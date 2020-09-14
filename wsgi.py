@@ -2,7 +2,7 @@
 import click
 
 from app import create_app, db, models, forms
-from tests import test_app
+from tests import test_auth
 
 app = create_app()
 

@@ -1,5 +1,6 @@
 black
 click
+email-validator
 flake8
 Flask
 Flask-Login
