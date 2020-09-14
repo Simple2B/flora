@@ -1,7 +1,6 @@
 import pytest
 
 from app import db, create_app
-from app.auth.models import User
 from tests.utils import register, login, logout
 
 

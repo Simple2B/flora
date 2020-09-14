@@ -13,9 +13,14 @@ db = SQLAlchemy()
 def create_app(environment='development'):
 
     from config import config
-    from .views import main_blueprint
-    from .auth.views import auth_blueprint
-    from .auth.models import User, AnonymousUser
+    from app.views import (
+        main_blueprint,
+        auth_blueprint,
+    )
+    from app.models import (
+        User,
+        AnonymousUser,
+    )
 
     # Instantiate app.
     app = Flask(__name__)
