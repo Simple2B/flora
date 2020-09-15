@@ -16,28 +16,6 @@
   {% block links %}{% endblock %}
 </head>
 
-<style>
-  /* class="container" */
-  .container_top {
-    width: 100%;
-    margin-left: 30px;
-    margin-right: 0px;
-  }
-
-  .font_item {
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  /* identical to box height */
-  color: #333333;
-  }
-  .font_item > li{
-    margin-left: 54px;
-  }
-
-</style>
-
 <body>
   <!-- Header -->
   <header>
@@ -55,13 +33,13 @@
           <!-- Main Navigation -->
           <ul class="navbar-nav  font_item" style="margin-left: 6px;">
             <li class="nav-item">
-              <a class="nav-link" href="#about">Bidding</a>
+              <a class="nav-link" href="">Bidding</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#about">My team</a>
+              <a class="nav-link" href="">My team</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#about">Resources</a>
+              <a class="nav-link" href="">Resources</a>
             </li>
           </ul>
           <!-- Login/Logout -->
@@ -88,7 +66,7 @@
     </nav>
   </header>
   <!-- Flash Messages -->
-  {% with messages = get_flashed_messages(with_categories=true) %}
+  <!-- {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
   {% for category, message in messages %}
   <div class="alert alert-{{ category }} alert-dismisible">
@@ -100,7 +78,7 @@
   </div>
   {% endfor %}
   {% endif %}
-  {% endwith %}
+  {% endwith %} -->
   <!-- Main Content -->
   {% block content %}{% endblock %}
   <!-- Footer-->
