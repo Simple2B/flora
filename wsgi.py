@@ -1,7 +1,13 @@
 #!/user/bin/env python
+import os
 import click
 
 from app import create_app, db, models, forms
+from app.models import User
+
+ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', '1234')
+ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'admin@admin.com')
 
 app = create_app()
 
@@ -17,6 +23,9 @@ def get_context():
 def create_db():
     """Create the configured database."""
     db.create_all()
+    user = User(username=ADMIN_USERNAME, email=ADMIN_EMAIL, activated=True)
+    user.password = ADMIN_PASSWORD
+    user.save()
 
 
 @app.cli.command()
