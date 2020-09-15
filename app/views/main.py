@@ -13,7 +13,7 @@ def bidding():
 
 @main_blueprint.route('/team')
 def team():
-    return render_template('index.html')
+    return render_template('team.html')
 
 @main_blueprint.route('/resources')
 def resources():

@@ -8,7 +8,7 @@
     position: relative;
 }
 .navbar-light .navbar-nav .active a::after {
-    border-bottom: 5px solid #5bc0eb;
+    border-bottom: 5px solid #333333;
     bottom: -10px;
     content: " ";
     left: 0;
@@ -32,7 +32,7 @@ font-size: 24px;
 /* identical to box height */
 }
 
-.font_item > li{
+.font_item > li {
 margin-left: 54px;
 }
 
