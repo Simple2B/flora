@@ -1,7 +1,51 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container py-4">
+
+<style>
+.container-bottom {
+  margin-top: 164px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.box div {
+  width: 350px;
+  /* height: auto; */
+  text-align: center;
+}
+.title_text {
+  /* width: 270px; */
+  font-family: Poppins;
+  font-style: normal;
+  font-size: 28px;
+  line-height: 27px;
+  color: #000000;
+}
+
+.login_button {
+  width: 350px;
+  height: 40px;
+  margin-top: 40px;
+  background: #4F4F4F;
+  border-radius: 5px;
+  color:#ffff;
+}
+
+.form_control_style {
+  height: 40px;
+  border: 1px solid #BDBDBD;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+</style>
+
+<!-- <div class="container py-4">
   <div class="card w-50 mx-auto">
     <div class="card-header">
       <h4 class="card-title">Login</h4>
@@ -21,5 +65,26 @@
       </form>
     </div>
   </div>
+</div> -->
+<div class="container-bottom">
+  <form class="form" role="form" action="{{ url_for('auth.login') }}" method="post">
+    <div class="box">
+      <div class="title_text">
+        <div style="text-align: left; margin-bottom: 10px;"> Welcome </div>
+        <div style="text-align: left; font-weight: bold;"> DDB Bidding Manager </div>
+      </div>
+      <div style="margin-top: 40px;">
+        <!-- {{form.user_id.label}} -->
+        {{form.user_id(class='form-control form_control_style')}}
+      </div>
+      <div style="margin-top: 25px;">
+        {{form.password(class='form-control form_control_style')}}
+      </div>
+      <div>
+        {{form.submit(class='login_button')}}
+      </div>
+    </div>
+  </form>
 </div>
+
 {% endblock %}

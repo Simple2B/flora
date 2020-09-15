@@ -16,29 +16,58 @@
   {% block links %}{% endblock %}
 </head>
 
+<style>
+  /* class="container" */
+  .container_top {
+    width: 100%;
+    margin-left: 30px;
+    margin-right: 0px;
+  }
+
+  .font_item {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  /* identical to box height */
+  color: #333333;
+  }
+  .font_item > li{
+    margin-left: 54px;
+  }
+
+</style>
+
 <body>
   <!-- Header -->
   <header>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
-      <div class="container">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light" style="height: 82px; background: #FFFFFF;
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+      <div class="container container_top">
         <!-- Navbar Brand -->
-        <a class="navbar-brand" href="{{ url_for('main.index') }}">{{ config.APP_NAME }}</a>
+        <a class="navbar-brand" href="{{ url_for('main.index') }}"><img src="../static/images/image2.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <!-- Main Navigation -->
-          <ul class="navbar-nav">
+          <ul class="navbar-nav  font_item" style="margin-left: 6px;">
             <li class="nav-item">
-              <a class="nav-link" href="#about">About</a>
+              <a class="nav-link" href="#about">Bidding</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">My team</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">Resources</a>
             </li>
           </ul>
           <!-- Login/Logout -->
-          <ul class="navbar-nav ml-auto">
+          <!-- <ul class="navbar-nav ml-auto">
             {% if current_user.is_authenticated %}
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown"  style="margin-left: 80vh; width: 100%;">
               <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">{{current_user.username | capitalize}}</a>
               <div class="dropdown-menu" aria-labelledby="userActions">
@@ -53,7 +82,7 @@
               <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
             </li>
             {% endif %}
-          </ul>
+          </ul> -->
         </div>
       </div>
     </nav>
@@ -75,7 +104,7 @@
   <!-- Main Content -->
   {% block content %}{% endblock %}
   <!-- Footer-->
-  <footer>
+  <!-- <footer>
     <div class="container-fluid bg-light py-5">
       <div class="row py-4">
         <div class="col-lg-6 col-md-4 mb-4 mb-lg-0">
@@ -104,12 +133,12 @@
           </ul>
         </div>
       </div>
-      <!-- Copyrights -->
+       Copyrights(this is comment)
       <div class="text-center">
         <p class="text-muted mb-0 py-2">&copy;2020 {{ config.APP_NAME }} | All rights reserved.</p>
       </div>
     </div>
-  </footer>
+  </footer> -->
   <!-- scripts -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
