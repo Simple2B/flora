@@ -44,54 +44,83 @@ margin-left: 54px;
 
 /* begin login.html */
 .container-bottom {
-margin-top: 164px;
+    margin-top: 164px;
 }
 
 .box {
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .box div {
-width: 350px;
-text-align: center;
+    width: 350px;
+    text-align: center;
 }
+
+.label-control {
+    position: absolute;
+    top: -.7rem;
+    padding: 0 1rem .1rem .5rem;
+    background-color: white;
+    left: 1rem;
+    color: #555;
+    opacity: 1;
+    font: 400 0.875rem/1.375rem "Open Sans", sans-serif;
+    cursor: text;
+    transition: all 0.2s ease;
+}
+
+.form-control-input, .form-control-select {
+    display: block;
+    width: 100%;
+    padding-top: 1.0625rem;
+    padding-bottom: 0.0625rem;
+    padding-left: 1.25rem;
+    border: 1px solid #c4d8dc;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    color: #555;
+    font: 400 0.875rem/1.875rem "Open Sans", sans-serif;
+    transition: all 0.2s;
+    -webkit-appearance: none;
+}
+
 .title_text {
 /* width: 270px; */
-font-family: Poppins;
-font-style: normal;
-font-size: 28px;
-line-height: 27px;
-color: #000000;
+    font-family: Poppins;
+    font-style: normal;
+    font-size: 28px;
+    line-height: 27px;
+    color: #000000;
 }
 
 .login_button {
-width: 350px;
-height: 40px;
-margin-top: 40px;
-background: #4F4F4F;
-border-radius: 5px;
-color:#ffff;
+    width: 350px;
+    height: 40px;
+    margin-top: 40px;
+    background: #4F4F4F;
+    border-radius: 5px;
+    color:#ffff;
 }
 
 .form_control_style {
-height: 40px;
-border: 1px solid #BDBDBD;
-box-sizing: border-box;
-border-radius: 5px;
+    height: 40px;
+    border: 1px solid #BDBDBD;
+    box-sizing: border-box;
+    border-radius: 5px;
 }
 
 .flash_mess_style {
-background-color: white;
-color:#EB5757;
-font-weight: bold;
-border: 0px;
-padding-left: 0px;
+    background-color: white;
+    color:#EB5757;
+    font-weight: bold;
+    border: 0px;
+    padding-left: 0px;
 }
 
 hr {
-color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
 }
 /* end login.html */
 
