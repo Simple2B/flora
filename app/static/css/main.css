@@ -144,13 +144,22 @@ hr {
 
 .main-container-box {
     display: block;
-    width: 75vw;
+    width: 45vw;
     height: 55vh;
     margin-left: auto;
     margin-right: auto;
 }
 
+.box-users {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
 
-
-
+.box-users .li-card {
+    padding: 20px;
+}
 
