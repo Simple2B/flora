@@ -30,42 +30,23 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <!-- Main Navigation -->
-          <ul class="navbar-nav font_item">
-            <li class="nav-item active">
+          <ul class="navbar-nav font_item" style="margin-left: 6px;">
+            <li class="nav-item">
               <a class="nav-link" href="">Bidding</a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="">My team</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="">Resources</a>
             </li>
           </ul>
-          <!-- Login/Logout -->
-          <!-- <ul class="navbar-nav ml-auto">
-            {% if current_user.is_authenticated %}
-            <li class="nav-item dropdown"  style="margin-left: 80vh; width: 100%;">
-              <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">{{current_user.username | capitalize}}</a>
-              <div class="dropdown-menu" aria-labelledby="userActions">
-                <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
-              </div>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
-            </li>
-            {% endif %}
-          </ul> -->
         </div>
       </div>
     </nav>
   </header>
   <!-- Flash Messages -->
-  <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
   {% for category, message in messages %}
   <div class="alert alert-{{ category }} alert-dismisible">
@@ -77,11 +58,10 @@
   </div>
   {% endfor %}
   {% endif %}
-  {% endwith %} -->
+  {% endwith %}
   <!-- Main Content -->
   {% block content %}{% endblock %}
-  <!-- Footer-->
-
+  <!-- Footer -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>

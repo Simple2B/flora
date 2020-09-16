@@ -29,7 +29,7 @@ font-family: Poppins;
 font-style: normal;
 font-weight: 500;
 font-size: 24px;
-/* identical to box height */
+margin-left: 6px;
 }
 
 .font_item > li {
@@ -40,6 +40,10 @@ font-size: 24px;
     color: #333333;
 }
 
+.navbar_style {
+    height: 82px; background: #FFFFFF;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
 /* end styles of base.html */
 
 /* begin login.html */
@@ -135,4 +139,18 @@ hr {
     color: rgb(0, 0, 0);
 }
 /* end login.html */
+
+/* begin team.html */
+
+.main-container-box {
+    display: block;
+    width: 75vw;
+    height: 55vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
 
