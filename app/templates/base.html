@@ -42,9 +42,10 @@
             </li>
           </ul>
           <!-- Login/Logout -->
-          <!-- <ul class="navbar-nav ml-auto">
+          <!--  -->
+          <ul class="navbar-nav ml-auto font_item">
             {% if current_user.is_authenticated %}
-            <li class="nav-item dropdown"  style="margin-left: 80vh; width: 100%;">
+            <li class="nav-item dropdown"  style="width: 100%;">
               <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">{{current_user.username | capitalize}}</a>
               <div class="dropdown-menu" aria-labelledby="userActions">
@@ -59,7 +60,7 @@
               <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
             </li>
             {% endif %}
-          </ul> -->
+          </ul>
         </div>
       </div>
     </nav>
