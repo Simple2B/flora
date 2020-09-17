@@ -32,7 +32,16 @@ input:-webkit-autofill:active  {
     float: left;
     position: relative;
 }
-.navbar-light .navbar-nav .active a::after {
+.navbar-light .navbar-nav .active a:hover:after {
+    border-bottom: 5px solid #333333;
+    bottom: -10px;
+    content: " ";
+    left: 0;
+    position: absolute;
+    right: 0;
+}
+
+.navbar-light .navbar-nav .active_after a::after {
     border-bottom: 5px solid #333333;
     bottom: -10px;
     content: " ";

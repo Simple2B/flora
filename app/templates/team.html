@@ -28,48 +28,48 @@
               </div>
               <div class="modal-footer">
                 <form action="{{ url_for('auth.register') }}" enctype="multipart/form-data" method="POST">
-                  <div class="">
-                  <ul class="box-users">
-                    <div class="form-group form-group-form_add_user">
-                      <li class="li-card">{{form.username(class='form-control-input width-block-input')}}</li>
-                      <label class="label-control label-control-bt_add_user">Name</label>
-                    </div>
-                    <div class="form-group form-group-form_add_user">
-                      <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
-                      <label class="label-control label-control-bt_add_user">Password</label>
-                    </div>
-                    <div class="form-group form-group-form_add_user">
-                      <li class="li-card">{{form.email(class='form-control-input width-block-input')}}</li>
-                      <label class="label-control label-control-bt_add_user">Email</label>
-                    </div>
-                    <div class="form-group form-group-form_add_user">
-                      <li class="li-card">{{form.position(class='form-control-input width-block-input')}}</li>
-                      <label class="label-control label-control-bt_add_user">Position</label>
-                    </div>
-                    <div class="form-group form-group-form_add_user">
-                      <li class="li-card">{{form.phone(class='form-control-input width-block-input')}}</li>
-                      <label class="label-control label-control-bt_add_user">Phone</label>
-                    </div>
-                    <div class="form-group form-group-form_add_user" style="margin-top: -2rem;">
-                      <li class="li-card">
-                      <label class="label-control label-control-bt_add_user" style="left:0.8rem; top: 1.3rem;">User type</label>
-                      <div class="form-control-input width-block-input bt_add_user-user_type">
-                        <div>
-                        <input type="radio" id="contactChoice1" name="contact" value="None admin">
-                        <label for="contactChoice1">None admin</label>
-                        </div>
-                        <div>
-                        <input type="radio" id="contactChoice2" name="contact" value="Admin">
-                        <label for="contactChoice2">Admin</label>
-                        </div>
+                  <div>
+                    <ul class="box-users">
+                      <div class="form-group form-group-form_add_user">
+                        <li class="li-card">{{form.username(class='form-control-input width-block-input')}}</li>
+                        <label class="label-control label-control-bt_add_user">Name</label>
                       </div>
-                      </li>
+                      <div class="form-group form-group-form_add_user">
+                        <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
+                        <label class="label-control label-control-bt_add_user">Password</label>
+                      </div>
+                      <div class="form-group form-group-form_add_user">
+                        <li class="li-card">{{form.email(class='form-control-input width-block-input')}}</li>
+                        <label class="label-control label-control-bt_add_user">Email</label>
+                      </div>
+                      <div class="form-group form-group-form_add_user">
+                        <li class="li-card">{{form.position(class='form-control-input width-block-input')}}</li>
+                        <label class="label-control label-control-bt_add_user">Position</label>
+                      </div>
+                      <div class="form-group form-group-form_add_user">
+                        <li class="li-card">{{form.phone(class='form-control-input width-block-input')}}</li>
+                        <label class="label-control label-control-bt_add_user">Phone</label>
+                      </div>
+                      <div class="form-group form-group-form_add_user" style="margin-top: -2rem;">
+                        <li class="li-card">
+                        <label class="label-control label-control-bt_add_user" style="left:0.8rem; top: 1.3rem;">User type</label>
+                        <div class="form-control-input width-block-input bt_add_user-user_type">
+                          <div>
+                          <input type="radio" id="contactChoice1" name="contact" value="None admin">
+                          <label for="contactChoice1">None admin</label>
+                          </div>
+                          <div>
+                          <input type="radio" id="contactChoice2" name="contact" value="Admin">
+                          <label for="contactChoice2">Admin</label>
+                          </div>
+                        </div>
+                        </li>
+                      </div>
+                    </ul>
+                    <div class="bt_add-new-user">
+                    <input class="btn btn-success" type="submit" value="Add new user">
+                    <input class="btn btn-success bt_cancel" type="button" value="cancel">
                     </div>
-                  </ul>
-                  <div class="bt_add-new-user">
-                  <input class="btn btn-success" type="submit" value="Add new user">
-                  <input class="btn btn-success bt_cancel" type="text" value="cancel">
-                  </div>
                   </div>
                 </form>
               </div>
@@ -79,7 +79,7 @@
       </div>
       <div>
         <div style="padding: 5px 0px 0px 10px;">
-        <h4 style="text-align: center; margin-bottom: 25px; padding: 5px 0px 0px 10px;">Welcome, {{form.user}}!</h4>
+        <h4 style="text-align: center; margin-bottom: 25px; padding: 5px 0px 0px 10px;">Welcome</h4>
         </div>
       </div>
       {% for user in users %}
