@@ -55,10 +55,12 @@
             </li>
             {% else %}
             <li>
-            <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
+            <!-- <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">{{current_user.username | capitalize}} Anonymous</a>
               <div class="dropdown-menu" aria-labelledby="userActions">
                 <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Register</a>
+              </div> -->
+              <div>
               </div>
             </li>
             {% endif %}

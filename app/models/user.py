@@ -1,7 +1,9 @@
 from datetime import datetime
+import enum
 
 from flask_login import UserMixin, AnonymousUserMixin
 from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy import Enum
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from app import db
@@ -12,9 +14,17 @@ class User(db.Model, UserMixin, ModelMixin):
 
     __tablename__ = 'users'
 
+    class Type(enum.Enum):
+        # super_admin = "super_admin"
+        admin = "admin"
+        user = "user"
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(60), unique=True, nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
+    position = db.Column(db.String(60), nullable=False)
+    user_type = db.Column(db.Enum(Type), default=Type.user, nullable=False)
+    phone = db.Column(db.Integer, unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     activated = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now)

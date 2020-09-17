@@ -8,6 +8,8 @@ from app.models import User
 ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
 ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', '1234')
 ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'admin@admin.com')
+ADMIN_POSITION = os.environ.get('ADMIN_POSITION', 'administrator')
+ADMIN_PHONE = os.environ.get('ADMIN_PHONE', '0987654321')
 
 app = create_app()
 
@@ -23,7 +25,7 @@ def get_context():
 def create_db():
     """Create the configured database."""
     db.create_all()
-    user = User(username=ADMIN_USERNAME, email=ADMIN_EMAIL, activated=True)
+    user = User(username=ADMIN_USERNAME, email=ADMIN_EMAIL, position=ADMIN_POSITION, phone=ADMIN_PHONE, activated=True)
     user.password = ADMIN_PASSWORD
     user.save()
 

@@ -10,17 +10,53 @@
     }
 </style>
 
-<div class="container-bottom">
+<div class="container-bottom_team">
   <form class="form" role="form" action="{{ url_for('main.team') }}" method="post">
     <div class="main-container-box">
-        <h4 style="text-align: center; margin-bottom: 25px;">Welcome, {{form.user}}!</h4>
-        <ul class="container-box box-users">
+      <div class="bt_block">
+        <button type="button" class="btn btn-outline-success my-sm-0 mr-1" data-toggle="modal" data-target="#addUser">
+          Add New
+        </button>
+        <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUserLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title font_style_new-user" id="importModalLabel">New user</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true"><img src="static/images/close_button_ddb.svg"></span>
+                </button>
+              </div>
+              <div class="modal-footer">
+                <form action="{{ url_for('auth.login') }}" enctype="multipart/form-data" method="POST">
+                  <div class="box-users-inputs">
+                  {{form.password(class='form-control-input width-block-input')}}
+                  {{form.password(class='form-control-input width-block-input')}}
+                  {{form.password(class='form-control-input width-block-input')}}
+                  {{form.password(class='form-control-input width-block-input')}}
+                  {{form.password(class='form-control-input width-block-input')}}
+                  {{form.password(class='form-control-input width-block-input')}}
+                  <div class="bt_add-new-user">
+                  <input class="btn btn-success" type="submit" value="Add new user">
+                  </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="padding: 5px 0px 0px 10px;">
+        <h4 style="text-align: center; margin-bottom: 25px; padding: 5px 0px 0px 10px;">Welcome, {{form.user}}!</h4>
+        </div>
+        <ul class="container-box box-users user_card_block">
                 <li class="li-card"><img class="" src="static/images/image_test.png"></li>
                 <li class="li-card"><img class="" src="static/images/image_test.png"></li>
                 <li class="li-card"><img class="" src="static/images/image_test.png"></li>
                 <li class="li-card"><img class="" src="static/images/image_test.png"></li>
         </ul>
         <h5 style="text-align: center; margin-top: 25px;">This is TEST</h5>
+      </div>
     </div>
   </form>
 </div>
