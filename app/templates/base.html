@@ -31,17 +31,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <!-- Main Navigation -->
+          {% if current_user.is_authenticated %}
           <ul class="navbar-nav font_item">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="">Bidding</a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="">My team</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="">Resources</a>
             </li>
           </ul>
+          {% endif %}
           <!-- Login/Logout -->
           <!--  -->
           <ul class="navbar-nav ml-auto font_item">

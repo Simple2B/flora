@@ -198,7 +198,7 @@ hr {
     font-size: 1rem;
 }
 
-.box-users-inputs {
+.box-bt_add_user-block {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;

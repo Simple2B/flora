@@ -28,13 +28,15 @@
               </div>
               <div class="modal-footer">
                 <form action="{{ url_for('auth.login') }}" enctype="multipart/form-data" method="POST">
-                  <div class="box-users-inputs">
-                  {{form.password(class='form-control-input width-block-input')}}
-                  {{form.password(class='form-control-input width-block-input')}}
-                  {{form.password(class='form-control-input width-block-input')}}
-                  {{form.password(class='form-control-input width-block-input')}}
-                  {{form.password(class='form-control-input width-block-input')}}
-                  {{form.password(class='form-control-input width-block-input')}}
+                  <div class="">
+                  <ul class="box-users user_card_block">
+                    <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
+                    <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
+                    <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
+                    <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
+                    <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
+                    <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
+                  </ul>
                   <div class="bt_add-new-user">
                   <input class="btn btn-success" type="submit" value="Add new user">
                   </div>
@@ -50,10 +52,10 @@
         <h4 style="text-align: center; margin-bottom: 25px; padding: 5px 0px 0px 10px;">Welcome, {{form.user}}!</h4>
         </div>
         <ul class="container-box box-users user_card_block">
-                <li class="li-card"><img class="" src="static/images/image_test.png"></li>
-                <li class="li-card"><img class="" src="static/images/image_test.png"></li>
-                <li class="li-card"><img class="" src="static/images/image_test.png"></li>
-                <li class="li-card"><img class="" src="static/images/image_test.png"></li>
+            <li class="li-card"><img class="" src="static/images/image_test.png"></li>
+            <li class="li-card"><img class="" src="static/images/image_test.png"></li>
+            <li class="li-card"><img class="" src="static/images/image_test.png"></li>
+            <li class="li-card"><img class="" src="static/images/image_test.png"></li>
         </ul>
         <h5 style="text-align: center; margin-top: 25px;">This is TEST</h5>
       </div>
