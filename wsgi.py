@@ -5,11 +5,12 @@ import click
 from app import create_app, db, models, forms
 from app.models import User
 
-ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
-ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', '1234')
-ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'admin@admin.com')
-ADMIN_POSITION = os.environ.get('ADMIN_POSITION', 'administrator')
-ADMIN_PHONE = os.environ.get('ADMIN_PHONE', '0987654321')
+ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "1234")
+ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "admin@admin.com")
+ADMIN_POSITION = os.environ.get("ADMIN_POSITION", "administrator")
+ADMIN_PHONE = os.environ.get("ADMIN_PHONE", "0987654321")
+ADMIN_TYPE = os.environ.get("ADMIN_TYPE", "admin")
 
 app = create_app()
 
@@ -25,17 +26,24 @@ def get_context():
 def create_db():
     """Create the configured database."""
     db.create_all()
-    user = User(username=ADMIN_USERNAME, email=ADMIN_EMAIL, position=ADMIN_POSITION, phone=ADMIN_PHONE, activated=True)
+    user = User(
+        username=ADMIN_USERNAME,
+        email=ADMIN_EMAIL,
+        position=ADMIN_POSITION,
+        phone=ADMIN_PHONE,
+        user_type=ADMIN_TYPE,
+        activated=True,
+    )
     user.password = ADMIN_PASSWORD
     user.save()
 
 
 @app.cli.command()
-@click.confirmation_option(prompt='Drop all database tables?')
+@click.confirmation_option(prompt="Drop all database tables?")
 def drop_db():
     """Drop the current database."""
     db.drop_all()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()

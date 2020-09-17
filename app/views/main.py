@@ -1,5 +1,9 @@
 from flask import render_template, Blueprint, redirect, url_for, request
-from app.forms import LoginForm
+from flask_login import login_required
+
+from app.forms import LoginForm, RegistrationForm
+from app.models import User
+
 
 main_blueprint = Blueprint('main', __name__)
 
@@ -10,17 +14,20 @@ def index():
 
 
 @main_blueprint.route('/bidding')
+@login_required
 def bidding():
     return render_template('index.html')
 
 
 @main_blueprint.route('/team')
+@login_required
 def team():
-    form = LoginForm(request.form)
-    form.user = 'Administrator'
-    return render_template('team.html', form=form)
+    form = RegistrationForm(request.form)
+    users = User.query.all()
+    return render_template('team.html', form=form, users=users)
 
 
 @main_blueprint.route('/resources')
+@login_required
 def resources():
     return render_template('index.html')

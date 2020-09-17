@@ -3,6 +3,31 @@
     border-radius: 0 !important;
 }
 
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
 .navbar-nav > li {
     float: left;
     position: relative;
@@ -99,7 +124,7 @@ margin-left: 6px;
     padding-bottom: 0.0625rem;
     padding-left: 1.25rem;
     border: 1px solid #b1b4b4;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem !important;
     background-color: #fff;
     color: #555;
     font: 400 0.875rem/1.875rem "Open Sans", sans-serif;
@@ -213,10 +238,12 @@ hr {
 
 .btn-success {
     background-color: #000000;
+    border-color: grey;
 }
 
 .btn-success:hover {
     background-color: #28a745;
+    border-color: grey;
 }
 
 .bt_add-new-user {

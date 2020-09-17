@@ -33,6 +33,9 @@ def test_register(client):
     response = client.post('/register', data=dict(
         username="sam",
         email="sam@test.com",
+        user_type="admin",
+        position="test position",
+        phone=123456789,
         password="password",
         password_confirmation="password"
     ), follow_redirects=True)
