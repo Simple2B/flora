@@ -2,26 +2,18 @@
 
 {% block content %}
 
-<style>
-    img.displayed {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-</style>
-
 <div class="container-bottom_team">
   <form class="form" role="form" action="{{ url_for('main.team') }}" method="post">
-    <div class="main-container-box">
+    <div class="main-container-box ddb-box-shadow">
       <div class="bt_block">
-        <button type="button" class="btn btn-outline-success my-sm-0 mr-1" data-toggle="modal" data-target="#addUser">
+        <button type="button" class="btn btn-outline-success ddb-font-family my-sm-0 mr-1" data-toggle="modal" data-target="#addUser">
           Add New
         </button>
         <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUserLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title font_style_new-user" id="importModalLabel">New user</h5>
+                <h5 class="modal-title font_style_new-user  ddb-font-family" id="importModalLabel">New user</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true"><img src="static/images/close_button_ddb.svg"></span>
                 </button>
@@ -29,7 +21,7 @@
               <div class="modal-footer">
                 <form action="{{ url_for('auth.register') }}" enctype="multipart/form-data" method="POST">
                   <div>
-                    <ul class="box-users">
+                    <ul class="box-users ddb-flex-row-wrap">
                       <div class="form-group form-group-form_add_user">
                         <li class="li-card">{{form.username(class='form-control-input width-block-input')}}</li>
                         <label class="label-control label-control-bt_add_user">Name</label>
@@ -53,7 +45,7 @@
                       <div class="form-group form-group-form_add_user" style="margin-top: -2rem;">
                         <li class="li-card">
                         <label class="label-control label-control-bt_add_user" style="left:0.8rem; top: 1.3rem;">User type</label>
-                        <div class="form-control-input width-block-input bt_add_user-user_type">
+                        <div class="form-control-input width-block-input addU-user-type-font ddb-font-family bt-radio-box">
                           <div>
                           <input type="radio" id="contactChoice1" name="contact" value="None admin">
                           <label for="contactChoice1">None admin</label>
@@ -83,11 +75,11 @@
         </div>
       </div>
       {% for user in users %}
-      <div class="container-box box-users user-card-box_shadow">
+      <div class="box-users ddb-flex-row-wrap ddb-box-shadow">
         <div>
           <img src="static/images/avatar_ddb.svg">
         </div>
-        <div class="box-users">
+        <div class="ddb-flex-row-wrap">
           <ul class="markers-none">
             <li class="">{{user.username}}</li>
             <li class="">{{user.user_type}}</li>
