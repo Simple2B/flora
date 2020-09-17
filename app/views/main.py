@@ -24,6 +24,14 @@ def bidding():
 def team():
     form = RegistrationForm(request.form)
     users = User.query.all()
+    form.list_of_user_attributes = [
+        'Name',
+        'Password',
+        'Email',
+        'Position',
+        'Phone',
+        'User type'
+    ]
     return render_template('team.html', form=form, users=users)
 
 

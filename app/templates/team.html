@@ -27,18 +27,38 @@
                 </button>
               </div>
               <div class="modal-footer">
-                <form action="{{ url_for('auth.login') }}" enctype="multipart/form-data" method="POST">
+                <form action="{{ url_for('auth.register') }}" enctype="multipart/form-data" method="POST">
                   <div class="">
-                  <ul class="box-users user_card_block">
-                    <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
-                    <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
-                    <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
-                    <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
-                    <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
-                    <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
+                  <ul class="box-users">
+                    <!-- <div class="li-card">{{form.password(class='form-control-input width-block-input')}}</div> -->
+                    {% for attribute in form.list_of_user_attributes %}
+                    {% if attribute == 'User type' %}
+                    <div class="form-group form-group-form_add_user" style="margin-top: -2rem;">
+                      <li class="li-card">
+                      <label class="label-control label-control-bt_add_user" style="left:0.8rem; top: 1.3rem;">{{attribute}}</label>
+                      <div class="form-control-input width-block-input bt_add_user-user_type">
+                        <div>
+                        <input type="radio" id="contactChoice1" name="contact" value="None admin">
+                        <label for="contactChoice1">None admin</label>
+                        </div>
+                        <div>
+                        <input type="radio" id="contactChoice2" name="contact" value="Admin">
+                        <label for="contactChoice2">Admin</label>
+                        </div>
+                      </div>
+                      </li>
+                    </div>
+                    {% else %}
+                    <div class="form-group form-group-form_add_user">
+                      <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
+                      <label class="label-control label-control-bt_add_user">{{attribute}}</label>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
                   </ul>
                   <div class="bt_add-new-user">
                   <input class="btn btn-success" type="submit" value="Add new user">
+                  <input class="btn btn-success bt_cancel" type="text" value="cancel">
                   </div>
                   </div>
                 </form>
@@ -51,14 +71,22 @@
         <div style="padding: 5px 0px 0px 10px;">
         <h4 style="text-align: center; margin-bottom: 25px; padding: 5px 0px 0px 10px;">Welcome, {{form.user}}!</h4>
         </div>
-        <ul class="container-box box-users user_card_block">
-            <li class="li-card"><img class="" src="static/images/image_test.png"></li>
-            <li class="li-card"><img class="" src="static/images/image_test.png"></li>
-            <li class="li-card"><img class="" src="static/images/image_test.png"></li>
-            <li class="li-card"><img class="" src="static/images/image_test.png"></li>
-        </ul>
-        <h5 style="text-align: center; margin-top: 25px;">This is TEST</h5>
       </div>
+      {% for user in users %}
+      <div class="container-box box-users user-card-box_shadow">
+        <div>
+          <img src="static/images/avatar_ddb.svg">
+        </div>
+        <div class="box-users">
+          <ul class="markers-none">
+            <li class="">{{user.username}}</li>
+            <li class="">{{user.user_type}}</li>
+            <li class="">{{user.email}}</li>
+            <li class="">{{user.phone}}</li>
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </form>
 </div>

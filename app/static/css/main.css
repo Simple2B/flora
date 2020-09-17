@@ -195,6 +195,11 @@ hr {
     max-height: 55vh;
 }
 
+.box-users ul {
+    text-align: left;
+    list-style: none;
+}
+
 .box-users .li-card {
     padding: 20px;
 }
@@ -238,14 +243,50 @@ hr {
 
 .btn-success {
     background-color: #000000;
-    border-color: grey;
+    border-color: #000000;
+    border-radius: 0.5rem !important;
 }
 
 .btn-success:hover {
     background-color: #28a745;
-    border-color: grey;
+    border-color: #000000;
 }
 
 .bt_add-new-user {
+    float: right;
     padding: 1rem;
+    margin-top: 1.5rem;
+}
+
+.bt_cancel {
+    background: #979797;
+}
+.bt_cancel:hover {
+ background-color: #af2d16;
+}
+
+.label-control-bt_add_user {
+    top: -5.18rem;
+    left: 1.8rem;
+}
+
+.form-group-form_add_user {
+    margin-bottom: -2rem;
+}
+
+.bt_add_user-user_type {
+    border: 2px solid black;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+
+}
+
+.user-card-box_shadow{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.cursor-none {
+    cursor: none;
 }
