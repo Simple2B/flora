@@ -27,7 +27,9 @@
     background-color: #175593;
     color: #FFFFFF;
     border-color: grey;
+    border-radius: .5rem !important;
 }
+
 .btn-success {
     background-color: #000000;
     border-color: #000000;
@@ -51,4 +53,27 @@
     margin: 3px 3px 0px 5px;
     padding: initial;
     border: initial;
+}
+
+.btn-primary {
+    background-color: #333;
+    border-color: #333;
+    border-radius: .5rem !important;
+}
+
+.btn-primary:hover {
+    background-color: #000000;
+    border-color: #000;
+    border-radius: .5rem !important;
+}
+
+.btn-outline-success:hover {
+    background-color: #184a7c;
+    border-color: #184a7c;
+}
+
+.btn-outline-success:focus,
+.btn-outline-success:active {
+    background-color: #184a7c !important;
+    border-color: #184a7c !important;
 }

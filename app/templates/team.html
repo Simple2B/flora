@@ -2,95 +2,91 @@
 
 {% block content %}
 
-<div class="container-bottom_team">
-  <form class="form" role="form" action="{{ url_for('main.team') }}" method="post">
-    <div class="main-container-box ddb-box-shadow">
-      <div class="bt_block">
-        <button type="button" class="btn btn-outline-success ddb-font-family my-sm-0 mr-1" data-toggle="modal" data-target="#addUser">
-          Add New
-        </button>
-        <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUserLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title font_style_new-user  ddb-font-family" id="importModalLabel">New user</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true"><img src="static/images/close_button_ddb.svg"></span>
-                </button>
-              </div>
-              <div class="modal-footer">
-                <form action="{{ url_for('auth.register') }}" enctype="multipart/form-data" method="POST">
-                  <div>
-                    <ul class="box-users ddb-flex-row-wrap">
-                      <div class="form-group form-group-form_add_user">
-                        <li class="li-card">{{form.username(class='form-control-input width-block-input')}}</li>
-                        <label class="label-control label-control-bt_add_user">Name</label>
-                      </div>
-                      <div class="form-group form-group-form_add_user">
-                        <li class="li-card">{{form.password(class='form-control-input width-block-input')}}</li>
-                        <label class="label-control label-control-bt_add_user">Password</label>
-                      </div>
-                      <div class="form-group form-group-form_add_user">
-                        <li class="li-card">{{form.email(class='form-control-input width-block-input')}}</li>
-                        <label class="label-control label-control-bt_add_user">Email</label>
-                      </div>
-                      <div class="form-group form-group-form_add_user">
-                        <li class="li-card">{{form.position(class='form-control-input width-block-input')}}</li>
-                        <label class="label-control label-control-bt_add_user">Position</label>
-                      </div>
-                      <div class="form-group form-group-form_add_user">
-                        <li class="li-card">{{form.phone(class='form-control-input width-block-input')}}</li>
-                        <label class="label-control label-control-bt_add_user">Phone</label>
-                      </div>
-                      <div class="form-group form-group-form_add_user" style="margin-top: -2rem;">
-                        <li class="li-card">
-                        <label class="label-control label-control-bt_add_user" style="left:0.8rem; top: 1.3rem;">User type</label>
-                        <div class="form-control-input width-block-input addU-user-type-font ddb-font-family bt-radio-box">
-                          <div>
-                          <input type="radio" id="contactChoice1" name="contact" value="None admin">
-                          <label for="contactChoice1">None admin</label>
-                          </div>
-                          <div>
-                          <input type="radio" id="contactChoice2" name="contact" value="Admin">
-                          <label for="contactChoice2">Admin</label>
-                          </div>
-                        </div>
-                        </li>
-                      </div>
-                    </ul>
-                    <div class="bt_add-new-user">
-                    <input class="btn btn-success" type="submit" value="Add new user">
-                    <input class="btn btn-success bt_cancel" type="button" value="cancel">
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
+  <div class="main-team-container">
+    <div class="team-top-section">
+      <span>Showing {{ users|length }} users</span>
+      <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal">
+        Add new
+      </button>
+    </div>
+
+    <div class="team-cards-container">
+      {% for user in users %}
+        <div class="team-card">
+          <div>
+            <img src="static/images/avatar_ddb.svg">
+          </div>
+          <div class="box-users">
+            <ul class="markers-none">
+              <li class="">{{user.username}}</li>
+              <li class="">{{user.position}}</li>
+              <li class="">{{user.email}}</li>
+              <li class="">{{user.phone}}</li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div>
-        <div style="padding: 5px 0px 0px 10px;">
-        <h4 style="text-align: center; margin-bottom: 25px; padding: 5px 0px 0px 10px;">Welcome</h4>
-        </div>
-      </div>
-      {% for user in users %}
-      <div class="box-users ddb-flex-row-wrap ddb-box-shadow">
-        <div>
-          <img src="static/images/avatar_ddb.svg">
-        </div>
-        <div class="ddb-flex-row-wrap">
-          <ul class="markers-none">
-            <li class="">{{user.username}}</li>
-            <li class="">{{user.user_type}}</li>
-            <li class="">{{user.email}}</li>
-            <li class="">{{user.phone}}</li>
-          </ul>
-        </div>
-      </div>
       {% endfor %}
     </div>
-  </form>
-</div>
+  </div>
 
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <h5>Add user</h5>
+        <div class="modal-body">
+          <form class="form" role="form" action="{{ url_for('auth.register') }}" method="post">
+            <div class="form-row">
+              <div>
+                {{form.username(class='ddb-form-input m-1')}}
+                <label class="ddb-form-label">Username</label>
+              </div>
+
+              <div>
+                {{form.email(class='ddb-form-input m-1')}}
+                <label class="ddb-form-label">Email</label>
+              </div>
+
+              <div>
+                {{form.password(class='ddb-form-input m-1')}}
+                <label class="ddb-form-label">Password</label>
+              </div>
+  
+              <div>
+                {{form.password_confirmation(class='ddb-form-input m-1')}}
+                <label class="ddb-form-label">Confirm password</label>
+              </div>
+            </div>
+            <div class="form-row">
+              <div>
+                {{form.position(class='ddb-form-input m-1')}}
+                <label class="ddb-form-label">Position</label>
+              </div>
+
+              <div>
+                {{form.phone(class='ddb-form-input m-1')}}
+                <label class="ddb-form-label">Phone</label>
+              </div>
+
+              <div class="team-radio-select m-1">
+                <div>
+                  <input type="radio" id="admin" name="user_type" value="admin"
+                        checked>
+                  <label for="admin">Admin</label>
+                </div>
+                
+                <div>
+                  <input type="radio" id="user" name="user_type" value="user">
+                  <label for="user">Non admin</label>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="bt_add-new-user">
+          {{form.submit(class='btn btn-primary')}}
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
