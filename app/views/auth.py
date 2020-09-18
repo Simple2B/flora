@@ -11,6 +11,7 @@ auth_blueprint = Blueprint("auth", __name__)
 def register():
     form = RegistrationForm(request.form)
     if form.validate_on_submit():
+        # TODO: enhance validation logic
         user = User(
             username=form.username.data,
             email=form.email.data,
@@ -20,12 +21,11 @@ def register():
             password=form.password.data,
         )
         user.save()
-        login_user(user)
         flash("Registration successful. You are logged in.", "success")
-        return redirect(url_for("main.index"))
+        return redirect(url_for("main.team"))
     elif form.is_submitted():
         flash("The given data was invalid.", "danger")
-    return render_template("auth/register.html", form=form)
+    return render_template("team.html", form=form)
 
 
 @auth_blueprint.route("/login", methods=["GET", "POST"])

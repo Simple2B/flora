@@ -24,7 +24,7 @@ class User(db.Model, UserMixin, ModelMixin):
     email = db.Column(db.String(255), unique=True, nullable=False)
     position = db.Column(db.String(60), nullable=False)
     user_type = db.Column(db.Enum(Type), default=Type.user, nullable=False)
-    phone = db.Column(db.Integer, unique=True, nullable=False)
+    phone = db.Column(db.String, unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     activated = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
