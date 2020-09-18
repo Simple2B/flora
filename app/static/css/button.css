@@ -1,0 +1,54 @@
+  /*         ddb         */
+ /*  Repeated - classes */
+/*         button      */
+
+
+
+
+
+
+
+
+.login_button {
+    width: 350px;
+    height: 40px;
+    background: #4F4F4F;
+    border-radius: 5px;
+    color:#ffff;
+    font-size: 135%;
+}
+
+.bt_block {
+    float: right;
+    padding: 0.5rem 0.5rem 0rem 0.1rem;
+}
+
+.btn-outline-success {
+    background-color: #175593;
+    color: #FFFFFF;
+    border-color: grey;
+}
+.btn-success {
+    background-color: #000000;
+    border-color: #000000;
+    border-radius: 0.5rem !important;
+}
+
+.btn-success:hover {
+    background-color: #28a745;
+    border-color: #000000;
+}
+
+.bt_cancel:hover {
+    background-color: #af2d16;
+}
+
+.bt-radio-box input {
+    background-color: initial;
+    cursor: default;
+    appearance: radio;
+    box-sizing: border-box;
+    margin: 3px 3px 0px 5px;
+    padding: initial;
+    border: initial;
+}

@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" media="screen">
+  <link href="{{ url_for('static', filename='css/button.css') }}" rel="stylesheet" media="screen">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   {% block links %}{% endblock %}
 </head>
@@ -21,7 +22,7 @@
   <!-- Header -->
   <header>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-sm navbar-light bg-light navbar_style">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light navbar_style ddb-box-shadow">
       <div class="container container_top container-width">
         <!-- Navbar Brand -->
         <a class="navbar-brand" href="{{ url_for('main.index') }}"><img src="/static/images/ddb_logo.svg"></a>
@@ -32,7 +33,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <!-- Main Navigation -->
           {% if current_user.is_authenticated %}
-          <ul class="navbar-nav font_item">
+          <ul class="navbar-nav font_item ddb-font-family">
             <li class="nav-item active">
               <a class="nav-link" href="">Bidding</a>
             </li>
@@ -44,7 +45,7 @@
             </li>
           </ul>
           {% else %}
-          <ul class="navbar-nav font_item">
+          <ul class="navbar-nav font_item ddb-font-family">
             <li class="nav-item active">
               <a class="nav-link" href="">Bidding</a>
             </li>
@@ -58,7 +59,7 @@
           {% endif %}
           <!-- Login/Logout -->
           <!--  -->
-          <ul class="navbar-nav ml-auto font_item">
+          <ul class="navbar-nav ml-auto font_item ddb-font-family">
             {% if current_user.is_authenticated %}
             <li class="nav-item dropdown"  style="width: 100%;">
               <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
