@@ -27,7 +27,9 @@
     background-color: #175593;
     color: #FFFFFF;
     border-color: grey;
+    border-radius: .5rem !important;
 }
+
 .btn-success {
     background-color: #000000;
     border-color: #000000;
