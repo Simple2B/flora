@@ -34,7 +34,7 @@
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content">
-        <span>Add user</span>
+        <h5>Add user</h5>
         <div class="modal-body">
           <form class="form" role="form" action="{{ url_for('auth.register') }}" method="post">
             <div class="form-row">
@@ -85,7 +85,6 @@
         </div>
         <div class="bt_add-new-user">
           {{form.submit(class='btn btn-primary')}}
-          <input class="btn btn-success bt_cancel" type="button" value="cancel">
         </div>
       </div>
     </div>

@@ -23,7 +23,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired(), Length(6, 30)])
     password_confirmation = PasswordField(
         'Confirm Password', validators=[DataRequired(), EqualTo('password', message='Password do not match.')])
-    submit = SubmitField('Register')
+    submit = SubmitField('Add new user')
 
     def validate_username(form, field):
         if User.query.filter_by(username=field.data).first() is not None:

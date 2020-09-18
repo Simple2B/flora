@@ -28,6 +28,10 @@ input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
+h5 {
+    padding: 1rem;
+}
+
 .navbar-nav > li {
     float: left;
     position: relative;
@@ -227,9 +231,8 @@ hr {
 }
 
 .bt_add-new-user {
-    float: right;
+    margin-left: auto;
     padding: 1rem;
-    margin-top: 1.5rem;
 }
 
 .bt_cancel {

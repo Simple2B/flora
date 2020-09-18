@@ -30,9 +30,10 @@ def register():
             return redirect(url_for("main.team"))
         else:
             flash("The given data was invalid.", "danger")
+            return redirect(url_for("main.team"))
     elif form.is_submitted():
         flash("The given data was invalid.", "danger")
-    return render_template("team.html", form=form)
+    return redirect(url_for("main.team"))
 
 
 @auth_blueprint.route("/login", methods=["GET", "POST"])
