@@ -12,12 +12,32 @@
             "env": {
                 "FLASK_APP": "app.py",
                 "FLASK_ENV": "development",
-                "FLASK_DEBUG": "1"
             },
             "args": [
                 "run"
             ],
             "jinja": true
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Gulp: Watch",
+            "program": "${workspaceFolder}/node_modules/gulp/bin/gulp.js",
+            "args": [
+                "watch"
+            ],
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Flask Server & Gulp",
+            "configurations": [
+                "Python: Flask", 
+                "Gulp: Watch"
+            ]
         }
     ]
 }
