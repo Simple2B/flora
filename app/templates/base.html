@@ -33,26 +33,26 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <!-- Main Navigation -->
           {% if current_user.is_authenticated %}
-          <ul class="navbar-nav font_item ddb-font-family">
-            <li class="nav-item active">
-              <a class="nav-link" href="">Bidding</a>
+          <ul class="navbar-nav font_item ddb-font-family" id="select_ul_id">
+            <li class="nav-item">
+              <a class="nav-link a_active_id" href="{{ url_for('main.index') }}">Bidding</a>
             </li>
             <li class="nav-item active_after">
-              <a class="nav-link" href="">My team</a>
+              <a class="a_active_id nav-link" href="">My team</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="">Resources</a>
+            <li class="nav-item">
+              <a class="a_active_id ddb-active nav-link" href="{{ url_for('auth.login') }}">Resources</a>
             </li>
           </ul>
           {% else %}
           <ul class="navbar-nav font_item ddb-font-family">
-            <li class="nav-item active">
-              <a class="nav-link" href="">Bidding</a>
+            <li class="nav-item active ddb-active-button">
+              <a class="nav-link" href="{{ url_for('main.index') }}">Bidding</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item active ddb-active-button">
               <a class="nav-link" href="">My team</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item active ddb-active-button">
               <a class="nav-link" href="">Resources</a>
             </li>
           </ul>
@@ -61,7 +61,7 @@
           <!--  -->
           <ul class="navbar-nav ml-auto font_item ddb-font-family">
             {% if current_user.is_authenticated %}
-            <li class="nav-item dropdown"  style="width: 100%;">
+            <li class="nav-item dropdown ddb-width">
               <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">{{current_user.username | capitalize}}</a>
               <div class="dropdown-menu" aria-labelledby="userActions">

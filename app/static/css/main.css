@@ -55,6 +55,7 @@ h5 {
     right: 0;
 }
 
+
   /*         ddb         */
  /*  Repeated - classes */
 /*                     */
@@ -107,6 +108,11 @@ margin-left: 6px;
     padding: 1.1rem 1rem .35rem;
     background: #FFFFFF;
 }
+
+.ddb-width {
+    width: 100%;
+}
+
 /* end styles of base.html */
 
 /* begin login.html */
@@ -336,3 +342,22 @@ hr {
     flex-flow: row, wrap;
     justify-content: space-around;
 }
+
+/*  */
+/*** begin test css ***/
+
+.navbar-light .navbar-nav .active>.nav-link{
+    color: rgba(0,0,0,.9);
+}
+
+.ddb-underline::after {
+    border-bottom: 5px solid #333333;
+    bottom: -10px;
+    content: " ";
+    left: 0;
+    position: absolute;
+    right: 0;
+
+}
+
+/*** end test css ***/
