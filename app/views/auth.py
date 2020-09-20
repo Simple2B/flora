@@ -17,15 +17,14 @@ def register():
             form.email.data,
             form.phone.data,
         ):
-            user = User(
+            User(
                 username=form.username.data,
                 email=form.email.data,
                 user_type=form.user_type.data,
                 position=form.position.data,
                 phone=form.phone.data,
                 password=form.password.data,
-            )
-            user.save()
+            ).save()
             flash("Registration successful. You are logged in.", "success")
             return redirect(url_for("main.team"))
         else:
