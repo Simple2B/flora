@@ -350,6 +350,7 @@ hr {
     color: rgba(0,0,0,.9);
 }
 
+
 .ddb-underline::after {
     border-bottom: 5px solid #333333;
     bottom: -10px;
@@ -359,5 +360,16 @@ hr {
     right: 0;
 
 }
+
+.ddb-underline_a::after {
+    border-bottom: 5px solid #333333;
+    bottom: -10px;
+    content: " ";
+    left: 0;
+    position: absolute;
+    right: 0;
+
+}
+
 
 /*** end test css ***/

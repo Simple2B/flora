@@ -17,9 +17,11 @@ $(document).ready(function(){
     // a_element_id.forEach(element => {
 
     $( "#select_ul_id li a" ).on('click', function(e) {
-        e.preventDefault();
+        // e.preventDefault();
+        // $('.contentMenu').each((i, item) => $(item).removeClass('ddb-underline'));
         $("#select_ul_id li a").removeClass('ddb-underline');
         $(this).addClass('ddb-underline');
+        // $(this).addClass('ddb-underline');
     });
     // });
 });
