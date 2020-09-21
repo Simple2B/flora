@@ -15,12 +15,12 @@
         {% for user in users %}
           <div class="team__card">
             <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt='user-icon'>
-            <div class="details">
-              <div class="details__name">
+            <div class="team__details">
+              <div class="team__details__name">
                 <li>{{user.username}}</li>
                 <li class="t-gray">{{user.position}}</li>
               </div>
-              <div class="details__contact">
+              <div class="team__details__contact">
                 <li>Email: {{user.email}}</li>
                 <li>Phone: {{user.phone}}</li>
               </div>

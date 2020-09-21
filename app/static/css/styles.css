@@ -21,11 +21,11 @@ ul, li {
   list-style: none;
   margin: 0; }
 
-.t-gray {
-  color: #828282; }
-
 .page-section {
   margin-top: 1rem; }
+
+.t-gray {
+  color: #828282; }
 
 ._flash {
   background-color: none;
@@ -200,7 +200,7 @@ ul, li {
     padding: .5rem; }
     .team__inner .team__card img {
       margin: .5rem 1rem 0 .5rem; }
-    .team__inner .team__card .details__contact {
+    .team__inner .team__card .team__details__contacts {
       padding-top: .3rem; }
 
 .header {
