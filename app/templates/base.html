@@ -19,88 +19,39 @@
 </head>
 
 <body>
-  <!-- Header -->
-  <header>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-sm navbar-light bg-light navbar_style ddb-box-shadow">
-      <div class="container container_top container-width">
-        <!-- Navbar Brand -->
-        <a class="navbar-brand" href="{{ url_for('main.index') }}"><img src="/static/images/ddb_logo.svg"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <!-- Main Navigation -->
-          {% if current_user.is_authenticated %}
-          <ul class="navbar-nav font_item ddb-font-family">
-            <li class="nav-item active">
-              <a class="nav-link" href="">Bidding</a>
-            </li>
-            <li class="nav-item active_after">
-              <a class="nav-link" href="">My team</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="">Resources</a>
-            </li>
-          </ul>
-          {% else %}
-          <ul class="navbar-nav font_item ddb-font-family">
-            <li class="nav-item active">
-              <a class="nav-link" href="">Bidding</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="">My team</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="">Resources</a>
-            </li>
-          </ul>
-          {% endif %}
-          <!-- Login/Logout -->
-          <!--  -->
-          <ul class="navbar-nav ml-auto font_item ddb-font-family">
-            {% if current_user.is_authenticated %}
-            <li class="nav-item dropdown"  style="width: 100%;">
-              <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">{{current_user.username | capitalize}}</a>
-              <div class="dropdown-menu" aria-labelledby="userActions">
-                <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
-              </div>
-            </li>
-            {% else %}
-            <li>
-            <!-- <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">{{current_user.username | capitalize}} Anonymous</a>
-              <div class="dropdown-menu" aria-labelledby="userActions">
-                <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Register</a>
-              </div> -->
-              <div>
-              </div>
-            </li>
-            {% endif %}
-          </ul>
+
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <div class="header__inner--left">
+          <a class="logo" href="#">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="DDB Contracting" class="logo__img">
+          </a>
+          <nav class="menu__items">
+              <a class="menu__item" href="#">Bidding</a>
+              <a class="menu__item" href="#">My team</a>
+              <a class="menu__item" href="#">Resources</a>
+              <span class="nav-indicator"></span>
+          </nav>
         </div>
+        {% if current_user.is_authenticated %}
+        <div class="header__inner--right">
+          <div class="user-info">
+            <div class="user-info__img">
+              <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt="Icon">
+            </div>
+            <div class="user-info__details">
+              <p>{{current_user.username}}</p>
+              <p class='t-gray'>{{current_user.position}}</p>
+            </div>
+          </div>
+        </div>
+        {% endif %}
       </div>
-    </nav>
+    </div>
   </header>
-  <!-- Flash Messages -->
-  <!-- {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-  {% for category, message in messages %}
-  <div class="alert alert-{{ category }} alert-dismisible">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-      <span class="sr-only">Close</span>
-    </button>
-    {{ message }}
-  </div>
-  {% endfor %}
-  {% endif %}
-  {% endwith %} -->
-  <!-- Main Content -->
+
   {% block content %}{% endblock %}
-  <!-- Footer-->
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

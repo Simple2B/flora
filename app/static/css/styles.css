@@ -1,1 +1,276 @@
-body{color:#000;background-color:orange}.navbar{background-color:#ff0!important}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif; }
+
+body {
+  font-size: 14px;
+  line-height: 21px; }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset; }
+
+a {
+  text-decoration: none; }
+
+ul, li {
+  list-style: none;
+  margin: 0; }
+
+.t-gray {
+  color: #828282; }
+
+.page-section {
+  margin-top: 1rem; }
+
+._flash {
+  background-color: none;
+  color: #EB5757; }
+
+._btn--lg {
+  width: 20rem;
+  margin: 1rem; }
+
+._btn--black {
+  padding: .5rem 1.5rem;
+  color: #fff;
+  border-radius: .5rem;
+  border: 1px solid;
+  outline: none;
+  font-size: 14px;
+  transition: .3s;
+  background-color: #000; }
+  ._btn--black:focus {
+    outline: none; }
+  ._btn--black:active {
+    outline: none; }
+  ._btn--black:hover {
+    background-color: #333333; }
+
+._btn--dgrey {
+  padding: .5rem 1.5rem;
+  color: #fff;
+  border-radius: .5rem;
+  border: 1px solid;
+  outline: none;
+  font-size: 14px;
+  transition: .3s;
+  background-color: #4F4F4F; }
+  ._btn--dgrey:focus {
+    outline: none; }
+  ._btn--dgrey:active {
+    outline: none; }
+  ._btn--dgrey:hover {
+    background-color: #363636; }
+
+._btn--blue {
+  padding: .5rem 1.5rem;
+  color: #fff;
+  border-radius: .5rem;
+  border: 1px solid;
+  outline: none;
+  font-size: 14px;
+  transition: .3s;
+  background-color: #175593; }
+  ._btn--blue:focus {
+    outline: none; }
+  ._btn--blue:active {
+    outline: none; }
+  ._btn--blue:hover {
+    background-color: #103c67; }
+
+._btn--gray {
+  padding: .5rem 1.5rem;
+  color: #fff;
+  border-radius: .5rem;
+  border: 1px solid;
+  outline: none;
+  font-size: 14px;
+  transition: .3s;
+  background-color: #979797; }
+  ._btn--gray:focus {
+    outline: none; }
+  ._btn--gray:active {
+    outline: none; }
+  ._btn--gray:hover {
+    background-color: #7e7e7e; }
+
+._form-input {
+  border: 1px solid transparent;
+  line-height: 2rem;
+  height: 2rem;
+  padding: 0;
+  margin: 0 auto;
+  display: block;
+  padding: .2rem;
+  border-radius: .5rem;
+  border-color: #BDBDBD;
+  text-indent: 5px;
+  height: 2.5rem;
+  margin-top: 1rem; }
+  ._form-input:focus {
+    border-color: #ffdd48;
+    outline: 0; }
+  ._form-input--lg {
+    width: 20rem;
+    margin-top: 1rem; }
+
+._label {
+  border: 1px solid transparent;
+  line-height: 2rem;
+  height: 2rem;
+  padding: 0;
+  margin: 0 auto;
+  z-index: 2;
+  float: left;
+  height: .5rem;
+  line-height: .1rem;
+  padding: .1rem .5rem .1rem .2rem;
+  position: relative;
+  left: 1rem;
+  top: -2.7rem;
+  color: #333333;
+  background-color: #fff;
+  font-size: 13px; }
+
+.login__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column nowrap;
+  height: 80vh; }
+
+.login__form {
+  justify-content: center;
+  align-items: center; }
+
+.login__error {
+  background-color: white;
+  color: #EB5757;
+  font-weight: 500;
+  border: 0;
+  margin: auto; }
+
+.login__title--welcome {
+  font-size: 18px;
+  font-weight: 500; }
+
+.login__title--DDB {
+  font-size: 27px;
+  font-weight: 700; }
+
+._flash {
+  background-color: none;
+  color: #EB5757; }
+
+.team__inner {
+  max-width: 60vw;
+  border-top: 1px solid #ebebeb;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  margin: auto;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  font-size: 12px; }
+  .team__inner .team__header {
+    padding: 1rem 2rem;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%; }
+  .team__inner .team__cards {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding: 0 2rem; }
+  .team__inner .team__card {
+    border-top: 1px solid #ebebeb;
+    display: flex;
+    margin: .5rem 0;
+    min-width: 20rem;
+    flex: 0 49%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+    padding: .5rem; }
+    .team__inner .team__card img {
+      margin: .5rem 1rem 0 .5rem; }
+    .team__inner .team__card .details__contact {
+      padding-top: .3rem; }
+
+.header {
+  background-color: #fff;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 5rem;
+  display: inline-flex;
+  align-items: flex-end; }
+  .header__inner {
+    display: flex;
+    justify-content: space-between; }
+    .header__inner .logo__img {
+      width: 13rem; }
+    .header__inner--left {
+      display: inline-flex;
+      align-items: flex-end; }
+    .header__inner .menu__items {
+      display: inline-flex;
+      position: relative;
+      overflow: hidden;
+      max-width: 100%;
+      background-color: #fff;
+      padding: 0 20px; }
+    .header__inner a {
+      color: #000;
+      text-decoration: none; }
+    .header__inner .menu__item {
+      padding: 0 2rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      padding: 20px;
+      text-decoration: none;
+      transition: 0.3s;
+      margin: 0 6px;
+      z-index: 1;
+      font-weight: 500;
+      position: relative; }
+      .header__inner .menu__item:before {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 100%;
+        height: .5rem;
+        background-color: #111;
+        opacity: 0;
+        transition: 0.3s; }
+      .header__inner .menu__item:not(.is-active):hover:before {
+        opacity: 1;
+        bottom: 0; }
+      .header__inner .menu__item:not(.is-active):hover {
+        color: #333; }
+      .header__inner .menu__item .nav-indicator {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 4px;
+        transition: 0.4s;
+        height: 5px;
+        z-index: 1;
+        border-radius: 8px 8px 0 0; }
+    .header__inner--right .user-info {
+      display: flex;
+      align-items: center;
+      margin-top: .5rem; }
+      .header__inner--right .user-info__details {
+        display: flex;
+        flex-flow: column nowrap;
+        padding-left: 1rem; }
+        .header__inner--right .user-info__details p {
+          margin: 0;
+          padding: 0; }

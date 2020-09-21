@@ -1,0 +1,60 @@
+@import 'variables';
+
+@mixin _btn {
+    padding: .5rem 1.5rem;
+    color: #fff;
+    border-radius: .5rem;
+    border: 1px solid;
+    outline: none;
+    font-size: 14px;
+    transition: .3s;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:active {
+        outline: none;
+    }
+}
+
+._btn--lg {
+    width: 20rem;
+    margin: 1rem;
+}
+
+._btn--black {
+    @include _btn;
+    background-color: #000;
+    
+    &:hover {
+        background-color: lighten(#000, 20%);
+    }
+}
+
+._btn--dgrey {
+    @include _btn;
+    background-color: #4F4F4F;
+
+    &:hover {
+        background-color: darken(#4F4F4F, 10%);
+    }
+}
+
+._btn--blue {
+    @include _btn;
+    background-color: $blue;
+
+    &:hover {
+        background-color: darken($blue, 10%);
+    }
+}
+
+._btn--gray {
+    @include _btn;
+    background-color: #979797;
+
+    &:hover {
+        background-color:darken(#979797, 10%);
+    }
+}

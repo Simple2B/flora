@@ -1,8 +1,9 @@
-body {
-    color: black;
-    background-color:orange;
-}
+@import 'global/config';
+@import 'global/variables';
+@import 'global/utilities';
+@import 'global/buttons';
+@import 'global/inputs';
 
-.navbar {
-    background-color: yellow !important;
-}
+@import 'layouts/login';
+@import 'layouts/team';
+@import 'layouts/base';

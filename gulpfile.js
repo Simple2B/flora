@@ -1,9 +1,9 @@
-const gulp = require('gulp');
-const sass = require('gulp-sass');
-const cleanCSS = require('gulp-clean-css');
-const autoprefixer = require('gulp-autoprefixer');
-const plumber = require('gulp-plumber');
-const browserSync = require('browser-sync').create();
+const gulp = require('gulp');                         // main module
+const sass = require('gulp-sass');                    // sass files compiler
+const autoprefixer = require('gulp-autoprefixer');    // prefixing of css styles for older browsers
+const cleanCSS = require('gulp-clean-css');           // minify css
+const plumber = require('gulp-plumber');              // error handler
+const browserSync = require('browser-sync').create(); // browser reloader
 
 const paths = {
   styles: {
@@ -12,48 +12,32 @@ const paths = {
   }
 }
 
-//compile scss into css
 const style = () => {
   const { styles : { src, dest }} = paths;
-  // 1. where is scss file
+
   return gulp.src(src)
-    .pipe(plumber())
-  // 2. pass that file through sass compiler
-    .pipe(sass())
+    .pipe(plumber())              // set up error handling
+    .pipe(sass())                 // pass files through sass compiler
     .on("error", sass.logError)
-  // 3. provide auto-prefixing to support multiple browsers
-    .pipe(autoprefixer('last 2 versions',
-    {
+    .pipe(autoprefixer({
       cascade: false
-    })) 
-  // 4. where to save compiled CSS
-    .pipe(gulp.dest(dest))
-  // 5. minify CSS
-  // .pipe(cleanCSS())
-  // .pipe(gulp.dest(dest))
-  // 6. stream changes to all browsers
-    .pipe(browserSync.stream());
+    }))                           // enable auto-prefixing
+    .pipe(gulp.dest(dest))        // save compiled css to dest folder
+    // .pipe(cleanCSS())          // minify css (optional) 
+    // .pipe(gulp.dest(dest))
+    .pipe(browserSync.stream());  // update browser
 }
 
 const watch = () => {
-  // sets up watcher to reload pages on scss compile
   browserSync.init({
-    // turn off sync notification
-    notify: false,
-    // provide proxy address to watch
-    proxy: "localhost:5000",
-    // optionally provide ["browser_name", "browser_name"]
-    browser: "google chrome"
+    notify: false,                // turn off sync notification
+    proxy: "localhost:5000",      // provide address to watch
+    browser: "google chrome"      // select multiple browsers ["browser_name", "browser_name"]
   });
 
-  // shcedule tasks
-  gulp.watch('./app/static/**/*.scss', style);
-
-  // This will reload browser and update HTML files
-  gulp.watch('./app/templates/**/*.html').on('change', browserSync.reload);
-
-  gulp.watch('./static/js/**/*.js').on('change', browserSync.reload);
-
+  gulp.watch('./app/static/**/*.scss', style);                                // reload browser on CSS update
+  gulp.watch('./app/templates/**/*.html').on('change', browserSync.reload);   // reload browser on HTML update
+  gulp.watch('./static/js/**/*.js').on('change', browserSync.reload);         // reload browser on JS update        
 }
 
 exports.style = style;

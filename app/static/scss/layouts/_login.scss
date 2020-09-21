@@ -1,0 +1,40 @@
+@import '../global/variables';
+
+.login__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+    height: 80vh;
+}
+
+.login__form {
+    justify-content: center;
+    align-items: center;
+}
+
+.login__error {
+    background-color: white;
+    color: $red;
+    font-weight: 500;
+    border: 0;
+    margin: auto;
+}
+
+.login__title {
+    
+    &--welcome {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    &--DDB {
+        font-size: 27px;
+        font-weight: 700;
+    }
+}
+
+._flash {
+    background-color: none;
+    color: $red;
+}
