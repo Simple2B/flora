@@ -32,4 +32,6 @@ def team():
 @main_blueprint.route('/resources')
 @login_required
 def resources():
-    return render_template('index.html')
+    # return render_template('index.html')
+    return render_template('header.html')
+
