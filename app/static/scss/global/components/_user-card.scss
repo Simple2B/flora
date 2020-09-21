@@ -1,0 +1,21 @@
+@import '../variables';
+
+.user-card {
+    border-top: $border-top;
+    display: flex;
+    margin: .5rem 0;
+    min-width: 20rem;
+    flex: 0 49%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-shadow: $shadow;
+    padding: .5rem;
+
+    img {
+        margin: .5rem 1rem 0 .5rem;
+    }
+
+    &__details__contact {
+        padding-top: .3rem;
+    }
+}

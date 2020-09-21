@@ -2,44 +2,42 @@
 
 {% block content %}
 
-<div class="container-bottom">
-  <form class="form" role="form" action="{{ url_for('auth.login') }}" method="post">
-    <div class="container-box">
-      <div class="container-div">
-        <div class="title_text ddb-font-family">
-          <div style="text-align: left; margin-bottom: 10px;"> Welcome </div>
-          <div style="text-align: left; font-weight: bold;"> DDB Bidding Manager </div>
-        </div>
-        <div class="form-group password-input">
-          <!-- <input type="text" class="form-control-input" required> -->
-          {{form.user_id(class='form-control-input')}}
-          <label class="label-control">Username</label>
-        </div>
-        <div class="form-group">
-          <!-- <input type="text" class="form-control-input" required> -->
-          {{form.password(class='form-control-input')}}
-          <label class="label-control">Password</label>
+<section class="page-section login">
+  <div class="_container">
+    <div class="login__inner">
+      <div class="login__title">
+        <p class="login__title--welcome">Welcome</p>
+        <p class="login__title--DDB">DDB Bidding Manager</p>
+      </div>
+      <form class="login__form" action="{{ url_for('auth.login') }}" method="POST">
+        <div class="">
+          {{form.user_id(class='_form-input _form-input--lg')}}
+          <label class="_label">Username</label>
         </div>
         <div>
-          {{form.submit(class='login_button')}}
+          {{form.password(class='_form-input _form-input--lg')}}
+          <label class="_label">Password</label>
         </div>
+        
+
+        {{form.submit(class='_btn--dgrey _btn--lg')}}
+
         {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <div style="margin-top: 15px;"><hr size="3"></div>
-        {% for category, message in messages %}
-        <div class="alert alert-{{ category }} alert-dismisible flash_mess_style" style="text-align: center;">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close" style=" float: left;">
-            <span aria-hidden="true"><img src="static/images/close_button_ddb.svg"></span>
-            <span class="sr-only">Close</span>
-          </button>
-          {{ message }}
-        </div>
-        {% endfor %}
-        {% endif %}
+          {% if messages %}
+            <hr>
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismisible login__error">
+                <button type="button" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true"><img src="{{ url_for('static', filename='images/close_button_ddb.svg') }}"></span>
+                </button>
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
         {% endwith %}
-      </div>
+      </form>
     </div>
-  </form>
-</div>
+  </div>
+</section>
 
 {% endblock %}

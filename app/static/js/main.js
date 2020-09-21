@@ -1,27 +1,33 @@
 // custom javascript
 
-$(document).ready(function(){
-    // $( ".i" ).click(function() {
-    //     console.log(12);
-    //     alert( "Handler for .click() called." );
-    //   });
-    var element_id = $(".ddb-active")[0];
-    var a_element_id = $(".a_active_id");
-    var ul_element_id = $("#select_ul_id li a");
-    console.log(element_id);
-    console.log(a_element_id);
-    console.log(ul_element_id);
-    // a_element_id.forEach(i => {
-    //     console.log(i);
-    // });
-    // a_element_id.forEach(element => {
+"use strict";
 
-    $( "#select_ul_id li a" ).on('click', function(e) {
-        // e.preventDefault();
-        // $('.contentMenu').each((i, item) => $(item).removeClass('ddb-underline'));
-        $("#select_ul_id li a").removeClass('ddb-underline');
-        $(this).addClass('ddb-underline');
-        // $(this).addClass('ddb-underline');
-    });
+    // $( "#select_ul_id li a" ).on('click', function(e) {
+    //     // e.preventDefault();
+    //     // $('.contentMenu').each((i, item) => $(item).removeClass('ddb-underline'));
+    //     $("#select_ul_id li a").removeClass('ddb-underline');
+    //     $(this).addClass('ddb-underline');
+    //     // $(this).addClass('ddb-underline');
     // });
+    // // });
+const indicator = document.querySelector('.nav-indicator');
+const items = document.querySelectorAll('.menu__item');
+
+const handleIndicator = (el) => {
+  items.forEach(function (item) {
+    item.classList.remove('is-active');
+    item.removeAttribute('style');
+  });
+  indicator.style.width = "".concat(el.offsetWidth, "px");
+  indicator.style.left = "".concat(el.offsetLeft, "px");
+  indicator.style.backgroundColor = el.getAttribute('active-color');
+  el.classList.add('is-active');
+  el.style.color = el.getAttribute('active-color');
+}
+
+items.forEach((item) => {
+  item.addEventListener('click', function (e) {
+    handleIndicator(e.target);
+  });
+  item.classList.contains('is-active') && handleIndicator(item);
 });

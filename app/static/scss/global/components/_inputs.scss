@@ -1,0 +1,46 @@
+@import '../variables';
+
+@mixin _input {
+    border: 1px solid transparent;
+    line-height: 2rem;
+    height: 2rem;
+    padding: 0;
+    margin: 0 auto;
+}
+
+
+._form-input {
+    @include _input;
+    display: block;
+    padding: .2rem;
+    border-radius: .5rem;
+    border-color: #BDBDBD;
+    text-indent: 5px;
+    height: 2.5rem;
+    margin-top: 1rem;
+
+    &:focus {
+        border-color: rgb(255, 221, 72);
+        outline: 0;
+    }
+
+    &--lg {
+        width: 20rem;
+        margin-top: 1rem;
+    }
+}
+
+._label {
+    @include _input;
+    z-index: 2;
+    float: left;
+    height: .5rem;
+    line-height: .1rem;
+    padding: .1rem .5rem .1rem .2rem;
+    position: relative;
+    left: 1rem;
+    top: -2.7rem;
+    color: #333333;
+    background-color: #fff;
+    font-size: 13px;
+}

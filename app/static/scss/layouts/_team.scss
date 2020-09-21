@@ -1,0 +1,28 @@
+@import '../global/variables';
+
+.team__inner {
+    max-width: 60vw;
+    border-top: $border-top;
+    box-shadow: $shadow;
+    margin: auto;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    font-size: 12px;
+
+    .team-header {
+        padding: 1rem 2rem;;
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: baseline;
+        width: 100%;
+    }
+
+    .team-cards {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        padding-top: 1rem;
+        padding: 0 2rem;
+    }
+}

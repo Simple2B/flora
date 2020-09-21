@@ -2,32 +2,33 @@
 
 {% block content %}
 
-  <div class="main-team-container">
-    <div class="team-top-section">
-      <span>Showing {{ users|length }} users</span>
-      <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal">
+<section class="page-section team">
+  <div class="team__inner">
+    <div class="team-header">
+      <span class="team-header__counter t-gray">Showing {{ users|length }} users</span>
+      <button type="button" class="team-header__button _btn--blue" data-toggle="modal" data-target="#exampleModal">
         Add new
       </button>
     </div>
-
-    <div class="team-cards-container">
+    <div class="team-cards">
       {% for user in users %}
-        <div class="team-card">
-          <div>
-            <img src="static/images/avatar_ddb.svg">
-          </div>
-          <div class="box-users">
-            <ul class="markers-none">
-              <li class="">{{user.username}}</li>
-              <li class="">{{user.position}}</li>
-              <li class="">{{user.email}}</li>
-              <li class="">{{user.phone}}</li>
-            </ul>
+        <div class="user-card">
+          <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt='user-icon'>
+          <div class="user-card__details">
+            <div class="user-card__details__name">
+              <li>{{user.username}}</li>
+              <li class="t-gray">{{user.position}}</li>
+            </div>
+            <div class="user-card__details__contact">
+              <li>Email: {{user.email}}</li>
+              <li>Phone: {{user.phone}}</li>
+            </div>
           </div>
         </div>
       {% endfor %}
     </div>
   </div>
+</section>
 
 
   <!-- Modal -->
@@ -39,34 +40,34 @@
           <form class="form" role="form" action="{{ url_for('auth.register') }}" method="post">
             <div class="form-row">
               <div>
-                {{form.username(class='ddb-form-input m-1')}}
-                <label class="ddb-form-label">Username</label>
+                {{form.username(class='_form-input _form-input--m')}}
+                <label class="_label">Username</label>
               </div>
 
               <div>
-                {{form.email(class='ddb-form-input m-1')}}
-                <label class="ddb-form-label">Email</label>
+                {{form.email(class='_form-input _form-input--m')}}
+                <label class="_label">Email</label>
               </div>
 
               <div>
-                {{form.password(class='ddb-form-input m-1')}}
-                <label class="ddb-form-label">Password</label>
+                {{form.password(class='_form-input _form-input--m')}}
+                <label class="_label">Password</label>
               </div>
   
               <div>
-                {{form.password_confirmation(class='ddb-form-input m-1')}}
-                <label class="ddb-form-label">Confirm password</label>
+                {{form.password_confirmation(class='_form-input _form-input--m')}}
+                <label class="_label">Confirm password</label>
               </div>
             </div>
             <div class="form-row">
               <div>
-                {{form.position(class='ddb-form-input m-1')}}
-                <label class="ddb-form-label">Position</label>
+                {{form.position(class='_form-input _form-input--m')}}
+                <label class="_label">Position</label>
               </div>
 
               <div>
-                {{form.phone(class='ddb-form-input m-1')}}
-                <label class="ddb-form-label">Phone</label>
+                {{form.phone(class='_form-input _form-input--m')}}
+                <label class="_label">Phone</label>
               </div>
 
               <div class="team-radio-select m-1">
@@ -80,11 +81,12 @@
                   <input type="radio" id="user" name="user_type" value="user">
                   <label for="user">Non admin</label>
                 </div>
+
               </div>
             </div>
         </div>
         <div class="bt_add-new-user">
-          {{form.submit(class='btn btn-primary')}}
+          {{form.submit(class='_btn--black')}}
         </div>
       </div>
     </div>
