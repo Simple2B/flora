@@ -137,6 +137,21 @@ ul, li {
   background-color: #fff;
   font-size: 13px; }
 
+.user-card {
+  border-top: 1px solid #ebebeb;
+  display: flex;
+  margin: .5rem 0;
+  min-width: 20rem;
+  flex: 0 49%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  padding: .5rem; }
+  .user-card img {
+    margin: .5rem 1rem 0 .5rem; }
+  .user-card__details__contact {
+    padding-top: .3rem; }
+
 .login__inner {
   display: flex;
   align-items: center;
@@ -176,32 +191,18 @@ ul, li {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
   font-size: 12px; }
-  .team__inner .team__header {
+  .team__inner .team-header {
     padding: 1rem 2rem;
     display: inline-flex;
     justify-content: space-between;
     align-items: baseline;
     width: 100%; }
-  .team__inner .team__cards {
+  .team__inner .team-cards {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
     padding-top: 1rem;
     padding: 0 2rem; }
-  .team__inner .team__card {
-    border-top: 1px solid #ebebeb;
-    display: flex;
-    margin: .5rem 0;
-    min-width: 20rem;
-    flex: 0 49%;
-    justify-content: flex-start;
-    align-items: flex-start;
-    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
-    padding: .5rem; }
-    .team__inner .team__card img {
-      margin: .5rem 1rem 0 .5rem; }
-    .team__inner .team__card .team__details__contacts {
-      padding-top: .3rem; }
 
 .header {
   background-color: #fff;

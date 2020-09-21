@@ -3,31 +3,29 @@
 {% block content %}
 
 <section class="page-section team">
-  <div class="container">
-    <div class="team__inner">
-      <div class="team__header">
-        <span class="counter t-gray">Showing {{ users|length }} users</span>
-        <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
-          Add new
-        </button>
-      </div>
-      <div class="team__cards">
-        {% for user in users %}
-          <div class="team__card">
-            <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt='user-icon'>
-            <div class="team__details">
-              <div class="team__details__name">
-                <li>{{user.username}}</li>
-                <li class="t-gray">{{user.position}}</li>
-              </div>
-              <div class="team__details__contact">
-                <li>Email: {{user.email}}</li>
-                <li>Phone: {{user.phone}}</li>
-              </div>
+  <div class="team__inner">
+    <div class="team-header">
+      <span class="team-header__counter t-gray">Showing {{ users|length }} users</span>
+      <button type="button" class="team-header__button _btn--blue" data-toggle="modal" data-target="#exampleModal">
+        Add new
+      </button>
+    </div>
+    <div class="team-cards">
+      {% for user in users %}
+        <div class="user-card">
+          <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt='user-icon'>
+          <div class="user-card__details">
+            <div class="user-card__details__name">
+              <li>{{user.username}}</li>
+              <li class="t-gray">{{user.position}}</li>
+            </div>
+            <div class="user-card__details__contact">
+              <li>Email: {{user.email}}</li>
+              <li>Phone: {{user.phone}}</li>
             </div>
           </div>
-        {% endfor %}
-      </div>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </section>
