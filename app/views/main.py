@@ -18,8 +18,8 @@ def index():
 @main_blueprint.route('/bidding')
 @login_required
 def bidding():
-    tabs = ['My Biddings', 'Work Items']
-    return render_template('bidding.html', tabs=tabs)
+    form = RegistrationForm(request.form)
+    return render_template('bidding.html', form=form)
 
 
 @main_blueprint.route('/team')
