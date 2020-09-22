@@ -35,3 +35,9 @@ def resources():
     # return render_template('index.html')
     return render_template('header.html')
 
+
+@main_blueprint.route('/header')
+@login_required
+def header():
+    # return render_template('index.html')
+    return render_template('header.html')

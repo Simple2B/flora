@@ -1,5 +1,40 @@
 {% extends "base.html" %}
 
+
+
+{% block header %}
+
+<header class="header">
+  <div class="container">
+    <div class="header__inner">
+      <div class="header__inner--left">
+        <a class="logo" href="#">
+          <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="DDB Contracting" class="logo__img">
+        </a>
+        <nav class="menu__items">
+            <a class="menu__item" href="{{ url_for('main.header') }}">Bidding</a>
+            <a class="menu__item" href="#" style="color: chartreuse;">My team</a>
+            <a class="menu__item" href="#">Resources</a>
+            <span class="nav-indicator"></span>
+        </nav>
+      </div>
+      {% if current_user.is_authenticated %}
+      <div class="header__inner--right">
+        <div class="user-info">
+          <div class="user-info__img">
+            <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt="Icon">
+          </div>
+          <div class="user-info__details">
+            <p>{{current_user.username}}</p>
+            <p class='t-gray'>{{current_user.position}}</p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</header>
+{% endblock %}
 {% block content %}
 
 <div class="container">
