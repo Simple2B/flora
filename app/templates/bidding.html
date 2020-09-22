@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 
+{% block links %}
+<link rel="stylesheet" href="/static/css/jquery.dataTables.min.css">
+{% endblock %}
 
 {% block header %}
 <header class="header">
@@ -36,10 +39,69 @@
 
 {% block content %}
 <!-- Sidebar -->
+
+<style>
+  .zeroing_bootsrtap {
+    border-color: #fff;
+  }
+
+  .font-work-items {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333333;
+    background-color: #fff;
+  }
+
+  .font-work-items:hover {
+    color: #175593;;
+  }
+
+  .box-shadow {
+    box-shadow: 0 .2rem .2rem rgba(0, 0, 0, 0.25);
+  }
+
+  .a-space-between a {
+    padding: 1rem;
+  }
+
+/*  */
+/* TEST */
+/* Tabs */
+
+
+.tab {
+    overflow: hidden;
+}
+
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+
+
+.tab button.active {
+    background-color: #fff;
+    color: #333333;
+}
+
+
+.tabcontent {
+    display: none;
+}
+
+</style>
+
 <section class="page-section bidding">
   <div class="d-flex" id="wrapper">
     <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading">{{ config.APP_NAME }}</div>
+        <div class="sidebar-heading">DDB Contracting</div>
         <div class="list-group list-group-flush">
         {% for tab in tabs %}
         <a href="" class="list-group-item list-group-item-action bg-light">{{ tab }}</a>
@@ -47,12 +109,7 @@
         </div>
     </div>
     <!-- end Sidebar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" id="ddb-background">
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" id="ddb-background" style="padding:0.5rem 1.8rem;">
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Login/Logout -->
@@ -78,7 +135,65 @@
         <h1>Welcome!</h1>
         <hr>
         <p>Add some content here!</p>
+        <div class="a-space-between tab">
+        <button class="font-work-items active" onclick="changeTab(event, 'work_item_table')">Work items</button>
+        <button class="font-work-items" onclick="changeTab(event, 'exclusion_block')"> Exclusions</button>
+        <button href="#" class="font-work-items">Clarifications</button>
+        </div>
+
+        <div style="display: flex; flex-direction: column; justify-content: space-around; align-items: center;">
+          <!-- <div><a id="#table">Test content</a></div> -->
+
+          <div id="work_item_table" class="box-shadow tabcontent">
+            <table id="" class="patientsTable table table-striped table-sm">
+              <thead>
+                <th>Work Code</th>
+                <th>Work Item</th>
+                <th>Edit</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="" class="t-gray">12.12</a></td>
+                  <td>Overhead</td>
+                  <td><a href=""><img src="{{ url_for('static', filename='images/edit_logo.svg') }}"></a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="exclusion_block" class="tabcontent">
+            <div>
+            Unless expressly stated, the following exclusions apply: sing emoji to express emotions, ideas,
+            and thoughts are very popular on the iPhone and other mobile devices.
+            A couple of quick taps on the keyboard button and you've got them ready, but did you know you can actually use emoji on your Mac?
+            That's right, you can liter your email, notes, Twitter feed, and anything else you want with emoji on your Mac even though it
+            isn't immediately obvious how to access them. Here' s a quick guide to help you use emoji on your Mac!
+            </div>
+          </div>
+          <!-- <ul class="nav nav-tabs">
+            <li class="nav-item"> <a class="nav-link active zeroing_bootstrap"  data-toggle="tab" href="#work_items">Work Items</a>
+            </li>
+            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#exclusions">Exclusions</a>
+            </li>
+            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#clarifications">Clarifications</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="work_items">
+              Add some content here! (block 1)
+            </div>
+            <div class="tab-pane fade" id="exclusions">
+              Add some content here! (block 2)
+            </div>
+            <div class="tab-pane fade" id="clarifications">
+              Add some content here! (block 3)
+            </div>
+          </div> -->
+        </div>
     </div>
   </div>
 </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/jquery.dataTables.min.js"></script>
 {% endblock %}
