@@ -31,3 +31,8 @@ items.forEach((item) => {
   });
   item.classList.contains('is-active') && handleIndicator(item);
 });
+
+$("#ddb-background").click(function (e) {
+  e.preventDefault();
+  $("#wrapper").toggleClass("toggled");
+});

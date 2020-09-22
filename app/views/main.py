@@ -18,7 +18,8 @@ def index():
 @main_blueprint.route('/bidding')
 @login_required
 def bidding():
-    return render_template('index.html')
+    tabs = ['My Biddings', 'Work Items']
+    return render_template('bidding.html', tabs=tabs)
 
 
 @main_blueprint.route('/team')
@@ -32,12 +33,10 @@ def team():
 @main_blueprint.route('/resources')
 @login_required
 def resources():
-    # return render_template('index.html')
     return render_template('header.html')
 
 
 @main_blueprint.route('/header')
 @login_required
 def header():
-    # return render_template('index.html')
     return render_template('header.html')
