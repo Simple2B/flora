@@ -194,13 +194,13 @@
               <th>Edit</th>
             </thead>
             <tbody>
+              {% for work_item in work_items %}
               <tr>
-                {% for work_item in work_items %}
                 <td><a href="" class="t-gray">{{work_item.code}}</a></td>
                 <td>{{work_item.name}}</td>
-                {% endfor %}
                 <td><a href=""><img src="{{ url_for('static', filename='images/edit_logo.svg') }}"></a></td>
               </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>

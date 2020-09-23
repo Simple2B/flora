@@ -59,7 +59,7 @@ def logout():
 
 @auth_blueprint.route("/work_item", methods=["GET", "POST"])
 def work_item():
-    form = WorkItem(request.form)
+    form = WorkItemForm(request.form)
     if form.validate_on_submit():
         if add_work_item_validator(
             form.code.data,
