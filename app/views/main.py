@@ -20,7 +20,17 @@ def index():
 def bidding():
     form = WorkItemForm(request.form)
     work_items = WorkItem.query.all()
-    return render_template('bidding.html', form=form, work_items=work_items)
+    test = [
+        'test',
+        'test',
+        'test',
+        'test',
+        'test',
+        'test',
+        'test',
+        'test'
+    ]
+    return render_template('bidding.html', form=form, work_items=work_items, test=test)
 
 
 @main_blueprint.route('/team')
@@ -35,6 +45,30 @@ def team():
 @login_required
 def resources():
     return render_template('header.html')
+
+
+@main_blueprint.route('/work_items')
+@login_required
+def work_items():
+    form = WorkItemForm(request.form)
+    work_items = WorkItem.query.all()
+    return render_template('work_items.html', form=form, work_items=work_items)
+
+
+@main_blueprint.route('/exclusions')
+@login_required
+def exclusions():
+    form = WorkItemForm(request.form)
+    work_items = WorkItem.query.all()
+    return render_template('exclusions.html', form=form, work_items=work_items)
+
+
+@main_blueprint.route('/clarifications')
+@login_required
+def clarifications():
+    form = WorkItemForm(request.form)
+    work_items = WorkItem.query.all()
+    return render_template('clarifications.html', form=form, work_items=work_items)
 
 
 @main_blueprint.route('/header')

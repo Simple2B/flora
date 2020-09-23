@@ -1,0 +1,278 @@
+% extends "base.html" %}
+
+{% block links %}
+<link rel="stylesheet" href="/static/css/jquery.dataTables.min.css">
+{% endblock %}
+
+{% block header %}
+<header class="header">
+  <div class="container">
+    <div class="header__inner">
+      <div class="header__inner--left">
+        <a class="logo" href="#">
+          <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="DDB Contracting" class="logo__img">
+        </a>
+        <nav class="menu__items">
+          <a class="menu__item" href="{{ url_for('main.index') }}">Bidding</a>
+          <a class="menu__item" href="#">My team</a>
+          <a class="menu__item" href="#">Resources</a>
+          <span class="nav-indicator"></span>
+        </nav>
+      </div>
+      {% if current_user.is_authenticated %}
+      <div class="header__inner--right">
+        <div class="user-info">
+          <div class="user-info__img">
+            <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt="Icon">
+          </div>
+          <div class="user-info__details">
+            <p>{{current_user.username}}</p>
+            <p class='t-gray'>{{current_user.position}}</p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<!-- Sidebar -->
+
+<style>
+  .zeroing_bootsrtap {
+    border-color: #fff;
+  }
+
+  .font-work-items {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333333;
+    background-color: #fff;
+  }
+
+  .font-work-items:hover {
+    color: #175593;
+    ;
+  }
+
+  .box-shadow {
+    box-shadow: 0 .2rem .2rem rgba(0, 0, 0, 0.25);
+  }
+
+  .a-space-between a {
+    padding: 1rem;
+  }
+
+  /*  */
+  /* TEST */
+  /* Tabs */
+
+
+  .tab {
+    overflow: hidden;
+  }
+
+  .tabm {
+    overflow: hidden;
+  }
+
+  .tabm .__tabm-button.active{
+    background-color: #333333 !important;
+    color: #fff;
+  }
+
+  .__btn {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+  }
+
+  .__btn:hover {
+    color: #333333;
+  }
+
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+  }
+
+
+  .tab button.active {
+    border-bottom: 5px solid #175593;
+  }
+
+  .tabcontent {
+    display: none;
+  }
+
+  .tabcontentm {
+    display: none;
+  }
+
+  .list-group-item.active {
+    border-color: #333333;
+    color: #333333;
+  }
+</style>
+
+<section class="page-section bidding d-flex tabm" id="wrapper">
+  <!-- begin Sidebar -->
+  <!-- <div> -->
+  <div class="bg-light border-right box-shadow" style="height: 800px;" id="sidebar-wrapper">
+    <div class="sidebar-heading">DDB Contracting</div>
+    <div class="list-group list-group-flush">
+      <button class="list-group-item list-group-item-action bg-light normalized tablinks __tabm-button"
+        onclick="changeMainTab(event, 'bidding-container')">
+        My Bidding</button>
+      <button class="list-group-item list-group-item-action bg-light normalized tablinks __tabm-button"
+        onclick="changeMainTab(event, 'work-item-container')">
+        Work Items</button>
+      <button class="font-work-items tablinks" onclick="changeTab(event, 'exclusion_block')">Exclusions</button>
+      <button class="font-work-items tablinks" onclick="changeTab(event, 'clarification_block')">Clarifications</button>
+    </div>
+  </div>
+  <!-- </div> -->
+  <!-- end Sidebar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" id="ddb-background"
+    style="padding:0.5rem 2.8rem;">
+
+    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+    <!-- Login/Logout -->
+    <!-- <ul class="navbar-nav ml-auto">
+          {% if current_user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">{{current_user.username | capitalize}}</a>
+            <div class="dropdown-menu" aria-labelledby="userActions">
+              <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
+            </div>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+          </li>
+          {% endif %}
+        </ul> -->
+    <!-- </div> -->
+  </nav>
+  <!-- <div class="ddb-container"> -->
+  <div class="container" id="work-item-container">
+    <h1>Welcome!</h1>
+
+    <div class="a-space-between">
+      <button class="font-work-items">Work items</button>
+    </div>
+    <div style="display: flex; flex-direction: column; justify-content: space-around; align-items: center;">
+      <!-- <div><a id="#table">Test content</a></div> -->
+      <div class="container">
+        <div id="workItemTable" class="box-shadow tabcontent">
+          <span>
+            <select>
+              <option value="Most popular" name="Most popular">Most popular</option>
+              <option value="Most recent" name="Most recent">Most recent</option>
+            </select>
+            <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
+              Add new
+            </button>
+          </span>
+          <table id="" class="patientsTable table table-striped table-sm">
+            <thead>
+              <th>Work Code</th>
+              <th>Work Item</th>
+              <th>Edit</th>
+            </thead>
+            <tbody>
+              {% for work_item in work_items %}
+              <tr>
+                <td><a href="" class="t-gray">{{work_item.code}}</a></td>
+                <td>{{work_item.name}}</td>
+                <td><a href=""><img src="{{ url_for('static', filename='images/edit_logo.svg') }}"></a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container tabcontentm" id="bidding-container">
+    <h1>Welcome!</h1>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <h5>Add work item</h5>
+      <div class="modal-body">
+        <form class="form" role="form" action="{{ url_for('auth.work_item') }}" method="post">
+          <div class="form-row">
+            <div>
+              {{form.name(class='_form-input _form-input--m')}}
+              <label class="_label">Name</label>
+            </div>
+
+            <div>
+              {{form.code(class='_form-input _form-input--m')}}
+              <label class="_label">Code</label>
+            </div>
+
+          </div>
+      </div>
+      <div class="bt_add-new-user">
+        {{form.submit(class='_btn--black')}}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of Modal -->
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/jquery.dataTables.min.js"></script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+<!--
+<div id="exclusion_block" class="tabcontent">
+  <div>
+    Unless expressly stated, the following exclusions apply: sing emoji to express emotions, ideas,
+    and thoughts are very popular on the iPhone and other mobile devices.
+    A couple of quick taps on the keyboard button and you've got them ready, but did you know you can actually
+    use emoji on your Mac?
+    That's right, you can liter your email, notes, Twitter feed, and anything else you want with emoji on your
+    Mac even though it
+    isn't immediately obvious how to access them. Here' s a quick guide to help you use emoji on your Mac!
+  </div>
+</div>
+<div id="clarification_block" class="tabcontent">
+  <div>
+    Please note the following clarifications:
+    sing emoji to express emotions, ideas, and thoughts are very popular on the iPhone and other mobile devices.
+    A couple of quick taps on the keyboard button and you've got them ready,
+    but did you know you can actually use emoji on your Mac? That's right, you can liter your email, notes,
+    Twitter feed,
+    and anything else you want with emoji on your Mac even though it isn't
+    immediately obvious how to access them. Here' s a quick guide to help you use emoji on your Mac!
+  </div>
+</div> -->

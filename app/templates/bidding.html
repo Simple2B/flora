@@ -13,9 +13,9 @@
           <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="DDB Contracting" class="logo__img">
         </a>
         <nav class="menu__items">
-          <a class="menu__item" href="{{ url_for('main.index') }}">Bidding</a>
-          <a class="menu__item" href="#">My team</a>
-          <a class="menu__item" href="#">Resources</a>
+          <a class="menu__item" href="{{ url_for('main.bidding') }}">Bidding</a>
+          <a class="menu__item" href="{{ url_for('main.team') }}">My team</a>
+          <a class="menu__item" href="{{ url_for('main.resources') }}">Resources</a>
           <span class="nav-indicator"></span>
         </nav>
       </div>
@@ -43,6 +43,14 @@
 <style>
   .zeroing_bootsrtap {
     border-color: #fff;
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  .margin--top {
+    margin-top: 2rem;
   }
 
   .font-work-items {
@@ -124,6 +132,16 @@
     border-color: #333333;
     color: #333333;
   }
+
+.bck-ground {
+  background-color: black;
+  color: #fff;
+}
+
+.text--center {
+  text-align: center;
+}
+
 </style>
 
 <section class="page-section bidding d-flex tabm" id="wrapper">
@@ -131,19 +149,27 @@
   <!-- <div> -->
   <div class="bg-light border-right box-shadow" id="sidebar-wrapper">
     <div class="sidebar-heading">DDB Contracting</div>
-    <div class="list-group list-group-flush">
-      <button class="list-group-item list-group-item-action bg-light normalized tablinks __tabm-button"
-        onclick="changeMainTab(event, 'bidding-container')">
-        My Bidding</button>
-      <button class="list-group-item list-group-item-action bg-light normalized tablinks __tabm-button"
-        onclick="changeMainTab(event, 'work-item-container')">
-        Work Items</button>
+    <div class="text--center list-group list-group-flush">
+      <a href="#">
+      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      My Bidding </button></a>
+      <a href="{{ url_for('main.work_items') }}">
+      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      Work Items </button> </a>
+      <a href="{{ url_for('main.exclusions') }}">
+      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      Exclusions
+      </button> </a>
+      <a href="{{ url_for('main.clarifications') }}">
+      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      Clarifications
+      </button> </a>
     </div>
   </div>
   <!-- </div> -->
   <!-- end Sidebar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" id="ddb-background"
-    style="padding:0.5rem 1.8rem;">
+    style="padding:0.5rem 2.8rem;">
 
     <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
     <!-- Login/Logout -->
@@ -165,135 +191,49 @@
     <!-- </div> -->
   </nav>
   <!-- <div class="ddb-container"> -->
-  <div class="container tabcontentm" id="work-item-container">
+  <div class="container" id="work-item-container">
     <h1>Welcome!</h1>
 
-    <div class="a-space-between tab">
-      <button class="font-work-items tablinks" onclick="changeTab(event, 'workItemTable')">Work items</button>
-      <button class="font-work-items tablinks" onclick="changeTab(event, 'exclusion_block')">Exclusions</button>
-      <button class="font-work-items tablinks" onclick="changeTab(event, 'clarification_block')">Clarifications</button>
+    <span>
+      <select>
+        <option value="Most popular" name="Most popular">Most popular</option>
+        <option value="Most recent" name="Most recent">Most recent</option>
+      </select>
+      <button type="button" class="_btn--gray" data-toggle="modal" data-target="#exampleModal">
+        Edit
+      </button>
+      <input type="input" style="float: right;">
+      </input>
+    </span>
+
+    <div class="margin--top">
+      <table id="" class="patientsTable table table-striped table-sm">
+        <thead class="bck-ground">
+          <th>Bidding ID</th>
+          <th>Title</th>
+          <th>PM</th>
+          <th>Client</th>
+          <th>Satus</th>
+          <th>Last updated</th>
+        </thead>
+        <tbody>
+          {% for i in test %}
+          <tr>
+            <td>{{i}}</td>
+            <td>{{i}}</td>
+            <td>{{i}}</td>
+            <td>{{i}}</td>
+            <td>{{i}}</td>
+            <td>{{i}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
 
-    <div style="display: flex; flex-direction: column; justify-content: space-around; align-items: center;">
-      <!-- <div><a id="#table">Test content</a></div> -->
-      <div class="container">
-        <div id="workItemTable" class="box-shadow tabcontent">
-          <span>
-            <select>
-              <option value="Most popular" name="Most popular">Most popular</option>
-              <option value="Most recent" name="Most recent">Most recent</option>
-            </select>
-            <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
-              Add new
-            </button>
-          </span>
-          <table id="" class="patientsTable table table-striped table-sm">
-            <thead>
-              <th>Work Code</th>
-              <th>Work Item</th>
-              <th>Edit</th>
-            </thead>
-            <tbody>
-              {% for work_item in work_items %}
-              <tr>
-                <td><a href="" class="t-gray">{{work_item.code}}</a></td>
-                <td>{{work_item.name}}</td>
-                <td><a href=""><img src="{{ url_for('static', filename='images/edit_logo.svg') }}"></a></td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        <div id="exclusion_block" class="tabcontent">
-          <div>
-            Unless expressly stated, the following exclusions apply: sing emoji to express emotions, ideas,
-            and thoughts are very popular on the iPhone and other mobile devices.
-            A couple of quick taps on the keyboard button and you've got them ready, but did you know you can actually
-            use emoji on your Mac?
-            That's right, you can liter your email, notes, Twitter feed, and anything else you want with emoji on your
-            Mac even though it
-            isn't immediately obvious how to access them. Here' s a quick guide to help you use emoji on your Mac!
-          </div>
-        </div>
-        <div id="clarification_block" class="tabcontent">
-          <div>
-            Please note the following clarifications:
-            sing emoji to express emotions, ideas, and thoughts are very popular on the iPhone and other mobile devices.
-            A couple of quick taps on the keyboard button and you've got them ready,
-            but did you know you can actually use emoji on your Mac? That's right, you can liter your email, notes,
-            Twitter feed,
-            and anything else you want with emoji on your Mac even though it isn't
-            immediately obvious how to access them. Here' s a quick guide to help you use emoji on your Mac!
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container tabcontentm" id="bidding-container">
-    <h1>Welcome!</h1>
-    <ul class="nav nav-tabs">
-      <li class="nav-item"> <a class="nav-link active zeroing_bootstrap" data-toggle="tab" href="#work_items">Work
-          Items</a>
-      </li>
-      <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#exclusions">Exclusions</a>
-      </li>
-      <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#clarifications">Clarifications</a>
-      </li>
-    </ul>
-    <div class="tab-content">
-      <div class="tab-pane fade show active" id="work_items">
-        Add some content here! (block 1)
-      </div>
-      <div class="tab-pane fade" id="exclusions">
-        Add some content here! (block 2)
-      </div>
-      <div class="tab-pane fade" id="clarifications">
-        Add some content here! (block 3)
-      </div>
-    </div>
   </div>
 </section>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <h5>Add work item</h5>
-      <div class="modal-body">
-        <form class="form" role="form" action="{{ url_for('auth.work_item') }}" method="post">
-          <div class="form-row">
-            <div>
-              {{form.name(class='_form-input _form-input--m')}}
-              <label class="_label">Name</label>
-            </div>
-
-            <div>
-              {{form.code(class='_form-input _form-input--m')}}
-              <label class="_label">Code</label>
-            </div>
-
-            <!-- <div class="team-radio-select m-1">
-              <div>
-                <input type="radio" id="admin" name="user_type" value="admin" checked>
-                <label for="admin">Admin</label>
-              </div>
-
-              <div>
-                <input type="radio" id="user" name="user_type" value="user">
-                <label for="user">Non admin</label>
-              </div>
-            </div>
-             -->
-          </div>
-      </div>
-      <div class="bt_add-new-user">
-        {{form.submit(class='_btn--black')}}
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end of Modal -->
 {% endblock %}
 
 {% block scripts %}
