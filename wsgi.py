@@ -3,7 +3,7 @@ import os
 import click
 
 from app import create_app, db, models, forms
-from app.models import User
+from app.models import User, WorkItem
 
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "1234")
@@ -11,6 +11,9 @@ ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "admin@admin.com")
 ADMIN_POSITION = os.environ.get("ADMIN_POSITION", "administrator")
 ADMIN_PHONE = os.environ.get("ADMIN_PHONE", "0987654321")
 ADMIN_TYPE = os.environ.get("ADMIN_TYPE", "admin")
+
+WORK_ITEM_NAME = os.environ.get("WORK_ITEM_NAME", "TESTWORKITEM")
+WORK_ITEM_CODE = os.environ.get("WORK_ITEM_CODE", "")
 
 app = create_app()
 
@@ -34,9 +37,14 @@ def create_db():
         user_type=ADMIN_TYPE,
         activated=True,
     )
+
     user.password = ADMIN_PASSWORD
     user.save()
-
+    work_item = WorkItem(
+        name=WORK_ITEM_NAME,
+        code=WORK_ITEM_CODE,
+    )
+    work_item.save()
 
 @app.cli.command()
 @click.confirmation_option(prompt="Drop all database tables?")

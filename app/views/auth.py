@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, login_required
 
-from app.models import User
-from app.forms import LoginForm, RegistrationForm
-from app.controllers import add_user_data_validator
+from app.models import User, WorkItem
+from app.forms import LoginForm, RegistrationForm, WorkItemForm
+from app.controllers import add_user_data_validator, add_work_item_validator
 
 auth_blueprint = Blueprint("auth", __name__)
 
@@ -55,3 +55,25 @@ def logout():
     logout_user()
     flash("You were logged out.", "info")
     return redirect(url_for("auth.login"))
+
+
+@auth_blueprint.route("/work_item", methods=["GET", "POST"])
+def work_item():
+    form = WorkItem(request.form)
+    if form.validate_on_submit():
+        if add_work_item_validator(
+            form.code.data,
+        ):
+            work_item = WorkItem(
+                name=form.name.data,
+                code=form.code.data,
+            )
+            work_item.save()
+            flash("Registration successful. You are logged in.", "success")
+            return redirect(url_for("main.bidding"))
+        else:
+            flash("The given data was invalid.", "danger")
+            return redirect(url_for("main.bidding"))
+    elif form.is_submitted():
+        flash("The given data was invalid.", "danger")
+    return redirect(url_for("main.bidding"))

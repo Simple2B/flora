@@ -1,8 +1,8 @@
 from flask import render_template, Blueprint, redirect, url_for, request
 from flask_login import login_required
 
-from app.forms import LoginForm, RegistrationForm
-from app.models import User
+from app.forms import RegistrationForm, WorkItemForm
+from app.models import User, WorkItem
 
 
 main_blueprint = Blueprint('main', __name__)
@@ -18,8 +18,9 @@ def index():
 @main_blueprint.route('/bidding')
 @login_required
 def bidding():
-    form = RegistrationForm(request.form)
-    return render_template('bidding.html', form=form)
+    form = WorkItemForm(request.form)
+    work_items = WorkItem.query.all()
+    return render_template('bidding.html', form=form, work_items=work_items)
 
 
 @main_blueprint.route('/team')
@@ -40,3 +41,8 @@ def resources():
 @login_required
 def header():
     return render_template('header.html')
+
+
+@main_blueprint.route("/test")
+def test():
+    return redirect(url_for("main.bidding/#work-item-container"))

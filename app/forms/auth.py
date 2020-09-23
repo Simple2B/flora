@@ -18,8 +18,6 @@ class RegistrationForm(FlaskForm):
     phone = IntegerField('Phone', validators=[DataRequired()])
     user_type = StringField('User type', validators=[DataRequired()])
 
-    # TODO: check type field is select
-
     password = PasswordField('Password', validators=[DataRequired(), Length(6, 30)])
     password_confirmation = PasswordField(
         'Confirm Password', validators=[DataRequired(), EqualTo('password', message='Password do not match.')])
@@ -32,3 +30,9 @@ class RegistrationForm(FlaskForm):
     def validate_email(form, field):
         if User.query.filter_by(email=field.data).first() is not None:
             raise ValidationError('This email is already registered.')
+
+
+class WorkItemForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired(), Length(2, 30)])
+    code = StringField('Code', validators=[DataRequired(), Length(2, 30)])
+    submit = SubmitField('Add new user')

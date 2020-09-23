@@ -1,1 +1,1 @@
-from .auth import LoginForm, RegistrationForm  # noqa f401
+from .auth import LoginForm, RegistrationForm, WorkItemForm  # noqa f401
