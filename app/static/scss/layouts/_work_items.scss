@@ -43,3 +43,9 @@
     align-content: space-between;
     align-items: center;
 }
+
+.custom-checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
