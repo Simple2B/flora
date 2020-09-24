@@ -11,8 +11,8 @@ body {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
 input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px white inset;
 }
@@ -28,4 +28,15 @@ ul, li {
 
 .page-section {
     margin-top: 1rem;
+}
+
+.title-tabs {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: black;
+}
+
+.section-block {
+    height: 89.5vh;
 }

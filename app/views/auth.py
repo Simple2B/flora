@@ -70,10 +70,10 @@ def work_item():
             )
             work_item.save()
             flash("Registration successful. You are logged in.", "success")
-            return redirect(url_for("main.bidding"))
+            return redirect(url_for("main.work_items"))
         else:
             flash("The given data was invalid.", "danger")
-            return redirect(url_for("main.bidding"))
+            return redirect(url_for("main.work_items"))
     elif form.is_submitted():
         flash("The given data was invalid.", "danger")
-    return redirect(url_for("main.bidding"))
+    return redirect(url_for("main.work_items"))

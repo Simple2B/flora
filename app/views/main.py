@@ -1,8 +1,8 @@
 from flask import render_template, Blueprint, redirect, url_for, request
 from flask_login import login_required
 
-from app.forms import RegistrationForm, WorkItemForm
-from app.models import User, WorkItem
+from app.forms import RegistrationForm, WorkItemForm, ExclusionForm, ClarificationsForm
+from app.models import User, WorkItem, Exclusion, Clarification
 
 
 main_blueprint = Blueprint('main', __name__)
@@ -58,17 +58,17 @@ def work_items():
 @main_blueprint.route('/exclusions')
 @login_required
 def exclusions():
-    form = WorkItemForm(request.form)
-    work_items = WorkItem.query.all()
-    return render_template('exclusions.html', form=form, work_items=work_items)
+    form = ExclusionForm(request.form)
+    exclusions = Exclusion.query.all()
+    return render_template('exclusions.html', form=form, exclusions=exclusions)
 
 
 @main_blueprint.route('/clarifications')
 @login_required
 def clarifications():
-    form = WorkItemForm(request.form)
-    work_items = WorkItem.query.all()
-    return render_template('clarifications.html', form=form, work_items=work_items)
+    form = ClarificationsForm(request.form)
+    clarifications = Clarification.query.all()
+    return render_template('clarifications.html', form=form, clarifications=clarifications)
 
 
 @main_blueprint.route('/header')

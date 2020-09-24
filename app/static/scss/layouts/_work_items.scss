@@ -1,0 +1,45 @@
+@import '../global/variables';
+
+.__side-bar-box {
+    height: 65vh;
+}
+
+.nav-side-bar {
+    padding:0.5rem 2.8rem;
+    height: 65vh;
+    box-shadow: $shadow;
+}
+
+.__box-table {
+    margin-top: 1rem;
+    min-height: 70vh;
+    max-height: 70vh;
+    box-shadow: $shadow;
+    overflow: visible;
+
+    .table__work-item {
+        height: 100%;
+    }
+
+.__box-table--bottom {
+    margin-top: 10rem;
+}
+
+}
+
+.title__work-item {
+    padding: 0.3rem;
+    width: 9vw;
+    border-bottom: $border-bottom;
+}
+
+.margin-left {
+    margin-left: 2rem;
+}
+
+.__box-table-flex-column {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    align-items: center;
+}

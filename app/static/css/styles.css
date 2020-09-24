@@ -24,6 +24,15 @@ ul, li {
 .page-section {
   margin-top: 1rem; }
 
+.title-tabs {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: black; }
+
+.section-block {
+  height: 89.5vh; }
+
 .t-gray {
   color: #828282; }
 
@@ -275,3 +284,36 @@ ul, li {
         .header__inner--right .user-info__details p {
           margin: 0;
           padding: 0; }
+
+.__side-bar-box {
+  height: 65vh; }
+
+.nav-side-bar {
+  padding: 0.5rem 2.8rem;
+  height: 65vh;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25); }
+
+.__box-table {
+  margin-top: 1rem;
+  min-height: 70vh;
+  max-height: 70vh;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  overflow: visible; }
+  .__box-table .table__work-item {
+    height: 100%; }
+  .__box-table .__box-table--bottom {
+    margin-top: 10rem; }
+
+.title__work-item {
+  padding: 0.3rem;
+  width: 9vw;
+  border-bottom: 5px solid #175593; }
+
+.margin-left {
+  margin-left: 2rem; }
+
+.__box-table-flex-column {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  align-items: center; }

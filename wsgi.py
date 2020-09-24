@@ -3,7 +3,7 @@ import os
 import click
 
 from app import create_app, db, models, forms
-from app.models import User, WorkItem
+from app.models import User, WorkItem, Exclusion, Clarification
 
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "1234")
@@ -13,7 +13,13 @@ ADMIN_PHONE = os.environ.get("ADMIN_PHONE", "0987654321")
 ADMIN_TYPE = os.environ.get("ADMIN_TYPE", "admin")
 
 WORK_ITEM_NAME = os.environ.get("WORK_ITEM_NAME", "TESTWORKITEM")
-WORK_ITEM_CODE = os.environ.get("WORK_ITEM_CODE", "")
+WORK_ITEM_CODE = os.environ.get("WORK_ITEM_CODE", "99.99")
+
+EXCLUSION_TITLE = os.environ.get("EXCLUSION_TITLE", "TESTWORKITEM")
+EXCLUSION_DESCRIPTION = os.environ.get("EXCLUSION_DESCRIPTION", "some exclusion")
+
+CLARIFICATION_NOTE = os.environ.get("CLARIFICATION_NOTE", "TESTWORKITEM")
+CLARIFICATION_DESCRIPTION = os.environ.get("CLARIFICATION_DESCRIPTION", "some clarification")
 
 app = create_app()
 
@@ -45,6 +51,13 @@ def create_db():
         code=WORK_ITEM_CODE,
     )
     work_item.save()
+
+    exclusion = Exclusion(title=EXCLUSION_TITLE, description=EXCLUSION_DESCRIPTION)
+    exclusion.save()
+
+    exclusion = Clarification(note=CLARIFICATION_NOTE, description=CLARIFICATION_DESCRIPTION)
+    exclusion.save()
+
 
 @app.cli.command()
 @click.confirmation_option(prompt="Drop all database tables?")
