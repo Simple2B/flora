@@ -46,3 +46,8 @@ ul, li {
     flex-direction: row;
     justify-content: space-around;
 }
+
+.flex-flow-wrap {
+    flex-flow: row wrap;
+    display: flex;
+}

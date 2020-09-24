@@ -193,10 +193,12 @@
     <div class="a-space-between">
       <div class="title-tabs">Work items</div>
     </div>
-    <div class="__box-table-flex-column">
+    <div class="">
       <!-- <div><a id="#table">Test content</a></div> -->
-      <div class="container __box-table">
+      <div class="container __box-table flex-row-box--sb">
+        <div class="__box-table--left">
         <form role="form" action="{{ url_for('work_item.work_item') }}" method="post">
+
           <h5>Add work item</h5>
             <div class="form-row">
               <div>
@@ -217,8 +219,8 @@
                 {{form.submit(class='_btn--blue')}}
               </div>
             </div>
-
         </form>
+
         <form class="form" role="form" action="{{ url_for('work_item.add_work_item_to_cart') }}" method="post">
           <div id="workItemTable" class="box-shadow">
             <span>
@@ -229,8 +231,9 @@
               <!-- <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
               Add new
             </button> -->
-
             </span>
+          </div>
+          <div>
             <table id="" class="patientsTable table table-striped table-sm table__work-item">
               <thead>
                 <th></th>
@@ -250,34 +253,38 @@
               </tbody>
             </table>
           </div>
+        </div>
+
+        <div class="__box-table--right">
           <div class="modal-content" role="document" style="padding: 1rem;">
             <div class="bt_add-new-user">
               {{ work_cart_form.submit(class='_btn--blue') }}
             </div>
+          </div>
+        <table id="" class="patientsTable table table-striped table-sm table__work-item">
+          <thead>
+            <th>Work Code</th>
+            <th>Work Item</th>
+            <th>Edit</th>
+          </thead>
+          <tbody>
+            {% for item in work_cart_form.selected_work_items %}
+            <tr>
+              <td><a href="" class="t-gray">{{item.code}}</a></td>
+              <td>{{item.name}}</td>
+              <td><a href="{{url_for('work_item.delete_work_item_from_cart', item_id=item.id)}}"><img src="{{ url_for('static', filename='images/delete_element.svg') }}"></a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </div>
         </form>
 
+        </div>
       </div>
-      <table id="" class="patientsTable table table-striped table-sm table__work-item">
-        <thead>
-          <th>Work Code</th>
-          <th>Work Item</th>
-          <th>Edit</th>
-        </thead>
-        <tbody>
-          {% for item in work_cart_form.selected_work_items %}
-          <tr>
-            <td><a href="" class="t-gray">{{item.code}}</a></td>
-            <td>{{item.name}}</td>
-            <td><a href=""><img src="{{ url_for('static', filename='images/edit_logo.svg') }}"></a></td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
     </div>
   </div>
-  </div>
-  <div class="container tabcontentm" id="bidding-container">
-    <!-- <h1>Welcome!</h1> -->
+</div>
 </section>
 
 {% endblock %}
