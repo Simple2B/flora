@@ -1,0 +1,63 @@
+from flask import Blueprint, render_template, url_for, redirect, flash, request, session
+from flask_login import login_required
+from app.models import WorkItem
+from app.forms import NewWorkItemForm, WorkItemCartForm
+from app.controllers import add_work_item_validator
+
+work_item_blueprint = Blueprint("work_item", __name__)
+
+
+@work_item_blueprint.route("/work_item", methods=["POST"])
+@login_required
+def work_item():
+    form = NewWorkItemForm(request.form)
+    if form.validate_on_submit():
+        if add_work_item_validator(form.code.data):
+            work_item = WorkItem(
+                name=form.name.data,
+                code=form.code.data,
+            )
+            work_item.save()
+            # flash("Registration successful. You are logged in.", "success")
+            return redirect(url_for("work_item.work_items"))
+        else:
+            flash("The given data was invalid.", "danger")
+            return redirect(url_for("work_item.work_items"))
+    elif form.is_submitted():
+        flash("The given data was invalid.", "danger")
+    return redirect(url_for("work_item.work_items"))
+
+
+@work_item_blueprint.route("/add_work_item_to_cart", methods=["POST"])
+@login_required
+def add_work_item_to_cart():
+    form = WorkItemCartForm(request.form)
+    selected_ids = session.get("SelectedWorkItems", [])
+    form.selected_work_items = [WorkItem.query.get(item_id) for item_id in selected_ids]
+    if form.validate_on_submit():
+        new_selected_items = [
+            WorkItem.query.get(int(k)) for k in request.form if request.form[k] == "on"
+        ]
+        for item in new_selected_items:
+            if item not in form.selected_work_items:
+                form.selected_work_items += [item]
+        session["SelectedWorkItems"] = [item.id for item in form.selected_work_items]
+        return redirect(url_for("work_item.work_items"))
+    elif form.is_submitted():
+        flash("The given data was invalid.", "danger")
+    return redirect(url_for("work_item.work_items"))
+
+
+@work_item_blueprint.route("/work_items", methods=["GET"])
+@login_required
+def work_items():
+    form = NewWorkItemForm()
+    work_cart_form = WorkItemCartForm()
+    selected_work_item_ids = session.get("SelectedWorkItems", [])
+    work_cart_form.selected_work_items = [WorkItem.query.get(item_id) for item_id in selected_work_item_ids]
+    form.work_items = WorkItem.query.all()
+    return render_template(
+        "work_items.html",
+        form=form,
+        work_cart_form=work_cart_form,
+    )

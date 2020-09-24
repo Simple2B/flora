@@ -151,14 +151,14 @@
       <a href="{{ url_for('main.bidding') }}">
       <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
       My Bidding </button></a>
-      <a href="{{ url_for('main.work_items') }}">
+      <a href="{{ url_for('work_item.work_items') }}">
       <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
       Work Items </button> </a>
-      <a href="{{ url_for('main.exclusions') }}">
+      <a href="{{ url_for('exclusion.exclusions') }}">
       <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
       Exclusions
       </button> </a>
-      <a href="{{ url_for('main.clarifications') }}">
+      <a href="{{ url_for('clarification.clarifications') }}">
       <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
       Clarifications
       </button> </a>
@@ -191,7 +191,7 @@
   <div class="container" id="work-item-container">
 
     <div class="a-space-between">
-      <div class="title-tabs title__work-item">Exclusions</div>
+      <div class="title-tabs">Exclusions</div>
     </div>
     <div class="__box-table-flex-column">
       <!-- <div><a id="#table">Test content</a></div> -->
@@ -226,7 +226,7 @@
           </table>
         </div>
         <div class="modal-content" role="document" style="padding: 1rem;">
-        <form class="form" role="form" action="{{ url_for('auth.exclusion') }}" method="post">
+        <form class="form" role="form" action="{{ url_for('exclusion.exclusion') }}" method="post">
           <h5>Add exclusion</h5>
           <div class="modal-body">
               <div class="form-row flex-row-box--sb">
@@ -262,7 +262,7 @@
     <div class="modal-content">
       <h5>Add work item</h5>
       <div class="modal-body">
-        <form class="form" role="form" action="{{ url_for('auth.work_item') }}" method="post">
+        <form class="form" role="form" action="{{ url_for('work_item.work_item') }}" method="post">
           <div class="form-row">
             <div>
               {{form.title(class='_form-input _form-input--m')}}

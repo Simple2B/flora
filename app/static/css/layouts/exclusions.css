@@ -4,3 +4,8 @@
 .label--exclusions {
   left: 1rem;
   top: -14.8rem; }
+
+.title__exclusions {
+  padding: 0.3rem;
+  width: 8.4vw;
+  border-bottom: 5px solid #175593; }

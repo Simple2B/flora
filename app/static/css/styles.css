@@ -330,6 +330,16 @@ ul, li {
   left: 1rem;
   top: -14.8rem; }
 
+.title__exclusions {
+  padding: 0.3rem;
+  width: 8.4vw;
+  border-bottom: 5px solid #175593; }
+
 .label--clarification {
   left: 1rem;
   top: -14.8rem; }
+
+.title__clarifications {
+  padding: 0.3rem;
+  width: 10.5vw;
+  border-bottom: 5px solid #175593; }

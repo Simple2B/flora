@@ -85,7 +85,7 @@
     overflow: hidden;
   }
 
-  .tabm .__tabm-button.active{
+  .tabm .__tabm-button.active {
     background-color: #333333 !important;
     color: #fff;
   }
@@ -132,14 +132,14 @@
     color: #333333;
   }
 
-.bck-ground {
-  background-color: black;
-  color: #fff;
-}
+  .bck-ground {
+    background-color: black;
+    color: #fff;
+  }
 
-.text--center {
-  text-align: center;
-}
+  .text--center {
+    text-align: center;
+  }
 </style>
 
 <section class="page-section section-block bidding d-flex tabm" id="wrapper">
@@ -149,19 +149,19 @@
     <div class="sidebar-heading">DDB Contracting</div>
     <div class="text--center list-group list-group-flush">
       <a href="{{ url_for('main.bidding') }}">
-      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
-      My Bidding </button></a>
-      <a href="{{ url_for('main.work_items') }}">
-      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
-      Work Items </button> </a>
-      <a href="{{ url_for('main.exclusions') }}">
-      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
-      Exclusions
-      </button> </a>
-      <a href="{{ url_for('main.clarifications') }}">
-      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
-      Clarifications
-      </button> </a>
+        <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+          My Bidding </button></a>
+      <a href="{{ url_for('work_item.work_items') }}">
+        <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+          Work Items </button> </a>
+      <a href="{{ url_for('exclusion.exclusions') }}">
+        <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+          Exclusions
+        </button> </a>
+      <a href="{{ url_for('clarification.clarifications') }}">
+        <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+          Clarifications
+        </button> </a>
     </div>
   </div>
   <!-- </div> -->
@@ -191,131 +191,97 @@
   <div class="container" id="work-item-container">
 
     <div class="a-space-between">
-      <div class="title-tabs title__work-item">Work items</div>
+      <div class="title-tabs">Work items</div>
     </div>
     <div class="__box-table-flex-column">
       <!-- <div><a id="#table">Test content</a></div> -->
       <div class="container __box-table">
-        <div id="workItemTable" class="box-shadow">
-          <span>
-            <select>
-              <option value="Most popular" name="Most popular">Most popular</option>
-              <option value="Most recent" name="Most recent">Most recent</option>
-            </select>
-            <!-- <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
-              Add new
-            </button> -->
-          </span>
-          <table id="" class="patientsTable table table-striped table-sm table__work-item">
-            <thead>
-              <th>Work Code</th>
-              <th>Work Item</th>
-              <th>Edit</th>
-            </thead>
-            <tbody>
-              {% for work_item in work_items %}
-              <tr>
-                <td><a href="" class="t-gray">{{work_item.code}}</a></td>
-                <td>{{work_item.name}}</td>
-                <td><a href=""><img src="{{ url_for('static', filename='images/edit_logo.svg') }}"></a></td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-content" role="document" style="padding: 1rem;">
-        <form class="form" role="form" action="{{ url_for('auth.work_item') }}" method="post">
+        <form role="form" action="{{ url_for('work_item.work_item') }}" method="post">
           <h5>Add work item</h5>
-          <div class="modal-body">
-              <div class="form-row">
-                <div>
-                  {{form.name(class='_form-input _form-input--m')}}
-                  <label class="_label">Name</label>
-                </div>
-
-                <div class="margin-left">
-                  {{form.code(class='_form-input _form-input--m')}}
-                  <label class="_label">Code</label>
-                </div>
-
+            <div class="form-row">
+              <div>
+                {{form.name(class='_form-input _form-input--m')}}
+                <label class="_label">Name</label>
               </div>
 
-          </div>
-          <div class="bt_add-new-user">
-            {{form.submit(class='_btn--blue')}}
-          </div>
+              <!-- <div>
+            <label class="_label">Name</label>
+            <textarea class='_form-input _form-input--m' name="" id="" cols="30" rows="10"></textarea>
+            </div> -->
+
+              <div class="margin-left">
+                {{form.code(class='_form-input _form-input--m')}}
+                <label class="_label">Code</label>
+              </div>
+              <div class="bt_add-new-user">
+                {{form.submit(class='_btn--blue')}}
+              </div>
+            </div>
+
         </form>
-        </div>
+        <form class="form" role="form" action="{{ url_for('work_item.add_work_item_to_cart') }}" method="post">
+          <div id="workItemTable" class="box-shadow">
+            <span>
+              <select>
+                <option value="Most popular" name="Most popular">Most popular</option>
+                <option value="Most recent" name="Most recent">Most recent</option>
+              </select>
+              <!-- <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
+              Add new
+            </button> -->
+
+            </span>
+            <table id="" class="patientsTable table table-striped table-sm table__work-item">
+              <thead>
+                <th></th>
+                <th>Work Code</th>
+                <th>Work Item</th>
+                <th>Edit</th>
+              </thead>
+              <tbody>
+                {% for work_item in form.work_items %}
+                <tr>
+                  <td><input class="form-control" type="checkbox" name="{{work_item.id}}"></td>
+                  <td><a href="" class="t-gray">{{work_item.code}}</a></td>
+                  <td>{{work_item.name}}</td>
+                  <td><a href=""><img src="{{ url_for('static', filename='images/edit_logo.svg') }}"></a></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-content" role="document" style="padding: 1rem;">
+            <div class="bt_add-new-user">
+              {{ work_cart_form.submit(class='_btn--blue') }}
+            </div>
+        </form>
+
       </div>
+      <table id="" class="patientsTable table table-striped table-sm table__work-item">
+        <thead>
+          <th>Work Code</th>
+          <th>Work Item</th>
+          <th>Edit</th>
+        </thead>
+        <tbody>
+          {% for item in work_cart_form.selected_work_items %}
+          <tr>
+            <td><a href="" class="t-gray">{{item.code}}</a></td>
+            <td>{{item.name}}</td>
+            <td><a href=""><img src="{{ url_for('static', filename='images/edit_logo.svg') }}"></a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
+  </div>
   </div>
   <div class="container tabcontentm" id="bidding-container">
     <!-- <h1>Welcome!</h1> -->
 </section>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <h5>Add work item</h5>
-      <div class="modal-body">
-        <form class="form" role="form" action="{{ url_for('auth.work_item') }}" method="post">
-          <div class="form-row">
-            <div>
-              {{form.name(class='_form-input _form-input--m')}}
-              <label class="_label">Name</label>
-            </div>
-
-            <div>
-              {{form.code(class='_form-input _form-input--m')}}
-              <label class="_label">Code</label>
-            </div>
-
-          </div>
-      </div>
-      <div class="bt_add-new-user">
-        {{form.submit(class='_btn--black')}}
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end of Modal -->
 {% endblock %}
 
 {% block scripts %}
 <script src="/static/js/jquery.dataTables.min.js"></script>
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-<!--
-<div id="exclusion_block" class="tabcontent">
-  <div>
-    Unless expressly stated, the following exclusions apply: sing emoji to express emotions, ideas,
-    and thoughts are very popular on the iPhone and other mobile devices.
-    A couple of quick taps on the keyboard button and you've got them ready, but did you know you can actually
-    use emoji on your Mac?
-    That's right, you can liter your email, notes, Twitter feed, and anything else you want with emoji on your
-    Mac even though it
-    isn't immediately obvious how to access them. Here' s a quick guide to help you use emoji on your Mac!
-  </div>
-</div>
-<div id="clarification_block" class="tabcontent">
-  <div>
-    Please note the following clarifications:
-    sing emoji to express emotions, ideas, and thoughts are very popular on the iPhone and other mobile devices.
-    A couple of quick taps on the keyboard button and you've got them ready,
-    but did you know you can actually use emoji on your Mac? That's right, you can liter your email, notes,
-    Twitter feed,
-    and anything else you want with emoji on your Mac even though it isn't
-    immediately obvious how to access them. Here' s a quick guide to help you use emoji on your Mac!
-  </div>
-</div> -->

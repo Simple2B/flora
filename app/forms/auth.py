@@ -30,21 +30,3 @@ class RegistrationForm(FlaskForm):
     def validate_email(form, field):
         if User.query.filter_by(email=field.data).first() is not None:
             raise ValidationError('This email is already registered.')
-
-
-class WorkItemForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired(), Length(2, 30)])
-    code = StringField('Code', validators=[DataRequired(), Length(2, 30)])
-    submit = SubmitField('Add new work item')
-
-
-class ExclusionForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired(), Length(2, 64)])
-    description = TextField('Description', validators=[DataRequired()])
-    submit = SubmitField('Add new exclusion')
-
-
-class ClarificationForm(FlaskForm):
-    note = StringField('Note', validators=[DataRequired(), Length(2, 64)])
-    description = TextField('Description', validators=[DataRequired()])
-    submit = SubmitField('Add new clarification')
