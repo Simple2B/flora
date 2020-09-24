@@ -32,19 +32,27 @@ def work_item():
 @login_required
 def add_work_item_to_cart():
     form = WorkItemCartForm(request.form)
-    selected_ids = session.get("SelectedWorkItems", [])
-    form.selected_work_items = [WorkItem.query.get(item_id) for item_id in selected_ids]
+    selected_ids = session.get("SelectedWorkItemsDict", {})
+    form.selected_work_items = {int(item_id): WorkItem.query.get(item_id) for item_id in selected_ids}
     if form.validate_on_submit():
-        new_selected_items = [
-            WorkItem.query.get(int(k)) for k in request.form if request.form[k] == "on"
-        ]
-        for item in new_selected_items:
-            if item not in form.selected_work_items:
-                form.selected_work_items += [item]
-        session["SelectedWorkItems"] = [item.id for item in form.selected_work_items]
+        form.selected_work_items.update({
+            str(k): WorkItem.query.get(int(k)) for k in request.form if request.form[k] == "on"
+        })
+        session["SelectedWorkItemsDict"] = {str(item_id): item_id for item_id in form.selected_work_items}
         return redirect(url_for("work_item.work_items"))
     elif form.is_submitted():
         flash("The given data was invalid.", "danger")
+    return redirect(url_for("work_item.work_items"))
+
+
+@work_item_blueprint.route("/delete_work_item_from_cart/<item_id>", methods=["GET"])
+@login_required
+def delete_work_item_from_cart(item_id):
+    item_id = str(item_id)
+    selected_ids = session.get("SelectedWorkItemsDict", {})
+    if item_id in selected_ids:
+        del selected_ids[item_id]
+    session["SelectedWorkItemsDict"] = selected_ids
     return redirect(url_for("work_item.work_items"))
 
 
@@ -53,7 +61,7 @@ def add_work_item_to_cart():
 def work_items():
     form = NewWorkItemForm()
     work_cart_form = WorkItemCartForm()
-    selected_work_item_ids = session.get("SelectedWorkItems", [])
+    selected_work_item_ids = session.get("SelectedWorkItemsDict", {})
     work_cart_form.selected_work_items = [WorkItem.query.get(item_id) for item_id in selected_work_item_ids]
     form.work_items = WorkItem.query.all()
     return render_template(
