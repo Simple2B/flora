@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, ValidationError, IntegerField
+from wtforms import StringField, PasswordField, SubmitField, ValidationError, IntegerField, TextField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 
 from app.models import User
@@ -40,11 +40,11 @@ class WorkItemForm(FlaskForm):
 
 class ExclusionForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(), Length(2, 64)])
-    description = StringField('Description', validators=[DataRequired()])
+    description = TextField('Description', validators=[DataRequired()])
     submit = SubmitField('Add new exclusion')
 
 
 class ClarificationForm(FlaskForm):
     note = StringField('Note', validators=[DataRequired(), Length(2, 64)])
-    description = StringField('Description', validators=[DataRequired()])
+    description = TextField('Description', validators=[DataRequired()])
     submit = SubmitField('Add new clarification')

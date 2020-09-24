@@ -1,7 +1,7 @@
 from flask import render_template, Blueprint, redirect, url_for, request
 from flask_login import login_required
 
-from app.forms import RegistrationForm, WorkItemForm, ExclusionForm, ClarificationsForm
+from app.forms import RegistrationForm, WorkItemForm, ExclusionForm, ClarificationForm
 from app.models import User, WorkItem, Exclusion, Clarification
 
 
@@ -66,7 +66,7 @@ def exclusions():
 @main_blueprint.route('/clarifications')
 @login_required
 def clarifications():
-    form = ClarificationsForm(request.form)
+    form = ClarificationForm(request.form)
     clarifications = Clarification.query.all()
     return render_template('clarifications.html', form=form, clarifications=clarifications)
 

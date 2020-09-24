@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, login_required
 
-from app.models import User, WorkItem
-from app.forms import LoginForm, RegistrationForm, WorkItemForm
+from app.models import User, WorkItem, Exclusion, Clarification
+from app.forms import LoginForm, RegistrationForm, WorkItemForm, ExclusionForm, ClarificationForm
 from app.controllers import add_user_data_validator, add_work_item_validator
 
 auth_blueprint = Blueprint("auth", __name__)
@@ -77,3 +77,47 @@ def work_item():
     elif form.is_submitted():
         flash("The given data was invalid.", "danger")
     return redirect(url_for("main.work_items"))
+
+
+@auth_blueprint.route("/exclusion", methods=["GET", "POST"])
+def exclusion():
+    form = ExclusionForm(request.form)
+    if form.validate_on_submit():
+        # if add_work_item_validator(
+        #     form.code.data,
+        # ):
+        exclusion = Exclusion(
+            title=form.title.data,
+            description=form.description.data,
+        )
+        exclusion.save()
+        flash("Registration successful. You are logged in.", "success")
+        return redirect(url_for("main.exclusions"))
+        # else:
+        #     flash("The given data was invalid.", "danger")
+        #     return redirect(url_for("main.work_items"))
+    elif form.is_submitted():
+        flash("The given data was invalid.", "danger")
+    return redirect(url_for("main.exclusions"))
+
+
+@auth_blueprint.route("/clarification", methods=["GET", "POST"])
+def clarification():
+    form = ClarificationForm(request.form)
+    if form.validate_on_submit():
+        # if add_work_item_validator(
+        #     form.code.data,
+        # ):
+        clarification = Clarification(
+            note=form.note.data,
+            description=form.description.data,
+        )
+        clarification.save()
+        flash("Registration successful. You are logged in.", "success")
+        return redirect(url_for("main.clarifications"))
+        # else:
+        #     flash("The given data was invalid.", "danger")
+        #     return redirect(url_for("main.clarifications"))
+    elif form.is_submitted():
+        flash("The given data was invalid.", "danger")
+    return redirect(url_for("main.clarifications"))

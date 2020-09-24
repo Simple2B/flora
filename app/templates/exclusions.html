@@ -191,7 +191,7 @@
   <div class="container" id="work-item-container">
 
     <div class="a-space-between">
-      <div class="title-tabs title__work-item">Work items</div>
+      <div class="title-tabs title__work-item">Exclusions</div>
     </div>
     <div class="__box-table-flex-column">
       <!-- <div><a id="#table">Test content</a></div> -->
@@ -207,16 +207,18 @@
             </button> -->
           </span>
           <table id="" class="patientsTable table table-striped table-sm table__work-item">
-            <thead>
-              <th>Work Code</th>
-              <th>Work Item</th>
-              <th>Edit</th>
+            <thead class="bck-color-table">
+              <th>№</th>
+              <th>Exclusions</th>
+              <th>Title</th>
+              <th></th>
             </thead>
             <tbody>
-              {% for work_item in work_items %}
+              {% for exclusion in exclusions %}
               <tr>
-                <td><a href="" class="t-gray">{{work_item.code}}</a></td>
-                <td>{{work_item.name}}</td>
+                <td><a href="" class="t-gray">{{exclusion.id}}</a></td>
+                <td>{{exclusion.title}}</td>
+                <td>{{exclusion.description}}</td>
                 <td><a href=""><img src="{{ url_for('static', filename='images/edit_logo.svg') }}"></a></td>
               </tr>
               {% endfor %}
@@ -224,18 +226,18 @@
           </table>
         </div>
         <div class="modal-content" role="document" style="padding: 1rem;">
-        <form class="form" role="form" action="{{ url_for('auth.work_item') }}" method="post">
-          <h5>Add work item</h5>
+        <form class="form" role="form" action="{{ url_for('auth.exclusion') }}" method="post">
+          <h5>Add exclusion</h5>
           <div class="modal-body">
-              <div class="form-row">
+              <div class="form-row flex-row-box--sb">
                 <div>
-                  {{form.name(class='_form-input _form-input--m')}}
-                  <label class="_label">Name</label>
+                  {{form.title(class='_form-input _form-input--m', style='width: 25vw; height: 25vh;')}}
+                  <label class="_label label--exclusions">Title</label>
                 </div>
 
                 <div class="margin-left">
-                  {{form.code(class='_form-input _form-input--m')}}
-                  <label class="_label">Code</label>
+                  {{form.description(class='_form-input _form-input--m', style='width: 25vw; height: 25vh;')}}
+                  <label class="_label label--exclusions">Description</label>
                 </div>
 
               </div>
@@ -263,13 +265,13 @@
         <form class="form" role="form" action="{{ url_for('auth.work_item') }}" method="post">
           <div class="form-row">
             <div>
-              {{form.name(class='_form-input _form-input--m')}}
-              <label class="_label">Name</label>
+              {{form.title(class='_form-input _form-input--m')}}
+              <label class="_label">Title</label>
             </div>
 
             <div>
-              {{form.code(class='_form-input _form-input--m')}}
-              <label class="_label">Code</label>
+              {{form.description(class='_form-input _form-input--m')}}
+              <label class="_label">Description</label>
             </div>
 
           </div>

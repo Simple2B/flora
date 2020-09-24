@@ -40,3 +40,9 @@ ul, li {
 .section-block {
     height: 89.5vh;
 }
+
+.flex-row-box--sb {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

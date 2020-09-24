@@ -33,6 +33,11 @@ ul, li {
 .section-block {
   height: 89.5vh; }
 
+.flex-row-box--sb {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }
+
 .t-gray {
   color: #828282; }
 
@@ -317,3 +322,14 @@ ul, li {
   flex-direction: column;
   align-content: space-between;
   align-items: center; }
+
+.bck-color-table {
+  background-color: #828282; }
+
+.label--exclusions {
+  left: 1rem;
+  top: -14.8rem; }
+
+.label--clarification {
+  left: 1rem;
+  top: -14.8rem; }

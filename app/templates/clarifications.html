@@ -1,0 +1,290 @@
+{% extends "base.html" %}
+
+{% block links %}
+<link rel="stylesheet" href="/static/css/jquery.dataTables.min.css">
+{% endblock %}
+
+{% block header %}
+<header class="header">
+  <div class="container">
+    <div class="header__inner">
+      <div class="header__inner--left">
+        <a class="logo" href="#">
+          <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="DDB Contracting" class="logo__img">
+        </a>
+        <nav class="menu__items">
+          <a class="menu__item" href="{{ url_for('main.index') }}">Bidding</a>
+          <a class="menu__item" href="#">My team</a>
+          <a class="menu__item" href="#">Resources</a>
+          <span class="nav-indicator"></span>
+        </nav>
+      </div>
+      {% if current_user.is_authenticated %}
+      <div class="header__inner--right">
+        <div class="user-info">
+          <div class="user-info__img">
+            <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt="Icon">
+          </div>
+          <div class="user-info__details">
+            <p>{{current_user.username}}</p>
+            <p class='t-gray'>{{current_user.position}}</p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</header>
+{% endblock %}
+
+{% block content %}
+
+<style>
+  .zeroing_bootsrtap {
+    border-color: #fff;
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  .margin--top {
+    margin-top: 2rem;
+  }
+
+  .font-work-items {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333333;
+    background-color: #fff;
+  }
+
+  .font-work-items:hover {
+    color: #175593;
+    ;
+  }
+
+  .box-shadow {
+    box-shadow: 0 .2rem .2rem rgba(0, 0, 0, 0.25);
+  }
+
+  .a-space-between a {
+    padding: 1rem;
+  }
+
+  /*  */
+  /* TEST */
+  /* Tabs */
+
+
+  .tab {
+    overflow: hidden;
+  }
+
+  .tabm {
+    overflow: hidden;
+  }
+
+  .tabm .__tabm-button.active{
+    background-color: #333333 !important;
+    color: #fff;
+  }
+
+  .__btn {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+  }
+
+  .__btn:hover {
+    color: #333333;
+  }
+
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+  }
+
+
+  .tab button.active {
+    border-bottom: 5px solid #175593;
+  }
+
+  .tabcontent {
+    display: none;
+  }
+
+  .tabcontentm {
+    display: none;
+  }
+
+  .list-group-item.active {
+    border-color: #333333;
+    color: #333333;
+  }
+
+.bck-ground {
+  background-color: black;
+  color: #fff;
+}
+
+.text--center {
+  text-align: center;
+}
+</style>
+
+<section class="page-section section-block bidding d-flex tabm" id="wrapper">
+  <!-- begin Sidebar -->
+  <!-- <div> -->
+  <div class="bg-light border-right box-shadow __side-bar-box" id="sidebar-wrapper">
+    <div class="sidebar-heading">DDB Contracting</div>
+    <div class="text--center list-group list-group-flush">
+      <a href="{{ url_for('main.bidding') }}">
+      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      My Bidding </button></a>
+      <a href="{{ url_for('main.work_items') }}">
+      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      Work Items </button> </a>
+      <a href="{{ url_for('main.exclusions') }}">
+      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      Exclusions
+      </button> </a>
+      <a href="{{ url_for('main.clarifications') }}">
+      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      Clarifications
+      </button> </a>
+    </div>
+  </div>
+  <!-- </div> -->
+  <!-- end Sidebar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom nav-side-bar" id="ddb-background">
+
+    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+    <!-- Login/Logout -->
+    <!-- <ul class="navbar-nav ml-auto">
+          {% if current_user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">{{current_user.username | capitalize}}</a>
+            <div class="dropdown-menu" aria-labelledby="userActions">
+              <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
+            </div>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+          </li>
+          {% endif %}
+        </ul> -->
+    <!-- </div> -->
+  </nav>
+  <!-- <div class="ddb-container"> -->
+  <div class="container" id="work-item-container">
+
+    <div class="a-space-between">
+      <div class="title-tabs title__work-item">Clarifications</div>
+    </div>
+    <div class="__box-table-flex-column">
+      <!-- <div><a id="#table">Test content</a></div> -->
+      <div class="container __box-table">
+        <div id="workItemTable" class="box-shadow">
+          <span>
+            <select>
+              <option value="Most popular" name="Most popular">Most popular</option>
+              <option value="Most recent" name="Most recent">Most recent</option>
+            </select>
+            <!-- <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
+              Add new
+            </button> -->
+          </span>
+          <table id="" class="patientsTable table table-striped table-sm table__work-item">
+            <thead class="bck-color-table">
+              <th>№</th>
+              <th>Clarification</th>
+              <th>Note</th>
+              <th></th>
+            </thead>
+            <tbody>
+              {% for clarification in clarifications %}
+              <tr>
+                <td><a href="" class="t-gray">{{clarification.id}}</a></td>
+                <td>{{clarification.note}}</td>
+                <td>{{clarification.description}}</td>
+                <td><a href=""><img src="{{ url_for('static', filename='images/edit_logo.svg') }}"></a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-content" role="document" style="padding: 1rem;">
+        <form class="form" role="form" action="{{ url_for('auth.clarification') }}" method="post">
+          <h5>Add clarification</h5>
+          <div class="modal-body">
+              <div class="form-row flex-row-box--sb">
+                <div>
+                  {{form.note(class='_form-input _form-input--m', style='width: 25vw; height: 25vh;')}}
+                  <label class="_label label--clarification">Note</label>
+                </div>
+
+                <div class="margin-left">
+                  {{form.description(class='_form-input _form-input--m', style='width: 25vw; height: 25vh;')}}
+                  <label class="_label label--clarification"">Description</label>
+                </div>
+
+              </div>
+
+          </div>
+          <div class="bt_add-new-user">
+            {{form.submit(class='_btn--blue')}}
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container tabcontentm" id="bidding-container">
+    <!-- <h1>Welcome!</h1> -->
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <h5>Add work item</h5>
+      <div class="modal-body">
+        <form class="form" role="form" action="{{ url_for('auth.work_item') }}" method="post">
+          <div class="form-row">
+            <div>
+              {{form.note(class='_form-input _form-input--m')}}
+              <label class="_label">Title</label>
+            </div>
+
+            <div>
+              {{form.description(class='_form-input _form-input--m')}}
+              <label class="_label">Description</label>
+            </div>
+
+          </div>
+      </div>
+      <div class="bt_add-new-user">
+        {{form.submit(class='_btn--black')}}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of Modal -->
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/jquery.dataTables.min.js"></script>
+{% endblock %}
