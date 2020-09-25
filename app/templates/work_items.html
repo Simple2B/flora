@@ -237,7 +237,7 @@
               </span>
 
               <div>
-                <table id="patientsTable" class="patientsTable table table-striped table-sm table__work-item">
+                <table id="workItemsTable" class="patientsTable table table-striped table-sm table__work-item">
                   <thead class="__table--head">
                     <th></th>
                     <th>Code</th>
@@ -272,7 +272,7 @@
             </div>
           </div>
           <div class="__box-table--mtop">
-            <table id="patientsTable" class="patientsTable table table-striped table-sm table__work-item">
+            <table id="selectedWorkItemsTable" class="patientsTable table table-striped table-sm table__work-item">
               <thead class="__table--head">
                 <th>Work Code</th>
                 <th>Work Item</th>
@@ -336,4 +336,18 @@
 
 {% block scripts %}
 <script src="/static/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#workItemsTable').DataTable({
+        "pageLength": 10,
+        "order": [],
+        "displayStart": 0
+    });
+    $('#selectedWorkItemsTable').DataTable({
+        "pageLength": 10,
+        "order": [],
+        "displayStart": 0
+    });
+} );
+</script>
 {% endblock %}
