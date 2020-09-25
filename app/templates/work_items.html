@@ -250,7 +250,10 @@
                       <td><input class="form-control" type="checkbox" name="{{work_item.id}}"></td>
                       <td><a href="" class="t-gray">{{work_item.code}}</a></td>
                       <td>{{work_item.name}}</td>
-                      <td><a href=""><img src="{{ url_for('static', filename='images/edit_element.svg') }}"></a></td>
+                      <td><button type="button" class="btn btn-primary btn-danger ml-auto mr-3" data-toggle="modal" data-target="#exampleModal">
+                          <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+                        </button>
+                      </td>
                     </tr>
                     {% endfor %}
                   </tbody>
@@ -271,15 +274,17 @@
               <thead class="__table--head">
                 <th>Work Code</th>
                 <th>Work Item</th>
-                <th>Edit</th>
+                <th>Delete</th>
               </thead>
               <tbody>
                 {% for item in work_cart_form.selected_work_items %}
                 <tr>
                   <td><a href="" class="t-gray">{{item.code}}</a></td>
                   <td>{{item.name}}</td>
-                  <td><a href="{{url_for('work_item.delete_work_item_from_cart', item_id=item.id)}}"><img
-                        src="{{ url_for('static', filename='images/delete_element.svg') }}"></a></td>
+                  <td>
+                    <a href="{{url_for('work_item.delete_work_item_from_cart', item_id=item.id)}}"><img
+                        src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
+                  </td>
                 </tr>
                 {% endfor %}
               </tbody>
@@ -293,6 +298,36 @@
   </div>
   </div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content modal--padding">
+      <h5 class="centralized">Edit work item</h5>
+      <div class="modal-body">
+        <form class="form" role="form" action="{{ url_for('work_item.work_item') }}" method="post">
+          <div class="form-row flex-row-box--se">
+            <div>
+              {{form.code(class='_form-input _form-input--m')}}
+              <label class="_label">Code</label>
+            </div>
+
+            <div>
+              {{form.name(class='_form-input _form-input--m')}}
+              <label class="_label">Name</label>
+            </div>
+
+          </div>
+      </div>
+      <div class="bt_add-new-user centralized">
+        {{form.edit_submit(class='_btn--black  ddb-cursor')}}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of Modal -->
+
 
 {% endblock %}
 

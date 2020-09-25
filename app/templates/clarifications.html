@@ -193,77 +193,114 @@
     <div class="a-space-between">
       <div class="title-tabs">Clarifications</div>
     </div>
-    <div class="__box-table-flex-column">
+    <div class="">
       <!-- <div><a id="#table">Test content</a></div> -->
-      <div class="container __box-table">
-        <div id="workItemTable" class="box-shadow">
-          <span>
-            <select>
-              <option value="Most popular" name="Most popular">Most popular</option>
-              <option value="Most recent" name="Most recent">Most recent</option>
-            </select>
-            <!-- <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
+      <div class="container __box-table flex-flow-wrap">
+        <div class="__box-table--left">
+          <form role="form" action="{{ url_for('clarification.clarification') }}" method="post">
+
+            <div class="modal-content border--none">
+              <div class="form-row __add-work-item--box">
+                <h5 class="__h5--width">Add clarification item</h5>
+                <div>
+                  {{form.note(class='_form-input _form-input--m')}}
+                  <label class="_label">Note</label>
+                </div>
+                <div class="margin-left">
+                  {{form.description(class='_form-input _form-input--m')}}
+                  <label class="_label">Description</label>
+                </div>
+
+                <!-- <div>
+            <label class="_label">Name</label>
+            <textarea class='_form-input _form-input--m' name="" id="" cols="30" rows="10"></textarea>
+            </div> -->
+
+                <div class="bt_add-new-user">
+                  {{form.submit(class='_btn--blue')}}
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <form class="form" role="form" action="{{ url_for('clarification.add_clarification_item_to_cart') }}" method="post">
+            <div id="workItemTable" class="box-shadow __box-table--mtop">
+              <span>
+                <select>
+                  <option value="Most popular" name="Most popular">Most popular</option>
+                  <option value="Most recent" name="Most recent">Most recent</option>
+                </select>
+                <!-- <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
               Add new
             </button> -->
-          </span>
-          <table id="" class="patientsTable table table-striped table-sm table__work-item">
-            <thead class="bck-color-table">
-              <th>№</th>
-              <th>Clarification</th>
-              <th>Note</th>
-              <th></th>
-            </thead>
-            <tbody>
-              {% for clarification in clarifications %}
-              <tr>
-                <td><a href="" class="t-gray">{{clarification.id}}</a></td>
-                <td>{{clarification.note}}</td>
-                <td>{{clarification.description}}</td>
-                <td><a href=""><img src="{{ url_for('static', filename='images/edit_logo.svg') }}"></a></td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-content" role="document" style="padding: 1rem;">
-        <form class="form" role="form" action="{{ url_for('clarification.clarification') }}" method="post">
-          <h5>Add clarification</h5>
-          <div class="modal-body">
-              <div class="form-row flex-row-box--sb">
-                <div>
-                  {{form.note(class='_form-input _form-input--m', style='width: 25vw; height: 25vh;')}}
-                  <label class="_label label--clarification">Note</label>
-                </div>
+              </span>
 
-                <div class="margin-left">
-                  {{form.description(class='_form-input _form-input--m', style='width: 25vw; height: 25vh;')}}
-                  <label class="_label label--clarification">Description</label>
-                </div>
-
+              <div>
+                <table id="" class="patientsTable table table-striped table-sm table__work-item">
+                  <thead class="bck-color-table">
+                    <th>№</th>
+                    <th>Note</th>
+                    <th>Description</th>
+                    <th></th>
+                  </thead>
+                  <tbody>
+                    {% for clarification in clarifications %}
+                    <tr>
+                      <td><a href="" class="t-gray">{{clarification.id}}</a></td>
+                      <td>{{clarification.note}}</td>
+                      <td>{{clarification.description}}</td>
+                      <td><a href=""><img src="{{ url_for('static', filename='images/edit_element.svg') }}"></a></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
               </div>
+            </div>
+        </div>
 
+        <div class="__box-table--right">
+          <div class="modal-content title-tab border--none" role="document">
+            <h5>Clarification item cart</h5>
+            <div class="bt_add-new-user">
+              {{ form.submit(class='_btn--blue') }}
+            </div>
           </div>
-          <div class="bt_add-new-user">
-            {{form.submit(class='_btn--blue')}}
+          <div class="__box-table--mtop">
+            <table id="patientsTable" class="patientsTable table table-striped table-sm table__work-item">
+              <thead class="__table--head">
+                <th>Clarification Item</th>
+                <th>Delete</th>
+              </thead>
+              <tbody>
+                {% for item in selected_clarification_item_ids %}
+                <tr>
+                  <td><a href="" class="t-gray">{{item.note}}</a></td>
+                  <td>
+                    <a href="{{url_for('clarification.delete_clarification_item_from_cart', item_id=item.id)}}"><img
+                        src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
-        </form>
+          </form>
         </div>
       </div>
     </div>
+    </div>
   </div>
-  <div class="container tabcontentm" id="bidding-container">
-    <!-- <h1>Welcome!</h1> -->
 </section>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
+    <div class="modal-content modal--padding">
       <h5>Add work item</h5>
       <div class="modal-body">
-        <form class="form" role="form" action="{{ url_for('work_item.work_item') }}" method="post">
-          <div class="form-row">
+        <form class="form" role="form" action="{{ url_for('clarification.clarification') }}" method="post">
+          <div class="form-row flex-row-box--se">
             <div>
               {{form.note(class='_form-input _form-input--m')}}
               <label class="_label">Title</label>
@@ -288,3 +325,45 @@
 {% block scripts %}
 <script src="/static/js/jquery.dataTables.min.js"></script>
 {% endblock %}
+
+<!-- <table id="" class="patientsTable table table-striped table-sm table__work-item">
+            <thead class="bck-color-table">
+              <th>№</th>
+              <th>Clarification</th>
+              <th>Note</th>
+              <th></th>
+            </thead>
+            <tbody>
+              {% for clarification in clarifications %}
+              <tr>
+                <td><a href="" class="t-gray">{{clarification.id}}</a></td>
+                <td>{{clarification.note}}</td>
+                <td>{{clarification.description}}</td>
+                <td><a href=""><img src="{{ url_for('static', filename='images/edit_logo.svg') }}"></a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-content" role="document" style="padding: 1rem;">
+        <form class="form" role="form" action="{{ url_for('clarification.clarification') }}" method="post">
+          <h5>Add clarification</h5>
+          <div class="modal-body">
+              <div class="form-row flex-row-box--sb">
+                <div>
+                  {{form.note(class='_form-input _form-input--m')}}
+                  <label class="_label label--clarification">Note</label>
+                </div>
+
+                <div class="margin-left">
+                  {{form.description(class='_form-input _form-input--m')}}
+                  <label class="_label label--clarification">Description</label>
+                </div>
+
+              </div>
+
+          </div>
+          <div class="bt_add-new-user">
+            {{form.submit(class='_btn--blue')}}
+          </div>
+        </form> -->
