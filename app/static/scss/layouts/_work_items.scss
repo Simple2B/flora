@@ -25,11 +25,16 @@
     .__box-table--left {
         // display: block;
         width: 53%;
+
     }
 
     .__box-table--right {
         // display: block;
         width: 47%;
+    }
+
+    .__box-table--mtop {
+        margin-top: 1rem;
     }
 
 .__box-table--bottom {
@@ -45,7 +50,7 @@
 }
 
 .margin-left {
-    margin-left: 2rem;
+    margin-left: 1rem;
 }
 
 .__box-table-flex-column {
@@ -61,3 +66,22 @@
     opacity: 0;
 }
 
+.__table--head {
+    background-color: #828282;
+}
+
+.__add-work-item--box {
+    padding: 1rem;
+}
+
+.__h5--width {
+    width: 150%;
+}
+
+.title-tab {
+    padding: 1rem;
+}
+
+.border--none {
+    border-style: none;
+}

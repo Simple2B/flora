@@ -151,9 +151,10 @@
       <a href="{{ url_for('main.bidding') }}">
         <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
           My Bidding </button></a>
-      <a href="{{ url_for('work_item.work_items') }}">
-        <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
-          Work Items </button> </a>
+      <select class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+        Scope of work
+        <option value=""><a href="{{ url_for('work_item.work_items') }}">Select Work Item</a></option>
+      </select>
       <a href="{{ url_for('exclusion.exclusions') }}">
         <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
           Exclusions
@@ -195,96 +196,102 @@
     </div>
     <div class="">
       <!-- <div><a id="#table">Test content</a></div> -->
-      <div class="container __box-table flex-row-box--sb">
+      <div class="container __box-table flex-flow-wrap">
         <div class="__box-table--left">
-        <form role="form" action="{{ url_for('work_item.work_item') }}" method="post">
+          <form role="form" action="{{ url_for('work_item.work_item') }}" method="post">
 
-          <h5>Add work item</h5>
-            <div class="form-row">
-              <div>
-                {{form.name(class='_form-input _form-input--m')}}
-                <label class="_label">Name</label>
-              </div>
+            <div class="modal-content border--none">
+              <div class="form-row __add-work-item--box">
+                <h5 class="__h5--width">Add work item</h5>
+                <div>
+                  {{form.code(class='_form-input _form-input--m')}}
+                  <label class="_label">Code</label>
+                </div>
+                <div class="margin-left">
+                  {{form.name(class='_form-input _form-input--m')}}
+                  <label class="_label">Name</label>
+                </div>
 
-              <!-- <div>
+                <!-- <div>
             <label class="_label">Name</label>
             <textarea class='_form-input _form-input--m' name="" id="" cols="30" rows="10"></textarea>
             </div> -->
 
-              <div class="margin-left">
-                {{form.code(class='_form-input _form-input--m')}}
-                <label class="_label">Code</label>
-              </div>
-              <div class="bt_add-new-user">
-                {{form.submit(class='_btn--blue')}}
+                <div class="bt_add-new-user">
+                  {{form.submit(class='_btn--blue')}}
+                </div>
               </div>
             </div>
-        </form>
+          </form>
 
-        <form class="form" role="form" action="{{ url_for('work_item.add_work_item_to_cart') }}" method="post">
-          <div id="workItemTable" class="box-shadow">
-            <span>
-              <select>
-                <option value="Most popular" name="Most popular">Most popular</option>
-                <option value="Most recent" name="Most recent">Most recent</option>
-              </select>
-              <!-- <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
+          <form class="form" role="form" action="{{ url_for('work_item.add_work_item_to_cart') }}" method="post">
+            <div id="workItemTable" class="box-shadow __box-table--mtop">
+              <span>
+                <select>
+                  <option value="Most popular" name="Most popular">Most popular</option>
+                  <option value="Most recent" name="Most recent">Most recent</option>
+                </select>
+                <!-- <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
               Add new
             </button> -->
-            </span>
+              </span>
+
+              <div>
+                <table id="patientsTable" class="patientsTable table table-striped table-sm table__work-item">
+                  <thead class="__table--head">
+                    <th></th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Edit</th>
+                  </thead>
+                  <tbody>
+                    {% for work_item in form.work_items %}
+                    <tr>
+                      <td><input class="form-control" type="checkbox" name="{{work_item.id}}"></td>
+                      <td><a href="" class="t-gray">{{work_item.code}}</a></td>
+                      <td>{{work_item.name}}</td>
+                      <td><a href=""><img src="{{ url_for('static', filename='images/edit_element.svg') }}"></a></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+
+        <div class="__box-table--right">
+          <div class="modal-content title-tab border--none" role="document">
+            <h5>Work items cart</h5>
+            <div class="bt_add-new-user">
+              {{ work_cart_form.submit(class='_btn--blue') }}
+            </div>
           </div>
-          <div>
-            <table id="" class="patientsTable table table-striped table-sm table__work-item">
-              <thead>
-                <th></th>
+          <div class="__box-table--mtop">
+            <table id="patientsTable" class="patientsTable table table-striped table-sm table__work-item">
+              <thead class="__table--head">
                 <th>Work Code</th>
                 <th>Work Item</th>
                 <th>Edit</th>
               </thead>
               <tbody>
-                {% for work_item in form.work_items %}
+                {% for item in work_cart_form.selected_work_items %}
                 <tr>
-                  <td><input class="form-control" type="checkbox" name="{{work_item.id}}"></td>
-                  <td><a href="" class="t-gray">{{work_item.code}}</a></td>
-                  <td>{{work_item.name}}</td>
-                  <td><a href=""><img src="{{ url_for('static', filename='images/edit_logo.svg') }}"></a></td>
+                  <td><a href="" class="t-gray">{{item.code}}</a></td>
+                  <td>{{item.name}}</td>
+                  <td><a href="{{url_for('work_item.delete_work_item_from_cart', item_id=item.id)}}"><img
+                        src="{{ url_for('static', filename='images/delete_element.svg') }}"></a></td>
                 </tr>
                 {% endfor %}
               </tbody>
             </table>
           </div>
-        </div>
-
-        <div class="__box-table--right">
-          <div class="modal-content" role="document" style="padding: 1rem;">
-            <div class="bt_add-new-user">
-              {{ work_cart_form.submit(class='_btn--blue') }}
-            </div>
-          </div>
-        <table id="" class="patientsTable table table-striped table-sm table__work-item">
-          <thead>
-            <th>Work Code</th>
-            <th>Work Item</th>
-            <th>Edit</th>
-          </thead>
-          <tbody>
-            {% for item in work_cart_form.selected_work_items %}
-            <tr>
-              <td><a href="" class="t-gray">{{item.code}}</a></td>
-              <td>{{item.name}}</td>
-              <td><a href="{{url_for('work_item.delete_work_item_from_cart', item_id=item.id)}}"><img src="{{ url_for('static', filename='images/delete_element.svg') }}"></a></td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        </div>
-        </form>
-
+          </form>
         </div>
       </div>
     </div>
   </div>
-</div>
+  </div>
+  </div>
 </section>
 
 {% endblock %}
