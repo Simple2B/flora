@@ -21,7 +21,8 @@ def work_item():
             # flash("Registration successful. You are logged in.", "success")
             return redirect(url_for("work_item.work_items"))
         else:
-            flash("The given data was invalid.", "danger")
+            pass
+            # flash("The given data was invalid.", "danger")
             return redirect(url_for("work_item.work_items"))
     elif form.is_submitted():
         flash("The given data was invalid.", "danger")
@@ -41,7 +42,8 @@ def add_work_item_to_cart():
         session["SelectedWorkItemsDict"] = {str(item_id): item_id for item_id in form.selected_work_items}
         return redirect(url_for("work_item.work_items"))
     elif form.is_submitted():
-        flash("The given data was invalid.", "danger")
+        pass
+        # flash("The given data was invalid.", "danger")
     return redirect(url_for("work_item.work_items"))
 
 

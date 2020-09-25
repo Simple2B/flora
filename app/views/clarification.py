@@ -20,13 +20,14 @@ def clarification():
             description=form.description.data,
         )
         clarification.save()
-        flash("Registration successful. You are logged in.", "success")
+        # flash("Registration successful. You are logged in.", "success")
         return redirect(url_for("clarification.clarifications"))
         # else:
         #     flash("The given data was invalid.", "danger")
         #     return redirect(url_for("clarification.clarifications"))
     elif form.is_submitted():
-        flash("The given data was invalid.", "danger")
+        pass
+        # flash("The given data was invalid.", "danger")
     return redirect(url_for("clarification.clarifications"))
 
 
@@ -47,11 +48,12 @@ def add_clarification_item_to_cart():
             }
         )
         session["SelectedClarificationsDict"] = {
-            str(item_id): item_id for item_id in form.selected_work_items
+            str(item_id): item_id for item_id in form.selected_clarification_items
         }
-        return redirect(url_for("work_item.work_items"))
+        return redirect(url_for("clarification.clarifications"))
     elif form.is_submitted():
-        flash("The given data was invalid.", "danger")
+        pass
+        # flash("The given data was invalid.", "danger")
     return redirect(url_for("clarification.clarifications"))
 
 
@@ -65,6 +67,20 @@ def delete_clarification_item_from_cart(item_id):
     if item_id in selected_ids:
         del selected_ids[item_id]
     session["SelectedClarificationsDict"] = selected_ids
+    return redirect(url_for("clarification.clarifications"))
+
+
+@clarification_blueprint.route("/edit_clarification_item/<item_id>", methods=["POST"])
+@login_required
+def edit_clarification_item(item_id):
+    item_id = int(item_id)
+    form = ClarificationForm(request.form)
+    if form.validate_on_submit():
+        clarification = Clarification.query.get(item_id)
+        if clarification:
+            clarification.note = form.note.data
+            clarification.description = form.description.data
+            clarification.save()
     return redirect(url_for("clarification.clarifications"))
 
 

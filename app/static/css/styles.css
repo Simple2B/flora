@@ -47,16 +47,28 @@ ul, li {
   flex-direction: row;
   justify-content: space-evenly; }
 
+.flex-row-box-sb {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
 .modal--padding {
   padding: 0.5rem; }
 
-.centralized {
+.centralized-block {
   display: block;
   margin-left: auto;
   margin-right: auto; }
 
 .ddb-cursor {
   cursor: pointer; }
+
+.--border {
+  background-color: #dae0e5 !important;
+  color: black !important; }
+
+.none-underline a {
+  text-decoration: none !important; }
 
 .t-gray {
   color: #828282; }
@@ -370,6 +382,21 @@ ul, li {
 
 .border--none {
   border-style: none; }
+
+.__modal-inputs--flex-row {
+  display: flex;
+  flex-direction: row; }
+  .__modal-inputs--flex-row div {
+    padding: 0.75rem; }
+
+.padding--top {
+  padding-top: 1.8rem !important; }
+
+.padding--off {
+  padding: 0; }
+
+.--padding {
+  padding: 1rem 1rem 0rem 1rem; }
 
 .bck-color-table {
   background-color: #828282; }

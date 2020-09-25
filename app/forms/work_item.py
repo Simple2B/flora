@@ -11,4 +11,4 @@ class NewWorkItemForm(FlaskForm):
 
 
 class WorkItemCartForm(FlaskForm):
-    submit = SubmitField('Add to bidding')
+    submit = SubmitField('Add to cart')

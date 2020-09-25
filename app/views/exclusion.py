@@ -26,7 +26,8 @@ def exclusion():
         #     flash("The given data was invalid.", "danger")
         #     return redirect(url_for("work_item.work_items"))
     elif form.is_submitted():
-        flash("The given data was invalid.", "danger")
+        pass
+        # flash("The given data was invalid.", "danger")
     return redirect(url_for("exclusion.exclusions"))
 
 
@@ -51,7 +52,8 @@ def add_exclusion_to_cart():
         }
         return redirect(url_for("exclusion.exclusions"))
     elif form.is_submitted():
-        flash("The given data was invalid.", "danger")
+        pass
+        # flash("The given data was invalid.", "danger")
     return redirect(url_for("exclusion.exclusions"))
 
 

@@ -207,9 +207,10 @@
       <!-- <div><a id="#table">Test content</a></div> -->
       <div class="container __box-table flex-flow-wrap">
         <div class="__box-table--left">
-          <form role="form" action="{{ url_for('work_item.work_item') }}" method="post">
+
 
             <div class="modal-content border--none">
+              <form role="form" action="{{ url_for('work_item.work_item') }}" method="post"></form>
               <div class="form-row __add-work-item--box">
                 <h5 class="__h5--width">Add work item</h5>
                 <div>
@@ -225,15 +226,20 @@
             <label class="_label">Name</label>
             <textarea class='_form-input _form-input--m' name="" id="" cols="30" rows="10"></textarea>
             </div> -->
-
                 <div class="bt_add-new-user">
                   {{form.submit(class='_btn--blue')}}
                 </div>
+              </form>
+
+                <div>
+                  {{ work_cart_form.submit(class='_btn--gray', style="float: right; margin-left: 7rem;
+                  padding-left: 2rem;", form="work_items") }}
+                </div>
               </div>
             </div>
-          </form>
 
-          <form class="form" role="form" action="{{ url_for('work_item.add_work_item_to_cart') }}" method="post">
+
+          <form class="form" id="work_items" role="form" action="{{ url_for('work_item.add_work_item_to_cart') }}" method="post">
             <div id="workItemTable" class="box-shadow __box-table--mtop">
               <span>
                 <select>
@@ -274,12 +280,12 @@
         </div>
 
         <div class="__box-table--right">
-          <div class="modal-content title-tab border--none" role="document">
+          <!-- <div class="modal-content title-tab border--none" role="document">
             <h5>Work items cart</h5>
             <div class="bt_add-new-user">
               {{ work_cart_form.submit(class='_btn--blue') }}
             </div>
-          </div>
+          </div> -->
           <div class="__box-table--mtop">
             <table id="selectedWorkItemsTable" class="patientsTable table table-striped table-sm table__work-item">
               <thead class="__table--head">
@@ -302,7 +308,16 @@
             </table>
           </div>
           </form>
+
+          <button class="_btn--gray" style="float: right; margin-top: 3rem;">
+            Cancel
+          </button>
+          <button class="_btn--black" style="float: right; margin-top: 3rem;">
+            Add to bidding
+          </button>
+
         </div>
+
       </div>
     </div>
   </div>
