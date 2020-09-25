@@ -147,11 +147,11 @@
   <!-- <div> -->
   <div class="bg-light border-right box-shadow __side-bar-box" id="sidebar-wrapper">
     <div class="sidebar-heading">DDB Contracting</div>
-    <div class="text--center list-group list-group-flush">
+    <div class="text--center list-group list-group-flush none-underline">
       <a href="{{ url_for('main.bidding') }}">
         <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
           My Bidding </button></a>
-      <select class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      <select class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks --border">
         Scope of work
         <option value=""><a href="{{ url_for('work_item.work_items') }}">Select Work Item</a></option>
       </select>
@@ -250,7 +250,7 @@
                       <td><input class="form-control" type="checkbox" name="{{work_item.id}}"></td>
                       <td><a href="" class="t-gray">{{work_item.code}}</a></td>
                       <td>{{work_item.name}}</td>
-                      <td><button type="button" value="{{work_item.id}}" class="btn btn-primary btn-danger ml-auto mr-3"
+                      <td><button type="button" value="{{work_item.id}}" style="border: none;"
                           data-toggle="modal" data-target="#exampleModal" data-target_link="{{url_for('work_item.edit_work_item', item_id=work_item.id)}}"
                           data-code="{{work_item.code}}" data-name="{{work_item.name}}">
                           <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
@@ -306,10 +306,11 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content modal--padding">
-      <h5 class="centralized">Edit work item</h5>
-      <div class="modal-body">
+      <h5 class="--padding">Edit work item</h5>
+      <div class="modal-body padding--off">
         <form class="form" role="form" action="" method="post">
-          <div class="form-row flex-row-box--se">
+          <div class="__modal-inputs--flex-row">
+
             <div>
               {{form.code(class='_form-input _form-input--m')}}
               <label class="_label">Code</label>
@@ -320,9 +321,10 @@
               <label class="_label">Name</label>
             </div>
 
-          </div>
-          <div class="bt_add-new-user centralized">
-            {{form.edit_submit(class='_btn--black  ddb-cursor')}}
+            <div class="padding--top">
+              {{form.edit_submit(class='_btn--gray  ddb-cursor')}}
+            </div>
+
           </div>
         </form>
       </div>
@@ -331,7 +333,7 @@
 </div>
 <!-- end of Modal -->
 
-
+<!-- <button type="button" value="" class="btn btn-primary btn-danger ml-auto mr-3" -->
 {% endblock %}
 
 {% block scripts %}

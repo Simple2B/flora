@@ -147,7 +147,7 @@
   <!-- <div> -->
   <div class="bg-light border-right box-shadow __side-bar-box" id="sidebar-wrapper">
     <div class="sidebar-heading">DDB Contracting</div>
-    <div class="text--center list-group list-group-flush">
+    <div class="text--center list-group list-group-flush none-underline">
       <a href="{{ url_for('main.bidding') }}">
       <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
       My Bidding </button></a>
@@ -155,7 +155,7 @@
       <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
       Work Items </button> </a>
       <a href="{{ url_for('exclusion.exclusions') }}">
-      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks --border">
       Exclusions
       </button> </a>
       <a href="{{ url_for('clarification.clarifications') }}">
@@ -223,7 +223,7 @@
             </div>
           </form>
 
-          <form class="form" role="form" action="{{ url_for('exclusion.add_exclusion_item_to_cart') }}" method="post">
+          <form class="form" role="form" action="{{ url_for('exclusion.add_exclusion_to_cart') }}" method="post">
             <div id="workItemTable" class="box-shadow __box-table--mtop">
               <span>
                 <select>
@@ -238,18 +238,22 @@
               <div>
                 <table id="" class="patientsTable table table-striped table-sm table__work-item">
                   <thead class="bck-color-table">
-                    <th>№</th>
+                    <th></th>
                     <th>Title</th>
                     <th>Description</th>
                     <th></th>
                   </thead>
                   <tbody>
-                    {% for exclusion in exclusions %}
+                    {% for exclusion in form.exclusions %}
                     <tr>
-                      <td><a href="" class="t-gray">{{exclusion.id}}</a></td>
+                      <td><input class="form-control" type="checkbox" name="{{exclusion.id}}"></td>
                       <td>{{exclusion.title}}</td>
                       <td>{{exclusion.description}}</td>
-                      <td><a href=""><img src="{{ url_for('static', filename='images/edit_element.svg') }}"></a></td>
+                      <td><button type="button" value="{{exclusion.id}}" style="border: none;"
+                        data-toggle="modal" data-target="#exampleModal" data-target_link="{{url_for('exclusion.edit_exclusion_item', item_id=exclusion.id)}}"
+                        data-title="{{exclusion.title}}" data-description="{{exclusion.description}}">
+                        <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
+                      </button></td>
                     </tr>
                     {% endfor %}
                   </tbody>
@@ -262,7 +266,7 @@
           <div class="modal-content title-tab border--none" role="document">
             <h5>Exclusion item cart</h5>
             <div class="bt_add-new-user">
-              {{ form.submit(class='_btn--blue') }}
+              {{ exclusion_cart_form.submit(class='_btn--blue') }}
             </div>
           </div>
           <div class="__box-table--mtop">
@@ -270,11 +274,13 @@
               <thead class="__table--head">
                 <th>Exclusion item</th>
                 <th>Delete</th>
+                <th></th>
               </thead>
               <tbody>
-                {% for item in selected_exclusion_item_ids %}
+                {% for item in exclusion_cart_form.selected_work_items %}
                 <tr>
                   <td><a href="" class="t-gray">{{item.title}}</a></td>
+                  <td>{{item.description}}</td>
                   <td>
                     <a href="{{url_for('exclusion.delete_exclusion_item_from_cart', item_id=item.id)}}"><img
                         src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
@@ -297,10 +303,11 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content modal--padding">
-      <h5 class="centralized">Add work item</h5>
-      <div class="modal-body">
-        <form class="form" role="form" action="{{ url_for('exclusion.exclusion') }}" method="post">
-          <div class="form-row flex-row-box--se">
+      <h5 class="--padding">Edit exclusion</h5>
+      <div class="modal-body padding--off">
+        <form class="form" role="form" action="" method="post">
+          <div class="__modal-inputs--flex-row">
+
             <div>
               {{form.title(class='_form-input _form-input--m')}}
               <label class="_label">Title</label>
@@ -311,10 +318,12 @@
               <label class="_label">Description</label>
             </div>
 
+            <div class="padding--top">
+              {{form.save_submit(class='_btn--gray  ddb-cursor')}}
+            </div>
+
           </div>
-      </div>
-      <div class="bt_add-new-user centralized">
-        {{form.submit(class='_btn--black ddb-cursor')}}
+        </form>
       </div>
     </div>
   </div>
@@ -324,4 +333,5 @@
 
 {% block scripts %}
 <script src="/static/js/jquery.dataTables.min.js"></script>
+<script src="/static/js/exclusions.js"></script>
 {% endblock %}

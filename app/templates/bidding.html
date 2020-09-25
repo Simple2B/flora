@@ -12,7 +12,7 @@
         <a class="logo" href="#">
           <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="DDB Contracting" class="logo__img">
         </a>
-        <nav class="menu__items">
+        <nav class="menu__items none-underline">
           <a class="menu__item" href="{{ url_for('main.bidding') }}">Bidding</a>
           <a class="menu__item" href="{{ url_for('main.team') }}">My team</a>
           <a class="menu__item" href="{{ url_for('main.resources') }}">Resources</a>
@@ -149,9 +149,9 @@
   <!-- <div> -->
   <div class="bg-light border-right box-shadow" id="sidebar-wrapper">
     <div class="sidebar-heading">DDB Contracting</div>
-    <div class="text--center list-group list-group-flush">
+    <div class="text--center list-group list-group-flush none-underline">
       <a href="#">
-      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks --border">
       My Bidding </button></a>
       <a href="{{ url_for('work_item.work_items') }}">
       <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
@@ -229,6 +229,34 @@
           {% endfor %}
         </tbody>
       </table>
+    </div>
+
+    <div class="modal-content modal--padding">
+      <h5 class="--padding">Work Items</h5>
+      <!-- <div class="modal-body padding--off"> -->
+      <div class="__modal-inputs--flex-row">
+
+        <a href="{{ url_for('work_item.work_items') }}"><button class="ddb-cursor _btn--gray">Add work item/group</button></a>
+
+      </div>
+    </div>
+
+    <div class="modal-content modal--padding">
+      <h5 class="--padding">Exclusions</h5>
+      <div class="__modal-inputs--flex-row">
+
+        <a href="{{ url_for('exclusion.exclusions') }}"><button class="ddb-cursor _btn--gray">Add exclusion</button></a>
+
+      </div>
+    </div>
+
+    <div class="modal-content modal--padding">
+      <h5 class="--padding">Clarifications</h5>
+      <div class="__modal-inputs--flex-row">
+
+        <a href="{{ url_for('clarification.clarifications') }}"><button class="ddb-cursor _btn--gray">Add clarification</button></a>
+
+      </div>
     </div>
 
   </div>

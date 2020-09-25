@@ -58,11 +58,17 @@ ul, li {
     justify-content: space-evenly;
 }
 
+.flex-row-box-sb {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .modal--padding {
     padding: 0.5rem;
 }
 
-.centralized {
+.centralized-block {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -70,4 +76,13 @@ ul, li {
 
 .ddb-cursor {
     cursor: pointer;
+}
+
+.--border {
+    background-color: #dae0e5 !important;
+    color: black !important;
+}
+
+.none-underline a {
+    text-decoration: none !important;
 }

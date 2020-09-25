@@ -147,7 +147,7 @@
   <!-- <div> -->
   <div class="bg-light border-right box-shadow __side-bar-box" id="sidebar-wrapper">
     <div class="sidebar-heading">DDB Contracting</div>
-    <div class="text--center list-group list-group-flush">
+    <div class="text--center list-group list-group-flush none-underline">
       <a href="{{ url_for('main.bidding') }}">
       <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
       My Bidding </button></a>
@@ -159,7 +159,7 @@
       Exclusions
       </button> </a>
       <a href="{{ url_for('clarification.clarifications') }}">
-      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks --border">
       Clarifications
       </button> </a>
     </div>
@@ -249,7 +249,11 @@
                       <td><a href="" class="t-gray">{{clarification.id}}</a></td>
                       <td>{{clarification.note}}</td>
                       <td>{{clarification.description}}</td>
-                      <td><a href=""><img src="{{ url_for('static', filename='images/edit_element.svg') }}"></a></td>
+                      <td><button type="button" value="{{clarification.id}}" style="border: none;"
+                        data-toggle="modal" data-target="#exampleModal" data-target_link="{{url_for('clarification.edit_clarification_item', item_id=clarification.id)}}"
+                        data-note="{{clarification.note}}" data-description="{{clarification.description}}">
+                        <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
+                      </button></td>
                     </tr>
                     {% endfor %}
                   </tbody>
@@ -270,9 +274,10 @@
               <thead class="__table--head">
                 <th>Clarification Item</th>
                 <th>Delete</th>
+                <th></th>
               </thead>
               <tbody>
-                {% for item in selected_clarification_item_ids %}
+                {% for item in clarification_cart_form.selected_work_items %}
                 <tr>
                   <td><a href="" class="t-gray">{{item.note}}</a></td>
                   <td>
@@ -297,13 +302,14 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content modal--padding">
-      <h5 class="centralized">Add work item</h5>
-      <div class="modal-body">
-        <form class="form" role="form" action="{{ url_for('clarification.clarification') }}" method="post">
-          <div class="form-row flex-row-box--se">
+      <h5 class="--padding">Edit clarification</h5>
+      <div class="modal-body padding--off">
+        <form class="form" role="form" action="" method="post">
+          <div class="__modal-inputs--flex-row">
+
             <div>
               {{form.note(class='_form-input _form-input--m')}}
-              <label class="_label">Title</label>
+              <label class="_label">Note</label>
             </div>
 
             <div>
@@ -311,10 +317,12 @@
               <label class="_label">Description</label>
             </div>
 
+            <div class="padding--top">
+              {{form.save_submit(class='_btn--gray  ddb-cursor')}}
+            </div>
+
           </div>
-      </div>
-      <div class="bt_add-new-user centralized">
-        {{form.submit(class='_btn--black ddb-cursor')}}
+        </form>
       </div>
     </div>
   </div>
@@ -324,46 +332,5 @@
 
 {% block scripts %}
 <script src="/static/js/jquery.dataTables.min.js"></script>
+<script src="/static/js/clarifications.js"></script>
 {% endblock %}
-
-<!-- <table id="" class="patientsTable table table-striped table-sm table__work-item">
-            <thead class="bck-color-table">
-              <th>№</th>
-              <th>Clarification</th>
-              <th>Note</th>
-              <th></th>
-            </thead>
-            <tbody>
-              {% for clarification in clarifications %}
-              <tr>
-                <td><a href="" class="t-gray">{{clarification.id}}</a></td>
-                <td>{{clarification.note}}</td>
-                <td>{{clarification.description}}</td>
-                <td><a href=""><img src="{{ url_for('static', filename='images/edit_logo.svg') }}"></a></td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-content" role="document" style="padding: 1rem;">
-        <form class="form" role="form" action="{{ url_for('clarification.clarification') }}" method="post">
-          <h5>Add clarification</h5>
-          <div class="modal-body">
-              <div class="form-row flex-row-box--sb">
-                <div>
-                  {{form.note(class='_form-input _form-input--m')}}
-                  <label class="_label label--clarification">Note</label>
-                </div>
-
-                <div class="margin-left">
-                  {{form.description(class='_form-input _form-input--m')}}
-                  <label class="_label label--clarification">Description</label>
-                </div>
-
-              </div>
-
-          </div>
-          <div class="bt_add-new-user">
-            {{form.submit(class='_btn--blue')}}
-          </div>
-        </form> -->
