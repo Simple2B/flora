@@ -56,6 +56,20 @@ def delete_work_item_from_cart(item_id):
     return redirect(url_for("work_item.work_items"))
 
 
+@work_item_blueprint.route("/edit_work_item/<item_id>", methods=["POST"])
+@login_required
+def edit_work_item(item_id):
+    item_id = int(item_id)
+    form = NewWorkItemForm(request.form)
+    if form.validate_on_submit():
+        work_item = WorkItem.query.get(item_id)
+        if work_item:
+            work_item.code = form.code.data
+            work_item.name = form.name.data
+            work_item.save()
+    return redirect(url_for("work_item.work_items"))
+
+
 @work_item_blueprint.route("/work_items", methods=["GET"])
 @login_required
 def work_items():

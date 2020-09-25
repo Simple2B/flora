@@ -250,8 +250,10 @@
                       <td><input class="form-control" type="checkbox" name="{{work_item.id}}"></td>
                       <td><a href="" class="t-gray">{{work_item.code}}</a></td>
                       <td>{{work_item.name}}</td>
-                      <td><button type="button" class="btn btn-primary btn-danger ml-auto mr-3" data-toggle="modal" data-target="#exampleModal">
-                          <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+                      <td><button type="button" value="{{work_item.id}}" class="btn btn-primary btn-danger ml-auto mr-3"
+                          data-toggle="modal" data-target="#exampleModal" data-target_link="{{url_for('work_item.edit_work_item', item_id=work_item.id)}}"
+                          data-code="{{work_item.code}}" data-name="{{work_item.name}}">
+                          <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
                         </button>
                       </td>
                     </tr>
@@ -306,7 +308,7 @@
     <div class="modal-content modal--padding">
       <h5 class="centralized">Edit work item</h5>
       <div class="modal-body">
-        <form class="form" role="form" action="{{ url_for('work_item.work_item') }}" method="post">
+        <form class="form" role="form" action="" method="post">
           <div class="form-row flex-row-box--se">
             <div>
               {{form.code(class='_form-input _form-input--m')}}
@@ -319,9 +321,10 @@
             </div>
 
           </div>
-      </div>
-      <div class="bt_add-new-user centralized">
-        {{form.edit_submit(class='_btn--black  ddb-cursor')}}
+          <div class="bt_add-new-user centralized">
+            {{form.edit_submit(class='_btn--black  ddb-cursor')}}
+          </div>
+        </form>
       </div>
     </div>
   </div>

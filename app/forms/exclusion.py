@@ -8,3 +8,6 @@ class ExclusionForm(FlaskForm):
     description = TextField('Description', validators=[DataRequired()])
     submit = SubmitField('Add new exclusion')
 
+
+class ExclusionCartForm(FlaskForm):
+    submit = SubmitField('Add to bidding')

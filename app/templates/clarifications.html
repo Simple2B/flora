@@ -297,7 +297,7 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content modal--padding">
-      <h5>Add work item</h5>
+      <h5 class="centralized">Add work item</h5>
       <div class="modal-body">
         <form class="form" role="form" action="{{ url_for('clarification.clarification') }}" method="post">
           <div class="form-row flex-row-box--se">
@@ -313,8 +313,8 @@
 
           </div>
       </div>
-      <div class="bt_add-new-user">
-        {{form.submit(class='_btn--black')}}
+      <div class="bt_add-new-user centralized">
+        {{form.submit(class='_btn--black ddb-cursor')}}
       </div>
     </div>
   </div>
