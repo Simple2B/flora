@@ -29,6 +29,15 @@
             <p>{{current_user.username}}</p>
             <p class='t-gray'>{{current_user.position}}</p>
           </div>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false"></a>
+              <div class="dropdown-menu" aria-labelledby="userActions">
+                <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
       {% endif %}
@@ -147,7 +156,7 @@
 <section class="page-section bidding d-flex tabm" id="wrapper">
   <!-- begin Sidebar -->
   <!-- <div> -->
-  <div class="bg-light border-right box-shadow" id="sidebar-wrapper">
+  <div class="bg-light border-right box-shadow __side-bar-box" id="sidebar-wrapper">
     <div class="sidebar-heading">DDB Contracting</div>
     <div class="text--center list-group list-group-flush none-underline">
       <a href="#">
@@ -168,7 +177,7 @@
   </div>
   <!-- </div> -->
   <!-- end Sidebar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" id="ddb-background"
+  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom nav-side-bar" id="ddb-background"
     style="padding:0.5rem 2.8rem;">
 
     <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
@@ -192,7 +201,6 @@
   </nav>
   <!-- <div class="ddb-container"> -->
   <div class="container" id="work-item-container">
-    <h1>Welcome!</h1>
 
     <span>
       <select>

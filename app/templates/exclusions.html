@@ -29,6 +29,15 @@
             <p>{{current_user.username}}</p>
             <p class='t-gray'>{{current_user.position}}</p>
           </div>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false"></a>
+              <div class="dropdown-menu" aria-labelledby="userActions">
+                <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
       {% endif %}
@@ -224,7 +233,7 @@
           </form>
 
           <form class="form" role="form" action="{{ url_for('exclusion.add_exclusion_to_cart') }}" method="post">
-            <div id="workItemTable" class="box-shadow __box-table--mtop">
+            <div id="exclusionTable" class="box-shadow __box-table--mtop">
               <span>
                 <select>
                   <option value="Most popular" name="Most popular">Most popular</option>
@@ -236,7 +245,7 @@
               </span>
 
               <div>
-                <table id="" class="patientsTable table table-striped table-sm table__work-item">
+                <table id="exclusionsTable" class="patientsTable table table-striped table-sm table__work-item">
                   <thead class="bck-color-table">
                     <th></th>
                     <th>Title</th>
@@ -270,7 +279,7 @@
             </div>
           </div>
           <div class="__box-table--mtop">
-            <table id="patientsTable" class="patientsTable table table-striped table-sm table__work-item">
+            <table id="selectedExclusionTable" class="patientsTable table table-striped table-sm table__work-item">
               <thead class="__table--head">
                 <th>Exclusion item</th>
                 <th>Delete</th>
