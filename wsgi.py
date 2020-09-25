@@ -4,6 +4,7 @@ import click
 
 from app import create_app, db, models, forms
 from app.models import User, WorkItem, Exclusion, Clarification
+from app.controllers import populate_db_by_test_data
 
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "1234")
@@ -57,6 +58,8 @@ def create_db():
 
     exclusion = Clarification(note=CLARIFICATION_NOTE, description=CLARIFICATION_DESCRIPTION)
     exclusion.save()
+    if app.config['GENERATE_TEST_DATA']:
+        populate_db_by_test_data()
 
 
 @app.cli.command()
