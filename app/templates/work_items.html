@@ -336,18 +336,5 @@
 
 {% block scripts %}
 <script src="/static/js/jquery.dataTables.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $('#workItemsTable').DataTable({
-        "pageLength": 10,
-        "order": [],
-        "displayStart": 0
-    });
-    $('#selectedWorkItemsTable').DataTable({
-        "pageLength": 10,
-        "order": [],
-        "displayStart": 0
-    });
-} );
-</script>
+<script src="/static/js/work_items.js"></script>
 {% endblock %}
