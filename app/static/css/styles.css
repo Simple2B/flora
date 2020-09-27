@@ -329,6 +329,12 @@ ul, li {
 .navbar-nav .nav-link {
   padding-left: 1rem; }
 
+.list-style--type {
+  background-color: #f8f9fa; }
+  .list-style--type li {
+    list-style-type: disc;
+    color: #2F80ED; }
+
 .__side-bar-box {
   height: 65vh; }
 
