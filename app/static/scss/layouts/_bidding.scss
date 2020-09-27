@@ -10,12 +10,39 @@
 //     background-color: #F2F2F2;
 // }
 
-.list-style--type {
+.bidding__side_bar--size {
+    max-height: 64vh;
+}
+
+.bidding-sb--box {
+    text-align: center;
+}
+
+.bidding-sb-list {
+    display: block;
+    margin-left: 4.75rem;
+    margin-right: 0.75rem;
+}
+
+.list__side_bar--style {
     background-color: #f8f9fa;
+    text-align: left;
 
     & li {
         list-style-type: disc;
         color: #2F80ED;
     }
+
+    & span {
+       color: #BDBDBD;
+    }
+
+    & a {
+        color: #BDBDBD;
+    }
+        a:hover {
+            color: #2F80ED;
+        }
+
 }
 

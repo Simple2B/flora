@@ -74,6 +74,9 @@ ul, li {
 .none-underline a {
   text-decoration: none !important; }
 
+.__side-bar-box {
+  height: 65vh; }
+
 .t-gray {
   color: #828282; }
 
@@ -329,10 +332,28 @@ ul, li {
 .navbar-nav .nav-link {
   padding-left: 1rem; }
 
-.list-style--type {
-  background-color: #f8f9fa; }
-  .list-style--type li {
+.bidding__side_bar--size {
+  max-height: 64vh; }
+
+.bidding-sb--box {
+  text-align: center; }
+
+.bidding-sb-list {
+  display: block;
+  margin-left: 4.75rem;
+  margin-right: 0.75rem; }
+
+.list__side_bar--style {
+  background-color: #f8f9fa;
+  text-align: left; }
+  .list__side_bar--style li {
     list-style-type: disc;
+    color: #2F80ED; }
+  .list__side_bar--style span {
+    color: #BDBDBD; }
+  .list__side_bar--style a {
+    color: #BDBDBD; }
+  .list__side_bar--style a:hover {
     color: #2F80ED; }
 
 .__side-bar-box {

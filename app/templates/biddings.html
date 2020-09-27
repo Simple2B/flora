@@ -229,26 +229,23 @@
           <th>Last updated</th>
         </thead>
         <tbody>
-          {% for i in test %}
-          {% if i == "12345" %}
           <tr>
-            <td><a href="{{url_for('main.bidding', item_id=i)}}">{{i}}</a></td>
-            <td>{{test[1]}}</td>
-            <td>{{test[1]}}</td>
-            <td>{{test[1]}}</td>
-            <td>{{test[1]}}</td>
-            <td>{{test[1]}}</td>
+            <td><a href="{{url_for('main.bidding', item_id=12345)}}">12345</a></td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
           </tr>
-          {% else %}
+          {% for work_item in work_items %}
           <tr>
-            <td>{{i}}</td>
-            <td>{{i}}</td>
-            <td>{{i}}</td>
-            <td>{{i}}</td>
-            <td>{{i}}</td>
-            <td>{{i}}</td>
+            <td><a href="{{url_for('main.bidding', item_id=work_item.id)}}">{{work_item.id}}</a></td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
           </tr>
-          {% endif %}
           {% endfor %}
         </tbody>
       </table>
