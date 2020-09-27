@@ -52,6 +52,10 @@ ul, li {
   flex-direction: row;
   justify-content: space-between; }
 
+.flex-row {
+  display: flex;
+  flex-direction: row; }
+
 .modal--padding {
   padding: 0.5rem; }
 
@@ -321,6 +325,9 @@ ul, li {
         .header__inner--right .user-info__details p {
           margin: 0;
           padding: 0; }
+
+.navbar-nav .nav-link {
+  padding-left: 1rem; }
 
 .__side-bar-box {
   height: 65vh; }
