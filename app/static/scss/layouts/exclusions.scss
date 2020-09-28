@@ -32,7 +32,10 @@
             margin-left: 4.2rem;
             padding-left: 2rem;
         }
+    }
 
+    .__border-none {
+        border: none;
     }
 
     .__box-table--right {
@@ -49,7 +52,11 @@
                 font-weight: $fw-700;
                 padding: 1rem;
             }
+            & div {
+                padding: 0rem 1.2rem 0.1rem 1.2rem;
+            }
         }
+
     }
 
     & h6 {
@@ -57,7 +64,7 @@
     }
 }
 
-.__add-work-item--box {
+.__add-exclusion--box {
     .__add_new_excl--margin {
         margin-top: 1rem;
         margin-left: 1rem;
@@ -66,9 +73,24 @@
 
 .__box-add-bid-cancel--margins {
     margin-left: auto;
+    margin-top: auto;
+    margin-bottom: 1rem;
 
     & a {
         text-decoration: none;
         color: #FFFFFF
     }
+}
+
+.input--label {
+    top: -.15rem;
+    left: 2.8rem;
+}
+
+
+._input--input {
+    margin-top: 0rem;
+    margin-right: 1rem;
+    margin-bottom: 0rem;
+    margin-left: 0.5rem;
 }

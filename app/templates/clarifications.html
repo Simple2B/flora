@@ -172,34 +172,13 @@
   <!-- </div> -->
   <!-- end Sidebar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom nav-side-bar" id="ddb-background">
-
-    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-    <!-- Login/Logout -->
-    <!-- <ul class="navbar-nav ml-auto">
-          {% if current_user.is_authenticated %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">{{current_user.username | capitalize}}</a>
-            <div class="dropdown-menu" aria-labelledby="userActions">
-              <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
-            </div>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-          </li>
-          {% endif %}
-        </ul> -->
-    <!-- </div> -->
   </nav>
-  <!-- <div class="ddb-container"> -->
   <div class="container" id="work-item-container">
 
     <div class="a-space-between">
       <div class="title-tabs">Clarifications</div>
     </div>
     <div class="">
-      <!-- <div><a id="#table">Test content</a></div> -->
       <div class="container __box-table flex-flow-wrap">
         <div class="__box-table--left">
           <form role="form" action="{{ url_for('clarification.clarification') }}" method="post">
@@ -235,9 +214,6 @@
                   <option value="Most popular" name="Most popular">Most popular</option>
                   <option value="Most recent" name="Most recent">Most recent</option>
                 </select>
-                <!-- <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
-              Add new
-            </button> -->
               </span>
 
               <div>

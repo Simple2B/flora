@@ -23,6 +23,8 @@
       float: right;
       margin-left: 4.2rem;
       padding-left: 2rem; }
+  .__box-table-exclusion .__border-none {
+    border: none; }
   .__box-table-exclusion .__box-table--right {
     padding-left: 1rem;
     width: 47%;
@@ -34,15 +36,29 @@
       .__box-table-exclusion .__box-table--right .__exclusion-box--description h6 {
         font-weight: 700;
         padding: 1rem; }
+      .__box-table-exclusion .__box-table--right .__exclusion-box--description div {
+        padding: 0rem 1.2rem 0.1rem 1.2rem; }
   .__box-table-exclusion h6 {
     font-weight: 700; }
 
-.__add-work-item--box .__add_new_excl--margin {
+.__add-exclusion--box .__add_new_excl--margin {
   margin-top: 1rem;
   margin-left: 1rem; }
 
 .__box-add-bid-cancel--margins {
-  margin-left: auto; }
+  margin-left: auto;
+  margin-top: auto;
+  margin-bottom: 1rem; }
   .__box-add-bid-cancel--margins a {
     text-decoration: none;
     color: #FFFFFF; }
+
+.input--label {
+  top: -.15rem;
+  left: 2.8rem; }
+
+._input--input {
+  margin-top: 0rem;
+  margin-right: 1rem;
+  margin-bottom: 0rem;
+  margin-left: 0.5rem; }
