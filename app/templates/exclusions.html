@@ -13,8 +13,8 @@
           <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="DDB Contracting" class="logo__img">
         </a>
         <nav class="menu__items">
-          <a class="menu__item" href="{{ url_for('main.index') }}">Bidding</a>
-          <a class="menu__item" href="#">My team</a>
+          <a class="menu__item" href="{{ url_for('main.biddings') }}">Bidding</a>
+          <a class="menu__item" href="{{ url_for('main.team') }}">My team</a>
           <a class="menu__item" href="#">Resources</a>
           <span class="nav-indicator"></span>
         </nav>
@@ -198,105 +198,112 @@
     <div class="a-space-between">
       <div class="title-tabs">Exclusions</div>
     </div>
-      <!-- <div><a id="#table">Test content</a></div> -->
-      <div class="container __box-table-exclusion flex-flow-wrap">
-        <div class="__box-table--left">
-          <form role="form" action="{{ url_for('exclusion.exclusion') }}" method="post">
+    <!-- <div><a id="#table">Test content</a></div> -->
+    <div class="container __box-table-exclusion flex-flow-wrap">
+      <div class="__box-table--left">
+        <form role="form" action="{{ url_for('exclusion.exclusion') }}" method="post">
 
-            <div class="modal-content border--none">
-              <div class="form-row __add-work-item--box">
-                <h6 class="__h5--width">Add exclusion item</h6>
-                <div>
-                  {{form.title(class='_form-input _form-input--m')}}
-                  <label class="_label">Title</label>
-                </div>
-
-                <div class="__add_new_excl--margin">
-                  {{form.submit(class='_btn--blue')}}
-                </div>
-              </div>
-            </div>
-          </form>
-
-          <form class="form" role="form" action="{{ url_for('exclusion.add_exclusion_to_cart') }}" method="post">
-            <div id="exclusionTable" class="box-shadow __box-table--mtop">
-              <span>
-                <select>
-                  <option value="Most popular" name="Most popular">Most popular</option>
-                  <option value="Most recent" name="Most recent">Most recent</option>
-                </select>
-                <!-- <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
-              Add new
-            </button> -->
-              </span>
-
+          <div class="modal-content border--none">
+            <div class="form-row __add-work-item--box">
+              <h6 class="__h5--width">Add exclusion item</h6>
               <div>
-                <table id="exclusionsTable" class="patientsTable table table-striped table-sm centralized-text table__work-item">
-                  <thead class="bck-color-table">
-                    <th></th>
-                    <th>Title</th>
-                    <!-- <th>Description</th> -->
-                    <th></th>
-                  </thead>
-                  <tbody>
-                    {% for exclusion in form.exclusions %}
-                    <tr>
-                      <td><input class="form-control" type="checkbox" name="{{exclusion.id}}"></td>
-                      <td>{{exclusion.title}}</td>
-                      <!-- <td>{{exclusion.description}}</td> -->
-                      <td><button type="button" value="{{exclusion.id}}" style="border: none;"
-                        data-toggle="modal" data-target="#exampleModal" data-target_link="{{url_for('exclusion.edit_exclusion_item', item_id=exclusion.id)}}"
-                        data-title="{{exclusion.title}}">
-                        <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
-                      </button></td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
+                {{form.title(class='_form-input _form-input--m')}}
+                <label class="_label">Title</label>
+              </div>
+
+              <div class="__add_new_excl--margin">
+                {{form.submit(class='_btn--blue')}}
               </div>
             </div>
-        </div>
-
-        <div class="__box-table--right">
-          <div class="modal-content title-tab border--none" role="document">
-            <h6>Exclusion item cart</h6>
-            <div class="bt_add-new-user">
-              {{ exclusion_cart_form.submit(class='_btn--blue') }}
-            </div>
           </div>
-          <div class="__box-table--mtop">
-            <table id="selectedExclusionTable" class="patientsTable table table-striped table-sm centralized-text table__work-item">
-              <thead class="__table--head">
-                <th>Exclusion item</th>
-                <th></th>
-              </thead>
-              <tbody>
-                {% for item in exclusion_cart_form.selected_work_items %}
-                <tr>
-                  <td><a href="" class="t-gray">{{item.title}}</a></td>
-                  <!-- <td>{{item.description}}</td> -->
-                  <td>
-                    <a href="{{url_for('exclusion.delete_exclusion_item_from_cart', item_id=item.id)}}"><img
-                        src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-          </form>
+        </form>
 
-          <form action="">
-          <div class="box-shadow __exclusion-box--description">
-            <h6>Unless expressly stated, the following exclusions apply:</h6>
+        <form class="form" role="form" action="{{ url_for('exclusion.add_exclusion_to_cart') }}" method="post">
+          <div id="exclusionTable" class="box-shadow __box-table--mtop">
+            <span>
+              <select>
+                <option value="Most popular" name="Most popular">Most popular</option>
+                <option value="Most recent" name="Most recent">Most recent</option>
+              </select>
+              <!-- <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
+            Add new
+          </button> -->
+            </span>
+
             <div>
-
+              <table id="exclusionsTable" class="patientsTable table table-striped table-sm centralized-text table__work-item">
+                <thead class="bck-color-table">
+                  <th></th>
+                  <th>Title</th>
+                  <th></th>
+                </thead>
+                <tbody>
+                  {% for exclusion in form.exclusions %}
+                  <tr>
+                    <td><input class="form-control" type="checkbox" name="{{exclusion.id}}"></td>
+                    <td>{{exclusion.title}}</td>
+                    <td><button type="button" value="{{exclusion.id}}" style="border: none;"
+                      data-toggle="modal" data-target="#exampleModal" data-target_link="{{url_for('exclusion.edit_exclusion_item', item_id=exclusion.id)}}"
+                      data-title="{{exclusion.title}}">
+                      <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
+                    </button></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
             </div>
           </div>
-          </form>
-
-        </div>
       </div>
+
+      <div class="__box-table--right">
+        <div class="modal-content title-tab border--none" role="document">
+          <h6>Exclusion item cart</h6>
+          <div class="bt_add-new-user">
+            {{ exclusion_cart_form.submit(class='_btn--blue') }}
+          </div>
+        </div>
+        <div class="__box-table--mtop">
+          <table id="selectedExclusionTable" class="patientsTable table table-striped table-sm centralized-text table__work-item">
+            <thead class="__table--head">
+              <th>Exclusion item</th>
+              <th></th>
+            </thead>
+            <tbody>
+              {% for item in exclusion_cart_form.selected_work_items %}
+              <tr>
+                <td><a href="" class="t-gray">{{item.title}}</a></td>
+                <td>
+                  <a href="{{url_for('exclusion.delete_exclusion_item_from_cart', item_id=item.id)}}"><img
+                      src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        </form>
+
+        <div class="box-shadow __exclusion-box--description">
+        <form action="">
+          <h6>Unless expressly stated, the following exclusions apply:</h6>
+          <div>
+
+          </div>
+        </form>
+        </div>
+
+
+      </div>
+
+      <div class="__box-add-bid-cancel--margins">
+      <a href="#" class="none-underline"><button class="_btn--black">
+        Add to bidding</a>
+      </button>
+      <a href="{{ url_for('main.biddings') }}"><button class="_btn--gray">
+        Cancel</a>
+      </button>
+      </div>
+
     </div>
   </div>
 </section>
@@ -314,11 +321,6 @@
             <div>
               {{form.title(class='_form-input _form-input--m')}}
               <label class="_label">Title</label>
-            </div>
-
-            <div>
-              {{form.description(class='_form-input _form-input--m')}}
-              <label class="_label">Description</label>
             </div>
 
             <div class="padding--top">

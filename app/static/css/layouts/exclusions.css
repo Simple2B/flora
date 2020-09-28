@@ -29,7 +29,7 @@
     position: relative; }
     .__box-table-exclusion .__box-table--right .__exclusion-box--description {
       position: absolute;
-      height: 53.85%;
+      height: 40%;
       width: 29vw; }
       .__box-table-exclusion .__box-table--right .__exclusion-box--description h6 {
         font-weight: 700;
@@ -40,3 +40,9 @@
 .__add-work-item--box .__add_new_excl--margin {
   margin-top: 1rem;
   margin-left: 1rem; }
+
+.__box-add-bid-cancel--margins {
+  margin-left: auto; }
+  .__box-add-bid-cancel--margins a {
+    text-decoration: none;
+    color: #FFFFFF; }

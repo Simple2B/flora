@@ -42,7 +42,7 @@
         position: relative;
         .__exclusion-box--description {
             position: absolute;
-            height: 53.85%;
+            height: 40%;
             width: 29vw;
 
             & h6 {
@@ -61,5 +61,14 @@
     .__add_new_excl--margin {
         margin-top: 1rem;
         margin-left: 1rem;
+    }
+}
+
+.__box-add-bid-cancel--margins {
+    margin-left: auto;
+
+    & a {
+        text-decoration: none;
+        color: #FFFFFF
     }
 }

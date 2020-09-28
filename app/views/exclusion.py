@@ -17,7 +17,6 @@ def exclusion():
         # ):
         exclusion = Exclusion(
             title=form.title.data,
-            # description=form.description.data,
         )
         exclusion.save()
         # flash("Registration successful. You are logged in.", "success")
