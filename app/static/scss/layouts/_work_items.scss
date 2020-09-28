@@ -7,6 +7,7 @@
 .nav-side-bar {
     padding:0.5rem 2.8rem;
     height: 65vh;
+    max-height: 65vh;
     box-shadow: $shadow;
 }
 
@@ -25,6 +26,11 @@
     .__box-table--left {
         // display: block;
         width: 53%;
+        .__add_to_cart--place {
+            float: right;
+            margin-left: 4.2rem;
+            padding-left: 2rem;
+        }
 
     }
 
@@ -41,6 +47,8 @@
 .__box-table--bottom {
     margin-top: 10rem;
 }
+
+
 
 }
 

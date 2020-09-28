@@ -73,10 +73,6 @@
     ;
   }
 
-  .box-shadow {
-    box-shadow: 0 .2rem .2rem rgba(0, 0, 0, 0.25);
-  }
-
   .a-space-between a {
     padding: 1rem;
   }
@@ -202,30 +198,20 @@
     <div class="a-space-between">
       <div class="title-tabs">Exclusions</div>
     </div>
-    <div class="">
       <!-- <div><a id="#table">Test content</a></div> -->
-      <div class="container __box-table flex-flow-wrap">
+      <div class="container __box-table-exclusion flex-flow-wrap">
         <div class="__box-table--left">
           <form role="form" action="{{ url_for('exclusion.exclusion') }}" method="post">
 
             <div class="modal-content border--none">
               <div class="form-row __add-work-item--box">
-                <h5 class="__h5--width">Add exclusion item</h5>
+                <h6 class="__h5--width">Add exclusion item</h6>
                 <div>
                   {{form.title(class='_form-input _form-input--m')}}
-                  <label class="_label">Note</label>
-                </div>
-                <div class="margin-left">
-                  {{form.description(class='_form-input _form-input--m')}}
-                  <label class="_label">Description</label>
+                  <label class="_label">Title</label>
                 </div>
 
-                <!-- <div>
-            <label class="_label">Name</label>
-            <textarea class='_form-input _form-input--m' name="" id="" cols="30" rows="10"></textarea>
-            </div> -->
-
-                <div class="bt_add-new-user">
+                <div class="__add_new_excl--margin">
                   {{form.submit(class='_btn--blue')}}
                 </div>
               </div>
@@ -245,11 +231,11 @@
               </span>
 
               <div>
-                <table id="exclusionsTable" class="patientsTable table table-striped table-sm table__work-item">
+                <table id="exclusionsTable" class="patientsTable table table-striped table-sm centralized-text table__work-item">
                   <thead class="bck-color-table">
                     <th></th>
                     <th>Title</th>
-                    <th>Description</th>
+                    <!-- <th>Description</th> -->
                     <th></th>
                   </thead>
                   <tbody>
@@ -257,10 +243,10 @@
                     <tr>
                       <td><input class="form-control" type="checkbox" name="{{exclusion.id}}"></td>
                       <td>{{exclusion.title}}</td>
-                      <td>{{exclusion.description}}</td>
+                      <!-- <td>{{exclusion.description}}</td> -->
                       <td><button type="button" value="{{exclusion.id}}" style="border: none;"
                         data-toggle="modal" data-target="#exampleModal" data-target_link="{{url_for('exclusion.edit_exclusion_item', item_id=exclusion.id)}}"
-                        data-title="{{exclusion.title}}" data-description="{{exclusion.description}}">
+                        data-title="{{exclusion.title}}">
                         <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
                       </button></td>
                     </tr>
@@ -273,23 +259,22 @@
 
         <div class="__box-table--right">
           <div class="modal-content title-tab border--none" role="document">
-            <h5>Exclusion item cart</h5>
+            <h6>Exclusion item cart</h6>
             <div class="bt_add-new-user">
               {{ exclusion_cart_form.submit(class='_btn--blue') }}
             </div>
           </div>
           <div class="__box-table--mtop">
-            <table id="selectedExclusionTable" class="patientsTable table table-striped table-sm table__work-item">
+            <table id="selectedExclusionTable" class="patientsTable table table-striped table-sm centralized-text table__work-item">
               <thead class="__table--head">
                 <th>Exclusion item</th>
-                <th>Delete</th>
                 <th></th>
               </thead>
               <tbody>
                 {% for item in exclusion_cart_form.selected_work_items %}
                 <tr>
                   <td><a href="" class="t-gray">{{item.title}}</a></td>
-                  <td>{{item.description}}</td>
+                  <!-- <td>{{item.description}}</td> -->
                   <td>
                     <a href="{{url_for('exclusion.delete_exclusion_item_from_cart', item_id=item.id)}}"><img
                         src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
@@ -300,9 +285,18 @@
             </table>
           </div>
           </form>
+
+          <form action="">
+          <div class="box-shadow __exclusion-box--description">
+            <h6>Unless expressly stated, the following exclusions apply:</h6>
+            <div>
+
+            </div>
+          </div>
+          </form>
+
         </div>
       </div>
-    </div>
     </div>
   </div>
 </section>
@@ -344,3 +338,8 @@
 <script src="/static/js/jquery.dataTables.min.js"></script>
 <script src="/static/js/exclusions.js"></script>
 {% endblock %}
+
+                <!-- <div>
+            <label class="_label">Name</label>
+            <textarea class='_form-input _form-input--m' name="" id="" cols="30" rows="10"></textarea>
+            </div> -->

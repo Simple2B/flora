@@ -17,7 +17,7 @@ def exclusion():
         # ):
         exclusion = Exclusion(
             title=form.title.data,
-            description=form.description.data,
+            # description=form.description.data,
         )
         exclusion.save()
         # flash("Registration successful. You are logged in.", "success")
@@ -82,6 +82,32 @@ def edit_exclusion_item(item_id):
             exclusion.description = form.description.data
             exclusion.save()
     return redirect(url_for("exclusion.exclusions"))
+
+
+# @exclusion_blueprint.route("/add_exclusion_to_cart", methods=["POST"])
+# @login_required
+# def add_exclusion_to_cart():
+#     form = ExclusionCartForm(request.form)
+#     selected_ids = session.get("SelectedExclusionItemsDict", {})
+#     form.selected_exclusion_items = {
+#         int(item_id): Exclusion.query.get(item_id) for item_id in selected_ids
+#     }
+#     if form.validate_on_submit():
+#         form.selected_exclusion_items.update(
+#             {
+#                 str(k): Exclusion.query.get(int(k))
+#                 for k in request.form
+#                 if request.form[k] == "on"
+#             }
+#         )
+#         session["SelectedExclusionItemsDict"] = {
+#             str(item_id): item_id for item_id in form.selected_exclusion_items
+#         }
+#         return redirect(url_for("exclusion.exclusions"))
+#     elif form.is_submitted():
+#         pass
+#         # flash("The given data was invalid.", "danger")
+#     return redirect(url_for("exclusion.exclusions"))
 
 
 @exclusion_blueprint.route("/exclusions", methods=["GET"])

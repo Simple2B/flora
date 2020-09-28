@@ -2,15 +2,6 @@
 
 "use strict";
 
-    // $( "#select_ul_id li a" ).on('click', function(e) {
-    //     // e.preventDefault();
-    //     // $('.contentMenu').each((i, item) => $(item).removeClass('ddb-underline'));
-    //     $("#select_ul_id li a").removeClass('ddb-underline');
-    //     $(this).addClass('ddb-underline');
-    //     // $(this).addClass('ddb-underline');
-    // });
-    // // });
-
 function changeTab(evt, cityName) {
   var i, tabcontent, tablinks;
 
@@ -72,3 +63,34 @@ $("#ddb-background").click(function (e) {
   e.preventDefault();
   $("#wrapper").toggleClass("toggled");
 });
+
+
+// for side-bar transition
+
+$(document).ready(function(){
+
+  $("#menu").on("click","a", function (event) {
+
+    //отменяем стандартную обработку нажатия по ссылке
+
+    event.preventDefault();
+
+
+    //забираем идентификатор бока с атрибута href
+
+    var id  = $(this).attr('href'),
+
+
+    //узнаем высоту от начала страницы до блока на который ссылается якорь
+
+        top = $(id).offset().top;
+
+
+    //анимируем переход на расстояние - top за 100 мс
+
+    $('body,html').animate({scrollTop: top}, 100);
+
+  });
+
+});
+

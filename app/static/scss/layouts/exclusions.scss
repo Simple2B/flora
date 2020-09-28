@@ -15,3 +15,51 @@
     width: 8.4vw;
     border-bottom: $border-bottom;
 }
+
+.__box-table-exclusion {
+    width: 100%;
+    margin-top: 1rem;
+    min-height: 70vh;
+    max-height: 80vh;
+    box-shadow: $shadow;
+    overflow: visible;
+
+    .__box-table--left {
+        // display: block;
+        width: 53%;
+        .__add_to_cart--place {
+            float: right;
+            margin-left: 4.2rem;
+            padding-left: 2rem;
+        }
+
+    }
+
+    .__box-table--right {
+        // display: block;
+        padding-left: 1rem;
+        width: 47%;
+        position: relative;
+        .__exclusion-box--description {
+            position: absolute;
+            height: 53.85%;
+            width: 29vw;
+
+            & h6 {
+                font-weight: $fw-700;
+                padding: 1rem;
+            }
+        }
+    }
+
+    & h6 {
+        font-weight: $fw-700;
+    }
+}
+
+.__add-work-item--box {
+    .__add_new_excl--margin {
+        margin-top: 1rem;
+        margin-left: 1rem;
+    }
+}

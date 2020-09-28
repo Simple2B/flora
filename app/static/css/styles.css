@@ -24,6 +24,9 @@ ul, li {
 .page-section {
   margin-top: 1rem; }
 
+.box-shadow {
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25); }
+
 .title-tabs {
   font-style: normal;
   font-weight: 600;
@@ -63,6 +66,9 @@ ul, li {
   display: block;
   margin-left: auto;
   margin-right: auto; }
+
+.centralized-text {
+  text-align: center; }
 
 .ddb-cursor {
   cursor: pointer; }
@@ -335,6 +341,9 @@ ul, li {
 .bidding__side_bar--size {
   max-height: 64vh; }
 
+.nav-side-bar {
+  max-height: 64vh; }
+
 .bidding-sb--box {
   text-align: center; }
 
@@ -356,12 +365,16 @@ ul, li {
   .list__side_bar--style a:hover {
     color: #2F80ED; }
 
+.active {
+  color: #2F80ED !important; }
+
 .__side-bar-box {
   height: 65vh; }
 
 .nav-side-bar {
   padding: 0.5rem 2.8rem;
   height: 65vh;
+  max-height: 65vh;
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25); }
 
 .__box-table {
@@ -375,6 +388,10 @@ ul, li {
     height: 100%; }
   .__box-table .__box-table--left {
     width: 53%; }
+    .__box-table .__box-table--left .__add_to_cart--place {
+      float: right;
+      margin-left: 4.2rem;
+      padding-left: 2rem; }
   .__box-table .__box-table--right {
     padding-left: 1rem;
     width: 47%; }
@@ -443,6 +460,37 @@ ul, li {
   padding: 0.3rem;
   width: 8.4vw;
   border-bottom: 5px solid #175593; }
+
+.__box-table-exclusion {
+  width: 100%;
+  margin-top: 1rem;
+  min-height: 70vh;
+  max-height: 80vh;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  overflow: visible; }
+  .__box-table-exclusion .__box-table--left {
+    width: 53%; }
+    .__box-table-exclusion .__box-table--left .__add_to_cart--place {
+      float: right;
+      margin-left: 4.2rem;
+      padding-left: 2rem; }
+  .__box-table-exclusion .__box-table--right {
+    padding-left: 1rem;
+    width: 47%;
+    position: relative; }
+    .__box-table-exclusion .__box-table--right .__exclusion-box--description {
+      position: absolute;
+      height: 53.85%;
+      width: 29vw; }
+      .__box-table-exclusion .__box-table--right .__exclusion-box--description h6 {
+        font-weight: 700;
+        padding: 1rem; }
+  .__box-table-exclusion h6 {
+    font-weight: 700; }
+
+.__add-work-item--box .__add_new_excl--margin {
+  margin-top: 1rem;
+  margin-left: 1rem; }
 
 .label--clarification {
   left: 1rem;

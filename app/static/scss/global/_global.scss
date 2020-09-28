@@ -30,6 +30,11 @@ ul, li {
     margin-top: 1rem;
 }
 
+.box-shadow {
+    box-shadow: 0 .2rem .2rem rgba(0, 0, 0, 0.25);
+}
+
+
 .title-tabs {
     font-style: normal;
     font-weight: 600;
@@ -77,6 +82,10 @@ ul, li {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.centralized-text {
+    text-align: center;
 }
 
 .ddb-cursor {

@@ -135,16 +135,16 @@
       <div class="bidding-sb-list">
         <ul class="list-group-item normalized list__side_bar--style">
             <li>
-              <span><a href="#">Project general</a> </span>
+              <span class="tablinks active"><a href="#ex1">Project general</a> </span>
             </li>
             <li>
-              <span><a href="#"> Scope of Work</a> </span>
+              <span class="tablinks"><a href="#ex2"> Scope of Work</a> </span>
             </li>
             <li>
-              <span><a href="#"> Exclusions</a> </span>
+              <span class="tablinks"><a href="#ex3"> Exclusions</a> </span>
             </li>
             <li>
-              <span><a href="#"> Clarifications</a> </span>
+              <span class="tablinks"><a href="#ex4"> Clarifications</a> </span>
             </li>
         </ul>
       </div>
@@ -155,25 +155,6 @@
   <!-- end Sidebar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom nav-side-bar" id="ddb-background"
       style="padding:0.5rem 2.8rem;">
-
-      <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-      <!-- Login/Logout -->
-      <!-- <ul class="navbar-nav ml-auto">
-          {% if current_user.is_authenticated %}
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">{{current_user.username | capitalize}}</a>
-              <div class="dropdown-menu" aria-labelledby="userActions">
-              <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
-              </div>
-          </li>
-          {% else %}
-          <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-          </li>
-          {% endif %}
-          </ul> -->
-      <!-- </div> -->
   </nav>
 
   <!-- <div class="ddb-container"> -->
@@ -187,49 +168,17 @@
     <button type="button" class="_btn--gray" data-toggle="modal" data-target="#exampleModal">
         Edit
     </button>
-    <input type="input" style="float: right;">
-    </input>
     </span>
 
     <form>
     <div class="margin--top">
-    <table id="" class="patientsTable table table-striped table-sm">
-        <thead class="bck-ground">
-        <th>Bidding ID</th>
-        <th>Title</th>
-        <th>PM</th>
-        <th>Client</th>
-        <th>Satus</th>
-        <th>Last updated</th>
-        </thead>
-        <tbody>
-        {% for i in test %}
-        {% if i == "12345" %}
-        <tr>
-            <td><a href="{{url_for('main.bidding', item_id=i)}}">{{i}}</a></td>
-            <td>{{test[1]}}</td>
-            <td>{{test[1]}}</td>
-            <td>{{test[1]}}</td>
-            <td>{{test[1]}}</td>
-            <td>{{test[1]}}</td>
-        </tr>
-        {% else %}
-        <tr>
-            <td>{{i}}</td>
-            <td>{{i}}</td>
-            <td>{{i}}</td>
-            <td>{{i}}</td>
-            <td>{{i}}</td>
-            <td>{{i}}</td>
-        </tr>
-        {% endif %}
-        {% endfor %}
-        </tbody>
-    </table>
+      <img src="{{url_for('static', filename='images/test_screen_scopeOw.png')}}">
+      <img src="{{url_for('static', filename='images/test_screen.png')}}">
     </div>
     </form>
 
-    <div class="modal-content modal--padding">
+    <div class="modal-content modal--padding" >
+      <section id="ex1">
       <h5 class="--padding">Work Items</h5>
       <!-- <div class="modal-body padding--off"> -->
       <div class="__modal-inputs--flex-row">
@@ -237,6 +186,7 @@
           <a href="{{ url_for('work_item.work_items') }}"><button class="ddb-cursor _btn--gray">Add work item/group</button></a>
 
       </div>
+      </section>
     </div>
 
     <div class="modal-content modal--padding">
@@ -264,6 +214,14 @@
 
 {% block scripts %}
 <script src="/static/js/jquery.dataTables.min.js"></script>
+<script>
+  $(".bidding-sb-list ul li a").click(function(e) {
+  e.preventDefault();
+  $(".bidding-sb-list ul li a").removeClass('active');
+  $(this).addClass('active');
+})
+</script>
+
 {% endblock %}
 
 {% endblock %}
