@@ -48,108 +48,6 @@
 
 {% block content %}
 
-<style>
-  .zeroing_bootsrtap {
-    border-color: #fff;
-  }
-
-  .cursor-pointer {
-    cursor: pointer;
-  }
-
-  .margin--top {
-    margin-top: 2rem;
-  }
-
-  .font-work-items {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #333333;
-    background-color: #fff;
-  }
-
-  .font-work-items:hover {
-    color: #175593;
-    ;
-  }
-
-  .box-shadow {
-    box-shadow: 0 .2rem .2rem rgba(0, 0, 0, 0.25);
-  }
-
-  .a-space-between a {
-    padding: 1rem;
-  }
-
-  /*  */
-  /* TEST */
-  /* Tabs */
-
-
-  .tab {
-    overflow: hidden;
-  }
-
-  .tabm {
-    overflow: hidden;
-  }
-
-  .tabm .__tabm-button.active {
-    background-color: #333333 !important;
-    color: #fff;
-  }
-
-  .__btn {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-  }
-
-  .__btn:hover {
-    color: #333333;
-  }
-
-  .tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-  }
-
-
-  .tab button.active {
-    border-bottom: 5px solid #175593;
-  }
-
-  .tabcontent {
-    display: none;
-  }
-
-  .tabcontentm {
-    display: none;
-  }
-
-  .list-group-item.active {
-    border-color: #333333;
-    color: #333333;
-  }
-
-  .bck-ground {
-    background-color: black;
-    color: #fff;
-  }
-
-  .text--center {
-    text-align: center;
-  }
-</style>
 
 <section class="page-section section-block bidding d-flex tabm" id="wrapper">
   <!-- begin Sidebar -->
@@ -158,18 +56,18 @@
     <div class="sidebar-heading">DDB Contracting</div>
     <div class="text--center list-group list-group-flush none-underline">
       <a href="{{ url_for('main.biddings') }}">
-        <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+        <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
           My Bidding </button></a>
-      <select class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks --border">
+      <select class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks --border">
         Scope of work
         <option value=""><a href="{{ url_for('work_item.work_items') }}">Select Work Item</a></option>
       </select>
       <a href="{{ url_for('exclusion.exclusions') }}">
-        <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+        <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
           Exclusions
         </button> </a>
       <a href="{{ url_for('clarification.clarifications') }}">
-        <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+        <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
           Clarifications
         </button> </a>
     </div>
@@ -200,7 +98,7 @@
   <!-- <div class="ddb-container"> -->
   <div class="container" id="work-item-container">
 
-    <div class="a-space-between">
+    <div>
       <div class="title-tabs">Work items</div>
     </div>
     <!-- <div class=""> -->

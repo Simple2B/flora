@@ -73,6 +73,10 @@ ul, li {
   display: flex;
   flex-direction: row; }
 
+.flex-column {
+  display: flex;
+  flex-direction: column; }
+
 .modal--padding {
   padding: 0.5rem; }
 
@@ -99,7 +103,7 @@ ul, li {
 
 .__box-add-bid-cancel--margins {
   margin-left: auto;
-  margin-top: auto;
+  margin-top: 1rem;
   margin-bottom: 1rem; }
   .__box-add-bid-cancel--margins a {
     text-decoration: none;
@@ -613,3 +617,17 @@ ul, li {
 
 .text--center {
   text-align: center; }
+
+._add_new_clarification--modal ._submit--margins {
+  padding-top: 1.8rem;
+  margin-top: auto; }
+
+._add_new_clarification--modal ._input--label {
+  top: 0.9rem;
+  left: 1.7rem; }
+
+._add_new_clarification--modal ._zeroing-padding {
+  padding: 0rem !important; }
+
+._add_new_clarification--modal ._input--margin_l {
+  margin-left: 1rem !important; }

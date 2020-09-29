@@ -88,3 +88,24 @@
 .text--center {
     text-align: center;
 }
+
+._add_new_clarification--modal {
+
+    ._submit--margins {
+        padding-top: 1.8rem;
+        margin-top: auto;
+    }
+
+    ._input--label{
+        top: 0.9rem;
+        left: 1.7rem;
+    }
+
+    ._zeroing-padding {
+        padding: 0rem !important;
+    }
+
+    ._input--margin_l {
+        margin-left: 1rem !important;
+    }
+}

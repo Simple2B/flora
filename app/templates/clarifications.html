@@ -86,11 +86,6 @@
           <div class="form-row __add-clarification--box">
             <h6 class="__h6--width">Add clarification item</h6>
 
-            <!-- <div>
-        <label class="_label">Name</label>
-        <textarea class='_form-input _form-input--m' name="" id="" cols="30" rows="10"></textarea>
-        </div> -->
-
             <button type="button" data-target="#AddModalClarification" data-toggle="modal" class="_btn--blue">
               Add clarification
             </button>
@@ -211,19 +206,21 @@
       <h5 class="--padding">Edit clarification</h5>
       <div class="modal-body padding--off">
         <form class="form" role="form" action="{{ url_for('clarification.clarification') }}" method="post">
-          <div class="__modal-inputs--flex-row">
+          <div class="flex-row _add_new_clarification--modal">
 
-            <div>
-              {{form.note(class='_form-input _form-input--m')}}
-              <label class="_label">Note</label>
+            <div class="flex-column _zeroing-padding">
+              <div>
+                <label class="_label _input--label">Note</label>
+                {{form.note(class='_form-input _form-input--m _input--margin_l')}}
+              </div>
+
+              <div>
+                <label class="_label _input--label">Description</label>
+                <textarea class='_form-input _form-input--m _textarea--size _input--margin_l' name="" id="" cols="30" rows="10"></textarea>
+              </div>
             </div>
 
-            <div>
-              {{form.description(class='_form-input _form-input--m')}}
-              <label class="_label">Description</label>
-            </div>
-
-            <div class="padding--top">
+            <div class="_submit--margins">
               {{form.submit(class='_btn--black  ddb-cursor-handle')}}
             </div>
 
@@ -273,3 +270,9 @@
 <script src="/static/js/jquery.dataTables.min.js"></script>
 <script src="/static/js/clarifications.js"></script>
 {% endblock %}
+
+
+            <!-- <div>
+              {{form.description(class='_form-input _form-input--m')}}
+              <label class="_label">Description</label>
+            </div> -->
