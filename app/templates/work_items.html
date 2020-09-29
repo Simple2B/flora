@@ -204,14 +204,14 @@
       <div class="title-tabs">Work items</div>
     </div>
     <!-- <div class=""> -->
-      <div class="container __box-table flex-flow-wrap">
+      <div class="container __box-table-work_item flex-flow-wrap">
         <div class="__box-table--left">
 
 
             <div class="modal-content border--none">
               <form role="form" action="{{ url_for('work_item.work_item') }}" method="post"></form>
               <div class="form-row __add-work-item--box">
-                <h5 class="__h5--width">Add work item</h5>
+                <h6 class="__h6--width">Add work item</h6>
                 <div>
                   {{form.code(class='_form-input _form-input--m')}}
                   <label class="_label">Code</label>
@@ -278,12 +278,9 @@
         </div>
 
         <div class="__box-table--right">
-          <!-- <div class="modal-content title-tab border--none" role="document">
-            <h5>Work items cart</h5>
-            <div class="bt_add-new-user">
-              {{ work_cart_form.submit(class='_btn--blue') }}
-            </div>
-          </div> -->
+          <div class="modal-content border--none" role="document">
+            <h6>Work items cart</h6>
+          </div>
           <div class="__box-table--mtop">
             <table id="selectedWorkItemsTable" class="patientsTable table table-striped table-sm table__work-item">
               <thead class="__table--head">

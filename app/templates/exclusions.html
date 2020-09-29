@@ -142,7 +142,7 @@
     <div class="text--center list-group list-group-flush none-underline">
       <a href="{{ url_for('main.biddings') }}">
       <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
-      My Bidding </button></a>
+      <img src="{{ url_for('static', filename='images/right-hand.svg') }}"> Back to editing </button></a>
       <a href="{{ url_for('work_item.work_items') }}">
       <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
       Work Items </button> </a>
@@ -192,7 +192,7 @@
 
           <div class="modal-content border--none">
             <div class="form-row __add-exclusion--box">
-              <h6 class="__h5--width">Add exclusion item</h6>
+              <h6 class="__h6--width">Add exclusion item</h6>
               <div>
                 {{form.title(class='_form-input _form-input--m')}}
                 <label class="_label">Title</label>
@@ -259,7 +259,7 @@
 
       <div class="__box-table--right">
         <div class="modal-content border--none" role="document">
-          <h6>Exclusion item cart</h6>
+          <h6>Exclusion items cart</h6>
         </div>
 
         <div class="__exclusion-item--head">
@@ -268,7 +268,7 @@
 
         <div class="__box-table--mtop">
           <table id="selectedExclusionTable" class="patientsTable table table-striped table-sm centralized-text table__work-item">
-            <thead></thead>
+            <!-- <thead><th></th><th></th></thead> -->
             <tbody>
               {% for item in exclusion_cart_form.selected_exclusions %}
               <tr>

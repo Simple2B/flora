@@ -111,3 +111,14 @@ ul, li {
 .__side-bar-box {
     height: 65vh;
 }
+
+.__box-add-bid-cancel--margins {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: 1rem;
+
+    & a {
+        text-decoration: none;
+        color: #FFFFFF
+    }
+}
