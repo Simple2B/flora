@@ -15,7 +15,7 @@
         <nav class="menu__items">
           <a class="menu__item" href="{{ url_for('main.biddings') }}">Bidding</a>
           <a class="menu__item" href="{{ url_for('main.team') }}">My team</a>
-          <a class="menu__item" href="#">Resources</a>
+          <a class="menu__item" href="{{ url_for('main.index') }}">Resources</a>
           <span class="nav-indicator"></span>
         </nav>
       </div>
@@ -58,10 +58,10 @@
     <div class="text--center list-group list-group-flush none-underline">
       <a href="{{ url_for('main.biddings') }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
-      <img src="{{ url_for('static', filename='images/right-hand.svg') }}"> Back to editing </button></a>
+      <img src="{{ url_for('static', filename='images/right-hand.svg') }}"> Back to Editing </button></a>
       <a href="{{ url_for('work_item.work_items') }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
-      Work Items </button> </a>
+      Scope of work </button> </a>
       <a href="{{ url_for('exclusion.exclusions') }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks --border">
       Exclusions

@@ -4,6 +4,9 @@
   padding: 0;
   font-family: 'Poppins', sans-serif; }
 
+html {
+  scroll-behavior: smooth; }
+
 body {
   font-size: 14px;
   line-height: 21px; }
@@ -409,6 +412,12 @@ ul, li {
 .bck-ground {
   background-color: black;
   color: #fff; }
+
+._bidding--scroll div {
+  margin-top: 1rem; }
+
+._bidding--scroll ._last_url_item {
+  margin-bottom: 1rem; }
 
 .ddb_nav-side-bar {
   height: 64vh; }

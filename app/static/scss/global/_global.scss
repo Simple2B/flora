@@ -5,6 +5,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-size: 14px;
     line-height: 21px;
@@ -161,3 +165,4 @@ ul, li {
 ._side-bar-size{
     padding:0.5rem 2.8rem;
 }
+
