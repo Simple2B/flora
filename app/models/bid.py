@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 
 class Bid(db.Model, ModelMixin):
 
-    __tablename__ = 'bids'
+    __tablename__ = "bids"
 
     id = db.Column(db.Integer, primary_key=True)
     link_work_items = relationship("WorkItemLine")
@@ -15,4 +15,4 @@ class Bid(db.Model, ModelMixin):
     exclusion_links = relationship("ExclusionLink")
 
     def __str__(self):
-        return '<Bid: %d>' % self.id
+        return "<Bid: %d>" % self.id

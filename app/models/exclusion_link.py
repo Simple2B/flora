@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 
 class ExclusionLink(db.Model, ModelMixin):
 
-    __tablename__ = 'exclusion_links'
+    __tablename__ = "exclusion_links"
 
     id = db.Column(db.Integer, primary_key=True)
     bid_id = db.Column(db.Integer, db.ForeignKey("bids.id"), nullable=False)
@@ -14,4 +14,4 @@ class ExclusionLink(db.Model, ModelMixin):
     exclusion = relationship("Exclusion")
 
     def __str__(self):
-        return '<ExclusionLink: %d>' % self.id
+        return "<ExclusionLink: %d>" % self.id

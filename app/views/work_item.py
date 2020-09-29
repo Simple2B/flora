@@ -33,12 +33,20 @@ def work_item():
 def add_work_item_to_cart():
     form = WorkItemCartForm(request.form)
     selected_ids = session.get("SelectedWorkItemsDict", {})
-    form.selected_work_items = {int(item_id): WorkItem.query.get(item_id) for item_id in selected_ids}
+    form.selected_work_items = {
+        int(item_id): WorkItem.query.get(item_id) for item_id in selected_ids
+    }
     if form.validate_on_submit():
-        form.selected_work_items.update({
-            str(k): WorkItem.query.get(int(k)) for k in request.form if request.form[k] == "on"
-        })
-        session["SelectedWorkItemsDict"] = {str(item_id): item_id for item_id in form.selected_work_items}
+        form.selected_work_items.update(
+            {
+                str(k): WorkItem.query.get(int(k))
+                for k in request.form
+                if request.form[k] == "on"
+            }
+        )
+        session["SelectedWorkItemsDict"] = {
+            str(item_id): item_id for item_id in form.selected_work_items
+        }
         return redirect(url_for("work_item.work_items"))
     elif form.is_submitted():
         flash("The given data was invalid.", "danger")
@@ -62,7 +70,9 @@ def work_items():
     form = NewWorkItemForm()
     work_cart_form = WorkItemCartForm()
     selected_work_item_ids = session.get("SelectedWorkItemsDict", {})
-    work_cart_form.selected_work_items = [WorkItem.query.get(item_id) for item_id in selected_work_item_ids]
+    work_cart_form.selected_work_items = [
+        WorkItem.query.get(item_id) for item_id in selected_work_item_ids
+    ]
     form.work_items = WorkItem.query.all()
     return render_template(
         "work_items.html",

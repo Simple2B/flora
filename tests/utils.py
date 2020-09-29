@@ -7,7 +7,7 @@ def register(
     user_type="admin",
     position="test position",
     phone=123456789,
-    password="password"
+    password="password",
 ):
     user = User(
         username=username,

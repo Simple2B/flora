@@ -14,6 +14,7 @@
             <a class="menu__item" href="{{ url_for('main.bidding') }}">Bidding</a>
             <a class="menu__item" href="{{ url_for('main.team') }}">My team</a>
             <a class="menu__item" href="#">Resources</a>
+            <a class="menu__item" href="{{ url_for('procore.procore_auth') }}">Procore</a>
             <span class="nav-indicator"></span>
         </nav>
       </div>
@@ -37,21 +38,17 @@
 
 {% block content %}
 <!-- Sidebar -->
-<div class="container">
-  <h1>Welcome!</h1>
-  <hr>
-  <p>Add some content here!</p>
-</div>
-</div>
-<!-- <div class="container">
-  <div class="bg-light border-right" id="sidebar-wrapper">
-    <div class="sidebar-heading">{{ config.APP_NAME }}</div>
-    <div class="list-group list-group-flush">
-      {% for tab in tabs %}
-      <a href="{{tab.href}}" class="list-group-item list-group-item-action bg-light">{{ tab.name }}</a>
-      {% endfor %}
-    </div>
-  </div> -->
-  <!-- end Sidebar -->
+  <div class="container">
+    <h1>Welcome!</h1>
+    <hr>
+    <p>Your Procore session credemtials:</p>
+    <ul>
+      <li>access_token: {{ session['access_token'] }}</li>
+      <li>refresh_token: {{ session['refresh_token'] }}</li>
+      <li>created_at: {{ session['created_at'] }}</li>
+      <li>expires_at: {{ session['expires_at'] }}</li>
+    </ul>
+  </div>
+
 
 {% endblock %}

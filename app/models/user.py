@@ -12,7 +12,7 @@ from app.models.utils import ModelMixin
 
 class User(db.Model, UserMixin, ModelMixin):
 
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     class Type(enum.Enum):
         # super_admin = "super_admin"
@@ -39,12 +39,14 @@ class User(db.Model, UserMixin, ModelMixin):
 
     @classmethod
     def authenticate(cls, user_id, password):
-        user = cls.query.filter(db.or_(cls.username == user_id, cls.email == user_id)).first()
+        user = cls.query.filter(
+            db.or_(cls.username == user_id, cls.email == user_id)
+        ).first()
         if user is not None and check_password_hash(user.password, password):
             return user
 
     def __str__(self):
-        return '<User: %s>' % self.username
+        return "<User: %s>" % self.username
 
 
 class AnonymousUser(AnonymousUserMixin):

@@ -11,6 +11,7 @@ Jinja2
 MarkupSafe
 pytest
 python-dotenv
+requests
 SQLAlchemy
 Werkzeug
 WTForms

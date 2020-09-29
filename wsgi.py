@@ -19,7 +19,9 @@ EXCLUSION_TITLE = os.environ.get("EXCLUSION_TITLE", "TESTEXCLUSION")
 EXCLUSION_DESCRIPTION = os.environ.get("EXCLUSION_DESCRIPTION", "some exclusion")
 
 CLARIFICATION_NOTE = os.environ.get("CLARIFICATION_NOTE", "TESTWORKITEM")
-CLARIFICATION_DESCRIPTION = os.environ.get("CLARIFICATION_DESCRIPTION", "some clarification")
+CLARIFICATION_DESCRIPTION = os.environ.get(
+    "CLARIFICATION_DESCRIPTION", "some clarification"
+)
 
 app = create_app()
 
@@ -55,7 +57,9 @@ def create_db():
     exclusion = Exclusion(title=EXCLUSION_TITLE, description=EXCLUSION_DESCRIPTION)
     exclusion.save()
 
-    exclusion = Clarification(note=CLARIFICATION_NOTE, description=CLARIFICATION_DESCRIPTION)
+    exclusion = Clarification(
+        note=CLARIFICATION_NOTE, description=CLARIFICATION_DESCRIPTION
+    )
     exclusion.save()
 
 
