@@ -46,12 +46,11 @@
     }
 
     .__box-table--right {
-        // display: block;
         padding-left: 1rem;
         width: 47%;
         position: relative;
 
-        .__clarification-item--head {
+        .__table-item--thead {
             height: 1.5rem;
             ._cart_item--style {
                 padding: 0.2rem 0rem 0.2rem 2.35rem;
@@ -73,17 +72,6 @@
             }
         }
 
-    }
-
-    .__clarification-item--head {
-        text-align: left;
-        height: 2.5rem;
-        ._cart_item--style {
-            padding: 0.55rem 0rem 0.55rem 2.35rem;
-            color: #ffffff;
-            font-size: 0.90rem;
-            background-color: #828282;
-        }
     }
 
     & h6 {

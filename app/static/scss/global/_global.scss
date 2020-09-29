@@ -137,3 +137,19 @@ ul, li {
         color: #FFFFFF
     }
 }
+
+.text--center {
+    text-align: center;
+}
+
+.__table-item--thead {
+    text-align: left;
+    height: 2.5rem;
+    ._cart_item--style {
+        padding: 0.55rem 0rem 0.55rem 2.35rem;
+        color: #ffffff;
+        font-size: 0.90rem;
+        background-color: #828282;
+    }
+}
+

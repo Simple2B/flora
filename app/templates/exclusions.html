@@ -48,92 +48,6 @@
 
 {% block content %}
 
-<style>
-  .cursor-pointer {
-    cursor: pointer;
-  }
-
-  .margin--top {
-    margin-top: 2rem;
-  }
-
-  .font-work-items {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #333333;
-    background-color: #fff;
-  }
-
-  .font-work-items:hover {
-    color: #175593;
-    ;
-  }
-
-  .a-space-between a {
-    padding: 1rem;
-  }
-
-  /*  */
-  /* TEST */
-  /* Tabs */
-
-
-  .tab {
-    overflow: hidden;
-  }
-
-  .tabm {
-    overflow: hidden;
-  }
-
-  .tabm .__tabm-button.active{
-    background-color: #333333 !important;
-    color: #fff;
-  }
-
-  .__btn {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-  }
-
-  .__btn:hover {
-    color: #333333;
-  }
-
-  .tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-  }
-
-  .tab button.active {
-    border-bottom: 5px solid #175593;
-  }
-
-  .list-group-item.active {
-    border-color: #333333;
-    color: #333333;
-  }
-
-.bck-ground {
-  background-color: black;
-  color: #fff;
-}
-
-.text--center {
-  text-align: center;
-}
-</style>
-
 <section class="page-section section-block bidding d-flex tabm" id="wrapper">
   <!-- begin Sidebar -->
   <!-- <div> -->
@@ -141,17 +55,17 @@
     <div class="sidebar-heading">DDB Contracting</div>
     <div class="text--center list-group list-group-flush none-underline">
       <a href="{{ url_for('main.biddings') }}">
-      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       <img src="{{ url_for('static', filename='images/right-hand.svg') }}"> Back to editing </button></a>
       <a href="{{ url_for('work_item.work_items') }}">
-      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       Work Items </button> </a>
       <a href="{{ url_for('exclusion.exclusions') }}">
-      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks --border">
+      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks --border">
       Exclusions
       </button> </a>
       <a href="{{ url_for('clarification.clarifications') }}">
-      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       Clarifications
       </button> </a>
     </div>
@@ -202,10 +116,6 @@
                 {{form.submit(class='_btn--blue ddb-cursor-handle')}}
               </div>
 
-              <div class="__add_to_cart--margin">
-                {{ exclusion_cart_form.submit(class='_btn--gray ddb-cursor-handle', form='exclusions') }}
-              </div>
-
             </div>
           </div>
         </form>
@@ -222,8 +132,12 @@
           </button> -->
             </span>
 
-            <div class="__exclusion-item--head">
-              <div class="_item-padding">Exclusion item</div>
+            <div class="__table-item--thead">
+              <div class="_cart_item--style">Exclusion item</div>
+            </div>
+
+            <div>
+              {{ exclusion_cart_form.submit(class='_btn--gray _add_to_cart--float-r ddb-cursor-handle', form='exclusions') }}
             </div>
 
             <div>
@@ -262,11 +176,11 @@
           <h6>Exclusion items cart</h6>
         </div>
 
-        <div class="__exclusion-item--head">
-          <div class="_item-padding">Exclusion item</div>
+        <div class="__table-item--thead">
+          <div class="_cart_item--style">Exclusion item cart</div>
         </div>
 
-        <div class="__box-table--mtop">
+        <div class="ddb-margin-top box-scroll">
           <table id="selectedExclusionTable" class="patientsTable table table-striped table-sm centralized-text table__work-item">
             <!-- <thead><th></th><th></th></thead> -->
             <tbody>
