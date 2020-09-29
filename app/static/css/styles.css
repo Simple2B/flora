@@ -21,6 +21,10 @@ ul, li {
   list-style: none;
   margin: 0; }
 
+.list-group-item.active {
+  border-color: #333333;
+  color: #333333; }
+
 .page-section {
   margin-top: 1rem; }
 
@@ -29,6 +33,10 @@ ul, li {
 
 .box-shadow {
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25); }
+
+.box-scroll {
+  max-height: 35vh;
+  overflow: auto; }
 
 .title-tab {
   padding: 1rem; }
@@ -556,23 +564,14 @@ ul, li {
   overflow: visible; }
   .__box-table-clarification .__box-table--left {
     width: 53%; }
-    .__box-table-clarification .__box-table--left .__add-clarification--box .__add_new_excl--margin {
-      margin-top: 1rem;
-      margin-left: 1rem; }
-    .__box-table-clarification .__box-table--left .__add-clarification--box .__add_to_cart--margin {
-      margin-top: 1rem;
-      margin-left: 0.5rem; }
     .__box-table-clarification .__box-table--left .__add_to_cart--place {
       float: right;
       margin-left: 4.2rem;
       padding-left: 2rem; }
-    .__box-table-clarification .__box-table--left .__exclusion-item--head {
-      text-align: center;
-      height: 2.5rem; }
-      .__box-table-clarification .__box-table--left .__exclusion-item--head ._item-padding {
-        padding: 0.55rem 15rem 0.55rem 0.35rem;
-        font-size: 0.90rem;
-        background-color: #828282; }
+    .__box-table-clarification .__box-table--left ._add_to_cart--float-r {
+      float: right;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem; }
   .__box-table-clarification .__border-none {
     border: none; }
   .__box-table-clarification .__box-table--right {
@@ -580,12 +579,9 @@ ul, li {
     width: 47%;
     position: relative; }
     .__box-table-clarification .__box-table--right .__clarification-item--head {
-      background-color: #828282;
-      text-align: center;
-      height: 2.5rem; }
-      .__box-table-clarification .__box-table--right .__clarification-item--head ._item-padding {
-        padding: 0.55rem 12.3rem 0.55rem 0.35rem;
-        font-size: 0.90rem; }
+      height: 1.5rem; }
+      .__box-table-clarification .__box-table--right .__clarification-item--head ._cart_item--style {
+        padding: 0.2rem 0rem 0.2rem 2.35rem; }
     .__box-table-clarification .__box-table--right .__clarification-box--description {
       position: absolute;
       margin-top: 0.5rem;
@@ -596,8 +592,19 @@ ul, li {
         padding: 1rem; }
       .__box-table-clarification .__box-table--right .__clarification-box--description div {
         padding: 0rem 1.2rem 0.1rem 1.2rem; }
+  .__box-table-clarification .__clarification-item--head {
+    text-align: left;
+    height: 2.5rem; }
+    .__box-table-clarification .__clarification-item--head ._cart_item--style {
+      padding: 0.55rem 0rem 0.55rem 2.35rem;
+      color: #ffffff;
+      font-size: 0.90rem;
+      background-color: #828282; }
   .__box-table-clarification h6 {
     font-weight: 700; }
   .__box-table-clarification .__h6--width {
     font-weight: 700;
     width: 150%; }
+
+.text--center {
+  text-align: center; }

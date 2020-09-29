@@ -11,4 +11,4 @@ class ClarificationForm(FlaskForm):
 
 
 class ClarificationCartForm(FlaskForm):
-    submit = SubmitField('Add to bidding')
+    submit = SubmitField('Add to cart')

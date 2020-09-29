@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, redirect, flash, request, session
+from flask import Blueprint, render_template, url_for, redirect, request, session
 from flask_login import login_required
 
 from app.models import Clarification
@@ -67,6 +67,21 @@ def delete_clarification_item_from_cart(item_id):
     if item_id in selected_ids:
         del selected_ids[item_id]
     session["SelectedClarificationsDict"] = selected_ids
+    return redirect(url_for("clarification.clarifications"))
+
+
+@clarification_blueprint.route(
+    "/delete_clarification_item_from_items/<item_id>", methods=["POST"]
+)
+@login_required
+def delete_clarification_item_from_items(item_id):
+    clarification = Clarification.query.get(item_id)
+    if clarification:
+        selected = session.get("SelectedClarificationItemsDict", {})
+        if str(clarification.id) in selected:
+            del selected[str(clarification.id)]
+            session['SelectedClarificationItemsDict'] = selected
+        clarification.delete()
     return redirect(url_for("clarification.clarifications"))
 
 

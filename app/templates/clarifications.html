@@ -48,105 +48,6 @@
 
 {% block content %}
 
-<style>
-  .zeroing_bootsrtap {
-    border-color: #fff;
-  }
-
-  .cursor-pointer {
-    cursor: pointer;
-  }
-
-  .margin--top {
-    margin-top: 2rem;
-  }
-
-  .font-work-items {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #333333;
-    background-color: #fff;
-  }
-
-  .font-work-items:hover {
-    color: #175593;
-    ;
-  }
-
-  .a-space-between a {
-    padding: 1rem;
-  }
-
-  /*  */
-  /* TEST */
-  /* Tabs */
-
-
-  .tab {
-    overflow: hidden;
-  }
-
-  .tabm {
-    overflow: hidden;
-  }
-
-  .tabm .__tabm-button.active{
-    background-color: #333333 !important;
-    color: #fff;
-  }
-
-  .__btn {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-  }
-
-  .__btn:hover {
-    color: #333333;
-  }
-
-  .tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-  }
-
-
-  .tab button.active {
-    border-bottom: 5px solid #175593;
-  }
-
-  .tabcontent {
-    display: none;
-  }
-
-  .tabcontentm {
-    display: none;
-  }
-
-  .list-group-item.active {
-    border-color: #333333;
-    color: #333333;
-  }
-
-.bck-ground {
-  background-color: black;
-  color: #fff;
-}
-
-.text--center {
-  text-align: center;
-}
-</style>
-
 <section class="page-section section-block bidding d-flex tabm" id="wrapper">
   <!-- begin Sidebar -->
   <!-- <div> -->
@@ -154,17 +55,17 @@
     <div class="sidebar-heading">DDB Contracting</div>
     <div class="text--center list-group list-group-flush none-underline">
       <a href="{{ url_for('main.biddings') }}">
-      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       My Bidding </button></a>
       <a href="{{ url_for('work_item.work_items') }}">
-      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       Work Items </button> </a>
       <a href="{{ url_for('exclusion.exclusions') }}">
-      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       Exclusions
       </button> </a>
       <a href="{{ url_for('clarification.clarifications') }}">
-      <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks --border">
+      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks --border">
       Clarifications
       </button> </a>
     </div>
@@ -193,10 +94,11 @@
             <button type="button" data-target="#AddModalClarification" data-toggle="modal" class="_btn--blue">
               Add clarification
             </button>
+
           </div>
 
 
-          <form class="form" role="form" action="{{ url_for('clarification.add_clarification_item_to_cart') }}" method="post">
+          <form id="clarifications" class="form" role="form" action="{{ url_for('clarification.add_clarification_item_to_cart') }}" method="post">
             <div id="clarificationTable" class="box-shadow __box-table--mtop ddb-margin-top">
               <span>
                 <select>
@@ -204,6 +106,14 @@
                   <option value="Most recent" name="Most recent">Most recent</option>
                 </select>
               </span>
+
+              <div class="__clarification-item--head">
+                <div class="_cart_item--style">Clarification item</div>
+              </div>
+
+              <div>
+                {{ clarification_cart_form.submit(class='_btn--gray _add_to_cart--float-r ddb-cursor-handle', form='clarifications') }}
+              </div>
 
               <div>
                 <table id="clarificationsTable" class="patientsTable table table-striped table-sm table__work-item">
@@ -225,7 +135,11 @@
                         <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
                       </button>
 
-
+                      <button type="button" value="{{clarification.id}}" class="__border-none" data-toggle="modal" data-target="#modalDeleteClarification"
+                      data-delete="{{clarification.note}}"
+                      data-target_link_clarification_delete="{{url_for('clarification.delete_clarification_item_from_items', item_id=clarification.id)}}">
+                      <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                      </button>
                     </td>
                     </tr>
                     {% endfor %}
@@ -238,16 +152,17 @@
         <div class="__box-table--right">
           <div class="modal-content border--none" role="document">
             <h6>Clarification items cart</h6>
-            <div class="bt_add-new-user">
-              {{ form.submit(class='_btn--blue') }}
-            </div>
           </div>
-          <div class="__box-table--mtop ddb-margin-top">
+
+          <div class="__box-table--mtop ddb-margin-top box-scroll">
+            <div class="__clarification-item--head">
+              <div class="_cart_item--style">Clarification item cart</div>
+            </div>
             <table id="selectedClarificationTable" class="patientsTable table table-striped table-sm table__work-item">
-              <thead class="__table--head">
+              <!-- <thead class="__table--head">
                 <th>Clarification Item</th>
                 <th>Delete</th>
-              </thead>
+              </thead> -->
               <tbody>
                 {% for item in clarification_cart_form.selected_work_items %}
                 <tr>
@@ -265,7 +180,7 @@
 
           <div class="box-shadow __clarification-box--description">
             <form action="">
-              <h6>Unless expressly stated, the following exclusions apply:</h6>
+              <h6>Unless expressly stated, the following clarifications apply:</h6>
               <!-- <div> {{clarification_cart_form.result_text}} </div> -->
               Some test text
             </form>
@@ -322,27 +237,26 @@
 
 
 <!-- Modal Delete Clarification-->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modalDeleteClarification" tabindex="-2" role="dialog" aria-labelledby="ModalLabelDelete"
   aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content modal--padding">
-      <h5 class="--padding">Edit clarification</h5>
+      <h5 class="--padding">Are you sure want to delete clarification?</h5>
       <div class="modal-body padding--off">
-        <form class="form" role="form" action="" method="post">
+        <form class="form_delete" role="form" action="" method="post" id="delete_clarification_item">
           <div class="__modal-inputs--flex-row">
 
-            <div>
-              {{form.note(class='_form-input _form-input--m')}}
-              <label class="_label">Note</label>
-            </div>
-
-            <div>
-              {{form.description(class='_form-input _form-input--m')}}
-              <label class="_label">Description</label>
+            <div id="_clarification_input_delete">
+              <label class="_label input--label">Note</label>
+              <input class="_form-input _form-input--m" id="title" disabled>
             </div>
 
             <div class="padding--top">
-              {{form.save_submit(class='_btn--gray  ddb-cursor-handle')}}
+              <input class="_btn--black  ddb-cursor-handle" id="submit" name="submit" type="submit" value="Delete">
+            </div>
+
+            <div class="padding--top">
+              <button type="button" class="btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
             </div>
 
           </div>
