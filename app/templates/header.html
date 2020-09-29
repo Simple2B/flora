@@ -8,7 +8,7 @@
         <nav class="menu__items">
             <a class="menu__item" href="{{ url_for('main.biddings') }}">Bidding</a>
             <a class="menu__item" href="{{ url_for('main.team') }}">My team</a>
-            <a class="menu__item" href="#">Resources</a>
+            <a class="menu__item" href="{{ url_for('main.index') }}">Resources</a>
             <span class="nav-indicator"></span>
         </nav>
       </div>
@@ -35,22 +35,7 @@
           </div>
         </div>
       </div>
-      <!-- current_user.username | capitalize -->
-      <!-- <ul class="navbar-nav ml-auto">
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">{{current_user.username | capitalize}}</a>
-          <div class="dropdown-menu" aria-labelledby="userActions">
-            <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
-          </div>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-        </li>
-        </ul>
-      -->
       {% endif %}
     </div>
   </div>

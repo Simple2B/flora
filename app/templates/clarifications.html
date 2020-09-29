@@ -14,8 +14,8 @@
         </a>
         <nav class="menu__items">
           <a class="menu__item" href="{{ url_for('main.biddings') }}">Bidding</a>
-          <a class="menu__item" href="#">My team</a>
-          <a class="menu__item" href="#">Resources</a>
+          <a class="menu__item" href="{{ url_for('main.team') }}">My team</a>
+          <a class="menu__item" href="{{ url_for('main.index') }}">Resources</a>
           <span class="nav-indicator"></span>
         </nav>
       </div>
@@ -26,18 +26,20 @@
             <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt="Icon">
           </div>
           <div class="user-info__details">
-            <p>{{current_user.username}}</p>
+            <span class="flex-row">
+            <div>{{current_user.username}}</div>
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle flex-row" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"></a>
+                <div class="dropdown-menu" aria-labelledby="userActions">
+                  <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
+                </div>
+              </li>
+            </ul>
+            </span>
             <p class='t-gray'>{{current_user.position}}</p>
           </div>
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false"></a>
-              <div class="dropdown-menu" aria-labelledby="userActions">
-                <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
-              </div>
-            </li>
-          </ul>
         </div>
       </div>
       {% endif %}
@@ -56,10 +58,10 @@
     <div class="text--center list-group list-group-flush none-underline">
       <a href="{{ url_for('main.biddings') }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
-      My Bidding </button></a>
+      <img src="{{ url_for('static', filename='images/right-hand.svg') }}"> Back to Editing </button></a>
       <a href="{{ url_for('work_item.work_items') }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
-      Work Items </button> </a>
+      Scope of work </button> </a>
       <a href="{{ url_for('exclusion.exclusions') }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       Exclusions
@@ -72,7 +74,7 @@
   </div>
   <!-- </div> -->
   <!-- end Sidebar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom nav-side-bar" id="ddb-background">
+  <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size" id="ddb-background">
   </nav>
   <div class="container" id="work-item-container">
 
@@ -86,12 +88,7 @@
           <div class="form-row __add-clarification--box">
             <h6 class="__h6--width">Add clarification item</h6>
 
-            <!-- <div>
-        <label class="_label">Name</label>
-        <textarea class='_form-input _form-input--m' name="" id="" cols="30" rows="10"></textarea>
-        </div> -->
-
-            <button type="button" data-target="#AddModalClarification" data-toggle="modal" class="_btn--blue">
+            <button type="button" data-target="#AddModalClarification" data-toggle="modal" class="_btn--blue ddb-cursor-handle">
               Add clarification
             </button>
 
@@ -116,11 +113,11 @@
               </div>
 
               <div>
-                <table id="clarificationsTable" class="patientsTable table table-striped table-sm table__work-item">
+                <table id="clarificationsTable" class="ddb_base_Table table table-striped table-sm table__work-item">
                   <thead class="bck-color-table">
                     <th></th>
                     <th>Note</th>
-                    <th>Description</th>
+
                     <th></th>
                   </thead>
                   <tbody>
@@ -128,15 +125,15 @@
                     <tr>
                       <td><input class="form-control" type="checkbox" name="{{clarification.id}}"></td>
                       <td>{{clarification.note}}</td>
-                      <td>{{clarification.description}}</td>
+
                       <td><button type="button" value="{{clarification.id}}" style="border: none;"
-                        data-toggle="modal" data-target="#exampleModal" data-target_link="{{url_for('clarification.edit_clarification_item', item_id=clarification.id)}}"
+                        data-toggle="modal" data-target="#AddModalClarification" data-target_link="{{url_for('clarification.edit_clarification_item', item_id=clarification.id)}}"
                         data-note="{{clarification.note}}" data-description="{{clarification.description}}">
                         <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
                       </button>
 
                       <button type="button" value="{{clarification.id}}" class="__border-none" data-toggle="modal" data-target="#modalDeleteClarification"
-                      data-delete="{{clarification.note}}"
+                      data-delete="{{clarification.note}}" data-description="{{clarification.description}}"
                       data-target_link_clarification_delete="{{url_for('clarification.delete_clarification_item_from_items', item_id=clarification.id)}}">
                       <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
                       </button>
@@ -182,7 +179,6 @@
             <form action="">
               <h6>Unless expressly stated, the following clarifications apply:</h6>
               <!-- <div> {{clarification_cart_form.result_text}} </div> -->
-              Some test text
             </form>
           </div>
 
@@ -211,22 +207,30 @@
       <h5 class="--padding">Edit clarification</h5>
       <div class="modal-body padding--off">
         <form class="form" role="form" action="{{ url_for('clarification.clarification') }}" method="post">
-          <div class="__modal-inputs--flex-row">
+          <div class="">
+<!-- flex-row _add_new_clarification--modal -->
+            <div class="flex-row _zeroing-padding">
 
-            <div>
-              {{form.note(class='_form-input _form-input--m')}}
-              <label class="_label">Note</label>
+              <div class="_add_new_clarification--modal">
+                <div>
+                  <label class="_label _input--label">Description</label>
+                  <textarea class='_form-input _form-input--m _textarea--size _input--margin_l _description_height' name="description"
+                  id="add_clarification_description" cols="30" rows="10"></textarea>
+                </div>
+              </div>
+
+              <div class="flex-column">
+                <div>
+                  <label class="_label _input--label_note">Note</label>
+                  {{form.note(class='_form-input _form-input--m _input--margin_l')}}
+                </div>
+
+                <div class="_submit--margins">
+                  {{form.submit(class='_btn--black  ddb-cursor-handle')}}
+                </div>
+              </div>
+
             </div>
-
-            <div>
-              {{form.description(class='_form-input _form-input--m')}}
-              <label class="_label">Description</label>
-            </div>
-
-            <div class="padding--top">
-              {{form.submit(class='_btn--black  ddb-cursor-handle')}}
-            </div>
-
           </div>
         </form>
       </div>

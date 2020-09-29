@@ -58,6 +58,21 @@ def delete_work_item_from_cart(item_id):
     return redirect(url_for("work_item.work_items"))
 
 
+@work_item_blueprint.route(
+    "/delete_work_item_from_items/<item_id>", methods=["POST"]
+)
+@login_required
+def delete_work_item_from_items(item_id):
+    work_item = WorkItem.query.get(item_id)
+    if work_item:
+        selected = session.get("SelectedWorkItemsDict", {})
+        if str(work_item.id) in selected:
+            del selected[str(work_item.id)]
+            session['SelectedWorkItemsDict'] = selected
+        work_item.delete()
+    return redirect(url_for("work_item.work_items"))
+
+
 @work_item_blueprint.route("/edit_work_item/<item_id>", methods=["POST"])
 @login_required
 def edit_work_item(item_id):

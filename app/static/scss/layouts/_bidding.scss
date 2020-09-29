@@ -10,12 +10,9 @@
 //     background-color: #F2F2F2;
 // }
 
-.bidding__side_bar--size {
-    max-height: 64vh;
-}
-
-.nav-side-bar {
-    max-height: 64vh;
+.bidding__side_bar {
+    height: 64vh;
+    background-color: #f8f9fa;
 }
 
 .bidding-sb--box {
@@ -52,4 +49,20 @@
 
 .active {
     color: #2F80ED !important;
+}
+
+.bck-ground {
+    background-color: black;
+    color: #fff;
+}
+
+._bidding--scroll {
+    div {
+        margin-top: 1rem;
+    }
+
+    ._last_url_item {
+        margin-bottom: 1rem;;
+    }
+
 }

@@ -13,9 +13,9 @@
           <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="DDB Contracting" class="logo__img">
         </a>
         <nav class="menu__items">
-          <a class="menu__item" href="{{ url_for('main.index') }}">Bidding</a>
-          <a class="menu__item" href="#">My team</a>
-          <a class="menu__item" href="#">Resources</a>
+          <a class="menu__item" href="{{ url_for('main.biddings') }}">Bidding</a>
+          <a class="menu__item" href="{{ url_for('main.team') }}">My team</a>
+          <a class="menu__item" href="{{ url_for('main.index') }}">Resources</a>
           <span class="nav-indicator"></span>
         </nav>
       </div>
@@ -26,18 +26,20 @@
             <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt="Icon">
           </div>
           <div class="user-info__details">
-            <p>{{current_user.username}}</p>
+            <span class="flex-row">
+            <div>{{current_user.username}}</div>
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle flex-row" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"></a>
+                <div class="dropdown-menu" aria-labelledby="userActions">
+                  <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
+                </div>
+              </li>
+            </ul>
+            </span>
             <p class='t-gray'>{{current_user.position}}</p>
           </div>
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false"></a>
-              <div class="dropdown-menu" aria-labelledby="userActions">
-                <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
-              </div>
-            </li>
-          </ul>
         </div>
       </div>
       {% endif %}
@@ -48,108 +50,6 @@
 
 {% block content %}
 
-<style>
-  .zeroing_bootsrtap {
-    border-color: #fff;
-  }
-
-  .cursor-pointer {
-    cursor: pointer;
-  }
-
-  .margin--top {
-    margin-top: 2rem;
-  }
-
-  .font-work-items {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #333333;
-    background-color: #fff;
-  }
-
-  .font-work-items:hover {
-    color: #175593;
-    ;
-  }
-
-  .box-shadow {
-    box-shadow: 0 .2rem .2rem rgba(0, 0, 0, 0.25);
-  }
-
-  .a-space-between a {
-    padding: 1rem;
-  }
-
-  /*  */
-  /* TEST */
-  /* Tabs */
-
-
-  .tab {
-    overflow: hidden;
-  }
-
-  .tabm {
-    overflow: hidden;
-  }
-
-  .tabm .__tabm-button.active {
-    background-color: #333333 !important;
-    color: #fff;
-  }
-
-  .__btn {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-  }
-
-  .__btn:hover {
-    color: #333333;
-  }
-
-  .tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-  }
-
-
-  .tab button.active {
-    border-bottom: 5px solid #175593;
-  }
-
-  .tabcontent {
-    display: none;
-  }
-
-  .tabcontentm {
-    display: none;
-  }
-
-  .list-group-item.active {
-    border-color: #333333;
-    color: #333333;
-  }
-
-  .bck-ground {
-    background-color: black;
-    color: #fff;
-  }
-
-  .text--center {
-    text-align: center;
-  }
-</style>
 
 <section class="page-section section-block bidding d-flex tabm" id="wrapper">
   <!-- begin Sidebar -->
@@ -158,25 +58,24 @@
     <div class="sidebar-heading">DDB Contracting</div>
     <div class="text--center list-group list-group-flush none-underline">
       <a href="{{ url_for('main.biddings') }}">
-        <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
-          My Bidding </button></a>
-      <select class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks --border">
-        Scope of work
-        <option value=""><a href="{{ url_for('work_item.work_items') }}">Select Work Item</a></option>
-      </select>
+        <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
+        <img src="{{ url_for('static', filename='images/right-hand.svg') }}"> Back to Editing </button></a>
+      <a href="{{ url_for('work_item.work_items') }}">
+        <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks --border">
+        Scope of work</button></a>
       <a href="{{ url_for('exclusion.exclusions') }}">
-        <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+        <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
           Exclusions
         </button> </a>
       <a href="{{ url_for('clarification.clarifications') }}">
-        <button class="cursor-pointer list-group-item list-group-item-action bg-light normalized tablinks">
+        <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
           Clarifications
         </button> </a>
     </div>
   </div>
   <!-- </div> -->
   <!-- end Sidebar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom nav-side-bar" id="ddb-background">
+  <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size" id="ddb-background">
 
     <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
     <!-- Login/Logout -->
@@ -200,16 +99,16 @@
   <!-- <div class="ddb-container"> -->
   <div class="container" id="work-item-container">
 
-    <div class="a-space-between">
+    <div>
       <div class="title-tabs">Work items</div>
     </div>
-    <!-- <div class=""> -->
+
       <div class="container __box-table-work_item flex-flow-wrap">
         <div class="__box-table--left">
 
 
             <div class="modal-content border--none">
-              <form role="form" action="{{ url_for('work_item.work_item') }}" method="post"></form>
+              <form role="form" action="{{ url_for('work_item.work_item') }}" method="post">
               <div class="form-row __add-work-item--box">
                 <h6 class="__h6--width">Add work item</h6>
                 <div>
@@ -221,10 +120,6 @@
                   <label class="_label">Name</label>
                 </div>
 
-                <!-- <div>
-            <label class="_label">Name</label>
-            <textarea class='_form-input _form-input--m' name="" id="" cols="30" rows="10"></textarea>
-            </div> -->
                 <div class="bt_add-new-user">
                   {{form.submit(class='_btn--blue')}}
                 </div>
@@ -244,9 +139,7 @@
                   <option value="Most popular" name="Most popular">Most popular</option>
                   <option value="Most recent" name="Most recent">Most recent</option>
                 </select>
-                <!-- <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
-              Add new
-            </button> -->
+
               </span>
 
               <div>
@@ -268,6 +161,13 @@
                           data-code="{{work_item.code}}" data-name="{{work_item.name}}">
                           <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
                         </button>
+
+                        <button type="button" value="{{work_item.id}}" style="border: none;" data-toggle="modal" data-target="#modalDeleteWorkItem"
+                        data-delete_work_item="{{work_item.code}}" data-work_item_name="{{work_item.name}}"
+                        data-target_link_work_item_delete="{{url_for('work_item.delete_work_item_from_items', item_id=work_item.id)}}">
+                        <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                        </button>
+
                       </td>
                     </tr>
                     {% endfor %}
@@ -304,17 +204,18 @@
           </div>
           </form>
 
-          <button class="_btn--gray" style="float: right; margin-top: 3rem;">
-            Cancel
-          </button>
-          <button class="_btn--black" style="float: right; margin-top: 3rem;">
-            Add to bidding
-          </button>
+          <div class="__margin-auto">
+            <button class="_btn--black _btn--add_to_bidding ddb-cursor-handle">
+              Add to bidding
+            </button>
+            <a href="{{ url_for('main.biddings') }}" class="_cancel_font-style"><button class="_btn--gray">
+              Cancel</a>
+          </div>
 
         </div>
 
       </div>
-    <!-- </div> -->
+
   </div>
   </div>
   </div>
@@ -352,7 +253,42 @@
 </div>
 <!-- end of Modal -->
 
-<!-- <button type="button" value="" class="btn btn-primary btn-danger ml-auto mr-3" -->
+<!-- Modal Delete WorkItem-->
+<div class="modal fade" id="modalDeleteWorkItem" tabindex="-2" role="dialog" aria-labelledby="ModalLabelDelete"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content modal--padding">
+      <h5 class="--padding">Are you sure want to delete work item?</h5>
+      <div class="modal-body padding--off">
+        <form class="form_delete" role="form" action="" method="post" id="delete_work_item">
+          <div class="__modal-inputs--flex-row">
+
+            <div id="_work_item_input_delete">
+              <label class="_label input--label _label_code_place">Code</label>
+              <input class="_form-input _form-input--m" id="title" disabled>
+            </div>
+
+            <div id="_work_item_input_name_delete">
+              <label class="_label input--label">Name</label>
+              <input class="_form-input _form-input--m" id="title" disabled>
+            </div>
+
+            <div class="padding--top">
+              <input class="_btn--black btn btn-secondary ddb-cursor-handle" name="submit" type="submit" value="Delete">
+            </div>
+
+            <div class="padding--top">
+              <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of Modal Delete WorkItem-->
+
 {% endblock %}
 
 {% block scripts %}

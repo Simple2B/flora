@@ -8,7 +8,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#exampleModal').on('show.bs.modal', function (event) {
+    $('#AddModalClarification').on('show.bs.modal', function (event) {
       const button = $(event.relatedTarget); // Button that triggered the modal
       const target_link = button.data('target_link');
       const note = button.data('note');
@@ -16,7 +16,7 @@ $(document).ready(function() {
       const modal = $(this);
       modal.find('.modal-body form').attr('action', target_link);
       modal.find('.modal-body #note').val(note);
-      modal.find('.modal-body #description').val(description);
+      modal.find('.modal-body #add_clarification_description').val(description);
     });
 
     $('#modalDeleteClarification').on('show.bs.modal', function (event) {

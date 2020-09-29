@@ -67,30 +67,30 @@ $("#ddb-background").click(function (e) {
 
 // for side-bar transition
 
-$(document).ready(function(){
+// $(document).ready(function(){
 
-  $("#menu").on("click","a", function (event) {
+//   $("#menu").on("click","a", function (event) {
 
-    //отменяем стандартную обработку нажатия по ссылке
+//     //отменяем стандартную обработку нажатия по ссылке
 
-    event.preventDefault();
-
-
-    //забираем идентификатор бока с атрибута href
-
-    var id  = $(this).attr('href'),
+//     event.preventDefault();
 
 
-    //узнаем высоту от начала страницы до блока на который ссылается якорь
+//     //забираем идентификатор бока с атрибута href
 
-        top = $(id).offset().top;
+//     var id  = $(this).attr('href'),
 
 
-    //анимируем переход на расстояние - top за 100 мс
+//     //узнаем высоту от начала страницы до блока на который ссылается якорь
 
-    $('body,html').animate({scrollTop: top}, 100);
+//         top = $(id).offset().top;
 
-  });
 
-});
+//     //анимируем переход на расстояние - top за 100 мс
+
+//     $('body,html').animate({scrollTop: top}, 100);
+
+//   });
+
+// });
 
