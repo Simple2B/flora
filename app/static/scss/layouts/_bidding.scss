@@ -11,11 +11,7 @@
 // }
 
 .bidding__side_bar--size {
-    max-height: 64vh;
-}
-
-.nav-side-bar {
-    max-height: 64vh;
+    height: 64vh;
 }
 
 .bidding-sb--box {
@@ -52,4 +48,9 @@
 
 .active {
     color: #2F80ED !important;
+}
+
+.bck-ground {
+    background-color: black;
+    color: #fff;
 }

@@ -121,6 +121,9 @@ ul, li {
     font-size: 0.90rem;
     background-color: #828282; }
 
+._side-bar-size {
+  padding: 0.5rem 2.8rem; }
+
 .t-gray {
   color: #828282; }
 
@@ -377,10 +380,7 @@ ul, li {
   padding-left: 1rem; }
 
 .bidding__side_bar--size {
-  max-height: 64vh; }
-
-.nav-side-bar {
-  max-height: 64vh; }
+  height: 64vh; }
 
 .bidding-sb--box {
   text-align: center; }
@@ -405,6 +405,13 @@ ul, li {
 
 .active {
   color: #2F80ED !important; }
+
+.bck-ground {
+  background-color: black;
+  color: #fff; }
+
+.ddb_nav-side-bar {
+  height: 64vh; }
 
 .__side-bar-box {
   height: 65vh; }
