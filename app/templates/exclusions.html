@@ -49,10 +49,6 @@
 {% block content %}
 
 <style>
-  .zeroing_bootsrtap {
-    border-color: #fff;
-  }
-
   .cursor-pointer {
     cursor: pointer;
   }
@@ -119,17 +115,8 @@
     transition: 0.3s;
   }
 
-
   .tab button.active {
     border-bottom: 5px solid #175593;
-  }
-
-  .tabcontent {
-    display: none;
-  }
-
-  .tabcontentm {
-    display: none;
   }
 
   .list-group-item.active {
@@ -212,14 +199,19 @@
               </div>
 
               <div class="__add_new_excl--margin">
-                {{form.submit(class='_btn--blue')}}
+                {{form.submit(class='_btn--blue ddb-cursor-handle')}}
               </div>
+
+              <div class="__add_to_cart--margin">
+                {{ exclusion_cart_form.submit(class='_btn--gray ddb-cursor-handle', form='exclusions') }}
+              </div>
+
             </div>
           </div>
         </form>
 
-        <form class="form" role="form" action="{{ url_for('exclusion.add_exclusion_to_cart') }}" method="post">
-          <div id="exclusionTable" class="box-shadow __box-table--mtop">
+        <form class="form" id="exclusions" role="form" action="{{ url_for('exclusion.add_exclusion_to_cart') }}" method="post">
+          <div id="exclusionTable" class="box-shadow __box-table--mtop ddb-margin-top">
             <span>
               <select>
                 <option value="Most popular" name="Most popular">Most popular</option>
@@ -229,6 +221,10 @@
             Add new
           </button> -->
             </span>
+
+            <div class="__exclusion-item--head">
+              <div class="_item-padding">Exclusion item</div>
+            </div>
 
             <div>
               <table id="exclusionsTable" class="table table-striped table-sm centralized-text table__work-item">
@@ -262,20 +258,19 @@
       </div>
 
       <div class="__box-table--right">
-        <div class="modal-content title-tab border--none" role="document">
+        <div class="modal-content border--none" role="document">
           <h6>Exclusion item cart</h6>
-          <div class="bt_add-new-user">
-            {{ exclusion_cart_form.submit(class='_btn--blue') }}
-          </div>
         </div>
+
+        <div class="__exclusion-item--head">
+          <div class="_item-padding">Exclusion item</div>
+        </div>
+
         <div class="__box-table--mtop">
           <table id="selectedExclusionTable" class="patientsTable table table-striped table-sm centralized-text table__work-item">
-            <thead class="__table--head">
-              <th>Exclusion item</th>
-              <th></th>
-            </thead>
+            <thead></thead>
             <tbody>
-              {% for item in exclusion_cart_form.selected_work_items %}
+              {% for item in exclusion_cart_form.selected_exclusions %}
               <tr>
                 <td><a href="" class="t-gray">{{item.title}}</a></td>
                 <td>
@@ -328,7 +323,7 @@
             </div>
 
             <div class="padding--top">
-              {{form.save_submit(class='_btn--gray  ddb-cursor')}}
+              {{form.save_submit(class='_btn--gray  ddb-cursor-handle')}}
             </div>
 
           </div>
@@ -349,13 +344,13 @@
         <form class="form_delete" role="form" action="" method="post" id="delete_item">
           <div class="__modal-inputs--flex-row">
 
-            <div>
+            <div id="_exclusion_input_delete">
               <label class="_label input--label">Title</label>
-              <input class="_form-input _form-input--m _input--input" id="title" disabled>
+              <input class="_form-input _form-input--m" id="title" disabled>
             </div>
 
             <div class="padding--top">
-              <input class="_btn--black  ddb-cursor" id="submit" name="submit" type="submit" value="Delete">
+              <input class="_btn--black  ddb-cursor-handle" id="submit" name="submit" type="submit" value="Delete">
             </div>
 
             <div class="padding--top">

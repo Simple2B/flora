@@ -27,7 +27,7 @@ $(document).ready(function() {
         const target_link = button.data('target_link_delete');
         const title = button.data('delete');
         const modal = $(this);
-        modal.find('.modal-body #title').val(title);
+        modal.find('#_exclusion_input_delete #title').val(title);
         modal.find('#delete_item').attr('action', target_link);
     });
 

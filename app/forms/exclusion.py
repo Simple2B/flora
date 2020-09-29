@@ -10,4 +10,4 @@ class ExclusionForm(FlaskForm):
 
 
 class ExclusionCartForm(FlaskForm):
-    submit = SubmitField('Add to bidding')
+    submit = SubmitField('Add to cart')
