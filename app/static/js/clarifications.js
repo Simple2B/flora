@@ -8,7 +8,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#exampleModal').on('show.bs.modal', function (event) {
+    $('#AddModalClarification').on('show.bs.modal', function (event) {
       const button = $(event.relatedTarget); // Button that triggered the modal
       const target_link = button.data('target_link');
       const note = button.data('note');
