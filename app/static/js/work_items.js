@@ -20,4 +20,16 @@ $(document).ready(function() {
       modal.find('.modal-body #code').val(code);
       modal.find('.modal-body #name').val(name);
     });
+
+    $('#modalDeleteWorkItem').on('show.bs.modal', function (event) {
+        const button = $(event.relatedTarget); // Button that triggered the modal
+        const target_link = button.data('target_link_work_item_delete');
+        const code = button.data('delete_work_item');
+        const name = button.data('work_item_name');
+        const modal = $(this);
+        modal.find('#delete_work_item').attr('action', target_link);
+        modal.find('#_work_item_input_delete #title').val(code);
+        modal.find('#_work_item_input_name_delete #title').val(name);
+    });
+
 } );

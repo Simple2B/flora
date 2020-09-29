@@ -533,6 +533,9 @@ ul, li {
 .--padding {
   padding: 1rem 1rem 0rem 1rem; }
 
+._label_code_place {
+  left: 0.5rem; }
+
 .bck-color-table {
   background-color: #828282; }
 

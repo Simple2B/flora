@@ -161,6 +161,13 @@
                           data-code="{{work_item.code}}" data-name="{{work_item.name}}">
                           <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
                         </button>
+
+                        <button type="button" value="{{work_item.id}}" style="border: none;" data-toggle="modal" data-target="#modalDeleteWorkItem"
+                        data-delete_work_item="{{work_item.code}}" data-work_item_name="{{work_item.name}}"
+                        data-target_link_work_item_delete="{{url_for('work_item.delete_work_item_from_items', item_id=work_item.id)}}">
+                        <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                        </button>
+
                       </td>
                     </tr>
                     {% endfor %}
@@ -246,6 +253,41 @@
 </div>
 <!-- end of Modal -->
 
+<!-- Modal Delete WorkItem-->
+<div class="modal fade" id="modalDeleteWorkItem" tabindex="-2" role="dialog" aria-labelledby="ModalLabelDelete"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content modal--padding">
+      <h5 class="--padding">Are you sure want to delete work item?</h5>
+      <div class="modal-body padding--off">
+        <form class="form_delete" role="form" action="" method="post" id="delete_work_item">
+          <div class="__modal-inputs--flex-row">
+
+            <div id="_work_item_input_delete">
+              <label class="_label input--label _label_code_place">Code</label>
+              <input class="_form-input _form-input--m" id="title" disabled>
+            </div>
+
+            <div id="_work_item_input_name_delete">
+              <label class="_label input--label">Name</label>
+              <input class="_form-input _form-input--m" id="title" disabled>
+            </div>
+
+            <div class="padding--top">
+              <input class="_btn--black btn btn-secondary ddb-cursor-handle" name="submit" type="submit" value="Delete">
+            </div>
+
+            <div class="padding--top">
+              <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of Modal Delete WorkItem-->
 
 {% endblock %}
 

@@ -100,7 +100,6 @@ def edit_exclusion_item(item_id):
 @exclusion_blueprint.route("/exclusions", methods=["GET"])
 @login_required
 def exclusions():
-    # bid_id = bid_id
     form = ExclusionForm(request.form)
     form.exclusions = Exclusion.query.all()
     exclusion_cart_form = ExclusionCartForm()
