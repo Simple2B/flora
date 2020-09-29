@@ -142,6 +142,10 @@ ul, li {
   margin-top: 3rem;
   margin-left: auto; }
 
+._description_height {
+  min-height: 9rem;
+  min-width: 18rem; }
+
 .t-gray {
   color: #828282; }
 
@@ -456,8 +460,8 @@ ul, li {
 .__box-table-work_item {
   width: 100%;
   margin-top: 1rem;
-  min-height: 70vh;
-  max-height: 70vh;
+  min-height: 80vh;
+  max-height: 85vh;
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
   overflow: visible; }
   .__box-table-work_item .table__work-item {
@@ -656,13 +660,9 @@ ul, li {
 .text--center {
   text-align: center; }
 
-._add_new_clarification--modal ._submit--margins {
-  padding-top: 1.8rem;
-  margin-top: auto; }
-
 ._add_new_clarification--modal ._input--label {
-  top: 0.9rem;
-  left: 1.7rem; }
+  left: 6rem;
+  top: -0.2rem; }
 
 ._add_new_clarification--modal ._zeroing-padding {
   padding: 0rem !important; }
@@ -673,3 +673,11 @@ ul, li {
 .ddb_base_Table #td_description_flex {
   display: flex;
   flex-flow: column wrap; }
+
+._input--label_note {
+  left: 1.8rem;
+  top: .8rem; }
+
+._submit--margins {
+  margin-left: 1.3rem;
+  margin-top: 1.5rem; }

@@ -117,7 +117,6 @@
                   <thead class="bck-color-table">
                     <th></th>
                     <th>Note</th>
-                    <th>Description</th>
                     <th></th>
                   </thead>
                   <tbody>
@@ -125,7 +124,7 @@
                     <tr>
                       <td><input class="form-control" type="checkbox" name="{{clarification.id}}"></td>
                       <td>{{clarification.note}}</td>
-                      <td id="td_description_flex">{{clarification.description}}</td>
+
                       <td><button type="button" value="{{clarification.id}}" style="border: none;"
                         data-toggle="modal" data-target="#AddModalClarification" data-target_link="{{url_for('clarification.edit_clarification_item', item_id=clarification.id)}}"
                         data-note="{{clarification.note}}" data-description="{{clarification.description}}">
@@ -207,25 +206,30 @@
       <h5 class="--padding">Edit clarification</h5>
       <div class="modal-body padding--off">
         <form class="form" role="form" action="{{ url_for('clarification.clarification') }}" method="post">
-          <div class="flex-row _add_new_clarification--modal">
+          <div class="">
+<!-- flex-row _add_new_clarification--modal -->
+            <div class="flex-row _zeroing-padding">
 
-            <div class="flex-column _zeroing-padding">
-              <div>
-                <label class="_label _input--label">Note</label>
-                {{form.note(class='_form-input _form-input--m _input--margin_l')}}
+              <div class="_add_new_clarification--modal">
+                <div>
+                  <label class="_label _input--label">Description</label>
+                  <textarea class='_form-input _form-input--m _textarea--size _input--margin_l _description_height' name="description"
+                  id="add_clarification_description" cols="30" rows="10"></textarea>
+                </div>
               </div>
 
-              <div>
-                <label class="_label _input--label">Description</label>
-                <textarea class='_form-input _form-input--m _textarea--size _input--margin_l' name="description"
-                 id="add_clarification_description" cols="30" rows="10"></textarea>
+              <div class="flex-column">
+                <div>
+                  <label class="_label _input--label_note">Note</label>
+                  {{form.note(class='_form-input _form-input--m _input--margin_l')}}
+                </div>
+
+                <div class="_submit--margins">
+                  {{form.submit(class='_btn--black  ddb-cursor-handle')}}
+                </div>
               </div>
-            </div>
 
-            <div class="_submit--margins">
-              {{form.save_submit(class='_btn--black  ddb-cursor-handle')}}
             </div>
-
           </div>
         </form>
       </div>
@@ -272,9 +276,3 @@
 <script src="/static/js/jquery.dataTables.min.js"></script>
 <script src="/static/js/clarifications.js"></script>
 {% endblock %}
-
-
-            <!-- <div>
-              {{form.description(class='_form-input _form-input--m')}}
-              <label class="_label">Description</label>
-            </div> -->

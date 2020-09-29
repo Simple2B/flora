@@ -91,14 +91,10 @@
 
 ._add_new_clarification--modal {
 
-    ._submit--margins {
-        padding-top: 1.8rem;
-        margin-top: auto;
-    }
 
     ._input--label{
-        top: 0.9rem;
-        left: 1.7rem;
+        left: 6rem;
+        top: -0.2rem;
     }
 
     ._zeroing-padding {
@@ -115,4 +111,15 @@
         display: flex;
         flex-flow: column wrap;
     }
+}
+
+
+._input--label_note {
+    left: 1.8rem;
+    top: .8rem;
+}
+
+._submit--margins {
+    margin-left: 1.3rem;
+    margin-top: 1.5rem;
 }
