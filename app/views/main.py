@@ -12,15 +12,6 @@ main_blueprint = Blueprint("main", __name__)
 @main_blueprint.route("/")
 @login_required
 def index():
-    api = ProcoreApi()
-    if request.method == "GET":
-        if session.get('bool'):
-            code = request.args.get('code')
-            access_token, refresh_token, created_at = api.get_token(code)
-            session['access_token'] = access_token
-            session['refresh_token'] = refresh_token
-            session['created_at'] = api.update_date(created_at)
-            session['expires_at'] = api.update_expire(created_at)
     return render_template("index.html")
 
 
