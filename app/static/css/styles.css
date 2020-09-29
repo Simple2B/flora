@@ -127,6 +127,12 @@ ul, li {
 ._side-bar-size {
   padding: 0.5rem 2.8rem; }
 
+._cancel_font-style {
+  color: white;
+  text-decoration: none !important; }
+  ._cancel_font-style:hover {
+    color: white; }
+
 .t-gray {
   color: #828282; }
 
