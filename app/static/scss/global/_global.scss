@@ -166,6 +166,11 @@ ul, li {
     padding:0.5rem 2.8rem;
 }
 
+.ddb__side_bar {
+    height: 64vh;
+    background-color: #f8f9fa;
+}
+
 ._cancel_font-style {
     color: white;
     text-decoration: none !important;
@@ -173,4 +178,10 @@ ul, li {
     &:hover {
         color: white;
     }
+}
+
+.__margin-auto {
+    width: 16vw;
+    margin-top: 3rem;
+    margin-left: auto;
 }

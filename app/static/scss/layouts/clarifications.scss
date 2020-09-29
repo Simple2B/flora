@@ -109,3 +109,10 @@
         margin-left: 1rem !important;
     }
 }
+
+.ddb_base_Table {
+    #td_description_flex {
+        display: flex;
+        flex-flow: column wrap;
+    }
+}

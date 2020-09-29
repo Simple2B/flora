@@ -26,7 +26,7 @@
 ._btn--black {
     @include _btn;
     background-color: #000;
-    
+
     &:hover {
         background-color: lighten(#000, 20%);
     }
@@ -57,4 +57,12 @@
     &:hover {
         background-color:darken(#979797, 10%);
     }
+}
+
+._btn--cancel-float {
+    margin-top: 3rem;
+}
+
+._btn--add_to_bidding {
+    margin-top: 3rem;
 }

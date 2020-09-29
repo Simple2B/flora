@@ -127,11 +127,20 @@ ul, li {
 ._side-bar-size {
   padding: 0.5rem 2.8rem; }
 
+.ddb__side_bar {
+  height: 64vh;
+  background-color: #f8f9fa; }
+
 ._cancel_font-style {
   color: white;
   text-decoration: none !important; }
   ._cancel_font-style:hover {
     color: white; }
+
+.__margin-auto {
+  width: 16vw;
+  margin-top: 3rem;
+  margin-left: auto; }
 
 .t-gray {
   color: #828282; }
@@ -207,6 +216,12 @@ ul, li {
     outline: none; }
   ._btn--gray:hover {
     background-color: #7e7e7e; }
+
+._btn--cancel-float {
+  margin-top: 3rem; }
+
+._btn--add_to_bidding {
+  margin-top: 3rem; }
 
 ._form-input {
   border: 1px solid transparent;
@@ -388,8 +403,9 @@ ul, li {
 .navbar-nav .nav-link {
   padding-left: 1rem; }
 
-.bidding__side_bar--size {
-  height: 64vh; }
+.bidding__side_bar {
+  height: 64vh;
+  background-color: #f8f9fa; }
 
 .bidding-sb--box {
   text-align: center; }
@@ -653,3 +669,7 @@ ul, li {
 
 ._add_new_clarification--modal ._input--margin_l {
   margin-left: 1rem !important; }
+
+.ddb_base_Table #td_description_flex {
+  display: flex;
+  flex-flow: column wrap; }

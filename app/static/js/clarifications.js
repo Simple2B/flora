@@ -16,7 +16,7 @@ $(document).ready(function() {
       const modal = $(this);
       modal.find('.modal-body form').attr('action', target_link);
       modal.find('.modal-body #note').val(note);
-      modal.find('.modal-body #description').val(description);
+      modal.find('.modal-body #add_clarification_description').val(description);
     });
 
     $('#modalDeleteClarification').on('show.bs.modal', function (event) {
