@@ -11,8 +11,8 @@ body {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
 input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px white inset;
 }
@@ -26,6 +26,130 @@ ul, li {
     margin: 0;
 }
 
+.list-group-item.active {
+    border-color: #333333;
+    color: #333333;
+}
+
+// TEST maybe can be useful
+// .tabcontentm {
+//     display: none;
+//   }
+
 .page-section {
     margin-top: 1rem;
 }
+
+.ddb-margin-top {
+    margin-top: 1rem;
+}
+
+.box-shadow {
+    box-shadow: 0 .2rem .2rem rgba(0, 0, 0, 0.25);
+}
+
+.box-scroll {
+    max-height: 35vh;
+    overflow: auto;
+}
+
+.title-tab {
+    padding: 1rem;
+}
+
+.title-tabs {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: black;
+}
+
+.section-block {
+    height: 89.5vh;
+}
+
+.flex-row-box--sb {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.flex-flow-wrap {
+    flex-flow: row wrap;
+    display: flex;
+}
+
+.flex-row-box--se {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.flex-row-box-sb {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.modal--padding {
+    padding: 0.5rem;
+}
+
+.centralized-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.centralized-text {
+    text-align: center;
+}
+
+.ddb-cursor-handle {
+    cursor: pointer;
+}
+
+.--border {
+    background-color: #dae0e5 !important;
+    color: black !important;
+}
+
+.none-underline a {
+    text-decoration: none !important;
+}
+
+.__side-bar-box {
+    height: 65vh;
+}
+
+.__box-add-bid-cancel--margins {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: 1rem;
+
+    & a {
+        text-decoration: none;
+        color: #FFFFFF
+    }
+}
+
+.text--center {
+    text-align: center;
+}
+
+.__table-item--thead {
+    text-align: left;
+    height: 2.5rem;
+    ._cart_item--style {
+        padding: 0.55rem 0rem 0.55rem 2.35rem;
+        color: #ffffff;
+        font-size: 0.90rem;
+        background-color: #828282;
+    }
+}
+

@@ -1,0 +1,113 @@
+@import '../global/variables';
+
+.bck-color-table{
+    background-color: #828282;
+}
+
+.label--exclusions {
+    left: 1rem;
+    top: -14.8rem;
+}
+
+.title__exclusions {
+    padding: 0.3rem;
+    width: 8.4vw;
+    border-bottom: $border-bottom;
+}
+
+.__box-table-exclusion {
+    width: 100%;
+    margin-top: 1rem;
+    min-height: 75vh;
+    max-height: 90vh;
+    box-shadow: $shadow;
+    overflow: visible;
+
+    .__box-table--left {
+        // display: block;
+        width: 53%;
+
+    .__add-exclusion--box {
+        .__add_new_excl--margin {
+            margin-top: 1rem;
+            margin-left: 1rem;
+        }
+
+        .__add_to_cart--margin {
+            margin-top: 1rem;
+            margin-left: 0.5rem;
+        }
+
+    }
+
+        .__add_to_cart--place {
+            float: right;
+            margin-left: 4.2rem;
+            padding-left: 2rem;
+        }
+
+        ._add_to_cart--float-r {
+            float: right;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .__exclusion-item--head {
+            text-align: center;
+            height: 2.5rem;
+            ._item-padding {
+                padding: 0.55rem 15rem 0.55rem 0.35rem;
+                font-size: 0.90rem;
+                background-color: #828282;
+            }
+        }
+
+    }
+
+    .__border-none {
+        border: none;
+    }
+
+    .__box-table--right {
+        padding-left: 1rem;
+        width: 47%;
+        position: relative;
+
+        .__table-item--thead {
+            height: 1.5rem;
+            ._cart_item--style {
+                padding: 0.2rem 0rem 0.2rem 2.35rem;
+            }
+        }
+
+        .__exclusion-box--description {
+            position: absolute;
+            margin-top: 0.5rem;
+            height: 40%;
+            width: 29vw;
+
+            & h6 {
+                font-weight: $fw-700;
+                padding: 1rem;
+            }
+            & div {
+                padding: 0rem 1.2rem 0.1rem 1.2rem;
+            }
+        }
+
+    }
+
+    & h6 {
+        font-weight: $fw-700;
+    }
+
+    .__h6--width {
+        font-weight: $fw-700;
+        width: 150%;
+    }
+}
+
+.input--label {
+    top: 0.9rem;
+    left: 1.9rem;
+}

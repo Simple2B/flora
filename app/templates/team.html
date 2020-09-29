@@ -10,9 +10,9 @@
           <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="DDB Contracting" class="logo__img">
         </a>
         <nav class="menu__items">
-            <a class="menu__item" href="{{ url_for('main.index') }}">Bidding</a>
+            <a class="menu__item" href="{{ url_for('main.bidding') }}">Bidding</a>
             <a class="menu__item" href="#" >My team</a>
-            <a class="menu__item" href="#">Resources</a>
+            <a class="menu__item" href="{{ url_for('main.resources') }}">Resources</a>
             <span class="nav-indicator"></span>
         </nav>
       </div>
@@ -26,6 +26,15 @@
             <p>{{current_user.username}}</p>
             <p class='t-gray'>{{current_user.position}}</p>
           </div>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false"></a>
+              <div class="dropdown-menu" aria-labelledby="userActions">
+                <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
       {% endif %}

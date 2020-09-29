@@ -23,7 +23,7 @@ const style = () => {
       cascade: false
     }))                           // enable auto-prefixing
     .pipe(gulp.dest(dest))        // save compiled css to dest folder
-    // .pipe(cleanCSS())          // minify css (optional) 
+    // .pipe(cleanCSS())          // minify css (optional)
     // .pipe(gulp.dest(dest))
     .pipe(browserSync.stream());  // update browser
 }
@@ -32,12 +32,12 @@ const watch = () => {
   browserSync.init({
     notify: false,                // turn off sync notification
     proxy: "localhost:5000",      // provide address to watch
-    browser: "google chrome"      // select multiple browsers ["browser_name", "browser_name"]
+    browser: "chrome"      // select multiple browsers ["browser_name", "browser_name"]
   });
 
   gulp.watch('./app/static/**/*.scss', style);                                // reload browser on CSS update
   gulp.watch('./app/templates/**/*.html').on('change', browserSync.reload);   // reload browser on HTML update
-  gulp.watch('./static/js/**/*.js').on('change', browserSync.reload);         // reload browser on JS update        
+  gulp.watch('./static/js/**/*.js').on('change', browserSync.reload);         // reload browser on JS update
 }
 
 exports.style = style;

@@ -2,14 +2,41 @@
 
 "use strict";
 
-    // $( "#select_ul_id li a" ).on('click', function(e) {
-    //     // e.preventDefault();
-    //     // $('.contentMenu').each((i, item) => $(item).removeClass('ddb-underline'));
-    //     $("#select_ul_id li a").removeClass('ddb-underline');
-    //     $(this).addClass('ddb-underline');
-    //     // $(this).addClass('ddb-underline');
-    // });
-    // // });
+function changeTab(evt, cityName) {
+  var i, tabcontent, tablinks;
+
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+  }
+
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+function changeMainTab(evt, cityName) {
+  var i, tabcontent, tablinks;
+
+  tabcontent = document.getElementsByClassName("tabcontentm");
+  for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+  }
+
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+//
 const indicator = document.querySelector('.nav-indicator');
 const items = document.querySelectorAll('.menu__item');
 
@@ -31,3 +58,39 @@ items.forEach((item) => {
   });
   item.classList.contains('is-active') && handleIndicator(item);
 });
+
+$("#ddb-background").click(function (e) {
+  e.preventDefault();
+  $("#wrapper").toggleClass("toggled");
+});
+
+
+// for side-bar transition
+
+$(document).ready(function(){
+
+  $("#menu").on("click","a", function (event) {
+
+    //отменяем стандартную обработку нажатия по ссылке
+
+    event.preventDefault();
+
+
+    //забираем идентификатор бока с атрибута href
+
+    var id  = $(this).attr('href'),
+
+
+    //узнаем высоту от начала страницы до блока на который ссылается якорь
+
+        top = $(id).offset().top;
+
+
+    //анимируем переход на расстояние - top за 100 мс
+
+    $('body,html').animate({scrollTop: top}, 100);
+
+  });
+
+});
+

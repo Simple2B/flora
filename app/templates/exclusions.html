@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+
+{% block links %}
+<link rel="stylesheet" href="/static/css/jquery.dataTables.min.css">
+{% endblock %}
+
+{% block header %}
+<header class="header">
+  <div class="container">
+    <div class="header__inner">
+      <div class="header__inner--left">
+        <a class="logo" href="#">
+          <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="DDB Contracting" class="logo__img">
+        </a>
+        <nav class="menu__items">
+          <a class="menu__item" href="{{ url_for('main.biddings') }}">Bidding</a>
+          <a class="menu__item" href="{{ url_for('main.team') }}">My team</a>
+          <a class="menu__item" href="#">Resources</a>
+          <span class="nav-indicator"></span>
+        </nav>
+      </div>
+      {% if current_user.is_authenticated %}
+      <div class="header__inner--right">
+        <div class="user-info">
+          <div class="user-info__img">
+            <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt="Icon">
+          </div>
+          <div class="user-info__details">
+            <p>{{current_user.username}}</p>
+            <p class='t-gray'>{{current_user.position}}</p>
+          </div>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false"></a>
+              <div class="dropdown-menu" aria-labelledby="userActions">
+                <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</header>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-section section-block bidding d-flex tabm" id="wrapper">
+  <!-- begin Sidebar -->
+  <!-- <div> -->
+  <div class="bg-light border-right box-shadow __side-bar-box" id="sidebar-wrapper">
+    <div class="sidebar-heading">DDB Contracting</div>
+    <div class="text--center list-group list-group-flush none-underline">
+      <a href="{{ url_for('main.biddings') }}">
+      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
+      <img src="{{ url_for('static', filename='images/right-hand.svg') }}"> Back to editing </button></a>
+      <a href="{{ url_for('work_item.work_items') }}">
+      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
+      Work Items </button> </a>
+      <a href="{{ url_for('exclusion.exclusions') }}">
+      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks --border">
+      Exclusions
+      </button> </a>
+      <a href="{{ url_for('clarification.clarifications') }}">
+      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
+      Clarifications
+      </button> </a>
+    </div>
+  </div>
+  <!-- </div> -->
+  <!-- end Sidebar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom nav-side-bar" id="ddb-background">
+
+    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+    <!-- Login/Logout -->
+    <!-- <ul class="navbar-nav ml-auto">
+          {% if current_user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">{{current_user.username | capitalize}}</a>
+            <div class="dropdown-menu" aria-labelledby="userActions">
+              <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
+            </div>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+          </li>
+          {% endif %}
+        </ul> -->
+    <!-- </div> -->
+  </nav>
+  <!-- <div class="ddb-container"> -->
+  <div class="container" id="exclusion-container">
+
+    <div class="a-space-between">
+      <div class="title-tabs">Exclusions</div>
+    </div>
+    <!-- <div><a id="#table">Test content</a></div> -->
+    <div class="container __box-table-exclusion flex-flow-wrap">
+      <div class="__box-table--left">
+        <form role="form" action="{{ url_for('exclusion.exclusion') }}" method="post">
+
+          <div class="modal-content border--none">
+            <div class="form-row __add-exclusion--box">
+              <h6 class="__h6--width">Add exclusion item</h6>
+              <div>
+                {{form.title(class='_form-input _form-input--m')}}
+                <label class="_label">Title</label>
+              </div>
+
+              <div class="__add_new_excl--margin">
+                {{form.submit(class='_btn--blue ddb-cursor-handle')}}
+              </div>
+
+            </div>
+          </div>
+        </form>
+
+        <form class="form" id="exclusions" role="form" action="{{ url_for('exclusion.add_exclusion_to_cart') }}" method="post">
+          <div id="exclusionTable" class="box-shadow __box-table--mtop ddb-margin-top">
+            <span>
+              <select>
+                <option value="Most popular" name="Most popular">Most popular</option>
+                <option value="Most recent" name="Most recent">Most recent</option>
+              </select>
+              <!-- <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
+            Add new
+          </button> -->
+            </span>
+
+            <div class="__table-item--thead">
+              <div class="_cart_item--style">Exclusion item</div>
+            </div>
+
+            <div>
+              {{ exclusion_cart_form.submit(class='_btn--gray _add_to_cart--float-r ddb-cursor-handle', form='exclusions') }}
+            </div>
+
+            <div>
+              <table id="exclusionsTable" class="table table-striped table-sm centralized-text table__work-item">
+                <thead class="bck-color-table">
+                  <th></th>
+                  <th>Title</th>
+                  <th></th>
+                </thead>
+                <tbody>
+                  {% for exclusion in form.exclusions %}
+                  <tr>
+                    <td><input class="form-control" type="checkbox" name="{{exclusion.id}}"></td>
+                    <td>{{exclusion.title}}</td>
+                    <td><button type="button" value="{{exclusion.id}}" class="__border-none"
+                      data-toggle="modal" data-target="#exampleModal" data-target_link="{{url_for('exclusion.edit_exclusion_item', item_id=exclusion.id)}}"
+                      data-title="{{exclusion.title}}">
+                      <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+                      </button>
+
+                      <button type="button" value="{{exclusion.id}}" class="__border-none" data-toggle="modal" data-target="#modalDelete"
+                      data-delete="{{exclusion.title}}" data-target_link_delete="{{url_for('exclusion.delete_exclusion_item_from_items', item_id=exclusion.id)}}">
+                      <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                      </button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+
+      <div class="__box-table--right">
+        <div class="modal-content border--none" role="document">
+          <h6>Exclusion items cart</h6>
+        </div>
+
+        <div class="__table-item--thead">
+          <div class="_cart_item--style">Exclusion item cart</div>
+        </div>
+
+        <div class="ddb-margin-top box-scroll">
+          <table id="selectedExclusionTable" class="patientsTable table table-striped table-sm centralized-text table__work-item">
+            <!-- <thead><th></th><th></th></thead> -->
+            <tbody>
+              {% for item in exclusion_cart_form.selected_exclusions %}
+              <tr>
+                <td><a href="" class="t-gray">{{item.title}}</a></td>
+                <td>
+                  <a href="{{url_for('exclusion.delete_exclusion_item_from_cart', item_id=item.id)}}"><img
+                      src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        </form>
+
+        <div class="box-shadow __exclusion-box--description">
+        <form action="">
+          <h6>Unless expressly stated, the following exclusions apply:</h6>
+          <div> {{exclusion_cart_form.result_text}} </div>
+        </form>
+        </div>
+
+
+      </div>
+
+      <div class="__box-add-bid-cancel--margins">
+      <a href="#" class="none-underline"><button class="_btn--black">
+        Add to bidding</a>
+      </button>
+      <a href="{{ url_for('main.biddings') }}"><button class="_btn--gray">
+        Cancel</a>
+      </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Modal - Edit Exclusion -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content modal--padding">
+      <h5 class="--padding">Edit exclusion</h5>
+      <div class="modal-body padding--off">
+        <form class="form" role="form" action="" method="post">
+          <div class="__modal-inputs--flex-row">
+
+            <div>
+              {{form.title(class='_form-input _form-input--m')}}
+              <label class="_label">Title</label>
+            </div>
+
+            <div class="padding--top">
+              {{form.save_submit(class='_btn--gray  ddb-cursor-handle')}}
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of Modal 1-->
+
+<!-- Modal - Delete Exclusion -->
+<div class="modal fade" id="modalDelete" tabindex="-2" role="dialog" aria-labelledby="ModalLabelDelete"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content modal--padding">
+      <h5 class="--padding">Delete exclusion</h5>
+      <div class="modal-body padding--off">
+        <form class="form_delete" role="form" action="" method="post" id="delete_item">
+          <div class="__modal-inputs--flex-row">
+
+            <div id="_exclusion_input_delete">
+              <label class="_label input--label">Title</label>
+              <input class="_form-input _form-input--m" id="title" disabled>
+            </div>
+
+            <div class="padding--top">
+              <input class="_btn--black  ddb-cursor-handle" id="submit" name="submit" type="submit" value="Delete">
+            </div>
+
+            <div class="padding--top">
+              <button type="button" class="btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of Modal Dedelet exclusion-->
+
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/jquery.dataTables.min.js"></script>
+<script src="/static/js/exclusions.js"></script>
+{% endblock %}
+
+                <!-- <div>
+            <label class="_label">Name</label>
+            <textarea class='_form-input _form-input--m' name="" id="" cols="30" rows="10"></textarea>
+            </div> -->
