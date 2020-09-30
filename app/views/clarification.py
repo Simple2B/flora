@@ -80,7 +80,7 @@ def delete_clarification_item_from_items(item_id):
         selected = session.get("SelectedClarificationItemsDict", {})
         if str(clarification.id) in selected:
             del selected[str(clarification.id)]
-            session['SelectedClarificationItemsDict'] = selected
+            session["SelectedClarificationItemsDict"] = selected
         clarification.delete()
     return redirect(url_for("clarification.clarifications"))
 
@@ -114,11 +114,14 @@ def clarifications():
         if not clarification_cart_form.result_text:
             clarification_cart_form.result_text = item.note
         else:
-            clarification_cart_form.result_text += ', '
+            clarification_cart_form.result_text += ", "
             clarification_cart_form.result_text += item.note
 
     clarification_list = Clarification.query.all()
 
     return render_template(
-        "clarifications.html", form=form, clarifications=clarification_list, clarification_cart_form=clarification_cart_form
+        "clarifications.html",
+        form=form,
+        clarifications=clarification_list,
+        clarification_cart_form=clarification_cart_form,
     )

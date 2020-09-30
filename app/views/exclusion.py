@@ -101,6 +101,7 @@ def edit_exclusion_item(item_id):
 @login_required
 def exclusions():
     form = ExclusionForm(request.form)
+    form.exclusions = Exclusion.query.all()
     exclusion_cart_form = ExclusionCartForm()
     selected_exclusion_item_ids = session.get("SelectedExclusionItemsDict", {})
     exclusion_cart_form.selected_exclusions = [
