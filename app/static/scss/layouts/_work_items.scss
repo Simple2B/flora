@@ -26,12 +26,6 @@
     .__box-table--left {
         // display: block;
         width: 53%;
-        .__add_to_cart--place {
-            float: right;
-            margin-left: 4.2rem;
-            padding-left: 2rem;
-        }
-
     }
 
     .__box-table--right {
@@ -82,6 +76,10 @@
     align-items: center;
 }
 
+.__add_to_cart--place {
+    margin-left: auto;
+}
+
 .custom-checkbox {
     position: absolute;
     z-index: -1;
@@ -93,7 +91,10 @@
 }
 
 .__add-work-item--box {
-    padding: 1rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .border--none {
