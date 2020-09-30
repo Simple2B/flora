@@ -30,30 +30,10 @@
         </button> </a>
     </div>
   </div>
-  <!-- </div> -->
   <!-- end Sidebar -->
   <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size" id="ddb-background">
 
-    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-    <!-- Login/Logout -->
-    <!-- <ul class="navbar-nav ml-auto">
-          {% if current_user.is_authenticated %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">{{current_user.username | capitalize}}</a>
-            <div class="dropdown-menu" aria-labelledby="userActions">
-              <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
-            </div>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-          </li>
-          {% endif %}
-        </ul> -->
-    <!-- </div> -->
   </nav>
-  <!-- <div class="ddb-container"> -->
   <div class="container" id="work-item-container">
 
     <div>
@@ -72,7 +52,7 @@
                   {{form.code(class='_form-input _form-input--m')}}
                   <label class="_label">Code</label>
                 </div>
-                <div class="margin-left">
+                <div>
                   {{form.name(class='_form-input _form-input--m')}}
                   <label class="_label">Name</label>
                 </div>
