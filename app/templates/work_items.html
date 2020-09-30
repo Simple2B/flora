@@ -14,7 +14,7 @@
   <div class="bg-light border-right box-shadow __side-bar-box" id="sidebar-wrapper">
     <div class="sidebar-heading">DDB Contracting</div>
     <div class="text--center list-group list-group-flush none-underline">
-      <a href="{{ url_for('main.biddings') }}">
+      <a href="{{ url_for('bidding.biddings') }}">
         <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
         <img src="{{ url_for('static', filename='images/right-hand.svg') }}"> Back to Editing </button></a>
       <a href="{{ url_for('work_item.work_items') }}">
@@ -165,7 +165,7 @@
             <button class="_btn--black _btn--add_to_bidding ddb-cursor-handle">
               Add to bidding
             </button>
-            <a href="{{ url_for('main.biddings') }}" class="_cancel_font-style"><button class="_btn--gray">
+            <a href="{{ url_for('bidding.biddings') }}" class="_cancel_font-style"><button class="_btn--gray">
               Cancel</a>
           </div>
 
