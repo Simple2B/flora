@@ -1,8 +1,9 @@
-from flask import render_template, Blueprint, redirect, url_for, request
+from flask import render_template, Blueprint, redirect, url_for, request, session
 from flask_login import login_required
 
 from app.forms import RegistrationForm
 from app.models import User, WorkItem
+from app.procore import ProcoreApi
 
 
 main_blueprint = Blueprint("main", __name__)
@@ -11,7 +12,6 @@ main_blueprint = Blueprint("main", __name__)
 @main_blueprint.route("/")
 @login_required
 def index():
-    # return redirect(url_for('main.team'))
     return render_template("index.html")
 
 

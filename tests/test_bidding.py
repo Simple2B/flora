@@ -15,8 +15,8 @@ def client():
         app_ctx.push()
         db.drop_all()
         db.create_all()
-        register('sam')
-        login(client, 'sam')
+        register("sam")
+        login(client, "sam")
         yield client
         db.session.remove()
         db.drop_all()
@@ -24,11 +24,11 @@ def client():
 
 
 def test_bidding(client):
-    response = client.get('/bidding')
+    response = client.get("/bidding")
     assert response.status_code == 200
-    assert b'Overhead' in response.data
-    item = WorkItem(name='TESTWORKITEM', code='99.99')
+    assert b"Overhead" in response.data
+    item = WorkItem(name="TESTWORKITEM", code="99.99")
     item.save()
-    response = client.get('/bidding')
-    assert b'TESTWORKITEM' in response.data
-    assert b'99.99' in response.data
+    response = client.get("/bidding")
+    assert b"TESTWORKITEM" in response.data
+    assert b"99.99" in response.data

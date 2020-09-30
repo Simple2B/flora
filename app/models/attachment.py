@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 
 class Attachment(db.Model, ModelMixin):
 
-    __tablename__ = 'attachments'
+    __tablename__ = "attachments"
 
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(1024), nullable=False)
@@ -15,4 +15,4 @@ class Attachment(db.Model, ModelMixin):
     bid = relationship("Bid")
 
     def __str__(self):
-        return '<Attachment: %d>' % self.id
+        return "<Attachment: %d>" % self.id
