@@ -1,3 +1,5 @@
+@import '../global/variables';
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -138,7 +140,7 @@ ul, li {
 
 .__box-add-bid-cancel--margins {
     margin-left: auto;
-    margin-top: 1rem;
+    margin-top: auto;
     margin-bottom: 1rem;
 
     & a {
@@ -171,6 +173,16 @@ ul, li {
     background-color: #f8f9fa;
 }
 
+._sidebar--list {
+    display: block;
+    margin-left: 4.75rem;
+    margin-right: 0.75rem;
+}
+
+._sidebar-a--font_style {
+    color: $light_blue;
+}
+
 ._cancel_font-style {
     color: white;
     text-decoration: none !important;
@@ -178,12 +190,6 @@ ul, li {
     &:hover {
         color: white;
     }
-}
-
-.__margin-auto {
-    width: 16vw;
-    margin-top: 3rem;
-    margin-left: auto;
 }
 
 ._description_height {

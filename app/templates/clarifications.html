@@ -71,6 +71,24 @@
       Clarifications
       </button> </a>
     </div>
+
+    <div class="_sidebar--list">
+      <ul class="list-group-item normalized list__side_bar--style">
+          <li>
+            <span class="tablinks active"><a href="#">Project general</a> </span>
+          </li>
+          <li>
+            <span class="tablinks"><a href="#bid_work_item"> Scope of Work</a> </span>
+          </li>
+          <li>
+            <span class="tablinks"><a href="#bid_exclusion"> Exclusions</a> </span>
+          </li>
+          <li>
+            <span class="tablinks"><a href="#bid_clarification"> Clarifications</a> </span>
+          </li>
+      </ul>
+    </div>
+
   </div>
   <!-- </div> -->
   <!-- end Sidebar -->
@@ -121,7 +139,7 @@
                     <th></th>
                   </thead>
                   <tbody>
-                    {% for clarification in clarifications %}
+                    {% for clarification in clarifications_list %}
                     <tr>
                       <td><input class="form-control" type="checkbox" name="{{clarification.id}}"></td>
                       <td>{{clarification.note}}</td>

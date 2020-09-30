@@ -63,13 +63,31 @@
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       Scope of work </button> </a>
       <a href="{{ url_for('exclusion.exclusions') }}">
-      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks --border">
+      <!-- <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks --border">
       Exclusions
-      </button> </a>
+      </button> </a> -->
       <a href="{{ url_for('clarification.clarifications') }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       Clarifications
       </button> </a>
+
+      <div class="_sidebar--list">
+        <ul class="list-group-item normalized list__side_bar--style">
+            <li>
+              <span class="tablinks active"><a href="#">Project general</a> </span>
+            </li>
+            <li>
+              <span class="tablinks"><a href="#bid_work_item"> Scope of Work</a> </span>
+            </li>
+            <li>
+              <span class="tablinks"><a href="#bid_exclusion"  class="_sidebar-a--font_style"> Exclusions</a> </span>
+            </li>
+            <li>
+              <span class="tablinks"><a href="#bid_clarification"> Clarifications</a> </span>
+            </li>
+        </ul>
+      </div>
+
     </div>
   </div>
   <!-- </div> -->
@@ -184,7 +202,7 @@
         <div class="box-shadow __exclusion-box--description">
         <form action="">
           <h6>Unless expressly stated, the following exclusions apply:</h6>
-          <div> {{exclusion_cart_form.result_text}} </div>
+          <div class="_box-text--width"> {{exclusion_cart_form.result_text}} </div>
         </form>
         </div>
 

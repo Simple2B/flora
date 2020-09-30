@@ -60,6 +60,8 @@
         padding: 1rem; }
       .__box-table-exclusion .__box-table--right .__exclusion-box--description div {
         padding: 0rem 1.2rem 0.1rem 1.2rem; }
+      .__box-table-exclusion .__box-table--right .__exclusion-box--description ._box-text--width {
+        width: 90%; }
   .__box-table-exclusion h6 {
     font-weight: 700; }
   .__box-table-exclusion .__h6--width {

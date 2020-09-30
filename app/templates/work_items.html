@@ -72,29 +72,28 @@
           Clarifications
         </button> </a>
     </div>
+
+    <div class="_sidebar--list">
+      <ul class="list-group-item normalized list__side_bar--style">
+          <li>
+            <span class="tablinks active"><a href="#">Project general</a> </span>
+          </li>
+          <li>
+            <span class="tablinks"><a href="#bid_work_item"> Scope of Work</a> </span>
+          </li>
+          <li>
+            <span class="tablinks"><a href="#bid_exclusion"> Exclusions</a> </span>
+          </li>
+          <li>
+            <span class="tablinks"><a href="#bid_clarification"> Clarifications</a> </span>
+          </li>
+      </ul>
+    </div>
+
   </div>
   <!-- </div> -->
   <!-- end Sidebar -->
   <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size" id="ddb-background">
-
-    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-    <!-- Login/Logout -->
-    <!-- <ul class="navbar-nav ml-auto">
-          {% if current_user.is_authenticated %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">{{current_user.username | capitalize}}</a>
-            <div class="dropdown-menu" aria-labelledby="userActions">
-              <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
-            </div>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-          </li>
-          {% endif %}
-        </ul> -->
-    <!-- </div> -->
   </nav>
   <!-- <div class="ddb-container"> -->
   <div class="container" id="work-item-container">
@@ -204,14 +203,14 @@
           </div>
           </form>
 
-          <div class="__margin-auto">
-            <button class="_btn--black _btn--add_to_bidding ddb-cursor-handle">
-              Add to bidding
-            </button>
-            <a href="{{ url_for('main.biddings') }}" class="_cancel_font-style"><button class="_btn--gray">
-              Cancel</a>
-          </div>
+        </div>
 
+        <div class="__box-add-bid-cancel--margins">
+          <button class="_btn--black _btn--add_to_bidding ddb-cursor-handle">
+            Add to bidding
+          </button>
+          <a href="{{ url_for('main.biddings') }}" class="_cancel_font-style"><button class="_btn--gray">
+            Cancel</a>
         </div>
 
       </div>

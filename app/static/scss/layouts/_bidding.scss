@@ -19,11 +19,6 @@
     text-align: center;
 }
 
-.bidding-sb-list {
-    display: block;
-    margin-left: 4.75rem;
-    margin-right: 0.75rem;
-}
 
 .list__side_bar--style {
     background-color: #f8f9fa;
@@ -31,7 +26,7 @@
 
     & li {
         list-style-type: disc;
-        color: #2F80ED;
+        color: $light_blue;
     }
 
     & span {
@@ -42,13 +37,13 @@
         color: #BDBDBD;
     }
         a:hover {
-            color: #2F80ED;
+            color: $light_blue;
         }
 
 }
 
 .active {
-    color: #2F80ED !important;
+    color: $light_blue !important;
 }
 
 .bck-ground {

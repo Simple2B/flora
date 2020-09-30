@@ -108,7 +108,7 @@ def clarifications():
     clarification_cart_form.selected_work_items = [
         Clarification.query.get(item_id) for item_id in selected_clarification_item_ids
     ]
-    clarifications = Clarification.query.all()
+    clarifications_list = Clarification.query.all()
     return render_template(
-        "clarifications.html", form=form, clarifications=clarifications, clarification_cart_form=clarification_cart_form
+        "clarifications.html", form=form, clarifications=clarifications_list, clarification_cart_form=clarification_cart_form
     )
