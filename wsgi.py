@@ -58,14 +58,16 @@ def create_db():
     exclusion = Exclusion(title=EXCLUSION_TITLE, description=EXCLUSION_DESCRIPTION)
     exclusion.save()
 
-    exclusion = Clarification(
+    clarification = Clarification(
         note=CLARIFICATION_NOTE, description=CLARIFICATION_DESCRIPTION
     )
-    exclusion.save()
+    clarification.save()
+
+    bid = Bid()
+    bid.save()
+
     if app.config['GENERATE_TEST_DATA']:
         populate_db_by_test_data()
-
-    
 
 
 @app.cli.command()

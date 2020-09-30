@@ -122,6 +122,6 @@ def clarifications():
     return render_template(
         "clarifications.html",
         form=form,
-        clarifications=clarification_list,
+        clarifications_list=clarification_list,
         clarification_cart_form=clarification_cart_form,
     )
