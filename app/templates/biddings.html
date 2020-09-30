@@ -101,9 +101,9 @@
             <td>test</td>
             <td>test</td>
           </tr>
-          {% for work_item in work_items %}
+          {% for bid in bids %}
           <tr>
-            <td><a href="{{url_for('main.bidding', item_id=work_item.id)}}">{{work_item.id}}</a></td>
+            <td><a href="{{url_for('main.bidding', item_id=bid.id)}}">{{bid.id}}</a></td>
             <td>test</td>
             <td>test</td>
             <td>test</td>

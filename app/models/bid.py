@@ -8,7 +8,7 @@ class Bid(db.Model, ModelMixin):
     __tablename__ = "bids"
 
     id = db.Column(db.Integer, primary_key=True)
-    link_work_items = relationship("WorkItemLine")
+    link_work_items = relationship("LinkWorkItem")
     work_item_groups = relationship("WorkItemGroup")
     attachments = relationship("Attachment")
     clarification_links = relationship("ClarificationLink")

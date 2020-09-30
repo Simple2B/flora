@@ -9,11 +9,8 @@ class LinkWorkItem(db.Model, ModelMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     link_work_item_id = db.Column(db.Integer, nullable=False)
-    bit_id = db.Column(db.Integer, db.ForeignKey("bids.id"), nullable=False)
+    bid_id = db.Column(db.Integer, db.ForeignKey("bids.id"), nullable=False)
     work_item_id = db.Column(db.Integer, db.ForeignKey("work_items.id"), nullable=False)
-    work_item_group_id = db.Column(
-        db.Integer, db.ForeignKey("work_item_groups.id"), nullable=True
-    )
     bid = relationship("Bid")
     work_item = relationship("WorkItem")
     work_item_group = relationship("WorkItemGroup")
