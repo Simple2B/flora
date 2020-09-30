@@ -7,9 +7,9 @@ from app.forms import ExclusionForm, ExclusionCartForm
 exclusion_blueprint = Blueprint("exclusion", __name__)
 
 
-@exclusion_blueprint.route("/exclusion", methods=["POST"])
+@exclusion_blueprint.route("/add_new_exclusion", methods=["POST"])
 @login_required
-def exclusion():
+def add_new_exclusion():
     form = ExclusionForm(request.form)
     if form.validate_on_submit():
         # if add_work_item_validator(
@@ -101,7 +101,6 @@ def edit_exclusion_item(item_id):
 @login_required
 def exclusions():
     form = ExclusionForm(request.form)
-    form.exclusions = Exclusion.query.all()
     exclusion_cart_form = ExclusionCartForm()
     selected_exclusion_item_ids = session.get("SelectedExclusionItemsDict", {})
     exclusion_cart_form.selected_exclusions = [
@@ -112,7 +111,7 @@ def exclusions():
         if not exclusion_cart_form.result_text:
             exclusion_cart_form.result_text = item.title
         else:
-            exclusion_cart_form.result_text += ','
+            exclusion_cart_form.result_text += ', '
             exclusion_cart_form.result_text += item.title
 
     return render_template(
