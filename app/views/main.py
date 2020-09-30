@@ -15,22 +15,6 @@ def index():
     return render_template("index.html")
 
 
-@main_blueprint.route("/biddings")
-@login_required
-def biddings():
-    # TODO: need refactoring!
-    work_items = WorkItem.query.all()
-    test = ["12345", "test", "test", "test", "test", "test", "test", "test"]
-    return render_template("biddings.html", work_items=work_items, test=test)
-
-
-@main_blueprint.route("/bidding/<item_id>", methods=["GET"])
-@login_required
-def bidding(item_id):
-    item_id = item_id
-    return render_template("bidding.html", item_id=item_id)
-
-
 @main_blueprint.route("/team")
 @login_required
 def team():
@@ -53,4 +37,4 @@ def header():
 
 @main_blueprint.route("/test")
 def test():
-    return redirect(url_for("main.bidding/#work-item-container"))
+    return redirect(url_for("bidding.bidding/#work-item-container"))

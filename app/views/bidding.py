@@ -16,5 +16,5 @@ def biddings():
 @bidding_blueprint.route("/bidding/<item_id>", methods=["GET"])
 @login_required
 def bidding(item_id):
-    item_id = item_id
-    return render_template("bidding.html", item_id=item_id)
+    bid = Bid.query.get(item_id)
+    return render_template("bidding.html", bid=bid)

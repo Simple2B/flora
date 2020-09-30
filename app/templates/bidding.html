@@ -4,9 +4,6 @@
 <link rel="stylesheet" href="/static/css/jquery.dataTables.min.css">
 {% endblock %}
 
-{% block header %}
-{% include 'header.html' %}
-{% endblock %}
 
 {% block content %}
 
@@ -17,10 +14,10 @@
   <div class="bg-light border-right box-shadow __side-bar-box bidding__side_bar--size" id="sidebar-wrapper">
     <div class="sidebar-heading"> DDB Contracting</div>
     <div class="text--center list-group list-group-flush none-underline">
-      <a href="{{ url_for('main.biddings') }}">
+      <a href="{{ url_for('bidding.biddings') }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized">
           <img src="{{url_for('static', filename='images/my_bidding_element.svg')}}"> My Bidding </button></a>
-      <div class="ddb-cursor-handle list-group-item list-group-item-action normalized bidding-sb--box --border"> #{{item_id}}  </div>
+      <div class="ddb-cursor-handle list-group-item list-group-item-action normalized bidding-sb--box --border"> #{{bid.id}}  </div>
       <div class="bidding-sb-list">
         <ul class="list-group-item normalized list__side_bar--style">
             <li>
@@ -57,13 +54,6 @@
         Edit
     </button>
     </span>
-
-    <form>
-    <div class="margin--top">
-      <img src="{{url_for('static', filename='images/test_screen_scopeOw.png')}}">
-      <img src="{{url_for('static', filename='images/test_screen.png')}}">
-    </div>
-    </form>
 
     <div class="_bidding--scroll">
       <div class="modal-content modal--padding" id="bid_work_item">

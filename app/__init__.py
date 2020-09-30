@@ -19,7 +19,8 @@ def create_app(environment="development"):
         work_item_blueprint,
         exclusion_blueprint,
         clarification_blueprint,
-        procore_blueprint
+        procore_blueprint,
+        bidding_blueprint
     )
     from app.models import (
         User,
@@ -45,6 +46,7 @@ def create_app(environment="development"):
     app.register_blueprint(exclusion_blueprint)
     app.register_blueprint(clarification_blueprint)
     app.register_blueprint(procore_blueprint)
+    app.register_blueprint(bidding_blueprint)
 
     # Set up flask login.
     @login_manager.user_loader
