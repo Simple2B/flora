@@ -28,10 +28,27 @@
           Clarifications
         </button> </a>
     </div>
+
+    <div class="_sidebar--list">
+      <ul class="list-group-item normalized list__side_bar--style">
+          <li>
+            <span class="tablinks active"><a href="#">Project general</a> </span>
+          </li>
+          <li>
+            <span class="tablinks"><a href="#bid_work_item"> Scope of Work</a> </span>
+          </li>
+          <li>
+            <span class="tablinks"><a href="#bid_exclusion"> Exclusions</a> </span>
+          </li>
+          <li>
+            <span class="tablinks"><a href="#bid_clarification"> Clarifications</a> </span>
+          </li>
+      </ul>
+    </div>
+
   </div>
   <!-- end Sidebar -->
   <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size" id="ddb-background">
-
   </nav>
   <div class="container" id="work-item-container">
 
@@ -148,6 +165,12 @@
               Cancel</a>
           </div>
 
+        <div class="__box-add-bid-cancel--margins">
+          <button class="_btn--black _btn--add_to_bidding ddb-cursor-handle">
+            Add to bidding
+          </button>
+          <a href="{{ url_for('bidding.biddings') }}" class="_cancel_font-style"><button class="_btn--gray">
+            Cancel</a>
         </div>
 
       </div>
