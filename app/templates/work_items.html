@@ -6,12 +6,12 @@
 
 
 {% block content %}
-<section class="section">
+<section class="page-section work-items-section">
   <!-- Sidebar -->
   <div class="sidebar-container">
     <nav class="sidebar">
-      <h3 class="sidebar__return-link">Back to editing</h3>
-      <h5 class="sidebar__bid-title">{{ bid.id }} - {{ bid.title }}</h5>
+      <span class="sidebar__return-link t-gray">Back to editing</span>
+      <span class="sidebar__bid-title">{{ bid.id }} - {{ bid.title }}</span>
       <ul class="sidebar__nav-links">
         <li><a href="#">Project General</a></li>
         <li><a href="#">Scope of Work</a></li>
@@ -27,8 +27,10 @@
   <!-- Chart Container -->
   <div class="main-container">
     <div class="main-container__bid-header">
-      <div class="bid-header__status"></div>
-      <div class="bid-header__title"></div>
+      <div class="bid-header__status">Draft</div>
+      <div class="bid-header__title"><strong>
+        {{ bid.id }} - {{ bid.title }}
+      </strong></div>
     </div>
     <div class="main-container__body">
       <div class="chart-left">
@@ -38,26 +40,27 @@
             <div class="search-item-bar">
               <input type="search" name="" id="">
             </div>
-            <div class="chart-left__header-add-item">
-              <input type="text" name="" id="">
-              <input type="text" name="" id="">
-              {{form.submit(class='_btn--blue')}}
-            </div>
+          </div>
+          <div class="chart-left__header-add-item">
+            <input class='_form-input' type="text" name="" id="">
+            <input class='_form-input' type="text" name="" id="">
+            {{form.submit(class='_btn--blue')}}
           </div>
         </div>
         
         <span class="t-gray">Showing {{ form.work_items|length }} items</span>
 
+        <div>
+          {{ work_cart_form.submit(class='_btn--gray __add_to_cart--place', form="work_items") }}
+        </div>
+
         <table id="workItemsTable" class="table table-striped table-sm">
-          <thead class="__table--head">
+          <thead class="">
             <th></th>
             <th>Code</th>
             <th>Name</th>
             <th>Edit</th>
           </thead>
-          <div>
-            {{ work_cart_form.submit(class='_btn--gray __add_to_cart--place', form="work_items") }}
-          </div>
           <tbody>
             {% for work_item in form.work_items %}
             <tr>
@@ -93,7 +96,7 @@
         </div>
         
         <table id="selectedWorkItemsTable" class="table table-striped table-sm">
-          <thead class="__table--head">
+          <thead class=""">
             <th>Code</th>
             <th>Name</th>
             <th>Delete</th>
