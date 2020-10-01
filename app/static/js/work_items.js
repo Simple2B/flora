@@ -10,7 +10,7 @@ $(document).ready(function() {
         "displayStart": 0
     });
 
-    $('#exampleModal').on('show.bs.modal', function (event) {
+    $('#modalEdit').on('show.bs.modal', function (event) {
       const button = $(event.relatedTarget); // Button that triggered the modal
       const target_link = button.data('target_link');
       const code = button.data('code');
