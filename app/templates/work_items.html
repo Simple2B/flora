@@ -6,222 +6,128 @@
 
 
 {% block content %}
-
-
-<section class="page-section section-block bidding d-flex tabm" id="wrapper">
-  <!-- begin Sidebar -->
-  <div class="bg-light border-right box-shadow __side-bar-box" id="sidebar-wrapper">
-    <div class="sidebar-heading">DDB Contracting</div>
-    <div class="text--center list-group list-group-flush none-underline">
-      <a href="{{ url_for('bidding.biddings') }}">
-        <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
-        <img src="{{ url_for('static', filename='images/right-hand.svg') }}"> Back to Editing </button></a>
-      <a href="{{ url_for('work_item.work_items') }}">
-        <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks --border">
-        Scope of work</button></a>
-      <a href="{{ url_for('exclusion.exclusions') }}">
-        <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
-          Exclusions
-        </button> </a>
-      <a href="{{ url_for('clarification.clarifications') }}">
-        <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
-          Clarifications
-        </button> </a>
-    </div>
-
+<section class="section">
+  <!-- Sidebar -->
+  <div class="sidebar-container">
+    <nav class="sidebar">
+      <h3 class="sidebar__return-link">Back to editing</h3>
+      <h5 class="sidebar__bid-title">{{ bid.id }} - {{ bid.title }}</h5>
+      <ul class="sidebar__nav-links">
+        <li><a href="#">Project General</a></li>
+        <li><a href="#">Scope of Work</a></li>
+        <li><a href="#">Select Work Item</a></li>
+        <li><a href="#">Exclusion</a></li>
+        <li><a href="#">Clarification</a></li>
+        <li><a href="#">Alternates</a></li>
+      </ul>
+    </nav>
   </div>
-  <!-- end Sidebar -->
-  <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size" id="ddb-background">
-  </nav>
-  <div class="container" id="work-item-container">
+  <!-- End Sidebar -->
 
-    <div>
-      <div class="title-tabs">Work items</div>
+  <!-- Chart Container -->
+  <div class="main-container">
+    <div class="main-container__bid-header">
+      <div class="bid-header__status"></div>
+      <div class="bid-header__title"></div>
     </div>
-
-      <div class="container __box-table-work_item flex-flow-wrap">
-        <div class="__box-table--left">
-
-
-            <div class="modal-content border--none">
-              <form role="form" action="{{ url_for('work_item.work_item') }}" method="post">
-              <div class="form-row __add-work-item--box">
-                <h6 class="__h6--width">Add work item</h6>
-                <div>
-                  {{form.code(class='_form-input _form-input--m')}}
-                  <label class="_label">Code</label>
-                </div>
-                <div>
-                  {{form.name(class='_form-input _form-input--m')}}
-                  <label class="_label">Name</label>
-                </div>
-
-                <div class="bt_add-new-user">
-                  {{form.submit(class='_btn--blue')}}
-                </div>
-              </form>
-
-                <div>
-                  {{ work_cart_form.submit(class='_btn--gray __add_to_cart--place', form="work_items") }}
-                </div>
-              </div>
+    <div class="main-container__body">
+      <div class="chart-left">
+        <!-- Left Chart -->
+        <div class="chart-left__header">
+          <div class="chart-left__header-search">
+            <div class="search-item-bar">
+              <input type="search" name="" id="">
             </div>
-
-
-          <form class="form" id="work_items" role="form" action="{{ url_for('work_item.add_work_item_to_cart') }}" method="post">
-            <div id="workItemTable" class="box-shadow __box-table--mtop">
-              <span>
-                <select>
-                  <option value="Most popular" name="Most popular">Most popular</option>
-                  <option value="Most recent" name="Most recent">Most recent</option>
-                </select>
-
-              </span>
-
-              <div>
-                <table id="workItemsTable" class="patientsTable table table-striped table-sm table__work-item">
-                  <thead class="__table--head">
-                    <th></th>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Edit</th>
-                  </thead>
-                  <tbody>
-                    {% for work_item in form.work_items %}
-                    <tr>
-                      <td><input class="form-control" type="checkbox" name="{{work_item.id}}"></td>
-                      <td><a href="" class="t-gray">{{work_item.code}}</a></td>
-                      <td>{{work_item.name}}</td>
-                      <td><button type="button" value="{{work_item.id}}" style="border: none;"
-                          data-toggle="modal" data-target="#exampleModal" data-target_link="{{url_for('work_item.edit_work_item', item_id=work_item.id)}}"
-                          data-code="{{work_item.code}}" data-name="{{work_item.name}}">
-                          <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
-                        </button>
-
-                        <button type="button" value="{{work_item.id}}" style="border: none;" data-toggle="modal" data-target="#modalDeleteWorkItem"
-                        data-delete_work_item="{{work_item.code}}" data-work_item_name="{{work_item.name}}"
-                        data-target_link_work_item_delete="{{url_for('work_item.delete_work_item_from_items', item_id=work_item.id)}}">
-                        <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-                        </button>
-
-                      </td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
+            <div class="chart-left__header-add-item">
+              <input type="text" name="" id="">
+              <input type="text" name="" id="">
+              {{form.submit(class='_btn--blue')}}
             </div>
+          </div>
         </div>
+        
+        <span class="t-gray">Showing {{ form.work_items|length }} items</span>
 
-        <div class="__box-table--right">
-          <div class="modal-content border--none" role="document">
-            <h6>Work items cart</h6>
+        <table id="workItemsTable" class="table table-striped table-sm">
+          <thead class="__table--head">
+            <th></th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Edit</th>
+          </thead>
+          <div>
+            {{ work_cart_form.submit(class='_btn--gray __add_to_cart--place', form="work_items") }}
           </div>
-          <div class="__box-table--mtop">
-            <table id="selectedWorkItemsTable" class="patientsTable table table-striped table-sm table__work-item">
-              <thead class="__table--head">
-                <th>Code</th>
-                <th>Name</th>
-                <th>Delete</th>
-              </thead>
-              <tbody>
-                {% for item in work_cart_form.selected_work_items %}
-                <tr>
-                  <td><a href="" class="t-gray">{{item.code}}</a></td>
-                  <td>{{item.name}}</td>
-                  <td>
-                    <a href="{{url_for('work_item.delete_work_item_from_cart', item_id=item.id)}}"><img
-                        src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-          </form>
+          <tbody>
+            {% for work_item in form.work_items %}
+            <tr>
+              <td><input class="form-control" type="checkbox" name="{{work_item.id}}"></td>
+              <td><span class="t-gray">{{work_item.code}}</span></td>
+              <td>{{work_item.name}}</td>
+              <td><button type="button" value="{{work_item.id}}"
+                  data-toggle="modal" data-target="#exampleModal" data-target_link="{{url_for('work_item.edit_work_item', item_id=work_item.id)}}"
+                  data-code="{{work_item.code}}" data-name="{{work_item.name}}">
+                  <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
+                </button>
 
-          <div class="__margin-auto">
-            <button class="_btn--black _btn--add_to_bidding ddb-cursor-handle">
-              Add to bidding
-            </button>
-            <a href="{{ url_for('bidding.biddings') }}" class="_cancel_font-style"><button class="_btn--gray">
-              Cancel</a>
-          </div>
-
+                <button type="button" value="{{work_item.id}}" data-toggle="modal" data-target="#modalDeleteWorkItem"
+                data-delete_work_item="{{work_item.code}}" data-work_item_name="{{work_item.name}}"
+                data-target_link_work_item_delete="{{url_for('work_item.delete_work_item_from_items', item_id=work_item.id)}}">
+                <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                </button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
+      <!-- End Left Chart -->
 
+      <!-- Right Chart -->
+      <div class="chart-right">
+        <div class="chart-right__header">
+          <span><strong>Work Items Cart</strong></span>
+          <div class="chart-left__header-add-group">
+            <input type="text" name="" id="">
+          </div>
+        </div>
+        
+        <table id="selectedWorkItemsTable" class="table table-striped table-sm">
+          <thead class="__table--head">
+            <th>Code</th>
+            <th>Name</th>
+            <th>Delete</th>
+          </thead>
+          <tbody>
+            {% for item in work_cart_form.selected_work_items %}
+            <tr>
+              <td><a href="" class="t-gray">{{item.code}}</a></td>
+              <td>{{item.name}}</td>
+              <td>
+                <a href="{{url_for('work_item.delete_work_item_from_cart', item_id=item.id)}}"><img
+                    src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+        <div class="chart-right__buttons">
+          <button class="_btn--black">
+            Add to bidding
+          </button>
+          <button class="_btn--gray">
+            <a href="{{ url_for('bidding.biddings') }}">Cancel</a>
+          </button> 
+        </div>
+      </div>
+      <!-- End Right Chart -->
+    </div>
   </div>
-  </div>
-  </div>
+  <!-- End Chart Container -->
+  
+
 </section>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content modal--padding">
-      <h5 class="--padding">Edit work item</h5>
-      <div class="modal-body padding--off">
-        <form class="form" role="form" action="" method="post">
-          <div class="__modal-inputs--flex-row">
-
-            <div>
-              {{form.code(class='_form-input _form-input--m')}}
-              <label class="_label">Code</label>
-            </div>
-
-            <div>
-              {{form.name(class='_form-input _form-input--m')}}
-              <label class="_label">Name</label>
-            </div>
-
-            <div class="padding--top">
-              {{form.edit_submit(class='_btn--gray  ddb-cursor-handle')}}
-            </div>
-
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end of Modal -->
-
-<!-- Modal Delete WorkItem-->
-<div class="modal fade" id="modalDeleteWorkItem" tabindex="-2" role="dialog" aria-labelledby="ModalLabelDelete"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content modal--padding">
-      <h5 class="--padding">Are you sure want to delete work item?</h5>
-      <div class="modal-body padding--off">
-        <form class="form_delete" role="form" action="" method="post" id="delete_work_item">
-          <div class="__modal-inputs--flex-row">
-
-            <div id="_work_item_input_delete">
-              <label class="_label input--label _label_code_place">Code</label>
-              <input class="_form-input _form-input--m" id="title" disabled>
-            </div>
-
-            <div id="_work_item_input_name_delete">
-              <label class="_label input--label">Name</label>
-              <input class="_form-input _form-input--m" id="title" disabled>
-            </div>
-
-            <div class="padding--top">
-              <input class="_btn--black btn btn-secondary ddb-cursor-handle" name="submit" type="submit" value="Delete">
-            </div>
-
-            <div class="padding--top">
-              <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
-            </div>
-
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end of Modal Delete WorkItem-->
 
 {% endblock %}
 
