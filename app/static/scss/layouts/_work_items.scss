@@ -95,10 +95,30 @@
     &__header-add-item {
         display: inline-flex;
     }
+
 }
 
 .chart-right {
     background-color: lightsalmon;
     padding: 0.7rem;
     flex: 1;
+
+    .chart-right__group-name {
+        background-color: #FFFFFF;
+    }
+
+    & .__inline--blocks {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        & ._form-input--m {
+            margin-left: 1rem;
+        }
+    }
+
+
 }
+
+

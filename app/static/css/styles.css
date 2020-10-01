@@ -517,6 +517,15 @@ ul {
   background-color: lightsalmon;
   padding: 0.7rem;
   flex: 1; }
+  .chart-right .chart-right__group-name {
+    background-color: #FFFFFF; }
+  .chart-right .__inline--blocks {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end; }
+    .chart-right .__inline--blocks ._form-input--m {
+      margin-left: 1rem; }
 
 .bck-color-table {
   background-color: #828282; }

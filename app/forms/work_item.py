@@ -7,7 +7,7 @@ class NewWorkItemForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(2, 30)])
     code = StringField('Code', validators=[DataRequired(), Length(2, 30)])
     submit = SubmitField('Add New')
-    edit_submit = SubmitField('Save')
+    # edit_submit = SubmitField('Save')
 
 
 class WorkItemCartForm(FlaskForm):
