@@ -71,8 +71,9 @@ def create_db():
     )
     clarification.save()
 
-    bid = Bid()
-    bid.save()
+    for i in range(8):
+        bid = Bid()
+        bid.save()
 
     if app.config['GENERATE_TEST_DATA']:
         populate_db_by_test_data()
