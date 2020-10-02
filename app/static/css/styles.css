@@ -125,7 +125,7 @@ ul {
   padding: 0.5rem 2.8rem; }
 
 .ddb__side_bar {
-  height: 64vh;
+  height: 65vh;
   background-color: #f8f9fa; }
 
 ._sidebar--list {
@@ -483,7 +483,7 @@ ul {
   .main-container__bid-header {
     background-color: black;
     display: inline-flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: .5rem 1rem;
     align-items: center; }
   .main-container__body {
@@ -500,7 +500,8 @@ ul {
   border-radius: .3rem; }
 
 .bid-header__title {
-  color: white; }
+  color: white;
+  margin-left: 8rem; }
 
 .chart-left {
   padding: 0.7rem;
@@ -561,9 +562,11 @@ ul {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end; }
+    align-items: center; }
     .chart-right .__inline--blocks ._form-input--m {
       margin-left: 1rem; }
+    .chart-right .__inline--blocks ._label {
+      left: 1.5rem; }
   .chart-right .chart-right__group_name-box .chart-right__group-name-block {
     display: flex;
     flex-direction: row;
@@ -583,12 +586,25 @@ ul {
   .chart-right .__btn-cancel {
     color: #fff;
     text-decoration: none; }
+  .chart-right .__box-scroll--group-table {
+    max-height: 17vh;
+    overflow: auto; }
   .chart-right .hidden {
     display: none; }
   .chart-right .chart-right__buttons {
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-end; }
+
+.modal-content ._h5--padding {
+  padding: 0.5rem 0.5rem 0rem 0.5rem; }
+
+.modal-content .__modal-inputs--flex-row {
+  display: inline-flex;
+  align-items: baseline;
+  flex-flow: row wrap; }
+  .modal-content .__modal-inputs--flex-row div {
+    padding: 0.5rem; }
 
 .bck-color-table {
   background-color: #828282; }

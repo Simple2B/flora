@@ -11,8 +11,9 @@
   <div class="sidebar-container">
     <nav class="sidebar">
       <span class="sidebar__return-link t-gray">
-        <img src="{{ url_for('static', filename='images/right-hand.svg') }}">
+        <a href=""><img src="{{ url_for('static', filename='images/right-hand.svg') }}">
         Back to editing
+        </a>
       </span>
       <span class="sidebar__bid-title">{{ bid.id }} - {{ bid.title }}</span>
       <ul class="sidebar__nav-links">
@@ -32,7 +33,7 @@
     <div class="main-container__bid-header">
       <div class="bid-header__status">Draft</div>
       <div class="bid-header__title"><strong>
-        {{ bid.id }} - {{ bid.title }}
+        # {{ bid.id }} - {{ bid.title }}
       </strong></div>
     </div>
     <div class="main-container__body">
@@ -159,7 +160,10 @@
           <!-- End Flash Massage -->
 
           <span class="chart-right__header-add-group __inline--blocks">
-            <input type="text" name="name" id="" class="_form-input _form-input--m" form="work_item_group_name">
+            <div>
+              <input type="text" name="name" id="" class="_form-input _form-input--m" form="work_item_group_name">
+              <label class="_label">Group Name</label>
+            </div>
             <div>
               {{ form_group.submit(class='__header-add-group--submit', form="work_item_group_name") }}
             </div>
@@ -207,7 +211,7 @@
           </div>
         </form>
 
-        <div id="groupTableWrapper" class="hidden">
+        <div id="groupTableWrapper" class="hidden __box-scroll--group-table">
           <table id="selectedWorkItemGroupTable" class="table table-striped table-sm dropdown-content">
             <thead class="">
               <th>Code</th>
@@ -231,7 +235,7 @@
 
         <!-- end Group Table -->
 
-        <div class="chart-right__buttons">
+        <div class="chart-right__buttons ddb-margin-top">
           <button class="_btn--black">
             Add to bidding
           </button>
@@ -252,7 +256,7 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
-      <h5 class="--padding">Edit work item</h5>
+      <h5 class="_h5--padding">Edit work item</h5>
       <div class="modal-body">
         <form class="form" role="form" action="" method="post">
           <div class="__modal-inputs--flex-row">
@@ -268,7 +272,7 @@
             </div>
 
             <div class="">
-              <!-- form.edit_submit(class='_btn--gray  ddb-cursor-handle') -->
+              {{ form.edit_submit(class='_btn--gray  ddb-cursor-handle') }}
             </div>
 
           </div>
