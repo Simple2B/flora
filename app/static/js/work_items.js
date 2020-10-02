@@ -39,6 +39,7 @@ $(document).ready(function() {
 
 const groupWrapper = document.getElementById('groupTableWrapper');
 const groupToggle = document.getElementById('btnGroup');
-groupToggle.addEventListener('click', () => {
-    groupWrapper.classList.toggle('show');
+groupToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    groupWrapper.classList.toggle('hidden');
 });

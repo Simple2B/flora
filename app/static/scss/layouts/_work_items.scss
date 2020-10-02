@@ -36,7 +36,7 @@
             color: #BDBDBD;
 
             &:hover {
-                color: $blue;
+                color: #2F80ED;
             }
         }
     }
@@ -126,6 +126,26 @@
 
     }
 
-    .show {display:block;}
+    &__undo-block {
+        background-color: #E6A73E;
+        border-radius: 0.5rem;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.3rem;
+        color: #fff;
+
+        div {
+            padding: 0rem 1rem;
+        }
+
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    // .show {display:block;}
 
 }

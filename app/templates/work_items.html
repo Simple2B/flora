@@ -104,6 +104,38 @@
 
         <div class="chart-right__header">
           <span><strong>Work Items Cart</strong></span>
+          {% if deleted_work_item_id %}
+
+          <div class="chart-right__undo-block">
+
+            {% for work_item in form.work_items %}
+            {% if str_function(work_item.id) == deleted_work_item_id %}
+              <div>Deleted {{work_item.code}} &nbsp; {{work_item.name}} </div>
+            {% endif %}
+            {% endfor %}
+
+            <div>
+              <a href="{{url_for('work_item.delete_work_item_from_cart', item_id=deleted_work_item_id)}}">Undo </a>
+            </div>
+          </div>
+
+          {% endif %}
+
+          <!-- Flash Massage -->
+          <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              <hr>
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismisible login__error">
+                  <button type="button" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><img src="{{ url_for('static', filename='images/close_button_ddb.svg') }}"></span>
+                  </button>
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %} -->
+          <!-- End Flash Massage -->
           <span class="chart-right__header-add-group __inline--blocks">
             <input type="text" name="name" id="" class="_form-input _form-input--m" form="work_item_group_name">
             <div>
