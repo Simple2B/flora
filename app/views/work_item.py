@@ -118,9 +118,17 @@ def work_item_group():
 @login_required
 def delete_work_item_from_group(item_id):
     item_id = str(item_id)
+    deleted_work_item_group_id = session.get("DeletedWorkGroupItem", {})
     selected_ids = session.get("SelectedWorkItemsGroupDict", {})
-    if item_id in selected_ids:
-        del selected_ids[item_id]
+
+    if deleted_work_item_group_id:
+        selected_ids[item_id] = str(item_id)
+        session["DeletedWorkGroupItem"] = {}
+        return redirect(url_for("work_item.work_items"))
+    else:
+        if item_id in selected_ids:
+            session["DeletedWorkGroupItem"] = selected_ids[item_id]
+            del selected_ids[item_id]
     session["SelectedWorkItemsGroupDict"] = selected_ids
     return redirect(url_for("work_item.work_items"))
 
@@ -166,6 +174,7 @@ def work_items():
     selected_work_item_ids = session.get("SelectedWorkItemsDict", {})
     selected_items_ids_group = session.get("SelectedWorkItemsGroupDict", {})
     deleted_work_item_id = session.get("DeletedWorkItem", {})
+    deleted_work_item_group_id = session.get("DeletedWorkGroupItem", {})
 
     work_cart_form.selected_work_items = [
         WorkItem.query.get(item_id) for item_id in selected_work_item_ids
@@ -186,5 +195,6 @@ def work_items():
         work_cart_form=work_cart_form,
         group_name=group_name,
         deleted_work_item_id=deleted_work_item_id,
+        deleted_work_item_group_id=deleted_work_item_group_id,
         str_function=str_function
     )

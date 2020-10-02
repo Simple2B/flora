@@ -85,10 +85,6 @@
                   data-target_link_work_item_delete="{{url_for('work_item.delete_work_item_from_items', item_id=work_item.id)}}">
                   <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
                   </button>
-
-                  <button type="add_submit_group" name='add_submit_group'>
-                  <img src="{{ url_for('static', filename='images/group_element.svg') }}">
-                  </button>
                 </td>
               </tr>
               {% endfor %}
@@ -119,27 +115,32 @@
             </div>
           </div>
 
+
+
+          {% elif deleted_work_item_group_id %}
+
+          <div class="chart-right__undo-block">
+
+            {% for work_item in form.work_items %}
+            {% if str_function(work_item.id) == deleted_work_item_group_id %}
+              <div>Deleted {{work_item.code}} &nbsp; {{work_item.name}} </div>
+            {% endif %}
+            {% endfor %}
+
+            <div>
+              <a href="{{url_for('work_item.delete_work_item_from_group', item_id=deleted_work_item_group_id)}}">Undo Else</a>
+            </div>
+          </div>
+
           {% endif %}
 
           <!-- Flash Massage -->
-          <!-- {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-              <hr>
-              {% for category, message in messages %}
-                <div class="alert alert-{{ category }} alert-dismisible login__error">
-                  <button type="button" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true"><img src="{{ url_for('static', filename='images/close_button_ddb.svg') }}"></span>
-                  </button>
-                  {{ message }}
-                </div>
-              {% endfor %}
-            {% endif %}
-          {% endwith %} -->
           <!-- End Flash Massage -->
+
           <span class="chart-right__header-add-group __inline--blocks">
             <input type="text" name="name" id="" class="_form-input _form-input--m" form="work_item_group_name">
             <div>
-              {{ form_group.submit(class='_btn--gray __add_to_cart--place', form="work_item_group_name") }}
+              {{ form_group.submit(class='__header-add-group--submit', form="work_item_group_name") }}
             </div>
             <div>
               {{ form_group_to_cart.add_submit(class='_btn--gray __add_to_cart--place', form="work_items") }}
@@ -184,8 +185,8 @@
             </div>
           </div>
         </form>
-        <!-- <form id="add_to_work_item_group" role="form" action="" method="post"> -->
-          <div id="groupTableWrapper" class="hidden">
+
+        <div id="groupTableWrapper" class="hidden">
           <table id="selectedWorkItemGroupTable" class="table table-striped table-sm dropdown-content">
             <thead class="">
               <th>Code</th>
@@ -205,8 +206,7 @@
               {% endfor %}
             </tbody>
           </table>
-          </div>
-        <!-- </form> -->
+        </div>
 
 
         <div class="chart-right__buttons">
@@ -214,7 +214,7 @@
             Add to bidding
           </button>
           <button class="_btn--gray">
-            <a href="{{ url_for('bidding.biddings') }}">Cancel</a>
+            <a class="__btn-cancel" href="{{ url_for('bidding.biddings') }}">Cancel</a>
           </button>
         </div>
       </div>

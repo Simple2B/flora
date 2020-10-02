@@ -518,6 +518,14 @@ ul {
 .chart-right {
   padding: 0.7rem;
   flex: 1; }
+  .chart-right .__header-add-group--submit {
+    border: none;
+    background-color: #FFFFFF;
+    color: #175593;
+    cursor: pointer;
+    padding: 0.5rem; }
+    .chart-right .__header-add-group--submit:hover {
+      text-decoration: underline; }
   .chart-right .__inline--blocks {
     display: flex;
     flex-direction: row;
@@ -541,6 +549,9 @@ ul {
     color: #fff; }
     .chart-right__undo-block div {
       padding: 0rem 1rem; }
+  .chart-right .__btn-cancel {
+    color: #fff;
+    text-decoration: none; }
   .chart-right .hidden {
     display: none; }
 

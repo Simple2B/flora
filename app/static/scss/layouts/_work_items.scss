@@ -104,6 +104,18 @@
     padding: 0.7rem;
     flex: 1;
 
+    .__header-add-group--submit {
+        border: none;
+        background-color: #FFFFFF;
+        color: #175593;
+        cursor: pointer;
+        padding: 0.5rem;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
     & .__inline--blocks {
         display: flex;
         flex-direction: row;
@@ -141,6 +153,12 @@
         }
 
     }
+
+    .__btn-cancel {
+        color: #fff;
+        text-decoration: none;
+    }
+
 
     .hidden {
         display: none;
