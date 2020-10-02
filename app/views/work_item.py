@@ -76,8 +76,6 @@ def add_work_item_to_cart():
         # flash("The given data was invalid.", "danger")
     return redirect(url_for("work_item.work_items"))
 
-#  WorkItemGroup Manipulation
-
 
 @work_item_blueprint.route("/delete_work_item_from_cart/<item_id>", methods=["GET"])
 @login_required
@@ -85,16 +83,29 @@ def delete_work_item_from_cart(item_id):
     item_id = str(item_id)
     deleted_work_item = session.get("DeletedWorkItem", {})
     selected_ids = session.get("SelectedWorkItemsDict", {})
+    if item_id in selected_ids:
+        session["DeletedWorkItem"] = {}
+        session["DeletedWorkItem"] = selected_ids[item_id]
+        del selected_ids[item_id]
+    session["SelectedWorkItemsDict"] = selected_ids
+    return redirect(url_for("work_item.work_items"))
+
+
+@work_item_blueprint.route("/undo_work_item_from_cart/<item_id>", methods=["GET"])
+@login_required
+def undo_work_item_from_cart(item_id):
+    item_id = str(item_id)
+    deleted_work_item = session.get("DeletedWorkItem", {})
+    selected_ids = session.get("SelectedWorkItemsDict", {})
     if deleted_work_item:
         selected_ids[item_id] = str(item_id)
         session["DeletedWorkItem"] = {}
         return redirect(url_for("work_item.work_items"))
-    else:
-        if item_id in selected_ids:
-            session["DeletedWorkItem"] = selected_ids[item_id]
-            del selected_ids[item_id]
     session["SelectedWorkItemsDict"] = selected_ids
     return redirect(url_for("work_item.work_items"))
+
+
+#  WorkItemGroup Manipulation
 
 
 @work_item_blueprint.route("/work_item_group", methods=["POST"])
@@ -111,26 +122,35 @@ def work_item_group():
     return redirect(url_for("work_item.work_items"))
 
 
-#  End WorkItemGroup Manipulation
-
-
 @work_item_blueprint.route("/delete_work_item_from_group/<item_id>", methods=["GET"])
 @login_required
 def delete_work_item_from_group(item_id):
     item_id = str(item_id)
     deleted_work_item_group_id = session.get("DeletedWorkGroupItem", {})
     selected_ids = session.get("SelectedWorkItemsGroupDict", {})
+    if item_id in selected_ids:
+        session["DeletedWorkGroupItem"] = {}
+        session["DeletedWorkGroupItem"] = selected_ids[item_id]
+        del selected_ids[item_id]
+    session["SelectedWorkItemsGroupDict"] = selected_ids
+    return redirect(url_for("work_item.work_items"))
 
+
+@work_item_blueprint.route("/undo_work_item_from_group/<item_id>", methods=["GET"])
+@login_required
+def undo_work_item_from_group(item_id):
+    item_id = str(item_id)
+    deleted_work_item_group_id = session.get("DeletedWorkGroupItem", {})
+    selected_ids = session.get("SelectedWorkItemsGroupDict", {})
     if deleted_work_item_group_id:
         selected_ids[item_id] = str(item_id)
         session["DeletedWorkGroupItem"] = {}
         return redirect(url_for("work_item.work_items"))
-    else:
-        if item_id in selected_ids:
-            session["DeletedWorkGroupItem"] = selected_ids[item_id]
-            del selected_ids[item_id]
     session["SelectedWorkItemsGroupDict"] = selected_ids
     return redirect(url_for("work_item.work_items"))
+
+
+#  End WorkItemGroup Manipulation
 
 
 @work_item_blueprint.route(

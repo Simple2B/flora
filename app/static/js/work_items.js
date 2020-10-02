@@ -2,7 +2,10 @@ $(document).ready(function() {
     $('#workItemsTable').DataTable({
         "pageLength": 10,
         "order": [],
-        "displayStart": 0
+        "displayStart": 0,
+        "drawCallback": function( settings ) {
+            $("#workItemsTable thead").remove();
+        }
     });
     $('#selectedWorkItemsTable').DataTable({
         "pageLength": 10,

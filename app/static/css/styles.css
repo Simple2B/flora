@@ -146,6 +146,9 @@ ul {
   min-height: 9rem;
   min-width: 18rem; }
 
+.border-none {
+  border: none; }
+
 .t-gray {
   color: #828282; }
 
@@ -513,7 +516,35 @@ ul {
     width: 100%;
     display: inline-flex;
     align-items: center;
-    justify-content: space-between; }
+    justify-content: space-evenly; }
+  .chart-left .__table-item--thead {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: start;
+    align-items: center;
+    padding: 0.3rem;
+    background-color: #828282;
+    color: #fff; }
+    .chart-left .__table-item--thead ._cart_item--style-work-name {
+      padding-left: 5rem; }
+  .chart-left .__block-add_to_cart {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0.5rem 0.5rem; }
+    .chart-left .__block-add_to_cart .__btn-add_to_cart {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #FFFFFF;
+      border: 1px solid #BDBDBD;
+      margin-right: 1rem;
+      width: 9vw; }
+      .chart-left .__block-add_to_cart .__btn-add_to_cart .__input-add-to-cart-from:hover {
+        text-decoration: underline; }
+    .chart-left .__block-add_to_cart .__input-add-to-cart-from {
+      cursor: pointer;
+      border: none;
+      background-color: #FFFFFF; }
 
 .chart-right {
   padding: 0.7rem;
@@ -554,6 +585,10 @@ ul {
     text-decoration: none; }
   .chart-right .hidden {
     display: none; }
+  .chart-right .chart-right__buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end; }
 
 .bck-color-table {
   background-color: #828282; }
