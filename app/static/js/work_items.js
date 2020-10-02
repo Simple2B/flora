@@ -32,4 +32,13 @@ $(document).ready(function() {
         modal.find('#_work_item_input_name_delete #title').val(name);
     });
 
+                /* When the user clicks on the button,
+            toggle between hiding and showing the dropdown content */
+
 } );
+
+const groupWrapper = document.getElementById('groupTableWrapper');
+const groupToggle = document.getElementById('btnGroup');
+groupToggle.addEventListener('click', () => {
+    groupWrapper.classList.toggle('show');
+});

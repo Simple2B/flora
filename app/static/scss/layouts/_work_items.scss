@@ -77,7 +77,6 @@
 }
 
 .chart-left {
-    background-color: lavender;
     padding: 0.7rem;
     flex: 1;
 
@@ -93,19 +92,17 @@
     }
 
     &__header-add-item {
+        width: 100%;
         display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
 }
 
 .chart-right {
-    background-color: lightsalmon;
     padding: 0.7rem;
     flex: 1;
-
-    .chart-right__group-name {
-        background-color: #FFFFFF;
-    }
 
     & .__inline--blocks {
         display: flex;
@@ -118,7 +115,17 @@
         }
     }
 
+    & .chart-right__group_name-box {
+
+        .chart-right__group-name-block {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            background-color: #FFFFFF;
+        }
+
+    }
+
+    .show {display:block;}
 
 }
-
-

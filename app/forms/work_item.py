@@ -12,3 +12,4 @@ class NewWorkItemForm(FlaskForm):
 
 class WorkItemCartForm(FlaskForm):
     submit = SubmitField('Add to cart')
+    add_submit_group = SubmitField('Add to group')

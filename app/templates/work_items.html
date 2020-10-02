@@ -38,11 +38,7 @@
 
         <form class="form" role="form" action="{{ url_for('work_item.work_item') }}" method="post">
           <div class="chart-left__header">
-            <div class="chart-left__header-search">
-              <div class="search-item-bar">
-                <input type="search" name="" id="">
-              </div>
-            </div>
+
             <div class="chart-left__header-add-item">
               <div>
                 {{form.code(class='_form-input _form-input--m')}}
@@ -62,10 +58,6 @@
         <span class="t-gray">Showing {{ form.work_items|length }} items</span>
         <div>
           {{ work_cart_form.submit(class='_btn--gray __add_to_cart--place', form="work_items") }}
-        </div>
-
-        <div>
-          {{ form_group_to_cart.submit(class='_btn--gray __add_to_cart--place', form="work_items") }}
         </div>
 
         <form class="form" id="work_items" role="form" action="{{ url_for('work_item.add_work_item_to_cart') }}" method="post">
@@ -94,7 +86,7 @@
                   <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
                   </button>
 
-                  <button type="button">
+                  <button type="add_submit_group" name='add_submit_group'>
                   <img src="{{ url_for('static', filename='images/group_element.svg') }}">
                   </button>
                 </td>
@@ -112,10 +104,13 @@
 
         <div class="chart-right__header">
           <span><strong>Work Items Cart</strong></span>
-          <span class="chart-left__header-add-group __inline--blocks">
-            <input type="text" name="name" id="" class="_form-input _form-input--m" form="work_item_name">
+          <span class="chart-right__header-add-group __inline--blocks">
+            <input type="text" name="name" id="" class="_form-input _form-input--m" form="work_item_group_name">
             <div>
-              {{ form_group.submit(class='_btn--gray __add_to_cart--place', form="add_to_work_item_group") }}
+              {{ form_group.submit(class='_btn--gray __add_to_cart--place', form="work_item_group_name") }}
+            </div>
+            <div>
+              {{ form_group_to_cart.add_submit(class='_btn--gray __add_to_cart--place', form="work_items") }}
             </div>
           </span>
         </div>
@@ -142,16 +137,24 @@
         </table>
 
         <form id="work_item_group_name" role="form" action="{{ url_for('work_item.work_item_group') }}" method="post">
-          <div>
-            <div class="chart-right__group-name">
+          <div class="chart-right__group_name-box">
+            <div class="chart-right__group-name-block">
+              <div>
               {% for i in group_name %}
               <img src="{{ url_for('static', filename='images/group_element.svg') }}"> Group: {{i.name}}
               {% endfor %}
+              </div>
+
+              <button id='btnGroup'>
+                <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}">
+              </button>
+
             </div>
           </div>
         </form>
-        <form id="add_to_work_item_group" role="form" action="{{ url_for('work_item.add_work_item_to_group') }}" method="post">
-          <table id="selectedWorkItemGroupTable" class="table table-striped table-sm">
+        <!-- <form id="add_to_work_item_group" role="form" action="" method="post"> -->
+          <div id="groupTableWrapper" class="hidden">
+          <table id="selectedWorkItemGroupTable" class="table table-striped table-sm dropdown-content">
             <thead class="">
               <th>Code</th>
               <th>Name</th>
@@ -163,14 +166,15 @@
                 <td><a href="" class="t-gray">{{item.code}}</a></td>
                 <td>{{item.name}}</td>
                 <td>
-                  <a href="{{url_for('work_item.delete_work_item_from_cart', item_id=item.id)}}"><img
+                  <a href="{{url_for('work_item.delete_work_item_from_group', item_id=item.id)}}"><img
                       src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
                 </td>
               </tr>
               {% endfor %}
             </tbody>
           </table>
-        </form>
+          </div>
+        <!-- </form> -->
 
 
         <div class="chart-right__buttons">
