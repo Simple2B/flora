@@ -9,6 +9,9 @@ bidding_blueprint = Blueprint("bidding", __name__)
 @bidding_blueprint.route("/biddings")
 @login_required
 def biddings():
+    for i in range(9):
+        bid_test = Bid()
+        bid_test.save()
     bids = Bid.query.all()
     return render_template("biddings.html", bids=bids)
 
