@@ -32,7 +32,7 @@
   </div>
   <!-- </div> -->
   <!-- end Sidebar -->
-  <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size" id="ddb-background">
+  <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size box-shadow" id="ddb-background">
   </nav>
   <div class="container" id="work-item-container">
 
@@ -84,13 +84,13 @@
                       <td><input class="form-control" type="checkbox" name="{{clarification.id}}"></td>
                       <td>{{clarification.note}}</td>
 
-                      <td><button type="button" value="{{clarification.id}}" style="border: none;"
+                      <td><button type="button" value="{{clarification.id}}" class="border-none"
                         data-toggle="modal" data-target="#AddModalClarification" data-target_link="{{url_for('clarification.edit_clarification_item', item_id=clarification.id)}}"
                         data-note="{{clarification.note}}" data-description="{{clarification.description}}">
                         <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
                       </button>
 
-                      <button type="button" value="{{clarification.id}}" class="__border-none" data-toggle="modal" data-target="#modalDeleteClarification"
+                      <button type="button" value="{{clarification.id}}" class="border-none" data-toggle="modal" data-target="#modalDeleteClarification"
                       data-delete="{{clarification.note}}" data-description="{{clarification.description}}"
                       data-target_link_clarification_delete="{{url_for('clarification.delete_clarification_item_from_items', item_id=clarification.id)}}">
                       <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
@@ -105,7 +105,7 @@
         </div>
 
         <div class="__box-table--right">
-          <div class="modal-content border--none" role="document">
+          <div class="modal-content border-none" role="document">
             <h6>Clarification items cart</h6>
           </div>
 

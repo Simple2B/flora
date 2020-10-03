@@ -2,7 +2,10 @@ $(document).ready(function() {
     $('#workItemsTable').DataTable({
         "pageLength": 10,
         "order": [],
-        "displayStart": 0
+        "displayStart": 0,
+        "drawCallback": function( settings ) {
+            $("#workItemsTable thead").remove();
+        }
     });
     $('#selectedWorkItemsTable').DataTable({
         "pageLength": 10,
@@ -10,7 +13,7 @@ $(document).ready(function() {
         "displayStart": 0
     });
 
-    $('#exampleModal').on('show.bs.modal', function (event) {
+    $('#modalEdit').on('show.bs.modal', function (event) {
       const button = $(event.relatedTarget); // Button that triggered the modal
       const target_link = button.data('target_link');
       const code = button.data('code');
@@ -32,4 +35,14 @@ $(document).ready(function() {
         modal.find('#_work_item_input_name_delete #title').val(name);
     });
 
+                /* When the user clicks on the button,
+            toggle between hiding and showing the dropdown content */
+
 } );
+
+const groupWrapper = document.getElementById('groupTableWrapper');
+const groupToggle = document.getElementById('btnGroup');
+groupToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    groupWrapper.classList.toggle('hidden');
+});

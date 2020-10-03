@@ -1,6 +1,7 @@
+from sqlalchemy.orm import relationship
+
 from app import db
 from app.models.utils import ModelMixin
-from sqlalchemy.orm import relationship
 
 
 class WorkItemGroup(db.Model, ModelMixin):
