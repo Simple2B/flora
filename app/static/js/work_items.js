@@ -35,8 +35,6 @@ $(document).ready(function() {
         modal.find('#_work_item_input_name_delete #title').val(name);
     });
 
-                /* When the user clicks on the button,
-            toggle between hiding and showing the dropdown content */
 
 } );
 
@@ -46,3 +44,15 @@ groupToggle.addEventListener('click', (e) => {
     e.preventDefault();
     groupWrapper.classList.toggle('hidden');
 });
+
+const sidebarWrapper = document.getElementById('wrapper');
+const barToggle = document.getElementById('ddb-background');
+barToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    sidebarWrapper.classList.toggle('hidden');
+});
+
+
+// if (location.href == 'http://localhost:3000/work_items') {
+//     document.getElementById('wrapper').classList.toggle('test-class');
+// };

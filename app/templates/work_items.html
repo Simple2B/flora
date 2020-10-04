@@ -6,10 +6,10 @@
 
 
 {% block content %}
-<section class="page-section work-items-section">
+<section class="page-section work-items-section"  id="wrapper">
   <!-- Sidebar -->
-  <div class="sidebar-container">
-    <nav class="sidebar">
+  <div class="sidebar-container" id="sidebar-wrapper">
+    <div class="sidebar">
       <span class="sidebar__return-link t-gray">
         <a href="http://localhost:3000/biddings"><img src="{{ url_for('static', filename='images/right-hand.svg') }}">
         Back to editing
@@ -17,15 +17,21 @@
       </span>
       <span class="sidebar__bid-title">{{ bid.id }} - {{ bid.title }}</span>
       <ul class="sidebar__nav-links">
-        <li><a href="#">Project General</a></li>
-        <li><a href="#">Scope of Work</a></li>
-        <li><a href="#">Select Work Item</a></li>
+        <li><a href="{{ url_for('bidding.biddings') }}">Project General</a></li>
+        <li class="__disc-blue"><a href="#" class="__text-decor-active">
+          <ul>Scope of Work</a>
+          <li><span href="#" class="__select_work_item-active">Select Work Item</span></li>
+          </ul>
+        </li>
         <li><a href="{{ url_for('exclusion.exclusions') }}">Exclusion</a></li>
         <li><a href="{{ url_for('clarification.clarifications') }}">Clarification</a></li>
         <li><a href="#">Alternates</a></li>
       </ul>
-    </nav>
+    </div>
   </div>
+
+  <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size box-shadow" id="ddb-background">
+  </nav>
   <!-- End Sidebar -->
 
   <!-- Chart Container -->
@@ -54,7 +60,7 @@
                 <label class="_label">Name</label>
               </div>
 
-              {{form.submit(class='_btn--blue')}}
+              {{form.submit(class='_btn--blue ddb-cursor-handle')}}
             </div>
           </div>
         </form>

@@ -3,6 +3,12 @@
 .work-items-section {
     display: flex;
     flex-flow: row nowrap;
+
+    & .ddb__side_bar {
+        max-height: 50vh;
+        cursor: pointer;
+    }
+
 }
 
 .sidebar-container {
@@ -28,8 +34,23 @@
     &__nav-links {
         list-style-type: disc;
 
+        .__disc-blue {
+            color: #007bff;
+
+            .__select_work_item-active {
+                // border-right: solid 2px #E6A73E;
+                // background-color: #F2F2F2;
+                // text-decoration: none;
+                color: #BDBDBD;
+                // &:hover {
+
+                // }
+            }
+        }
+
         & li {
             margin: 0.5rem;
+
         }
 
         & li a {
@@ -39,14 +60,25 @@
                 color: #2F80ED;
             }
         }
+
+        .__text-decor-active {
+            color: #007bff;
+
+            &:hover {
+                color: #2F80ED;
+                text-decoration: underline;
+            }
+        }
     }
 }
 
 .main-container {
-    min-width: 83%;
+    min-width: 75%;
     margin: 0 1rem;
     display: flex;
     flex-flow: column;
+    margin-left: auto;
+    margin-right: auto;
 
     &__bid-header {
         background-color: black;
