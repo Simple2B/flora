@@ -53,6 +53,29 @@ barToggle.addEventListener('click', (e) => {
 });
 
 
-// if (location.href == 'http://localhost:3000/work_items') {
-//     document.getElementById('wrapper').classList.toggle('test-class');
+// const hrefList = [
+//     'http:/biddings',
+//     'http:/team',
+//     'http:/',
+// ]
+// for (var i = 0; i < hrefList.length; i++) {
+//     if (hrefList[i] == );
 // };
+
+
+var list_of_header_href = $('#header_menu_items_id a');
+for (var i = 0; i < list_of_header_href.length; i++) {
+    console.log(list_of_header_href[i]);
+    var element = list_of_header_href[i].href;
+    console.log(element);
+    if ( element == window.location.href) {
+        var z = document.getElementById('bidding_id');
+        z.classList.toggle('test-class');
+    };
+};
+
+
+const href_work_items_ = document.getElementsByClassName('__text-decor-active');
+if ( href_work_items_[0].href == window.location.href) {
+  document.getElementById('bidding_id').classList.toggle('test-class');
+};

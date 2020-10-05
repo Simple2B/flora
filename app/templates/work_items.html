@@ -18,9 +18,9 @@
       <span class="sidebar__bid-title">{{ bid.id }} - {{ bid.title }}</span>
       <ul class="sidebar__nav-links">
         <li><a href="{{ url_for('bidding.biddings') }}">Project General</a></li>
-        <li class="__disc-blue"><a href="#" class="__text-decor-active">
+        <li class="__disc-blue"><a href="{{ url_for('work_item.work_items') }}" class="__text-decor-active">
           <ul>Scope of Work</a>
-          <li><span href="#" class="__select_work_item-active">Select Work Item</span></li>
+          <li><span href="" class="__select_work_item-active">Select Work Item</span></li>
           </ul>
         </li>
         <li><a href="{{ url_for('exclusion.exclusions') }}">Exclusion</a></li>

@@ -27,10 +27,10 @@
           <a class="logo" href="#">
             <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="DDB Contracting" class="logo__img">
           </a>
-          <nav class="menu__items">
-              <a class="menu__item" href="{{ url_for('bidding.biddings') }}">Bidding</a>
-              <a class="menu__item" href="{{ url_for('main.team') }}">My team</a>
-              <a class="menu__item" href="#">Resources</a>
+          <nav class="menu__items" id='header_menu_items_id'>
+              <a class="menu__item" href="{{ url_for('bidding.biddings') }}" id='bidding_id'>Bidding</a>
+              <a class="menu__item" href="{{ url_for('main.team') }}" id='myTeam_id'>My team</a>
+              <a class="menu__item" href="{{ url_for('main.index') }}" id='resources_id'>Resources</a>
               <a class="menu__item" href="{{ url_for('procore.procore_auth') }}">Procore</a>
               <span class="nav-indicator"></span>
           </nav>
@@ -41,7 +41,7 @@
             <div class="user-info__img">
               <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt="Icon">
             </div>
-            
+
             <div class="user-info__details">
               <span class="flex-row">
               <div>{{current_user.username}}</div>
