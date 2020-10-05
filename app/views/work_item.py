@@ -81,7 +81,6 @@ def add_work_item_to_cart():
 @login_required
 def delete_work_item_from_cart(item_id):
     item_id = str(item_id)
-    deleted_work_item = session.get("DeletedWorkItem", {})
     selected_ids = session.get("SelectedWorkItemsDict", {})
     if item_id in selected_ids:
         session["DeletedWorkItem"] = {}
@@ -106,8 +105,6 @@ def undo_work_item_from_cart(item_id):
 
 
 #  WorkItemGroup Manipulation
-
-
 @work_item_blueprint.route("/work_item_group", methods=["POST"])
 @login_required
 def work_item_group():
@@ -126,7 +123,6 @@ def work_item_group():
 @login_required
 def delete_work_item_from_group(item_id):
     item_id = str(item_id)
-    deleted_work_item_group_id = session.get("DeletedWorkGroupItem", {})
     selected_ids = session.get("SelectedWorkItemsGroupDict", {})
     if item_id in selected_ids:
         session["DeletedWorkGroupItem"] = {}
@@ -151,8 +147,6 @@ def undo_work_item_from_group(item_id):
 
 
 #  End WorkItemGroup Manipulation
-
-
 @work_item_blueprint.route(
     "/delete_work_item_from_items/<item_id>", methods=["POST"]
 )

@@ -2,7 +2,7 @@ import pytest
 
 from app.models import WorkItem
 from app import db, create_app
-from tests.utils import register, login, logout
+from tests.utils import register, login
 
 
 @pytest.fixture
