@@ -7,7 +7,7 @@ const browserSync = require('browser-sync').create(); // browser reloader
 
 const paths = {
   styles: {
-    src: './app/static/scss/**/*.scss',
+    src: './scss/**/*.scss',
     dest: './app/static/css'
   }
 }
@@ -32,10 +32,11 @@ const watch = () => {
   browserSync.init({
     notify: false,                // turn off sync notification
     proxy: "localhost:5000",      // provide address to watch
-    browser: "chrome"      // select multiple browsers ["browser_name", "browser_name"]
+    browser: ["chrome", "google chrome", "google-chrome"]      // select multiple browsers ["browser_name", "browser_name"]
+
   });
 
-  gulp.watch('./app/static/**/*.scss', style);                                // reload browser on CSS update
+  gulp.watch('./scss/**/*.scss', style);                               // reload browser on CSS update
   gulp.watch('./app/templates/**/*.html').on('change', browserSync.reload);   // reload browser on HTML update
   gulp.watch('./static/js/**/*.js').on('change', browserSync.reload);         // reload browser on JS update
 }
