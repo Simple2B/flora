@@ -440,6 +440,9 @@ ul {
   .list__side_bar--style a:hover {
     color: #2F80ED; }
 
+.__side_bar--ul {
+  padding-left: 5rem; }
+
 .active {
   color: #2F80ED !important; }
 
