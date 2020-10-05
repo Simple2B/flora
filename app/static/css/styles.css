@@ -156,6 +156,9 @@ ul {
 .welcome {
   text-align: center; }
 
+.overflow-x-hidden {
+  overflow-x: hidden; }
+
 .t-gray {
   color: #828282; }
 

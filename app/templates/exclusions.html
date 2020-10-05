@@ -6,10 +6,10 @@
 
 {% block content %}
 
-<section class="page-section section-block bidding d-flex tabm" id="wrapper">
+<section class="page-section section-block bidding d-flex overflow-x-hidden" id="wrapper">
   <!-- begin Sidebar -->
   <!-- <div> -->
-  <div class="bg-light border-right box-shadow __side-bar-box" id="sidebar-wrapper">
+  <div class="border-right box-shadow __side-bar-box" id="sidebar-wrapper">
     <div class="sidebar-heading">DDB Contracting</div>
     <div class="text--center list-group list-group-flush none-underline">
       <a href="{{ url_for('bidding.biddings') }}">
@@ -18,7 +18,7 @@
       <a href="{{ url_for('work_item.work_items') }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       Scope of work </button> </a>
-      <a href="{{ url_for('exclusion.exclusions') }}" id='exclusion_id'>
+      <a href="{{ url_for('exclusion.exclusions') }}" id='href_exclusion_id'>
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks --border">
       Exclusions
       </button> </a>
