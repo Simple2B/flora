@@ -77,15 +77,15 @@
         <div class="__block-add_to_cart">
           <div class='_btn--gray __btn-add_to_cart'>
             <img src="{{ url_for('static', filename='images/cart_element.svg') }}">
-            {{ work_cart_form.submit(class='__input-add-to-cart-from', form="work_items") }}
+            {{ work_cart_form.submit(class='__input-add-to-cart-from', form="form_work_items") }}
           </div>
 
-          <div>
-            {{ form_group_to_cart.add_submit(class='_btn--gray ddb-cursor-handle', form="work_items") }}
-          </div>
+          <!-- <div>
+            {{ form_group_to_cart.add_submit(class='_btn--gray ddb-cursor-handle', form="form_work_items") }}
+          </div> -->
         </div>
 
-        <form class="form" id="work_items" role="form" action="{{ url_for('work_item.add_work_item_to_cart') }}" method="post">
+        <form class="form" id="form_work_items" role="form" action="{{ url_for('work_item.add_work_item_to_cart') }}" method="post">
           <div>
           <table id="workItemsTable" class="table table-striped table-sm">
             <thead class="">
@@ -200,22 +200,25 @@
 
         <!-- Group Table -->
 
-        <form id="work_item_group_name" role="form" action="{{ url_for('work_item.work_item_group') }}" method="post">
-          <div class="chart-right__group_name-box">
-            <div class="chart-right__group-name-block">
-              <div>
-              {% for i in group_name %}
-              <img src="{{ url_for('static', filename='images/group_element.svg') }}"> Group: {{i.name}}
-              {% endfor %}
-              </div>
+        <div class="chart-right__group_name-box">
+          <div class="chart-right__group-name-block">
 
-              <button id='btnGroup'>
-                <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}">
-              </button>
 
+            <div class="__inline--items">
+            <input class="form-control" type="checkbox"  name="group_on_choice" form="form_work_items">
+
+            <img src="{{ url_for('static', filename='images/group_element.svg') }}">
             </div>
+            <form class="__group_name" id="work_item_group_name" role="form" action="{{ url_for('work_item.work_item_group') }}" method="post">
+            {% for i in group_name %}
+            <div>Group: {{i.name}}</div>
+            {% endfor %}
+            </form>
+            <button id='btnGroup'>
+              <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}">
+            </button>
           </div>
-        </form>
+        </div>
 
         <div id="groupTableWrapper" class="hidden __box-scroll--group-table">
           <table id="selectedWorkItemGroupTable" class="table table-striped table-sm dropdown-content">

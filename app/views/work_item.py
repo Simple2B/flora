@@ -46,25 +46,31 @@ def add_work_item_to_cart():
 
     if form.validate_on_submit():
 
-        if form_group.add_submit.data:
+        selected_work_items_choices = [
+            i for i in request.form
+            if (request.form[i] == "on" and i != "group_on_choice")
+        ]
+
+        # if form_group.add_submit.data:
+        if request.form.get('group_on_choice', '') == 'on':
+
             selected_work_items_group.update(
                 {
                     str(k): WorkItem.query.get(int(k))
-                    for k in request.form
-                    if request.form[k] == "on"
+                    for k in selected_work_items_choices
                 }
             )
             session["SelectedWorkItemsGroupDict"] = {
                 str(item_id): item_id for item_id in selected_work_items_group
             }
+
             return redirect(url_for("work_item.work_items"))
 
         else:
             form.selected_work_items.update(
                 {
                     str(k): WorkItem.query.get(int(k))
-                    for k in request.form
-                    if request.form[k] == "on"
+                    for k in selected_work_items_choices
                 }
             )
             session["SelectedWorkItemsDict"] = {

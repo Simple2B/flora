@@ -23,12 +23,7 @@ def client():
         app_ctx.pop()
 
 
-def test_bidding(client):
-    response = client.get("/bidding")
+def test_biddings(client):
+    response = client.get("/biddings")
     assert response.status_code == 200
-    assert b"Overhead" in response.data
-    item = WorkItem(name="TESTWORKITEM", code="99.99")
-    item.save()
-    response = client.get("/bidding")
-    assert b"TESTWORKITEM" in response.data
-    assert b"99.99" in response.data
+    assert b"1" in response.data

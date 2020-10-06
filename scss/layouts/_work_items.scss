@@ -213,8 +213,22 @@
             flex-direction: row;
             justify-content: space-between;
             background-color: #FFFFFF;
-        }
 
+            .__inline--items {
+                display: inline-flex;
+                flex-flow: row;
+                align-items: center;
+                width: 10%;
+            }
+
+            .__group_name {
+                display: flex;
+                align-items: center;
+                margin-right: auto;
+                margin-left: 0.5rem;
+                width: 30%;
+            }
+        }
     }
 
     &__undo-block {

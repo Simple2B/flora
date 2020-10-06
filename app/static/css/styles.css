@@ -599,6 +599,17 @@ ul {
     flex-direction: row;
     justify-content: space-between;
     background-color: #FFFFFF; }
+    .chart-right .chart-right__group_name-box .chart-right__group-name-block .__inline--items {
+      display: inline-flex;
+      flex-flow: row;
+      align-items: center;
+      width: 10%; }
+    .chart-right .chart-right__group_name-box .chart-right__group-name-block .__group_name {
+      display: flex;
+      align-items: center;
+      margin-right: auto;
+      margin-left: 0.5rem;
+      width: 30%; }
   .chart-right__undo-block {
     background-color: #E6A73E;
     border-radius: 0.5rem;
