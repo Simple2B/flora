@@ -93,7 +93,7 @@ def undo_work_item_from_cart(item_id):
     return redirect(url_for("work_item.work_items"))
 
 
-#  WorkItemGroup Manipulation
+#  Group Manipulation
 
 
 @work_item_blueprint.route("/work_item_group", methods=["POST"])
@@ -137,14 +137,30 @@ def undo_work_item_from_group(group_name, item_id):
     return redirect(url_for("work_item.work_items"))
 
 
-#  End WorkItemGroup Manipulation
+@work_item_blueprint.route(
+    "/delete_group/<group_name>", methods=["POST"]
+)
+@login_required
+def delete_group(group_name):
+    if group_name:
+        groups = session.get("GroupDict", {})
+        if str(group_name) in groups:
+            del groups[group_name]
+            session['GroupDict'] = groups
+    return redirect(url_for("work_item.work_items"))
+
+
+#  End Group Manipulation
+
+
+#  WorkItem Manipulation
 
 
 @work_item_blueprint.route(
-    "/delete_work_item_from_items/<item_id>", methods=["POST"]
+    "/delete_work_item/<item_id>", methods=["POST"]
 )
 @login_required
-def delete_work_item_from_items(item_id):
+def delete_work_item(item_id):
     work_item = WorkItem.query.get(item_id)
     if work_item:
         selected = session.get("SelectedWorkItemsDict", {})
@@ -167,6 +183,9 @@ def edit_work_item(item_id):
             work_item.name = form.name.data
             work_item.save()
     return redirect(url_for("work_item.work_items"))
+
+
+#  End WorkItem Manipulation
 
 
 @work_item_blueprint.route("/work_items/", methods=["GET"])

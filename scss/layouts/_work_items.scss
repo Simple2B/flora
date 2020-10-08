@@ -276,7 +276,7 @@
 
 .modal-content {
 
-    ._h5--padding{
+    .--padding{
         padding: $m0-5rem $m0-5rem 0rem $m0-5rem;
     }
 
@@ -288,5 +288,13 @@
         div {
             padding: $m0-5rem;
         }
+    }
+}
+
+
+#_group_input_delete {
+    .input--label {
+        top: 0.8rem;
+        left: 3.5rem;
     }
 }

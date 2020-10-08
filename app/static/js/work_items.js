@@ -35,6 +35,15 @@ $(document).ready(function() {
         modal.find('#_work_item_input_name_delete #title').val(name);
     });
 
+    $('#modalDeleteGroup').on('show.bs.modal', function (event) {
+        const button = $(event.relatedTarget); // Button that triggered the modal
+        const target_link = button.data('target_link_group_delete');
+        const name = button.data('group_name');
+        const modal = $(this);
+        modal.find('#_modal_delete_group').attr('action', target_link);
+        modal.find('#_group_input_delete #_input_group_name').val(name);
+    });
+
 
 } );
 

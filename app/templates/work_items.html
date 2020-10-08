@@ -106,7 +106,7 @@
                   <button type="button" value="{{work_item.id}}" data-toggle="modal" data-target="#modalDeleteWorkItem"
                   data-delete_work_item="{{work_item.code}}" data-work_item_name="{{work_item.name}}"
                   class="border-none ddb-cursor-handle"
-                  data-target_link_work_item_delete="{{url_for('work_item.delete_work_item_from_items', item_id=work_item.id)}}">
+                  data-target_link_work_item_delete="{{url_for('work_item.delete_work_item', item_id=work_item.id)}}">
                   <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
                   </button>
                 </td>
@@ -220,9 +220,10 @@
 
             </form>
 
-            <a class="__delete-group" href="#"><img
-              src="{{ url_for('static', filename='images/delete_element.svg') }}">
-            </a>
+            <button class="__delete-group border-none" type="button" data-toggle="modal" data-target="#modalDeleteGroup"
+            data-target_link_group_delete="{{url_for('work_item.delete_group', group_name=group_name)}}" data-group_name="{{group_name}}">
+              <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+            </button>
             <button id='btnGroup' class="ddb-cursor-handle btnGroup_js">
               <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}">
             </button>
@@ -280,7 +281,7 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
-      <h5 class="_h5--padding">Edit work item</h5>
+      <h5 class="--padding">Edit work item</h5>
       <div class="modal-body">
         <form class="form" role="form" action="" method="post">
           <div class="__modal-inputs--flex-row">
@@ -343,6 +344,38 @@
   </div>
 </div>
 <!-- end of Delete WorkItem Modal -->
+
+<!-- Delete Group Modal -->
+<div class="modal fade" id="modalDeleteGroup" tabindex="-3" role="dialog" aria-labelledby="ModalLabelDeleteGroup"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <h5 class="--padding">Are you sure want to delete Group?</h5>
+      <div class="modal-body">
+        <form class="form_delete" role="form" action="" method="post" id="_modal_delete_group">
+          <div class="__modal-inputs--flex-row">
+
+            <div id="_group_input_delete">
+              <label class="_label input--label">Group Name</label>
+              <input class="_form-input _form-input--m" id="_input_group_name" disabled>
+            </div>
+
+            <div class="">
+              <input class="_btn--black btn btn-secondary ddb-cursor-handle" name="submit" type="submit" value="Delete">
+            </div>
+
+            <div class="">
+              <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of Delete Group Modal -->
+
 
 {% endblock %}
 

@@ -636,7 +636,7 @@ ul {
     flex-flow: row nowrap;
     justify-content: flex-end; }
 
-.modal-content ._h5--padding {
+.modal-content .--padding {
   padding: 0.5rem 0.5rem 0rem 0.5rem; }
 
 .modal-content .__modal-inputs--flex-row {
@@ -645,6 +645,10 @@ ul {
   flex-flow: row wrap; }
   .modal-content .__modal-inputs--flex-row div {
     padding: 0.5rem; }
+
+#_group_input_delete .input--label {
+  top: 0.8rem;
+  left: 3.5rem; }
 
 .bck-color-table {
   background-color: #828282; }
