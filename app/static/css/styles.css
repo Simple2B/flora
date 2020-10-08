@@ -610,6 +610,8 @@ ul {
       margin-right: auto;
       margin-left: 0.5rem;
       width: 30%; }
+    .chart-right .chart-right__group_name-box .chart-right__group-name-block .__delete-group {
+      margin-right: 0.5rem; }
   .chart-right__undo-block {
     background-color: #E6A73E;
     border-radius: 0.5rem;
