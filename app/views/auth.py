@@ -10,7 +10,7 @@ auth_blueprint = Blueprint("auth", __name__)
 
 @auth_blueprint.route("/register", methods=["GET", "POST"])
 def register():
-    form = RegistrationForm(request.form)
+    form = RegistrationForm()
     if form.validate_on_submit():
         if add_user_data_validator(
             form.username.data,
@@ -52,7 +52,6 @@ def login():
 @auth_blueprint.route("/logout")
 @login_required
 def logout():
-    logout_user()
     session.clear()
     flash("You were logged out.", "info")
     return redirect(url_for("auth.login"))

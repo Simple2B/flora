@@ -22,7 +22,7 @@ def client():
 
 def test_auth_pages(client):
     response = client.get("/register")
-    assert response.status_code == 200
+    assert response.status_code == 302
     response = client.get("/login")
     assert response.status_code == 200
     response = client.get("/logout")
@@ -52,7 +52,7 @@ def test_login_and_logout(client):
     assert b"Please log in to access this page." in response.data
     register("sam")
     response = login(client, "sam")
-    assert b"Login successful." in response.data
+    assert b"sam" in response.data
     # Should successfully logout the currently logged in user.
     response = logout(client)
     assert b"You were logged out." in response.data
@@ -61,4 +61,4 @@ def test_login_and_logout(client):
     assert b"Wrong user login/email or password." in response.data
     # Correct credentials should login
     response = login(client, "sam")
-    assert b"Login successful." in response.data
+    assert b"sam" in response.data

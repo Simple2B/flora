@@ -15,6 +15,13 @@ class BaseConfig(object):
     WTF_CSRF_ENABLED = False
     GENERATE_TEST_DATA = int(os.environ.get('GENERATE_TEST_DATA', '0'))
 
+    PROCORE_API_CLIENT_ID = os.environ.get("PROCORE_API_CLIENT_ID", '')
+    PROCORE_API_CLIENT_SECRET = os.environ.get("PROCORE_API_CLIENT_SECRET", '')
+    PROCORE_API_REDIRECT_URI = os.environ.get("PROCORE_API_REDIRECT_URI", '')
+    PROCORE_API_OAUTH_URL = os.environ.get("PROCORE_API_OAUTH_URL", '')
+    PROCORE_API_BASE_URL = os.environ.get("PROCORE_API_BASE_URL", '')
+    PROCORE_API_COMPANY_ID = os.environ.get("PROCORE_API_COMPANY_ID", '')
+
     @staticmethod
     def configure(app):
         # Implement this method to do further configuration on your app.
@@ -29,11 +36,6 @@ class DevelopmentConfig(BaseConfig):
         "DEVEL_DATABASE_URL",
         "sqlite:///" + os.path.join(base_dir, "database-devel.sqlite3"),
     )
-    CLIENT_ID = os.environ.get("CLIENT_ID", '')
-    CLIENT_SECRET = os.environ.get("CLIENT_SECRET", '')
-    REDIRECT_URI = os.environ.get("REDIRECT_URI", '')
-    OAUTH_URL = os.environ.get("OAUTH_URL", '')
-    BASE_URL = os.environ.get("BASE_URL", '')
 
 
 class TestingConfig(BaseConfig):
