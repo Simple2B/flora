@@ -11,14 +11,14 @@
   <div class="sidebar-container" id="sidebar-wrapper">
     <div class="sidebar">
       <span class="sidebar__return-link t-gray">
-        <a href="{{ url_for('bidding.biddings')}}"><img src="{{ url_for('static', filename='images/right-hand.svg') }}">
+        <a href="{{ url_for('bidding.bidding', item_id=bid_id)}}"><img src="{{ url_for('static', filename='images/right-hand.svg') }}">
         Back to editing
         </a>
       </span>
-      <span class="sidebar__bid-title">{{ bid.id }} - TEST bid</span>
+      <span class="sidebar__bid-title">{{ bid_id }} - TEST bid</span>
       <ul class="sidebar__nav-links">
         <li><a href="{{ url_for('bidding.biddings') }}">Project General</a></li>
-        <li class="__disc-blue"><a href="{{ url_for('work_item.work_items') }}" class="__text-decor-active">
+        <li class="__disc-blue"><a href="{{ url_for('work_item.work_items', bid_id=bid_id) }}" class="__text-decor-active">
           <ul>Scope of Work</a>
           <li><span href="" class="__select_work_item-active">Select Work Item</span></li>
           </ul>
@@ -39,14 +39,14 @@
     <div class="main-container__bid-header">
       <div class="bid-header__status">Draft</div>
       <div class="bid-header__title"><strong>
-        # {{ bid.id }} - TEST bid
+        # {{ bid_id }} - TEST bid
       </strong></div>
     </div>
     <div class="main-container__body">
       <div class="chart-left">
         <!-- Left Chart -->
 
-        <form class="form" role="form" action="{{ url_for('work_item.work_item') }}" method="post">
+        <form class="form" role="form" action="{{ url_for('work_item.work_item', bid_id=bid_id) }}" method="post">
           <div class="chart-left__header">
 
             <div class="chart-left__header-add-item">
@@ -82,7 +82,7 @@
 
         </div>
 
-        <form class="form" id="form_work_items" role="form" action="{{ url_for('work_item.add_work_item_to_cart') }}" method="post">
+        <form class="form" id="form_work_items" role="form" action="{{ url_for('work_item.add_work_item_to_cart', bid_id=bid_id) }}" method="post">
           <div>
           <table id="workItemsTable" class="table table-striped table-sm">
             <thead class="">
@@ -98,7 +98,7 @@
                 <td><span class="t-gray">{{work_item.code}}</span></td>
                 <td>{{work_item.name}}</td>
                 <td><button type="button" value="{{work_item.id}}" class="border-none ddb-cursor-handle"
-                    data-toggle="modal" data-target="#modalEdit" data-target_link="{{url_for('work_item.edit_work_item', item_id=work_item.id)}}"
+                    data-toggle="modal" data-target="#modalEdit" data-target_link="{{url_for('work_item.edit_work_item', bid_id=bid_id, item_id=work_item.id)}}"
                     data-code="{{work_item.code}}" data-name="{{work_item.name}}">
                     <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
                   </button>
@@ -106,7 +106,7 @@
                   <button type="button" value="{{work_item.id}}" data-toggle="modal" data-target="#modalDeleteWorkItem"
                   data-delete_work_item="{{work_item.code}}" data-work_item_name="{{work_item.name}}"
                   class="border-none ddb-cursor-handle"
-                  data-target_link_work_item_delete="{{url_for('work_item.delete_work_item', item_id=work_item.id)}}">
+                  data-target_link_work_item_delete="{{url_for('work_item.delete_work_item', bid_id=bid_id, item_id=work_item.id)}}">
                   <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
                   </button>
                 </td>
@@ -136,7 +136,7 @@
             {% endfor %}
 
             <div>
-              <a href="{{url_for('work_item.undo_work_item_from_cart', item_id=form.deleted_work_item_id)}}">Undo </a>
+              <a href="{{url_for('work_item.undo_work_item_from_cart', bid_id=bid_id, item_id=form.deleted_work_item_id)}}">Undo </a>
             </div>
           </div>
 
@@ -154,7 +154,7 @@
             {% endfor %}
 
             <div>
-              <a href="{{url_for('work_item.undo_work_item_from_group', group_name=group_name, item_id=form_group.deleted_work_item_group_id[group_name])}}">
+              <a href="{{url_for('work_item.undo_work_item_from_group', group_name=group_name, item_id=form_group.deleted_work_item_group_id[group_name], bid_id=bid_id)}}">
                 Undo Group
               </a>
             </div>
@@ -190,7 +190,7 @@
                 <td><a href="" class="t-gray">{{item.code}}</a></td>
                 <td>{{item.name}}</td>
                 <td>
-                  <a href="{{url_for('work_item.delete_work_item_from_cart', item_id=item.id)}}"><img
+                  <a href="{{url_for('work_item.delete_work_item_from_cart', bid_id=bid_id, item_id=item.id)}}"><img
                       src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
                 </td>
               </tr>
@@ -212,7 +212,7 @@
 
             <img src="{{ url_for('static', filename='images/group_element.svg') }}">
             </div>
-            <form class="__group_name" id="work_item_group_name" role="form" action="{{ url_for('work_item.work_item_group') }}" method="post">
+            <form class="__group_name" id="work_item_group_name" role="form" action="{{ url_for('work_item.work_item_group', bid_id=bid_id) }}" method="post">
 
             <div> Group:
               {{group_name}}
@@ -221,7 +221,7 @@
             </form>
 
             <button class="__delete-group border-none" type="button" data-toggle="modal" data-target="#modalDeleteGroup"
-            data-target_link_group_delete="{{url_for('work_item.delete_group', group_name=group_name)}}" data-group_name="{{group_name}}">
+            data-target_link_group_delete="{{url_for('work_item.delete_group', bid_id=bid_id, group_name=group_name)}}" data-group_name="{{group_name}}">
               <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
             </button>
             <button id='btnGroup' class="ddb-cursor-handle btnGroup_js">
@@ -242,7 +242,7 @@
                   <td><a href="" class="t-gray">{{item.code}}</a></td>
                   <td>{{item.name}}</td>
                   <td>
-                    <a href="{{url_for('work_item.delete_work_item_from_group', group_name=group_name, item_id=item.id)}}"><img
+                    <a href="{{url_for('work_item.delete_work_item_from_group', group_name=group_name, work_item_id=item.id, bid_id=bid_id)}}"><img
                         src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
                   </td>
                 </tr>
@@ -252,7 +252,7 @@
           </div>
           {% endfor %}
           {% else %}
-          <form class="__group_name" id="work_item_group_name" role="form" action="{{ url_for('work_item.work_item_group') }}" method="post"></form>
+          <form class="__group_name" id="work_item_group_name" role="form" action="{{ url_for('work_item.work_item_group', bid_id=bid_id) }}" method="post"></form>
           {% endif %}
 
         </div>
@@ -265,7 +265,7 @@
             Add to bidding
           </button>
           <button class="_btn--gray">
-            <a class="__btn-cancel" href="{{ url_for('bidding.biddings') }}">Cancel</a>
+            <a class="__btn-cancel" href="{{ url_for('bidding.bidding', item_id=bid_id)}}">Cancel</a>
           </button>
         </div>
       </div>
