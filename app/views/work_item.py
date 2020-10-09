@@ -126,7 +126,6 @@ def delete_work_item_from_group(group_name, work_item_id, bid_id):
 @login_required
 def undo_work_item_from_group(group_name, item_id, bid_id):
     item_id = str(item_id)
-    deleted_work_item_group_id = session.get("DeletedWorkGroupItem", {})
     selected_ids = session.get("SelectedWorkItemsGroupDict", {})
     groups = session.get("GroupDict", {})
     if deleted_work_item_group_id:

@@ -1,9 +1,8 @@
-from flask import render_template, Blueprint, redirect, url_for, request, session
+from flask import render_template, Blueprint, redirect, url_for, request
 from flask_login import login_required
 
 from app.forms import RegistrationForm
-from app.models import User, WorkItem
-from app.procore import ProcoreApi
+from app.models import User
 
 
 main_blueprint = Blueprint("main", __name__)
