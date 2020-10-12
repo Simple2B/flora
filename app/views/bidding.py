@@ -29,9 +29,9 @@ def biddings():
     bids_from_procore = papi.bids()
     assert bids_from_procore
     for bid in bids_from_procore:
-        if bid["bid_package_id"] not in [i.id for i in bids]:
+        if bid["bid_package_id"] not in [i.procore_bid_id for i in bids]:
             bidding = Bid(
-                id=bid["bid_package_id"],
+                procore_bid_id=bid["bid_package_id"],
                 title=bid["bid_package_title"],
                 client=bid["vendor"]["name"],
                 status="New",

@@ -37,12 +37,8 @@ class ProcoreApi:
         """
 
         if current_app.config["TESTING"]:
-            from app.utils.test_data import TEST_BIDS
-            # bids_json = [{'awarded': None, 'bid_package_id': 99, 'bid_package_title': 'Bidding 1', 'bid_requester': {...}, 'bidder_comments': None, 'company_id': 27948, 'created_at': '2020-10-09T11:10:59Z', 'due_date': '2020-10-09T11:00:00Z', 'id': 129, ...},
-            # {'awarded': None, 'bid_package_id': 102, 'bid_package_title': 'Bidding 2', 'bid_requester': {...}, 'bidder_comments': None, 'company_id': 27948, 'created_at': '2020-10-11T17:43:37Z', 'due_date': '2020-10-11T17:00:00Z', 'id': 134, ...},
-            # {'awarded': None, 'bid_package_id': 103, 'bid_package_title': 'Bidding 3', 'bid_requester': {...}, 'bidder_comments': None, 'company_id': 27948, 'created_at': '2020-10-11T17:55:57Z', 'due_date': '2020-10-11T17:00:00Z', 'id': 135, ...},
-            # {'awarded': None, 'bid_package_id': 104, 'bid_package_title': 'Bidding 4', 'bid_requester': {...}, 'bidder_comments': None, 'company_id': 27948, 'created_at': '2020-10-11T17:56:54Z', 'due_date': '2020-10-11T17:00:00Z', 'id': 136, ...}]
-            return TEST_BIDS
+            from app.tests.utils import TEST_BIDS
+            return TEST_BIDS()
 
         if not self.access_token:
             log(log.ERROR, "ProcoreApi.bids: need access_token!")
