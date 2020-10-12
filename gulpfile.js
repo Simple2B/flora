@@ -33,7 +33,7 @@ const watch = () => {
     notify: false,                // turn off sync notification
     proxy: "localhost:5000",      // provide address to watch
     // select multiple browsers ["browser_name", "browser_name"]
-    browser: ["chrome", "google chrome", "google-chrome"]
+    browser: "chrome"
   });
 
   gulp.watch('./scss/**/*.scss', style);                                // reload browser on CSS update

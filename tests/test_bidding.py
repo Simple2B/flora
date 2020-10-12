@@ -23,4 +23,8 @@ def client():
 
 
 def test_bidding(client):
-    pass
+    response = client.get("/biddings", follow_redirects=True)
+    assert response.status_code == 200
+    assert b'103' in response.data
+    # TODO: check if suitable records exist in the DB with status NEW
+    # Bids.
