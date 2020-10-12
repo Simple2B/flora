@@ -72,7 +72,7 @@ def create_db():
     clarification.save()
 
     for i in range(8):
-        bid = Bid()
+        bid = Bid(title='testing', client='testingClient', status='testingStatus')
         bid.save()
 
     if app.config['GENERATE_TEST_DATA']:
