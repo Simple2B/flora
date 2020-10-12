@@ -26,8 +26,6 @@ def biddings():
 
     papi.access_token = session.get("procore_access_token", None)
     bids = Bid.query.all()
-    # TODO: read biddings from procore and update DB
-    # TODO: add to module procore_id
     bids_from_procore = papi.bids()
     assert bids_from_procore
     for bid in bids_from_procore:
