@@ -28,7 +28,6 @@ def biddings():
     bids = Bid.query.all()
     # TODO: read biddings from procore and update DB
     # TODO: add to module procore_id
-    # test string for git
     bids_from_procore = papi.bids()
     assert bids_from_procore
     for bid in bids_from_procore:
