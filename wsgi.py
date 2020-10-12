@@ -72,7 +72,11 @@ def create_db():
     clarification.save()
 
     for i in range(8):
-        bid = Bid(title='testing', client='testingClient', status='testingStatus')
+        bid = Bid(
+            title='testing',
+            client='testingClient',
+            status='testingStatus',
+            procore_bid_id='testingProcoreBidId')
         bid.save()
 
     if app.config['GENERATE_TEST_DATA']:
