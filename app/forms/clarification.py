@@ -10,5 +10,5 @@ class ClarificationForm(FlaskForm):
     save_submit = SubmitField('Save')
 
 
-# class ClarificationCartForm(FlaskForm):
-#     submit = SubmitField('Add to cart')
+class ClarificationCartForm(FlaskForm):
+    submit = SubmitField('Add to cart')
