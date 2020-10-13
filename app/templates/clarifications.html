@@ -16,14 +16,14 @@
       <a href="{{ url_for('bidding.biddings') }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       <img src="{{ url_for('static', filename='images/right-hand.svg') }}"> Back to Editing </button></a>
-      <a href="{{ url_for('work_item.work_items') }}">
+      <a href="{{ url_for('work_item.work_items', bid_id=bid_id) }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       Scope of work </button> </a>
-      <a href="{{ url_for('exclusion.exclusions') }}">
+      <a href="{{ url_for('exclusion.exclusions', bid_id=bid_id) }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       Exclusions
       </button> </a>
-      <a href="{{ url_for('clarification.clarifications') }}" id='href_clarification_id'>
+      <a href="{{ url_for('clarification.clarifications', bid_id=bid_id) }}" id='href_clarification_id'>
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks --border">
       Clarifications
       </button> </a>

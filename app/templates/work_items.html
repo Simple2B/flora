@@ -23,8 +23,8 @@
           <li><span href="" class="__select_work_item-active">Select Work Item</span></li>
           </ul>
         </li>
-        <li><a href="{{ url_for('exclusion.exclusions') }}">Exclusion</a></li>
-        <li><a href="{{ url_for('clarification.clarifications') }}">Clarification</a></li>
+        <li><a href="{{ url_for('exclusion.exclusions', bid_id=bid_id) }}">Exclusion</a></li>
+        <li><a href="{{ url_for('clarification.clarifications', bid_id=bid_id) }}">Clarification</a></li>
         <li><a href="#">Alternates</a></li>
       </ul>
     </div>
@@ -220,11 +220,11 @@
 
             </form>
 
-            <button class="__delete-group border-none" type="button" data-toggle="modal" data-target="#modalDeleteGroup"
+            <button class="__delete-group border-none ddb-cursor-handle" type="button" data-toggle="modal" data-target="#modalDeleteGroup"
             data-target_link_group_delete="{{url_for('work_item.delete_group', bid_id=bid_id, group_name=group_name)}}" data-group_name="{{group_name}}">
               <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
             </button>
-            <button id='btnGroup' class="ddb-cursor-handle btnGroup_js">
+            <button id='btnGroup' class="ddb-cursor-handle btnGroup_js test">
               <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}">
             </button>
 
@@ -242,8 +242,9 @@
                   <td><a href="" class="t-gray">{{item.code}}</a></td>
                   <td>{{item.name}}</td>
                   <td>
-                    <a href="{{url_for('work_item.delete_work_item_from_group', group_name=group_name, work_item_id=item.id, bid_id=bid_id)}}"><img
-                        src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
+                    <a href="{{url_for('work_item.delete_work_item_from_group', group_name=group_name, work_item_id=item.id, bid_id=bid_id)}}">
+                      <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                    </a>
                   </td>
                 </tr>
                 {% endfor %}

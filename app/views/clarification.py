@@ -99,9 +99,9 @@ def edit_clarification_item(item_id):
     return redirect(url_for("clarification.clarifications"))
 
 
-@clarification_blueprint.route("/clarifications", methods=["GET"])
+@clarification_blueprint.route("/clarifications/<bid_id>", methods=["GET"])
 @login_required
-def clarifications():
+def clarifications(bid_id):
     form = ClarificationForm(request.form)
     clarification_cart_form = ClarificationCartForm()
     selected_clarification_item_ids = session.get("SelectedClarificationsDict", {})
@@ -124,4 +124,5 @@ def clarifications():
         form=form,
         clarifications_list=clarification_list,
         clarification_cart_form=clarification_cart_form,
+        bid_id=bid_id
     )

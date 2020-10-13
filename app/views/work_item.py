@@ -127,6 +127,7 @@ def delete_work_item_from_group(group_name, work_item_id, bid_id):
 def undo_work_item_from_group(group_name, item_id, bid_id):
     item_id = str(item_id)
     selected_ids = session.get("SelectedWorkItemsGroupDict", {})
+    deleted_work_item_group_id = session.get("DeletedWorkGroupItem", {})
     groups = session.get("GroupDict", {})
     if deleted_work_item_group_id:
         groups[group_name].append(item_id)
@@ -217,5 +218,5 @@ def work_items(bid_id):
         form_group=form_group,
         bid_id=bid_id,
         work_cart_form=work_cart_form,
-        str_function=str_function
+        str_function=str_function,
     )

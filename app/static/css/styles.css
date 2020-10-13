@@ -650,6 +650,9 @@ ul {
   top: 0.8rem;
   left: 3.5rem; }
 
+.test:hover {
+  background-color: #af3f3f; }
+
 .bck-color-table {
   background-color: #828282; }
 

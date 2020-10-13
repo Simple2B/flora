@@ -18,11 +18,10 @@ def procore():
 @bidding_blueprint.route("/biddings")
 @login_required
 def biddings():
-    papi = ProcoreApi()
-    bids_from_procore = papi.bids()
-    bids = Bid.query.all()
-
     if current_app.config["TESTING"]:
+        papi = ProcoreApi()
+        bids_from_procore = papi.bids()
+        bids = Bid.query.all()
         for bid in bids_from_procore:
             if bid["bid_package_id"] not in [i.procore_bid_id for i in bids]:
                 bidding = Bid(
@@ -35,6 +34,8 @@ def biddings():
         bids = Bid.query.all()
         return render_template("biddings.html", bids=bids)
 
+    papi = ProcoreApi()
+
     if not session.get("procore_access_token", None):
         auth_token = session.get("procore_auth_token", None)
         access_token, refresh_token, created_at = papi.get_token(auth_token)
@@ -42,8 +43,10 @@ def biddings():
         session["procore_refresh_token"] = refresh_token
 
     papi.access_token = session.get("procore_access_token", None)
+    bids_from_procore = papi.bids()
+    bids = Bid.query.all()
 
-    assert bids_from_procore
+    # assert bids_from_procore
     for bid in bids_from_procore:
         if bid["bid_package_id"] not in [i.procore_bid_id for i in bids]:
             bidding = Bid(
