@@ -31,6 +31,7 @@ def logout(client):
     return client.get("/logout", follow_redirects=True)
 
 
+# Test data
 TEST_BIDS = [
     {'awarded': None, 'bid_package_id': 99, 'bid_package_title': 'Bidding 1',
         'name': 'Zradogog Daggozyr - f8cbc82c-517e-41c9-99de-41d5440829b6',
