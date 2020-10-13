@@ -11,7 +11,7 @@
 <section class="page-section bidding d-flex tabm" id="wrapper">
 <!-- begin Sidebar -->
 <!-- <div> -->
-  <div class="bg-light border-right box-shadow __side-bar-box bidding__side_bar--size" id="sidebar-wrapper">
+  <div class="border-right box-shadow __side-bar-box bidding__side_bar--size" id="sidebar-wrapper">
     <div class="sidebar-heading"> DDB Contracting</div>
     <div class="text--center list-group list-group-flush none-underline">
       <a href="{{ url_for('bidding.biddings') }}">
@@ -19,7 +19,7 @@
           <img src="{{url_for('static', filename='images/my_bidding_element.svg')}}"> My Bidding </button></a>
       <div class="ddb-cursor-handle list-group-item list-group-item-action normalized bidding-sb--box --border"> #{{bid.id}}  </div>
       <div class="bidding-sb-list">
-        <ul class="list-group-item normalized list__side_bar--style">
+        <ul class="list-group-item normalized list__side_bar--style __side_bar--ul">
             <li>
               <span class="tablinks active"><a href="#">Project general</a> </span>
             </li>
@@ -38,7 +38,7 @@
     </div>
   </div>
   <!-- end Sidebar -->
-  <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size" id="ddb-background">
+  <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size box-shadow ddb-cursor-handle" id="ddb-background">
   </nav>
 
   <!-- <div class="ddb-container"> -->
@@ -60,7 +60,7 @@
         <h5 class="--padding">Work Items</h5>
         <div class="__modal-inputs--flex-row">
 
-            <a href="{{ url_for('work_item.work_items') }}"><button class="ddb-cursor-handle _btn--gray">Add work item/group</button></a>
+            <a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add work item/group</button></a>
 
         </div>
         </section>
@@ -70,7 +70,7 @@
         <h5 class="--padding">Exclusions</h5>
         <div class="__modal-inputs--flex-row">
 
-            <a href="{{ url_for('exclusion.exclusions') }}"><button class="ddb-cursor-handle _btn--gray">Add exclusion</button></a>
+            <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add exclusion</button></a>
 
         </div>
       </div>
@@ -79,7 +79,7 @@
         <h5 class="--padding">Clarifications</h5>
         <div class="__modal-inputs--flex-row">
 
-            <a href="{{ url_for('clarification.clarifications') }}"><button class="ddb-cursor-handle _btn--gray">Add clarification</button></a>
+            <a href="{{ url_for('clarification.clarifications', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add clarification</button></a>
 
         </div>
       </div>
@@ -91,14 +91,10 @@
 
 {% block scripts %}
 <script src="/static/js/jquery.dataTables.min.js"></script>
+<script src="/static/js/bidding.js"></script>
 <script>
-//   // $(".bidding-sb-list ul li a").click(function(e) {
-//   // e.preventDefault();
-//   // $(".bidding-sb-list ul li a").removeClass('active');
-//   // $(this).addClass('active');
-// })
+  bid_href_id.classList.toggle('test-class');
 </script>
-
 {% endblock %}
 
 {% endblock %}

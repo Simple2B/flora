@@ -97,9 +97,9 @@ def edit_exclusion_item(item_id):
     return redirect(url_for("exclusion.exclusions"))
 
 
-@exclusion_blueprint.route("/exclusions", methods=["GET"])
+@exclusion_blueprint.route("/exclusions/<bid_id>", methods=["GET"])
 @login_required
-def exclusions():
+def exclusions(bid_id):
     form = ExclusionForm(request.form)
     form.exclusions = Exclusion.query.all()
     exclusion_cart_form = ExclusionCartForm()
@@ -119,4 +119,5 @@ def exclusions():
         "exclusions.html",
         form=form,
         exclusion_cart_form=exclusion_cart_form,
+        bid_id=bid_id
     )

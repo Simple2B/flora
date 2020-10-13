@@ -7,23 +7,23 @@
 
 {% block content %}
 
-<section class="page-section section-block bidding d-flex tabm" id="wrapper">
+<section class="page-section section-block bidding d-flex overflow-x-hidden" id="wrapper">
   <!-- begin Sidebar -->
   <!-- <div> -->
-  <div class="bg-light border-right box-shadow __side-bar-box" id="sidebar-wrapper">
+  <div class="border-right box-shadow __side-bar-box" id="sidebar-wrapper">
     <div class="sidebar-heading">DDB Contracting</div>
     <div class="text--center list-group list-group-flush none-underline">
       <a href="{{ url_for('bidding.biddings') }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       <img src="{{ url_for('static', filename='images/right-hand.svg') }}"> Back to Editing </button></a>
-      <a href="{{ url_for('work_item.work_items') }}">
+      <a href="{{ url_for('work_item.work_items', bid_id=bid_id) }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       Scope of work </button> </a>
-      <a href="{{ url_for('exclusion.exclusions') }}">
+      <a href="{{ url_for('exclusion.exclusions', bid_id=bid_id) }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
       Exclusions
       </button> </a>
-      <a href="{{ url_for('clarification.clarifications') }}">
+      <a href="{{ url_for('clarification.clarifications', bid_id=bid_id) }}" id='href_clarification_id'>
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks --border">
       Clarifications
       </button> </a>
@@ -53,7 +53,7 @@
           </div>
 
 
-          <form id="clarifications" class="form" role="form" action="{{ url_for('clarification.add_clarification_item_to_cart') }}" method="post">
+          <form id="clarifications" class="form" role="form" action="{{ url_for('clarification.add_clarification_item_to_cart', bid_id=bid_id) }}" method="post">
             <div id="clarificationTable" class="box-shadow __box-table--mtop ddb-margin-top">
               <span>
                 <select>
@@ -85,14 +85,14 @@
                       <td>{{clarification.note}}</td>
 
                       <td><button type="button" value="{{clarification.id}}" class="border-none"
-                        data-toggle="modal" data-target="#AddModalClarification" data-target_link="{{url_for('clarification.edit_clarification_item', item_id=clarification.id)}}"
+                        data-toggle="modal" data-target="#AddModalClarification" data-target_link="{{url_for('clarification.edit_clarification_item', item_id=clarification.id, bid_id=bid_id)}}"
                         data-note="{{clarification.note}}" data-description="{{clarification.description}}">
                         <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
                       </button>
 
                       <button type="button" value="{{clarification.id}}" class="border-none" data-toggle="modal" data-target="#modalDeleteClarification"
                       data-delete="{{clarification.note}}" data-description="{{clarification.description}}"
-                      data-target_link_clarification_delete="{{url_for('clarification.delete_clarification_item_from_items', item_id=clarification.id)}}">
+                      data-target_link_clarification_delete="{{url_for('clarification.delete_clarification_item_from_items', item_id=clarification.id, bid_id=bid_id)}}">
                       <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
                       </button>
                     </td>
@@ -123,7 +123,7 @@
                 <tr>
                   <td><a href="" class="t-gray">{{item.note}}</a></td>
                   <td>
-                    <a href="{{url_for('clarification.delete_clarification_item_from_cart', item_id=item.id)}}"><img
+                    <a href="{{url_for('clarification.delete_clarification_item_from_cart', item_id=item.id, bid_id=bid_id)}}"><img
                         src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
                   </td>
                 </tr>
@@ -164,7 +164,7 @@
     <div class="modal-content modal--padding">
       <h5 class="--padding">Edit clarification</h5>
       <div class="modal-body padding--off">
-        <form class="form" role="form" action="{{ url_for('clarification.clarification') }}" method="post">
+        <form class="form" role="form" action="{{ url_for('clarification.clarification', bid_id=bid_id) }}" method="post">
           <div class="">
 <!-- flex-row _add_new_clarification--modal -->
             <div class="flex-row _zeroing-padding">

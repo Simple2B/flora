@@ -149,6 +149,16 @@ ul {
 .border-none {
   border: none; }
 
+.test-class {
+  background-color: #dee2e6;
+  color: #fff; }
+
+.welcome {
+  text-align: center; }
+
+.overflow-x-hidden {
+  overflow-x: hidden; }
+
 .t-gray {
   color: #828282; }
 
@@ -430,6 +440,9 @@ ul {
   .list__side_bar--style a:hover {
     color: #2F80ED; }
 
+.__side_bar--ul {
+  padding-left: 5rem; }
+
 .active {
   color: #2F80ED !important; }
 
@@ -449,6 +462,9 @@ ul {
 .work-items-section {
   display: flex;
   flex-flow: row nowrap; }
+  .work-items-section .ddb__side_bar {
+    max-height: 50vh;
+    cursor: pointer; }
 
 .sidebar-container {
   min-width: 15%;
@@ -468,18 +484,29 @@ ul {
     margin-bottom: -1rem; }
   .sidebar__nav-links {
     list-style-type: disc; }
+    .sidebar__nav-links .__disc-blue {
+      color: #007bff; }
+      .sidebar__nav-links .__disc-blue .__select_work_item-active {
+        color: #BDBDBD; }
     .sidebar__nav-links li {
       margin: 0.5rem; }
     .sidebar__nav-links li a {
       color: #BDBDBD; }
       .sidebar__nav-links li a:hover {
         color: #2F80ED; }
+    .sidebar__nav-links .__text-decor-active {
+      color: #007bff; }
+      .sidebar__nav-links .__text-decor-active:hover {
+        color: #2F80ED;
+        text-decoration: underline; }
 
 .main-container {
-  min-width: 83%;
+  min-width: 75%;
   margin: 0 1rem;
   display: flex;
-  flex-flow: column; }
+  flex-flow: column;
+  margin-left: auto;
+  margin-right: auto; }
   .main-container__bid-header {
     background-color: black;
     display: inline-flex;
@@ -572,6 +599,19 @@ ul {
     flex-direction: row;
     justify-content: space-between;
     background-color: #FFFFFF; }
+    .chart-right .chart-right__group_name-box .chart-right__group-name-block .__inline--items {
+      display: inline-flex;
+      flex-flow: row;
+      align-items: center;
+      width: 10%; }
+    .chart-right .chart-right__group_name-box .chart-right__group-name-block .__group_name {
+      display: flex;
+      align-items: center;
+      margin-right: auto;
+      margin-left: 0.5rem;
+      width: 30%; }
+    .chart-right .chart-right__group_name-box .chart-right__group-name-block .__delete-group {
+      margin-right: 0.5rem; }
   .chart-right__undo-block {
     background-color: #E6A73E;
     border-radius: 0.5rem;
@@ -596,7 +636,7 @@ ul {
     flex-flow: row nowrap;
     justify-content: flex-end; }
 
-.modal-content ._h5--padding {
+.modal-content .--padding {
   padding: 0.5rem 0.5rem 0rem 0.5rem; }
 
 .modal-content .__modal-inputs--flex-row {
@@ -605,6 +645,13 @@ ul {
   flex-flow: row wrap; }
   .modal-content .__modal-inputs--flex-row div {
     padding: 0.5rem; }
+
+#_group_input_delete .input--label {
+  top: 0.8rem;
+  left: 3.5rem; }
+
+.test:hover {
+  background-color: #af3f3f; }
 
 .bck-color-table {
   background-color: #828282; }

@@ -1,4 +1,3 @@
-import json
 import requests
 import urllib
 from datetime import datetime
@@ -37,8 +36,8 @@ class ProcoreApi:
         """
 
         if current_app.config["TESTING"]:
-            from app.tests.utils import TEST_BIDS
-            return TEST_BIDS()
+            from tests.utils import TEST_BIDS
+            return TEST_BIDS
 
         if not self.access_token:
             log(log.ERROR, "ProcoreApi.bids: need access_token!")

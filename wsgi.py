@@ -61,23 +61,10 @@ def create_db():
     exclusion = Exclusion(title=EXCLUSION_TITLE, description=EXCLUSION_DESCRIPTION)
     exclusion.save()
 
-    # work_item_group = WorkItemGroup(
-    #     name=WORK_ITEM_GROUP_NAME
-    # )
-    # work_item_group.save()
-
     clarification = Clarification(
         note=CLARIFICATION_NOTE, description=CLARIFICATION_DESCRIPTION
     )
     clarification.save()
-
-    for i in range(8):
-        bid = Bid(
-            title='testing',
-            client='testingClient',
-            status='testingStatus',
-            procore_bid_id='testingProcoreBidId')
-        bid.save()
 
     if app.config['GENERATE_TEST_DATA']:
         populate_db_by_test_data()
