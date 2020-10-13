@@ -1,9 +1,9 @@
 from app import db
-from app.models import User, WorkItem, Exclusion, Clarification
+from app.models import User, WorkItem, Exclusion, Clarification, Bid
 
 
 def populate_db_by_test_data():
-    for i in range(100):
+    for i in range(10):
         user = User(
                 username=f"user_{i}",
                 email=f"user_{i}@email.com",
@@ -40,5 +40,12 @@ def populate_db_by_test_data():
                 ),
             )
         )
+
+    Bid(
+        procore_bid_id=105,
+        title="bidding 5",
+        client="Procore (Test Companies)",
+        status=Bid.Status.b_draft
+    ).save()
 
     db.session.commit()
