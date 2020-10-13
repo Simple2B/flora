@@ -1,6 +1,5 @@
 import pytest
 
-from app.models import WorkItem
 from app import db, create_app
 from tests.utils import register, login
 
@@ -24,11 +23,8 @@ def client():
 
 
 def test_bidding(client):
-    response = client.get("/bidding")
+    response = client.get("/biddings", follow_redirects=True)
     assert response.status_code == 200
-    assert b"Overhead" in response.data
-    item = WorkItem(name="TESTWORKITEM", code="99.99")
-    item.save()
-    response = client.get("/bidding")
-    assert b"TESTWORKITEM" in response.data
-    assert b"99.99" in response.data
+    assert b'103' in response.data
+    # TODO: check if suitable records exist in the DB with status NEW
+    # Bids.

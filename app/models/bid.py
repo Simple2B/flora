@@ -8,6 +8,11 @@ class Bid(db.Model, ModelMixin):
     __tablename__ = "bids"
 
     id = db.Column(db.Integer, primary_key=True)
+    procore_bid_id = db.Column(db.Integer, nullable=False)
+    title = db.Column(db.String(256), nullable=False)
+    client = db.Column(db.String(256), nullable=False)
+    status = db.Column(db.String(256), nullable=False)
+
     link_work_items = relationship("LinkWorkItem")
     work_item_groups = relationship("WorkItemGroup")
     attachments = relationship("Attachment")

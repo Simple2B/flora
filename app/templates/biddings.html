@@ -51,11 +51,11 @@
         <tbody>
           {% for bid in bids %}
           <tr>
-            <td><a href="{{ url_for('bidding.bidding', item_id=bid.id) }} ">{{ bid.id }}</a></td>
+            <td><a href="{{ url_for('bidding.bidding', item_id=bid.procore_bid_id) }} ">{{ bid.procore_bid_id }}</a></td>
+            <td>{{ bid.title }}</td>
             <td>test</td>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
+            <td>{{ bid.client }}</td>
+            <td>{{ bid.status }}</td>
             <td>test</td>
           </tr>
           {% endfor %}
