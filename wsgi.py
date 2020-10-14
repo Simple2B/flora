@@ -3,7 +3,7 @@ import os
 import click
 
 from app import create_app, db, models, forms
-from app.models import User, WorkItem, Exclusion, Clarification, Bid
+from app.models import User, WorkItem, Exclusion, Clarification
 from app.controllers import populate_db_by_test_data
 
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
