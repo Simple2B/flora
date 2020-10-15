@@ -28,10 +28,3 @@ def test_biddings(client):
     response = client.get("/biddings")
     assert response.status_code == 200
     assert b"Procore (Test Companies)" in response.data
-
-
-def test_bidding(client):
-    response = client.get("/bidding/1")
-    assert response.status_code == 200
-    assert b'1' in response.data
-    assert b'Add work item/group' in response.data

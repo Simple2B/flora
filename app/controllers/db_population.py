@@ -1,3 +1,4 @@
+import random
 from app import db
 from app.models import User, WorkItem, Exclusion, Clarification, Bid
 from app.models import WorkItemLine, ClarificationLink, ExclusionLink, LinkWorkItem
@@ -41,6 +42,18 @@ def populate_db_by_test_data():
                 ),
             )
         )
+
+    list_bids_status = ["New", "Draft"]
+    list_bids_client = ["Procore (Test Companies)", "Test company", "Big Test Company"]
+
+    # for i in range(4):
+    #     random_index_status = random.randint(0, 1)
+    #     bid = Bid(
+    #         procore_bid_id=i,
+    #         title="bidding {}".format(i),
+    #         client=list_bids_client[i],
+    #         status=list_bids_status[random_index_status]
+    #     ).save()
 
     bid = Bid(
         procore_bid_id=105,

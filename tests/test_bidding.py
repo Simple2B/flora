@@ -2,6 +2,8 @@ import pytest
 
 from app import db, create_app
 from tests.utils import register, login
+# from app.controllers.db_population import populate_db_by_test_data
+# from app.models import Bid
 
 
 @pytest.fixture
@@ -23,8 +25,13 @@ def client():
 
 
 def test_bidding(client):
-    response = client.get("/biddings", follow_redirects=True)
+    response = client.get("/bidding/1")
     assert response.status_code == 200
-    assert b'103' in response.data
+    assert b'1' in response.data
+    assert b'Add work item/group' in response.data
+    # populate_db_by_test_data()
+    # bids = Bid.query.all()
+    # assert bids
+
     # TODO: check if suitable records exist in the DB with status NEW
     # Bids.
