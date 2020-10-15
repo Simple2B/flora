@@ -27,8 +27,7 @@ def biddings():
                 bidding = Bid(
                     procore_bid_id=bid["bid_package_id"],
                     title=bid["bid_package_title"],
-                    client=bid["name"],
-                    status="New",
+                    client=bid["name"]
                 )
                 bidding.save()
         bids = Bid.query.all()
@@ -49,7 +48,8 @@ def biddings():
 
     # assert bids_from_procore
     for bid in bids_from_procore:
-        db_bid = Bid.query.filter(Bid.procore_bid_id == bid["bid_package_id"]).first()
+        bid_package_id = int(bid["bid_package_id"])
+        db_bid = Bid.query.filter(Bid.procore_bid_id == bid_package_id).first()
         if not db_bid:
             bidding = Bid(
                 procore_bid_id=bid["bid_package_id"],

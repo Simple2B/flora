@@ -69,9 +69,11 @@
       <div class="modal-content modal--padding" id="bid_exclusion">
         <h5 class="--padding">Exclusions</h5>
         <div class="__modal-inputs--flex-row">
-
+          {% if bid.exclusion_links %}
+          <p>test<p>
+          {% else %}
             <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add exclusion</button></a>
-
+          {% endif %}
         </div>
       </div>
 
