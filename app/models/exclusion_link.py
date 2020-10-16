@@ -14,4 +14,5 @@ class ExclusionLink(db.Model, ModelMixin):
     exclusion = relationship("Exclusion")
 
     def __str__(self):
-        return "<ExclusionLink: %d>" % self.id
+        #return "<ExclusionLink: %d>" % self.id
+        return f"{self.exclusion}"
