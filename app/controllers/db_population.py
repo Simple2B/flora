@@ -43,24 +43,24 @@ def populate_db_by_test_data():
             )
         )
 
-    list_bids_status = ["New", "Draft"]
-    list_bids_client = ["Procore (Test Companies)", "Test company", "Big Test Company"]
+    list_bids_client = ["Procore (Test Companies)", "Test company", "Big Test Company", "Procore Main Company"]
 
-    # for i in range(4):
-    #     random_index_status = random.randint(0, 1)
-    #     bid = Bid(
-    #         procore_bid_id=i,
-    #         title="bidding {}".format(i),
-    #         client=list_bids_client[i],
-    #         status=list_bids_status[random_index_status]
-    #     ).save()
-
-    bid = Bid(
-        procore_bid_id=105,
-        title="bidding 5",
-        client="Procore (Test Companies)",
-        status=Bid.Status.b_draft
-    ).save()
+    for i in range(4):
+        random_index_status = random.randint(0, 1)
+        if random_index_status == 0:
+            bid = Bid(
+                procore_bid_id=i+1,
+                title="bidding {}".format(str(i+1)),
+                client=list_bids_client[i],
+                status=Bid.Status.a_new
+            ).save()
+        else:
+            bid = Bid(
+                procore_bid_id=i+1,
+                title="bidding {}".format(str(i+1)),
+                client=list_bids_client[i],
+                status=Bid.Status.b_draft
+            ).save()
 
     work_item = WorkItem.query.first()
     link_wi = LinkWorkItem(bid_id=bid.id, work_item_id=work_item.id).save()
