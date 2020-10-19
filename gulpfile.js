@@ -32,11 +32,11 @@ const watch = () => {
   browserSync.init({
     notify: false,                // turn off sync notification
     proxy: "localhost:5000",      // provide address to watch
-    // select multiple browsers ["browser_name", "browser_name"]
-    browser: "chrome"
+    browser: "chrome"      // select multiple browsers ["browser_name", "browser_name"]
+
   });
 
-  gulp.watch('./scss/**/*.scss', style);                                // reload browser on CSS update
+  gulp.watch('./scss/**/*.scss', style);                               // reload browser on CSS update
   gulp.watch('./app/templates/**/*.html').on('change', browserSync.reload);   // reload browser on HTML update
   gulp.watch('./static/js/**/*.js').on('change', browserSync.reload);         // reload browser on JS update
 }

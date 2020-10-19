@@ -35,14 +35,58 @@ $(document).ready(function() {
         modal.find('#_work_item_input_name_delete #title').val(name);
     });
 
-                /* When the user clicks on the button,
-            toggle between hiding and showing the dropdown content */
+    $('#modalDeleteGroup').on('show.bs.modal', function (event) {
+        const button = $(event.relatedTarget); // Button that triggered the modal
+        const target_link = button.data('target_link_group_delete');
+        const name = button.data('group_name');
+        const modal = $(this);
+        modal.find('#_modal_delete_group').attr('action', target_link);
+        modal.find('#_group_input_delete #_input_group_name').val(name);
+    });
+
 
 } );
 
-const groupWrapper = document.getElementById('groupTableWrapper');
-const groupToggle = document.getElementById('btnGroup');
-groupToggle.addEventListener('click', (e) => {
-    e.preventDefault();
-    groupWrapper.classList.toggle('hidden');
+// const groupWrapper = document.getElementById('groupTableWrapper');
+// const groupToggle = document.getElementById('btnGroup');
+// groupToggle.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     groupWrapper.classList.toggle('hidden');
+// });
+
+const groupWrapper = document.getElementsByClassName('groupTableWrapper_js');
+const groupToggle = document.getElementsByClassName('btnGroup_js');
+
+[].forEach.call(groupToggle,function(el) {
+    el.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log(12);
+        for (var i = 0; i < groupWrapper.length; i++) {
+            groupWrapper[i].classList.toggle('hidden');
+        };
+    });
 });
+
+const sidebarWrapper = document.getElementById('wrapper');
+const barToggle = document.getElementById('ddb-background');
+barToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    sidebarWrapper.classList.toggle('hidden');
+});
+
+// var list_of_header_href = $('#header_menu_items_id a');
+// for (var i = 0; i < list_of_header_href.length; i++) {
+//     var element = list_of_header_href[i].href;
+//     if ( element == window.location.href) {
+//         var z = document.getElementById('bidding_id');
+//         z.classList.toggle('test-class');
+//     };
+// };
+
+
+
+const href_work_items_ = document.getElementsByClassName('__text-decor-active');
+
+if ( href_work_items_[0].href == window.location.href ) {
+  document.getElementById('bidding_id').classList.toggle('test-class');
+};

@@ -11,4 +11,4 @@ class Clarification(db.Model, ModelMixin):
     description = db.Column(db.String(1024), nullable=True)
 
     def __str__(self):
-        return "<Clarification: %d>" % self.id
+        return f"<Clarification: {self.id} - {self.note}>"

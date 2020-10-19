@@ -35,3 +35,9 @@ $(document).ready(function() {
     // });
 
 } );
+
+const href_exclusion_ = document.getElementById('href_exclusion_id');
+
+if ( href_exclusion_.href == window.location.href ) {
+  document.getElementById('bidding_id').classList.toggle('test-class');
+};

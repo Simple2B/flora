@@ -3,6 +3,12 @@
 .work-items-section {
     display: flex;
     flex-flow: row nowrap;
+
+    & .ddb__side_bar {
+        max-height: 50vh;
+        cursor: pointer;
+    }
+
 }
 
 .sidebar-container {
@@ -28,8 +34,23 @@
     &__nav-links {
         list-style-type: disc;
 
+        .__disc-blue {
+            color: #007bff;
+
+            .__select_work_item-active {
+                // border-right: solid 2px #E6A73E;
+                // background-color: #F2F2F2;
+                // text-decoration: none;
+                color: #BDBDBD;
+                // &:hover {
+
+                // }
+            }
+        }
+
         & li {
             margin: 0.5rem;
+
         }
 
         & li a {
@@ -39,14 +60,25 @@
                 color: #2F80ED;
             }
         }
+
+        .__text-decor-active {
+            color: #007bff;
+
+            &:hover {
+                color: #2F80ED;
+                text-decoration: underline;
+            }
+        }
     }
 }
 
 .main-container {
-    min-width: 83%;
+    min-width: 75%;
     margin: 0 1rem;
     display: flex;
     flex-flow: column;
+    margin-left: auto;
+    margin-right: auto;
 
     &__bid-header {
         background-color: black;
@@ -181,8 +213,25 @@
             flex-direction: row;
             justify-content: space-between;
             background-color: #FFFFFF;
-        }
 
+            .__inline--items {
+                display: inline-flex;
+                flex-flow: row;
+                align-items: center;
+                width: 10%;
+            }
+
+            .__group_name {
+                display: flex;
+                align-items: center;
+                margin-right: auto;
+                margin-left: 0.5rem;
+                width: 30%;
+            }
+            .__delete-group {
+                margin-right: $m0-5rem;
+            }
+        }
     }
 
     &__undo-block {
@@ -227,7 +276,7 @@
 
 .modal-content {
 
-    ._h5--padding{
+    .--padding{
         padding: $m0-5rem $m0-5rem 0rem $m0-5rem;
     }
 
@@ -239,5 +288,19 @@
         div {
             padding: $m0-5rem;
         }
+    }
+}
+
+
+#_group_input_delete {
+    .input--label {
+        top: 0.8rem;
+        left: 3.5rem;
+    }
+}
+
+.test {
+    &:hover {
+        background-color: rgb(175, 63, 63);
     }
 }
