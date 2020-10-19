@@ -43,7 +43,7 @@
     <!-- <div><a id="#table">Test content</a></div> -->
     <div class="container __box-table-exclusion flex-flow-wrap">
       <div class="__box-table--left">
-        <form role="form" action="{{ url_for('exclusion.add_new_exclusion') }}" method="post">
+        <form role="form" action="{{ url_for('exclusion.add_new_exclusion', bid_id=bid_id) }}" method="post">
 
           <div class="modal-content border-none">
             <div class="form-row __add-exclusion--box">
@@ -61,7 +61,7 @@
           </div>
         </form>
 
-        <form class="form" id="exclusions" role="form" action="{{ url_for('exclusion.add_exclusion_to_cart') }}" method="post">
+        <form class="form" id="exclusions" role="form" action="{{ url_for('exclusion.add_exclusion_to_cart', bid_id=bid_id) }}" method="post">
           <div id="exclusionTable" class="box-shadow __box-table--mtop ddb-margin-top">
             <span>
               <select>
@@ -94,13 +94,13 @@
                     <td><input class="form-control" type="checkbox" name="{{exclusion.id}}"></td>
                     <td>{{exclusion.title}}</td>
                     <td><button type="button" value="{{exclusion.id}}" class="__border-none"
-                      data-toggle="modal" data-target="#exampleModal" data-target_link="{{url_for('exclusion.edit_exclusion_item', item_id=exclusion.id)}}"
+                      data-toggle="modal" data-target="#exampleModal" data-target_link="{{url_for('exclusion.edit_exclusion_item', bid_id=bid_id, item_id=exclusion.id)}}"
                       data-title="{{exclusion.title}}">
                       <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
                       </button>
 
                       <button type="button" value="{{exclusion.id}}" class="__border-none" data-toggle="modal" data-target="#modalDelete"
-                      data-delete="{{exclusion.title}}" data-target_link_delete="{{url_for('exclusion.delete_exclusion_item_from_items', item_id=exclusion.id)}}">
+                      data-delete="{{exclusion.title}}" data-target_link_delete="{{url_for('exclusion.delete_exclusion_item_from_items', bid_id=bid_id, item_id=exclusion.id)}}">
                       <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
                       </button>
                     </td>
@@ -129,7 +129,7 @@
               <tr>
                 <td><a href="" class="t-gray">{{item.title}}</a></td>
                 <td>
-                  <a href="{{url_for('exclusion.delete_exclusion_item_from_cart', item_id=item.id)}}"><img
+                  <a href="{{url_for('exclusion.delete_exclusion_item_from_cart', bid_id=bid_id, item_id=item.id)}}"><img
                       src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
                 </td>
               </tr>
@@ -153,7 +153,7 @@
       <a href="#" class="none-underline"><button class="_btn--black">
         Add to bidding</a>
       </button>
-      <a href="{{ url_for('bidding.biddings') }}"><button class="_btn--gray">
+      <a href="{{ url_for('bidding.bidding') }}"><button class="_btn--gray">
         Cancel</a>
       </button>
       </div>

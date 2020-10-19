@@ -17,7 +17,7 @@
       <a href="{{ url_for('bidding.biddings') }}">
       <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized">
           <img src="{{url_for('static', filename='images/my_bidding_element.svg')}}"> My Bidding </button></a>
-      <div class="ddb-cursor-handle list-group-item list-group-item-action normalized bidding-sb--box --border"> #{{bid.id}}  </div>
+      <div class="ddb-cursor-handle list-group-item list-group-item-action normalized bidding-sb--box --border"> # {{ bid.procore_bid_id }}  </div>
       <div class="bidding-sb-list">
         <ul class="list-group-item normalized list__side_bar--style __side_bar--ul">
             <li>
@@ -69,9 +69,13 @@
       <div class="modal-content modal--padding" id="bid_exclusion">
         <h5 class="--padding">Exclusions</h5>
         <div class="__modal-inputs--flex-row">
-
+          {% if bid.exclusion_links %}
+          {% for val in bid.exclusion_links %}
+            <p> {{ val }} </p>
+          {% endfor %}
+          {% else %}
             <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add exclusion</button></a>
-
+          {% endif %}
         </div>
       </div>
 

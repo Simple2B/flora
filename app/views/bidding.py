@@ -27,8 +27,7 @@ def biddings():
                 bidding = Bid(
                     procore_bid_id=bid["bid_package_id"],
                     title=bid["bid_package_title"],
-                    client=bid["name"],
-                    status="New",
+                    client=bid["name"]
                 )
                 bidding.save()
         bids = Bid.query.all()
@@ -38,28 +37,33 @@ def biddings():
 
     if not session.get("procore_access_token", None):
         auth_token = session.get("procore_auth_token", None)
+        if not auth_token:
+            return redirect(url_for("procore.procore_auth"))
         access_token, refresh_token, created_at = papi.get_token(auth_token)
         session["procore_access_token"] = access_token
         session["procore_refresh_token"] = refresh_token
 
     papi.access_token = session.get("procore_access_token", None)
     bids_from_procore = papi.bids()
-    bids = Bid.query.all()
 
     # assert bids_from_procore
     for bid in bids_from_procore:
-        if bid["bid_package_id"] not in [i.procore_bid_id for i in bids]:
+        bid_package_id = bid["bid_package_id"]
+        db_bid = Bid.query.filter(Bid.procore_bid_id == bid_package_id).first()
+        if not db_bid:
             bidding = Bid(
                 procore_bid_id=bid["bid_package_id"],
                 title=bid["bid_package_title"],
-                client=bid["vendor"]["name"],
-                status="New",
+                client=bid["vendor"]["name"]
             )
             bidding.save()
+
+    bids = Bid.query.order_by(Bid.status).all()
+
     return render_template("biddings.html", bids=bids)
 
 
-@bidding_blueprint.route("/bidding/<item_id>", methods=["GET"])
+@bidding_blueprint.route("/bidding/<int:item_id>", methods=["GET"])
 @login_required
 def bidding(item_id):
     bid = Bid.query.get(item_id)

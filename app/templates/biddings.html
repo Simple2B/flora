@@ -45,7 +45,7 @@
           <th>Title</th>
           <th>PM</th>
           <th>Client</th>
-          <th>Satus</th>
+          <th>Status</th>
           <th>Last updated</th>
         </thead>
         <tbody>
@@ -55,7 +55,7 @@
             <td>{{ bid.title }}</td>
             <td>test</td>
             <td>{{ bid.client }}</td>
-            <td>{{ bid.status }}</td>
+            <td>{{ bid.status.value }}</td>
             <td>test</td>
           </tr>
           {% endfor %}
