@@ -12,4 +12,5 @@ class Exclusion(db.Model, ModelMixin):
     description = db.Column(db.Text, nullable=True)
 
     def __str__(self):
-        return '<Exclusion: %d>' % self.id
+        # return '<Exclusion: %d>' % self.id
+        return f"{self.title} \n {self.description}"

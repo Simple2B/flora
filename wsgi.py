@@ -58,8 +58,8 @@ def create_db():
     )
     work_item.save()
 
-    exclusion = Exclusion(title=EXCLUSION_TITLE, description=EXCLUSION_DESCRIPTION)
-    exclusion.save()
+    # exclusion = Exclusion(title=EXCLUSION_TITLE, description=EXCLUSION_DESCRIPTION)
+    # exclusion.save()
 
     clarification = Clarification(
         note=CLARIFICATION_NOTE, description=CLARIFICATION_DESCRIPTION
