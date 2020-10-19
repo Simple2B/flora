@@ -70,8 +70,9 @@
         <h5 class="--padding">Exclusions</h5>
         <div class="__modal-inputs--flex-row">
           {% if bid.exclusion_links %}
-          {% for val in bid.exclusion_links %}
-            <p> {{ val }} </p>
+          <h5>Unless expressly stated, the following exclusions apply:</br></h5>
+          {% for abc in bid.exclusion_links %}
+            <p> {{ abc.exclusion.title }},&nbsp; </p>
           {% endfor %}
           {% else %}
             <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add exclusion</button></a>
