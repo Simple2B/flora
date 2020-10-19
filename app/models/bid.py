@@ -11,7 +11,7 @@ class Bid(db.Model, ModelMixin):
     class Status(enum.Enum):
         a_new = "New"
         b_draft = "Draft"
-        c_submited = "Submitted"
+        c_submitted = "Submitted"
         d_archived = "Archived"
 
     id = db.Column(db.Integer, primary_key=True)

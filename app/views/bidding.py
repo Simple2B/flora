@@ -48,7 +48,7 @@ def biddings():
 
     # assert bids_from_procore
     for bid in bids_from_procore:
-        bid_package_id = int(bid["bid_package_id"])
+        bid_package_id = bid["bid_package_id"]
         db_bid = Bid.query.filter(Bid.procore_bid_id == bid_package_id).first()
         if not db_bid:
             bidding = Bid(
