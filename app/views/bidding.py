@@ -3,7 +3,7 @@ from flask_login import login_required
 from flask import current_app
 from app.procore import ProcoreApi
 
-from app.models import Bid
+from app.models import Bid, WorkItem
 
 bidding_blueprint = Blueprint("bidding", __name__)
 
@@ -67,4 +67,8 @@ def biddings():
 @login_required
 def bidding(item_id):
     bid = Bid.query.get(item_id)
-    return render_template("bidding.html", bid=bid)
+    work_items_ides = [link_work_item.work_item_id for link_work_item in bid.link_work_items]
+    list_work_items = []
+    for work_item_id in work_items_ides:
+        list_work_items += [WorkItem.query.get(work_item_id)]
+    return render_template("bidding.html", bid=bid, list_work_items=list_work_items)

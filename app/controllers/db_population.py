@@ -1,4 +1,3 @@
-import random
 from app import db
 from app.models import User, WorkItem, Exclusion, Clarification, Bid
 from app.models import WorkItemLine, ClarificationLink, ExclusionLink, LinkWorkItem
@@ -38,24 +37,12 @@ def populate_db_by_test_data():
             )
         )
 
-    list_bids_client = ["Procore (Test Companies)", "Test company", "Big Test Company", "Procore Main Company"]
-
-    for i in range(4):
-        random_index_status = random.randint(0, 1)
-        if random_index_status == 0:
-            bid = Bid(
-                procore_bid_id=i+1,
-                title="bidding {}".format(str(i+1)),
-                client=list_bids_client[i],
-                status=Bid.Status.a_new
-            ).save()
-        else:
-            bid = Bid(
-                procore_bid_id=i+1,
-                title="bidding {}".format(str(i+1)),
-                client=list_bids_client[i],
-                status=Bid.Status.b_draft
-            ).save()
+    bid = Bid(
+        procore_bid_id=105,
+        title="bidding 5",
+        client="Procore (Test Companies)",
+        status=Bid.Status.b_draft
+    ).save()
 
     work_item = WorkItem.query.first()
     link_wi = LinkWorkItem(bid_id=bid.id, work_item_id=work_item.id).save()
@@ -88,15 +75,15 @@ def populate_db_by_test_data():
         clarification_id=clarifications[1].id
     ).save()
 
-    exlusion = Exclusion.query.all()
+    exclusion = Exclusion.query.all()
     ExclusionLink(
         bid_id=bid.id,
-        exclusion_id=exlusion[0].id
+        exclusion_id=exclusion[0].id
     ).save()
 
     ExclusionLink(
         bid_id=bid.id,
-        exclusion_id=exlusion[1].id
+        exclusion_id=exclusion[1].id
     ).save()
 
     db.session.commit()

@@ -43,26 +43,88 @@
 
   <!-- <div class="ddb-container"> -->
   <div class="container" id="work-item-container">
+    <div class="main-container__bid-header">
+      <div class="bid-header__status">Draft</div>
+      <div class="bid-header__title"><strong>
+        # {{ bid.procore_bid_id }} - {{ bid.client }}
+      </strong></div>
+      <div>
+        All changes saved in the cloud
+        <img src="" alt="">
+      </div>
+    </div>
+    <div class="project_general">
 
-    <span>
-    <select>
-        <option value="Most popular" name="Most popular">Most popular</option>
-        <option value="Most recent" name="Most recent">Most recent</option>
-    </select>
-    <button type="button" class="_btn--gray" data-toggle="modal" data-target="#exampleModal">
-        Edit
-    </button>
-    </span>
+      <div>
+        <input type="text">
+        <input type="text">
+        <input type="text">
+      </div>
+      <div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
 
+      <div class="client">
+        <div class="client-address">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="job-address">
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+
+      <div class="drawing-log">
+        <table class="drawing-table">
+
+        </table>
+      </div>
+
+    </div>
     <div class="_bidding--scroll">
       <div class="modal-content modal--padding" id="bid_work_item">
-        <section id="ex1">
-        <h5 class="--padding">Work Items</h5>
-        <div class="__modal-inputs--flex-row">
+        <section>
+          <div class="">
+            <h5 class="--padding">Scope of work</h5>
+            <br>
+            <div class="work_item-link">
+              <div></div>
+              <div></div>
+              <input class="" type="text">
+              <button class="">
 
-            <a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add work item/group</button></a>
+              </button>
+            </div>
+            <div class="work_item-line">
+              <div>
+                <div>
+                  <textarea name="" id="" cols="30" rows="10"></textarea>
+                  <textarea name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <div>
+                  <input type="text">
+                </div>
+              </div>
+            </div>
+            {% if list_work_items %}
+            {% for work_item in list_work_items %}
+              <p> {{ work_item }},&nbsp; </p>
+            {% endfor %}
+            {% else %}
+            <div class="__modal-inputs--flex-row">
+              <a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add work item/group</button></a>
+            </div>
+            {% endif %}
 
-        </div>
+            <div class="add_work_item-group">
+              <div class="left_block"></div>
+              <div class="right_block"></div>
+            </div>
+          </div>
         </section>
       </div>
 
@@ -70,12 +132,15 @@
         <h5 class="--padding">Exclusions</h5>
         <div class="__modal-inputs--flex-row">
           {% if bid.exclusion_links %}
-          <h5>Unless expressly stated, the following exclusions apply:</br></h5>
+          <h5>Unless expressly stated, the following exclusions apply:</h5>
+          <br>
           {% for abc in bid.exclusion_links %}
             <p> {{ abc.exclusion.title }},&nbsp; </p>
           {% endfor %}
           {% else %}
-            <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add exclusion</button></a>
+            <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}">
+              <button class="ddb-cursor-handle _btn--gray">Add exclusion</button>
+            </a>
           {% endif %}
         </div>
       </div>

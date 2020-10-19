@@ -1,0 +1,2 @@
+Как работает кнопка Х в заголовке bidding?
+What is "Alternatives" (we havn't DB Model)?
