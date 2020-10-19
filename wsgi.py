@@ -3,7 +3,7 @@ import os
 import click
 
 from app import create_app, db, models, forms
-from app.models import User, WorkItem, Exclusion, Clarification
+from app.models import User
 from app.controllers import populate_db_by_test_data
 
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
@@ -52,19 +52,6 @@ def create_db():
 
     user.password = ADMIN_PASSWORD
     user.save()
-    work_item = WorkItem(
-        name=WORK_ITEM_NAME,
-        code=WORK_ITEM_CODE,
-    )
-    work_item.save()
-
-    # exclusion = Exclusion(title=EXCLUSION_TITLE, description=EXCLUSION_DESCRIPTION)
-    # exclusion.save()
-
-    clarification = Clarification(
-        note=CLARIFICATION_NOTE, description=CLARIFICATION_DESCRIPTION
-    )
-    clarification.save()
 
     if app.config['GENERATE_TEST_DATA']:
         populate_db_by_test_data()
