@@ -225,75 +225,129 @@
 
     </div>
     <div class="__bidding--scroll">
-      <div class="modal-content modal--padding" id="bid_scope_of_work">
-        <section>
-          <div class="_work_items_block">
-            <h5 class="--padding">Scope of work</h5>
-            <br>
-            <div class="work_item-link">
-              <div></div>
-              <div></div>
-              <input class="" type="text">
-              <button class="">
+      <div class="modal-content modal--padding box-shadow" id="bid_scope_of_work">
+        <div class="_work_items_block add_item_block">
+          <span class="ddb-margin-top"><strong>Scope of Work</strong></span>
+          <br>
+          {% if bid.link_work_items %}
+          {% for link_work_item in bid.link_work_items %}
+          <div class="_work_item-link">
+            <div class="_flex-start">
+              <div>{{ link_work_item.id }}</div>
+              <div>
+                <div class="title-gray">
+                  Work Code
+                </div>
+                <div class="item-style">
+                  {{ link_work_item.work_item.code }}
+                </div>
+              </div>
+              <div>
+                <div class="title-gray">
+                  Work Item
+                </div>
+                <div class="item-style">
+                  {{ link_work_item.work_item.name }}
+                </div>
+              </div>
+            </div>
 
+            <div class="_flex-end">
+              <div>
+                <input class="_form-input _form-input--m" type="text">
+              </div>
+              <button class="_btn--gray">
+                Add Line
+              </button>
+              <button class="_delete-button border-none ddb-cursor-handle bck-white">
+                <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
               </button>
             </div>
-            <div class="work_item-line">
-              <div>
+          </div>
+          <div class="_work_item-line">
+            <div class="bck-color">
+              <div class="_show-line_panel">
+                <div class="title-text-style">Line </div>
                 <div>
-                  <textarea name="" id="" cols="30" rows="10"></textarea>
-                  <textarea name="" id="" cols="30" rows="10"></textarea>
+                  <button class="border-none ddb-cursor-handle">
+                    <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="">
+                  </button>
                 </div>
-                <div>
-                  <input type="text">
+              </div>
+              <div class="_work_item_line--inputs">
+                <div class="text-areas">
+                  <textarea class="_form-text_area" name="" id="" cols="30" rows="10"></textarea>
+                  <textarea class="_form-text_area" name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <div class="inputs-features">
+                  <div>
+                    <input class="_form-input >" type="text">
+                    <label class="_label">Quantity</label>
+                  </div>
+                  <div>
+                    <input class="_form-input >" type="text">
+                    <label class="_label">Unit</label>
+                  </div>
+                  <div>
+                    <input class="_form-input >" type="text">
+                  </div>
+                  <div class="check_box-TBD">
+                    <input class="form-control" type="checkbox">
+                  </div>
                 </div>
               </div>
             </div>
-            {% if list_work_items %}
-            {% for work_item in list_work_items %}
-              <p> {{ work_item }},&nbsp; </p>
-            {% endfor %}
-            {% endif %}
-            <div class="__modal-inputs--flex-row">
-              <a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add work item/group</button></a>
+            <div class="_delete-button">
+              <button class="border-none ddb-cursor-handle bck-white">
+                <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+              </button>
             </div>
           </div>
-          <div class="add_work_item-group">
-            <div class="top_block">
-              <span>
-                <button>
 
-                </button>
-                <span class="">
-                  <strong>
+          {% endfor %}
+          {% endif %}
 
-                  </strong>
-                </span>
-                <div class="price"></div>
+        </div>
+        <div class="add_work_item-group">
 
+          <div class="__modal-inputs--flex-row">
+            <a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add work item/group</button></a>
+          </div>
+
+          <div class="top_block">
+            <span>
+              <button>
+
+              </button>
+              <span class="">
+                <strong>
+
+                </strong>
               </span>
-            </div>
-            <div class="center_block">
-              <div class="inputs_fields">
+              <div class="price"></div>
 
-              </div>
-              <div class="show_close_panel">
-
-              </div>
-            </div>
-            <div class="bottom_block"></div>
+            </span>
           </div>
-        </section>
+          <div class="center_block">
+            <div class="inputs_fields">
+
+            </div>
+            <div class="show_close_panel">
+
+            </div>
+          </div>
+          <div class="bottom_block"></div>
+        </div>
       </div>
 
-      <div class="modal-content modal--padding" id="bid_exclusion">
+      <div class="modal-content modal--padding add_item_block" id="bid_exclusion">
         <h5 class="--padding">Exclusions</h5>
         <div class="__modal-inputs--flex-row">
           {% if bid.exclusion_links %}
           <h5>Unless expressly stated, the following exclusions apply:</h5>
           <br>
-          {% for abc in bid.exclusion_links %}
-            <p> {{ abc.exclusion.title }},&nbsp; </p>
+          {% for exclusion_link in bid.exclusion_links %}
+            <p> {{ exclusion_link.exclusion.title }},&nbsp; </p>
           {% endfor %}
           {% else %}
             <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}">
@@ -303,7 +357,7 @@
         </div>
       </div>
 
-      <div class="modal-content modal--padding _last_url_item" id="bid_clarification">
+      <div class="modal-content modal--padding add_item_block" id="bid_clarification">
         <h5 class="--padding">Clarifications</h5>
         <div class="__modal-inputs--flex-row">
 

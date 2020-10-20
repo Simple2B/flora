@@ -2,13 +2,13 @@
 
 // custom class
 .navbar-nav .nav-link {
-    padding-left: 1rem;
+    padding-left: $m1rem;
 }
 // end of custom class
 
 .main-container {
     min-width: 75%;
-    margin: 0 1rem;
+    margin: 0 $m1rem;
     display: flex;
     flex-flow: column;
     margin-left: auto;
@@ -65,11 +65,12 @@
 .main-container__project_general {
     display: flex;
     flex-flow: column wrap;
-    padding: 1rem;
+    padding: $m1rem;
+    margin-bottom: $m1rem;
 
     ._date_revision {
         width: 50vw;
-        margin-top: 1rem;
+        margin-top:$m1rem;
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
@@ -81,7 +82,7 @@
         }
 
         ._date_time_img {
-            padding-left: 1rem;
+            padding-left: $m1rem;
         }
     }
 
@@ -95,7 +96,7 @@
     }
 
     .__client_job_info {
-        margin-top: 1rem;
+        margin-top: $m1rem;
 
         ._show-client_panel {
             display: flex;
@@ -158,6 +159,7 @@
         }
 
     }
+
 }
 
 .bidding__side_bar {
@@ -206,12 +208,85 @@
 }
 
 .__bidding--scroll {
-    div {
+    div.add_item_block {
         margin-top: 1rem;
     }
 
-    ._last_url_item {
-        margin-bottom: 1rem;;
+    ._work_items_block {
+
+        .title-gray {
+            color: $gray;
+        }
+
+        .item-style {
+            color: #000000;
+            font-weight: 500;
+        }
+
+        ._work_item-link {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            ._flex-start {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                div {
+                    padding: 0rem 2rem;
+                }
+
+            }
+
+            ._flex-end {
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+
+        ._work_item-line {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+
+            .bck-color {
+                background-color: $light_gray;
+            }
+
+            ._show-line_panel {
+                padding: 0rem 0rem 0rem $m0-5rem;
+                width: 46vw;
+                display: inline-flex;
+                justify-content: space-between;
+            }
+
+            .text-areas {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            }
+
+            .inputs-features {
+                display: flex;
+                justify-content: flex-end;
+                align-items: baseline;
+            }
+
+            ._delete-button {
+                display: flex;
+            }
+
+            .check_box-TBD {
+                width: 25px;
+            }
+
+        }
+
+        ._delete-button {
+            padding: 0rem 1.5rem;
+        }
+
     }
 
 }
