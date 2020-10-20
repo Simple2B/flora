@@ -95,6 +95,7 @@
     }
 
     .__client_job_info {
+        margin-top: 1rem;
 
         ._show-client_panel {
             display: flex;
@@ -108,25 +109,54 @@
             flex-flow: column wrap;
             border: 1px solid #E5E5E5;
 
-            .client-address--span {
-                display: inline-flex;
-                justify-content: space-between;
-                align-items: center;
-                color: #979797;
-                font-weight: bold;
+        }
 
-                .proj_gen-text-info {
-                    color: #000000;
-                    font-weight: normal;
-                }
+        .job-address {
+            display: flex;
+            flex-flow: column wrap;
+            border: 1px solid #E5E5E5;
 
-                .block-text--width {
-                    width: 10vw;
-                }
+        }
 
+        .client-job--span {
+            display: inline-flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #979797;
+            font-weight: bold;
+
+        }
+
+        .proj_gen-text-info {
+            color: #000000;
+            font-weight: normal;
+        }
+
+    }
+
+    .__drawing-log {
+        ._drawing-table {
+            background-color: #BEBEBE;
+        }
+
+        ._show-drawing_log_panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #E5E5E5;
+
+            .title-text-style {
+                color: #000000;
+                font-weight: 500;
             }
 
         }
+
+        ._flex-center {
+            display: flex;
+            justify-content: center;
+        }
+
     }
 }
 
