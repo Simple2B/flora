@@ -15,6 +15,7 @@ class LinkWorkItem(db.Model, ModelMixin):
     work_item_group_id = db.Column(db.Integer, db.ForeignKey("work_item_groups.id"), nullable=True)
     work_item = relationship("WorkItem")
     work_item_group = relationship("WorkItemGroup")
+    work_item_lines = relationship("WorkItemLine")
 
     def __str__(self):
         return "<LinkWorkItem: %d>" % self.id

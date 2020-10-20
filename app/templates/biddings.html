@@ -51,7 +51,7 @@
         <tbody>
           {% for bid in bids %}
           <tr>
-            <td><a href="{{ url_for('bidding.bidding', item_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
+            <td><a href="{{ url_for('bid.bidding', item_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
             <td>{{ bid.title }}</td>
             <td>test</td>
             <td>{{ bid.client }}</td>

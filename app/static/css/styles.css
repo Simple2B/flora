@@ -615,7 +615,8 @@ ul {
       padding: 0rem 2rem; }
   .__bidding--scroll ._work_items_block ._work_item-link ._flex-end {
     display: flex;
-    justify-content: flex-end; }
+    justify-content: flex-end;
+    align-items: baseline; }
 
 .__bidding--scroll ._work_items_block ._work_item-line {
   display: flex;
