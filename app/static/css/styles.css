@@ -641,20 +641,73 @@ ul {
     align-items: baseline; }
   .__bidding--scroll ._work_items_block ._work_item-line ._delete-button {
     display: flex;
-    flex-flow: wrap; }
-  .__bidding--scroll ._work_items_block ._work_item-line .check_box-TBD {
-    width: 25px; }
+    flex-flow: wrap;
+    align-items: center; }
 
 .__bidding--scroll ._work_items_block ._delete-button {
   padding: 0rem 1.5rem; }
 
-.__bidding--scroll .add_work_item-group .subtotal {
-  font-weight: bold;
-  color: #333333; }
+.__bidding--scroll .add_work_item-group {
+  display: inline-flex;
+  flex-direction: column; }
+  .__bidding--scroll .add_work_item-group ._top_block {
+    display: inline-flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    align-items: center; }
+    .__bidding--scroll .add_work_item-group ._top_block .add_item_btn {
+      display: flex;
+      justify-content: flex-start; }
+    .__bidding--scroll .add_work_item-group ._top_block ._subtotal-block {
+      width: 50vw;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-evenly;
+      align-self: center; }
+  .__bidding--scroll .add_work_item-group ._center_block {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end; }
+    .__bidding--scroll .add_work_item-group ._center_block .inputs_fields {
+      display: flex;
+      flex-direction: column; }
+      .__bidding--scroll .add_work_item-group ._center_block .inputs_fields div.input-row {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-items: center; }
+    .__bidding--scroll .add_work_item-group ._center_block ._show_subtotal_close_panel {
+      display: flex; }
+  .__bidding--scroll .add_work_item-group ._bottom_block {
+    margin-top: 1rem; }
+    .__bidding--scroll .add_work_item-group ._bottom_block .__right-block {
+      display: flex;
+      justify-content: flex-end; }
+      .__bidding--scroll .add_work_item-group ._bottom_block .__right-block ._grand_subtotal-block {
+        width: 50vw;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        align-self: center; }
+  .__bidding--scroll .add_work_item-group .subtotal {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333333; }
+  .__bidding--scroll .add_work_item-group .subtotal_price {
+    color: #EB5757;
+    font-weight: bold; }
 
-.__bidding--scroll .add_work_item-group .subtotal_price {
-  color: #EB5757;
-  font-weight: bold; }
+.check_box-TBD {
+  width: 50px;
+  display: inline-flex;
+  align-items: center; }
+
+.direction_element {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-flow: wrap;
+  padding: 0rem 1.5rem; }
 
 .ddb_nav-side-bar {
   height: 64vh; }

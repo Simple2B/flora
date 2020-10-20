@@ -279,10 +279,7 @@
             ._delete-button {
                 display: flex;
                 flex-flow: wrap;
-            }
-
-            .check_box-TBD {
-                width: 25px;
+                align-items: center;
             }
 
         }
@@ -294,16 +291,98 @@
     }
 
     .add_work_item-group {
+
+        display: inline-flex;
+        flex-direction: column;
+
+        ._top_block {
+
+            display: inline-flex;
+            flex-flow: wrap;
+            justify-content: space-between;
+            align-items: center;
+
+            .add_item_btn {
+                display: flex;
+                justify-content: flex-start;
+            }
+
+            ._subtotal-block{
+
+                width: 50vw;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-evenly;
+                align-self: center;
+
+            }
+        }
+
+        ._center_block {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-end;
+
+            .inputs_fields {
+                display: flex;
+                flex-direction: column;
+
+                div.input-row {
+                    display: flex;
+                    flex-flow: row wrap;
+                    justify-content: space-around;
+                    align-items: center;
+                }
+
+            }
+
+            ._show_subtotal_close_panel {
+                display: flex;
+            }
+
+        }
+
+        ._bottom_block {
+            margin-top: $m1rem;
+            .__right-block {
+
+                display: flex;
+                justify-content: flex-end;
+
+                ._grand_subtotal-block {
+
+                    width: 50vw;
+                    display: flex;
+                    flex-flow: row wrap;
+                    justify-content: space-evenly;
+                    align-self: center;
+                }
+            }
+        }
+
         .subtotal {
+            font-size: 18px;
             font-weight: bold;
             color: #333333;
         }
 
         .subtotal_price {
-            color: #EB5757;
+            color: $red;
             font-weight: bold;
         }
-
     }
+}
 
+.check_box-TBD {
+    width: 50px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.direction_element {
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-flow: wrap;
+    padding: 0rem 1.5rem;
 }

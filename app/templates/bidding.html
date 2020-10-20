@@ -269,9 +269,11 @@
               <div class="_show-line_panel">
                 <div class="title-text-style">Line </div>
                 <div>
-                  <button class="border-none ddb-cursor-handle">
-                    <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="">
-                  </button>
+                  <div>
+                    <button class="border-none ddb-cursor-handle">
+                      <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="">
+                    </button>
+                  </div>
                 </div>
               </div>
               <div class="_work_item_line--inputs">
@@ -293,14 +295,17 @@
                   </div>
                   <div class="check_box-TBD">
                     <input class="form-control" type="checkbox">
+                    <span>TDB</span>
                   </div>
                 </div>
               </div>
             </div>
             <div class="_delete-button">
-              <button class="border-none ddb-cursor-handle bck-white">
-                <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-              </button>
+              <div>
+                <button class="border-none ddb-cursor-handle bck-white">
+                  <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                </button>
+              </div>
             </div>
           </div>
 
@@ -310,30 +315,119 @@
         </div>
         <div class="add_work_item-group">
 
-          <div class="top_block">
+          <div class="_top_block">
 
-            <div class="__modal-inputs--flex-row">
+            <div class="add_item_btn">
               <a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add work item/group</button></a>
             </div>
 
-            <div class="subtotal">
-              Subtotal
-            </div>
+            <div class="_subtotal-block">
+              <div class="subtotal">
+                Subtotal:
+              </div>
 
-            <div class="subtotal_price">
-              $ 0.00
+              <div class="subtotal_price">
+                $ 0.00
+              </div>
             </div>
-
           </div>
-          <div class="center_block">
+
+          <div class="_center_block">
             <div class="inputs_fields">
-
+              <div class="input-row">
+                <div>Permit/Filling Fee: </div>
+                <div>
+                  <input class="_form-input" type="text">
+                </div>
+                <input class="_form-input" type="text" placeholder="$ 0.00">
+                <div class="check_box-TBD">
+                  <input class="form-control" type="checkbox">
+                  <span>TDB</span>
+                </div>
+              </div>
+              <div class="input-row">
+                <div>General Conditions: </div>
+                <div>
+                  <input class="_form-input" type="text">
+                </div>
+                <input class="_form-input" type="text" placeholder="$ 0.00">
+                <div class="check_box-TBD">
+                  <input class="form-control" type="checkbox">
+                  <span>TDB</span>
+                </div>
+              </div>
+              <div class="input-row">
+                <div>Overhead: </div>
+                <div>
+                  <input class="_form-input" type="text">
+                </div>
+                <input class="_form-input" type="text" placeholder="$ 0.00">
+                <div class="check_box-TBD">
+                  <input class="form-control" type="checkbox">
+                  <span>TDB</span>
+                </div>
+              </div>
+              <div class="input-row">
+                <div>Insurance/Tax: </div>
+                <div>
+                  <input class="_form-input" type="text">
+                </div>
+                <input class="_form-input" type="text" placeholder="$ 0.00">
+                <div class="check_box-TBD">
+                  <input class="form-control" type="checkbox">
+                  <span>TDB</span>
+                </div>
+              </div>
+              <div class="input-row">
+                <div>Profit: </div>
+                <div>
+                  <input class="_form-input" type="text">
+                </div>
+                <input class="_form-input" type="text" placeholder="$ 0.00">
+                <div class="check_box-TBD">
+                  <input class="form-control" type="checkbox">
+                  <span>TDB</span>
+                </div>
+              </div>
+              <div class="input-row">
+                <div>Bond: </div>
+                <div>
+                  <input class="_form-input" type="text">
+                </div>
+                <input class="_form-input" type="text" placeholder="$ 0.00">
+                <div class="check_box-TBD">
+                  <input class="form-control" type="checkbox">
+                  <span>TDB</span>
+                </div>
+              </div>
             </div>
-            <div class="show_close_panel">
-
+            <div class="_show_subtotal_close_panel">
+              <div>
+                <button class="direction_element bck-white ">
+                  <img src="{{ url_for('static', filename='images/up_direction_element.svg') }}" alt="">
+                </button>
+              </div>
             </div>
           </div>
-          <div class="bottom_block"></div>
+
+          <div class="_bottom_block">
+
+            <div></div>
+
+            <div class="__right-block">
+              <div class="_grand_subtotal-block">
+                <div class="subtotal">
+                  Grand Subtotal:
+                </div>
+
+                <div class="subtotal_price">
+                  $ 0.00
+                </div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
       </div>
 
