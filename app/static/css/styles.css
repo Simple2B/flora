@@ -676,10 +676,13 @@ ul {
         flex-flow: row wrap;
         justify-content: space-around;
         align-items: center; }
+        .__bidding--scroll .add_work_item-group ._center_block .inputs_fields div.input-row > div._feature-title {
+          font-weight: 500;
+          padding-right: 1rem; }
     .__bidding--scroll .add_work_item-group ._center_block ._show_subtotal_close_panel {
       display: flex; }
   .__bidding--scroll .add_work_item-group ._bottom_block {
-    margin-top: 1rem; }
+    margin: 1rem 0rem; }
     .__bidding--scroll .add_work_item-group ._bottom_block .__right-block {
       display: flex;
       justify-content: flex-end; }

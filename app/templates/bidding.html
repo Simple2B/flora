@@ -256,9 +256,11 @@
               <div>
                 <input class="_form-input _form-input--m" type="text">
               </div>
-              <button class="_btn--gray">
-                Add Line
-              </button>
+              <form action="">
+                <button class="_btn--gray ddb-cursor-handle">
+                  Add Line
+                </button>
+              </form>
               <button class="_delete-button border-none ddb-cursor-handle bck-white">
                 <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
               </button>
@@ -278,8 +280,9 @@
               </div>
               <div class="_work_item_line--inputs">
                 <div class="text-areas">
-                  <textarea class="_form-text_area" name="" id="" cols="30" rows="10"></textarea>
-                  <textarea class="_form-text_area" name="" id="" cols="30" rows="10"></textarea>
+                  <textarea class="_form-text_area" name="" id="" cols="30" rows="10" placeholder="Enter Description here...">
+                  </textarea>
+                  <textarea class="_form-text_area" name="" id="" cols="30" rows="10" placeholder="Enter Note here..."></textarea>
                 </div>
                 <div class="inputs-features">
                   <div>
@@ -335,7 +338,7 @@
           <div class="_center_block">
             <div class="inputs_fields">
               <div class="input-row">
-                <div>Permit/Filling Fee: </div>
+                <div class="_feature-title">Permit/Filling Fee: </div>
                 <div>
                   <input class="_form-input" type="text">
                 </div>
@@ -346,7 +349,7 @@
                 </div>
               </div>
               <div class="input-row">
-                <div>General Conditions: </div>
+                <div class="_feature-title">General Conditions: </div>
                 <div>
                   <input class="_form-input" type="text">
                 </div>
@@ -357,7 +360,7 @@
                 </div>
               </div>
               <div class="input-row">
-                <div>Overhead: </div>
+                <div class="_feature-title">Overhead: </div>
                 <div>
                   <input class="_form-input" type="text">
                 </div>
@@ -368,7 +371,7 @@
                 </div>
               </div>
               <div class="input-row">
-                <div>Insurance/Tax: </div>
+                <div class="_feature-title">Insurance/Tax: </div>
                 <div>
                   <input class="_form-input" type="text">
                 </div>
@@ -379,7 +382,7 @@
                 </div>
               </div>
               <div class="input-row">
-                <div>Profit: </div>
+                <div class="_feature-title">Profit: </div>
                 <div>
                   <input class="_form-input" type="text">
                 </div>
@@ -390,7 +393,7 @@
                 </div>
               </div>
               <div class="input-row">
-                <div>Bond: </div>
+                <div class="_feature-title">Bond: </div>
                 <div>
                   <input class="_form-input" type="text">
                 </div>

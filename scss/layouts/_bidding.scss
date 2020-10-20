@@ -332,6 +332,12 @@
                     flex-flow: row wrap;
                     justify-content: space-around;
                     align-items: center;
+
+                    & > div._feature-title {
+                        font-weight: 500;
+                        padding-right: 1rem;
+                    }
+
                 }
 
             }
@@ -343,7 +349,7 @@
         }
 
         ._bottom_block {
-            margin-top: $m1rem;
+            margin: $m1rem 0rem;
             .__right-block {
 
                 display: flex;
