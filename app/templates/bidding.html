@@ -24,7 +24,7 @@
               <span class="tablinks active"><a href="#">Project general</a> </span>
             </li>
             <li>
-              <span class="tablinks"><a href="#bid_work_item"> Scope of Work</a> </span>
+              <span class="tablinks"><a href="#bid_scope_of_work"> Scope of Work</a> </span>
             </li>
             <li>
               <span class="tablinks"><a href="#bid_exclusion"> Exclusions</a> </span>
@@ -41,36 +41,111 @@
   <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size box-shadow ddb-cursor-handle" id="ddb-background">
   </nav>
 
-  <!-- <div class="ddb-container"> -->
-  <div class="container" id="work-item-container">
-    <div class="main-container__bid-header">
-      <div class="bid-header__status">Draft</div>
-      <div class="bid-header__title"><strong>
-        # {{ bid.procore_bid_id }} - {{ bid.client }}
-      </strong></div>
-      <div>
-        All changes saved in the cloud
-        <img src="" alt="">
+  <div class="main-container" id="work-item-container">
+    <div class="main-container__bidding-header">
+      <div class="__bid-header_start_block">
+        <div class="bid-header__status">Draft</div>
+        <div class="bid-header__title"><strong>
+          # {{ bid.procore_bid_id }} - {{ bid.client }}
+        </strong></div>
+      </div>
+      <div class="__bid-header_end_block">
+        <span class="cloud_title">All changes saved in the cloud</span>
+        <button class="bck-black border-none ddb-cursor-handle">
+          <img src="{{ url_for('static', filename='images/close_x_element.svg') }}" alt="">
+        </button>
       </div>
     </div>
-    <div class="project_general">
+    <div class="main-container__project_general box-shadow">
+      <span class="ddb-margin-top"><strong>Project General</strong></span>
+      <div class="_date_revision">
+        <div>
+          <!-- form.code(class='_form-input _form-input--m') -->
+          <div class="_input-date_time">
+            <div>
+              <input class="_form-input _form-input--m" type="text">
+              <label class="_label">Due Date</label>
+            </div>
+            <div class="_date_time_img">
+              <img src="{{ url_for('static', filename='images/data_time_element.svg') }}" alt="">
+            </div>
+          </div>
+        </div>
+        <div>
+          <input class="_form-input _form-input--m" type="text">
+          <label class="_label">Revision</label>
+        </div>
+        <div class="project_type-radio-select m-1">
+          <div>
+            Chose a project type
+          </div>
+          <div>
+            <input type="radio" id="admin" name="user_type" value="admin"
+                  checked>
+            <label for="admin">Budget</label>
 
-      <div>
-        <input type="text">
-        <input type="text">
-        <input type="text">
+
+
+            <input type="radio" id="user" name="user_type" value="user">
+            <label for="user">Quote</label>
+          </div>
+        </div>
       </div>
-      <div>
-        <div></div>
-        <div></div>
-        <div></div>
+      <div class="_titles_prices">
+        <div>Subtotal &nbsp; &nbsp; $0.00</div>
+        <div>Adds-on &nbsp; &nbsp; $0.00</div>
+        <div>
+          <strong> Grand Total &nbsp; &nbsp; $0.00</strong>
+        </div>
       </div>
 
-      <div class="client">
-        <div class="client-address">
-          <div></div>
-          <div></div>
-          <div></div>
+      <div class="__client_job_info">
+        <div class="_show-client_panel">
+          <div>Client and Job Info</div>
+          <div> *Information edited in Procore
+            <button class="border-none ddb-cursor-handle">
+              <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="">
+            </button>
+          </div>
+        </div>
+        <div class="_client-block_info">
+          <div class="client-address--span">
+            <div>
+              <span>Client</span> &nbsp; &nbsp;
+              <span class="proj_gen-text-info block-text--width">
+                Complete Physical, LLC
+              </span>
+            </div>
+            <div>
+              <span>Phone &nbsp; &nbsp;
+              <span class="proj_gen-text-info">+1 738-927-9182</span>
+            </div>
+            <div>
+              <span>Fox</span> &nbsp; &nbsp;
+              <span class="proj_gen-text-info">+1 738-927-9182</span>
+            </div>
+          </div>
+          <div class="client-address--span">
+            <div>
+              <span>Address</span> &nbsp; &nbsp;
+              <span class="proj_gen-text-info block-text--width">
+                100 Willoughby Street
+                Suite # 502
+                Broklyn, NY, 11201
+              </span>
+            </div>
+            <div>
+              <span>Email &nbsp; &nbsp;
+              <span class="proj_gen-text-info">gh7028@nyu.edu</span>
+            </div>
+            <div>
+              <span>Contact</span> &nbsp; &nbsp;
+              <span class="proj_gen-text-info">
+                James Pumarada
+                Mr, Dr
+              </span>
+            </div>
+          </div>
         </div>
         <div class="job-address">
           <div></div>
@@ -78,17 +153,18 @@
         </div>
       </div>
 
-      <div class="drawing-log">
+      <div class="__drawing-log ddb-margin-top">
+        <span class="team-header__counter t-gray">Showing {{ users|length }} users</span>
         <table class="drawing-table">
 
         </table>
       </div>
 
     </div>
-    <div class="_bidding--scroll">
-      <div class="modal-content modal--padding" id="bid_work_item">
+    <div class="__bidding--scroll">
+      <div class="modal-content modal--padding" id="bid_scope_of_work">
         <section>
-          <div class="">
+          <div class="_work_items_block">
             <h5 class="--padding">Scope of work</h5>
             <br>
             <div class="work_item-link">
@@ -119,11 +195,31 @@
               <a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add work item/group</button></a>
             </div>
             {% endif %}
+          </div>
+          <div class="add_work_item-group">
+            <div class="top_block">
+              <span>
+                <button>
 
-            <div class="add_work_item-group">
-              <div class="left_block"></div>
-              <div class="right_block"></div>
+                </button>
+                <span class="">
+                  <strong>
+
+                  </strong>
+                </span>
+                <div class="price"></div>
+
+              </span>
             </div>
+            <div class="center_block">
+              <div class="inputs_fields">
+
+              </div>
+              <div class="show_close_panel">
+
+              </div>
+            </div>
+            <div class="bottom_block"></div>
           </div>
         </section>
       </div>
