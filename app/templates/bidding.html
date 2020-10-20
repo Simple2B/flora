@@ -342,9 +342,9 @@
         <div class="d-flex bd-highlight ddb-margin-bottom ">
         {% if bid.exclusion_links %}
           <div class="p-2 flex-shrink-1 bd-highlight">
-            <button class="_delete-button border-none ddb-cursor-handle bck-white">
+            <a href="{{url_for('bidding.delete_exclusions', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
               <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-            </button>
+            </a>
           </div>
           <div class="p-2 w-100 bd-highlight" style="border: 1px solid #BDBDBD">
             <p>Unless expressly stated, the following exclusions apply:</p>
@@ -353,9 +353,9 @@
           {% endfor %}
           </div>
           <div class="px-2 flex-shrink-1 bd-highlight">
-            <button type="button" class="border-none ddb-cursor-handle">
-                    <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
-                  </button>
+            <a href="{{url_for('bidding.edit_exclusions', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
+              <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+            </a>
           </div>
         </div>
         {% else %}

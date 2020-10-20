@@ -63,12 +63,27 @@ def biddings():
     return render_template("biddings.html", bids=bids)
 
 
-@bidding_blueprint.route("/bidding/<int:item_id>", methods=["GET"])
+@bidding_blueprint.route("/bidding/<int:bid_id>", methods=["GET"])
 @login_required
-def bidding(item_id):
-    bid = Bid.query.get(item_id)
+def bidding(bid_id):
+    bid = Bid.query.get(bid_id)
     work_items_ides = [link_work_item.work_item_id for link_work_item in bid.link_work_items]
     list_work_items = []
     for work_item_id in work_items_ides:
         list_work_items += [WorkItem.query.get(work_item_id)]
     return render_template("bidding.html", bid=bid, list_work_items=list_work_items)
+
+
+@bidding_blueprint.route("/delete_exclusions/<int:bid_id>")
+@login_required
+def delete_exclusions(bid_id):
+    bid = Bid.query.get(bid_id)
+    for exclusion_link in bid.exclusion_links:
+        exclusion_link.delete()
+    return redirect(url_for("bidding.bidding", bid_id=bid_id, _anchor='bid_exclusion'))
+
+
+@bidding_blueprint.route("/edit_exclusions/<int:bid_id>")
+@login_required
+def edit_exclusions(bid_id):
+    return redirect(url_for("exclusion.exclusions", bid_id=bid_id))
