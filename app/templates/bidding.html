@@ -310,23 +310,20 @@
         </div>
         <div class="add_work_item-group">
 
-          <div class="__modal-inputs--flex-row">
-            <a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add work item/group</button></a>
-          </div>
-
           <div class="top_block">
-            <span>
-              <button>
 
-              </button>
-              <span class="">
-                <strong>
+            <div class="__modal-inputs--flex-row">
+              <a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add work item/group</button></a>
+            </div>
 
-                </strong>
-              </span>
-              <div class="price"></div>
+            <div class="subtotal">
+              Subtotal
+            </div>
 
-            </span>
+            <div class="subtotal_price">
+              $ 0.00
+            </div>
+
           </div>
           <div class="center_block">
             <div class="inputs_fields">
@@ -340,7 +337,7 @@
         </div>
       </div>
 
-      <div class="modal-content modal--padding add_item_block" id="bid_exclusion">
+      <div class="modal-content modal--padding box-shadow add_item_block " id="bid_exclusion">
         <h5 class="--padding">Exclusions</h5>
         <div class="__modal-inputs--flex-row">
           {% if bid.exclusion_links %}

@@ -605,7 +605,7 @@ ul {
 
 .__bidding--scroll ._work_items_block ._work_item-link {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: space-between; }
   .__bidding--scroll ._work_items_block ._work_item-link ._flex-start {
     display: flex;
@@ -619,7 +619,7 @@ ul {
 
 .__bidding--scroll ._work_items_block ._work_item-line {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: flex-end; }
   .__bidding--scroll ._work_items_block ._work_item-line .bck-color {
     background-color: #FAFAFA; }
@@ -627,22 +627,34 @@ ul {
     padding: 0rem 0rem 0rem 0.5rem;
     width: 46vw;
     display: inline-flex;
+    flex-flow: row wrap;
     justify-content: space-between; }
   .__bidding--scroll ._work_items_block ._work_item-line .text-areas {
     display: flex;
+    flex-flow: row wrap;
     justify-content: flex-end;
     align-items: center; }
   .__bidding--scroll ._work_items_block ._work_item-line .inputs-features {
     display: flex;
+    flex-flow: row wrap;
     justify-content: flex-end;
     align-items: baseline; }
   .__bidding--scroll ._work_items_block ._work_item-line ._delete-button {
-    display: flex; }
+    display: flex;
+    flex-flow: wrap; }
   .__bidding--scroll ._work_items_block ._work_item-line .check_box-TBD {
     width: 25px; }
 
 .__bidding--scroll ._work_items_block ._delete-button {
   padding: 0rem 1.5rem; }
+
+.__bidding--scroll .add_work_item-group .subtotal {
+  font-weight: bold;
+  color: #333333; }
+
+.__bidding--scroll .add_work_item-group .subtotal_price {
+  color: #EB5757;
+  font-weight: bold; }
 
 .ddb_nav-side-bar {
   height: 64vh; }

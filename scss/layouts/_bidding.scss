@@ -225,7 +225,7 @@
 
         ._work_item-link {
             display: flex;
-            flex-direction: row;
+            flex-flow: row wrap;
             justify-content: space-between;
 
             ._flex-start {
@@ -247,7 +247,7 @@
 
         ._work_item-line {
             display: flex;
-            flex-direction: row;
+            flex-flow: row wrap;
             justify-content: flex-end;
 
             .bck-color {
@@ -258,23 +258,27 @@
                 padding: 0rem 0rem 0rem $m0-5rem;
                 width: 46vw;
                 display: inline-flex;
+                flex-flow: row wrap;
                 justify-content: space-between;
             }
 
             .text-areas {
                 display: flex;
+                flex-flow: row wrap;
                 justify-content: flex-end;
                 align-items: center;
             }
 
             .inputs-features {
                 display: flex;
+                flex-flow: row wrap;
                 justify-content: flex-end;
                 align-items: baseline;
             }
 
             ._delete-button {
                 display: flex;
+                flex-flow: wrap;
             }
 
             .check_box-TBD {
@@ -285,6 +289,19 @@
 
         ._delete-button {
             padding: 0rem 1.5rem;
+        }
+
+    }
+
+    .add_work_item-group {
+        .subtotal {
+            font-weight: bold;
+            color: #333333;
+        }
+
+        .subtotal_price {
+            color: #EB5757;
+            font-weight: bold;
         }
 
     }
