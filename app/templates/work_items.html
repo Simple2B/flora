@@ -253,7 +253,8 @@
           </div>
           {% endfor %}
           {% else %}
-          <form class="__group_name" id="work_item_group_name" role="form" action="{{ url_for('work_item.work_item_group', bid_id=bid_id) }}" method="post"></form>
+          <form class="__group_name" id="work_item_group_name" role="form" action="{{ url_for('work_item.work_item_group', bid_id=bid_id) }}" method="post">
+          </form>
           {% endif %}
 
         </div>
@@ -262,9 +263,11 @@
         <!-- end Group Table -->
 
         <div class="chart-right__buttons ddb-margin-top">
-          <button class="_btn--black">
-            Add to bidding
-          </button>
+          <form class="__group_name" id="add_to_bidding" role="form" action="{{ url_for('work_item.add_to_bidding', bid_id=bid_id) }}" method="post">
+            <button class="_btn--black">
+              Add to bidding
+            </button>
+          </form>
           <button class="_btn--gray">
             <a class="__btn-cancel" href="{{ url_for('bidding.bidding', item_id=bid_id)}}">Cancel</a>
           </button>

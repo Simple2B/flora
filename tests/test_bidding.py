@@ -1,3 +1,4 @@
+import random
 import pytest
 
 from app import db, create_app
@@ -17,6 +18,23 @@ def client():
         db.drop_all()
         db.create_all()
         populate_db_by_test_data()
+        list_bids_client = ["Procore (Test Companies)", "Test company", "Big Test Company", "Procore Main Company"]
+        for i in range(4):
+            random_index_status = random.randint(0, 1)
+            if random_index_status == 0:
+                Bid(
+                    procore_bid_id=i+1,
+                    title="bidding {}".format(str(i+1)),
+                    client=list_bids_client[i],
+                    status=Bid.Status.a_new
+                ).save()
+            else:
+                Bid(
+                    procore_bid_id=i+1,
+                    title="bidding {}".format(str(i+1)),
+                    client=list_bids_client[i],
+                    status=Bid.Status.b_draft
+                ).save()
         register("sam")
         login(client, "sam")
         yield client

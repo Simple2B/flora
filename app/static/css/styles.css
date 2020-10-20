@@ -159,6 +159,9 @@ ul {
 .overflow-x-hidden {
   overflow-x: hidden; }
 
+.bck-black {
+  background-color: black; }
+
 .t-gray {
   color: #828282; }
 
@@ -420,6 +423,111 @@ ul {
 .navbar-nav .nav-link {
   padding-left: 1rem; }
 
+.main-container {
+  min-width: 75%;
+  margin: 0 1rem;
+  display: flex;
+  flex-flow: column;
+  margin-left: auto;
+  margin-right: auto; }
+  .main-container__bidding-header {
+    background-color: black;
+    justify-content: space-between;
+    display: inline-flex;
+    padding: .5rem 1rem;
+    align-items: center; }
+    .main-container__bidding-header .__bid-header_start_block {
+      display: flex;
+      justify-content: flex-start;
+      padding: .5rem 1rem;
+      align-items: center; }
+    .main-container__bidding-header .__bid-header_end_block {
+      display: flex;
+      justify-content: flex-end;
+      padding: .5rem 1rem;
+      align-items: center; }
+  .main-container__body {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    min-height: 75vh;
+    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25); }
+
+.cloud_title {
+  color: #FFFFFF;
+  padding: 0rem 0.5rem 0rem 0rem; }
+
+.bid-header__status {
+  color: white;
+  padding: .5rem 1rem;
+  background-color: #EB5757;
+  border-radius: .3rem; }
+
+.bid-header__title {
+  color: white;
+  margin-left: 8rem; }
+
+.main-container__project_general {
+  display: flex;
+  flex-flow: column wrap;
+  padding: 1rem; }
+  .main-container__project_general ._date_revision {
+    width: 50vw;
+    margin-top: 1rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center; }
+    .main-container__project_general ._date_revision ._input-date_time {
+      display: inline-flex;
+      align-items: center; }
+    .main-container__project_general ._date_revision ._date_time_img {
+      padding-left: 1rem; }
+  .main-container__project_general ._titles_prices {
+    width: 60vw;
+    margin-top: 1rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center; }
+  .main-container__project_general .__client_job_info {
+    margin-top: 1rem; }
+    .main-container__project_general .__client_job_info ._show-client_panel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #E5E5E5; }
+    .main-container__project_general .__client_job_info ._client-block_info {
+      display: flex;
+      flex-flow: column wrap;
+      border: 1px solid #E5E5E5; }
+    .main-container__project_general .__client_job_info .job-address {
+      display: flex;
+      flex-flow: column wrap;
+      border: 1px solid #E5E5E5; }
+    .main-container__project_general .__client_job_info .client-job--span {
+      display: inline-flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #979797;
+      font-weight: bold; }
+    .main-container__project_general .__client_job_info .proj_gen-text-info {
+      color: #000000;
+      font-weight: normal; }
+  .main-container__project_general .__drawing-log ._drawing-table {
+    background-color: #BEBEBE; }
+  .main-container__project_general .__drawing-log ._show-drawing_log_panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #E5E5E5; }
+    .main-container__project_general .__drawing-log ._show-drawing_log_panel .title-text-style {
+      color: #000000;
+      font-weight: 500; }
+  .main-container__project_general .__drawing-log ._flex-center {
+    display: flex;
+    justify-content: center; }
+
 .bidding__side_bar {
   height: 64vh;
   background-color: #f8f9fa; }
@@ -450,10 +558,10 @@ ul {
   background-color: black;
   color: #fff; }
 
-._bidding--scroll div {
+.__bidding--scroll div {
   margin-top: 1rem; }
 
-._bidding--scroll ._last_url_item {
+.__bidding--scroll ._last_url_item {
   margin-bottom: 1rem; }
 
 .ddb_nav-side-bar {

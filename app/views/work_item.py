@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request, session
 from flask_login import login_required
 
-from app.models import WorkItem
+from app.models import WorkItem, Bid
+from app.models import LinkWorkItem
 from app.forms import NewWorkItemForm, WorkItemCartForm, WorkItemGroupForm
 from app.controllers import add_work_item_validator, str_function
 from app.logger import log
@@ -37,12 +38,14 @@ def add_work_item_to_cart(bid_id):
     form = WorkItemCartForm(request.form)
     if form.validate_on_submit():
         selected_work_items_choices = [
-            i for i in request.form
+            i
+            for i in request.form
             if (request.form[i] == "on" and not i.startswith("group$"))
         ]
 
         selected_group_names = [
-            i.split('$')[1] for i in request.form
+            i.split("$")[1]
+            for i in request.form
             if (request.form[i] == "on" and i.startswith("group$"))
         ]
 
@@ -67,7 +70,9 @@ def add_work_item_to_cart(bid_id):
     return redirect(url_for("work_item.work_items", bid_id=bid_id))
 
 
-@work_item_blueprint.route("/delete_work_item_from_cart/<bid_id>/<item_id>", methods=["GET"])
+@work_item_blueprint.route(
+    "/delete_work_item_from_cart/<bid_id>/<item_id>", methods=["GET"]
+)
 @login_required
 def delete_work_item_from_cart(bid_id, item_id):
     item_id = str(item_id)
@@ -79,7 +84,9 @@ def delete_work_item_from_cart(bid_id, item_id):
     return redirect(url_for("work_item.work_items", bid_id=bid_id))
 
 
-@work_item_blueprint.route("/undo_work_item_from_cart/<bid_id>/<item_id>", methods=["GET"])
+@work_item_blueprint.route(
+    "/undo_work_item_from_cart/<bid_id>/<item_id>", methods=["GET"]
+)
 @login_required
 def undo_work_item_from_cart(bid_id, item_id):
     item_id = str(item_id)
@@ -108,7 +115,9 @@ def work_item_group(bid_id):
     return redirect(url_for("work_item.work_items", bid_id=bid_id))
 
 
-@work_item_blueprint.route("/delete_work_item_from_group/<bid_id>/<group_name>/<work_item_id>", methods=["GET"])
+@work_item_blueprint.route(
+    "/delete_work_item_from_group/<bid_id>/<group_name>/<work_item_id>", methods=["GET"]
+)
 @login_required
 def delete_work_item_from_group(group_name, work_item_id, bid_id):
     groups = session.get("GroupDict", {})
@@ -122,7 +131,9 @@ def delete_work_item_from_group(group_name, work_item_id, bid_id):
     return redirect(url_for("work_item.work_items", bid_id=bid_id))
 
 
-@work_item_blueprint.route("/undo_work_item_from_group/<bid_id>/<group_name>/<item_id>", methods=["GET"])
+@work_item_blueprint.route(
+    "/undo_work_item_from_group/<bid_id>/<group_name>/<item_id>", methods=["GET"]
+)
 @login_required
 def undo_work_item_from_group(group_name, item_id, bid_id):
     item_id = str(item_id)
@@ -137,16 +148,14 @@ def undo_work_item_from_group(group_name, item_id, bid_id):
     return redirect(url_for("work_item.work_items", bid_id=bid_id))
 
 
-@work_item_blueprint.route(
-    "/delete_group/<bid_id>/<group_name>", methods=["POST"]
-)
+@work_item_blueprint.route("/delete_group/<bid_id>/<group_name>", methods=["POST"])
 @login_required
 def delete_group(bid_id, group_name):
     if group_name:
         groups = session.get("GroupDict", {})
         if str(group_name) in groups:
             del groups[group_name]
-            session['GroupDict'] = groups
+            session["GroupDict"] = groups
     return redirect(url_for("work_item.work_items", bid_id=bid_id))
 
 
@@ -156,9 +165,7 @@ def delete_group(bid_id, group_name):
 #  WorkItem Manipulation
 
 
-@work_item_blueprint.route(
-    "/delete_work_item/<bid_id>/<item_id>", methods=["POST"]
-)
+@work_item_blueprint.route("/delete_work_item/<bid_id>/<item_id>", methods=["POST"])
 @login_required
 def delete_work_item(bid_id, item_id):
     work_item = WorkItem.query.get(item_id)
@@ -166,7 +173,7 @@ def delete_work_item(bid_id, item_id):
         selected = session.get("SelectedWorkItemsDict", {})
         if str(work_item.id) in selected:
             del selected[str(work_item.id)]
-            session['SelectedWorkItemsDict'] = selected
+            session["SelectedWorkItemsDict"] = selected
         work_item.delete()
     return redirect(url_for("work_item.work_items", bid_id=bid_id))
 
@@ -186,6 +193,22 @@ def edit_work_item(bid_id, item_id):
 
 
 #  End WorkItem Manipulation
+
+
+@work_item_blueprint.route("/add_to_bidding/<bid_id>", methods=["POST"])
+@login_required
+def add_to_bidding(bid_id):
+    global_work_items = session.get("SelectedWorkItemsDict", {})
+    links_for_bid = LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id).all()
+    for item_id in global_work_items:
+        if int(item_id) in [links_for_bid[j].work_item_id for j in range(len(links_for_bid))]:
+            continue
+        else:
+            LinkWorkItem(
+                bid_id=bid_id,
+                work_item_id=int(global_work_items[item_id])
+            ).save()
+    return redirect(url_for("bidding.bidding", item_id=bid_id))
 
 
 @work_item_blueprint.route("/work_items/<bid_id>", methods=["GET"])
@@ -210,7 +233,9 @@ def work_items(bid_id):
     for group in groups_work_items_ids:
         form_group.groups[group] = []
         for work_item_id in groups_work_items_ids[group]:
-            form_group.groups[group] += [WorkItem.query.filter(WorkItem.id == int(work_item_id)).first()]
+            form_group.groups[group] += [
+                WorkItem.query.filter(WorkItem.id == int(work_item_id)).first()
+            ]
 
     return render_template(
         "work_items.html",

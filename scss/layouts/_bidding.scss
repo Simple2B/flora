@@ -6,9 +6,159 @@
 }
 // end of custom class
 
-// .bid-id--bgc {
-//     background-color: #F2F2F2;
-// }
+.main-container {
+    min-width: 75%;
+    margin: 0 1rem;
+    display: flex;
+    flex-flow: column;
+    margin-left: auto;
+    margin-right: auto;
+
+    &__bidding-header {
+        background-color: black;
+        justify-content: space-between;
+        display: inline-flex;
+        padding: .5rem 1rem;
+        align-items: center;
+
+        .__bid-header_start_block {
+            display: flex;
+            justify-content: flex-start;
+            padding: .5rem 1rem;
+            align-items: center;
+        }
+
+        .__bid-header_end_block {
+            display: flex;
+            justify-content: flex-end;
+            padding: .5rem 1rem;
+            align-items: center;
+        }
+    }
+
+    &__body {
+        display: flex;
+        flex-flow: row wrap;
+        width: 100%;
+        min-height: 75vh;
+        box-shadow: $shadow;
+    }
+}
+
+.cloud_title {
+    color: $white;
+    padding: 0rem $m0-5rem 0rem 0rem;
+}
+
+.bid-header__status {
+    color: white;
+    padding: .5rem 1rem;
+    background-color: $red;
+    border-radius: .3rem;
+}
+
+.bid-header__title {
+    color: white;
+    margin-left: 8rem;
+}
+
+.main-container__project_general {
+    display: flex;
+    flex-flow: column wrap;
+    padding: 1rem;
+
+    ._date_revision {
+        width: 50vw;
+        margin-top: 1rem;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+
+        ._input-date_time {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        ._date_time_img {
+            padding-left: 1rem;
+        }
+    }
+
+    ._titles_prices {
+        width: 60vw;
+        margin-top: 1rem;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .__client_job_info {
+        margin-top: 1rem;
+
+        ._show-client_panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #E5E5E5;
+        }
+
+        ._client-block_info {
+            display: flex;
+            flex-flow: column wrap;
+            border: 1px solid #E5E5E5;
+
+        }
+
+        .job-address {
+            display: flex;
+            flex-flow: column wrap;
+            border: 1px solid #E5E5E5;
+
+        }
+
+        .client-job--span {
+            display: inline-flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #979797;
+            font-weight: bold;
+
+        }
+
+        .proj_gen-text-info {
+            color: #000000;
+            font-weight: normal;
+        }
+
+    }
+
+    .__drawing-log {
+        ._drawing-table {
+            background-color: #BEBEBE;
+        }
+
+        ._show-drawing_log_panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #E5E5E5;
+
+            .title-text-style {
+                color: #000000;
+                font-weight: 500;
+            }
+
+        }
+
+        ._flex-center {
+            display: flex;
+            justify-content: center;
+        }
+
+    }
+}
 
 .bidding__side_bar {
     height: 64vh;
@@ -55,7 +205,7 @@
     color: #fff;
 }
 
-._bidding--scroll {
+.__bidding--scroll {
     div {
         margin-top: 1rem;
     }
