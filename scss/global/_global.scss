@@ -41,8 +41,8 @@ ul {
     margin-top: 1rem;
 }
 
-.ddb-margin-top {
-    margin-top: 1rem;
+.ddb-margin-bottom {
+    margin-bottom: 1rem;
 }
 
 .box-shadow {
@@ -207,4 +207,9 @@ ul {
 
 .bck-black {
     background-color: black;
+}
+
+.bck-white {
+    background-color: $white;
+
 }

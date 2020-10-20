@@ -30,6 +30,41 @@
     }
 }
 
+._form-input-size--s {
+    font-size: 0.33rem;
+}
+
+._form-input-size--m {
+    font-size: 0.5rem;
+}
+
+._form-input-size--l {
+    font-size: 1rem;
+}
+
+._form-text_area {
+    @include _input;
+    margin: 0;
+    display: block;
+    padding: .2rem;
+    border-radius: .5rem;
+    border-color: #BDBDBD;
+    text-indent: 5px;
+    height: 8rem;
+    width: 24rem;
+    margin-top: 1rem;
+
+    &:focus {
+        border-color: rgb(255, 221, 72);
+        outline: 0;
+    }
+
+    &--lg {
+        width: 20rem;
+        margin-top: 1rem;
+    }
+}
+
 ._label {
     @include _input;
     z-index: 2;

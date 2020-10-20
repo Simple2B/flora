@@ -11,6 +11,7 @@ class LinkWorkItem(db.Model, ModelMixin):
     bid_id = db.Column(db.Integer, db.ForeignKey("bids.id"), nullable=True)
     bid = relationship("Bid")
     work_item_id = db.Column(db.Integer, db.ForeignKey("work_items.id"), nullable=False)
+    work_item = relationship("WorkItem")
     work_item_group_id = db.Column(db.Integer, db.ForeignKey("work_item_groups.id"), nullable=True)
     work_item = relationship("WorkItem")
     work_item_group = relationship("WorkItemGroup")
