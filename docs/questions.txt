@@ -1,2 +1,4 @@
 Как работает кнопка Х в заголовке bidding?
 What is "Alternatives" (we havn't DB Model)?
+What if TDB?
+How we need to save WorkItemLine?

@@ -256,10 +256,8 @@
               <div>
                 <input class="_form-input _form-input--m" type="text">
               </div>
-              <form action="">
-                <button class="_btn--gray ddb-cursor-handle">
-                  Add Line
-                </button>
+              <form role="form" action="{{ url_for('bid.add_work_item_line', item_id=bid.id) }}" method="post">
+                {{form.submit(class='_btn--gray ddb-cursor-handle')}}
               </form>
               <div>
                 <button class="_delete-button border-none ddb-cursor-handle bck-white">
