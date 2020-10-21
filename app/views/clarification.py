@@ -137,3 +137,15 @@ def clarifications(bid_id):
         clarification_cart_form=clarification_cart_form,
         bid_id=bid_id,
     )
+
+@clarification_blueprint.route("/add_clarifications_to_bid/<int:bid_id>")
+@login_required
+def add_clarifications_to_bid(bid_id):
+    bid = Bid.query.get(bid_id)
+    selected_clarification_ids = session.get("SelectedClarificationsDict", {})
+    for link in bid.clarification_links:
+        link.delete()
+    for selected_clarification_id in map(int, selected_clarification_ids):
+        ClarificationLink(bid_id=bid_id, clarification_id=selected_clarification_id).save()
+    session["SelectedClarificationsDict"] = None
+    return redirect(url_for("bidding.bidding", bid_id=bid_id, _anchor='bid_clarification'))
