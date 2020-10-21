@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, request, session
 from flask_login import login_required
 
-from app.models import Clarification
+from app.models import Clarification, Bid, ClarificationLink
 from app.forms import ClarificationForm, ClarificationCartForm
 
 clarification_blueprint = Blueprint("clarification", __name__)
@@ -31,7 +31,9 @@ def clarification(bid_id):
     return redirect(url_for("clarification.clarifications", bid_id=bid_id))
 
 
-@clarification_blueprint.route("/add_clarification_item_to_cart/<bid_id>", methods=["POST"])
+@clarification_blueprint.route(
+    "/add_clarification_item_to_cart/<bid_id>", methods=["POST"]
+)
 @login_required
 def add_clarification_item_to_cart(bid_id):
     form = ClarificationCartForm(request.form)
@@ -85,7 +87,9 @@ def delete_clarification_item_from_items(bid_id, item_id):
     return redirect(url_for("clarification.clarifications", bid_id=bid_id))
 
 
-@clarification_blueprint.route("/edit_clarification_item/<bid_id>/<item_id>", methods=["POST"])
+@clarification_blueprint.route(
+    "/edit_clarification_item/<bid_id>/<item_id>", methods=["POST"]
+)
 @login_required
 def edit_clarification_item(bid_id, item_id):
     item_id = int(item_id)
@@ -99,18 +103,25 @@ def edit_clarification_item(bid_id, item_id):
     return redirect(url_for("clarification.clarifications", bid_id=bid_id))
 
 
-@clarification_blueprint.route("/clarifications/<bid_id>", methods=["GET"])
+@clarification_blueprint.route("/clarifications/<int:bid_id>", methods=["GET"])
 @login_required
 def clarifications(bid_id):
     form = ClarificationForm(request.form)
     clarification_cart_form = ClarificationCartForm()
-    selected_clarification_item_ids = session.get("SelectedClarificationsDict", {})
-    clarification_cart_form.selected_work_items = [
-        Clarification.query.get(item_id) for item_id in selected_clarification_item_ids
+    selected_clarification_ids = session.get("SelectedClarificationsDict", None)
+    if selected_clarification_ids is None:
+        bid = Bid.query.get(bid_id)
+        selected_clarification_ids = {
+            str(link.clarification_id): link.clarification_id
+            for link in bid.clarification_links
+        }
+        session["SelectedClarificationsDict"] = selected_clarification_ids
+    clarification_cart_form.selected_clarifications = [
+        Clarification.query.get(item_id) for item_id in selected_clarification_ids
     ]
 
     clarification_cart_form.result_text = ""
-    for item in clarification_cart_form.selected_work_items:
+    for item in clarification_cart_form.selected_clarifications:
         if not clarification_cart_form.result_text:
             clarification_cart_form.result_text = item.note
         else:
@@ -124,5 +135,5 @@ def clarifications(bid_id):
         form=form,
         clarifications_list=clarification_list,
         clarification_cart_form=clarification_cart_form,
-        bid_id=bid_id
+        bid_id=bid_id,
     )
