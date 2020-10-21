@@ -47,13 +47,6 @@ $(document).ready(function() {
 
 } );
 
-// const groupWrapper = document.getElementById('groupTableWrapper');
-// const groupToggle = document.getElementById('btnGroup');
-// groupToggle.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     groupWrapper.classList.toggle('hidden');
-// });
-
 const groupWrapper = document.getElementsByClassName('groupTableWrapper_js');
 const groupToggle = document.getElementsByClassName('btnGroup_js');
 

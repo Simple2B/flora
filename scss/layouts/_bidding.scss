@@ -243,6 +243,10 @@
                 display: flex;
                 justify-content: flex-end;
                 align-items: baseline;
+                div {
+                    padding: 0rem 1rem;
+                }
+
             }
         }
 
@@ -250,6 +254,7 @@
             display: flex;
             flex-flow: row wrap;
             justify-content: flex-end;
+            margin-top: $m1rem;
 
             .bck-color {
                 background-color: $light_gray;
@@ -275,6 +280,15 @@
                 flex-flow: row wrap;
                 justify-content: flex-end;
                 align-items: baseline;
+
+                div {
+                    padding: 0rem $m1rem;
+                }
+
+                &.--TDB {
+
+                }
+
             }
 
             ._delete-button {
@@ -289,6 +303,10 @@
             padding: 0rem 1.5rem;
         }
 
+    }
+
+    .scope_of_work_container {
+        padding: $m1rem;
     }
 
     .add_work_item-group {
@@ -332,7 +350,7 @@
                     display: flex;
                     flex-flow: row wrap;
                     justify-content: space-around;
-                    align-items: center;
+                    align-items: baseline;
 
                     & > div._feature-title {
                         font-weight: 500;
@@ -381,7 +399,13 @@
 }
 
 .check_box-TBD {
-    width: 50px;
+    width: 70px;
+    display: inline-flex;
+    align-items: center;
+}
+
+._modal_check_box-TBD {
+    width: 170px;
     display: inline-flex;
     align-items: center;
 }

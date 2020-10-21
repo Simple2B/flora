@@ -165,6 +165,16 @@ ul {
 .bck-white {
   background-color: #FFFFFF; }
 
+.modal-content .--padding {
+  padding: 0.5rem 0.5rem 0rem 0.5rem; }
+
+.modal-content .__modal-inputs--flex-row {
+  display: inline-flex;
+  align-items: baseline;
+  flex-flow: row wrap; }
+  .modal-content .__modal-inputs--flex-row div {
+    padding: 0.5rem; }
+
 .t-gray {
   color: #828282; }
 
@@ -617,11 +627,14 @@ ul {
     display: flex;
     justify-content: flex-end;
     align-items: baseline; }
+    .__bidding--scroll ._work_items_block ._work_item-link ._flex-end div {
+      padding: 0rem 1rem; }
 
 .__bidding--scroll ._work_items_block ._work_item-line {
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-end; }
+  justify-content: flex-end;
+  margin-top: 1rem; }
   .__bidding--scroll ._work_items_block ._work_item-line .bck-color {
     background-color: #FAFAFA; }
   .__bidding--scroll ._work_items_block ._work_item-line ._show-line_panel {
@@ -640,6 +653,8 @@ ul {
     flex-flow: row wrap;
     justify-content: flex-end;
     align-items: baseline; }
+    .__bidding--scroll ._work_items_block ._work_item-line .inputs-features div {
+      padding: 0rem 1rem; }
   .__bidding--scroll ._work_items_block ._work_item-line ._delete-button {
     display: flex;
     flex-flow: wrap;
@@ -647,6 +662,9 @@ ul {
 
 .__bidding--scroll ._work_items_block ._delete-button {
   padding: 0rem 1.5rem; }
+
+.__bidding--scroll .scope_of_work_container {
+  padding: 1rem; }
 
 .__bidding--scroll .add_work_item-group {
   display: inline-flex;
@@ -676,7 +694,7 @@ ul {
         display: flex;
         flex-flow: row wrap;
         justify-content: space-around;
-        align-items: center; }
+        align-items: baseline; }
         .__bidding--scroll .add_work_item-group ._center_block .inputs_fields div.input-row > div._feature-title {
           font-weight: 500;
           padding-right: 1rem; }
@@ -702,7 +720,12 @@ ul {
     font-weight: bold; }
 
 .check_box-TBD {
-  width: 50px;
+  width: 70px;
+  display: inline-flex;
+  align-items: center; }
+
+._modal_check_box-TBD {
+  width: 170px;
   display: inline-flex;
   align-items: center; }
 
@@ -892,16 +915,6 @@ ul {
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-end; }
-
-.modal-content .--padding {
-  padding: 0.5rem 0.5rem 0rem 0.5rem; }
-
-.modal-content .__modal-inputs--flex-row {
-  display: inline-flex;
-  align-items: baseline;
-  flex-flow: row wrap; }
-  .modal-content .__modal-inputs--flex-row div {
-    padding: 0.5rem; }
 
 #_group_input_delete .input--label {
   top: 0.8rem;

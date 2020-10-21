@@ -2,3 +2,4 @@
 What is "Alternatives" (we havn't DB Model)?
 What if TDB?
 How we need to save WorkItemLine?
+How we need to calculate percent in Grand Total?

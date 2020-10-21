@@ -13,6 +13,7 @@ class WorkItemLine(db.Model, ModelMixin):
     price = db.Column(db.Float, default=0, nullable=False)
     unit = db.Column(db.String(16), default='LS', nullable=False)
     quantity = db.Column(db.Float, default=1, nullable=False)
+    tdb = db.Column(db.Boolean, default=False)
     link_work_items_id = db.Column(
         db.Integer, db.ForeignKey("link_work_items.id"), nullable=False
     )

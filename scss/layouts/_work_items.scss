@@ -274,24 +274,6 @@
 
 }
 
-.modal-content {
-
-    .--padding{
-        padding: $m0-5rem $m0-5rem 0rem $m0-5rem;
-    }
-
-    .__modal-inputs--flex-row{
-        display: inline-flex;
-        align-items: baseline;
-        flex-flow: row wrap;
-
-        div {
-            padding: $m0-5rem;
-        }
-    }
-}
-
-
 #_group_input_delete {
     .input--label {
         top: 0.8rem;
