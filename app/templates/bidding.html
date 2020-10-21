@@ -347,10 +347,8 @@
             </a>
           </div>
           <div class="p-2 w-100 bd-highlight" style="border: 1px solid #BDBDBD">
-            <p>Unless expressly stated, the following exclusions apply:</p>
-          {% for exclusion_link in bid.exclusion_links %}
-          {{ exclusion_link.exclusion.title }},&nbsp;
-          {% endfor %}
+            <h6>Unless expressly stated, the following exclusions apply:</h6>
+            {{ show_exclusions }}
           </div>
           <div class="px-2 flex-shrink-1 bd-highlight">
             <a href="{{url_for('bidding.edit_exclusions', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">

@@ -71,7 +71,9 @@ def bidding(bid_id):
     list_work_items = []
     for work_item_id in work_items_ides:
         list_work_items += [WorkItem.query.get(work_item_id)]
-    return render_template("bidding.html", bid=bid, list_work_items=list_work_items)
+    show_exclusions = (", ").join([exclusion_link.exclusion.title for exclusion_link in bid.exclusion_links]) + "."
+    show_exclusions = show_exclusions.capitalize()
+    return render_template("bidding.html", bid=bid, list_work_items=list_work_items, show_exclusions=show_exclusions)
 
 
 @bidding_blueprint.route("/delete_exclusions/<int:bid_id>")
