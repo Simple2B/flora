@@ -256,9 +256,11 @@
                 <input class="_form-input _form-input--m" type="text" placeholder="$">
               </div>
               <div>
-              <form role="form" action="{{ url_for('bid.add_work_item_line', bid_id=bid.id, link_work_item_id=link_work_item.id) }}" method="post">
-                {{form.submit(class='_btn--gray ddb-cursor-handle')}}
-              </form>
+                <a href="{{url_for('bid.add_work_item_line', bid_id=bid.id, link_work_item_id=link_work_item.id)}}">
+                  <button type="button" class="_btn--gray ddb-cursor-handle">
+                    Add line
+                  </button>
+                </a>
               </div>
               <button class="_delete-button border-none ddb-cursor-handle bck-white">
                 <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
@@ -299,29 +301,30 @@
                   <div>
                     <input class="_form-input" type="text" readonly placeholder="$0" value="{{work_item_line.price}}">
                   </div>
-                  <div class="check_box-TBD">
-                    <div>
+                  <div>
+                    <div class="check_box-TBD">
                       <input class="form-control" type="checkbox">
                     </div>
-                    <span class="_inputs-features--TDB">TDB</span>
+                    <span class="">TBD</span>
                   </div>
                 </div>
               </div>
             </div>
             <div class="_delete-button">
               <div>
-                <button class="border-none ddb-cursor-handle bck-white" data-toggle="modal" data-target="#modalWorkItemLineEdit"
+                <button class="border-none ddb-cursor-handle bck-white" type="button"
+                data-target="#modalWorkItemLineEdit" data-toggle="modal"
                 data-note="{{work_item_line.description}}" data-description="{{work_item_line.note}}"
                 data-quantity="{{work_item_line.quantity}}" data-unit="{{work_item_line.unit}}"
                 data-price="{{work_item_line.price}}" data-tbd="{{work_item_line.tbd}}"
-                data-target_link="#">
+                data-target_link="{{url_for('bid.edit_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)}}">
                   <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
                 </button>
               </div>
               <div>
-                <button class="border-none ddb-cursor-handle bck-white">
+                <a class="border-none ddb-cursor-handle bck-white" href="{{url_for('bid.delete_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)}}">
                   <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-                </button>
+                </a>
               </div>
             </div>
             {% endfor %} {# end of lines #}
@@ -359,7 +362,7 @@
                 <input class="_form-input" type="text" placeholder="$ 0.00">
                 <div class="check_box-TBD">
                   <input class="form-control" type="checkbox">
-                  <span>TDB</span>
+                  <span>TBD</span>
                 </div>
               </div>
               <div class="input-row">
@@ -370,7 +373,7 @@
                 <input class="_form-input" type="text" placeholder="$ 0.00">
                 <div class="check_box-TBD">
                   <input class="form-control" type="checkbox">
-                  <span>TDB</span>
+                  <span>TBD</span>
                 </div>
               </div>
               <div class="input-row">
@@ -381,7 +384,7 @@
                 <input class="_form-input" type="text" placeholder="$ 0.00">
                 <div class="check_box-TBD">
                   <input class="form-control" type="checkbox">
-                  <span>TDB</span>
+                  <span>TBD</span>
                 </div>
               </div>
               <div class="input-row">
@@ -392,7 +395,7 @@
                 <input class="_form-input" type="text" placeholder="$ 0.00">
                 <div class="check_box-TBD">
                   <input class="form-control" type="checkbox">
-                  <span>TDB</span>
+                  <span>TBD</span>
                 </div>
               </div>
               <div class="input-row">
@@ -403,7 +406,7 @@
                 <input class="_form-input" type="text" placeholder="$ 0.00">
                 <div class="check_box-TBD">
                   <input class="form-control" type="checkbox">
-                  <span>TDB</span>
+                  <span>TBD</span>
                 </div>
               </div>
               <div class="input-row">
@@ -414,7 +417,7 @@
                 <input class="_form-input" type="text" placeholder="$ 0.00">
                 <div class="check_box-TBD">
                   <input class="form-control" type="checkbox">
-                  <span>TDB</span>
+                  <span>TBD</span>
                 </div>
               </div>
             </div>
@@ -483,38 +486,46 @@
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <h5 class="--padding">Edit work item line</h5>
-      <div class="modal-body">
-        <form class="form" role="form" action="" method="post" id="modal_work_item_line_edit">
+      <div class="">
+        <form role="form" action="" method="post" id="modal_work_item_line_edit">
           <div class="__modal-inputs--flex-row">
-            <div class="_work_item_line--inputs">
-              <div class="text-areas">
-
-                {{form.note(class='_form-input _form-input--m', placeholder="Enter Note here...", id="modal_note")}}
-
-                {{form.description(class='_form-input _form-input--m', placeholder="Enter Description here...", id="modal_description")}}
-
+            <div class="modal_work_item_line--inputs">
+              <div class="modal_text-areas">
+                <div id="form-text_area">
+                  {{form.note(class='_form-text_area', placeholder="Enter Note here...", id="modal_note")}}
+                </div>
+                <div id="form-text_area">
+                  {{form.description(class='_form-text_area', placeholder="Enter Description here...", id="modal_description")}}
+                </div>
               </div>
-              <div class="inputs-features">
+              <div class="modal_inputs-features">
                 <div>
-                  {{form.quantity(class='_form-input _form-input--m', id="modal_quantity")}}
+                  {{form.quantity(class='_form-input', id="modal_quantity")}}
                   <label class="_label">Quantity</label>
                 </div>
                 <div>
-                  {{form.unit(class='_form-input _form-input--m', id="modal_unit")}}
+                  {{form.unit(class='_form-input', id="modal_unit")}}
                   <label class="_label">Unit</label>
                 </div>
                 <div>
-                  {{form.price(class='_form-input _form-input--m', id="modal_price")}}
+                  {{form.price(class='_form-input', id="modal_price")}}
                 </div>
-                <div class="_modal_check_box-TBD">
-                  {{form.tbd(class='_form-input _form-input--m', type="checkbox", id="modal_price")}} TDB
+                <div>
+                    {{form.tbd(class='', type="checkbox", id="modal_price")}}
+                    <label> TBD </label>
+                </div>
+              </div>
+
+              <div class="_modal_btns">
+                <div>
+                  {{form.submit(class='_btn--black ddb-cursor-handle _form-input--m')}}
                 </div>
 
                 <div>
-                  {{form.submit(class='_btn--gray _form-input--m')}}
+                  <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
                 </div>
-
               </div>
+
             </div>
           </div>
         </form>

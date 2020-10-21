@@ -724,10 +724,30 @@ ul {
   display: inline-flex;
   align-items: center; }
 
-._modal_check_box-TBD {
-  width: 170px;
-  display: inline-flex;
-  align-items: center; }
+.modal-content {
+  width: auto;
+  margin-left: auto; }
+  .modal-content .modal_text-areas {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center; }
+    .modal-content .modal_text-areas div#form-text_area ._form-text_area {
+      width: 15vw;
+      padding: 0rem 0rem 0rem 0.5rem; }
+  .modal-content .modal_inputs-features {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    align-items: baseline; }
+  .modal-content ._modal_check_box-TBD {
+    width: 170px;
+    display: inline-flex;
+    align-items: center; }
+  .modal-content ._modal_btns {
+    display: flex;
+    justify-content: flex-end;
+    flex-flow: row wrap; }
 
 .direction_element {
   border: none;

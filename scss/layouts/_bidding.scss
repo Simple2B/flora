@@ -404,10 +404,43 @@
     align-items: center;
 }
 
-._modal_check_box-TBD {
-    width: 170px;
-    display: inline-flex;
-    align-items: center;
+.modal-content {
+    width: auto;
+    margin-left: auto;
+
+    .modal_text-areas {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-items: center;
+
+        div#form-text_area {
+            ._form-text_area {
+                width: 15vw;
+                padding: 0rem 0rem 0rem 0.5rem ;
+            }
+        }
+
+    }
+
+    .modal_inputs-features {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-end;
+        align-items: baseline;
+    }
+
+    ._modal_check_box-TBD {
+        width: 170px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    ._modal_btns {
+        display: flex;
+        justify-content: flex-end;
+        flex-flow: row wrap;
+    }
 }
 
 .direction_element {
