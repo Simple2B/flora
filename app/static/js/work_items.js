@@ -53,7 +53,6 @@ const groupToggle = document.getElementsByClassName('btnGroup_js');
 [].forEach.call(groupToggle,function(el) {
     el.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log(12);
         for (var i = 0; i < groupWrapper.length; i++) {
             groupWrapper[i].classList.toggle('hidden');
         };

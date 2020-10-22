@@ -6,15 +6,15 @@
 }
 // end of custom class
 
-.main-container {
-    min-width: 75%;
+.main-container_bidding {
+    max-width: 75%;
     margin: 0 $m1rem;
     display: flex;
     flex-flow: column;
     margin-left: auto;
     margin-right: auto;
 
-    &__bidding-header {
+    &-header {
         background-color: black;
         justify-content: space-between;
         display: inline-flex;
@@ -171,6 +171,13 @@
     text-align: center;
 }
 
+.__side-bar-box {
+    ._preview_export_btns {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
 
 .list__side_bar--style {
     background-color: #f8f9fa;
@@ -212,6 +219,11 @@
         margin-top: 1rem;
     }
 
+    .clarification_block {
+        margin-bottom: $m1rem;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
     ._work_items_block {
 
         .title-gray {
@@ -243,8 +255,8 @@
                 display: flex;
                 justify-content: flex-end;
                 align-items: baseline;
-                div {
-                    padding: 0rem 1rem;
+                div._flex-end_padding  {
+                    padding: 0rem $m1rem;
                 }
 
             }
@@ -256,13 +268,17 @@
             justify-content: flex-end;
             margin-top: $m1rem;
 
+            ._work_item_line--inputs {
+                margin-bottom: $m1rem;
+            }
+
             .bck-color {
                 background-color: $light_gray;
             }
 
             ._show-line_panel {
                 padding: 0rem 0rem 0rem $m0-5rem;
-                width: 46vw;
+                width: 50vw;
                 display: inline-flex;
                 flex-flow: row wrap;
                 justify-content: space-between;
@@ -273,6 +289,11 @@
                 flex-flow: row wrap;
                 justify-content: flex-end;
                 align-items: center;
+
+                div {
+                    padding: 0rem $m1rem;
+                }
+
             }
 
             .inputs-features {
@@ -282,25 +303,33 @@
                 align-items: baseline;
 
                 div {
-                    padding: 0rem $m1rem;
-                }
-
-                &.--TDB {
-
+                    padding-left: $m1rem;
                 }
 
             }
 
-            ._delete-button {
+            ._edit_delete-btns {
                 display: flex;
-                flex-flow: wrap;
-                align-items: center;
+                flex-direction: column;
+                margin-left: $m1rem;
+
+                .edit-height {
+                    display: flex;
+                }
+
+                .delete-height {
+                    height: 70%;
+                    display: flex;
+                    align-items: center;
+                }
+
+
             }
 
         }
 
-        ._delete-button {
-            padding: 0rem 1.5rem;
+        ._delete_btn {
+            padding-right: 0.3rem;
         }
 
     }

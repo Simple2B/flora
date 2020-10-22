@@ -159,6 +159,9 @@ ul {
 .overflow-x-hidden {
   overflow-x: hidden; }
 
+.hidden {
+  display: none; }
+
 .bck-black {
   background-color: black; }
 
@@ -467,30 +470,30 @@ ul {
 .navbar-nav .nav-link {
   padding-left: 1rem; }
 
-.main-container {
-  min-width: 75%;
+.main-container_bidding {
+  max-width: 75%;
   margin: 0 1rem;
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container__bidding-header {
+  .main-container_bidding-header {
     background-color: black;
     justify-content: space-between;
     display: inline-flex;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container__bidding-header .__bid-header_start_block {
+    .main-container_bidding-header .__bid-header_start_block {
       display: flex;
       justify-content: flex-start;
       padding: .5rem 1rem;
       align-items: center; }
-    .main-container__bidding-header .__bid-header_end_block {
+    .main-container_bidding-header .__bid-header_end_block {
       display: flex;
       justify-content: flex-end;
       padding: .5rem 1rem;
       align-items: center; }
-  .main-container__body {
+  .main-container_bidding__body {
     display: flex;
     flex-flow: row wrap;
     width: 100%;
@@ -580,6 +583,11 @@ ul {
 .bidding-sb--box {
   text-align: center; }
 
+.__side-bar-box ._preview_export_btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
 .list__side_bar--style {
   background-color: #f8f9fa;
   text-align: left; }
@@ -606,6 +614,10 @@ ul {
 .__bidding--scroll div.add_item_block {
   margin-top: 1rem; }
 
+.__bidding--scroll .clarification_block {
+  margin-bottom: 1rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); }
+
 .__bidding--scroll ._work_items_block .title-gray {
   color: #979797; }
 
@@ -627,7 +639,7 @@ ul {
     display: flex;
     justify-content: flex-end;
     align-items: baseline; }
-    .__bidding--scroll ._work_items_block ._work_item-link ._flex-end div {
+    .__bidding--scroll ._work_items_block ._work_item-link ._flex-end div._flex-end_padding {
       padding: 0rem 1rem; }
 
 .__bidding--scroll ._work_items_block ._work_item-line {
@@ -635,11 +647,13 @@ ul {
   flex-flow: row wrap;
   justify-content: flex-end;
   margin-top: 1rem; }
+  .__bidding--scroll ._work_items_block ._work_item-line ._work_item_line--inputs {
+    margin-bottom: 1rem; }
   .__bidding--scroll ._work_items_block ._work_item-line .bck-color {
     background-color: #FAFAFA; }
   .__bidding--scroll ._work_items_block ._work_item-line ._show-line_panel {
     padding: 0rem 0rem 0rem 0.5rem;
-    width: 46vw;
+    width: 50vw;
     display: inline-flex;
     flex-flow: row wrap;
     justify-content: space-between; }
@@ -648,20 +662,28 @@ ul {
     flex-flow: row wrap;
     justify-content: flex-end;
     align-items: center; }
+    .__bidding--scroll ._work_items_block ._work_item-line .text-areas div {
+      padding: 0rem 1rem; }
   .__bidding--scroll ._work_items_block ._work_item-line .inputs-features {
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-end;
     align-items: baseline; }
     .__bidding--scroll ._work_items_block ._work_item-line .inputs-features div {
-      padding: 0rem 1rem; }
-  .__bidding--scroll ._work_items_block ._work_item-line ._delete-button {
+      padding-left: 1rem; }
+  .__bidding--scroll ._work_items_block ._work_item-line ._edit_delete-btns {
     display: flex;
-    flex-flow: wrap;
-    align-items: center; }
+    flex-direction: column;
+    margin-left: 1rem; }
+    .__bidding--scroll ._work_items_block ._work_item-line ._edit_delete-btns .edit-height {
+      display: flex; }
+    .__bidding--scroll ._work_items_block ._work_item-line ._edit_delete-btns .delete-height {
+      height: 70%;
+      display: flex;
+      align-items: center; }
 
-.__bidding--scroll ._work_items_block ._delete-button {
-  padding: 0rem 1.5rem; }
+.__bidding--scroll ._work_items_block ._delete_btn {
+  padding-right: 0.3rem; }
 
 .__bidding--scroll .scope_of_work_container {
   padding: 1rem; }
@@ -929,8 +951,6 @@ ul {
   .chart-right .__box-scroll--group-table {
     max-height: 17vh;
     overflow: auto; }
-  .chart-right .hidden {
-    display: none; }
   .chart-right .chart-right__buttons {
     display: flex;
     flex-flow: row nowrap;

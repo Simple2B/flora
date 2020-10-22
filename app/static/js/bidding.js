@@ -1,9 +1,3 @@
-// const groupWrapper = document.getElementById('groupTableWrapper');
-// const groupToggle = document.getElementById('btnGroup');
-// groupToggle.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     groupWrapper.classList.toggle('hidden');
-// });
 
 function changeLineElement(workItemLineId, fieldName) {
     console.log("changed: [" + fieldName + "] for work item line: [" + workItemLineId + "]" );
@@ -26,5 +20,4 @@ $('#modalWorkItemLineEdit').on('show.bs.modal', function (event) {
     modal.find('#modal_unit').val(unit);
     modal.find('#modal_price').val(price);
     modal.find('#modal_tdb').val(tdb);
-
 });

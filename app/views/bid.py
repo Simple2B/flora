@@ -43,6 +43,19 @@ def edit_work_item_line(bid_id, work_item_line_id):
 
 
 @bid_blueprint.route(
+    "/delete_link_work_item/<int:bid_id>/<int:link_work_item_id>", methods=["GET"]
+)
+@login_required
+def delete_link_work_item(bid_id, link_work_item_id):
+    line = LinkWorkItem.query.get(link_work_item_id)
+    if line:
+        line.delete()
+    else:
+        log(log.ERROR, "Unknown work_item_line_id: %d", link_work_item_id)
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor='bid_scope_of_work'))
+
+
+@bid_blueprint.route(
     "/delete_work_item_line/<int:bid_id>/<int:work_item_line_id>", methods=["GET"]
 )
 @login_required

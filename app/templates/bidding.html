@@ -12,37 +12,48 @@
 <!-- begin Sidebar -->
 <!-- <div> -->
   <div class="border-right box-shadow __side-bar-box bidding__side_bar--size" id="sidebar-wrapper">
-    <div class="sidebar-heading"> DDB Contracting</div>
-    <div class="text--center list-group list-group-flush none-underline">
-      <a href="{{ url_for('bidding.biddings') }}">
-      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized">
-          <img src="{{url_for('static', filename='images/my_bidding_element.svg')}}"> My Bidding </button></a>
-      <div class="ddb-cursor-handle list-group-item list-group-item-action normalized bidding-sb--box --border"> # {{ bid.procore_bid_id }}  </div>
-      <div class="bidding-sb-list">
-        <ul class="list-group-item normalized list__side_bar--style __side_bar--ul">
-            <li>
-              <span class="tablinks active"><a href="#">Project general</a> </span>
-            </li>
-            <li>
-              <span class="tablinks"><a href="#bid_scope_of_work"> Scope of Work</a> </span>
-            </li>
-            <li>
-              <span class="tablinks"><a href="#bid_exclusion"> Exclusions</a> </span>
-            </li>
-            <li>
-              <span class="tablinks"><a href="#bid_clarification"> Clarifications</a> </span>
-            </li>
-        </ul>
+    <div>
+      <div class="sidebar-heading"> DDB Contracting</div>
+      <div class="text--center list-group list-group-flush none-underline">
+        <a href="{{ url_for('bidding.biddings') }}">
+        <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized">
+            <img src="{{url_for('static', filename='images/my_bidding_element.svg')}}"> My Bidding </button></a>
+        <div class="ddb-cursor-handle list-group-item list-group-item-action normalized bidding-sb--box --border"> # {{ bid.procore_bid_id }}  </div>
+        <div class="bidding-sb-list">
+          <ul class="list-group-item normalized list__side_bar--style __side_bar--ul">
+              <li>
+                <span class="tablinks active"><a href="#">Project general</a> </span>
+              </li>
+              <li>
+                <span class="tablinks"><a href="#bid_scope_of_work"> Scope of Work</a> </span>
+              </li>
+              <li>
+                <span class="tablinks"><a href="#bid_exclusion"> Exclusions</a> </span>
+              </li>
+              <li>
+                <span class="tablinks"><a href="#bid_clarification"> Clarifications</a> </span>
+              </li>
+          </ul>
+        </div>
       </div>
-
+    </div>
+    <div class="_preview_export_btns">
+      <div>
+        <button type="button" class="_btn--gray">Preview</button>
+      </div>
+      <a href="">
+        <div>
+          <button type="button" class="_btn--gray ddb-cursor-handle">Export</button>
+        </div>
+      </a>
     </div>
   </div>
   <!-- end Sidebar -->
   <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size box-shadow ddb-cursor-handle" id="ddb-background">
   </nav>
 
-  <div class="main-container" id="work-item-container">
-    <div class="main-container__bidding-header">
+  <div class="main-container_bidding" id="work-item-container">
+    <div class="main-container_bidding-header">
       <div class="__bid-header_start_block">
         <div class="bid-header__status">Draft</div>
         <div class="bid-header__title"><strong>
@@ -252,66 +263,76 @@
             </div>
 
             <div class="_flex-end">
-              <div>
+              <div class="_flex-end_padding">
                 <input class="_form-input _form-input--m" type="text" placeholder="$">
               </div>
-              <div>
+              <div class="_flex-end_padding">
                 <a href="{{url_for('bid.add_work_item_line', bid_id=bid.id, link_work_item_id=link_work_item.id)}}">
                   <button type="button" class="_btn--gray ddb-cursor-handle">
                     Add line
                   </button>
                 </a>
               </div>
-              <button class="_delete-button border-none ddb-cursor-handle bck-white">
-                <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-              </button>
+              <div class="_delete_btn">
+                <a href="{{url_for('bid.delete_link_work_item', bid_id=bid.id, link_work_item_id=link_work_item.id)}}">
+                  <button class="border-none ddb-cursor-handle bck-white">
+                    <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                  </button>
+                </a>
+              </div>
             </div>
           </div>
           <div class="_work_item-line">
             {% for work_item_line in link_work_item.work_item_lines%}
-            <div class="bck-color">
-              <div class="_show-line_panel">
+            <div>
+              <div class="_show-line_panel bck-color">
                 <div class="title-text-style">Line </div>
                 <div>
                   <div>
-                    <button class="border-none ddb-cursor-handle">
+                    <button id="btn_line_id" data-line_id="line-{{work_item_line.id}}" class="border-none ddb-cursor-handle btnLine_element_direction_js test-focus">
                       <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="">
                     </button>
                   </div>
                 </div>
               </div>
-              <div class="_work_item_line--inputs">
-                <div class="text-areas">
-                  <textarea class="_form-text_area" readonly cols="30" rows="10" placeholder="Enter Description here...">
-                      {{work_item_line.description}}
-                  </textarea>
-                  <textarea class="_form-text_area" readonly cols="30" rows="10" placeholder="Enter Note here...">
-                      {{work_item_line.note}}
-                  </textarea>
-                </div>
-                <div class="inputs-features">
-                  <div>
-                    <input class="_form-input" type="text" readonly placeholder="1" value="{{work_item_line.quantity}}">
-                    <label class="_label">Quantity</label>
-                  </div>
-                  <div>
-                    <input class="_form-input" type="text" readonly placeholder="LS" value="{{work_item_line.unit}}">
-                    <label class="_label">Unit</label>
-                  </div>
-                  <div>
-                    <input class="_form-input" type="text" readonly placeholder="$0" value="{{work_item_line.price}}">
-                  </div>
-                  <div>
-                    <div class="check_box-TBD">
-                      <input class="form-control" type="checkbox">
+              <div class="_work_item_line--inputs line_hidden_js" id="line-{{work_item_line.id}}">
+                <div class="bck-color">
+                  <div class="text-areas">
+                    <div>
+                      <textarea class="_form-text_area" readonly cols="30" rows="10" placeholder="Enter Description here...">
+                          {{work_item_line.description}}
+                      </textarea>
                     </div>
-                    <span class="">TBD</span>
+                    <div>
+                      <textarea class="_form-text_area" readonly cols="30" rows="10" placeholder="Enter Note here...">
+                          {{work_item_line.note}}
+                      </textarea>
+                    </div>
+                  </div>
+                  <div class="inputs-features">
+                    <div>
+                      <input class="_form-input" type="text" readonly placeholder="1" value="{{work_item_line.quantity}}">
+                      <label class="_label">Quantity</label>
+                    </div>
+                    <div>
+                      <input class="_form-input" type="text" readonly placeholder="LS" value="{{work_item_line.unit}}">
+                      <label class="_label">Unit</label>
+                    </div>
+                    <div>
+                      <input class="_form-input" type="text" readonly placeholder="$0" value="{{work_item_line.price}}">
+                    </div>
+                    <div>
+                      <div class="check_box-TBD">
+                        <input class="form-control" type="checkbox">
+                      </div>
+                      <span class="">TBD</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="_delete-button">
-              <div>
+            <div class="_edit_delete-btns">
+              <div class="edit-height">
                 <button class="border-none ddb-cursor-handle bck-white" type="button"
                 data-target="#modalWorkItemLineEdit" data-toggle="modal"
                 data-note="{{work_item_line.description}}" data-description="{{work_item_line.note}}"
@@ -321,7 +342,7 @@
                   <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
                 </button>
               </div>
-              <div>
+              <div class="delete-height">
                 <a class="border-none ddb-cursor-handle bck-white" href="{{url_for('bid.delete_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)}}">
                   <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
                 </a>
@@ -468,7 +489,7 @@
         </div>
       </div>
 
-      <div class="modal-content modal--padding add_item_block" id="bid_clarification">
+      <div class="modal-content modal--padding add_item_block clarification_block" id="bid_clarification">
         <h5 class="--padding">Clarifications</h5>
         <div class="__modal-inputs--flex-row">
 
