@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import login_required
 
-from app.models import Bid, WorkItem
-from app.models import WorkItemLine, LinkWorkItem
+from app.models import Bid, WorkItemLine, LinkWorkItem, WorkItem
 
 from app.forms import WorkItemLineForm
+
+from app.controllers import calculate_subtotal
 
 from app.logger import log
 
@@ -124,11 +125,12 @@ def bidding(bid_id):
         ]
     ) + "."
     show_clarifications = show_clarifications.capitalize()
+    calculate_subtotal(bid_id)
+
     return render_template(
         "bidding.html",
         bid=bid,
         form=form,
-        list_work_items=list_work_items,
         show_exclusions=show_exclusions,
-        show_clarifications=show_clarifications,
+        show_clarifications=show_clarifications
     )
