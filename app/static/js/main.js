@@ -61,3 +61,27 @@ $(document).ready( function() {
       });
   });
 });
+
+const CloseWrapper = document.getElementById('subtotal_close_panel_id');
+const changeImg = $('#subtotal_img_id')[0].src;
+console.log(changeImg);
+const subtotalClosePanel = document.getElementById('subtotal_inputs_fields_id');
+CloseWrapper.addEventListener('click', (e) => {
+  e.preventDefault();
+  subtotalClosePanel.classList.toggle('hidden');
+  $('#subtotal_img_id').attr('src', "http://localhost:5000/static/images/direction_element_bottom.svg");
+});
+
+const clientCloseWrapper = document.getElementById('client_and_job_close_panel_id');
+const clientClosePanel = document.getElementById('client_job_hidden_id');
+clientCloseWrapper.addEventListener('click', (e) => {
+  e.preventDefault();
+  clientClosePanel.classList.toggle('hidden');
+});
+
+const drawingLogCloseWrapper = document.getElementById('drawing_log_lose_panel_id');
+const drawingLogClosePanel = document.getElementById('drawing_log_hidden_id');
+drawingLogCloseWrapper.addEventListener('click', (e) => {
+  e.preventDefault();
+  drawingLogClosePanel.classList.toggle('hidden');
+});

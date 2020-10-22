@@ -224,7 +224,7 @@
             data-target_link_group_delete="{{url_for('work_item.delete_group', bid_id=bid_id, group_name=group_name)}}" data-group_name="{{group_name}}">
               <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
             </button>
-            <button id='btnGroup' class="ddb-cursor-handle btnGroup_js test">
+            <button id='btnGroup' class="ddb-cursor-handle btnGroup_js">
               <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}">
             </button>
 
@@ -264,13 +264,13 @@
 
         <div class="chart-right__buttons ddb-margin-top">
           <form class="__group_name" id="add_to_bidding" role="form" action="{{ url_for('work_item.add_to_bidding', bid_id=bid_id) }}" method="post">
-            <button class="_btn--black">
+            <button class="_btn--black ddb-cursor-handle">
               Add to bidding
             </button>
           </form>
-          <button class="_btn--gray">
-            <a class="__btn-cancel" href="{{ url_for('bid.bidding', bid_id=bid_id)}}">Cancel</a>
-          </button>
+            <button class="_btn--gray">
+              <a class="__btn-cancel" href="{{ url_for('work_item.work_item_cancel', bid_id=bid_id)}}">Cancel</a>
+            </button>
         </div>
       </div>
       <!-- End Right Chart -->

@@ -47,9 +47,11 @@ def edit_work_item_line(bid_id, work_item_line_id):
 )
 @login_required
 def delete_link_work_item(bid_id, link_work_item_id):
-    line = LinkWorkItem.query.get(link_work_item_id)
-    if line:
-        line.delete()
+    link = LinkWorkItem.query.get(link_work_item_id)
+    if link:
+        for line in link.work_item_lines:
+            line.delete()
+        link.delete()
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", link_work_item_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor='bid_scope_of_work'))
@@ -68,13 +70,65 @@ def delete_work_item_line(bid_id, work_item_line_id):
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor='bid_scope_of_work'))
 
 
+@bid_blueprint.route("/delete_exclusions/<int:bid_id>")
+@login_required
+def delete_exclusions(bid_id):
+    bid = Bid.query.get(bid_id)
+    for exclusion_link in bid.exclusion_links:
+        exclusion_link.delete()
+    return redirect(url_for("bidding.bidding", bid_id=bid_id, _anchor="bid_exclusion"))
+
+
+@bid_blueprint.route("/edit_exclusions/<int:bid_id>")
+@login_required
+def edit_exclusions(bid_id):
+    return redirect(url_for("exclusion.exclusions", bid_id=bid_id))
+
+
+@bid_blueprint.route("/delete_clarifications/<int:bid_id>")
+@login_required
+def delete_clarifications(bid_id):
+    bid = Bid.query.get(bid_id)
+    for clarification_link in bid.clarification_links:
+        clarification_link.delete()
+    return redirect(
+        url_for("bid.bidding", bid_id=bid_id, _anchor="bid_clarification")
+    )
+
+
+@bid_blueprint.route("/edit_clarifications/<int:bid_id>")
+@login_required
+def edit_clarifications(bid_id):
+    return redirect(url_for("clarification.clarifications", bid_id=bid_id))
+
+
 @bid_blueprint.route("/bidding/<int:bid_id>", methods=["GET"])
 @login_required
 def bidding(bid_id):
     bid = Bid.query.get(bid_id)
     form = WorkItemLineForm()
+    work_items_ides = [
+        link_work_item.work_item_id for link_work_item in bid.link_work_items
+    ]
+    list_work_items = []
+    for work_item_id in work_items_ides:
+        list_work_items += [WorkItem.query.get(work_item_id)]
+    show_exclusions = (", ").join(
+        [exclusion_link.exclusion.title for exclusion_link in bid.exclusion_links]
+    ) + "."
+    show_exclusions = show_exclusions.capitalize()
+    show_clarifications = (", ").join(
+        [
+            clarification_link.clarification.note
+            for clarification_link in bid.clarification_links
+        ]
+    ) + "."
+    show_clarifications = show_clarifications.capitalize()
     return render_template(
         "bidding.html",
         bid=bid,
-        form=form
+        form=form,
+        list_work_items=list_work_items,
+        show_exclusions=show_exclusions,
+        show_clarifications=show_clarifications,
     )

@@ -1,7 +1,6 @@
-
 function changeLineElement(workItemLineId, fieldName) {
     console.log("changed: [" + fieldName + "] for work item line: [" + workItemLineId + "]" );
-}
+};
 
 $('#modalWorkItemLineEdit').on('show.bs.modal', function (event) {
     const button = $(event.relatedTarget); // Button that triggered the modal
