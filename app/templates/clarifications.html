@@ -119,7 +119,7 @@
                 <th>Delete</th>
               </thead> -->
               <tbody>
-                {% for item in clarification_cart_form.selected_work_items %}
+                {% for item in clarification_cart_form.selected_clarifications %}
                 <tr>
                   <td><a href="" class="t-gray">{{item.note}}</a></td>
                   <td>
@@ -143,12 +143,13 @@
         </div>
 
         <div class="__box-add-bid-cancel--margins">
-          <a href="#" class="none-underline"><button class="_btn--black">
-            Add to bidding</a>
-          </button>
-          <a href="{{ url_for('bidding.biddings') }}"><button class="_btn--gray">
-            Cancel</a>
-          </button>
+
+            <a class="none-underline _btn--black" href="{{ url_for('clarification.add_clarifications_to_bid', bid_id=bid_id) }}">
+              Add to bidding
+            </a>
+            <a class="_btn--gray" href="{{ url_for('bidding.bidding', bid_id=bid_id, _anchor='bid_clarification') }}">
+                Cancel
+            </a>
         </div>
 
       </div>

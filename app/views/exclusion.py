@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, request, session
 from flask_login import login_required
 
-from app.models import Exclusion
+from app.models import Exclusion, Bid, ExclusionLink
 from app.forms import ExclusionForm, ExclusionCartForm
 
 exclusion_blueprint = Blueprint("exclusion", __name__)
@@ -79,7 +79,7 @@ def delete_exclusion_item_from_items(bid_id, item_id):
         selected = session.get("SelectedExclusionItemsDict", {})
         if str(exclusion.id) in selected:
             del selected[str(exclusion.id)]
-            session['SelectedExclusionItemsDict'] = selected
+            session["SelectedExclusionItemsDict"] = selected
         exclusion.delete()
     return redirect(url_for("exclusion.exclusions", bid_id=bid_id))
 
@@ -103,7 +103,15 @@ def exclusions(bid_id):
     form = ExclusionForm(request.form)
     form.exclusions = Exclusion.query.all()
     exclusion_cart_form = ExclusionCartForm()
-    selected_exclusion_item_ids = session.get("SelectedExclusionItemsDict", {})
+    selected_exclusion_item_ids = session.get("SelectedExclusionItemsDict", None)
+    if selected_exclusion_item_ids is None:
+        selected_exclusion_item_ids = {
+            str(excl_link.exclusion_id): excl_link.exclusion_id
+            for excl_link in ExclusionLink.query.filter(
+                ExclusionLink.bid_id == bid_id
+            ).all()
+        }
+        session["SelectedExclusionItemsDict"] = selected_exclusion_item_ids
     exclusion_cart_form.selected_exclusions = [
         Exclusion.query.get(item_id) for item_id in selected_exclusion_item_ids
     ]
@@ -112,12 +120,25 @@ def exclusions(bid_id):
         if not exclusion_cart_form.result_text:
             exclusion_cart_form.result_text = item.title
         else:
-            exclusion_cart_form.result_text += ', '
+            exclusion_cart_form.result_text += ", "
             exclusion_cart_form.result_text += item.title
 
     return render_template(
         "exclusions.html",
         form=form,
         exclusion_cart_form=exclusion_cart_form,
-        bid_id=bid_id
+        bid_id=bid_id,
     )
+
+
+@exclusion_blueprint.route("/add_exclusions_to_bid/<int:bid_id>")
+@login_required
+def add_exclusions_to_bid(bid_id):
+    bid = Bid.query.get(bid_id)
+    selected_exclusion_item_ids = session.get("SelectedExclusionItemsDict", {})
+    for exclusion_link in bid.exclusion_links:
+        exclusion_link.delete()
+    for selected_exclusion_id in map(int, selected_exclusion_item_ids):
+        ExclusionLink(bid_id=bid_id, exclusion_id=selected_exclusion_id).save()
+    session["SelectedExclusionItemsDict"] = None
+    return redirect(url_for("bidding.bidding", bid_id=bid_id, _anchor='bid_exclusion'))

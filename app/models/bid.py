@@ -19,6 +19,12 @@ class Bid(db.Model, ModelMixin):
     title = db.Column(db.String(256), nullable=False)
     client = db.Column(db.String(256), nullable=False)
     status = db.Column(db.Enum(Status), default=Status.a_new, nullable=False)
+    permit_filling_fee = db.Column(db.Float, default=0.0)
+    general_conditions = db.Column(db.Float, default=0.0)
+    overhead = db.Column(db.Float, default=0.0)
+    insurance_tax = db.Column(db.Float, default=0.0)
+    profit = db.Column(db.Float, default=0.0)
+    bond = db.Column(db.Float, default=0.0)
 
     link_work_items = relationship("LinkWorkItem")
     work_item_groups = relationship("WorkItemGroup")

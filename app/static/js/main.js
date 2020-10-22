@@ -48,3 +48,16 @@ $("#ddb-background").click(function (e) {
 });
 
 const bid_href_id = document.getElementById('bidding_id');
+
+$(document).ready( function() {
+  const lineList = document.querySelectorAll(".btnLine_element_direction_js")
+  lineList.forEach(element =>{
+      element.addEventListener('click',
+      (e)=> {
+          e.preventDefault();
+          const lineId = e.currentTarget.dataset["line_id"]
+          const areaToShow = document.querySelector(`#${lineId}`)
+          areaToShow.classList.toggle('hidden');
+      });
+  });
+});
