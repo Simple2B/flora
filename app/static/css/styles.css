@@ -159,11 +159,24 @@ ul {
 .overflow-x-hidden {
   overflow-x: hidden; }
 
+.hidden {
+  display: none; }
+
 .bck-black {
   background-color: black; }
 
 .bck-white {
   background-color: #FFFFFF; }
+
+.modal-content .--padding {
+  padding: 0.5rem 0.5rem 0rem 0.5rem; }
+
+.modal-content .__modal-inputs--flex-row {
+  display: inline-flex;
+  align-items: baseline;
+  flex-flow: row wrap; }
+  .modal-content .__modal-inputs--flex-row div {
+    padding: 0.5rem; }
 
 .t-gray {
   color: #828282; }
@@ -457,30 +470,30 @@ ul {
 .navbar-nav .nav-link {
   padding-left: 1rem; }
 
-.main-container {
-  min-width: 75%;
+.main-container_bidding {
+  max-width: 75%;
   margin: 0 1rem;
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container__bidding-header {
+  .main-container_bidding-header {
     background-color: black;
     justify-content: space-between;
     display: inline-flex;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container__bidding-header .__bid-header_start_block {
+    .main-container_bidding-header .__bid-header_start_block {
       display: flex;
       justify-content: flex-start;
       padding: .5rem 1rem;
       align-items: center; }
-    .main-container__bidding-header .__bid-header_end_block {
+    .main-container_bidding-header .__bid-header_end_block {
       display: flex;
       justify-content: flex-end;
       padding: .5rem 1rem;
       align-items: center; }
-  .main-container__body {
+  .main-container_bidding__body {
     display: flex;
     flex-flow: row wrap;
     width: 100%;
@@ -570,6 +583,11 @@ ul {
 .bidding-sb--box {
   text-align: center; }
 
+.__side-bar-box ._preview_export_btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
 .list__side_bar--style {
   background-color: #f8f9fa;
   text-align: left; }
@@ -596,6 +614,10 @@ ul {
 .__bidding--scroll div.add_item_block {
   margin-top: 1rem; }
 
+.__bidding--scroll .clarification_block {
+  margin-bottom: 1rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); }
+
 .__bidding--scroll ._work_items_block .title-gray {
   color: #979797; }
 
@@ -615,17 +637,23 @@ ul {
       padding: 0rem 2rem; }
   .__bidding--scroll ._work_items_block ._work_item-link ._flex-end {
     display: flex;
-    justify-content: flex-end; }
+    justify-content: flex-end;
+    align-items: baseline; }
+    .__bidding--scroll ._work_items_block ._work_item-link ._flex-end div._flex-end_padding {
+      padding: 0rem 1rem; }
 
 .__bidding--scroll ._work_items_block ._work_item-line {
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-end; }
+  justify-content: flex-end;
+  margin-top: 1rem; }
+  .__bidding--scroll ._work_items_block ._work_item-line ._work_item_line--inputs {
+    margin-bottom: 1rem; }
   .__bidding--scroll ._work_items_block ._work_item-line .bck-color {
     background-color: #FAFAFA; }
   .__bidding--scroll ._work_items_block ._work_item-line ._show-line_panel {
     padding: 0rem 0rem 0rem 0.5rem;
-    width: 46vw;
+    width: 50vw;
     display: inline-flex;
     flex-flow: row wrap;
     justify-content: space-between; }
@@ -634,27 +662,121 @@ ul {
     flex-flow: row wrap;
     justify-content: flex-end;
     align-items: center; }
+    .__bidding--scroll ._work_items_block ._work_item-line .text-areas div {
+      padding: 0rem 1rem; }
   .__bidding--scroll ._work_items_block ._work_item-line .inputs-features {
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-end;
     align-items: baseline; }
-  .__bidding--scroll ._work_items_block ._work_item-line ._delete-button {
+    .__bidding--scroll ._work_items_block ._work_item-line .inputs-features div {
+      padding-left: 1rem; }
+  .__bidding--scroll ._work_items_block ._work_item-line ._edit_delete-btns {
     display: flex;
-    flex-flow: wrap; }
-  .__bidding--scroll ._work_items_block ._work_item-line .check_box-TBD {
-    width: 25px; }
+    flex-direction: column;
+    margin-left: 1rem; }
+    .__bidding--scroll ._work_items_block ._work_item-line ._edit_delete-btns .edit-height {
+      display: flex; }
+    .__bidding--scroll ._work_items_block ._work_item-line ._edit_delete-btns .delete-height {
+      height: 70%;
+      display: flex;
+      align-items: center; }
 
-.__bidding--scroll ._work_items_block ._delete-button {
+.__bidding--scroll ._work_items_block ._delete_btn {
+  padding-right: 0.3rem; }
+
+.__bidding--scroll .scope_of_work_container {
+  padding: 1rem; }
+
+.__bidding--scroll .add_work_item-group {
+  display: inline-flex;
+  flex-direction: column; }
+  .__bidding--scroll .add_work_item-group ._top_block {
+    display: inline-flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    align-items: center; }
+    .__bidding--scroll .add_work_item-group ._top_block .add_item_btn {
+      display: flex;
+      justify-content: flex-start; }
+    .__bidding--scroll .add_work_item-group ._top_block ._subtotal-block {
+      width: 50vw;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-evenly;
+      align-self: center; }
+  .__bidding--scroll .add_work_item-group ._center_block {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end; }
+    .__bidding--scroll .add_work_item-group ._center_block .inputs_fields {
+      display: flex;
+      flex-direction: column; }
+      .__bidding--scroll .add_work_item-group ._center_block .inputs_fields div.input-row {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-items: baseline; }
+        .__bidding--scroll .add_work_item-group ._center_block .inputs_fields div.input-row > div._feature-title {
+          font-weight: 500;
+          padding-right: 1rem; }
+    .__bidding--scroll .add_work_item-group ._center_block ._show_subtotal_close_panel {
+      display: flex; }
+  .__bidding--scroll .add_work_item-group ._bottom_block {
+    margin: 1rem 0rem; }
+    .__bidding--scroll .add_work_item-group ._bottom_block .__right-block {
+      display: flex;
+      justify-content: flex-end; }
+      .__bidding--scroll .add_work_item-group ._bottom_block .__right-block ._grand_subtotal-block {
+        width: 50vw;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        align-self: center; }
+  .__bidding--scroll .add_work_item-group .subtotal {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333333; }
+  .__bidding--scroll .add_work_item-group .subtotal_price {
+    color: #EB5757;
+    font-weight: bold; }
+
+.check_box-TBD {
+  width: 70px;
+  display: inline-flex;
+  align-items: center; }
+
+.modal-content {
+  width: auto;
+  margin-left: auto; }
+  .modal-content .modal_text-areas {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center; }
+    .modal-content .modal_text-areas div#form-text_area ._form-text_area {
+      width: 15vw;
+      padding: 0rem 0rem 0rem 0.5rem; }
+  .modal-content .modal_inputs-features {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    align-items: baseline; }
+  .modal-content ._modal_check_box-TBD {
+    width: 170px;
+    display: inline-flex;
+    align-items: center; }
+  .modal-content ._modal_btns {
+    display: flex;
+    justify-content: flex-end;
+    flex-flow: row wrap; }
+
+.direction_element {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-flow: wrap;
   padding: 0rem 1.5rem; }
-
-.__bidding--scroll .add_work_item-group .subtotal {
-  font-weight: bold;
-  color: #333333; }
-
-.__bidding--scroll .add_work_item-group .subtotal_price {
-  color: #EB5757;
-  font-weight: bold; }
 
 .ddb_nav-side-bar {
   height: 64vh; }
@@ -829,22 +951,10 @@ ul {
   .chart-right .__box-scroll--group-table {
     max-height: 17vh;
     overflow: auto; }
-  .chart-right .hidden {
-    display: none; }
   .chart-right .chart-right__buttons {
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-end; }
-
-.modal-content .--padding {
-  padding: 0.5rem 0.5rem 0rem 0.5rem; }
-
-.modal-content .__modal-inputs--flex-row {
-  display: inline-flex;
-  align-items: baseline;
-  flex-flow: row wrap; }
-  .modal-content .__modal-inputs--flex-row div {
-    padding: 0.5rem; }
 
 #_group_input_delete .input--label {
   top: 0.8rem;

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request, session
 from flask_login import login_required
 
-from app.models import WorkItem, Bid
+from app.models import WorkItem
 from app.models import LinkWorkItem
 from app.forms import NewWorkItemForm, WorkItemCartForm, WorkItemGroupForm
 from app.controllers import add_work_item_validator, str_function

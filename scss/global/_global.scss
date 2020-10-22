@@ -205,6 +205,10 @@ ul {
     overflow-x: hidden;
 }
 
+.hidden {
+    display: none;
+}
+
 .bck-black {
     background-color: black;
 }
@@ -212,4 +216,21 @@ ul {
 .bck-white {
     background-color: $white;
 
+}
+
+.modal-content {
+
+    .--padding{
+        padding: $m0-5rem $m0-5rem 0rem $m0-5rem;
+    }
+
+    .__modal-inputs--flex-row{
+        display: inline-flex;
+        align-items: baseline;
+        flex-flow: row wrap;
+
+        div {
+            padding: $m0-5rem;
+        }
+    }
 }

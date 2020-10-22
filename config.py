@@ -15,6 +15,20 @@ class BaseConfig(object):
     WTF_CSRF_ENABLED = False
     GENERATE_TEST_DATA = int(os.environ.get('GENERATE_TEST_DATA', '0'))
 
+    # Permit/Filling Fee: 8%
+    PERCENT_PERMIT_FEE = float(os.environ.get("PERCENT_PERMIT_FEE", '8'))
+    # General Conditions: 5%
+    PERCENT_GENERAL_CONDITION = float(os.environ.get("PERCENT_GENERAL_CONDITION", '5'))
+    # Overhead: 5%
+    PERCENT_OVERHEAD = float(os.environ.get("PERCENT_OVERHEAD", '5'))
+    # Insurance/Tax: 5%
+    PERCENT_INSURANCE_TAX = float(os.environ.get("PERCENT_INSURANCE_TAX", '5'))
+    # Profit: 5%
+    PERCENT_PROFIT = float(os.environ.get("PERCENT_PROFIT", '5'))
+    # Bond: 5%
+    PERCENT_BOND = float(os.environ.get("PERCENT_BOND", '5'))
+
+
     PROCORE_API_CLIENT_ID = os.environ.get("PROCORE_API_CLIENT_ID", '')
     PROCORE_API_CLIENT_SECRET = os.environ.get("PROCORE_API_CLIENT_SECRET", '')
     PROCORE_API_REDIRECT_URI = os.environ.get("PROCORE_API_REDIRECT_URI", '')

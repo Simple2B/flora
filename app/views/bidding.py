@@ -3,7 +3,7 @@ from flask_login import login_required
 from flask import current_app
 from app.procore import ProcoreApi
 
-from app.models import Bid, WorkItem
+from app.models import Bid
 
 bidding_blueprint = Blueprint("bidding", __name__)
 
