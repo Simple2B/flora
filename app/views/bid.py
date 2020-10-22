@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import login_required
 
-from app.models import Bid
-from app.models import WorkItemLine, LinkWorkItem
+from app.models import Bid, WorkItemLine, LinkWorkItem, WorkItem
 
 from app.forms import WorkItemLineForm
+
+from app.controllers import calculate_subtotal
 
 from app.logger import log
 
@@ -73,8 +74,30 @@ def delete_work_item_line(bid_id, work_item_line_id):
 def bidding(bid_id):
     bid = Bid.query.get(bid_id)
     form = WorkItemLineForm()
+
+    work_items_ides = [
+        link_work_item.work_item_id for link_work_item in bid.link_work_items
+    ]
+    list_work_items = []
+    for work_item_id in work_items_ides:
+        list_work_items += [WorkItem.query.get(work_item_id)]
+    show_exclusions = (", ").join(
+        [exclusion_link.exclusion.title for exclusion_link in bid.exclusion_links]
+    ) + "."
+    show_exclusions = show_exclusions.capitalize()
+    show_clarifications = (", ").join(
+        [
+            clarification_link.clarification.note
+            for clarification_link in bid.clarification_links
+        ]
+    ) + "."
+    show_clarifications = show_clarifications.capitalize()
+    calculate_subtotal(bid_id)
+
     return render_template(
         "bidding.html",
         bid=bid,
-        form=form
+        form=form,
+        show_exclusions=show_exclusions,
+        show_clarifications=show_clarifications
     )

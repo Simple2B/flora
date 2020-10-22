@@ -25,6 +25,8 @@ class Bid(db.Model, ModelMixin):
     insurance_tax = db.Column(db.Float, default=0.0)
     profit = db.Column(db.Float, default=0.0)
     bond = db.Column(db.Float, default=0.0)
+    subtotal = db.Column(db.Float, default=0.0)
+    grand_subtotal = db.Column(db.Float, default=0.0)
 
     link_work_items = relationship("LinkWorkItem")
     work_item_groups = relationship("WorkItemGroup")

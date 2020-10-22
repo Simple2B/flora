@@ -368,7 +368,7 @@
               </div>
 
               <div class="subtotal_price">
-                $ 0.00
+                $ {{bid.subtotal}}
               </div>
             </div>
           </div>
@@ -380,7 +380,7 @@
                 <div>
                   <input class="_form-input" type="text" value="{{config.PERCENT_PERMIT_FEE}}%">
                 </div>
-                <input class="_form-input" type="text" placeholder="$ 0.00">
+                <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.permit_filling_fee}}">
                 <div class="check_box-TBD">
                   <input class="form-control" type="checkbox">
                   <span>TBD</span>
@@ -391,7 +391,7 @@
                 <div>
                   <input class="_form-input" type="text" value="{{config.PERCENT_GENERAL_CONDITION}}%">
                 </div>
-                <input class="_form-input" type="text" placeholder="$ 0.00">
+                <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.general_conditions}}">
                 <div class="check_box-TBD">
                   <input class="form-control" type="checkbox">
                   <span>TBD</span>
@@ -402,7 +402,7 @@
                 <div>
                   <input class="_form-input" type="text" value="{{config.PERCENT_OVERHEAD}}%">
                 </div>
-                <input class="_form-input" type="text" placeholder="$ 0.00">
+                <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.overhead}}">
                 <div class="check_box-TBD">
                   <input class="form-control" type="checkbox">
                   <span>TBD</span>
@@ -413,7 +413,7 @@
                 <div>
                   <input class="_form-input" type="text" value="{{config.PERCENT_INSURANCE_TAX}}%">
                 </div>
-                <input class="_form-input" type="text" placeholder="$ 0.00">
+                <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.insurance_tax}}">
                 <div class="check_box-TBD">
                   <input class="form-control" type="checkbox">
                   <span>TBD</span>
@@ -424,7 +424,7 @@
                 <div>
                   <input class="_form-input" type="text" value="{{config.PERCENT_PROFIT}}%">
                 </div>
-                <input class="_form-input" type="text" placeholder="$ 0.00">
+                <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.profit}}">
                 <div class="check_box-TBD">
                   <input class="form-control" type="checkbox">
                   <span>TBD</span>
@@ -435,7 +435,7 @@
                 <div>
                   <input class="_form-input" type="text" value="{{config.PERCENT_BOND}}%">
                 </div>
-                <input class="_form-input" type="text" placeholder="$ 0.00">
+                <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.bond}}">
                 <div class="check_box-TBD">
                   <input class="form-control" type="checkbox">
                   <span>TBD</span>
@@ -462,7 +462,7 @@
                 </div>
 
                 <div class="subtotal_price">
-                  $ 0.00
+                  $ {{ bid.grand_subtotal }}
                 </div>
               </div>
             </div>
