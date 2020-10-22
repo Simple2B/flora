@@ -62,9 +62,8 @@ $(document).ready( function() {
   });
 });
 
-const CloseWrapper = document.getElementById('subtotal_close_panel_id');
+const closeWrapper = document.getElementById('subtotal_close_panel_id');
 const changeImg = $('#subtotal_img_id')[0].src;
-console.log(changeImg);
 const subtotalClosePanel = document.getElementById('subtotal_inputs_fields_id');
 CloseWrapper.addEventListener('click', (e) => {
   e.preventDefault();

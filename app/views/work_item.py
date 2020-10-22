@@ -208,11 +208,6 @@ def add_to_bidding(bid_id):
             work_item_id=int(global_work_items[item_id])
         ).save()
 
-    session.get("SelectedWorkItemsDict", {})
-    session.get("DeletedWorkItem", {})
-    session.get("DeletedWorkGroupItem", {})
-    session.get("GroupDict", [])
-
     session["SelectedWorkItemsDict"] = {}
     session["DeletedWorkItem"] = {}
     session["DeletedWorkGroupItem"] = {}
@@ -224,10 +219,6 @@ def add_to_bidding(bid_id):
 @work_item_blueprint.route("/work_item_cancel/<bid_id>", methods=["GET"])
 @login_required
 def work_item_cancel(bid_id):
-    session.get("SelectedWorkItemsDict", {})
-    session.get("DeletedWorkItem", {})
-    session.get("DeletedWorkGroupItem", {})
-    session.get("GroupDict", [])
 
     session["SelectedWorkItemsDict"] = {}
     session["DeletedWorkItem"] = {}
