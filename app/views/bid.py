@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import login_required
 
-from app.models import Bid, WorkItem
+from app.models import Bid
 from app.models import WorkItemLine, LinkWorkItem
 
 from app.forms import WorkItemLineForm

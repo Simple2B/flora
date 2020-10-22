@@ -28,7 +28,6 @@ class BaseConfig(object):
     # Bond: 5%
     PERCENT_BOND = float(os.environ.get("PERCENT_BOND", '5'))
 
-
     PROCORE_API_CLIENT_ID = os.environ.get("PROCORE_API_CLIENT_ID", '')
     PROCORE_API_CLIENT_SECRET = os.environ.get("PROCORE_API_CLIENT_SECRET", '')
     PROCORE_API_REDIRECT_URI = os.environ.get("PROCORE_API_REDIRECT_URI", '')

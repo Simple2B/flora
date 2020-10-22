@@ -138,6 +138,7 @@ def clarifications(bid_id):
         bid_id=bid_id,
     )
 
+
 @clarification_blueprint.route("/add_clarifications_to_bid/<int:bid_id>")
 @login_required
 def add_clarifications_to_bid(bid_id):
