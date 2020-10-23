@@ -68,7 +68,7 @@ const subtotalClosePanel = document.getElementById('subtotal_inputs_fields_id');
 closeWrapper.addEventListener('click', (e) => {
   e.preventDefault();
   subtotalClosePanel.classList.toggle('hidden');
-  $('#subtotal_img_id').attr('src', "http://localhost:5000/static/images/direction_element_bottom.svg");
+  $('#subtotal_img_id').attr('src', "/static/images/direction_element_bottom.svg");
 });
 
 const clientCloseWrapper = document.getElementById('client_and_job_close_panel_id');
