@@ -208,7 +208,7 @@ def add_to_bidding(bid_id):
                 bid_id=bid_id,
                 work_item_id=int(global_work_items[item_id])
             ).save()
-    return redirect(url_for("bidding.bidding", item_id=bid_id))
+    return redirect(url_for("bid.bidding", bid_id=bid_id))
 
 
 @work_item_blueprint.route("/work_items/<bid_id>", methods=["GET"])

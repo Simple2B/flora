@@ -149,4 +149,4 @@ def add_clarifications_to_bid(bid_id):
     for selected_clarification_id in map(int, selected_clarification_ids):
         ClarificationLink(bid_id=bid_id, clarification_id=selected_clarification_id).save()
     session["SelectedClarificationsDict"] = None
-    return redirect(url_for("bidding.bidding", bid_id=bid_id, _anchor='bid_clarification'))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor='bid_clarification'))
