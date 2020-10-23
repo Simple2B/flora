@@ -192,7 +192,7 @@
         <div class="_show-drawing_log_panel">
           <div class="title-text-style">Drawing Log</div>
           <div> *Information edited in Procore
-            <button class="border-none ddb-cursor-handle" id="drawing_log_lose_panel_id">
+            <button class="border-none ddb-cursor-handle" id="drawing_log_close_panel_id">
               <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="">
             </button>
           </div>
@@ -292,7 +292,7 @@
                 <div>
                   <div>
                     <button id="btn_line_id" data-line_id="line-{{work_item_line.id}}" class="border-none ddb-cursor-handle btnLine_element_direction_js test-focus">
-                      <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="">
+                      <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="" id="line_img_id">
                     </button>
                   </div>
                 </div>

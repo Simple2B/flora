@@ -57,18 +57,28 @@ $(document).ready( function() {
           e.preventDefault();
           const lineId = e.currentTarget.dataset["line_id"]
           const areaToShow = document.querySelector(`#${lineId}`)
+          let changeLineImg = document.querySelector(`#line_img_id`).getAttribute('src');
           areaToShow.classList.toggle('hidden');
+          if (changeLineImg == "/static/images/up_direction_element.svg") {
+            $('#subtotal_img_id').attr('src', "/static/images/direction_element_bottom.svg");
+          } else {
+            $('#subtotal_img_id').attr('src', "/static/images/up_direction_element.svg");
+          };
       });
   });
 });
 
 const closeWrapper = document.getElementById('subtotal_close_panel_id');
-const changeImg = $('#subtotal_img_id')[0].src;
 const subtotalClosePanel = document.getElementById('subtotal_inputs_fields_id');
 closeWrapper.addEventListener('click', (e) => {
+  let changeImg = $('#subtotal_img_id').attr('src');
   e.preventDefault();
   subtotalClosePanel.classList.toggle('hidden');
-  $('#subtotal_img_id').attr('src', "/static/images/direction_element_bottom.svg");
+  if (changeImg == "/static/images/up_direction_element.svg") {
+    $('#subtotal_img_id').attr('src', "/static/images/direction_element_bottom.svg");
+  } else {
+    $('#subtotal_img_id').attr('src', "/static/images/up_direction_element.svg");
+  };
 });
 
 const clientCloseWrapper = document.getElementById('client_and_job_close_panel_id');
@@ -78,7 +88,7 @@ clientCloseWrapper.addEventListener('click', (e) => {
   clientClosePanel.classList.toggle('hidden');
 });
 
-const drawingLogCloseWrapper = document.getElementById('drawing_log_lose_panel_id');
+const drawingLogCloseWrapper = document.getElementById('drawing_log_close_panel_id');
 const drawingLogClosePanel = document.getElementById('drawing_log_hidden_id');
 drawingLogCloseWrapper.addEventListener('click', (e) => {
   e.preventDefault();
