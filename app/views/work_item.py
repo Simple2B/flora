@@ -208,10 +208,10 @@ def add_to_bidding(bid_id):
             work_item_id=int(global_work_items[item_id])
         ).save()
 
-    session["SelectedWorkItemsDict"] = {}
-    session["DeletedWorkItem"] = {}
-    session["DeletedWorkGroupItem"] = {}
-    session["GroupDict"] = []
+    session.pop("SelectedWorkItemsDict", None)
+    session.pop("DeletedWorkItem", None)
+    session.pop("DeletedWorkGroupItem", None)
+    session.pop("GroupDict", None)
 
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor='bid_scope_of_work'))
 
@@ -220,10 +220,10 @@ def add_to_bidding(bid_id):
 @login_required
 def work_item_cancel(bid_id):
 
-    session["SelectedWorkItemsDict"] = {}
-    session["DeletedWorkItem"] = {}
-    session["DeletedWorkGroupItem"] = {}
-    session["GroupDict"] = []
+    session.pop("SelectedWorkItemsDict", None)
+    session.pop("DeletedWorkItem", None)
+    session.pop("DeletedWorkGroupItem", None)
+    session.pop("GroupDict", None)
 
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor='bid_scope_of_work'))
 
