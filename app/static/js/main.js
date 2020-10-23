@@ -65,7 +65,7 @@ $(document).ready( function() {
 const closeWrapper = document.getElementById('subtotal_close_panel_id');
 const changeImg = $('#subtotal_img_id')[0].src;
 const subtotalClosePanel = document.getElementById('subtotal_inputs_fields_id');
-CloseWrapper.addEventListener('click', (e) => {
+closeWrapper.addEventListener('click', (e) => {
   e.preventDefault();
   subtotalClosePanel.classList.toggle('hidden');
   $('#subtotal_img_id').attr('src', "http://localhost:5000/static/images/direction_element_bottom.svg");
