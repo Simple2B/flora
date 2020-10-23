@@ -141,4 +141,4 @@ def add_exclusions_to_bid(bid_id):
     for selected_exclusion_id in map(int, selected_exclusion_item_ids):
         ExclusionLink(bid_id=bid_id, exclusion_id=selected_exclusion_id).save()
     session["SelectedExclusionItemsDict"] = None
-    return redirect(url_for("bidding.bidding", bid_id=bid_id, _anchor='bid_exclusion'))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor='bid_exclusion'))

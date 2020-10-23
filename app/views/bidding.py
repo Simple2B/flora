@@ -99,7 +99,7 @@ def delete_exclusions(bid_id):
     bid = Bid.query.get(bid_id)
     for exclusion_link in bid.exclusion_links:
         exclusion_link.delete()
-    return redirect(url_for("bidding.bidding", bid_id=bid_id, _anchor="bid_exclusion"))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_exclusion"))
 
 
 @bidding_blueprint.route("/edit_exclusions/<int:bid_id>")
@@ -115,7 +115,7 @@ def delete_clarifications(bid_id):
     for clarification_link in bid.clarification_links:
         clarification_link.delete()
     return redirect(
-        url_for("bidding.bidding", bid_id=bid_id, _anchor="bid_clarification")
+        url_for("bid.bidding", bid_id=bid_id, _anchor="bid_clarification")
     )
 
 
