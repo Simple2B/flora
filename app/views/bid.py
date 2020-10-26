@@ -1,4 +1,6 @@
-from flask import Blueprint, render_template, redirect, url_for
+import os
+import datetime
+from flask import Blueprint, render_template, redirect, url_for, send_file
 from flask_login import login_required
 
 from app.models import Bid, WorkItemLine, LinkWorkItem, WorkItem
@@ -100,4 +102,21 @@ def bidding(bid_id):
         form=form,
         show_exclusions=show_exclusions,
         show_clarifications=show_clarifications
+    )
+
+
+@bid_blueprint.route("/export_pdf/<int:bid_id>", methods=["GET"])
+@login_required
+def export_pdf(bid_id):
+    PATH_TO_PDF_FILE = os.path.join("docs", "dummy.pdf")
+
+    stream = open(PATH_TO_PDF_FILE, 'rb')
+    now = datetime.datetime.now()
+    return send_file(
+        stream,
+        as_attachment=True,
+        attachment_filename=f"bidding_{bid_id}_{now.strftime('%Y-%m-%d-%H-%M-%S')}.pdf",
+        mimetype="application/pdf",
+        cache_timeout=0,
+        last_modified=now,
     )
