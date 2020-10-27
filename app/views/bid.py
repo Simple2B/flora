@@ -105,6 +105,12 @@ def bidding(bid_id):
     )
 
 
+@bid_blueprint.route("/preview_pdf/<int:bid_id>", methods=["GET"])
+@login_required
+def preview_pdf(bid_id):
+    return render_template("export_document.html")
+
+
 @bid_blueprint.route("/export_pdf/<int:bid_id>", methods=["GET"])
 @login_required
 def export_pdf(bid_id):

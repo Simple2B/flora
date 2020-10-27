@@ -38,9 +38,9 @@
       </div>
     </div>
     <div class="_preview_export_btns">
-      <div>
+      <a href="{{ url_for('bid.preview_pdf', bid_id=bid.id) }}">
         <button type="button" class="_btn--gray">Preview</button>
-      </div>
+      </a>
       <a href="{{url_for('bid.export_pdf', bid_id=bid.id)}}">
         <div>
           <button type="button" class="_btn--gray ddb-cursor-handle">Export</button>

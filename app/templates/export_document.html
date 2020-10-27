@@ -1,1 +1,182 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{ config.APP_NAME }}</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" media="screen">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <section>
+        <div class="export_container">
+            <div>
+                <h6 class="preview_document">Preview Document</h6>
+                <div class="__top-content">
+                    <a href="#">
+                        <img src="{{url_for('static', filename='images/right-hand.svg')}}">
+                        Back
+                    </a>
+                    <a href="#">
+                        <button type="button" class="_btn--gray ddb-cursor-handle">Export</button>
+                    </a>
+                </div>
+
+                <div class="__main-content">
+
+                    <div class="__ddb_logo">
+                        <img class="_ddb_img_logo" src="{{ url_for('static', filename='images/logo.svg') }}">
+                    </div>
+
+                    <div class="__due_time">
+                        05/26/20
+                    </div>
+
+                    <div class="__client_project_block">
+                        <div class="_client_project client-padding">
+                            <div class="client_title">Client</div>
+                            <div  class="client_project-info">
+                                <div>
+                                    Complete Physical Rehabilitation, PC
+                                </div>
+                                <div>75 Montgomery</div>
+                                <div>Suite #502</div>
+                                <div>Jersey City, NJ 07302</div>
+                                <div>James Pumarada, DPT, STC, CSCS</div>
+                            </div>
+                        </div>
+                        <div class="_client_project project-padding">
+                            <div class="project_title">Project</div>
+                            <div  class="client_project-info">
+                                <div>
+                                    Transaction Window & Sink
+                                </div>
+                                <div>75 Montgomery</div>
+                                <div>Suite 502</div>
+                                <div>Jersey City, NJ 07302</div>
+                                <div>
+                                    <span class="project_quote">
+                                        Quote # B-20-034 R1
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section_letter">Section A: Scope of Work</div>
+                    <h5>Please find our detailed Quote for the above referenced project as outlined below:</h5>
+                    <div>
+                        <div class="bid_work_item">
+                            <div>8.81 Glazing</div>
+                            <div>$600</div>
+                        </div>
+                        <div class="bid_unit"></div>
+                        <div class="bid_subtotal">
+                            <div class="bid_subtotal_bid_features">
+                                <div class="feature_price">
+                                    <div>
+                                        Subtotal:
+                                    </div>
+                                    <div>
+                                        $600
+                                    </div>
+                                </div>
+                                <div class="feature_price">
+                                    <div>
+                                        Permit/Filing Free:
+                                    </div>
+                                    <div>
+                                        T.B.D
+                                    </div>
+                                </div>
+                                <div class="feature_price">
+                                    <div class="general_padding-r">
+                                        General Conditions:
+                                    </div>
+                                    <div>
+                                        $test
+                                    </div>
+                                </div>
+                                <div class="feature_price">
+                                    <div>
+                                        Insurance/Tax:
+                                    </div>
+                                    <div>
+                                        $test
+                                    </div>
+                                </div>
+                                <div class="feature_price">
+                                    <div>
+                                        Overhead:
+                                    </div>
+                                    <div>
+                                        $test
+                                    </div>
+                                </div>
+                                <div class="feature_price">
+                                    <div>
+                                        Profit:
+                                    </div>
+                                    <div>
+                                        $test
+                                    </div>
+                                </div>
+                                <div class="feature_price">
+                                    <div>
+                                        Permit/Filing Free:
+                                    </div>
+                                    <div>
+                                        $test
+                                    </div>
+                                </div>
+
+                                <div class="feature_price">
+                                    <div>
+                                        Grand Total:
+                                    </div>
+                                    <div>
+                                        $600
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section_letter">Section B: Exclusions</div>
+                    <h5>Unless expressly stated, the following exclusions apply</h5>
+                    <div>
+                        Some exclusion's text
+                    </div>
+
+                    <div class="section_letter">Section C: Clarifications</div>
+                    <h5>Please note the following clarifications: </h5>
+                    <div>
+                        Some clarification's text
+                    </div>
+                    <div class="qoute_clarification"></div>
+
+                    <div class="section_letter">Section D: Alternates</div>
+                    <div></div>
+
+                    <div class="section_E_and_F">
+                        <div>Section E: Submitted by:</div>
+                        <div>Section F: Approved by:</div>
+                    </div>
+
+                    <div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div></div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

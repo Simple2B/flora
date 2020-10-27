@@ -1,0 +1,135 @@
+@import '../global/variables';
+
+
+.export_container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.preview_document {
+    padding-top: 1rem;
+    font-weight: 700;
+}
+
+.__top-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.__main-content {
+
+    padding: 1rem;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    .__ddb_logo {
+        display: flex;
+        justify-content: flex-start;
+        ._ddb_img_logo {
+            width: 400px;
+            height: 200px;
+        }
+    }
+
+    .__due_time {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .__client_project_block {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 16px;
+        ._client_project {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            .client_project-info {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                &:first-child {
+                    font-weight: bold;
+                }
+
+                &:last-child {
+                    font-weight: bold;
+                }
+
+                .project_quote {
+                    background-color: yellow;
+                }
+            }
+        }
+
+        .client-padding {
+            padding-left: 1rem;
+        }
+
+        .client_title {
+            padding-right: 2rem;
+        }
+
+        .project-padding {
+            padding-right: 1rem;
+        }
+
+        .project_title {
+            padding-right: 2rem;
+        }
+    }
+
+    .section_letter {
+        text-align: center;
+        font-weight: 600;
+        font-size: 18px;
+        color: #333333;
+        background-color: #4682B4;
+        text-decoration: underline;
+        border-color: 3px solid #333333 1 0 0 0;
+        margin-top: 1rem;
+    }
+
+    .section_E_and_F {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .bid_work_item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .bid_subtotal {
+        display: flex;
+        justify-content: flex-end;
+        &_bid_features {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .feature_price {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                font-weight: bold;
+                font-size: 18px;
+
+                .general_padding-r {
+                    padding-right: 2rem;
+                }
+            }
+        }
+    }
+
+}
