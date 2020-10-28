@@ -6,8 +6,181 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" media="screen">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" media="screen"> -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        .export_container {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .preview_document {
+            padding-top: 1rem;
+            font-weight: 700;
+        }
+
+        .__top-content {
+
+            display: -webkit-box; /* wkhtmltopdf uses this one */
+            /* display: -webkit-flex; */
+            /* display: flex; */
+            flex-direction: row;
+            -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
+            -webkit-box-align: center;
+            /* justify-content: space-between;
+            align-items: center; */
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin-bottom: 1rem;
+            padding: 1rem;
+        }
+
+        .__main-content {
+            padding: 1rem;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+        .__main-content  .__ddb_logo {
+            display: flex;
+            justify-content: flex-start;
+        }
+        .__main-content  .__ddb_logo ._ddb_img_logo {
+            width: 400px;
+            height: 200px;
+        }
+
+        .__due_time {
+            /* display: flex;
+            justify-content: flex-end; */
+            display: -webkit-box;
+            -webkit-box-pack: end;
+        }
+
+        .__client_project_block {
+            /* display: flex;
+            flex-direction: row;
+            justify-content: space-between; */
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+            font-size: 16px;
+        }
+        .__client_project_block ._client_project {
+            /* display: flex;
+            flex-direction: row;
+            justify-content: space-between; */
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+        }
+        .__client_project_block ._client_project .client_project-info {
+            /* display: flex;
+            flex-direction: column;
+            justify-content: space-between; */
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+            -webkit-box-orient: vertical;
+        }
+        .__client_project_block ._client_project .client_project-info:first-child {
+            font-weight: bold;
+        }
+
+        .__client_project_block ._client_project .client_project-info:last-child {
+            font-weight: bold;
+        }
+
+        .project_quote {
+            background-color: yellow;
+        }
+
+        .client-padding {
+            padding-left: 1rem;
+        }
+
+        .client_title {
+            padding-right: 2rem;
+        }
+
+        .project-padding {
+            padding-right: 1rem;
+        }
+
+        .project_title {
+            padding-right: 2rem;
+        }
+
+        .section_letter {
+            text-align: center;
+            font-weight: 600;
+            font-size: 18px;
+            color: #333333;
+            background-color: #4682B4;
+            text-decoration: underline;
+            border-color: 3px solid #333333 1 0 0 0;
+            margin-top: 1rem;
+        }
+
+        .section_E_and_F {
+            /* display: flex;
+            justify-content: space-between; */
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+        }
+
+        .bid_work_item {
+            /* display: flex;
+            flex-direction: row;
+            justify-content: space-between; */
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .bid_subtotal {
+            /* display: flex;
+            justify-content: flex-end; */
+            display: -webkit-box;
+            -webkit-box-pack: end;
+        }
+        .bid_subtotal .bid_subtotal_bid_features {
+            /* display: flex; */
+            /* flex-direction: column; */
+            /* justify-content: space-between; */
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+            -webkit-box-orient: vertical;
+        }
+        .bid_subtotal .bid_subtotal_bid_features .feature_price {
+            /* display: flex;
+            flex-direction: row;
+            justify-content: space-between; */
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .bid_subtotal .bid_subtotal_bid_features .feature_price .general_padding-r {
+            padding-right: 2rem;
+        }
+
+        ._btn--gray {
+            padding: .5rem 1.5rem;
+            color: #fff;
+            border-radius: .5rem;
+            border: 1px solid;
+            outline: none;
+            font-size: 14px;
+            transition: .3s;
+            background-color: #979797;
+        }
+
+        .work_item_pdf {
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+            -webkit-box-orient: horizontal;
+        }
+
+    </style>
+
 </head>
 
 <body>
@@ -16,20 +189,12 @@
         <div class="export_container">
             <div>
                 <h6 class="preview_document">Preview Document</h6>
-                <div class="__top-content">
-                    <a href="#">
-                        <img src="{{url_for('static', filename='images/right-hand.svg')}}">
-                        Back
-                    </a>
-                    <a href="#">
-                        <button type="button" class="_btn--gray ddb-cursor-handle">Export</button>
-                    </a>
-                </div>
 
                 <div class="__main-content">
 
                     <div class="__ddb_logo">
-                        <img class="_ddb_img_logo" src="{{ url_for('static', filename='images/logo.svg') }}">
+                        <img class="_ddb_img_logo" src="/static/images/avatar_ddb.png">
+                        {{bid_id}}
                     </div>
 
                     <div class="__due_time">
@@ -71,7 +236,12 @@
                     <h5>Please find our detailed Quote for the above referenced project as outlined below:</h5>
                     <div>
                         <div class="bid_work_item">
-                            <div>8.81 Glazing</div>
+                            <!-- <div>8.81 Glazing</div> -->
+                            <div class="work_item_pdf">
+                                <div> 8.81 &nbsp; &nbsp;</div>
+                                <div> Glazing </div>
+                            </div>
+
                             <div>$600</div>
                         </div>
                         <div class="bid_unit"></div>
