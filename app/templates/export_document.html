@@ -44,10 +44,6 @@
             display: flex;
             justify-content: flex-start;
         }
-        .__main-content  .__ddb_logo ._ddb_img_logo {
-            width: 400px;
-            height: 200px;
-        }
 
         .__due_time {
             /* display: flex;
@@ -125,7 +121,19 @@
             -webkit-box-pack: justify;
         }
 
-        .bid_work_item {
+        .bid_price_container {
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+        }
+
+        .bid_price_container .bid_subtotal_value {
+            display: -webkit-box;
+            -webkit-box-pack: end;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .bid_price_container .bid_work_item {
             /* display: flex;
             flex-direction: row;
             justify-content: space-between; */
@@ -135,7 +143,7 @@
             font-size: 18px;
         }
 
-        .bid_subtotal {
+        .bid_price_container .bid_subtotal_container .bid_subtotal {
             /* display: flex;
             justify-content: flex-end; */
             display: -webkit-box;
@@ -158,6 +166,12 @@
             font-weight: bold;
             font-size: 18px;
         }
+
+        .feature_price_subtotal_price {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
         .bid_subtotal .bid_subtotal_bid_features .feature_price .general_padding-r {
             padding-right: 2rem;
         }
@@ -193,7 +207,7 @@
                 <div class="__main-content">
 
                     <div class="__ddb_logo">
-                        <img class="_ddb_img_logo" src="/static/images/avatar_ddb.png">
+                        <img class="_ddb_img_logo" src="/home/vitaly/simple2b/flora/app/static/images/avatar_ddb.png">
                         {{bid_id}}
                     </div>
 
@@ -234,82 +248,87 @@
 
                     <div class="section_letter">Section A: Scope of Work</div>
                     <h5>Please find our detailed Quote for the above referenced project as outlined below:</h5>
-                    <div>
+
+                    <div class="bid_price_container">
                         <div class="bid_work_item">
                             <!-- <div>8.81 Glazing</div> -->
+                            {% for link_work_item in bid.link_work_items %}
                             <div class="work_item_pdf">
-                                <div> 8.81 &nbsp; &nbsp;</div>
-                                <div> Glazing </div>
+                                <div> {{ link_work_item.work_item.code }} &nbsp; &nbsp;</div>
+                                <div> {{ link_work_item.work_item.name }} &nbsp; &nbsp;</div>
                             </div>
+                            {% endfor %}
+                        </div>1
 
-                            <div>$600</div>
-                        </div>
-                        <div class="bid_unit"></div>
-                        <div class="bid_subtotal">
-                            <div class="bid_subtotal_bid_features">
-                                <div class="feature_price">
-                                    <div>
-                                        Subtotal:
+                        <div class="bid_subtotal_container">
+                            <!-- <div class="bid_unit"></div> -->
+                            <div class="bid_subtotal_value">{{ bid.subtotal }}</div>
+                            <div class="bid_subtotal">
+                                <div class="bid_subtotal_bid_features">
+                                    <div class="feature_price">
+                                        <div>
+                                            Subtotal:
+                                        </div>
+                                        <div class="feature_price">
+                                            {{ bid.subtotal }}
+                                        </div>
                                     </div>
-                                    <div>
-                                        $600
+                                    <div class="feature_price">
+                                        <div>
+                                            Permit/Filing Free:
+                                        </div>
+                                        <div>
+                                            T.B.D
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="feature_price">
-                                    <div>
-                                        Permit/Filing Free:
+                                    <div class="feature_price">
+                                        <div class="general_padding-r">
+                                            General Conditions:
+                                        </div>
+                                        <div>
+                                            $test
+                                        </div>
                                     </div>
-                                    <div>
-                                        T.B.D
+                                    <div class="feature_price">
+                                        <div>
+                                            Insurance/Tax:
+                                        </div>
+                                        <div>
+                                            $test
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="feature_price">
-                                    <div class="general_padding-r">
-                                        General Conditions:
+                                    <div class="feature_price">
+                                        <div>
+                                            Overhead:
+                                        </div>
+                                        <div>
+                                            $test
+                                        </div>
                                     </div>
-                                    <div>
-                                        $test
+                                    <div class="feature_price">
+                                        <div>
+                                            Profit:
+                                        </div>
+                                        <div>
+                                            $test
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="feature_price">
-                                    <div>
-                                        Insurance/Tax:
+                                    <div class="feature_price">
+                                        <div>
+                                            Permit/Filing Free:
+                                        </div>
+                                        <div>
+                                            $test
+                                        </div>
                                     </div>
-                                    <div>
-                                        $test
-                                    </div>
-                                </div>
-                                <div class="feature_price">
-                                    <div>
-                                        Overhead:
-                                    </div>
-                                    <div>
-                                        $test
-                                    </div>
-                                </div>
-                                <div class="feature_price">
-                                    <div>
-                                        Profit:
-                                    </div>
-                                    <div>
-                                        $test
-                                    </div>
-                                </div>
-                                <div class="feature_price">
-                                    <div>
-                                        Permit/Filing Free:
-                                    </div>
-                                    <div>
-                                        $test
-                                    </div>
-                                </div>
 
-                                <div class="feature_price">
-                                    <div>
-                                        Grand Total:
-                                    </div>
-                                    <div>
-                                        $600
+                                    <div class="feature_price">
+                                        <div>
+                                            Grand Total:
+                                        </div>
+                                        <div>
+                                            {{ bid.grand_subtotal }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

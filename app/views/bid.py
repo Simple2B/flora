@@ -112,16 +112,18 @@ def bidding(bid_id):
 @bid_blueprint.route("/preview_pdf/<int:bid_id>", methods=["GET"])
 @login_required
 def preview_pdf(bid_id):
+    bid = Bid.query.get(bid_id)
 
-    return render_template("export_document.html")
+    return render_template("export_document.html", bid=bid)
 
 
 @bid_blueprint.route("/export_pdf/<int:bid_id>", methods=["GET"])
 @login_required
 def export_pdf(bid_id):
+    bid = Bid.query.get(bid_id)
 
     # PATH_TO_HTML_FILE = os.path.join("app/templates", "export_document.html")
-    export_bid_page = render_template("export_document.html", bid_id=bid_id)
+    export_bid_page = render_template("export_document.html", bid=bid)
     pdfkit.from_string(export_bid_page, "pdf.pdf")
     PATH_TO_PDF_FILE = os.path.join("", "pdf.pdf")
 
