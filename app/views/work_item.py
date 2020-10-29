@@ -77,8 +77,11 @@ def add_work_item_to_cart(bid_id):
 def delete_work_item_from_cart(bid_id, item_id):
     item_id = str(item_id)
     selected_ids = session.get("SelectedWorkItemsDict", {})
+    link_work_item = LinkWorkItem.query.filter(LinkWorkItem.work_item_id == int(selected_ids[item_id])).first()
     if item_id in selected_ids:
         session["DeletedWorkItem"] = selected_ids[item_id]
+        if link_work_item:
+            link_work_item.delete()
         del selected_ids[item_id]
         session["SelectedWorkItemsDict"] = selected_ids
     return redirect(url_for("work_item.work_items", bid_id=bid_id))
@@ -199,16 +202,30 @@ def edit_work_item(bid_id, item_id):
 @login_required
 def add_to_bidding(bid_id):
     global_work_items = session.get("SelectedWorkItemsDict", {})
-    links_for_bid = LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id).all()
     for item_id in global_work_items:
-        if int(item_id) in [links_for_bid[j].work_item_id for j in range(len(links_for_bid))]:
-            continue
-        else:
-            LinkWorkItem(
-                bid_id=bid_id,
-                work_item_id=int(global_work_items[item_id])
-            ).save()
-    return redirect(url_for("bid.bidding", bid_id=bid_id))
+        LinkWorkItem(
+            bid_id=bid_id,
+            work_item_id=int(global_work_items[item_id])
+        ).save()
+
+    session.pop("SelectedWorkItemsDict", None)
+    session.pop("DeletedWorkItem", None)
+    session.pop("DeletedWorkGroupItem", None)
+    session.pop("GroupDict", None)
+
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor='bid_scope_of_work'))
+
+
+@work_item_blueprint.route("/work_item_cancel/<bid_id>", methods=["GET"])
+@login_required
+def work_item_cancel(bid_id):
+
+    session.pop("SelectedWorkItemsDict", None)
+    session.pop("DeletedWorkItem", None)
+    session.pop("DeletedWorkGroupItem", None)
+    session.pop("GroupDict", None)
+
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor='bid_scope_of_work'))
 
 
 @work_item_blueprint.route("/work_items/<bid_id>", methods=["GET"])

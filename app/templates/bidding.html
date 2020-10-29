@@ -114,73 +114,75 @@
         <div class="_show-client_panel">
           <div>Client and Job Info</div>
           <div> *Information edited in Procore
-            <button class="border-none ddb-cursor-handle">
+            <button class="border-none ddb-cursor-handle" id="client_and_job_close_panel_id">
               <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="">
             </button>
           </div>
         </div>
-        <div class="_client-block_info">
-          <div class="client-job--span">
-            <div>
-              <span>Client</span> &nbsp; &nbsp;
-              <span class="proj_gen-text-info">
-                Complete Physical, LLC
-              </span>
+        <div id="client_job_hidden_id">
+          <div class="_client-block_info">
+            <div class="client-job--span">
+              <div>
+                <span>Client</span> &nbsp; &nbsp;
+                <span class="proj_gen-text-info">
+                  Complete Physical, LLC
+                </span>
+              </div>
+              <div>
+                <span>Phone &nbsp; &nbsp;
+                <span class="proj_gen-text-info">+1 738-927-9182</span>
+              </div>
+              <div>
+                <span>Fox</span> &nbsp; &nbsp;
+                <span class="proj_gen-text-info">+1 738-927-9182</span>
+              </div>
             </div>
-            <div>
-              <span>Phone &nbsp; &nbsp;
-              <span class="proj_gen-text-info">+1 738-927-9182</span>
-            </div>
-            <div>
-              <span>Fox</span> &nbsp; &nbsp;
-              <span class="proj_gen-text-info">+1 738-927-9182</span>
+            <div class="client-job--span">
+              <div>
+                <span>Address</span> &nbsp; &nbsp;
+                <span class="proj_gen-text-info block-text--width">
+                  100 Willoughby Street
+                  Suite # 502
+                  Broklyn, NY, 11201
+                </span>
+              </div>
+              <div>
+                <span>Email &nbsp; &nbsp;
+                <span class="proj_gen-text-info">gh7028@nyu.edu</span>
+              </div>
+              <div>
+                <span>Contact</span> &nbsp; &nbsp;
+                <span class="proj_gen-text-info">
+                  James Pumarada
+                  Mr, Dr
+                </span>
+              </div>
             </div>
           </div>
-          <div class="client-job--span">
-            <div>
-              <span>Address</span> &nbsp; &nbsp;
-              <span class="proj_gen-text-info block-text--width">
-                100 Willoughby Street
-                Suite # 502
-                Broklyn, NY, 11201
-              </span>
-            </div>
-            <div>
-              <span>Email &nbsp; &nbsp;
-              <span class="proj_gen-text-info">gh7028@nyu.edu</span>
-            </div>
-            <div>
-              <span>Contact</span> &nbsp; &nbsp;
-              <span class="proj_gen-text-info">
-                James Pumarada
-                Mr, Dr
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="job-address">
-          <div class="client-job--span">
-            <div>
-              <span>Job</span> &nbsp; &nbsp;
-              <span class="proj_gen-text-info block-text--width">
-                Transction Windon & Sink
-              </span>
-            </div>
-            <div>
-              <span>Note &nbsp; &nbsp;
-              <span class="proj_gen-text-info"></span>
-            </div>
-            <div>
+          <div class="job-address">
+            <div class="client-job--span">
+              <div>
+                <span>Job</span> &nbsp; &nbsp;
+                <span class="proj_gen-text-info block-text--width">
+                  Transction Windon & Sink
+                </span>
+              </div>
+              <div>
+                <span>Note &nbsp; &nbsp;
+                <span class="proj_gen-text-info"></span>
+              </div>
+              <div>
 
+              </div>
             </div>
-          </div>
-          <div class="client-job--span">
-            <div>
-              <span>Address</span> &nbsp; &nbsp;
-              <span class="proj_gen-text-info">
-                100 Willoughby Street
-                Suite # 502
-                Broklyn, NY, 11201</span>
+            <div class="client-job--span">
+              <div>
+                <span>Address</span> &nbsp; &nbsp;
+                <span class="proj_gen-text-info">
+                  100 Willoughby Street
+                  Suite # 502
+                  Broklyn, NY, 11201</span>
+              </div>
             </div>
           </div>
         </div>
@@ -190,13 +192,13 @@
         <div class="_show-drawing_log_panel">
           <div class="title-text-style">Drawing Log</div>
           <div> *Information edited in Procore
-            <button class="border-none ddb-cursor-handle">
+            <button class="border-none ddb-cursor-handle" id="drawing_log_close_panel_id">
               <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="">
             </button>
           </div>
         </div>
         <span class="team-header__counter t-gray">Showing {{ users|length }} users</span>
-        <div class="_flex-center">
+        <div class="_flex-center" id="drawing_log_hidden_id">
           <table>
             <thead class="_drawing-table">
               <th>Drawing ID</th>
@@ -290,12 +292,12 @@
                 <div>
                   <div>
                     <button id="btn_line_id" data-line_id="line-{{work_item_line.id}}" class="border-none ddb-cursor-handle btnLine_element_direction_js test-focus">
-                      <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="">
+                      <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="" id="line_img_id">
                     </button>
                   </div>
                 </div>
               </div>
-              <div class="_work_item_line--inputs line_hidden_js" id="line-{{work_item_line.id}}">
+              <div class="_work_item_line--inputs line_hidden_js hidden" id="line-{{work_item_line.id}}">
                 <div class="bck-color">
                   <div class="text-areas">
                     <div>
@@ -374,7 +376,7 @@
           </div>
 
           <div class="_center_block">
-            <div class="inputs_fields">
+            <div class="inputs_fields" id="subtotal_inputs_fields_id">
               <div class="input-row">
                 <div class="_feature-title">Permit/Filling Fee: </div>
                 <div>
@@ -444,9 +446,9 @@
             </div>
             <div class="_show_subtotal_close_panel">
               <div>
-                <button class="direction_element bck-white ">
-                  <img src="{{ url_for('static', filename='images/up_direction_element.svg') }}" alt="">
-                </button>
+                <div class="direction_element bck-white" id="subtotal_close_panel_id">
+                  <img src="{{ url_for('static', filename='images/up_direction_element.svg') }}" alt="" id="subtotal_img_id">
+                </div>
               </div>
             </div>
           </div>
@@ -474,10 +476,10 @@
 
       <div class="modal-content modal--padding box-shadow add_item_block " id="bid_exclusion">
         <h5 class="--padding">Exclusions</h5>
-        <div class="d-flex bd-highlight ddb-margin-bottom ">
+          <div class="d-flex bd-highlight ddb-margin-bottom ">
         {% if bid.exclusion_links %}
           <div class="p-2 flex-shrink-1 bd-highlight">
-            <a href="{{url_for('bidding.delete_exclusions', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
+            <a href="{{url_for('bid.delete_exclusions', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
               <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
             </a>
           </div>
@@ -486,11 +488,11 @@
             {{ show_exclusions }}
           </div>
           <div class="px-2 flex-shrink-1 bd-highlight">
-            <a href="{{url_for('bidding.edit_exclusions', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
+            <a href="{{url_for('bid.edit_exclusions', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
               <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
             </a>
           </div>
-        </div>
+
         {% else %}
 
         <div class="__modal-inputs--flex-row">
@@ -498,31 +500,36 @@
         </div>
 
         {% endif %}
+        </div>
       </div>
 
       <div class="modal-content modal--padding add_item_block clarification_block" id="bid_clarification">
         <h5 class="--padding">Clarifications</h5>
-        <div class="d-flex bd-highlight ddb-margin-bottom ">
+          <div class="d-flex bd-highlight ddb-margin-bottom ">
           {% if bid.clarification_links %}
-          <div class="p-2 flex-shrink-1 bd-highlight">
-            <a href="{{url_for('bidding.delete_clarifications', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
-              <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-            </a>
-          </div>
-          <div class="p-2 w-100 bd-highlight" style="border: 1px solid #BDBDBD">
+            <div class="p-2 flex-shrink-1 bd-highlight">
+             <a href="{{url_for('bid.delete_clarifications', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
+               <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+             </a>
+            </div>
+           <div class="p-2 w-100 bd-highlight" style="border: 1px solid #BDBDBD">
             <h6>Please note the following clarifications:</h6>
             {{ show_clarifications }}
-          </div>
-          <div class="px-2 flex-shrink-1 bd-highlight">
-          <a href="{{url_for('bidding.edit_clarifications', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
-            <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
-          </a>
-          </div>
+            </div>
+            <div class="px-2 flex-shrink-1 bd-highlight">
+             <a href="{{url_for('bid.edit_clarifications', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
+               <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+             </a>
+            </div>
 
-          {% else %}
-          <div class="__modal-inputs--flex-row">
-
-            <a href="{{ url_for('clarification.clarifications', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add clarification</button></a>
+            {% else %}
+            <div class="__modal-inputs--flex-row">
+              <a href="{{ url_for('clarification.clarifications', bid_id=bid.id) }}">
+                <button class="ddb-cursor-handle _btn--gray">
+                  Add clarification
+                </button>
+              </a>
+            </div>
           </div>
          {% endif %}
       </div>
