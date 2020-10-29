@@ -4,7 +4,6 @@ env/
 .venv/
 .pytest_cache/
 node_modules/
-.app/staic/images
 
 # ignore files
 .flaskenv
