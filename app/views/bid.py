@@ -1,4 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for
+import io
+import datetime
+
+from flask import Blueprint, render_template, redirect, url_for, send_file
 from flask_login import login_required
 
 from app.models import Bid, WorkItemLine, LinkWorkItem, WorkItem
@@ -8,6 +11,8 @@ from app.forms import WorkItemLineForm
 from app.controllers import calculate_subtotal
 
 from app.logger import log
+
+import pdfkit
 
 bid_blueprint = Blueprint("bid", __name__)
 
@@ -133,4 +138,34 @@ def bidding(bid_id):
         form=form,
         show_exclusions=show_exclusions,
         show_clarifications=show_clarifications
+    )
+
+
+@bid_blueprint.route("/preview_pdf/<int:bid_id>", methods=["GET"])
+@login_required
+def preview_pdf(bid_id):
+    bid = Bid.query.get(bid_id)
+    preview_pdf_bool = True
+
+    return render_template("export_document.html", bid=bid, preview_pdf_bool=preview_pdf_bool)
+
+
+@bid_blueprint.route("/export_pdf/<int:bid_id>", methods=["GET"])
+@login_required
+def export_pdf(bid_id):
+    bid = Bid.query.get(bid_id)
+    preview_pdf_bool = False
+
+    html_content = render_template("export_document.html", bid=bid, preview_pdf_bool=preview_pdf_bool)
+    pdf_content = pdfkit.from_string(html_content, False)
+    stream = io.BytesIO(pdf_content)
+
+    now = datetime.datetime.now()
+    return send_file(
+        stream,
+        as_attachment=True,
+        attachment_filename=f"bidding_{bid_id}_{now.strftime('%Y-%m-%d-%H-%M-%S')}.pdf",
+        mimetype="application/pdf",
+        cache_timeout=0,
+        last_modified=now,
     )

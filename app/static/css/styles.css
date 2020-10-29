@@ -470,6 +470,18 @@ ul {
 .navbar-nav .nav-link {
   padding-left: 1rem; }
 
+.__side-bar-box-bidding {
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem; }
+  .__side-bar-box-bidding ._preview_export_btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+
 .main-container_bidding {
   max-width: 75%;
   margin: 0 1rem;
@@ -1111,3 +1123,94 @@ ul {
 ._submit--margins {
   margin-left: 1.3rem;
   margin-top: 1.5rem; }
+
+.export_container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem; }
+
+.preview_document {
+  padding-top: 1rem;
+  font-weight: 700; }
+
+.__top-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 1rem;
+  padding: 1rem; }
+
+.__main-content {
+  padding: 1rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); }
+  .__main-content .__ddb_logo {
+    display: flex;
+    justify-content: flex-start; }
+    .__main-content .__ddb_logo ._ddb_img_logo {
+      width: 400px;
+      height: 200px; }
+  .__main-content .__due_time {
+    display: flex;
+    justify-content: flex-end; }
+  .__main-content .__client_project_block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 16px; }
+    .__main-content .__client_project_block ._client_project {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between; }
+      .__main-content .__client_project_block ._client_project .client_project-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; }
+        .__main-content .__client_project_block ._client_project .client_project-info:first-child {
+          font-weight: bold; }
+        .__main-content .__client_project_block ._client_project .client_project-info:last-child {
+          font-weight: bold; }
+        .__main-content .__client_project_block ._client_project .client_project-info .project_quote {
+          background-color: yellow; }
+    .__main-content .__client_project_block .client-padding {
+      padding-left: 1rem; }
+    .__main-content .__client_project_block .client_title {
+      padding-right: 2rem; }
+    .__main-content .__client_project_block .project-padding {
+      padding-right: 1rem; }
+    .__main-content .__client_project_block .project_title {
+      padding-right: 2rem; }
+  .__main-content .section_letter {
+    text-align: center;
+    font-weight: 600;
+    font-size: 18px;
+    color: #333333;
+    background-color: #4682B4;
+    text-decoration: underline;
+    border-top-color: 3px solid #333333;
+    margin-top: 1rem; }
+  .__main-content .section_E_and_F {
+    display: flex;
+    justify-content: space-between; }
+  .__main-content .bid_work_item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 18px; }
+  .__main-content .bid_subtotal {
+    display: flex;
+    justify-content: flex-end; }
+    .__main-content .bid_subtotal_bid_features {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; }
+      .__main-content .bid_subtotal_bid_features .feature_price {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-weight: bold;
+        font-size: 18px; }
+        .__main-content .bid_subtotal_bid_features .feature_price .general_padding-r {
+          padding-right: 2rem; }

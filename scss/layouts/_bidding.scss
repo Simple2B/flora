@@ -6,6 +6,23 @@
 }
 // end of custom class
 
+
+
+.__side-bar-box-bidding {
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: $m1rem;
+
+    ._preview_export_btns {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
 .main-container_bidding {
     max-width: 75%;
     margin: 0 $m1rem;
