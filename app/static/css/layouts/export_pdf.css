@@ -62,7 +62,7 @@
     color: #333333;
     background-color: #4682B4;
     text-decoration: underline;
-    border-color: 3px solid #333333 1 0 0 0;
+    border-top-color: 3px solid #333333;
     margin-top: 1rem; }
   .__main-content .section_E_and_F {
     display: flex;

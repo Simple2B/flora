@@ -1,6 +1,5 @@
-import os
+import io
 import datetime
-import tempfile
 
 from flask import Blueprint, render_template, redirect, url_for, send_file
 from flask_login import login_required
@@ -113,36 +112,23 @@ def bidding(bid_id):
 @login_required
 def preview_pdf(bid_id):
     bid = Bid.query.get(bid_id)
+    preview_pdf_bool = True
 
-    return render_template("export_document.html", bid=bid)
+    return render_template("export_document.html", bid=bid, preview_pdf_bool=preview_pdf_bool)
 
 
 @bid_blueprint.route("/export_pdf/<int:bid_id>", methods=["GET"])
 @login_required
 def export_pdf(bid_id):
     bid = Bid.query.get(bid_id)
+    preview_pdf_bool = False
 
-    # PATH_TO_HTML_FILE = os.path.join("app/templates", "export_document.html")
-    export_bid_page = render_template("export_document.html", bid=bid)
-    pdfkit.from_string(export_bid_page, "pdf.pdf")
-    PATH_TO_PDF_FILE = os.path.join("", "pdf.pdf")
+    html_content = render_template("export_document.html", bid=bid, preview_pdf_bool=preview_pdf_bool)
+    pdf_content = pdfkit.from_string(html_content, False)
+    stream = io.BytesIO(pdf_content)
 
-    # with open("test_pdf.pdf", "rb") as open_file:
-    #     # open_file.write(generated_pdf_file)
-    #     with tempfile.NamedTemporaryFile(delete=False) as file_opened:
-    #         now = datetime.datetime.now()
-    #         return send_file(
-    #             upload_file,
-    #             as_attachment=True,
-    #             attachment_filename=f"bidding_{bid_id}_{now.strftime('%Y-%m-%d-%H-%M-%S')}.pdf",
-    #             mimetype="application/pdf",
-    #             cache_timeout=0,
-    #             last_modified=now,
-    #         )
-
-    stream = open(PATH_TO_PDF_FILE, 'rb')
     now = datetime.datetime.now()
-    upload_file = send_file(
+    return send_file(
         stream,
         as_attachment=True,
         attachment_filename=f"bidding_{bid_id}_{now.strftime('%Y-%m-%d-%H-%M-%S')}.pdf",
@@ -150,7 +136,3 @@ def export_pdf(bid_id):
         cache_timeout=0,
         last_modified=now,
     )
-
-    if PATH_TO_PDF_FILE:
-        os.remove(PATH_TO_PDF_FILE)
-    return upload_file

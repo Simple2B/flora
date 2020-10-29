@@ -110,15 +110,40 @@
             color: #333333;
             background-color: #4682B4;
             text-decoration: underline;
-            border-color: 3px solid #333333 1 0 0 0;
+            border-top-color: #333333;
+            border-top-style: solid;
+            border-top-width: 3px;
             margin-top: 1rem;
         }
 
         .section_E_and_F {
             /* display: flex;
             justify-content: space-between; */
+            margin-top: 1rem;
             display: -webkit-box;
             -webkit-box-pack: justify;
+            text-align: center;
+            font-weight: 600;
+            font-size: 18px;
+            color: #333333;
+            background-color: #4682B4;
+            border-top-color: #333333;
+            border-top-style: solid;
+            border-top-width: 3px;
+            margin-top: 1rem;
+        }
+
+        .section_E_and_F div {
+            width: 15vw;
+            text-decoration: underline;
+        }
+
+        .section_E_and_F .section_E {
+            padding-left: 1rem;
+        }
+
+        .section_E_and_F .section_F {
+            padding-right: 1rem;
         }
 
         .bid_price_container {
@@ -193,6 +218,18 @@
             -webkit-box-orient: horizontal;
         }
 
+        .inputs_forms {
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+            -webkit-box-orient: horizontal;
+        }
+
+        .inputs_forms .by_name_date {
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+            -webkit-box-orient: vertical;
+        }
+
     </style>
 
 </head>
@@ -202,15 +239,21 @@
     <section>
         <div class="export_container">
             <div>
+                {% if preview_pdf_bool %}
                 <h6 class="preview_document">Preview Document</h6>
+                {% endif %}
 
                 <div class="__main-content">
 
+                    {% if preview_pdf_bool %}
+                    <div class="__ddb_logo">
+                        <img class="_ddb_img_logo" src="{{ url_for('static', filename='images/avatar_ddb.png') }}">
+                    </div>
+                    {% else %}
                     <div class="__ddb_logo">
                         <img class="_ddb_img_logo" src="/home/vitaly/simple2b/flora/app/static/images/avatar_ddb.png">
-                        {{bid_id}}
                     </div>
-
+                    {% endif %}
                     <div class="__due_time">
                         05/26/20
                     </div>
@@ -220,7 +263,7 @@
                             <div class="client_title">Client</div>
                             <div  class="client_project-info">
                                 <div>
-                                    Complete Physical Rehabilitation, PC
+                                    {{ bid.client }}
                                 </div>
                                 <div>75 Montgomery</div>
                                 <div>Suite #502</div>
@@ -258,11 +301,11 @@
                                 <div> {{ link_work_item.work_item.name }} &nbsp; &nbsp;</div>
                             </div>
                             {% endfor %}
-                        </div>1
+                        </div>
 
                         <div class="bid_subtotal_container">
                             <!-- <div class="bid_unit"></div> -->
-                            <div class="bid_subtotal_value">{{ bid.subtotal }}</div>
+                            <div class="bid_subtotal_value">${{ bid.subtotal }}</div>
                             <div class="bid_subtotal">
                                 <div class="bid_subtotal_bid_features">
                                     <div class="feature_price">
@@ -270,7 +313,7 @@
                                             Subtotal:
                                         </div>
                                         <div class="feature_price">
-                                            {{ bid.subtotal }}
+                                            ${{ bid.subtotal }}
                                         </div>
                                     </div>
                                     <div class="feature_price">
@@ -286,7 +329,7 @@
                                             General Conditions:
                                         </div>
                                         <div>
-                                            $test
+                                            ${{ bid.general_conditions }}
                                         </div>
                                     </div>
                                     <div class="feature_price">
@@ -294,7 +337,7 @@
                                             Insurance/Tax:
                                         </div>
                                         <div>
-                                            $test
+                                            ${{ bid.insurance_tax }}
                                         </div>
                                     </div>
                                     <div class="feature_price">
@@ -302,7 +345,7 @@
                                             Overhead:
                                         </div>
                                         <div>
-                                            $test
+                                            ${{ bid.overhead }}
                                         </div>
                                     </div>
                                     <div class="feature_price">
@@ -310,15 +353,15 @@
                                             Profit:
                                         </div>
                                         <div>
-                                            $test
+                                            ${{ bid.profit }}
                                         </div>
                                     </div>
                                     <div class="feature_price">
                                         <div>
-                                            Permit/Filing Free:
+                                            Bond:
                                         </div>
                                         <div>
-                                            $test
+                                            ${{ bid.bond }}
                                         </div>
                                     </div>
 
@@ -327,7 +370,7 @@
                                             Grand Total:
                                         </div>
                                         <div>
-                                            {{ bid.grand_subtotal }}
+                                            ${{ bid.grand_subtotal }}
                                         </div>
                                     </div>
                                 </div>
@@ -338,13 +381,17 @@
                     <div class="section_letter">Section B: Exclusions</div>
                     <h5>Unless expressly stated, the following exclusions apply</h5>
                     <div>
-                        Some exclusion's text
+                        {% for exclusion_link in bid.exclusion_links %}
+                            {{ exclusion_link.exclusion.note }}
+                        {% endfor %}
                     </div>
 
                     <div class="section_letter">Section C: Clarifications</div>
                     <h5>Please note the following clarifications: </h5>
                     <div>
-                        Some clarification's text
+                        {% for clarification_link in bid.clarification_links %}
+                            {{ clarification_link.clarification.note }}
+                        {% endfor %}
                     </div>
                     <div class="qoute_clarification"></div>
 
@@ -352,16 +399,44 @@
                     <div></div>
 
                     <div class="section_E_and_F">
-                        <div>Section E: Submitted by:</div>
-                        <div>Section F: Approved by:</div>
+                        <div><span class="section_E">Section E: Submitted by: </span></div>
+                        <div><span class="section_F">Section F: Approved by: </span></div>
                     </div>
 
-                    <div>
-                        <div></div>
-                        <div></div>
+                    <div class="ddb_contracting "></div>
+                    <div class="inputs_forms">
+                        <div class="by_name_date">
+                            <div>
+                                By &nbsp;
+                                <input type="text" style="text-decoration: underline; border: none;">
+                            </div>
+                            <div>Name &nbsp; Edward Albanese</div>
+                            <div>Name &nbsp; 05/26.2020</div>
+                        </div>
+                        <div class="by_name_date">
+                            <div>
+                                By &nbsp;
+                                <input type="text" style="text-decoration: underline; border: none;">
+                            </div>
+                            <div>
+                                Name &nbsp;
+                                <input type="text" style="text-decoration: underline; border: none;">
+                            </div>
+                            <div>
+                                Date &nbsp;
+                                <input type="text" style="text-decoration: underline; border: none;">
+                            </div>
+                        </div>
                     </div>
-                    <div></div>
-
+                    <div class="send_copies">
+                        <ul>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                    <span>No drawings have been received for this project</span>
+                    </div>
                 </div>
             </div>
         </div>
