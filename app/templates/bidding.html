@@ -8,10 +8,10 @@
 {% block content %}
 
 
-<section class="page-section bidding d-flex tabm" id="wrapper">
+<section class="page-section bidding d-flex" id="wrapper">
 <!-- begin Sidebar -->
 <!-- <div> -->
-  <div class="border-right box-shadow __side-bar-box bidding__side_bar--size" id="sidebar-wrapper">
+  <div class="border-right box-shadow __side-bar-box bidding__side_bar--size" id="sidebar-wrapper-bidding">
     <div>
       <div class="sidebar-heading"> DDB Contracting</div>
       <div class="text--center list-group list-group-flush none-underline">
@@ -39,7 +39,7 @@
     </div>
     <div class="_preview_export_btns">
       <a href="{{ url_for('bid.preview_pdf', bid_id=bid.id) }}">
-        <button type="button" class="_btn--gray">Preview</button>
+        <button type="button" class="_btn--gray ddb-cursor-handle">Preview</button>
       </a>
       <a href="{{url_for('bid.export_pdf', bid_id=bid.id)}}">
         <div>

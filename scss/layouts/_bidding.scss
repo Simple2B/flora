@@ -6,6 +6,13 @@
 }
 // end of custom class
 
+#sidebar-wrapper-bidding {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: $m1rem;
+}
+
 .main-container_bidding {
     max-width: 75%;
     margin: 0 $m1rem;
