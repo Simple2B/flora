@@ -61,3 +61,35 @@ def biddings():
     bids = Bid.query.order_by(Bid.status).all()
 
     return render_template("biddings.html", bids=bids)
+
+
+@bidding_blueprint.route("/delete_exclusions/<int:bid_id>")
+@login_required
+def delete_exclusions(bid_id):
+    bid = Bid.query.get(bid_id)
+    for exclusion_link in bid.exclusion_links:
+        exclusion_link.delete()
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_exclusion"))
+
+
+@bidding_blueprint.route("/edit_exclusions/<int:bid_id>")
+@login_required
+def edit_exclusions(bid_id):
+    return redirect(url_for("exclusion.exclusions", bid_id=bid_id))
+
+
+@bidding_blueprint.route("/delete_clarifications/<int:bid_id>")
+@login_required
+def delete_clarifications(bid_id):
+    bid = Bid.query.get(bid_id)
+    for clarification_link in bid.clarification_links:
+        clarification_link.delete()
+    return redirect(
+        url_for("bid.bidding", bid_id=bid_id, _anchor="bid_clarification")
+    )
+
+
+@bidding_blueprint.route("/edit_clarifications/<int:bid_id>")
+@login_required
+def edit_clarifications(bid_id):
+    return redirect(url_for("clarification.clarifications", bid_id=bid_id))
