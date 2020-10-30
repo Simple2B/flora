@@ -38,14 +38,16 @@
       </div>
     </div>
     <div class="_preview_export_btns">
-      <a href="{{ url_for('bid.preview_pdf', bid_id=bid.id) }}" target="_blank">
-        <button type="button" class="_btn--gray ddb-cursor-handle">Preview</button>
-      </a>
-      <a href="{{url_for('bid.export_pdf', bid_id=bid.id)}}">
+      <!-- <a href=" url_for('bid.preview_pdf', bid_id=bid.id) " target="_blank"> -->
+        <!-- <button type="button" class="_btn--gray ddb-cursor-handle">Preview</button> -->
+        {{ form_bid.preview(class="_btn--gray ddb-cursor-handle", form="bid_subtotal_data") }}
+      <!-- </a> -->
+      <!-- <a href="url_for('bid.export_pdf', bid_id=bid.id)"> -->
         <div>
-          <button type="button" class="_btn--gray ddb-cursor-handle">Export</button>
+          <!-- <button type="submit" class="_btn--gray ddb-cursor-handle" form="bid_subtotal_price">Export</button> -->
+          {{ form_bid.export(class="_btn--gray ddb-cursor-handle", form="bid_subtotal_data") }}
         </div>
-      </a>
+      <!-- </a> -->
     </div>
   </div>
   <!-- end Sidebar -->
@@ -71,7 +73,6 @@
       <span class="ddb-margin-top"><strong>Project General</strong></span>
       <div class="_date_revision">
         <div>
-          <!-- form.code(class='_form-input _form-input--m') -->
           <div class="_input-date_time">
             <div>
               <input class="_form-input _form-input--m" type="text">
@@ -375,6 +376,7 @@
             </div>
           </div>
 
+          <form class="form" id="bid_subtotal_data" role="form" action="{{ url_for('bid.export_pdf', bid_id=bid.id) }}" method="post">
           <div class="_center_block">
             <div class="inputs_fields" id="subtotal_inputs_fields_id">
               <div class="input-row">
@@ -384,7 +386,7 @@
                 </div>
                 <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.permit_filling_fee}}">
                 <div class="check_box-TBD">
-                  <input class="form-control" type="checkbox">
+                  <input class="form-control" type="checkbox" name="permit">
                   <span>TBD</span>
                 </div>
               </div>
@@ -395,7 +397,7 @@
                 </div>
                 <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.general_conditions}}">
                 <div class="check_box-TBD">
-                  <input class="form-control" type="checkbox">
+                  <input class="form-control" type="checkbox" name="general">
                   <span>TBD</span>
                 </div>
               </div>
@@ -406,7 +408,7 @@
                 </div>
                 <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.overhead}}">
                 <div class="check_box-TBD">
-                  <input class="form-control" type="checkbox">
+                  <input class="form-control" type="checkbox" name="overhead">
                   <span>TBD</span>
                 </div>
               </div>
@@ -417,7 +419,7 @@
                 </div>
                 <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.insurance_tax}}">
                 <div class="check_box-TBD">
-                  <input class="form-control" type="checkbox">
+                  <input class="form-control" type="checkbox" name="insurance">
                   <span>TBD</span>
                 </div>
               </div>
@@ -428,7 +430,7 @@
                 </div>
                 <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.profit}}">
                 <div class="check_box-TBD">
-                  <input class="form-control" type="checkbox">
+                  <input class="form-control" type="checkbox" name="profit">
                   <span>TBD</span>
                 </div>
               </div>
@@ -439,7 +441,7 @@
                 </div>
                 <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.bond}}">
                 <div class="check_box-TBD">
-                  <input class="form-control" type="checkbox">
+                  <input class="form-control" type="checkbox" name="bond">
                   <span>TBD</span>
                 </div>
               </div>
@@ -452,6 +454,7 @@
               </div>
             </div>
           </div>
+          </form>
 
           <div class="_bottom_block">
 

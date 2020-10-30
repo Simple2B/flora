@@ -319,49 +319,85 @@
                                         <div>
                                             Permit/Filing Free:
                                         </div>
+                                        {% if bid.permit_filling_fee %}
+                                        <div>
+                                            ${{ bid.permit_filling_fee }}
+                                        </div>
+                                        {% else %}
                                         <div>
                                             T.B.D
                                         </div>
+                                        {% endif %}
                                     </div>
                                     <div class="feature_price">
                                         <div class="general_padding-r">
                                             General Conditions:
                                         </div>
+                                        {% if bid.general_conditions %}
                                         <div>
                                             ${{ bid.general_conditions }}
                                         </div>
+                                        {% else %}
+                                        <div>
+                                            T.B.D
+                                        </div>
+                                        {% endif %}
                                     </div>
                                     <div class="feature_price">
                                         <div>
                                             Insurance/Tax:
                                         </div>
+                                        {% if bid.insurance_tax %}
                                         <div>
                                             ${{ bid.insurance_tax }}
                                         </div>
+                                        {% else %}
+                                        <div>
+                                            T.B.D
+                                        </div>
+                                        {% endif %}
                                     </div>
                                     <div class="feature_price">
                                         <div>
                                             Overhead:
                                         </div>
+                                        {% if bid.overhead %}
                                         <div>
                                             ${{ bid.overhead }}
                                         </div>
+                                        {% else %}
+                                        <div>
+                                            T.B.D
+                                        </div>
+                                        {% endif %}
                                     </div>
                                     <div class="feature_price">
                                         <div>
                                             Profit:
                                         </div>
+                                        {% if bid.profit %}
                                         <div>
                                             ${{ bid.profit }}
                                         </div>
+                                        {% else %}
+                                        <div>
+                                            T.B.D
+                                        </div>
+                                        {% endif %}
                                     </div>
                                     <div class="feature_price">
                                         <div>
                                             Bond:
                                         </div>
+                                        {% if bid.bond %}
                                         <div>
                                             ${{ bid.bond }}
                                         </div>
+                                        {% else %}
+                                        <div>
+                                            T.B.D
+                                        </div>
+                                        {% endif %}
                                     </div>
 
                                     <div class="feature_price">
