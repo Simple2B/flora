@@ -40,12 +40,12 @@ $(document).ready( function() {
           e.preventDefault();
           const lineId = e.currentTarget.dataset["line_id"]
           const areaToShow = document.querySelector(`#${lineId}`)
-          let changeLineImg = document.querySelector(`#line_img_id`).getAttribute('src');
+          let changeLineImg = document.querySelector(`#${lineId}_img_id`).getAttribute('src');
           areaToShow.classList.toggle('hidden');
           if (changeLineImg == "/static/images/up_direction_element.svg") {
-            $('#subtotal_img_id').attr('src', "/static/images/direction_element_bottom.svg");
+            $(`#${lineId}_img_id`).attr('src', "/static/images/direction_element_bottom.svg");
           } else {
-            $('#subtotal_img_id').attr('src', "/static/images/up_direction_element.svg");
+            $(`#${lineId}_img_id`).attr('src', "/static/images/up_direction_element.svg");
           };
       });
   });
