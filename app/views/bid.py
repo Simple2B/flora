@@ -1,4 +1,5 @@
 import io
+import os
 import datetime
 
 from flask import Blueprint, render_template, redirect, url_for, send_file
@@ -45,7 +46,7 @@ def edit_work_item_line(bid_id, work_item_line_id):
         else:
             log(log.ERROR, "Unknown work_item_line_id: %d", work_item_line_id)
 
-    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor='bid_scope_of_work'))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
 
 
 @bid_blueprint.route(
@@ -60,7 +61,7 @@ def delete_link_work_item(bid_id, link_work_item_id):
         link.delete()
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", link_work_item_id)
-    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor='bid_scope_of_work'))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
 
 
 @bid_blueprint.route(
@@ -73,7 +74,7 @@ def delete_work_item_line(bid_id, work_item_line_id):
         line.delete()
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", work_item_line_id)
-    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor='bid_scope_of_work'))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
 
 
 @bid_blueprint.route("/delete_exclusions/<int:bid_id>")
@@ -97,9 +98,7 @@ def delete_clarifications(bid_id):
     bid = Bid.query.get(bid_id)
     for clarification_link in bid.clarification_links:
         clarification_link.delete()
-    return redirect(
-        url_for("bid.bidding", bid_id=bid_id, _anchor="bid_clarification")
-    )
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_clarification"))
 
 
 @bid_blueprint.route("/edit_clarifications/<int:bid_id>")
@@ -137,7 +136,7 @@ def bidding(bid_id):
         bid=bid,
         form=form,
         show_exclusions=show_exclusions,
-        show_clarifications=show_clarifications
+        show_clarifications=show_clarifications,
     )
 
 
@@ -147,7 +146,9 @@ def preview_pdf(bid_id):
     bid = Bid.query.get(bid_id)
     preview_pdf_bool = True
 
-    return render_template("export_document.html", bid=bid, preview_pdf_bool=preview_pdf_bool)
+    return render_template(
+        "export_document.html", bid=bid, preview_pdf_bool=preview_pdf_bool
+    )
 
 
 @bid_blueprint.route("/export_pdf/<int:bid_id>", methods=["GET"])
@@ -155,8 +156,15 @@ def preview_pdf(bid_id):
 def export_pdf(bid_id):
     bid = Bid.query.get(bid_id)
     preview_pdf_bool = False
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    PATH_TO_IMG = os.path.join(BASE_DIR, "static/images/")
 
-    html_content = render_template("export_document.html", bid=bid, preview_pdf_bool=preview_pdf_bool)
+    html_content = render_template(
+        "export_document.html",
+        bid=bid,
+        preview_pdf_bool=preview_pdf_bool,
+        path_to_img=PATH_TO_IMG,
+    )
     pdf_content = pdfkit.from_string(html_content, False)
     stream = io.BytesIO(pdf_content)
 
