@@ -770,7 +770,8 @@ ul {
 
 .modal-content {
   width: auto;
-  margin-left: auto; }
+  margin-left: auto;
+  margin-right: auto; }
   .modal-content .modal_text-areas {
     display: flex;
     flex-flow: row wrap;

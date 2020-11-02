@@ -45,31 +45,20 @@
         }
 
         .__due_time {
-            /* display: flex;
-            justify-content: flex-end; */
             display: -webkit-box;
             -webkit-box-pack: end;
         }
 
         .__client_project_block {
-            /* display: flex;
-            flex-direction: row;
-            justify-content: space-between; */
             display: -webkit-box;
             -webkit-box-pack: justify;
             font-size: 16px;
         }
         .__client_project_block ._client_project {
-            /* display: flex;
-            flex-direction: row;
-            justify-content: space-between; */
             display: -webkit-box;
             -webkit-box-pack: justify;
         }
         .__client_project_block ._client_project .client_project-info {
-            /* display: flex;
-            flex-direction: column;
-            justify-content: space-between; */
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: vertical;
@@ -116,8 +105,6 @@
         }
 
         .section_E_and_F {
-            /* display: flex;
-            justify-content: space-between; */
             margin-top: 1rem;
             display: -webkit-box;
             -webkit-box-pack: justify;
@@ -126,9 +113,9 @@
             font-size: 18px;
             color: #333333;
             background-color: #4682B4;
-            border-top-color: #333333;
+            /* border-top-color: #333333;
             border-top-style: solid;
-            border-top-width: 3px;
+            border-top-width: 3px; */
             margin-top: 1rem;
         }
 
@@ -229,6 +216,23 @@
             -webkit-box-orient: vertical;
         }
 
+        .subtotal_column {
+            width: 47%;
+        }
+
+        .vert-align div {
+            padding-right: 1rem;
+            padding-bottom: 3.8rem;
+        }
+
+        .table_of_sections_E_F {
+            width: 100%;
+        }
+
+        .table_of_sections_E_F .inner_table {
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
 
 </head>
@@ -258,42 +262,48 @@
                     </div>
 
                     <div class="__client_project_block">
-                        <div class="_client_project client-padding">
-                            <div class="client_title">Client</div>
-                            <div  class="client_project-info">
-                                <div>
-                                    {{ bid.client }}
-                                </div>
-                                <div>75 Montgomery</div>
-                                <div>Suite #502</div>
-                                <div>Jersey City, NJ 07302</div>
-                                <div>James Pumarada, DPT, STC, CSCS</div>
-                            </div>
-                        </div>
-                        <div class="_client_project project-padding">
-                            <div class="project_title">Project</div>
-                            <div  class="client_project-info">
-                                <div>
-                                    Transaction Window & Sink
-                                </div>
-                                <div>75 Montgomery</div>
-                                <div>Suite 502</div>
-                                <div>Jersey City, NJ 07302</div>
-                                <div>
-                                    <span class="project_quote">
-                                        Quote # B-20-034 R1
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <td class="vert-align">
+                                        <div>bid.client</div>
+                                    </td>
+                                    <td>
+                                        <div>75 Montgomery</div>
+                                        <div>Suite #502</div>
+                                        <div>Jersey City, NJ 07302</div>
+                                        <div>James Pumarada, DPT, STC, CSCS</div>
+                                    </td>
+                                </td>
+                                <td>
+                                    <td class="vert-align">
+                                        <div> Transaction Window & Sink </div>
+                                    </td>
+                                    <td>
+                                        <div>75 Montgomery</div>
+                                        <div>Suite 502</div>
+                                        <div>Jersey City, NJ 07302</div>
+                                        <div>
+                                            <span class="project_quote">
+                                                Quote # B-20-034 R1
+                                            </span>
+                                        </div>
+                                    </td>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
+
+
+
+
 
                     <div class="section_letter">Section A: Scope of Work</div>
                     <h5>Please find our detailed Quote for the above referenced project as outlined below:</h5>
 
-                    <div class="bid_price_container">
-                        <div class="bid_work_item">
-                            <!-- <div>8.81 Glazing</div> -->
+                    <div class="bid_price_containe">
+                        <!-- <div class="bid_work_item">
                             {% for link_work_item in bid.link_work_items %}
                             <div class="work_item_pdf">
                                 <div> {{ link_work_item.work_item.code }} &nbsp; &nbsp;</div>
@@ -303,7 +313,6 @@
                         </div>
 
                         <div class="bid_subtotal_container">
-                            <!-- <div class="bid_unit"></div> -->
                             <div class="bid_subtotal_value">${{ bid.subtotal }}</div>
                             <div class="bid_subtotal">
                                 <div class="bid_subtotal_bid_features">
@@ -410,6 +419,98 @@
                                     </div>
                                 </div>
                             </div>
+                        </div> -->
+
+                        {% for link_work_item in bid.link_work_items %}
+
+                        <div class="bid_work_item">
+                            <div class="work_item_pdf">
+                                <span> {{ link_work_item.work_item.code }} &nbsp; &nbsp;</span>
+                                <span> {{ link_work_item.work_item.name }} &nbsp; &nbsp;</span>
+                                <span class="bid_subtotal_value">${{ link_work_item.subtotal }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div>
+                            <table>
+                                <tr>
+                                    <td></td>
+                                    <td class="subtotal_column">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div>Subtotal</div>
+                                                    <div>Permit/Filing Free:</div>
+                                                    <div>General_conditions</div>
+                                                    <div>Insurance_tax</div>
+                                                    <div>Overhead</div>
+                                                    <div>Profit</div>
+                                                    <div>Bond</div>
+                                                    <div>Grand Subtotal</div>
+                                                </td>
+                                                <td>
+                                                    <div>${{ bid.subtotal }}</div>
+                                                    {% if bid.permit_filling_fee %}
+                                                        <div>
+                                                            ${{ bid.permit_filling_fee }}
+                                                        </div>
+                                                        {% else %}
+                                                        <div>
+                                                            T.B.D
+                                                        </div>
+                                                    {% endif %}
+                                                    {% if bid.general_conditions %}
+                                                        <div>
+                                                            ${{ bid.general_conditions }}
+                                                        </div>
+                                                        {% else %}
+                                                        <div>
+                                                            T.B.D
+                                                        </div>
+                                                    {% endif %}
+                                                    {% if bid.insurance_tax %}
+                                                        <div>
+                                                            ${{ bid.insurance_tax }}
+                                                        </div>
+                                                        {% else %}
+                                                        <div>
+                                                            T.B.D
+                                                        </div>
+                                                    {% endif %}
+                                                    {% if bid.overhead %}
+                                                        <div>
+                                                            ${{ bid.overhead }}
+                                                        </div>
+                                                        {% else %}
+                                                        <div>
+                                                            T.B.D
+                                                        </div>
+                                                    {% endif %}
+                                                    {% if bid.profit %}
+                                                        <div>
+                                                            ${{ bid.profit }}
+                                                        </div>
+                                                        {% else %}
+                                                        <div>
+                                                            T.B.D
+                                                        </div>
+                                                    {% endif %}
+                                                    {% if bid.bond %}
+                                                        <div>
+                                                            ${{ bid.bond }}
+                                                        </div>
+                                                        {% else %}
+                                                        <div>
+                                                            T.B.D
+                                                        </div>
+                                                    {% endif %}
+                                                    <div>${{ bid.grand_subtotal }}</div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
 
@@ -434,34 +535,89 @@
                     <div></div>
 
                     <div class="section_E_and_F">
-                        <div><span class="section_E">Section E: Submitted by: </span></div>
-                        <div><span class="section_F">Section F: Approved by: </span></div>
+                        <table class="table_of_sections_E_F">
+                            <tr>
+                                <td style="text-decoration: underline; font-size: 18px; font-weight: 600;">
+                                    Section E: Submitted by:
+                                </td>
+
+                                <td style="text-decoration: underline;">
+                                    Section F: Approved by:
+                                </td>
+                            </tr>
+                        </table>
                     </div>
 
                     <div class="ddb_contracting "></div>
                     <div class="inputs_forms">
-                        <div class="by_name_date">
-                            <div>
-                                By &nbsp;
-                                <input type="text" style="text-decoration: underline; border: none;">
-                            </div>
-                            <div>Name &nbsp; Edward Albanese</div>
-                            <div>Name &nbsp; 05/26.2020</div>
-                        </div>
-                        <div class="by_name_date">
-                            <div>
-                                By &nbsp;
-                                <input type="text" style="text-decoration: underline; border: none;">
-                            </div>
-                            <div>
-                                Name &nbsp;
-                                <input type="text" style="text-decoration: underline; border: none;">
-                            </div>
-                            <div>
-                                Date &nbsp;
-                                <input type="text" style="text-decoration: underline; border: none;">
-                            </div>
-                        </div>
+
+                        <table class="table_of_sections_E_F">
+                            <tr>
+                                <td>
+                                    <table class="inner_table">
+                                        <tr>
+                                            <td>
+                                                <td>By &nbsp;</td>
+                                            </td>
+                                            <td>
+                                                <td></td>
+                                                <td></td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <td>Name &nbsp;</td>
+                                            </td>
+                                            <td>
+                                                <td></td>
+                                                <td>Edward Albanese</td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <td>Date &nbsp;</td>
+                                            </td>
+                                            <td>
+                                                <td></td>
+                                                <td>05/26.2020</td>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="inner_table">
+                                        <tr>
+                                            <td>
+                                                <td>By &nbsp;</td>
+                                            </td>
+                                            <td>
+                                                <td></td>
+                                                <td></td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <td>Name &nbsp;</td>
+                                            </td>
+                                            <td>
+                                                <td></td>
+                                                <td>Edward Albanese</td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <td>Date &nbsp;</td>
+                                            </td>
+                                            <td>
+                                                <td></td>
+                                                <td>05/26.2020</td>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
                     </div>
                     <div class="send_copies">
                         <ul>

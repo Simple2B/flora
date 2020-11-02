@@ -192,9 +192,11 @@ def export_pdf(bid_id):
             )
 
         elif form.export_docx.data:
+            preview_pdf_bool = False
+            calculate_subtotal(bid_id, tbd_choices)
             html_content = render_template(
                 "export_document_docx.html",
-                bid=bid
+                bid=bid, preview_pdf_bool=preview_pdf_bool
             )
             grabzit = GrabzItClient.GrabzItClient('NDBhNjEyMmI3MjY5NDExMmEwNzJlOTYzZmY1ZGNiNGM=', 'QD8/MT8/Pz9aP0EIPz8/P096S28/P1M/Bj8/RD8/Pxg=')
             grabzit.HTMLToDOCX(html_content)
