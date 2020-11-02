@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" media="screen"> -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -44,38 +43,22 @@
             display: flex;
             justify-content: flex-start;
         }
-        .__main-content  .__ddb_logo ._ddb_img_logo {
-            width: 400px;
-            height: 200px;
-        }
 
         .__due_time {
-            /* display: flex;
-            justify-content: flex-end; */
             display: -webkit-box;
             -webkit-box-pack: end;
         }
 
         .__client_project_block {
-            /* display: flex;
-            flex-direction: row;
-            justify-content: space-between; */
             display: -webkit-box;
-            -webkit-box-orient: vertical;
             -webkit-box-pack: justify;
             font-size: 16px;
         }
         .__client_project_block ._client_project {
-            /* display: flex;
-            flex-direction: row;
-            justify-content: space-between; */
             display: -webkit-box;
-            /* -webkit-box-pack: justify; */
+            -webkit-box-pack: justify;
         }
         .__client_project_block ._client_project .client_project-info {
-            /* display: flex;
-            flex-direction: column;
-            justify-content: space-between; */
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: vertical;
@@ -115,50 +98,81 @@
             color: #333333;
             background-color: #4682B4;
             text-decoration: underline;
-            border-color: 3px solid #333333 1 0 0 0;
+            border-top-color: #333333;
+            border-top-style: solid;
+            border-top-width: 3px;
             margin-top: 1rem;
         }
 
         .section_E_and_F {
-            /* display: flex;
-            justify-content: space-between; */
+            margin-top: 1rem;
             display: -webkit-box;
             -webkit-box-pack: justify;
+            text-align: center;
+            font-weight: 600;
+            font-size: 18px;
+            color: #333333;
+            background-color: #4682B4;
+            border-top-color: #333333;
+            border-top-style: solid;
+            border-top-width: 3px;
+            margin-top: 1rem;
         }
 
-        .bid_work_item {
-            /* display: flex;
-            flex-direction: row;
-            justify-content: space-between; */
+        .section_E_and_F div {
+            width: 15vw;
+            text-decoration: underline;
+        }
+
+        .section_E_and_F .section_E {
+            padding-left: 1rem;
+        }
+
+        .section_E_and_F .section_F {
+            padding-right: 1rem;
+        }
+
+        .bid_price_container {
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+            -webkit-box-orient: vertical;
+        }
+
+        .bid_price_container .bid_subtotal_value {
+            display: -webkit-box;
+            -webkit-box-pack: end;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .bid_price_container .bid_work_item {
             display: -webkit-box;
             -webkit-box-pack: justify;
             font-weight: bold;
             font-size: 18px;
         }
 
-        .bid_subtotal {
-            /* display: flex;
-            justify-content: flex-end; */
+        .bid_price_container .bid_subtotal_container .bid_subtotal {
             display: -webkit-box;
             -webkit-box-pack: end;
         }
         .bid_subtotal .bid_subtotal_bid_features {
-            /* display: flex; */
-            /* flex-direction: column; */
-            /* justify-content: space-between; */
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: vertical;
         }
         .bid_subtotal .bid_subtotal_bid_features .feature_price {
-            /* display: flex;
-            flex-direction: row;
-            justify-content: space-between; */
             display: -webkit-box;
             -webkit-box-pack: justify;
             font-weight: bold;
             font-size: 18px;
         }
+
+        .feature_price_subtotal_price {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
         .bid_subtotal .bid_subtotal_bid_features .feature_price .general_padding-r {
             padding-right: 2rem;
         }
@@ -180,6 +194,18 @@
             -webkit-box-orient: horizontal;
         }
 
+        .inputs_forms {
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+            -webkit-box-orient: horizontal;
+        }
+
+        .inputs_forms .by_name_date {
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+            -webkit-box-orient: vertical;
+        }
+
     </style>
 
 </head>
@@ -189,28 +215,21 @@
     <section>
         <div class="export_container">
             <div>
+                {% if preview_pdf_bool %}
                 <h6 class="preview_document">Preview Document</h6>
-                <div class="__top-content">
-                    <div class="">
-                        <a href="#">
-                            <img src="./imgs/right-hand.svg">
-                            Back
-                        </a>
-                    </div>
-                    <div class="">
-                        <a href="#">
-                            <button type="button" class="_btn--gray ddb-cursor-handle">Export</button>
-                        </a>
-                    </div>
-                </div>
+                {% endif %}
 
                 <div class="__main-content">
 
-                    <!-- <div class="__ddb_logo"> -->
-                    <!-- <img class="_ddb_img_logo"
-                    src="file:\\\C:\Users\Win10Pro\Desktop\Python\Folder Fo Tests\test pdf\pdf_flask\ddb_logo_pdf.jpg"> -->
-                    <!-- </div> -->
-
+                    {% if preview_pdf_bool %}
+                    <div class="__ddb_logo">
+                        <img class="_ddb_img_logo" src="{{ url_for('static', filename='images/ddb_logo_pdf.png') }}">
+                    </div>
+                    {% else %}
+                    <div class="__ddb_logo">
+                        <img class="_ddb_img_logo" src="{{ path_to_img }}ddb_logo_pdf.png">
+                    </div>
+                    {% endif %}
                     <div class="__due_time">
                         05/26/20
                     </div>
@@ -220,7 +239,7 @@
                             <div class="client_title">Client</div>
                             <div  class="client_project-info">
                                 <div>
-                                    Complete Physical Rehabilitation, PC
+                                    {{ bid.client }}
                                 </div>
                                 <div>75 Montgomery</div>
                                 <div>Suite #502</div>
@@ -248,82 +267,121 @@
 
                     <div class="section_letter">Section A: Scope of Work</div>
                     <h5>Please find our detailed Quote for the above referenced project as outlined below:</h5>
-                    <div>
+
+                    <div class="bid_price_container">
+                        {% for link_work_item in bid.link_work_items %}
                         <div class="bid_work_item">
-                            <!-- <div>8.81 Glazing</div> -->
                             <div class="work_item_pdf">
-                                <div> 8.81 &nbsp; &nbsp;</div>
-                                <div> Glazing </div>
+                                <div> {{ link_work_item.work_item.code }} &nbsp; &nbsp;</div>
+                                <div> {{ link_work_item.work_item.name }} &nbsp; &nbsp;</div>
                             </div>
-
-                            <div>$600</div>
+                            <div class="bid_subtotal_value">${{ bid.subtotal }}</div>
                         </div>
-                        <div class="bid_unit"></div>
-                        <div class="bid_subtotal">
-                            <div class="bid_subtotal_bid_features">
-                                <div class="feature_price">
-                                    <div>
-                                        Subtotal:
-                                    </div>
-                                    <div>
-                                        $600
-                                    </div>
-                                </div>
-                                <div class="feature_price">
-                                    <div>
-                                        Permit/Filing Free:
-                                    </div>
-                                    <div>
-                                        T.B.D
-                                    </div>
-                                </div>
-                                <div class="feature_price">
-                                    <div class="general_padding-r">
-                                        General Conditions:
-                                    </div>
-                                    <div>
-                                        $test
-                                    </div>
-                                </div>
-                                <div class="feature_price">
-                                    <div>
-                                        Insurance/Tax:
-                                    </div>
-                                    <div>
-                                        $test
-                                    </div>
-                                </div>
-                                <div class="feature_price">
-                                    <div>
-                                        Overhead:
-                                    </div>
-                                    <div>
-                                        $test
-                                    </div>
-                                </div>
-                                <div class="feature_price">
-                                    <div>
-                                        Profit:
-                                    </div>
-                                    <div>
-                                        $test
-                                    </div>
-                                </div>
-                                <div class="feature_price">
-                                    <div>
-                                        Permit/Filing Free:
-                                    </div>
-                                    <div>
-                                        $test
-                                    </div>
-                                </div>
+                        {% endfor %}
 
-                                <div class="feature_price">
-                                    <div>
-                                        Grand Total:
+                        <div class="bid_subtotal_container">
+                            <div class="bid_subtotal">
+                                <div class="bid_subtotal_bid_features">
+                                    <div class="feature_price">
+                                        <div>
+                                            Subtotal:
+                                        </div>
+                                        <div class="feature_price">
+                                            ${{ bid.subtotal }}
+                                        </div>
                                     </div>
-                                    <div>
-                                        $600
+                                    <div class="feature_price">
+                                        <div>
+                                            Permit/Filing Free:
+                                        </div>
+                                        {% if bid.permit_filling_fee %}
+                                        <div>
+                                            ${{ bid.permit_filling_fee }}
+                                        </div>
+                                        {% else %}
+                                        <div>
+                                            T.B.D
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="feature_price">
+                                        <div class="general_padding-r">
+                                            General Conditions:
+                                        </div>
+                                        {% if bid.general_conditions %}
+                                        <div>
+                                            ${{ bid.general_conditions }}
+                                        </div>
+                                        {% else %}
+                                        <div>
+                                            T.B.D
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="feature_price">
+                                        <div>
+                                            Insurance/Tax:
+                                        </div>
+                                        {% if bid.insurance_tax %}
+                                        <div>
+                                            ${{ bid.insurance_tax }}
+                                        </div>
+                                        {% else %}
+                                        <div>
+                                            T.B.D
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="feature_price">
+                                        <div>
+                                            Overhead:
+                                        </div>
+                                        {% if bid.overhead %}
+                                        <div>
+                                            ${{ bid.overhead }}
+                                        </div>
+                                        {% else %}
+                                        <div>
+                                            T.B.D
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="feature_price">
+                                        <div>
+                                            Profit:
+                                        </div>
+                                        {% if bid.profit %}
+                                        <div>
+                                            ${{ bid.profit }}
+                                        </div>
+                                        {% else %}
+                                        <div>
+                                            T.B.D
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="feature_price">
+                                        <div>
+                                            Bond:
+                                        </div>
+                                        {% if bid.bond %}
+                                        <div>
+                                            ${{ bid.bond }}
+                                        </div>
+                                        {% else %}
+                                        <div>
+                                            T.B.D
+                                        </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="feature_price">
+                                        <div>
+                                            Grand Total:
+                                        </div>
+                                        <div>
+                                            ${{ bid.grand_subtotal }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -333,33 +391,66 @@
                     <div class="section_letter">Section B: Exclusions</div>
                     <h5>Unless expressly stated, the following exclusions apply</h5>
                     <div>
-                        Some exclusion's text
+                        {% for exclusion_link in bid.exclusion_links %}
+                            {{ exclusion_link.exclusion.title }}
+                        {% endfor %}
                     </div>
 
                     <div class="section_letter">Section C: Clarifications</div>
                     <h5>Please note the following clarifications: </h5>
                     <div>
-                        Some clarification's text
+                        {% for clarification_link in bid.clarification_links %}
+                            {{ clarification_link.clarification.note }}
+                        {% endfor %}
                     </div>
                     <div class="qoute_clarification"></div>
 
                     <div class="section_letter">Section D: Alternates</div>
                     <div></div>
 
-                    <div class="section_letter">Section E: Submitted by:</div>
-                    <div class="section_letter">Section F: Approved by:</div>
-
-                    <div>
-                        <div></div>
-                        <div></div>
+                    <div class="section_E_and_F">
+                        <div><span class="section_E">Section E: Submitted by: </span></div>
+                        <div><span class="section_F">Section F: Approved by: </span></div>
                     </div>
-                    <div></div>
 
+                    <div class="ddb_contracting "></div>
+                    <div class="inputs_forms">
+                        <div class="by_name_date">
+                            <div>
+                                By &nbsp;
+                                <input type="text" style="text-decoration: underline; border: none;">
+                            </div>
+                            <div>Name &nbsp; Edward Albanese</div>
+                            <div>Name &nbsp; 05/26.2020</div>
+                        </div>
+                        <div class="by_name_date">
+                            <div>
+                                By &nbsp;
+                                <input type="text" style="text-decoration: underline; border: none;">
+                            </div>
+                            <div>
+                                Name &nbsp;
+                                <input type="text" style="text-decoration: underline; border: none;">
+                            </div>
+                            <div>
+                                Date &nbsp;
+                                <input type="text" style="text-decoration: underline; border: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="send_copies">
+                        <ul>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                    <span>No drawings have been received for this project</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
 </body>
-
 </html>
