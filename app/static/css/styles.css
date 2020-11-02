@@ -281,6 +281,9 @@ ul {
   ._form-input--m {
     width: 8rem;
     margin-top: 1rem; }
+  ._form-input--lg {
+    width: 20rem;
+    margin-top: 1rem; }
 
 ._form-input-size--s {
   font-size: 0.33rem; }
@@ -791,7 +794,8 @@ ul {
   .modal-content ._modal_btns {
     display: flex;
     justify-content: flex-end;
-    flex-flow: row wrap; }
+    flex-flow: row wrap;
+    align-items: baseline; }
 
 .direction_element {
   border: none;
