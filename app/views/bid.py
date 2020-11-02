@@ -14,6 +14,9 @@ from app.controllers import calculate_subtotal
 from app.logger import log
 
 import pdfkit
+import GrabzIt
+from GrabzIt import GrabzItDOCXOptions
+from GrabzIt import GrabzItClient
 
 bid_blueprint = Blueprint("bid", __name__)
 
@@ -164,7 +167,7 @@ def export_pdf(bid_id):
     if form.validate_on_submit():
         if form.preview.data:
             return redirect(url_for("bid.preview_pdf", bid_id=bid_id))
-        if form.export.data:
+        if form.export_pdf.data:
             BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             PATH_TO_IMG = os.path.join(BASE_DIR, "static/images/")
             preview_pdf_bool = False
@@ -184,6 +187,25 @@ def export_pdf(bid_id):
                 as_attachment=True,
                 attachment_filename=f"bidding_{bid_id}_{now.strftime('%Y-%m-%d-%H-%M-%S')}.pdf",
                 mimetype="application/pdf",
+                cache_timeout=0,
+                last_modified=now,
+            )
+
+        elif form.export_docx.data:
+            html_content = render_template(
+                "export_document_docx.html",
+                bid=bid
+            )
+            grabzit = GrabzItClient.GrabzItClient('NDBhNjEyMmI3MjY5NDExMmEwNzJlOTYzZmY1ZGNiNGM=', 'QD8/MT8/Pz9aP0EIPz8/P096S28/P1M/Bj8/RD8/Pxg=')
+            grabzit.HTMLToDOCX(html_content)
+            docx_content = grabzit.SaveTo()
+            stream = io.BytesIO(docx_content)
+            now = datetime.datetime.now()
+            return send_file(
+                stream,
+                as_attachment=True,
+                attachment_filename=f"bidding_{bid_id}_{now.strftime('%Y-%m-%d-%H-%M-%S')}.docx",
+                mimetype="application/docx",
                 cache_timeout=0,
                 last_modified=now,
             )

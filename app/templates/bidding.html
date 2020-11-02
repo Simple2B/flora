@@ -38,16 +38,9 @@
       </div>
     </div>
     <div class="_preview_export_btns">
-      <!-- <a href=" url_for('bid.preview_pdf', bid_id=bid.id) " target="_blank"> -->
-        <!-- <button type="button" class="_btn--gray ddb-cursor-handle">Preview</button> -->
-        {{ form_bid.preview(class="_btn--gray ddb-cursor-handle", form="bid_subtotal_data") }}
-      <!-- </a> -->
-      <!-- <a href="url_for('bid.export_pdf', bid_id=bid.id)"> -->
         <div>
-          <!-- <button type="submit" class="_btn--gray ddb-cursor-handle" form="bid_subtotal_price">Export</button> -->
-          {{ form_bid.export(class="_btn--gray ddb-cursor-handle", form="bid_subtotal_data") }}
+          <button type="button" class="_btn--gray ddb-cursor-handle" data-target="#modalExport" data-toggle="modal">Export</button>
         </div>
-      <!-- </a> -->
     </div>
   </div>
   <!-- end Sidebar -->
@@ -594,6 +587,36 @@
   </div>
 </div>
 <!-- end of Edit Modal -->
+<!-- Modal Export -->
+<div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="ModalExport"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <h5 class="--padding">Edit work item line</h5>
+      <div class="">
+        <form role="form" action="" method="post" id="modal_work_item_line_edit">
+          <div class="__modal-inputs--flex-row">
+            <div class="modal_work_item_line--inputs">
+              <div class="_modal_btns">
+                <div>
+                  {{ form_bid.export_pdf(class="_btn--gray ddb-cursor-handle", form="bid_subtotal_data") }}
+                </div>
+                <div>
+                  {{ form_bid.export_docx(class="_btn--gray ddb-cursor-handle", form="bid_subtotal_data") }}
+                </div>
+                <div>
+                  <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of Modal Export -->
 
 {% block scripts %}
 <script src="/static/js/jquery.dataTables.min.js"></script>
