@@ -51,12 +51,12 @@
 
             <div class="chart-left__header-add-item">
               <div>
-                {{form.code(class='_form-input _form-input--m')}}
+                {{form.code(class='_form-input')}}
                 <label class="_label">Code</label>
               </div>
 
               <div>
-                {{form.name(class='_form-input _form-input--m')}}
+                {{form.name(class='_form-input')}}
                 <label class="_label">Name</label>
               </div>
 
@@ -168,7 +168,7 @@
 
           <span class="chart-right__header-add-group __inline--blocks">
             <div>
-              <input type="text" name="name" id="" class="_form-input _form-input--m" form="work_item_group_name">
+              <input type="text" name="name" id="" class="_form-input" form="work_item_group_name">
               <label class="_label">Group Name</label>
             </div>
             <div>
@@ -224,12 +224,12 @@
             data-target_link_group_delete="{{url_for('work_item.delete_group', bid_id=bid_id, group_name=group_name)}}" data-group_name="{{group_name}}">
               <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
             </button>
-            <button id='btnGroup' class="ddb-cursor-handle btnGroup_js">
-              <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}">
+            <button id='{{ group_name }}' class="ddb-cursor-handle btnGroup_js">
+              <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" id="{{ group_name }}_img_id">
             </button>
 
           </div>
-          <div id="groupTableWrapper" class="hidden __box-scroll--group-table groupTableWrapper_js">
+          <div id="groupTableWrapper-{{ group_name }}" class="hidden __box-scroll--group-table groupTableWrapper_js">
             <table id="selectedWorkItemGroupTable" class="table table-striped table-sm dropdown-content">
               <thead class="">
                 <th>Code</th>
@@ -291,12 +291,12 @@
           <div class="__modal-inputs--flex-row">
 
             <div>
-              {{form.code(class='_form-input _form-input--m')}}
+              {{form.code(class='_form-input')}}
               <label class="_label">Code</label>
             </div>
 
             <div>
-              {{form.name(class='_form-input _form-input--m')}}
+              {{form.name(class='_form-input')}}
               <label class="_label">Name</label>
             </div>
 
@@ -324,14 +324,13 @@
 
             <div id="_work_item_input_delete">
               <label class="_label input--label">Code</label>
-              <input class="_form-input _form-input--m" id="title" disabled>
+              <input class="_form-input" id="title" disabled>
             </div>
 
             <div id="_work_item_input_name_delete">
               <label class="_label input--label">Name</label>
-              <input class="_form-input _form-input--m" id="title" disabled>
+              <input class="_form-input" id="title" disabled>
             </div>
-
 
             <div class="">
               <input class="_btn--black btn btn-secondary ddb-cursor-handle" name="submit" type="submit" value="Delete">
@@ -361,7 +360,7 @@
 
             <div id="_group_input_delete">
               <label class="_label input--label">Group Name</label>
-              <input class="_form-input _form-input--m" id="_input_group_name" disabled>
+              <input class="_form-input" id="_input_group_name" disabled>
             </div>
 
             <div class="">

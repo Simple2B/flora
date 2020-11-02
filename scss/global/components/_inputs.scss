@@ -8,6 +8,9 @@
     margin: 0 auto;
 }
 
+// %form_input_template {
+
+// }
 
 ._form-input {
     @include _input;
@@ -24,8 +27,13 @@
         outline: 0;
     }
 
-    &--lg {
-        width: 20rem;
+    &--sm {
+        width: 4rem;
+        margin-top: 1rem;
+    }
+
+    &--m {
+        width: 8rem;
         margin-top: 1rem;
     }
 }
