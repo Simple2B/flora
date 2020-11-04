@@ -8,8 +8,8 @@ from app.logger import log
 
 
 class ProcoreApi:
-    def __init__(self, access_token=None):
-        self.access_token = access_token
+    def __init__(self):
+        pass
 
     def get_me(self):
         """
@@ -46,7 +46,8 @@ class ProcoreApi:
         PROCORE_API_BASE_URL = current_app.config["PROCORE_API_BASE_URL"]
         PROCORE_API_COMPANY_ID = current_app.config["PROCORE_API_COMPANY_ID"]
 
-        url = f"{PROCORE_API_BASE_URL}/vapid/companies/{PROCORE_API_COMPANY_ID}/bids"
+        url = f"{PROCORE_API_BASE_URL}vapid/companies/{PROCORE_API_COMPANY_ID}/bids"
+
         response = requests.get(url, headers=headers)
         if response.status_code >= 400:
             res = response.json()
@@ -68,6 +69,7 @@ class ProcoreApi:
         """
         # Generate a random string for the state parameter
         # Save it for use later to prevent xsrf attacks
+
         params = {
             "client_id": current_app.config["PROCORE_API_CLIENT_ID"],
             "response_type": "code",
@@ -78,6 +80,7 @@ class ProcoreApi:
             + "/oauth/authorize?"
             + urllib.parse.urlencode(params)
         )
+
         return url
 
     def update_date(self, created_at):
@@ -106,7 +109,8 @@ class ProcoreApi:
             "%Y-%m-%d %H:%M:%S"
         )
 
-    def get_token(self, code):
+    @property
+    def set_access_token(self):
         """
         DESCRIPTION:
             Gets the access token by utilizating the authorization code that was
@@ -119,14 +123,13 @@ class ProcoreApi:
             response_json['created_at']    = the date and time the user's access
             token was generated
         """
+
         client_auth = requests.auth.HTTPBasicAuth(
             current_app.config["PROCORE_API_CLIENT_ID"],
             current_app.config["PROCORE_API_CLIENT_SECRET"],
         )
         post_data = {
-            "grant_type": "authorization_code",
-            "code": code,
-            "redirect_uri": current_app.config["PROCORE_API_REDIRECT_URI"],
+            "grant_type": "client_credentials",
         }
         response = requests.post(
             current_app.config["PROCORE_API_BASE_URL"] + "/oauth/token",
@@ -134,9 +137,6 @@ class ProcoreApi:
             data=post_data,
         )
         response_json = response.json()
-        print(response_json)
-        return (
-            response_json["access_token"],
-            response_json["refresh_token"],
-            response_json["created_at"],
-        )
+
+        log(log.DEBUG, "%s", response_json)
+        return response_json["access_token"]

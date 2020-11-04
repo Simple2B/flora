@@ -12,7 +12,10 @@ procore_blueprint = Blueprint("procore", __name__)
 def procore_auth():
     api = ProcoreApi()
     session['bool'] = True
-    return redirect(api.make_authorization_url())
+    # return redirect(api.make_authorization_url())
+    access_token = api.set_access_token
+    session["procore_access_token"] = access_token
+    return redirect(url_for("bidding.biddings"))
 
 
 @procore_blueprint.route('/procore/refresh_token', methods=["POST"])
