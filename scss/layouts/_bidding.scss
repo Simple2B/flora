@@ -395,16 +395,27 @@
                 div.input-row {
                     display: flex;
                     flex-flow: row wrap;
-                    justify-content: space-around;
+                    justify-content: space-between;
                     align-items: baseline;
 
                     & > div._feature-title {
                         font-weight: 500;
-                        padding-right: 1rem;
+                        padding-right: 8rem;
                     }
 
+                    & > div._feature-percents {
+                        display: flex;
+                        align-items: baseline;
+                    }
                 }
 
+                .input_percents-block {
+                    display: flex;
+
+                    & > div:first-child {
+                        padding-right: $m0-5rem;
+                    }
+                }
             }
 
             ._show_subtotal_close_panel {
@@ -453,6 +464,7 @@
 .modal-content {
     width: auto;
     margin-left: auto;
+    margin-right: auto;
 
     .modal_text-areas {
         display: flex;
@@ -486,6 +498,7 @@
         display: flex;
         justify-content: flex-end;
         flex-flow: row wrap;
+        align-items: baseline;
     }
 }
 

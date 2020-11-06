@@ -8,6 +8,9 @@
     margin: 0 auto;
 }
 
+// %form_input_template {
+
+// }
 
 ._form-input {
     @include _input;
@@ -22,6 +25,16 @@
     &:focus {
         border-color: rgb(255, 221, 72);
         outline: 0;
+    }
+
+    &--sm {
+        width: 4rem;
+        margin-top: 1rem;
+    }
+
+    &--m {
+        width: 8rem;
+        margin-top: 1rem;
     }
 
     &--lg {

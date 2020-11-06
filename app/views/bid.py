@@ -2,18 +2,27 @@ import io
 import os
 import datetime
 
-from flask import Blueprint, render_template, redirect, url_for, send_file
+from flask import (
+    Blueprint,
+    render_template,
+    redirect,
+    url_for,
+    send_file,
+    request,
+    session,
+)
 from flask_login import login_required
 
 from app.models import Bid, WorkItemLine, LinkWorkItem, WorkItem
 
-from app.forms import WorkItemLineForm
+from app.forms import WorkItemLineForm, BidForm
 
 from app.controllers import calculate_subtotal
 
 from app.logger import log
 
 import pdfkit
+from GrabzIt import GrabzItClient
 
 bid_blueprint = Blueprint("bid", __name__)
 
@@ -111,6 +120,7 @@ def edit_clarifications(bid_id):
 @login_required
 def bidding(bid_id):
     bid = Bid.query.get(bid_id)
+    form_bid = BidForm(request.form)
     form = WorkItemLineForm()
     work_items_ides = [
         link_work_item.work_item_id for link_work_item in bid.link_work_items
@@ -137,6 +147,7 @@ def bidding(bid_id):
         form=form,
         show_exclusions=show_exclusions,
         show_clarifications=show_clarifications,
+        form_bid=form_bid,
     )
 
 
@@ -145,35 +156,71 @@ def bidding(bid_id):
 def preview_pdf(bid_id):
     bid = Bid.query.get(bid_id)
     preview_pdf_bool = True
+    tbd_choices = session.get("tbdChoices", [])
+    calculate_subtotal(bid_id, tbd_choices)
 
     return render_template(
         "export_document.html", bid=bid, preview_pdf_bool=preview_pdf_bool
     )
 
 
-@bid_blueprint.route("/export_pdf/<int:bid_id>", methods=["GET"])
+@bid_blueprint.route("/export_pdf/<int:bid_id>", methods=["GET", "POST"])
 @login_required
 def export_pdf(bid_id):
+    form = BidForm(request.form)
     bid = Bid.query.get(bid_id)
-    preview_pdf_bool = False
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    PATH_TO_IMG = os.path.join(BASE_DIR, "static/images/")
+    tbd_choices = [i for i in request.form if request.form[i] == "on"]
+    session["tbdChoices"] = tbd_choices
 
-    html_content = render_template(
-        "export_document.html",
-        bid=bid,
-        preview_pdf_bool=preview_pdf_bool,
-        path_to_img=PATH_TO_IMG,
-    )
-    pdf_content = pdfkit.from_string(html_content, False)
-    stream = io.BytesIO(pdf_content)
+    if form.validate_on_submit():
+        if form.preview.data:
+            return redirect(url_for("bid.preview_pdf", bid_id=bid_id))
+        if form.export_pdf.data:
+            BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            PATH_TO_IMG = os.path.join(BASE_DIR, "static/images/")
+            preview_pdf_bool = False
+            calculate_subtotal(bid_id, tbd_choices)
+            html_content = render_template(
+                "export_document.html",
+                bid=bid,
+                preview_pdf_bool=preview_pdf_bool,
+                path_to_img=PATH_TO_IMG,
+            )
+            pdf_content = pdfkit.from_string(html_content, False)
+            stream = io.BytesIO(pdf_content)
 
-    now = datetime.datetime.now()
-    return send_file(
-        stream,
-        as_attachment=True,
-        attachment_filename=f"bidding_{bid_id}_{now.strftime('%Y-%m-%d-%H-%M-%S')}.pdf",
-        mimetype="application/pdf",
-        cache_timeout=0,
-        last_modified=now,
-    )
+            now = datetime.datetime.now()
+            return send_file(
+                stream,
+                as_attachment=True,
+                attachment_filename=f"bidding_{bid_id}_{now.strftime('%Y-%m-%d-%H-%M-%S')}.pdf",
+                mimetype="application/pdf",
+                cache_timeout=0,
+                last_modified=now,
+            )
+
+        elif form.export_docx.data:
+            preview_pdf_bool = False
+            calculate_subtotal(bid_id, tbd_choices)
+            html_content = render_template(
+                "export_document_docx.html",
+                bid=bid, preview_pdf_bool=preview_pdf_bool)
+            grabzit = GrabzItClient.GrabzItClient(
+                "NDBhNjEyMmI3MjY5NDExMmEwNzJlOTYzZmY1ZGNiNGM=",
+                "QD8/MT8/Pz9aP0EIPz8/P096S28/P1M/Bj8/RD8/Pxg=",
+            )
+            grabzit.HTMLToDOCX(html_content)
+            docx_content = grabzit.SaveTo()
+            stream = io.BytesIO(docx_content)
+            now = datetime.datetime.now()
+            return send_file(
+                stream,
+                as_attachment=True,
+                attachment_filename=f"bidding_{bid_id}_{now.strftime('%Y-%m-%d-%H-%M-%S')}.docx",
+                mimetype="application/docx",
+                cache_timeout=0,
+                last_modified=now,
+            )
+    else:
+        log(log.ERROR, "Form submitted")
+        return redirect(url_for("bid.bidding", bid_id=bid_id))
