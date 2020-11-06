@@ -77,11 +77,8 @@ def add_work_item_to_cart(bid_id):
 def delete_work_item_from_cart(bid_id, item_id):
     item_id = str(item_id)
     selected_ids = session.get("SelectedWorkItemsDict", {})
-    link_work_item = LinkWorkItem.query.filter(LinkWorkItem.work_item_id == int(selected_ids[item_id])).first()
     if item_id in selected_ids:
         session["DeletedWorkItem"] = selected_ids[item_id]
-        if link_work_item:
-            link_work_item.delete()
         del selected_ids[item_id]
         session["SelectedWorkItemsDict"] = selected_ids
     return redirect(url_for("work_item.work_items", bid_id=bid_id))

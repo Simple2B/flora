@@ -263,7 +263,7 @@
 
             <div class="_flex-end">
               <div class="_flex-end_padding">
-                <input class="_form-input _form-input--m" type="text" placeholder="$">
+                <input class="_form-input _form-input--m" readonly type="text" placeholder="$" value="$ {{link_work_item.link_subtotal}}">
               </div>
               <div class="_flex-end_padding">
                 <a href="{{url_for('bid.add_work_item_line', bid_id=bid.id, link_work_item_id=link_work_item.id)}}">

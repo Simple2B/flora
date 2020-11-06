@@ -13,9 +13,12 @@ def calculate_subtotal(bid_id, tbd_choices=[]):
     bid = Bid.query.get(bid_id)
     # bid.subtotal
     subtotal = 0.0
+
     for link in bid.link_work_items:
+        link.link_subtotal = 0.0
         for line in link.work_item_lines:
             subtotal += line.price * line.quantity
+            link.link_subtotal += round((line.price * line.quantity), 2)
 
     subtotal = round(subtotal, 2)
     was_change = False

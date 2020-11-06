@@ -2,7 +2,15 @@ import io
 import os
 import datetime
 
-from flask import Blueprint, render_template, redirect, url_for, send_file, request, session
+from flask import (
+    Blueprint,
+    render_template,
+    redirect,
+    url_for,
+    send_file,
+    request,
+    session,
+)
 from flask_login import login_required
 
 from app.models import Bid, WorkItemLine, LinkWorkItem, WorkItem
@@ -14,8 +22,6 @@ from app.controllers import calculate_subtotal
 from app.logger import log
 
 import pdfkit
-import GrabzIt
-from GrabzIt import GrabzItDOCXOptions
 from GrabzIt import GrabzItClient
 
 bid_blueprint = Blueprint("bid", __name__)
@@ -141,7 +147,7 @@ def bidding(bid_id):
         form=form,
         show_exclusions=show_exclusions,
         show_clarifications=show_clarifications,
-        form_bid=form_bid
+        form_bid=form_bid,
     )
 
 
@@ -153,7 +159,9 @@ def preview_pdf(bid_id):
     tbd_choices = session.get("tbdChoices", [])
     calculate_subtotal(bid_id, tbd_choices)
 
-    return render_template("export_document.html", bid=bid, preview_pdf_bool=preview_pdf_bool)
+    return render_template(
+        "export_document.html", bid=bid, preview_pdf_bool=preview_pdf_bool
+    )
 
 
 @bid_blueprint.route("/export_pdf/<int:bid_id>", methods=["GET", "POST"])
@@ -196,9 +204,11 @@ def export_pdf(bid_id):
             calculate_subtotal(bid_id, tbd_choices)
             html_content = render_template(
                 "export_document_docx.html",
-                bid=bid, preview_pdf_bool=preview_pdf_bool
+                bid=bid, preview_pdf_bool=preview_pdf_bool)
+            grabzit = GrabzItClient.GrabzItClient(
+                "NDBhNjEyMmI3MjY5NDExMmEwNzJlOTYzZmY1ZGNiNGM=",
+                "QD8/MT8/Pz9aP0EIPz8/P096S28/P1M/Bj8/RD8/Pxg=",
             )
-            grabzit = GrabzItClient.GrabzItClient('NDBhNjEyMmI3MjY5NDExMmEwNzJlOTYzZmY1ZGNiNGM=', 'QD8/MT8/Pz9aP0EIPz8/P096S28/P1M/Bj8/RD8/Pxg=')
             grabzit.HTMLToDOCX(html_content)
             docx_content = grabzit.SaveTo()
             stream = io.BytesIO(docx_content)
