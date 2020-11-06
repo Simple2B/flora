@@ -45,20 +45,31 @@
         }
 
         .__due_time {
+            /* display: flex;
+            justify-content: flex-end; */
             display: -webkit-box;
             -webkit-box-pack: end;
         }
 
         .__client_project_block {
+            /* display: flex;
+            flex-direction: row;
+            justify-content: space-between; */
             display: -webkit-box;
             -webkit-box-pack: justify;
             font-size: 16px;
         }
         .__client_project_block ._client_project {
+            /* display: flex;
+            flex-direction: row;
+            justify-content: space-between; */
             display: -webkit-box;
             -webkit-box-pack: justify;
         }
         .__client_project_block ._client_project .client_project-info {
+            /* display: flex;
+            flex-direction: column;
+            justify-content: space-between; */
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: vertical;
@@ -105,6 +116,8 @@
         }
 
         .section_E_and_F {
+            /* display: flex;
+            justify-content: space-between; */
             margin-top: 1rem;
             display: -webkit-box;
             -webkit-box-pack: justify;
@@ -135,7 +148,6 @@
         .bid_price_container {
             display: -webkit-box;
             -webkit-box-pack: justify;
-            -webkit-box-orient: vertical;
         }
 
         .bid_price_container .bid_subtotal_value {
@@ -146,6 +158,9 @@
         }
 
         .bid_price_container .bid_work_item {
+            /* display: flex;
+            flex-direction: row;
+            justify-content: space-between; */
             display: -webkit-box;
             -webkit-box-pack: justify;
             font-weight: bold;
@@ -153,15 +168,23 @@
         }
 
         .bid_price_container .bid_subtotal_container .bid_subtotal {
+            /* display: flex;
+            justify-content: flex-end; */
             display: -webkit-box;
             -webkit-box-pack: end;
         }
         .bid_subtotal .bid_subtotal_bid_features {
+            /* display: flex; */
+            /* flex-direction: column; */
+            /* justify-content: space-between; */
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: vertical;
         }
         .bid_subtotal .bid_subtotal_bid_features .feature_price {
+            /* display: flex;
+            flex-direction: row;
+            justify-content: space-between; */
             display: -webkit-box;
             -webkit-box-pack: justify;
             font-weight: bold;
@@ -269,17 +292,19 @@
                     <h5>Please find our detailed Quote for the above referenced project as outlined below:</h5>
 
                     <div class="bid_price_container">
-                        {% for link_work_item in bid.link_work_items %}
                         <div class="bid_work_item">
+                            <!-- <div>8.81 Glazing</div> -->
+                            {% for link_work_item in bid.link_work_items %}
                             <div class="work_item_pdf">
                                 <div> {{ link_work_item.work_item.code }} &nbsp; &nbsp;</div>
                                 <div> {{ link_work_item.work_item.name }} &nbsp; &nbsp;</div>
                             </div>
-                            <div class="bid_subtotal_value">${{ link_work_item.link_subtotal }}</div>
+                            {% endfor %}
                         </div>
-                        {% endfor %}
 
                         <div class="bid_subtotal_container">
+                            <!-- <div class="bid_unit"></div> -->
+                            <div class="bid_subtotal_value">${{ bid.subtotal }}</div>
                             <div class="bid_subtotal">
                                 <div class="bid_subtotal_bid_features">
                                     <div class="feature_price">

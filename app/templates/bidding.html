@@ -38,14 +38,12 @@
       </div>
     </div>
     <div class="_preview_export_btns">
-      <a href="{{ url_for('bid.preview_pdf', bid_id=bid.id) }}" target="_blank">
-        <button type="button" class="_btn--gray ddb-cursor-handle">Preview</button>
-      </a>
-      <a href="{{url_for('bid.export_pdf', bid_id=bid.id)}}">
         <div>
-          <button type="button" class="_btn--gray ddb-cursor-handle">Export</button>
+          {{ form_bid.preview(class="_btn--gray ddb-cursor-handle", form="bid_subtotal_data") }}
         </div>
-      </a>
+        <div>
+          <button type="button" class="_btn--gray ddb-cursor-handle" data-target="#modalExport" data-toggle="modal">Export</button>
+        </div>
     </div>
   </div>
   <!-- end Sidebar -->
@@ -71,7 +69,6 @@
       <span class="ddb-margin-top"><strong>Project General</strong></span>
       <div class="_date_revision">
         <div>
-          <!-- form.code(class='_form-input _form-input--m') -->
           <div class="_input-date_time">
             <div>
               <input class="_form-input _form-input--m" type="text">
@@ -125,7 +122,7 @@
               <div>
                 <span>Client</span> &nbsp; &nbsp;
                 <span class="proj_gen-text-info">
-                  Complete Physical, LLC
+                  {{ bid.client }}
                 </span>
               </div>
               <div>
@@ -266,7 +263,7 @@
 
             <div class="_flex-end">
               <div class="_flex-end_padding">
-                <input class="_form-input _form-input--m" type="text" placeholder="$">
+                <input class="_form-input _form-input--m" readonly type="text" placeholder="$" value="$ {{link_work_item.link_subtotal}}">
               </div>
               <div class="_flex-end_padding">
                 <a href="{{url_for('bid.add_work_item_line', bid_id=bid.id, link_work_item_id=link_work_item.id)}}">
@@ -291,8 +288,8 @@
                 <div class="title-text-style">Line </div>
                 <div>
                   <div>
-                    <button id="btn_line_id" data-line_id="line-{{work_item_line.id}}" class="border-none ddb-cursor-handle btnLine_element_direction_js test-focus">
-                      <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="" id="line_img_id">
+                    <button id="btn_line_id" data-line_id="line-{{work_item_line.id}}" class="border-none ddb-cursor-handle btnLine_element_direction_js">
+                      <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="" id="line-{{work_item_line.id}}_img_id">
                     </button>
                   </div>
                 </div>
@@ -375,72 +372,109 @@
             </div>
           </div>
 
+          <form class="form" id="bid_subtotal_data" role="form" action="{{ url_for('bid.export_pdf', bid_id=bid.id) }}" method="post">
           <div class="_center_block">
             <div class="inputs_fields" id="subtotal_inputs_fields_id">
               <div class="input-row">
                 <div class="_feature-title">Permit/Filling Fee: </div>
-                <div>
-                  <input class="_form-input" type="text" value="{{config.PERCENT_PERMIT_FEE}}%">
-                </div>
-                <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.permit_filling_fee}}">
-                <div class="check_box-TBD">
-                  <input class="form-control" type="checkbox">
-                  <span>TBD</span>
+                <div class="_feature-percents">
+                  <div class="input_percents-block">
+                    <div>
+                      <input class="_form-input _form-input--sm" type="text" value="{{config.PERCENT_PERMIT_FEE}}%">
+                    </div>
+                    <div>
+                      <input class="_form-input _form-input--m" type="text" placeholder="$ 0.00" value="$ {{bid.permit_filling_fee}}">
+                    </div>
+                  </div>
+                  <div class="check_box-TBD">
+                    <input class="form-control" type="checkbox" name="permit">
+                    <span>TBD</span>
+                  </div>
                 </div>
               </div>
               <div class="input-row">
                 <div class="_feature-title">General Conditions: </div>
-                <div>
-                  <input class="_form-input" type="text" value="{{config.PERCENT_GENERAL_CONDITION}}%">
-                </div>
-                <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.general_conditions}}">
-                <div class="check_box-TBD">
-                  <input class="form-control" type="checkbox">
-                  <span>TBD</span>
+                <div class="_feature-percents">
+                  <div class="input_percents-block">
+                    <div>
+                      <input class="_form-input _form-input--sm" type="text" value="{{config.PERCENT_GENERAL_CONDITION}}%">
+                    </div>
+                    <div>
+                      <input class="_form-input _form-input--m" type="text" placeholder="$ 0.00" value="$ {{bid.general_conditions}}">
+                    </div>
+                  </div>
+                  <div class="check_box-TBD">
+                    <input class="form-control" type="checkbox" name="general">
+                    <span>TBD</span>
+                  </div>
                 </div>
               </div>
               <div class="input-row">
                 <div class="_feature-title">Overhead: </div>
-                <div>
-                  <input class="_form-input" type="text" value="{{config.PERCENT_OVERHEAD}}%">
-                </div>
-                <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.overhead}}">
-                <div class="check_box-TBD">
-                  <input class="form-control" type="checkbox">
-                  <span>TBD</span>
+                <div class="_feature-percents">
+                  <div class="input_percents-block">
+                    <div>
+                      <input class="_form-input _form-input--sm" type="text" value="{{config.PERCENT_OVERHEAD}}%">
+                    </div>
+                    <div>
+                      <input class="_form-input _form-input--m" type="text" placeholder="$ 0.00" value="$ {{bid.overhead}}">
+                    </div>
+                  </div>
+                  <div class="check_box-TBD">
+                    <input class="form-control" type="checkbox" name="overhead">
+                    <span>TBD</span>
+                  </div>
                 </div>
               </div>
               <div class="input-row">
                 <div class="_feature-title">Insurance/Tax: </div>
-                <div>
-                  <input class="_form-input" type="text" value="{{config.PERCENT_INSURANCE_TAX}}%">
-                </div>
-                <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.insurance_tax}}">
-                <div class="check_box-TBD">
-                  <input class="form-control" type="checkbox">
-                  <span>TBD</span>
+                <div class="_feature-percents">
+                  <div class="input_percents-block">
+                    <div>
+                      <input class="_form-input _form-input--sm" type="text" value="{{config.PERCENT_INSURANCE_TAX}}%">
+                    </div>
+                    <div>
+                      <input class="_form-input _form-input--m" type="text" placeholder="$ 0.00" value="$ {{bid.insurance_tax}}">
+                    </div>
+                  </div>
+                  <div class="check_box-TBD">
+                    <input class="form-control" type="checkbox" name="insurance">
+                    <span>TBD</span>
+                  </div>
                 </div>
               </div>
               <div class="input-row">
                 <div class="_feature-title">Profit: </div>
-                <div>
-                  <input class="_form-input" type="text" value="{{config.PERCENT_PROFIT}}%">
-                </div>
-                <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.profit}}">
-                <div class="check_box-TBD">
-                  <input class="form-control" type="checkbox">
-                  <span>TBD</span>
+                <div class="_feature-percents">
+                  <div class="input_percents-block">
+                    <div>
+                      <input class="_form-input _form-input--sm" type="text" value="{{config.PERCENT_PROFIT}}%">
+                    </div>
+                    <div>
+                      <input class="_form-input _form-input--m" type="text" placeholder="$ 0.00" value="$ {{bid.profit}}">
+                    </div>
+                  </div>
+                  <div class="check_box-TBD">
+                    <input class="form-control" type="checkbox" name="profit">
+                    <span>TBD</span>
+                  </div>
                 </div>
               </div>
               <div class="input-row">
                 <div class="_feature-title">Bond: </div>
-                <div>
-                  <input class="_form-input" type="text" value="{{config.PERCENT_BOND}}%">
-                </div>
-                <input class="_form-input" type="text" placeholder="$ 0.00" value="$ {{bid.bond}}">
-                <div class="check_box-TBD">
-                  <input class="form-control" type="checkbox">
-                  <span>TBD</span>
+                <div class="_feature-percents">
+                  <div class="input_percents-block">
+                    <div>
+                      <input class="_form-input _form-input--sm" type="text" value="{{config.PERCENT_BOND}}%">
+                    </div>
+                    <div>
+                      <input class="_form-input _form-input--m" type="text" placeholder="$ 0.00" value="$ {{bid.bond}}">
+                    </div>
+                  </div>
+                  <div class="check_box-TBD">
+                    <input class="form-control" type="checkbox" name="bond">
+                    <span>TBD</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -452,6 +486,7 @@
               </div>
             </div>
           </div>
+          </form>
 
           <div class="_bottom_block">
 
@@ -591,6 +626,36 @@
   </div>
 </div>
 <!-- end of Edit Modal -->
+<!-- Modal Export -->
+<div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="ModalExport"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <h5 class="--padding">Export</h5>
+      <div class="">
+        <form role="form" action="" method="post" id="modal_work_item_line_edit">
+          <div class="__modal-inputs--flex-row">
+            <div class="modal_work_item_line--inputs">
+              <div class="_modal_btns">
+                <div>
+                  {{ form_bid.export_pdf(class="_btn--black ddb-cursor-handle", form="bid_subtotal_data") }}
+                </div>
+                <div>
+                  {{ form_bid.export_docx(class="_btn--black ddb-cursor-handle", form="bid_subtotal_data") }}
+                </div>
+                <div>
+                  <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of Modal Export -->
 
 {% block scripts %}
 <script src="/static/js/jquery.dataTables.min.js"></script>
