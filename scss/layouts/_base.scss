@@ -4,14 +4,81 @@
     background-color: #fff;
     box-shadow: $shadow;
     width: 100%;
-    height: 5rem;
-    display: inline-flex;
+    min-height: 5rem;
+    display: flex;
     align-items: flex-end;
+
+    a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    .header_container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        flex-flow: wrap;
+    }
+
+    .menu__items {
+        display: inline-flex;
+        position: relative;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #fff;
+        padding: 0 20px;
+    }
+
+    .menu__item {
+        padding: 0 2rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        padding: 20px;
+        text-decoration: none;
+        transition: 0.3s;
+        margin: 0 6px;
+        z-index: 1;
+        font-weight: 500;
+        position: relative;
+
+        &:before {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: .5rem;
+            background-color: #111;
+            // border-radius: 8px 8px 0 0;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        &:not(.is-active):hover:before {
+            opacity: 1;
+            bottom: 0;
+        }
+
+        &:not(.is-active):hover {
+            color: #333;
+        }
+
+        .nav-indicator {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 4px;
+            transition: 0.4s;
+            height: 5px;
+            z-index: 1;
+            border-radius: 8px 8px 0 0;
+        }
+    }
 
     &__inner {
         display: flex;
         justify-content: space-between;
-
+        flex-flow: wrap;
 
         .logo__img {
             width: 13rem;
@@ -20,86 +87,34 @@
         &--left {
             display: inline-flex;
             align-items: flex-end;
-        }
 
-        .menu__items {
-            display: inline-flex;
-            position: relative;
-            overflow: hidden;
-            max-width: 100%;
-            background-color: #fff;
-            padding: 0 20px;
-        }
-
-        a {
-            color: #000;
-            text-decoration: none;
-        }
-
-        .menu__item {
-            padding: 0 2rem;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-            padding: 20px;
-            text-decoration: none;
-            transition: 0.3s;
-            margin: 0 6px;
-            z-index: 1;
-            font-weight: 500;
-            position: relative;
-
-            &:before {
-                content: "";
-                position: absolute;
-                bottom: -6px;
-                left: 0;
-                width: 100%;
-                height: .5rem;
-                background-color: #111;
-                // border-radius: 8px 8px 0 0;
-                opacity: 0;
-                transition: 0.3s;
-            }
-
-            &:not(.is-active):hover:before {
-                opacity: 1;
-                bottom: 0;
-            }
-
-            &:not(.is-active):hover {
-                color: #333;
-            }
-
-            .nav-indicator {
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                height: 4px;
-                transition: 0.4s;
-                height: 5px;
-                z-index: 1;
-                border-radius: 8px 8px 0 0;
+            .logo {
+                padding-left: 3rem;
             }
         }
 
-        &--right {
+    }
 
-            .user-info {
+    &--right {
+        display: flex;
+        justify-content: space-between;
+        padding-right: 8rem;
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-top: .5rem;
+
+            &__details {
                 display: flex;
-                align-items: center;
-                margin-top: .5rem;
+                flex-flow: column nowrap;
+                padding-left: 1rem;
 
-                &__details {
-                    display: flex;
-                    flex-flow: column nowrap;
-                    padding-left: 1rem;
-
-                    p {
-                        margin: 0;
-                        padding: 0;
-                    }
-
+                p {
+                    margin: 0;
+                    padding: 0;
                 }
+
             }
         }
     }

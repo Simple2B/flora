@@ -405,71 +405,83 @@ ul {
   background-color: #fff;
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
   width: 100%;
-  height: 5rem;
-  display: inline-flex;
+  min-height: 5rem;
+  display: flex;
   align-items: flex-end; }
+  .header a {
+    color: #000;
+    text-decoration: none; }
+  .header .header_container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-flow: wrap; }
+  .header .menu__items {
+    display: inline-flex;
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    background-color: #fff;
+    padding: 0 20px; }
+  .header .menu__item {
+    padding: 0 2rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    padding: 20px;
+    text-decoration: none;
+    transition: 0.3s;
+    margin: 0 6px;
+    z-index: 1;
+    font-weight: 500;
+    position: relative; }
+    .header .menu__item:before {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: .5rem;
+      background-color: #111;
+      opacity: 0;
+      transition: 0.3s; }
+    .header .menu__item:not(.is-active):hover:before {
+      opacity: 1;
+      bottom: 0; }
+    .header .menu__item:not(.is-active):hover {
+      color: #333; }
+    .header .menu__item .nav-indicator {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 4px;
+      transition: 0.4s;
+      height: 5px;
+      z-index: 1;
+      border-radius: 8px 8px 0 0; }
   .header__inner {
     display: flex;
-    justify-content: space-between; }
+    justify-content: space-between;
+    flex-flow: wrap; }
     .header__inner .logo__img {
       width: 13rem; }
     .header__inner--left {
       display: inline-flex;
       align-items: flex-end; }
-    .header__inner .menu__items {
-      display: inline-flex;
-      position: relative;
-      overflow: hidden;
-      max-width: 100%;
-      background-color: #fff;
-      padding: 0 20px; }
-    .header__inner a {
-      color: #000;
-      text-decoration: none; }
-    .header__inner .menu__item {
-      padding: 0 2rem;
-      font-weight: 500;
-      margin-bottom: 1.5rem;
-      padding: 20px;
-      text-decoration: none;
-      transition: 0.3s;
-      margin: 0 6px;
-      z-index: 1;
-      font-weight: 500;
-      position: relative; }
-      .header__inner .menu__item:before {
-        content: "";
-        position: absolute;
-        bottom: -6px;
-        left: 0;
-        width: 100%;
-        height: .5rem;
-        background-color: #111;
-        opacity: 0;
-        transition: 0.3s; }
-      .header__inner .menu__item:not(.is-active):hover:before {
-        opacity: 1;
-        bottom: 0; }
-      .header__inner .menu__item:not(.is-active):hover {
-        color: #333; }
-      .header__inner .menu__item .nav-indicator {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        height: 4px;
-        transition: 0.4s;
-        height: 5px;
-        z-index: 1;
-        border-radius: 8px 8px 0 0; }
-    .header__inner--right .user-info {
+      .header__inner--left .logo {
+        padding-left: 3rem; }
+  .header--right {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 8rem; }
+    .header--right .user-info {
       display: flex;
       align-items: center;
       margin-top: .5rem; }
-      .header__inner--right .user-info__details {
+      .header--right .user-info__details {
         display: flex;
         flex-flow: column nowrap;
         padding-left: 1rem; }
-        .header__inner--right .user-info__details p {
+        .header--right .user-info__details p {
           margin: 0;
           padding: 0; }
 
