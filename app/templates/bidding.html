@@ -11,7 +11,7 @@
 <section class="page-section bidding d-flex" id="wrapper">
 <!-- begin Sidebar -->
 <!-- <div> -->
-  <div class="border-right box-shadow __side-bar-box-bidding bidding__side_bar--size" id="sidebar-wrapper">
+  <!-- <div class="border-right box-shadow __side-bar-box-bidding bidding__side_bar--size" id="sidebar-wrapper">
     <div>
       <div class="sidebar-heading"> DDB Contracting</div>
       <div class="text--center list-group list-group-flush none-underline">
@@ -46,9 +46,70 @@
         </div>
     </div>
   </div>
-  <!-- end Sidebar -->
   <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size box-shadow ddb-cursor-handle" id="ddb-background">
+  </nav> -->
+  <!-- end Sidebar -->
+
+
+  <div class="sidebar-container" id="sidebar-wrapper">
+    <div class="s_d_bidding">
+      <div class="sidebar__return-link t-gray">
+        <a href="{{ url_for('bidding.biddings') }}">
+          <img src="{{ url_for('static', filename='images/right-hand.svg') }}">
+          My Biddings
+        </a>
+      </div>
+      <div class="sidebar__bidding"># {{ bid.procore_bid_id }} </div>
+      <ul class="sidebar__nav-links">
+        <li>
+          <span class="tablinks active"><a href="#">Project general</a> </span>
+        </li>
+        <li>
+          <span class="tablinks"><a href="#bid_scope_of_work"> Scope of Work</a> </span>
+        </li>
+        <li>
+          <span class="tablinks"><a href="#bid_exclusion"> Exclusions</a> </span>
+        </li>
+        <li>
+          <span class="tablinks"><a href="#bid_clarification"> Clarifications</a> </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+<!-- <ul class="sidebar__nav-links">
+        <li><a href=" url_for('bidding.biddings') ">Project General</a></li>
+        <li class="__disc-blue"><a href=" url_for('work_item.work_items', bid_id=bid_id) " class="__text-decor-active">
+          <ul>Scope of Work</a>
+          <li><span href="" class="__select_work_item-active">Select Work Item</span></li>
+          </ul>
+        </li>
+        <li><a href=" url_for('exclusion.exclusions', bid_id=bid_id) ">Exclusion</a></li>
+        <li><a href=" url_for('clarification.clarifications', bid_id=bid_id) ">Clarification</a></li>
+        <li><a href="#">Alternates</a></li>
+      </ul> -->
+
+
+  <!-- <ul class="list-group-item normalized list__side_bar--style __side_bar--ul">
+              <li>
+                <span class="tablinks active"><a href="#">Project general</a> </span>
+              </li>
+              <li>
+                <span class="tablinks"><a href="#bid_scope_of_work"> Scope of Work</a> </span>
+              </li>
+              <li>
+                <span class="tablinks"><a href="#bid_exclusion"> Exclusions</a> </span>
+              </li>
+              <li>
+                <span class="tablinks"><a href="#bid_clarification"> Clarifications</a> </span>
+              </li>
+          </ul> -->
+
+
+  <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size box-shadow" id="ddb-background">
   </nav>
+
 
   <div class="main-container_bidding" id="work-item-container">
     <div class="main-container_bidding-header">

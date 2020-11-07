@@ -488,6 +488,24 @@ ul {
 .navbar-nav .nav-link {
   padding-left: 1rem; }
 
+.ddb__side_bar {
+  max-height: 50vh;
+  cursor: pointer; }
+
+.s_d_bidding {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  height: 80%; }
+  .s_d_bidding__return-link {
+    min-height: 5vh;
+    display: flex;
+    align-items: center; }
+  .s_d_bidding__bidding {
+    min-height: 5vh;
+    display: flex; }
+
 .__side-bar-box-bidding {
   height: 65vh;
   display: flex;

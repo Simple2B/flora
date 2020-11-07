@@ -6,7 +6,33 @@
 }
 // end of custom class
 
+.ddb__side_bar {
+    max-height: 50vh;
+    cursor: pointer;
+}
 
+.sidebar-container_bidding {
+
+}
+
+.s_d_bidding {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    height: 80%;
+
+    &__return-link {
+        min-height: 5vh;
+        display: flex;
+        align-items: center;
+    }
+
+    &__bidding {
+        min-height: 5vh;
+        display: flex;
+    }
+}
 
 .__side-bar-box-bidding {
     height: 65vh;
