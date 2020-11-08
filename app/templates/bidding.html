@@ -239,7 +239,7 @@
         <div class="_work_items_block add_item_block">
           <span class="ddb-margin-top"><strong>Scope of Work</strong></span>
           <br>
-          {% for link_work_item in global_work_items %}
+          {% for link_work_item in form_bid.global_work_items %}
           <div class="_work_item-link">
             <div class="_flex-start">
               <div>{{ link_work_item.id }}</div>
@@ -361,13 +361,36 @@
               <a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add work item/group</button></a>
             </div>
 
-            <div class="_subtotal-block">
-              <div class="subtotal">
-                Subtotal:
-              </div>
+          </div>
 
-              <div class="subtotal_price">
-                $ {{bid.subtotal}}
+          {% for group in form_bid.groups %}
+          <div class="_group-block">
+            <div class="group-title">
+              <img src="{{ url_for('static', filename='images/group_element.svg') }}" alt="">
+              <span>Work Group: {{ group.name }}</span>
+            </div>
+            <div class="group-btns">
+              <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="">
+              <img src="{{ url_for('static', filename='images/delete_element.svg') }}" alt="">
+            </div>
+          </div>
+          {% endfor %}
+
+          <div>
+
+          </div>
+
+          <div class="_subtotal-block">
+            <div></div>
+            <div class="__right-block">
+              <div class="_grand_subtotal-block">
+                <div class="subtotal">
+                  Subtotal:
+                </div>
+
+                <div class="subtotal_price">
+                  $ {{bid.subtotal}}
+                </div>
               </div>
             </div>
           </div>

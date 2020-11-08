@@ -729,12 +729,16 @@ ul {
     .__bidding--scroll .add_work_item-group ._top_block .add_item_btn {
       display: flex;
       justify-content: flex-start; }
-    .__bidding--scroll .add_work_item-group ._top_block ._subtotal-block {
-      width: 50vw;
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-evenly;
-      align-self: center; }
+  .__bidding--scroll .add_work_item-group ._group-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #EDF8FF;
+    padding: 0.5rem; }
+    .__bidding--scroll .add_work_item-group ._group-block .group-title img {
+      margin-right: 1rem; }
+    .__bidding--scroll .add_work_item-group ._group-block .group-btns img:first-child {
+      margin-right: 1rem; }
   .__bidding--scroll .add_work_item-group ._center_block {
     display: flex;
     flex-flow: row wrap;
@@ -759,17 +763,21 @@ ul {
           padding-right: 0.5rem; }
     .__bidding--scroll .add_work_item-group ._center_block ._show_subtotal_close_panel {
       display: flex; }
+  .__bidding--scroll .add_work_item-group ._subtotal-block {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline; }
   .__bidding--scroll .add_work_item-group ._bottom_block {
     margin: 1rem 0rem; }
-    .__bidding--scroll .add_work_item-group ._bottom_block .__right-block {
+  .__bidding--scroll .add_work_item-group .__right-block {
+    display: flex;
+    justify-content: flex-end; }
+    .__bidding--scroll .add_work_item-group .__right-block ._grand_subtotal-block {
+      width: 50vw;
       display: flex;
-      justify-content: flex-end; }
-      .__bidding--scroll .add_work_item-group ._bottom_block .__right-block ._grand_subtotal-block {
-        width: 50vw;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-evenly;
-        align-self: center; }
+      flex-flow: row wrap;
+      justify-content: space-evenly;
+      align-items: baseline; }
   .__bidding--scroll .add_work_item-group .subtotal {
     font-size: 18px;
     font-weight: bold;

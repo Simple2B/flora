@@ -372,15 +372,27 @@
                 justify-content: flex-start;
             }
 
-            ._subtotal-block{
+        }
 
-                width: 50vw;
-                display: flex;
-                flex-flow: row wrap;
-                justify-content: space-evenly;
-                align-self: center;
+        ._group-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #EDF8FF;
+            padding: $m0-5rem;
 
+            .group-title {
+                & img {
+                    margin-right: 1rem;
+                }
             }
+
+            .group-btns {
+                & img:first-child {
+                    margin-right: 1rem;
+                }
+            }
+
         }
 
         ._center_block {
@@ -424,21 +436,37 @@
 
         }
 
+        ._subtotal-block{
+            display: flex;
+            justify-content: flex-end;
+            align-items: baseline;
+            &-inner_block {
+
+                .subtotal {
+                    // padding-right: ;
+                }
+
+                .subtotal_price {
+                    // padding-left: 1rem;
+                }
+            }
+        }
+
         ._bottom_block {
             margin: $m1rem 0rem;
-            .__right-block {
+        }
 
+        .__right-block {
+
+            display: flex;
+            justify-content: flex-end;
+
+            ._grand_subtotal-block {
+                width: 50vw;
                 display: flex;
-                justify-content: flex-end;
-
-                ._grand_subtotal-block {
-
-                    width: 50vw;
-                    display: flex;
-                    flex-flow: row wrap;
-                    justify-content: space-evenly;
-                    align-self: center;
-                }
+                flex-flow: row wrap;
+                justify-content: space-evenly;
+                align-items: baseline;
             }
         }
 

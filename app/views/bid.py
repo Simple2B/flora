@@ -123,13 +123,13 @@ def bidding(bid_id):
     form_bid = BidForm(request.form)
     form = WorkItemLineForm()
 
-    global_work_items = (
+    form_bid.global_work_items = (
         LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
         .filter(LinkWorkItem.work_item_group == None)  # noqa 711
         .all()
     )
 
-    groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
+    form_bid.groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
 
     work_items_ides = [
         link_work_item.work_item_id for link_work_item in bid.link_work_items
@@ -156,9 +156,7 @@ def bidding(bid_id):
         form=form,
         show_exclusions=show_exclusions,
         show_clarifications=show_clarifications,
-        form_bid=form_bid,
-        global_work_items=global_work_items,
-        groups=groups
+        form_bid=form_bid
     )
 
 
