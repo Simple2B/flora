@@ -179,11 +179,11 @@ def preview_pdf(bid_id):
 @login_required
 def export_pdf(bid_id):
     form = BidForm(request.form)
-    bid = Bid.query.get(bid_id)
-    tbd_choices = [i for i in request.form if request.form[i] == "on"]
-    session["tbdChoices"] = tbd_choices
 
     if form.validate_on_submit():
+        bid = Bid.query.get(bid_id)
+        tbd_choices = [i for i in request.form if request.form[i] == "on"]
+        session["tbdChoices"] = tbd_choices
         if form.preview.data:
             return redirect(url_for("bid.preview_pdf", bid_id=bid_id))
         if form.export_pdf.data:
