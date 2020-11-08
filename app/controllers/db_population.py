@@ -65,7 +65,7 @@ def populate_db_by_test_data():
     ).save()
 
     ######################################
-    ## Add Group1
+    # Add Group1
     work_item_group = WorkItemGroup(
         bid_id=bid.id,
         name="Group1"

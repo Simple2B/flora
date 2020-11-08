@@ -355,6 +355,7 @@
         </div>
         <div class="add_work_item-group">
 
+          <!-- begin of Add Group/Work Item button   -->
           <div class="_top_block">
 
             <div class="add_item_btn">
@@ -362,6 +363,7 @@
             </div>
 
           </div>
+          <!-- end of Add Group/Work Item button -->
 
           {% for group in form_bid.groups %}
           <div class="_group-block">
@@ -374,11 +376,121 @@
               <img src="{{ url_for('static', filename='images/delete_element.svg') }}" alt="">
             </div>
           </div>
-          {% endfor %}
 
-          <div>
+          {% for group_link in group.link_work_items %}
+          <div class="_work_item-link">
+            <div class="_flex-start">
+              <div>{{ group_link.id }}</div>
+              <div>
+                <div class="title-gray">
+                  Work Code
+                </div>
+                <div class="item-style">
+                  {{ group_link.work_item.code }}
+                </div>
+              </div>
+              <div>
+                <div class="title-gray">
+                  Work Item
+                </div>
+                <div class="item-style">
+                  {{ group_link.work_item.name }}
+                </div>
+              </div>
+            </div>
+
+            <div class="_flex-end">
+              <div class="_flex-end_padding">
+                <input class="_form-input _form-input--m" readonly type="text" placeholder="$" value="$ {{group_link.link_subtotal}}">
+              </div>
+              <div class="_flex-end_padding">
+                <a href="{{url_for('bid.add_group_work_item_line', bid_id=bid.id, group_link_id=group_link.id)}}">
+                  <button type="button" class="_btn--gray ddb-cursor-handle">
+                    Add line
+                  </button>
+                </a>
+              </div>
+              <div class="_delete_btn">
+                <a href="{{url_for('bid.delete_group_link_work_item', bid_id=bid.id, group_link_id=group_link.id)}}">
+                  <button class="border-none ddb-cursor-handle bck-white">
+                    <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="_work_item-line">
+            {% for work_item_line in group_link.work_item_lines %}
+            <div>
+              <div class="_show-line_panel bck-color">
+                <div class="title-text-style">Line </div>
+                <div>
+                  <div>
+                    <button id="btn_line_id" data-line_id="line-{{work_item_line.id}}" class="border-none ddb-cursor-handle btnLine_element_direction_js">
+                      <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="" id="line-{{work_item_line.id}}_img_id">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="_work_item_line--inputs line_hidden_js hidden" id="line-{{work_item_line.id}}">
+                <div class="bck-color">
+                  <div class="text-areas">
+                    <div>
+                      <textarea class="_form-text_area" readonly cols="30" rows="10" placeholder="Enter Description here...">
+                          {{work_item_line.description}}
+                      </textarea>
+                    </div>
+                    <div>
+                      <textarea class="_form-text_area" readonly cols="30" rows="10" placeholder="Enter Note here...">
+                          {{work_item_line.note}}
+                      </textarea>
+                    </div>
+                  </div>
+                  <div class="inputs-features">
+                    <div>
+                      <input class="_form-input" type="text" readonly placeholder="1" value="{{work_item_line.quantity}}">
+                      <label class="_label">Quantity</label>
+                    </div>
+                    <div>
+                      <input class="_form-input" type="text" readonly placeholder="LS" value="{{work_item_line.unit}}">
+                      <label class="_label">Unit</label>
+                    </div>
+                    <div>
+                      <input class="_form-input" type="text" readonly placeholder="$0" value="{{work_item_line.price}}">
+                    </div>
+                    <div>
+                      <div class="check_box-TBD">
+                        <input class="form-control" type="checkbox">
+                      </div>
+                      <span class="">TBD</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="_edit_delete-btns">
+              <div class="edit-height">
+                <button class="border-none ddb-cursor-handle bck-white" type="button"
+                data-target="#modalWorkItemLineEdit" data-toggle="modal"
+                data-note="{{work_item_line.description}}" data-description="{{work_item_line.note}}"
+                data-quantity="{{work_item_line.quantity}}" data-unit="{{work_item_line.unit}}"
+                data-price="{{work_item_line.price}}" data-tbd="{{work_item_line.tbd}}"
+                data-target_link="{{url_for('bid.edit_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)}}">
+                  <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+                </button>
+              </div>
+              <div class="delete-height">
+                <a class="border-none ddb-cursor-handle bck-white" href="{{url_for('bid.delete_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)}}">
+                  <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                </a>
+              </div>
+            </div>
+            {% endfor %} {# end of lines #}
 
           </div>
+          {% endfor %} {# end of work item links #}
+
+          {% endfor %} {# end of groups #}
 
           <div class="_subtotal-block">
             <div></div>

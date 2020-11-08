@@ -37,6 +37,15 @@ def add_work_item_line(bid_id, link_work_item_id):
 
 
 @bid_blueprint.route(
+    "/add_group_work_item_line/<bid_id>/<int:group_link_id>", methods=["GET"]
+)
+@login_required
+def add_group_work_item_line(bid_id, group_link_id):
+    WorkItemLine(link_work_items_id=group_link_id).save()
+    return redirect(url_for("bid.bidding", bid_id=bid_id))
+
+
+@bid_blueprint.route(
     "/edit_work_item_line/<int:bid_id>/<int:work_item_line_id>", methods=["POST"]
 )
 @login_required
@@ -74,6 +83,21 @@ def delete_link_work_item(bid_id, link_work_item_id):
 
 
 @bid_blueprint.route(
+    "/delete_group_link_work_item/<int:bid_id>/<int:group_link_id>", methods=["GET"]
+)
+@login_required
+def delete_group_link_work_item(bid_id, group_link_id):
+    link = LinkWorkItem.query.get(group_link_id)
+    if link:
+        for line in link.work_item_lines:
+            line.delete()
+        link.delete()
+    else:
+        log(log.ERROR, "Unknown work_item_line_id: %d", group_link_id)
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
+
+
+@bid_blueprint.route(
     "/delete_work_item_line/<int:bid_id>/<int:work_item_line_id>", methods=["GET"]
 )
 @login_required
@@ -83,6 +107,19 @@ def delete_work_item_line(bid_id, work_item_line_id):
         line.delete()
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", work_item_line_id)
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
+
+
+@bid_blueprint.route(
+    "/delete_group_work_item_line/<int:bid_id>/<int:group_link_id>", methods=["GET"]
+)
+@login_required
+def delete_group_work_item_line(bid_id, group_link_id):
+    line = WorkItemLine.query.get(group_link_id)
+    if line:
+        line.delete()
+    else:
+        log(log.ERROR, "Unknown work_item_line_id: %d", group_link_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
 
 
@@ -126,6 +163,12 @@ def bidding(bid_id):
     form_bid.global_work_items = (
         LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
         .filter(LinkWorkItem.work_item_group == None)  # noqa 711
+        .all()
+    )
+
+    form_bid.group_work_items = (
+        LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
+        .filter(LinkWorkItem.work_item_group != None)  # noqa 711
         .all()
     )
 

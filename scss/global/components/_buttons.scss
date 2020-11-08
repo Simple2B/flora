@@ -18,6 +18,14 @@
     }
 }
 
+._flash-btn {
+    border: none;
+    background-color: #fff;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 ._btn--lg {
     width: 20rem;
     margin: 1rem;

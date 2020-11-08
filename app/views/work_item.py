@@ -109,10 +109,15 @@ def work_item_group(bid_id):
     form = WorkItemGroupForm(request.form)
     groups = session.get("GroupDict", {})
     group_name = form.name.data
-    if group_name not in groups:
-        groups[group_name] = []
-        session["GroupDict"] = groups
-    return redirect(url_for("work_item.work_items", bid_id=bid_id))
+    if group_name:
+        if group_name not in groups:
+            groups[group_name] = []
+            session["GroupDict"] = groups
+        return redirect(url_for("work_item.work_items", bid_id=bid_id))
+    else:
+        flash("Invalid group name!", "warning")
+        log(log.WARNING, "The given data was invalid")
+        return redirect(url_for("work_item.work_items", bid_id=bid_id))
 
 
 @work_item_blueprint.route(

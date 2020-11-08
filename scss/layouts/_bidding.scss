@@ -252,103 +252,103 @@
             font-weight: 500;
         }
 
-        ._work_item-link {
+    }
+
+    ._work_item-link {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        ._flex-start {
             display: flex;
-            flex-flow: row wrap;
-            justify-content: space-between;
+            justify-content: flex-start;
+            align-items: center;
 
-            ._flex-start {
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-
-                div {
-                    padding: 0rem 2rem;
-                }
-
+            div {
+                padding: 0rem 2rem;
             }
 
-            ._flex-end {
-                display: flex;
-                justify-content: flex-end;
-                align-items: baseline;
-                div._flex-end_padding  {
-                    padding: 0rem $m1rem;
-                }
-
-            }
         }
 
-        ._work_item-line {
+        ._flex-end {
+            display: flex;
+            justify-content: flex-end;
+            align-items: baseline;
+            div._flex-end_padding  {
+                padding: 0rem $m1rem;
+            }
+
+        }
+    }
+
+    ._work_item-line {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-end;
+        margin-top: $m1rem;
+
+        ._work_item_line--inputs {
+            margin-bottom: $m1rem;
+        }
+
+        .bck-color {
+            background-color: $light_gray;
+        }
+
+        ._show-line_panel {
+            padding: 0rem 0rem 0rem $m0-5rem;
+            width: 50vw;
+            display: inline-flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+        }
+
+        .text-areas {
             display: flex;
             flex-flow: row wrap;
             justify-content: flex-end;
-            margin-top: $m1rem;
+            align-items: center;
 
-            ._work_item_line--inputs {
-                margin-bottom: $m1rem;
+            div {
+                padding: 0rem $m1rem;
             }
 
-            .bck-color {
-                background-color: $light_gray;
+        }
+
+        .inputs-features {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-end;
+            align-items: baseline;
+
+            div {
+                padding-left: $m1rem;
             }
 
-            ._show-line_panel {
-                padding: 0rem 0rem 0rem $m0-5rem;
-                width: 50vw;
-                display: inline-flex;
-                flex-flow: row wrap;
-                justify-content: space-between;
-            }
+        }
 
-            .text-areas {
+        ._edit_delete-btns {
+            display: flex;
+            flex-direction: column;
+            margin-left: $m1rem;
+
+            .edit-height {
                 display: flex;
-                flex-flow: row wrap;
-                justify-content: flex-end;
+            }
+
+            .delete-height {
+                height: 70%;
+                display: flex;
                 align-items: center;
-
-                div {
-                    padding: 0rem $m1rem;
-                }
-
             }
 
-            .inputs-features {
-                display: flex;
-                flex-flow: row wrap;
-                justify-content: flex-end;
-                align-items: baseline;
-
-                div {
-                    padding-left: $m1rem;
-                }
-
-            }
-
-            ._edit_delete-btns {
-                display: flex;
-                flex-direction: column;
-                margin-left: $m1rem;
-
-                .edit-height {
-                    display: flex;
-                }
-
-                .delete-height {
-                    height: 70%;
-                    display: flex;
-                    align-items: center;
-                }
-
-
-            }
 
         }
 
-        ._delete_btn {
-            padding-right: 0.3rem;
-        }
+    }
 
+    ._delete_btn {
+        padding-right: 0.3rem;
     }
 
     .scope_of_work_container {

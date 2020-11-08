@@ -185,6 +185,12 @@ ul {
   background-color: none;
   color: #EB5757; }
 
+._flash-btn {
+  border: none;
+  background-color: #fff; }
+  ._flash-btn:hover {
+    cursor: pointer; }
+
 ._btn--lg {
   width: 20rem;
   margin: 1rem; }
@@ -655,64 +661,64 @@ ul {
   color: #000000;
   font-weight: 500; }
 
-.__bidding--scroll ._work_items_block ._work_item-link {
+.__bidding--scroll ._work_item-link {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between; }
-  .__bidding--scroll ._work_items_block ._work_item-link ._flex-start {
+  .__bidding--scroll ._work_item-link ._flex-start {
     display: flex;
     justify-content: flex-start;
     align-items: center; }
-    .__bidding--scroll ._work_items_block ._work_item-link ._flex-start div {
+    .__bidding--scroll ._work_item-link ._flex-start div {
       padding: 0rem 2rem; }
-  .__bidding--scroll ._work_items_block ._work_item-link ._flex-end {
+  .__bidding--scroll ._work_item-link ._flex-end {
     display: flex;
     justify-content: flex-end;
     align-items: baseline; }
-    .__bidding--scroll ._work_items_block ._work_item-link ._flex-end div._flex-end_padding {
+    .__bidding--scroll ._work_item-link ._flex-end div._flex-end_padding {
       padding: 0rem 1rem; }
 
-.__bidding--scroll ._work_items_block ._work_item-line {
+.__bidding--scroll ._work_item-line {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-end;
   margin-top: 1rem; }
-  .__bidding--scroll ._work_items_block ._work_item-line ._work_item_line--inputs {
+  .__bidding--scroll ._work_item-line ._work_item_line--inputs {
     margin-bottom: 1rem; }
-  .__bidding--scroll ._work_items_block ._work_item-line .bck-color {
+  .__bidding--scroll ._work_item-line .bck-color {
     background-color: #FAFAFA; }
-  .__bidding--scroll ._work_items_block ._work_item-line ._show-line_panel {
+  .__bidding--scroll ._work_item-line ._show-line_panel {
     padding: 0rem 0rem 0rem 0.5rem;
     width: 50vw;
     display: inline-flex;
     flex-flow: row wrap;
     justify-content: space-between; }
-  .__bidding--scroll ._work_items_block ._work_item-line .text-areas {
+  .__bidding--scroll ._work_item-line .text-areas {
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-end;
     align-items: center; }
-    .__bidding--scroll ._work_items_block ._work_item-line .text-areas div {
+    .__bidding--scroll ._work_item-line .text-areas div {
       padding: 0rem 1rem; }
-  .__bidding--scroll ._work_items_block ._work_item-line .inputs-features {
+  .__bidding--scroll ._work_item-line .inputs-features {
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-end;
     align-items: baseline; }
-    .__bidding--scroll ._work_items_block ._work_item-line .inputs-features div {
+    .__bidding--scroll ._work_item-line .inputs-features div {
       padding-left: 1rem; }
-  .__bidding--scroll ._work_items_block ._work_item-line ._edit_delete-btns {
+  .__bidding--scroll ._work_item-line ._edit_delete-btns {
     display: flex;
     flex-direction: column;
     margin-left: 1rem; }
-    .__bidding--scroll ._work_items_block ._work_item-line ._edit_delete-btns .edit-height {
+    .__bidding--scroll ._work_item-line ._edit_delete-btns .edit-height {
       display: flex; }
-    .__bidding--scroll ._work_items_block ._work_item-line ._edit_delete-btns .delete-height {
+    .__bidding--scroll ._work_item-line ._edit_delete-btns .delete-height {
       height: 70%;
       display: flex;
       align-items: center; }
 
-.__bidding--scroll ._work_items_block ._delete_btn {
+.__bidding--scroll ._delete_btn {
   padding-right: 0.3rem; }
 
 .__bidding--scroll .scope_of_work_container {
