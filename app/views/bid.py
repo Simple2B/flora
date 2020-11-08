@@ -13,7 +13,7 @@ from flask import (
 )
 from flask_login import login_required
 
-from app.models import Bid, WorkItemLine, LinkWorkItem, WorkItem
+from app.models import Bid, WorkItemLine, LinkWorkItem, WorkItem, WorkItemGroup
 
 from app.forms import WorkItemLineForm, BidForm
 
@@ -122,6 +122,15 @@ def bidding(bid_id):
     bid = Bid.query.get(bid_id)
     form_bid = BidForm(request.form)
     form = WorkItemLineForm()
+
+    global_work_items = (
+        LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
+        .filter(LinkWorkItem.work_item_group == None)  # noqa 711
+        .all()
+    )
+
+    groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
+
     work_items_ides = [
         link_work_item.work_item_id for link_work_item in bid.link_work_items
     ]
@@ -148,6 +157,8 @@ def bidding(bid_id):
         show_exclusions=show_exclusions,
         show_clarifications=show_clarifications,
         form_bid=form_bid,
+        global_work_items=global_work_items,
+        groups=groups
     )
 
 
@@ -203,8 +214,8 @@ def export_pdf(bid_id):
             preview_pdf_bool = False
             calculate_subtotal(bid_id, tbd_choices)
             html_content = render_template(
-                "export_document_docx.html",
-                bid=bid, preview_pdf_bool=preview_pdf_bool)
+                "export_document_docx.html", bid=bid, preview_pdf_bool=preview_pdf_bool
+            )
             grabzit = GrabzItClient.GrabzItClient(
                 "NDBhNjEyMmI3MjY5NDExMmEwNzJlOTYzZmY1ZGNiNGM=",
                 "QD8/MT8/Pz9aP0EIPz8/P096S28/P1M/Bj8/RD8/Pxg=",

@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, url_for, redirect, flash, request,
 from flask_login import login_required
 
 from app.models import WorkItem
-from app.models import LinkWorkItem
+from app.models import LinkWorkItem, WorkItemGroup
 from app.forms import NewWorkItemForm, WorkItemCartForm, WorkItemGroupForm
 from app.controllers import add_work_item_validator, str_function
 from app.logger import log
@@ -204,6 +204,20 @@ def add_to_bidding(bid_id):
             bid_id=bid_id,
             work_item_id=int(global_work_items[item_id])
         ).save()
+
+    groups = session.get("GroupDict", {})
+    for grp in groups:
+        work_group = WorkItemGroup(
+            bid_id=bid_id,
+            name=grp
+        ).save()
+        items = groups[grp]
+        for item in items:
+            LinkWorkItem(
+                bid_id=bid_id,
+                work_item_id=int(item),
+                work_item_group=work_group
+            ).save()
 
     session.pop("SelectedWorkItemsDict", None)
     session.pop("DeletedWorkItem", None)
