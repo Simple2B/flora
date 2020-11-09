@@ -359,19 +359,21 @@
           {% for group in form_bid.groups %}
           <div class="_group-block">
             <div class="group-title">
-              <img src="{{ url_for('static', filename='images/group_element.svg') }}" alt="">
+              <img src="{{ url_for('static', filename='images/group_element.svg') }}">
               <span>Work Group: {{ group.name }}</span>
             </div>
             <div class="group-btns">
-              <img class="ddb-cursor-handle" src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="" id="bid_group_id">
+              <img class="ddb-cursor-handle" data-group_panel_id="{{group.name}}"
+              src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}"
+              id="bid_group_id">
               <a href="{{ url_for('bid.delete_group', bid_id=bid.id, group_name=group.name)}}">
-                <img src="{{ url_for('static', filename='images/delete_element.svg') }}" alt="">
+                <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
               </a>
             </div>
           </div>
 
           {% for group_link in group.link_work_items %}
-          <div id="group_panel_id">
+          <div id="group_panel_id-{{group.name}}">
             <div class="_work_item-link">
               <div class="_flex-start">
                 <div>{{ loop.index }}</div>
