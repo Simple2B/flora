@@ -41,17 +41,26 @@ def add_work_item_line(bid_id, link_work_item_id):
 )
 @login_required
 def edit_work_item_line(bid_id, work_item_line_id):
-    form = WorkItemLineForm()
+    form = WorkItemLineForm(request.form)
     if form.validate_on_submit():
         line = WorkItemLine.query.get(work_item_line_id)
         if line:
-            line.note = form.note.data
-            line.description = form.description.data
-            line.price = form.price.data
-            line.unit = form.unit.data
-            line.quantity = form.quantity.data
-            line.tbd = form.tbd.data
-            line.save()
+            if form.tbd.data:
+                line.note = form.note.data
+                line.description = form.description.data
+                line.price = 0.0
+                line.unit = form.unit.data
+                line.quantity = form.quantity.data
+                line.tbd = form.tbd.data
+                line.save()
+            else:
+                line.note = form.note.data
+                line.description = form.description.data
+                line.price = form.price.data
+                line.unit = form.unit.data
+                line.quantity = form.quantity.data
+                line.tbd = form.tbd.data
+                line.save()
         else:
             log(log.ERROR, "Unknown work_item_line_id: %d", work_item_line_id)
 
