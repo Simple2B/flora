@@ -27,6 +27,15 @@ from GrabzIt import GrabzItClient
 bid_blueprint = Blueprint("bid", __name__)
 
 
+@bid_blueprint.route(
+    "/add_work_item_line/<bid_id>/<int:link_work_item_id>", methods=["GET"]
+)
+@login_required
+def add_work_item_line(bid_id, link_work_item_id):
+    WorkItemLine(link_work_items_id=link_work_item_id).save()
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
+
+
 @bid_blueprint.route("/delete_group/<bid_id>/<group_name>", methods=["GET"])
 @login_required
 def delete_group(bid_id, group_name):
@@ -38,15 +47,6 @@ def delete_group(bid_id, group_name):
             line.delete()
         link.delete()
     group.delete()
-    return redirect(url_for("bid.bidding", bid_id=bid_id))
-
-
-@bid_blueprint.route(
-    "/add_work_item_line/<bid_id>/<int:link_work_item_id>", methods=["GET"]
-)
-@login_required
-def add_work_item_line(bid_id, link_work_item_id):
-    WorkItemLine(link_work_items_id=link_work_item_id).save()
     return redirect(url_for("bid.bidding", bid_id=bid_id))
 
 
@@ -224,7 +224,7 @@ def preview_pdf(bid_id):
     )
 
 
-@bid_blueprint.route("/export_pdf/<int:bid_id>", methods=["GET", "POST"])
+@bid_blueprint.route("/export_pdf/<int:bid_id>", methods=["POST"])
 @login_required
 def export_pdf(bid_id):
     form = BidForm(request.form)

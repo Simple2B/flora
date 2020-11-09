@@ -242,7 +242,7 @@
           {% for link_work_item in form_bid.global_work_items %}
           <div class="_work_item-link">
             <div class="_flex-start">
-              <div>{{ link_work_item.id }}</div>
+              <div>{{ loop.index }}</div>
               <div>
                 <div class="title-gray">
                   Work Code
@@ -374,7 +374,7 @@
           <div id="group_panel_id">
             <div class="_work_item-link">
               <div class="_flex-start">
-                <div>{{ group_link.id }}</div>
+                <div>{{ loop.index }}</div>
                 <div>
                   <div class="title-gray">
                     Work Code

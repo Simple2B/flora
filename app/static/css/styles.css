@@ -648,7 +648,7 @@ ul {
   color: #fff; }
 
 .__bidding--scroll div.add_item_block {
-  margin-top: 1rem; }
+  margin: 1rem 0rem; }
 
 .__bidding--scroll .clarification_block {
   margin-bottom: 1rem;
@@ -731,7 +731,8 @@ ul {
     display: inline-flex;
     flex-flow: wrap;
     justify-content: space-between;
-    align-items: center; }
+    align-items: center;
+    margin-top: 1rem; }
     .__bidding--scroll .add_work_item-group ._top_block .add_item_btn {
       display: flex;
       justify-content: flex-start; }
@@ -745,6 +746,8 @@ ul {
       margin-right: 1rem; }
     .__bidding--scroll .add_work_item-group ._group-block .group-btns img:first-child {
       margin-right: 1rem; }
+  .__bidding--scroll .add_work_item-group #group_panel_id {
+    margin-bottom: 1rem; }
   .__bidding--scroll .add_work_item-group ._center_block {
     display: flex;
     flex-flow: row wrap;

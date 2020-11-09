@@ -233,7 +233,7 @@
 
 .__bidding--scroll {
     div.add_item_block {
-        margin-top: 1rem;
+        margin: $m1rem 0rem;
     }
 
     .clarification_block {
@@ -361,11 +361,11 @@
         flex-direction: column;
 
         ._top_block {
-
             display: inline-flex;
             flex-flow: wrap;
             justify-content: space-between;
             align-items: center;
+            margin-top: $m1rem;
 
             .add_item_btn {
                 display: flex;
@@ -393,6 +393,10 @@
                 }
             }
 
+        }
+
+        #group_panel_id {
+            margin-bottom: 1rem;
         }
 
         ._center_block {
