@@ -39,7 +39,7 @@
     </div>
     <div class="_preview_export_btns">
         <div>
-          {{ form_bid.preview(class="_btn--gray ddb-cursor-handle", form="bid_subtotal_data") }}
+           form_bid.preview(class="_btn--gray ddb-cursor-handle", form="bid_subtotal_data")
         </div>
         <div>
           <button type="button" class="_btn--gray ddb-cursor-handle" data-target="#modalExport" data-toggle="modal">Export</button>
@@ -61,51 +61,39 @@
       </div>
       <div class="side_dar_bidding-bid"># {{ bid.procore_bid_id }} </div>
       <ul class="sidebar__nav-links-bidding">
-        <li>
-          <span class="tablinks active"><a href="#">Project general</a> </span>
+        <li class="active">
+          <span><a href="#">Project general</a> </span>
         </li>
         <li>
-          <span class="tablinks"><a href="#bid_scope_of_work"> Scope of Work</a> </span>
+          <span><a href="#bid_scope_of_work"> Scope of Work</a> </span>
         </li>
         <li>
-          <span class="tablinks"><a href="#bid_exclusion"> Exclusions</a> </span>
+          <span><a href="#bid_exclusion"> Exclusions</a> </span>
         </li>
         <li>
-          <span class="tablinks"><a href="#bid_clarification"> Clarifications</a> </span>
+          <span><a href="#bid_clarification"> Clarifications</a> </span>
         </li>
       </ul>
     </div>
+    <div class="_preview_export_btns">
+      <div class="_btn">
+         <button class="ddb-cursor-handle" type="submit"
+         name="preview" value="True" form="bid_subtotal_data">
+          <img src="{{ url_for('static', filename='images/eye_preview.svg') }}">
+           &nbsp;
+           Preview
+         </button>
+      </div>
+      <div class="_btn">
+        <button type="button" class="ddb-cursor-handle"
+         data-target="#modalExport" data-toggle="modal">
+         <img src="{{ url_for('static', filename='images/export.svg') }}">
+          &nbsp;
+          Export
+        </button>
+      </div>
+    </div>
   </div>
-
-
-<!-- <ul class="sidebar__nav-links">
-        <li><a href=" url_for('bidding.biddings') ">Project General</a></li>
-        <li class="__disc-blue"><a href=" url_for('work_item.work_items', bid_id=bid_id) " class="__text-decor-active">
-          <ul>Scope of Work</a>
-          <li><span href="" class="__select_work_item-active">Select Work Item</span></li>
-          </ul>
-        </li>
-        <li><a href=" url_for('exclusion.exclusions', bid_id=bid_id) ">Exclusion</a></li>
-        <li><a href=" url_for('clarification.clarifications', bid_id=bid_id) ">Clarification</a></li>
-        <li><a href="#">Alternates</a></li>
-      </ul> -->
-
-
-  <!-- <ul class="list-group-item normalized list__side_bar--style __side_bar--ul">
-              <li>
-                <span class="tablinks active"><a href="#">Project general</a> </span>
-              </li>
-              <li>
-                <span class="tablinks"><a href="#bid_scope_of_work"> Scope of Work</a> </span>
-              </li>
-              <li>
-                <span class="tablinks"><a href="#bid_exclusion"> Exclusions</a> </span>
-              </li>
-              <li>
-                <span class="tablinks"><a href="#bid_clarification"> Clarifications</a> </span>
-              </li>
-          </ul> -->
-
 
   <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size box-shadow" id="ddb-background">
   </nav>
@@ -328,7 +316,7 @@
               </div>
               <div class="_flex-end_padding">
                 <a href="{{url_for('bid.add_work_item_line', bid_id=bid.id, link_work_item_id=link_work_item.id)}}">
-                  <button type="button" class="_btn--gray ddb-cursor-handle">
+                  <button type="button" class="_btn--base-gray ddb-cursor-handle">
                     Add line
                   </button>
                 </a>
@@ -419,7 +407,7 @@
           <div class="_top_block">
 
             <div class="add_item_btn">
-              <a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add work item/group</button></a>
+              <a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--base-gray">Add work item/group</button></a>
             </div>
 
             <div class="_subtotal-block">
@@ -592,7 +580,7 @@
         {% else %}
 
         <div class="__modal-inputs--flex-row">
-            <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--gray">Add exclusion</button></a>
+            <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--base-gray">Add exclusion</button></a>
         </div>
 
         {% endif %}
@@ -621,7 +609,7 @@
             {% else %}
             <div class="__modal-inputs--flex-row">
               <a href="{{ url_for('clarification.clarifications', bid_id=bid.id) }}">
-                <button class="ddb-cursor-handle _btn--gray">
+                <button class="ddb-cursor-handle _btn--base-gray">
                   Add clarification
                 </button>
               </a>
