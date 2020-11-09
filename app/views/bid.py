@@ -27,6 +27,20 @@ from GrabzIt import GrabzItClient
 bid_blueprint = Blueprint("bid", __name__)
 
 
+@bid_blueprint.route("/delete_group/<bid_id>/<group_name>", methods=["GET"])
+@login_required
+def delete_group(bid_id, group_name):
+    group = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).filter(
+            WorkItemGroup.name == group_name
+        ).first()
+    for link in group.link_work_items:
+        for line in link.work_item_lines:
+            line.delete()
+        link.delete()
+    group.delete()
+    return redirect(url_for("bid.bidding", bid_id=bid_id))
+
+
 @bid_blueprint.route(
     "/add_work_item_line/<bid_id>/<int:link_work_item_id>", methods=["GET"]
 )
@@ -166,12 +180,6 @@ def bidding(bid_id):
         .all()
     )
 
-    form_bid.group_work_items = (
-        LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
-        .filter(LinkWorkItem.work_item_group != None)  # noqa 711
-        .all()
-    )
-
     form_bid.groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
 
     work_items_ides = [
@@ -199,7 +207,7 @@ def bidding(bid_id):
         form=form,
         show_exclusions=show_exclusions,
         show_clarifications=show_clarifications,
-        form_bid=form_bid
+        form_bid=form_bid,
     )
 
 

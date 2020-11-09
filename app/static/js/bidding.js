@@ -16,3 +16,10 @@ $('#modalWorkItemLineEdit').on('show.bs.modal', function (event) {
     modal.find('#modal_price').val(price);
     modal.find('#modal_tdb').val(tdb);
 });
+
+const groupCloseWrapper = document.getElementById('bid_group_id');
+const groupClosePanel = document.getElementById('group_panel_id');
+groupCloseWrapper.addEventListener('click', (e) => {
+  e.preventDefault();
+  groupClosePanel.classList.toggle('hidden');
+});
