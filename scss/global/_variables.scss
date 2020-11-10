@@ -16,3 +16,36 @@ $m1rem: 1rem;
 $shadow: 0 .2rem .2rem rgba(0, 0, 0, 0.25);
 $border-top: 1px solid #ebebeb;
 $border-bottom: 5px solid #175593;
+
+
+// scss-templates
+%tpl_sidebar__nav-links {
+    list-style-type: disc;
+
+    .__disc-blue {
+    color: #007bff;
+
+    .__select_work_item-active {
+        // border-right: solid 2px #E6A73E;
+        // background-color: #F2F2F2;
+        // text-decoration: none;
+        color: #BDBDBD;
+        // &:hover {
+
+        // }
+    }
+    }
+
+    & li {
+    margin: 0.5rem;
+
+    }
+
+    & li a {
+    color: #BDBDBD;
+    }
+
+    &:hover {
+        color: #2F80ED;
+    }
+}

@@ -234,3 +234,15 @@ ul {
         }
     }
 }
+
+
+.active {
+    color: $light_blue !important;
+    a {
+        text-decoration: none;
+        color: $light_blue !important;
+        &:hover {
+            color: darken($light_blue, 20%) !important;
+        }
+    }
+}
