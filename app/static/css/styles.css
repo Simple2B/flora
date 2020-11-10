@@ -232,7 +232,7 @@ ul {
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
-    ._flash-btn {
+._flash-btn {
   border: none;
   background-color: #fff; }
   ._flash-btn:hover {
@@ -644,6 +644,12 @@ ul {
     color: #BDBDBD; }
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
+
+._flash-btn {
+  border: none;
+  background-color: #fff; }
+  ._flash-btn:hover {
+    cursor: pointer; }
 
 ._btn--lg {
   width: 20rem;
