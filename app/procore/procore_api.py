@@ -123,11 +123,6 @@ class ProcoreApi:
             response_json['created_at']    = the date and time the user's access
             token was generated
         """
-
-        # client_auth = requests.auth.HTTPBasicAuth(
-        #     current_app.config["PROCORE_API_CLIENT_ID"],
-        #     current_app.config["PROCORE_API_CLIENT_SECRET"],
-        # )
         post_data = {
             "grant_type": "client_credentials",
             "client_id": current_app.config["PROCORE_API_CLIENT_ID"],
