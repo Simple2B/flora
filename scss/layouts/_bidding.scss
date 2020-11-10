@@ -233,7 +233,7 @@
 
 .__bidding--scroll {
     div.add_item_block {
-        margin-top: 1rem;
+        margin: $m1rem 0rem;
     }
 
     .clarification_block {
@@ -252,103 +252,103 @@
             font-weight: 500;
         }
 
-        ._work_item-link {
+    }
+
+    ._work_item-link {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        ._flex-start {
             display: flex;
-            flex-flow: row wrap;
-            justify-content: space-between;
+            justify-content: flex-start;
+            align-items: center;
 
-            ._flex-start {
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-
-                div {
-                    padding: 0rem 2rem;
-                }
-
+            div {
+                padding: 0rem 2rem;
             }
 
-            ._flex-end {
-                display: flex;
-                justify-content: flex-end;
-                align-items: baseline;
-                div._flex-end_padding  {
-                    padding: 0rem $m1rem;
-                }
-
-            }
         }
 
-        ._work_item-line {
+        ._flex-end {
+            display: flex;
+            justify-content: flex-end;
+            align-items: baseline;
+            div._flex-end_padding  {
+                padding: 0rem $m1rem;
+            }
+
+        }
+    }
+
+    ._work_item-line {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-end;
+        margin-top: $m1rem;
+
+        ._work_item_line--inputs {
+            margin-bottom: $m1rem;
+        }
+
+        .bck-color {
+            background-color: $light_gray;
+        }
+
+        ._show-line_panel {
+            padding: 0rem 0rem 0rem $m0-5rem;
+            width: 50vw;
+            display: inline-flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+        }
+
+        .text-areas {
             display: flex;
             flex-flow: row wrap;
             justify-content: flex-end;
-            margin-top: $m1rem;
+            align-items: center;
 
-            ._work_item_line--inputs {
-                margin-bottom: $m1rem;
+            div {
+                padding: 0rem $m1rem;
             }
 
-            .bck-color {
-                background-color: $light_gray;
+        }
+
+        .inputs-features {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-end;
+            align-items: baseline;
+
+            div {
+                padding-left: $m1rem;
             }
 
-            ._show-line_panel {
-                padding: 0rem 0rem 0rem $m0-5rem;
-                width: 50vw;
-                display: inline-flex;
-                flex-flow: row wrap;
-                justify-content: space-between;
-            }
+        }
 
-            .text-areas {
+        ._edit_delete-btns {
+            display: flex;
+            flex-direction: column;
+            margin-left: $m1rem;
+
+            .edit-height {
                 display: flex;
-                flex-flow: row wrap;
-                justify-content: flex-end;
+            }
+
+            .delete-height {
+                height: 70%;
+                display: flex;
                 align-items: center;
-
-                div {
-                    padding: 0rem $m1rem;
-                }
-
             }
 
-            .inputs-features {
-                display: flex;
-                flex-flow: row wrap;
-                justify-content: flex-end;
-                align-items: baseline;
-
-                div {
-                    padding-left: $m1rem;
-                }
-
-            }
-
-            ._edit_delete-btns {
-                display: flex;
-                flex-direction: column;
-                margin-left: $m1rem;
-
-                .edit-height {
-                    display: flex;
-                }
-
-                .delete-height {
-                    height: 70%;
-                    display: flex;
-                    align-items: center;
-                }
-
-
-            }
 
         }
 
-        ._delete_btn {
-            padding-right: 0.3rem;
-        }
+    }
 
+    ._delete_btn {
+        padding-right: 0.3rem;
     }
 
     .scope_of_work_container {
@@ -361,26 +361,42 @@
         flex-direction: column;
 
         ._top_block {
-
             display: inline-flex;
             flex-flow: wrap;
             justify-content: space-between;
             align-items: center;
+            margin-top: $m1rem;
 
             .add_item_btn {
                 display: flex;
                 justify-content: flex-start;
             }
 
-            ._subtotal-block{
+        }
 
-                width: 50vw;
-                display: flex;
-                flex-flow: row wrap;
-                justify-content: space-evenly;
-                align-self: center;
+        ._group-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #EDF8FF;
+            padding: $m0-5rem;
 
+            .group-title {
+                & img {
+                    margin-right: 1rem;
+                }
             }
+
+            .group-btns {
+                & img:first-child {
+                    margin-right: 1rem;
+                }
+            }
+
+        }
+
+        #group_panel_id {
+            margin-bottom: 1rem;
         }
 
         ._center_block {
@@ -424,21 +440,37 @@
 
         }
 
+        ._subtotal-block{
+            display: flex;
+            justify-content: flex-end;
+            align-items: baseline;
+            &-inner_block {
+
+                .subtotal {
+                    // padding-right: ;
+                }
+
+                .subtotal_price {
+                    // padding-left: 1rem;
+                }
+            }
+        }
+
         ._bottom_block {
             margin: $m1rem 0rem;
-            .__right-block {
+        }
 
+        .__right-block {
+
+            display: flex;
+            justify-content: flex-end;
+
+            ._grand_subtotal-block {
+                width: 50vw;
                 display: flex;
-                justify-content: flex-end;
-
-                ._grand_subtotal-block {
-
-                    width: 50vw;
-                    display: flex;
-                    flex-flow: row wrap;
-                    justify-content: space-evenly;
-                    align-self: center;
-                }
+                flex-flow: row wrap;
+                justify-content: space-evenly;
+                align-items: baseline;
             }
         }
 

@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, url_for, redirect, flash, request,
 from flask_login import login_required
 
 from app.models import WorkItem
-from app.models import LinkWorkItem
+from app.models import LinkWorkItem, WorkItemGroup
 from app.forms import NewWorkItemForm, WorkItemCartForm, WorkItemGroupForm
 from app.controllers import add_work_item_validator, str_function
 from app.logger import log
@@ -109,10 +109,15 @@ def work_item_group(bid_id):
     form = WorkItemGroupForm(request.form)
     groups = session.get("GroupDict", {})
     group_name = form.name.data
-    if group_name not in groups:
-        groups[group_name] = []
-        session["GroupDict"] = groups
-    return redirect(url_for("work_item.work_items", bid_id=bid_id))
+    if group_name:
+        if group_name not in groups:
+            groups[group_name] = []
+            session["GroupDict"] = groups
+        return redirect(url_for("work_item.work_items", bid_id=bid_id))
+    else:
+        flash("Invalid group name!", "warning")
+        log(log.WARNING, "The given data was invalid")
+        return redirect(url_for("work_item.work_items", bid_id=bid_id))
 
 
 @work_item_blueprint.route(
@@ -204,6 +209,20 @@ def add_to_bidding(bid_id):
             bid_id=bid_id,
             work_item_id=int(global_work_items[item_id])
         ).save()
+
+    groups = session.get("GroupDict", {})
+    for grp in groups:
+        work_group = WorkItemGroup(
+            bid_id=bid_id,
+            name=grp
+        ).save()
+        items = groups[grp]
+        for item in items:
+            LinkWorkItem(
+                bid_id=bid_id,
+                work_item_id=int(item),
+                work_item_group=work_group
+            ).save()
 
     session.pop("SelectedWorkItemsDict", None)
     session.pop("DeletedWorkItem", None)
