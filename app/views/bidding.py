@@ -26,6 +26,7 @@ def biddings():
         bids = Bid.query.all()
         return render_template("biddings.html", bids=bids)
 
+    # Take bids
     papi = ProcoreApi()
     if session.get("procore_access_token", None):
         papi.access_token = session.get("procore_access_token", None)
