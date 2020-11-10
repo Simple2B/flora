@@ -164,6 +164,18 @@
           {% endif %}
 
           <!-- Flash Massage -->
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismisible login__error">
+                <button class="_flash-btn" type="button" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true"><img src="{{ url_for('static', filename='images/close_button_ddb.svg') }}"></span>
+                </button>
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+          {% endwith %}
           <!-- End Flash Massage -->
 
           <span class="chart-right__header-add-group __inline--blocks">

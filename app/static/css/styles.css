@@ -232,6 +232,12 @@ ul {
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
+    ._flash-btn {
+  border: none;
+  background-color: #fff; }
+  ._flash-btn:hover {
+    cursor: pointer; }
+
 ._btn--lg {
   width: 20rem;
   margin: 1rem; }
@@ -928,7 +934,7 @@ ul {
   color: #fff; }
 
 .__bidding--scroll div.add_item_block {
-  margin-top: 1rem; }
+  margin: 1rem 0rem; }
 
 .__bidding--scroll .clarification_block {
   margin-bottom: 1rem;
@@ -941,64 +947,64 @@ ul {
   color: #000000;
   font-weight: 500; }
 
-.__bidding--scroll ._work_items_block ._work_item-link {
+.__bidding--scroll ._work_item-link {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between; }
-  .__bidding--scroll ._work_items_block ._work_item-link ._flex-start {
+  .__bidding--scroll ._work_item-link ._flex-start {
     display: flex;
     justify-content: flex-start;
     align-items: center; }
-    .__bidding--scroll ._work_items_block ._work_item-link ._flex-start div {
+    .__bidding--scroll ._work_item-link ._flex-start div {
       padding: 0rem 2rem; }
-  .__bidding--scroll ._work_items_block ._work_item-link ._flex-end {
+  .__bidding--scroll ._work_item-link ._flex-end {
     display: flex;
     justify-content: flex-end;
     align-items: baseline; }
-    .__bidding--scroll ._work_items_block ._work_item-link ._flex-end div._flex-end_padding {
+    .__bidding--scroll ._work_item-link ._flex-end div._flex-end_padding {
       padding: 0rem 1rem; }
 
-.__bidding--scroll ._work_items_block ._work_item-line {
+.__bidding--scroll ._work_item-line {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-end;
   margin-top: 1rem; }
-  .__bidding--scroll ._work_items_block ._work_item-line ._work_item_line--inputs {
+  .__bidding--scroll ._work_item-line ._work_item_line--inputs {
     margin-bottom: 1rem; }
-  .__bidding--scroll ._work_items_block ._work_item-line .bck-color {
+  .__bidding--scroll ._work_item-line .bck-color {
     background-color: #FAFAFA; }
-  .__bidding--scroll ._work_items_block ._work_item-line ._show-line_panel {
+  .__bidding--scroll ._work_item-line ._show-line_panel {
     padding: 0rem 0rem 0rem 0.5rem;
     width: 50vw;
     display: inline-flex;
     flex-flow: row wrap;
     justify-content: space-between; }
-  .__bidding--scroll ._work_items_block ._work_item-line .text-areas {
+  .__bidding--scroll ._work_item-line .text-areas {
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-end;
     align-items: center; }
-    .__bidding--scroll ._work_items_block ._work_item-line .text-areas div {
+    .__bidding--scroll ._work_item-line .text-areas div {
       padding: 0rem 1rem; }
-  .__bidding--scroll ._work_items_block ._work_item-line .inputs-features {
+  .__bidding--scroll ._work_item-line .inputs-features {
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-end;
     align-items: baseline; }
-    .__bidding--scroll ._work_items_block ._work_item-line .inputs-features div {
+    .__bidding--scroll ._work_item-line .inputs-features div {
       padding-left: 1rem; }
-  .__bidding--scroll ._work_items_block ._work_item-line ._edit_delete-btns {
+  .__bidding--scroll ._work_item-line ._edit_delete-btns {
     display: flex;
     flex-direction: column;
     margin-left: 1rem; }
-    .__bidding--scroll ._work_items_block ._work_item-line ._edit_delete-btns .edit-height {
+    .__bidding--scroll ._work_item-line ._edit_delete-btns .edit-height {
       display: flex; }
-    .__bidding--scroll ._work_items_block ._work_item-line ._edit_delete-btns .delete-height {
+    .__bidding--scroll ._work_item-line ._edit_delete-btns .delete-height {
       height: 70%;
       display: flex;
       align-items: center; }
 
-.__bidding--scroll ._work_items_block ._delete_btn {
+.__bidding--scroll ._delete_btn {
   padding-right: 0.3rem; }
 
 .__bidding--scroll .scope_of_work_container {
@@ -1011,16 +1017,23 @@ ul {
     display: inline-flex;
     flex-flow: wrap;
     justify-content: space-between;
-    align-items: center; }
+    align-items: center;
+    margin-top: 1rem; }
     .__bidding--scroll .add_work_item-group ._top_block .add_item_btn {
       display: flex;
       justify-content: flex-start; }
-    .__bidding--scroll .add_work_item-group ._top_block ._subtotal-block {
-      width: 50vw;
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-evenly;
-      align-self: center; }
+  .__bidding--scroll .add_work_item-group ._group-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #EDF8FF;
+    padding: 0.5rem; }
+    .__bidding--scroll .add_work_item-group ._group-block .group-title img {
+      margin-right: 1rem; }
+    .__bidding--scroll .add_work_item-group ._group-block .group-btns img:first-child {
+      margin-right: 1rem; }
+  .__bidding--scroll .add_work_item-group #group_panel_id {
+    margin-bottom: 1rem; }
   .__bidding--scroll .add_work_item-group ._center_block {
     display: flex;
     flex-flow: row wrap;
@@ -1045,17 +1058,21 @@ ul {
           padding-right: 0.5rem; }
     .__bidding--scroll .add_work_item-group ._center_block ._show_subtotal_close_panel {
       display: flex; }
+  .__bidding--scroll .add_work_item-group ._subtotal-block {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline; }
   .__bidding--scroll .add_work_item-group ._bottom_block {
     margin: 1rem 0rem; }
-    .__bidding--scroll .add_work_item-group ._bottom_block .__right-block {
+  .__bidding--scroll .add_work_item-group .__right-block {
+    display: flex;
+    justify-content: flex-end; }
+    .__bidding--scroll .add_work_item-group .__right-block ._grand_subtotal-block {
+      width: 50vw;
       display: flex;
-      justify-content: flex-end; }
-      .__bidding--scroll .add_work_item-group ._bottom_block .__right-block ._grand_subtotal-block {
-        width: 50vw;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-evenly;
-        align-self: center; }
+      flex-flow: row wrap;
+      justify-content: space-evenly;
+      align-items: baseline; }
   .__bidding--scroll .add_work_item-group .subtotal {
     font-size: 18px;
     font-weight: bold;

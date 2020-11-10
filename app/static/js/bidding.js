@@ -16,3 +16,19 @@ $('#modalWorkItemLineEdit').on('show.bs.modal', function (event) {
     modal.find('#modal_price').val(price);
     modal.find('#modal_tdb').val(tdb);
 });
+
+const groupCloseWrapper = document.querySelectorAll('#bid_group_id');
+groupCloseWrapper.forEach(element => {
+    element.addEventListener('click', (e) => {
+        const groupId = e.currentTarget.dataset["group_panel_id"]
+        const groupClosePanel = document.querySelector(`#group_panel_id-${groupId}`)
+        e.preventDefault();
+        let changeGroupImg = element.getAttribute('src');
+        groupClosePanel.classList.toggle('hidden');
+        if (changeGroupImg == "/static/images/up_direction_element.svg") {
+            element.setAttribute('src', "/static/images/direction_element_bottom.svg");
+        } else {
+            element.setAttribute('src', "/static/images/up_direction_element.svg");
+        };
+    });
+});
