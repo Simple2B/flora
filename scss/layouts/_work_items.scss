@@ -75,38 +75,15 @@
 .main-container {
     min-width: 75%;
     margin: 0 1rem;
-    display: flex;
-    flex-flow: column;
-    margin-left: auto;
-    margin-right: auto;
+    @extend %tpl_main-container;
 
-    &__bid-header {
-        background-color: black;
-        display: inline-flex;
-        justify-content: flex-start;
-        padding: .5rem 1rem;
-        align-items: center;
-    }
-
-    &__body {
+    .__body {
         display: flex;
         flex-flow: row wrap;
         width: 100%;
         min-height: 75vh;
         box-shadow: $shadow;
     }
-}
-
-.bid-header__status {
-    color: white;
-    padding: .5rem 1rem;
-    background-color: $red;
-    border-radius: .3rem;
-}
-
-.bid-header__title {
-    color: white;
-    margin-left: 8rem;
 }
 
 .chart-left {
