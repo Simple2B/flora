@@ -124,16 +124,17 @@ class ProcoreApi:
             token was generated
         """
 
-        client_auth = requests.auth.HTTPBasicAuth(
-            current_app.config["PROCORE_API_CLIENT_ID"],
-            current_app.config["PROCORE_API_CLIENT_SECRET"],
-        )
+        # client_auth = requests.auth.HTTPBasicAuth(
+        #     current_app.config["PROCORE_API_CLIENT_ID"],
+        #     current_app.config["PROCORE_API_CLIENT_SECRET"],
+        # )
         post_data = {
             "grant_type": "client_credentials",
+            "client_id": current_app.config["PROCORE_API_CLIENT_ID"],
+            "client_secret": current_app.config["PROCORE_API_CLIENT_SECRET"],
         }
         response = requests.post(
             current_app.config["PROCORE_API_BASE_URL"] + "/oauth/token",
-            auth=client_auth,
             data=post_data,
         )
         response_json = response.json()

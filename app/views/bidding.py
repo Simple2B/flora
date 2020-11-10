@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, session
 from flask_login import login_required
 from flask import current_app
 from app.procore import ProcoreApi
@@ -27,9 +27,12 @@ def biddings():
         return render_template("biddings.html", bids=bids)
 
     papi = ProcoreApi()
-
-    papi.access_token = papi.set_access_token
-    bids_from_procore = papi.bids()
+    if session.get("procore_access_token", None):
+        papi.access_token = session.get("procore_access_token", None)
+        bids_from_procore = papi.bids()
+    else:
+        papi.access_token = papi.set_access_token
+        bids_from_procore = papi.bids()
 
     # assert bids_from_procore
     for bid in bids_from_procore:
