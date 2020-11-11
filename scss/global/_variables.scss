@@ -26,14 +26,8 @@ $border-bottom: 5px solid #175593;
     color: #007bff;
 
     .__select_work_item-active {
-        // border-right: solid 2px #E6A73E;
-        // background-color: #F2F2F2;
-        // text-decoration: none;
         color: #BDBDBD;
-        // &:hover {
-
-        // }
-    }
+        }
     }
 
     & li {
@@ -47,5 +41,32 @@ $border-bottom: 5px solid #175593;
 
     &:hover {
         color: #2F80ED;
+    }
+}
+
+%tpl_main-container {
+    display: flex;
+    flex-flow: column;
+    margin-left: auto;
+    margin-right: auto;
+
+    .__bid-header {
+        background-color: black;
+        display: inline-flex;
+        justify-content: flex-start;
+        padding: .5rem 1rem;
+        align-items: center;
+
+        .bid-header__status {
+            color: white;
+            padding: .5rem 1rem;
+            background-color: $red;
+            border-radius: .3rem;
+        }
+
+        .bid-header__title {
+            color: white;
+            margin-left: 8rem;
+        }
     }
 }
