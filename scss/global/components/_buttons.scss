@@ -18,6 +18,14 @@
     }
 }
 
+._flash-btn {
+    border: none;
+    background-color: #fff;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 ._btn--lg {
     width: 20rem;
     margin: 1rem;
@@ -32,15 +40,6 @@
     }
 }
 
-._btn--dgrey {
-    @include _btn;
-    background-color: #4F4F4F;
-
-    &:hover {
-        background-color: darken(#4F4F4F, 10%);
-    }
-}
-
 ._btn--blue {
     @include _btn;
     background-color: $blue;
@@ -50,12 +49,30 @@
     }
 }
 
+._btn--base-gray {
+    @include _btn;
+    background-color: #828282;;
+
+    &:hover {
+        background-color: darken(#828282, 20%);
+    }
+}
+
 ._btn--gray {
     @include _btn;
     background-color: #979797;
 
     &:hover {
         background-color:darken(#979797, 10%);
+    }
+}
+
+._btn--dgrey {
+    @include _btn;
+    background-color: #4F4F4F;
+
+    &:hover {
+        background-color: darken(#4F4F4F, 10%);
     }
 }
 

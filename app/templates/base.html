@@ -21,45 +21,47 @@
 <body>
   {% block header %}
   <header class="header">
-    <div class="container">
+    <div class="header_container">
       <div class="header__inner">
         <div class="header__inner--left">
-          <a class="logo" href="#">
-            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="DDB Contracting" class="logo__img">
-          </a>
+          <div>
+            <a class="logo" href="#">
+              <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="DDB Contracting" class="logo__img">
+            </a>
+          </div>
+        </div>
           <nav class="menu__items" id='header_menu_items_id'>
               <a class="menu__item" href="{{ url_for('bidding.biddings') }}" id='bidding_id'>Bidding</a>
               <a class="menu__item" href="{{ url_for('main.team') }}" id='myTeam_id'>My team</a>
               <a class="menu__item" href="{{ url_for('main.index') }}" id='resources_id'>Resources</a>
               <span class="nav-indicator"></span>
           </nav>
-        </div>
-        {% if current_user.is_authenticated %}
-        <div class="header__inner--right">
-          <div class="user-info">
-            <div class="user-info__img">
-              <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt="Icon">
-            </div>
+      </div>
+      {% if current_user.is_authenticated %}
+      <div class="header--right">
+        <div class="user-info">
+          <div class="user-info__img">
+            <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt="Icon">
+          </div>
 
-            <div class="user-info__details">
-              <span class="flex-row">
-              <div>{{current_user.username}}</div>
-              <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle flex-row" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
-                  aria-expanded="false"></a>
-                  <div class="dropdown-menu" aria-labelledby="userActions">
-                    <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
-                  </div>
-                </li>
-              </ul>
-              </span>
-              <p class='t-gray'>{{current_user.position}}</p>
-            </div>
+          <div class="user-info__details">
+            <span class="flex-row">
+            <div>{{current_user.username}}</div>
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle flex-row" href="#" id="userActions" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"></a>
+                <div class="dropdown-menu" aria-labelledby="userActions">
+                  <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
+                </div>
+              </li>
+            </ul>
+            </span>
+            <p class='t-gray'>{{current_user.position}}</p>
           </div>
         </div>
-        {% endif %}
       </div>
+      {% endif %}
     </div>
   </header>
   {% endblock %}

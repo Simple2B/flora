@@ -11,21 +11,23 @@
     border-bottom: $border-bottom;
 }
 
+.clarifications-container {
+    @extend %tpl_main-container;
+}
+
 .__box-table-clarification {
     width: 100%;
-    margin-top: 1rem;
     min-height: 75vh;
     max-height: 90vh;
     box-shadow: $shadow;
     overflow: visible;
 
     .__box-table--left {
-        // display: block;
         width: 53%;
 
-    .__add-clarification--box {
-
-    }
+        .__add-clarification--box {
+            margin-bottom: $m1rem;
+        }
 
         .__add_to_cart--place {
             float: right;
@@ -75,12 +77,12 @@
     }
 
     & h6 {
+        margin-top: $m1rem;
         font-weight: $fw-700;
-    }
 
-    .__h6--width {
-        font-weight: $fw-700;
-        width: 150%;
+        &:first-child {
+            width: 150%;
+        }
     }
 }
 

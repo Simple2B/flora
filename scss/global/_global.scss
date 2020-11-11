@@ -126,7 +126,7 @@ ul {
 }
 
 .__side-bar-box {
-    height: 65vh;
+    height: 50vh;
 }
 
 .__box-add-bid-cancel--margins {
@@ -231,6 +231,18 @@ ul {
 
         div {
             padding: $m0-5rem;
+        }
+    }
+}
+
+
+.active {
+    color: $light_blue !important;
+    a {
+        text-decoration: none;
+        color: $light_blue !important;
+        &:hover {
+            color: darken($light_blue, 20%) !important;
         }
     }
 }

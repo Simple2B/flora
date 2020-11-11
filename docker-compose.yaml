@@ -6,7 +6,8 @@ services:
     command: flask run -h 0.0.0.0
     volumes:
       - .:/usr/src/app
-    ports: 
+    ports:
       - 5000:5000
-    restart_policy:
-      condition: unless-stopped
+    deploy:
+      restart_policy:
+        condition: any
