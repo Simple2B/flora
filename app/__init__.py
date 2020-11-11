@@ -19,7 +19,6 @@ def create_app(environment="development"):
         work_item_blueprint,
         exclusion_blueprint,
         clarification_blueprint,
-        procore_blueprint,
         bidding_blueprint,
         bid_blueprint
     )
@@ -46,7 +45,6 @@ def create_app(environment="development"):
     app.register_blueprint(work_item_blueprint)
     app.register_blueprint(exclusion_blueprint)
     app.register_blueprint(clarification_blueprint)
-    app.register_blueprint(procore_blueprint)
     app.register_blueprint(bidding_blueprint)
     app.register_blueprint(bid_blueprint)
 

@@ -39,10 +39,11 @@ class ProcoreApi:
             from tests.utils import TEST_BIDS
             return TEST_BIDS
 
-        if not self.access_token:
+        access_token = self.access_token
+        if not access_token:
             log(log.ERROR, "ProcoreApi.bids: need access_token!")
             return []
-        headers = {"Authorization": "Bearer " + self.access_token}
+        headers = {"Authorization": "Bearer " + access_token}
         PROCORE_API_BASE_URL = current_app.config["PROCORE_API_BASE_URL"]
         PROCORE_API_COMPANY_ID = current_app.config["PROCORE_API_COMPANY_ID"]
 
@@ -110,7 +111,7 @@ class ProcoreApi:
         )
 
     @property
-    def set_access_token(self):
+    def access_token(self):
         """
         DESCRIPTION:
             Gets the access token by utilizating the authorization code that was

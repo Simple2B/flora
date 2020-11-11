@@ -28,12 +28,7 @@ def biddings():
 
     # Take bids
     papi = ProcoreApi()
-    if session.get("procore_access_token", None):
-        papi.access_token = session.get("procore_access_token", None)
-        bids_from_procore = papi.bids()
-    else:
-        papi.access_token = papi.set_access_token
-        bids_from_procore = papi.bids()
+    bids_from_procore = papi.bids()
 
     # assert bids_from_procore
     for bid in bids_from_procore:
