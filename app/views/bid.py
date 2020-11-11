@@ -198,7 +198,7 @@ def edit_clarifications(bid_id):
     return redirect(url_for("clarification.clarifications", bid_id=bid_id))
 
 
-@bid_blueprint.route("/bidding/<int:bid_id>", methods=["GET"])
+@bid_blueprint.route("/bidding/<int:bid_id>", methods=["GET", "POST"])
 @login_required
 def bidding(bid_id):
     bid = Bid.query.get(bid_id)
@@ -232,6 +232,15 @@ def bidding(bid_id):
     show_clarifications = show_clarifications.capitalize()
     calculate_subtotal(bid_id)
 
+    # form_bid.status_lists = [attr for attr in dir(bid.Status) if not attr.startswith("__")]
+    form_bid.bid_status = "Draft"
+    if form_bid.validate_on_submit():
+        form_bid.bid_status = request.form["bid_status"]
+        bid.status = Bid.status.a_new
+        bid.save()
+    elif form_bid.is_submitted():
+        log(log.WARNING, "Bid status form is submitted")
+
     return render_template(
         "bidding.html",
         bid=bid,
@@ -240,6 +249,8 @@ def bidding(bid_id):
         show_clarifications=show_clarifications,
         form_bid=form_bid,
     )
+
+# Export document
 
 
 @bid_blueprint.route("/preview_pdf/<int:bid_id>", methods=["GET"])
