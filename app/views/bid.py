@@ -27,6 +27,26 @@ from GrabzIt import GrabzItClient
 bid_blueprint = Blueprint("bid", __name__)
 
 
+@bid_blueprint.route("/test_pdf/<bid_id>", methods=["GET"])
+@login_required
+def test_pdf(bid_id):
+    bid = Bid.query.get(bid_id)
+    global_work_items = (
+        LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
+        .filter(LinkWorkItem.work_item_group == None)  # noqa 711
+        .all()
+    )
+    groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
+    preview_pdf_bool = True
+    return render_template(
+        "export_document.html",
+        bid=bid,
+        groups=groups,
+        global_work_items=global_work_items,
+        preview_pdf_bool=preview_pdf_bool,
+    )
+
+
 @bid_blueprint.route(
     "/add_work_item_line/<bid_id>/<int:link_work_item_id>", methods=["GET"]
 )
@@ -39,9 +59,11 @@ def add_work_item_line(bid_id, link_work_item_id):
 @bid_blueprint.route("/delete_group/<bid_id>/<group_name>", methods=["GET"])
 @login_required
 def delete_group(bid_id, group_name):
-    group = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).filter(
-            WorkItemGroup.name == group_name
-        ).first()
+    group = (
+        WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id)
+        .filter(WorkItemGroup.name == group_name)
+        .first()
+    )
     for link in group.link_work_items:
         for line in link.work_item_lines:
             line.delete()
@@ -224,12 +246,22 @@ def bidding(bid_id):
 @login_required
 def preview_pdf(bid_id):
     bid = Bid.query.get(bid_id)
+    global_work_items = (
+        LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
+        .filter(LinkWorkItem.work_item_group == None)  # noqa 711
+        .all()
+    )
+    groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
     preview_pdf_bool = True
     tbd_choices = session.get("tbdChoices", [])
     calculate_subtotal(bid_id, tbd_choices)
 
     return render_template(
-        "export_document.html", bid=bid, preview_pdf_bool=preview_pdf_bool
+        "export_document.html",
+        bid=bid,
+        global_work_items=global_work_items,
+        groups=groups,
+        preview_pdf_bool=preview_pdf_bool,
     )
 
 
@@ -240,6 +272,12 @@ def export_pdf(bid_id):
 
     if form.validate_on_submit():
         bid = Bid.query.get(bid_id)
+        global_work_items = (
+            LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
+            .filter(LinkWorkItem.work_item_group == None)  # noqa 711
+            .all()
+        )
+        groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
         tbd_choices = [i for i in request.form if request.form[i] == "on"]
         session["tbdChoices"] = tbd_choices
         if form.preview.data:
@@ -253,6 +291,8 @@ def export_pdf(bid_id):
                 "export_document.html",
                 bid=bid,
                 preview_pdf_bool=preview_pdf_bool,
+                groups=groups,
+                global_work_items=global_work_items,
                 path_to_img=PATH_TO_IMG,
             )
             pdf_content = pdfkit.from_string(html_content, False)

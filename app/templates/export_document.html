@@ -132,11 +132,14 @@
             padding-right: 1rem;
         }
 
+        /********** begin bid price container */
+
         .bid_price_container {
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: vertical;
         }
+
 
         .bid_price_container .bid_subtotal_value {
             display: -webkit-box;
@@ -152,10 +155,47 @@
             font-size: 18px;
         }
 
+        .bid_price_container .work_item_note {
+            display: -webkit-box;
+            -webkit-box-pack: justify;
+        }
+
+        .work_item_note .__note-box {
+            display: -webkit-box;
+            -webkit-box-pack: end;
+            width: 60%;
+        }
+
+        .work_item_note ._note {
+            width: 65%;
+            overflow-wrap: break-word;
+            margin-right: 1rem;
+        }
+
+        ._note div {
+            margin-left: 1rem;
+        }
+
+        .work_item_note ._unit {
+            display: -webkit-box;
+        }
+
+        ._unit :first-child {
+            margin-right: 1rem;
+        }
+
+        .bid_price_container ._group-block {
+            background-color: #EDF8FF;
+            padding: 0.5rem;
+        }
+
         .bid_price_container .bid_subtotal_container .bid_subtotal {
             display: -webkit-box;
             -webkit-box-pack: end;
         }
+
+        /********** end bid price container */
+
         .bid_subtotal .bid_subtotal_bid_features {
             display: -webkit-box;
             -webkit-box-pack: justify;
@@ -198,12 +238,23 @@
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: horizontal;
+            padding: 0.5rem 0rem 0rem 1.5rem;
         }
 
         .inputs_forms .by_name_date {
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: vertical;
+        }
+
+        .ddb_contracting {
+            margin: 1rem 0rem 0rem 5rem;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .send_copies {
+            margin-left: 1rem;
         }
 
     </style>
@@ -269,13 +320,47 @@
                     <h5>Please find our detailed Quote for the above referenced project as outlined below:</h5>
 
                     <div class="bid_price_container">
-                        {% for link_work_item in bid.link_work_items %}
+                        {% for link_work_item in global_work_items %}
                         <div class="bid_work_item">
                             <div class="work_item_pdf">
                                 <div> {{ link_work_item.work_item.code }} &nbsp; &nbsp;</div>
                                 <div> {{ link_work_item.work_item.name }} &nbsp; &nbsp;</div>
                             </div>
                             <div class="bid_subtotal_value">${{ link_work_item.link_subtotal }}</div>
+                        </div>
+                        <div class="work_item_note">
+                            <div class="__note-box">
+                                <div class="_note">
+                                    Furnish & Install new double pane
+                                    sliding transaction window in existing opening
+                                    <div>
+                                        NOTE: System to utilize surface
+                                        mounted hardware
+                                    </div>
+                                </div>
+                                <div class="_unit">
+                                    <div>1</div>
+                                    <div>LS</div>
+                                </div>
+                            </div>
+                            <div></div>
+                        </div>
+                        {% endfor %}
+                        {% for group in groups %}
+                        <div class="_group-block">
+                            <div class="group-title">
+                            <img src="{{ path_to_img }}group_element.svg">
+                            <span>Work Group: {{ group.name }}</span>
+                            </div>
+                            {% for link in group.link_work_items %}
+                            <div class="bid_work_item">
+                                <div class="work_item_pdf">
+                                    <div> {{ link.work_item.code }} &nbsp; &nbsp;</div>
+                                    <div> {{ link.work_item.name }} &nbsp; &nbsp;</div>
+                                </div>
+                                <div class="bid_subtotal_value">${{ link.link_subtotal }}</div>
+                            </div>
+                            {% endfor %}
                         </div>
                         {% endfor %}
 
@@ -389,7 +474,7 @@
                     </div>
 
                     <div class="section_letter">Section B: Exclusions</div>
-                    <h5>Unless expressly stated, the following exclusions apply</h5>
+                    <h5>Unless expressly stated, the following exclusions apply: </h5>
                     <div>
                         {% for exclusion_link in bid.exclusion_links %}
                             {{ exclusion_link.exclusion.title }}
@@ -413,7 +498,7 @@
                         <div><span class="section_F">Section F: Approved by: </span></div>
                     </div>
 
-                    <div class="ddb_contracting "></div>
+                    <div class="ddb_contracting "> DDB Contracting, LLC. </div>
                     <div class="inputs_forms">
                         <div class="by_name_date">
                             <div>
@@ -439,6 +524,7 @@
                         </div>
                     </div>
                     <div class="send_copies">
+                        Send copies to the following:
                         <ul>
                             <li></li>
                             <li></li>
