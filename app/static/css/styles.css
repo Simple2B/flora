@@ -11,23 +11,23 @@
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
-.main-container, .exclusions-container {
+.main-container, .exclusions-container, .clarifications-container {
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container .__bid-header, .exclusions-container .__bid-header {
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
     background-color: black;
     display: inline-flex;
     justify-content: flex-start;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status {
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
       color: white;
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title {
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
       color: white;
       margin-left: 8rem; }
 
@@ -232,23 +232,23 @@ ul {
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
-.main-container, .exclusions-container {
+.main-container, .exclusions-container, .clarifications-container {
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container .__bid-header, .exclusions-container .__bid-header {
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
     background-color: black;
     display: inline-flex;
     justify-content: flex-start;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status {
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
       color: white;
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title {
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
       color: white;
       margin-left: 8rem; }
 
@@ -272,23 +272,23 @@ ul {
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
-.main-container, .exclusions-container {
+.main-container, .exclusions-container, .clarifications-container {
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container .__bid-header, .exclusions-container .__bid-header {
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
     background-color: black;
     display: inline-flex;
     justify-content: flex-start;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status {
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
       color: white;
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title {
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
       color: white;
       margin-left: 8rem; }
 
@@ -401,23 +401,23 @@ ul {
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
-.main-container, .exclusions-container {
+.main-container, .exclusions-container, .clarifications-container {
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container .__bid-header, .exclusions-container .__bid-header {
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
     background-color: black;
     display: inline-flex;
     justify-content: flex-start;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status {
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
       color: white;
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title {
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
       color: white;
       margin-left: 8rem; }
 
@@ -509,23 +509,23 @@ ul {
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
-.main-container, .exclusions-container {
+.main-container, .exclusions-container, .clarifications-container {
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container .__bid-header, .exclusions-container .__bid-header {
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
     background-color: black;
     display: inline-flex;
     justify-content: flex-start;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status {
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
       color: white;
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title {
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
       color: white;
       margin-left: 8rem; }
 
@@ -557,23 +557,23 @@ ul {
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
-.main-container, .exclusions-container {
+.main-container, .exclusions-container, .clarifications-container {
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container .__bid-header, .exclusions-container .__bid-header {
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
     background-color: black;
     display: inline-flex;
     justify-content: flex-start;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status {
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
       color: white;
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title {
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
       color: white;
       margin-left: 8rem; }
 
@@ -620,23 +620,23 @@ ul {
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
-.main-container, .exclusions-container {
+.main-container, .exclusions-container, .clarifications-container {
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container .__bid-header, .exclusions-container .__bid-header {
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
     background-color: black;
     display: inline-flex;
     justify-content: flex-start;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status {
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
       color: white;
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title {
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
       color: white;
       margin-left: 8rem; }
 
@@ -675,23 +675,23 @@ ul {
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
-.main-container, .exclusions-container {
+.main-container, .exclusions-container, .clarifications-container {
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container .__bid-header, .exclusions-container .__bid-header {
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
     background-color: black;
     display: inline-flex;
     justify-content: flex-start;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status {
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
       color: white;
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title {
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
       color: white;
       margin-left: 8rem; }
 
@@ -792,23 +792,23 @@ ul {
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
-.main-container, .exclusions-container {
+.main-container, .exclusions-container, .clarifications-container {
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container .__bid-header, .exclusions-container .__bid-header {
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
     background-color: black;
     display: inline-flex;
     justify-content: flex-start;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status {
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
       color: white;
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title {
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
       color: white;
       margin-left: 8rem; }
 
@@ -825,23 +825,23 @@ ul {
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
-.main-container, .exclusions-container {
+.main-container, .exclusions-container, .clarifications-container {
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container .__bid-header, .exclusions-container .__bid-header {
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
     background-color: black;
     display: inline-flex;
     justify-content: flex-start;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status {
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
       color: white;
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title {
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
       color: white;
       margin-left: 8rem; }
 
@@ -1339,23 +1339,23 @@ ul {
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
-.main-container, .exclusions-container {
+.main-container, .exclusions-container, .clarifications-container {
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container .__bid-header, .exclusions-container .__bid-header {
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
     background-color: black;
     display: inline-flex;
     justify-content: flex-start;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status {
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
       color: white;
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title {
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
       color: white;
       margin-left: 8rem; }
 
@@ -1375,23 +1375,23 @@ ul {
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
-.main-container, .exclusions-container {
+.main-container, .exclusions-container, .clarifications-container {
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container .__bid-header, .exclusions-container .__bid-header {
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
     background-color: black;
     display: inline-flex;
     justify-content: flex-start;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status {
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
       color: white;
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title {
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
       color: white;
       margin-left: 8rem; }
 
@@ -1567,23 +1567,23 @@ ul {
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
-.main-container, .exclusions-container {
+.main-container, .exclusions-container, .clarifications-container {
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container .__bid-header, .exclusions-container .__bid-header {
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
     background-color: black;
     display: inline-flex;
     justify-content: flex-start;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status {
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
       color: white;
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title {
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
       color: white;
       margin-left: 8rem; }
 
@@ -1673,23 +1673,23 @@ ul {
   .sidebar__nav-links-bidding:hover {
     color: #2F80ED; }
 
-.main-container, .exclusions-container {
+.main-container, .exclusions-container, .clarifications-container {
   display: flex;
   flex-flow: column;
   margin-left: auto;
   margin-right: auto; }
-  .main-container .__bid-header, .exclusions-container .__bid-header {
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
     background-color: black;
     display: inline-flex;
     justify-content: flex-start;
     padding: .5rem 1rem;
     align-items: center; }
-    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status {
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
       color: white;
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title {
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
       color: white;
       margin-left: 8rem; }
 
@@ -1704,13 +1704,14 @@ ul {
 
 .__box-table-clarification {
   width: 100%;
-  margin-top: 1rem;
   min-height: 75vh;
   max-height: 90vh;
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
   overflow: visible; }
   .__box-table-clarification .__box-table--left {
     width: 53%; }
+    .__box-table-clarification .__box-table--left .__add-clarification--box {
+      margin-bottom: 1rem; }
     .__box-table-clarification .__box-table--left .__add_to_cart--place {
       float: right;
       margin-left: 4.2rem;
@@ -1740,10 +1741,10 @@ ul {
       .__box-table-clarification .__box-table--right .__clarification-box--description div {
         padding: 0rem 1.2rem 0.1rem 1.2rem; }
   .__box-table-clarification h6 {
+    margin-top: 1rem;
     font-weight: 700; }
-  .__box-table-clarification .__h6--width {
-    font-weight: 700;
-    width: 150%; }
+    .__box-table-clarification h6:first-child {
+      width: 150%; }
 
 .text--center {
   text-align: center; }
