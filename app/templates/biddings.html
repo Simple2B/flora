@@ -35,6 +35,19 @@
       </input>
     </span>
 
+    <form action="{{ url_for('bidding.change_status') }}" method="post">
+    <div class="status_block">
+      <span class="t-gray">Showing {{ bids|length }} Documents</span>
+      <div class="status_block__bids_status">
+
+        <div> <button type="submit" name="bids_status" value="Draft" class="status-active" id="bids_draft_id"> Draft </button></div>
+        <div> <button name="bids_status" value="Submitted" id="bids_submitted_id" class="testing">Submitted </button></div>
+        <div> <button name="bids_status" value="Archived" id="bids_archived_id">Archived </button></div>
+        <div> <button name="bids_status" id="bids_all_id">All </button></div>
+
+      </div>
+    </div>
+    </form>
     <form>
     <div class="margin--top">
       <table id="" class="patientsTable table table-striped table-sm">
@@ -53,7 +66,7 @@
             <td>{{ bid.title }}</td>
             <td>test</td>
             <td>{{ bid.client }}</td>
-            <td>{{ bid.status.value }}</td>
+            <td id="table_td-status_id" data-status_value="{{ bid.status.value }}">{{ bid.status.value }}</td>
             <td>test</td>
           </tr>
           {% endfor %}

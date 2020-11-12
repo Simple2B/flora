@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for, session
+from flask import Blueprint, render_template, redirect, url_for, session, request
 from flask_login import login_required
 from flask import current_app
+from flask_wtf import FlaskForm
 from app.procore import ProcoreApi
 
 from app.models import Bid
@@ -8,7 +9,7 @@ from app.models import Bid
 bidding_blueprint = Blueprint("bidding", __name__)
 
 
-@bidding_blueprint.route("/biddings")
+@bidding_blueprint.route("/biddings", methods=["GET"])
 @login_required
 def biddings():
     if current_app.config["TESTING"]:
@@ -41,9 +42,26 @@ def biddings():
                 client=bid["vendor"]["name"],
             )
             bidding.save()
-
     bids = Bid.query.order_by(Bid.status).all()
 
+    return render_template("biddings.html", bids=bids)
+
+
+@bidding_blueprint.route("/change_status", methods=["POST"])
+@login_required
+def change_status():
+    form = FlaskForm(request.form)
+    if form.validate_on_submit():
+        if request.form["bids_status"] == "Draft":
+            bids = Bid.query.filter(Bid.status == Bid.Status.b_draft).all()
+        elif request.form["bids_status"] == "Submitted":
+            bids = Bid.query.filter(Bid.status == Bid.Status.c_submitted).all()
+        elif request.form["bids_status"] == "Archived":
+            bids = Bid.query.filter(Bid.status == Bid.Status.d_archived).all()
+        else:
+            bids = Bid.query.order_by(Bid.status).all()
+    elif form.is_submitted():
+        pass
     return render_template("biddings.html", bids=bids)
 
 
