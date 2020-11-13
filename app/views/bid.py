@@ -331,5 +331,5 @@ def export_pdf(bid_id):
                 last_modified=now,
             )
     else:
-        log(log.ERROR, "Form submitted")
+        log(log.INFO, "Form submitted")
         return redirect(url_for("bid.bidding", bid_id=bid_id))

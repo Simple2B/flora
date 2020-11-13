@@ -1,11 +1,11 @@
-from flask import Blueprint, render_template, redirect, url_for, session, request
+from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import login_required
 from flask import current_app
 from flask_wtf import FlaskForm
 from app.procore import ProcoreApi
 
 from app.models import Bid
-
+from app.logger import log
 bidding_blueprint = Blueprint("bidding", __name__)
 
 
@@ -43,8 +43,10 @@ def biddings():
             )
             bidding.save()
     bids = Bid.query.order_by(Bid.status).all()
+    form = FlaskForm()
+    form.status_active_draft = "status-active"
 
-    return render_template("biddings.html", bids=bids)
+    return render_template("biddings.html", bids=bids, form=form)
 
 
 @bidding_blueprint.route("/change_status", methods=["POST"])
@@ -52,17 +54,25 @@ def biddings():
 def change_status():
     form = FlaskForm(request.form)
     if form.validate_on_submit():
+        form.status_active_draft = ""
+        form.status_active_submitted = ""
+        form.status_active_archived = ""
+        form.status_active_all = ""
         if request.form["bids_status"] == "Draft":
             bids = Bid.query.filter(Bid.status == Bid.Status.b_draft).all()
+            form.status_active_draft = "status-active"
         elif request.form["bids_status"] == "Submitted":
             bids = Bid.query.filter(Bid.status == Bid.Status.c_submitted).all()
+            form.status_active_submitted = "status-active"
         elif request.form["bids_status"] == "Archived":
             bids = Bid.query.filter(Bid.status == Bid.Status.d_archived).all()
+            form.status_active_archived = "status-active"
         else:
             bids = Bid.query.order_by(Bid.status).all()
+            form.status_active_all = "status-active"
     elif form.is_submitted():
-        pass
-    return render_template("biddings.html", bids=bids)
+        log(log.INFO, "Form submitted")
+    return render_template("biddings.html", bids=bids, form=form)
 
 
 @bidding_blueprint.route("/delete_exclusions/<int:bid_id>")

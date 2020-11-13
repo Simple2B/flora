@@ -37,6 +37,7 @@ def populate_db_by_test_data():
             )
         )
 
+    # bid save()
     bid = Bid(
         procore_bid_id=105,
         title="bidding 5",
@@ -44,6 +45,22 @@ def populate_db_by_test_data():
         status=Bid.Status.b_draft
     ).save()
 
+    for i in range(2):
+        bid = Bid(
+            procore_bid_id=106+i,
+            title="bidding i",
+            client="Procore (Test Companies)",
+            status=Bid.Status.c_submitted
+        ).save()
+
+    for i in range(2):
+        bid = Bid(
+            procore_bid_id=108+i,
+            title=f"bidding {3+i}",
+            client="Procore (Test Companies)",
+            status=Bid.Status.d_archived
+        ).save()
+    # end bid save()
     work_item = WorkItem.query.first()
     link_wi = LinkWorkItem(bid_id=bid.id, work_item_id=work_item.id).save()
     WorkItemLine(
