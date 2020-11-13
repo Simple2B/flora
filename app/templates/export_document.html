@@ -263,6 +263,10 @@
             padding-left: 2rem;
         }
 
+        .line_qty {
+            width: 15%;
+        }
+
         .inputs_forms {
             display: -webkit-box;
             -webkit-box-pack: justify;
@@ -279,7 +283,7 @@
 
         .by_name_date .input_field {
             display: -webkit-box;
-            -webkit-box-align: end;
+            /* -webkit-box-align: end; */
         }
 
         .by_name_date .input-underline {
@@ -422,7 +426,7 @@
                                     <div> {{ link.work_item.code }} &nbsp; &nbsp;</div>
                                     <div> {{ link.work_item.name }} &nbsp; &nbsp;</div>
                                 </div>
-                                <div>
+                                <div class="line_qty">
                                     {% for line in link.work_item_lines %}
                                     <div> {{ line.quantity }} </div>
                                     {% endfor %}
@@ -561,6 +565,10 @@
 
                     <div class="section_letter">Section D: Alternates</div>
                     <div></div>
+
+                    <br>
+                    <br>
+                    <br>
 
                     <div class="section_E_and_F">
                         <div><span class="section_E">Section E: Submitted by: </span></div>
