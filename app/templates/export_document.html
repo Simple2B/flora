@@ -140,6 +140,9 @@
             -webkit-box-orient: vertical;
         }
 
+        .keep-together {
+            page-break-inside: avoid;
+        }
 
         .bid_price_container .bid_subtotal_value {
             display: -webkit-box;
@@ -377,7 +380,7 @@
                     <div class="section_letter">Section A: Scope of Work</div>
                     <h5>Please find our detailed Quote for the above referenced project as outlined below:</h5>
 
-                    <div class="bid_price_container">
+                    <div class="bid_price_container keep-together">
                         {% for link_work_item in global_work_items %}
                         <div class="bid_work_item">
                             <div class="work_item_pdf">
@@ -566,40 +569,37 @@
                     <div class="section_letter">Section D: Alternates</div>
                     <div></div>
 
-                    <br>
-                    <br>
-                    <br>
-
-                    <div class="section_E_and_F">
-                        <div><span class="section_E">Section E: Submitted by: </span></div>
-                        <div><span class="section_F">Section F: Approved by: </span></div>
-                    </div>
-
-                    <div class="ddb_titles">
-                        <div> DDB Contracting, LLC. </div>
-                        <div> Premier Project Management </div>
-                    </div>
-                    <div class="inputs_forms">
-                        <div class="by_name_date">
-                            <div class="input_field">
-                                <div>By &nbsp; </div>
-                                <input type="text" class="input-underline">
-                            </div>
-                            <div>Name &nbsp; Edward Albanese</div>
-                            <div>Name &nbsp; 05/26.2020</div>
+                    <div class="keep-together">
+                        <div class="section_E_and_F">
+                            <div><span class="section_E">Section E: Submitted by: </span></div>
+                            <div><span class="section_F">Section F: Approved by: </span></div>
                         </div>
-                        <div class="by_name_date">
-                            <div class="input_field">
-                                <div> By &nbsp; </div>
-                                <input type="text" class="input-underline">
+                        <div class="ddb_titles">
+                            <div> DDB Contracting, LLC. </div>
+                            <div> Premier Project Management </div>
+                        </div>
+                        <div class="inputs_forms">
+                            <div class="by_name_date">
+                                <div class="input_field">
+                                    <div>By &nbsp; </div>
+                                    <input type="text" class="input-underline">
+                                </div>
+                                <div>Name &nbsp; Edward Albanese</div>
+                                <div>Name &nbsp; 05/26.2020</div>
                             </div>
-                            <div class="input_field">
-                                <div> Name &nbsp; </div>
-                                <input type="text" class="input-underline">
-                            </div>
-                            <div class="input_field">
-                                <div> Date &nbsp; </div>
-                                <input type="text" class="input-underline">
+                            <div class="by_name_date">
+                                <div class="input_field">
+                                    <div> By &nbsp; </div>
+                                    <input type="text" class="input-underline">
+                                </div>
+                                <div class="input_field">
+                                    <div> Name &nbsp; </div>
+                                    <input type="text" class="input-underline">
+                                </div>
+                                <div class="input_field">
+                                    <div> Date &nbsp; </div>
+                                    <input type="text" class="input-underline">
+                                </div>
                             </div>
                         </div>
                     </div>
