@@ -36,8 +36,9 @@ class ProcoreApi:
         """
 
         if current_app.config["TESTING"]:
-            from tests.utils import TEST_BIDS
-            return TEST_BIDS
+            # from tests.utils import TEST_BIDS
+            # return TEST_BIDS
+            pass
 
         access_token = self.access_token
         if not access_token:
