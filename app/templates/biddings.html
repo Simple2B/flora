@@ -29,11 +29,9 @@
         <option value="Most recent" name="Most recent">Most recent</option>
       </select>
       {% if edit_bid %}
-      <a href="{{ url_for('bidding.finish_edit_bid') }}">
-        <button class="_btn--gray">
-        Finish Editing
+        <button type="submit" class="_btn--gray" form="finish_edit_bid_form">
+          Finish Editing
         </button>
-      </a>
       {% else %}
       <a href="{{ url_for('bidding.edit_bid') }}">
         <button class="_btn--gray">
@@ -59,7 +57,6 @@
       </div>
     </form>
 
-    <form>
     <div class="margin--top">
       <table id="" class="patientsTable table table-striped table-sm">
         <thead class="bck-ground">
@@ -82,17 +79,19 @@
         </thead>
         <tbody>
           {% if edit_bid %}
-          {% for bid in bids %}
-          <tr>
-            <td><input class="form-control" type="checkbox"></td>
-            <td><a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
-            <td>{{ bid.title }}</td>
-            <td>test</td>
-            <td>{{ bid.client }}</td>
-            <td>{{ bid.status.value }}</td>
-            <td>test</td>
-          </tr>
-          {% endfor %}
+          <form action="{{ url_for('bidding.finish_edit_bid') }}" method="post" id="finish_edit_bid_form">
+            {% for bid in bids %}
+            <tr>
+              <td><input class="form-control" type="checkbox" name="bid_choice"></td>
+              <td><a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
+              <td>{{ bid.title }}</td>
+              <td>test</td>
+              <td>{{ bid.client }}</td>
+              <td>{{ bid.status.value }}</td>
+              <td>test</td>
+            </tr>
+            {% endfor %}
+          </form>
           {% else %}
           {% for bid in bids %}
           <tr>
@@ -108,7 +107,6 @@
         </tbody>
       </table>
     </div>
-    </form>
 
   </div>
 </section>
