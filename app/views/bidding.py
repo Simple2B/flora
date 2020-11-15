@@ -18,14 +18,22 @@ def edit_bid():
     return redirect(url_for("bidding.biddings"))
 
 
-@bidding_blueprint.route("/finish_edit_bid", methods=["GET", "POST"])
+@bidding_blueprint.route("/finish_edit_bid")
 @login_required
 def finish_edit_bid():
+    session["edit_bid"] = False
+    return redirect(url_for("bidding.biddings"))
+
+
+@bidding_blueprint.route("/edited_bid", methods=["GET", "POST"])
+@login_required
+def edited_bid():
     form = FlaskForm(request.form)
     if request.form:
         pass
     session["edit_bid"] = False
     return redirect(url_for("bidding.biddings"))
+
 
 
 @bidding_blueprint.route("/biddings")
