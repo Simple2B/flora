@@ -382,6 +382,22 @@ ul {
   ._btn--dgrey:hover {
     background-color: #363636; }
 
+._btn--white {
+  padding: .5rem 1.5rem;
+  color: #fff;
+  border-radius: .5rem;
+  border: 1px solid;
+  outline: none;
+  font-size: 14px;
+  transition: .3s;
+  background-color: #FFFFFF; }
+  ._btn--white:focus {
+    outline: none; }
+  ._btn--white:active {
+    outline: none; }
+  ._btn--white:hover {
+    background-color: #7e7e7e; }
+
 ._btn--cancel-float {
   margin-top: 3rem; }
 
@@ -935,6 +951,22 @@ ul {
   ._btn--dgrey:hover {
     background-color: #363636; }
 
+._btn--white {
+  padding: .5rem 1.5rem;
+  color: #fff;
+  border-radius: .5rem;
+  border: 1px solid;
+  outline: none;
+  font-size: 14px;
+  transition: .3s;
+  background-color: #FFFFFF; }
+  ._btn--white:focus {
+    outline: none; }
+  ._btn--white:active {
+    outline: none; }
+  ._btn--white:hover {
+    background-color: #7e7e7e; }
+
 ._btn--cancel-float {
   margin-top: 3rem; }
 
@@ -1359,8 +1391,203 @@ ul {
       color: white;
       margin-left: 8rem; }
 
+._flash-btn {
+  border: none;
+  background-color: #fff; }
+  ._flash-btn:hover {
+    cursor: pointer; }
+
+._btn--lg {
+  width: 20rem;
+  margin: 1rem; }
+
+._btn--black {
+  padding: .5rem 1.5rem;
+  color: #fff;
+  border-radius: .5rem;
+  border: 1px solid;
+  outline: none;
+  font-size: 14px;
+  transition: .3s;
+  background-color: #000; }
+  ._btn--black:focus {
+    outline: none; }
+  ._btn--black:active {
+    outline: none; }
+  ._btn--black:hover {
+    background-color: #333333; }
+
+._btn--blue {
+  padding: .5rem 1.5rem;
+  color: #fff;
+  border-radius: .5rem;
+  border: 1px solid;
+  outline: none;
+  font-size: 14px;
+  transition: .3s;
+  background-color: #175593; }
+  ._btn--blue:focus {
+    outline: none; }
+  ._btn--blue:active {
+    outline: none; }
+  ._btn--blue:hover {
+    background-color: #103c67; }
+
+._btn--base-gray {
+  padding: .5rem 1.5rem;
+  color: #fff;
+  border-radius: .5rem;
+  border: 1px solid;
+  outline: none;
+  font-size: 14px;
+  transition: .3s;
+  background-color: #828282; }
+  ._btn--base-gray:focus {
+    outline: none; }
+  ._btn--base-gray:active {
+    outline: none; }
+  ._btn--base-gray:hover {
+    background-color: #4f4f4f; }
+
+._btn--gray {
+  padding: .5rem 1.5rem;
+  color: #fff;
+  border-radius: .5rem;
+  border: 1px solid;
+  outline: none;
+  font-size: 14px;
+  transition: .3s;
+  background-color: #979797; }
+  ._btn--gray:focus {
+    outline: none; }
+  ._btn--gray:active {
+    outline: none; }
+  ._btn--gray:hover {
+    background-color: #7e7e7e; }
+
+._btn--dgrey {
+  padding: .5rem 1.5rem;
+  color: #fff;
+  border-radius: .5rem;
+  border: 1px solid;
+  outline: none;
+  font-size: 14px;
+  transition: .3s;
+  background-color: #4F4F4F; }
+  ._btn--dgrey:focus {
+    outline: none; }
+  ._btn--dgrey:active {
+    outline: none; }
+  ._btn--dgrey:hover {
+    background-color: #363636; }
+
+._btn--white {
+  padding: .5rem 1.5rem;
+  color: #fff;
+  border-radius: .5rem;
+  border: 1px solid;
+  outline: none;
+  font-size: 14px;
+  transition: .3s;
+  background-color: #FFFFFF; }
+  ._btn--white:focus {
+    outline: none; }
+  ._btn--white:active {
+    outline: none; }
+  ._btn--white:hover {
+    background-color: #7e7e7e; }
+
+._btn--cancel-float {
+  margin-top: 3rem; }
+
+._btn--add_to_bidding {
+  margin-top: 3rem; }
+
+.sidebar__nav-links-bidding {
+  list-style-type: disc; }
+  .sidebar__nav-links-bidding .__disc-blue {
+    color: #007bff; }
+    .sidebar__nav-links-bidding .__disc-blue .__select_work_item-active {
+      color: #BDBDBD; }
+  .sidebar__nav-links-bidding li {
+    margin: 0.5rem; }
+  .sidebar__nav-links-bidding li a {
+    color: #BDBDBD; }
+  .sidebar__nav-links-bidding:hover {
+    color: #2F80ED; }
+
+.main-container, .exclusions-container, .clarifications-container {
+  display: flex;
+  flex-flow: column;
+  margin-left: auto;
+  margin-right: auto; }
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
+    background-color: black;
+    display: inline-flex;
+    justify-content: flex-start;
+    padding: .5rem 1rem;
+    align-items: center; }
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
+      color: white;
+      padding: .5rem 1rem;
+      background-color: #EB5757;
+      border-radius: .3rem; }
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
+      color: white;
+      margin-left: 8rem; }
+
+.container__header-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  .container__header-block > div:first-child {
+    display: inherit;
+    align-items: baseline; }
+    .container__header-block > div:first-child select {
+      margin-right: 1rem; }
+    .container__header-block > div:first-child div {
+      width: 100%; }
+      .container__header-block > div:first-child div button {
+        padding: 0.5rem 1rem 0.5rem; }
+
 .ddb_nav-side-bar {
   height: 64vh; }
+
+.form-control-resize {
+  min-width: 10vw;
+  cursor: pointer; }
+
+.edit_btn {
+  padding: .5rem 1.5rem;
+  color: #fff;
+  border-radius: .5rem;
+  border: 1px solid;
+  outline: none;
+  font-size: 14px;
+  transition: .3s;
+  background-color: #F2F2F2;
+  color: #000000;
+  border: 1px solid #E4E4E4; }
+  .edit_btn:focus {
+    outline: none; }
+  .edit_btn:active {
+    outline: none; }
+  .edit_btn:hover {
+    background-color: #bfbfbf;
+    color: #FFFFFF; }
+
+.bids_status_btns {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; }
+  .bids_status_btns button {
+    display: inline-flex;
+    color: #000000;
+    border: 1px solid #E4E4E4; }
+    .bids_status_btns button > div {
+      padding-right: 0.5rem; }
+    .bids_status_btns button:hover {
+      color: #FFFFFF; }
 
 .status_block {
   display: flex;
@@ -1378,6 +1605,10 @@ ul {
         background-color: #fff; }
     .status_block__bids_status .status-active {
       border-bottom: 5px solid #175593; }
+
+.biddings-table_check-box {
+  width: 26.5px;
+  vertical-align: middle !important; }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }

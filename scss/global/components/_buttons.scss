@@ -76,6 +76,15 @@
     }
 }
 
+._btn--white {
+    @include _btn;
+    background-color: #FFFFFF;
+
+    &:hover {
+        background-color:darken(#979797, 10%);
+    }
+}
+
 ._btn--cancel-float {
     margin-top: 3rem;
 }

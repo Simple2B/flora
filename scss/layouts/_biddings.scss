@@ -1,7 +1,66 @@
+@import '../global/components/buttons';
 @import '../global/variables';
+
+.container {
+    &__header-block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        & > div:first-child {
+            display: inherit;
+            align-items: baseline;
+            select {
+                margin-right: $m1rem;
+            }
+            div {
+                width: 100%;
+                button {
+                    padding: $m0-5rem $m1rem $m0-5rem;
+                }
+            }
+        }
+    }
+}
+
 
 .ddb_nav-side-bar {
     height: 64vh;
+}
+
+.form-control-resize {
+    min-width: 10vw;
+    cursor: pointer;
+}
+
+.edit_btn {
+    @include _btn;
+    background-color: #F2F2F2;
+    color: #000000;
+    border: 1px solid #E4E4E4;
+
+    &:hover {
+        background-color: darken( #F2F2F2, 20%);
+        color: #FFFFFF;
+    }
+}
+
+.bids_status_btns {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    button {
+        display: inline-flex;
+        color: #000000;
+        border: 1px solid #E4E4E4;
+
+        & > div {
+            padding-right: $m0-5rem;
+        }
+
+        &:hover {
+            color: #FFFFFF;
+        }
+    }
 }
 
 .status_block {
@@ -25,5 +84,12 @@
         .status-active {
             border-bottom: 5px solid #175593;
         }
+    }
+}
+
+.biddings-table {
+    &_check-box {
+        width: 26.5px;
+        vertical-align: middle !important;
     }
 }
