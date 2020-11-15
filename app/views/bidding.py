@@ -44,29 +44,51 @@ def biddings():
             )
             bidding.save()
 
-    status_active_all = session.get("status_active_all", "")
-    status_active_submitted = session.get("status_active_submitted", "")
-    status_active_archived = session.get("status_active_archived", "")
-    status_active_draft = session.get("status_active_draft", "")
+    # status_active_all = session.get("status_active_all", "")
+    # status_active_submitted = session.get("status_active_submitted", "")
+    # status_active_archived = session.get("status_active_archived", "")
+    # status_active_draft = session.get("status_active_draft", "")
 
-    if status_active_submitted:
-        bids = Bid.query.filter(Bid.status == Bid.Status.c_submitted).all()
-    elif status_active_archived:
-        bids = Bid.query.filter(Bid.status == Bid.Status.d_archived).all()
-    elif status_active_draft:
-        bids = Bid.query.filter(Bid.status == Bid.Status.b_draft).all()
-    else:
-        status_active_all = "status-active"
-        bids = Bid.query.order_by(Bid.status).all()
-
+    # if status_active_submitted:
+    #     bids = Bid.query.filter(Bid.status == Bid.Status.c_submitted).all()
+    # elif status_active_archived:
+    #     bids = Bid.query.filter(Bid.status == Bid.Status.d_archived).all()
+    # elif status_active_draft:
+    #     bids = Bid.query.filter(Bid.status == Bid.Status.b_draft).all()
+    # else:
+    #     status_active_all = "status-active"
+    #     bids = Bid.query.order_by(Bid.status).all()
+    bids = Bid.query.order_by(Bid.status).all()
     return render_template(
         "biddings.html",
         bids=bids,
-        status_active_all=status_active_all,
-        status_active_submitted=status_active_submitted,
-        status_active_archived=status_active_archived,
-        status_active_draft=status_active_draft,
     )
+    # form = FlaskForm(request.form)
+    # if form.validate_on_submit():
+    #     session["status_active_draft"] = ""
+    #     session["status_active_submitted"] = ""
+    #     session["status_active_archived"] = ""
+    #     session["status_active_all"] = ""
+    #     if request.form["bids_status"] == "Draft":
+    #         session["status_active_draft"] = "status-active"
+    #     elif request.form["bids_status"] == "Submitted":
+    #         session["status_active_submitted"] = "status-active"
+    #     elif request.form["bids_status"] == "Archived":
+    #         session["status_active_archived"] = "status-active"
+    #     else:
+    #         session["status_active_all"] = "status-active"
+    #     return redirect(url_for("bidding.biddings"))
+    # elif form.is_submitted():
+    #     log(log.INFO, "Form submitted")
+
+    # return render_template(
+    #     "biddings.html",
+    #     bids=bids,
+    #     status_active_all=status_active_all,
+    #     status_active_submitted=status_active_submitted,
+    #     status_active_archived=status_active_archived,
+    #     status_active_draft=status_active_draft,
+    # )
 
 
 @bidding_blueprint.route("/change_status", methods=["POST"])

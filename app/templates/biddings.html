@@ -35,15 +35,15 @@
       </input>
     </span>
 
-    <form action="{{ url_for('bidding.change_status') }}" method="post" id="status_form_id">
+    <form action=" url_for('')" id="status_form_id">
     <div class="status_block">
-      <span class="t-gray">Showing {{ bids|length }} Documents</span>
+      <span class="t-gray">Showing  bids|length  Documents</span>
       <div class="status_block__bids_status">
 
-        <div> <button type="submit" name="bids_status" value="Draft" class="{{ status_active_draft }}" id="bids_draft_id"> Draft </button></div>
-        <div id="bids_submitted_id"  > <button name="bids_status" value="Submitted" class="{{ status_active_submitted }}">Submitted </button></div>
-        <div> <button name="bids_status" value="Archived" id="bids_archived_id" class="{{ status_active_archived }}">Archived </button></div>
-        <div> <button name="bids_status" id="bids_all_id" class="{{ status_active_all }}">All </button></div>
+        <div> <button type="submit" name="bids_status" value="Draft" class=" status_active_draft " id="bids_draft_id"> Draft </button></div>
+        <div id="bids_submitted_id"  > <button name="bids_status" value="Submitted" class=" status_active_submitted ">Submitted </button></div>
+        <div> <button name="bids_status" value="Archived" id="bids_archived_id" class=" status_active_archived ">Archived </button></div>
+        <div> <button name="bids_status" id="bids_all_id" class=" status_active_all ">All </button></div>
 
       </div>
     </div>
