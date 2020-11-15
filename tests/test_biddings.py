@@ -25,6 +25,12 @@ def client():
         app_ctx.pop()
 
 
+def test_edited_bids(client):
+    response = client.post("/edited_bids", data={'1': 'on', '2': 'on'}, follow_redirects=True)
+    assert response.status_code == 200
+    assert b'Archived' in response.data
+
+
 def test_biddings(client):
     response = client.get("/biddings")
     assert response.status_code == 200

@@ -28,15 +28,12 @@ def finish_edit_bid():
 @bidding_blueprint.route("/edited_bids", methods=["GET", "POST"])
 @login_required
 def edited_bids():
-    # form = FlaskForm(request.form)
-    bids_list = request.form.get('bid_choice', 'off')
-    bids_list = [bid for bid in request.form if request.form.get('bid_choice', '') == 'on']
-    # for bid in request.form
-
-    for bid in bids_list:
-        if request.form['bid_choice'] == 'on':
-
-            pass
+    FlaskForm(request.form)
+    bids_list = [int(bid_id) for bid_id in request.form if request.form.get(bid_id, '') == 'on']
+    for bid_id in bids_list:
+        bid = Bid.query.get(bid_id)
+        bid.status = Bid.Status.d_archived
+        bid.save()
     return redirect(url_for("bidding.biddings"))
 
 
