@@ -71,7 +71,7 @@
           <th>Status</th>
           <th>Last updated</th>
 
-          <button type="submit" form="finish_edit_bid_form">Archived</button>
+          <button type="submit" form="finish_edit_bids_form">Archived</button>
 
           {% else %}
           <th>Bidding ID</th>
@@ -84,30 +84,33 @@
         </thead>
         <tbody>
           {% if edit_bid %}
-          <form action="{{ url_for('bidding.edited_bid') }}" method="post" id="finish_edit_bid_form">
+          <form action="{{ url_for('bidding.edited_bids') }}" method="post" id="finish_edit_bids_form">
             {% for bid in bids %}
-            <tr>
-              <td><input class="form-control" type="checkbox" name="bid_choice"></td>
-              <td><a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
-              <td>{{ bid.title }}</td>
-              <td>test</td>
-              <td>{{ bid.client }}</td>
-              <td>{{ bid.status.value }}</td>
-              <td>test</td>
-            </tr>
+              <tr>
+                <td><input class="form-control" type="checkbox" name="{{bid.id}}"></td>
+                <td><a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
+                <td>{{ bid.title }}</td>
+                <td>test</td>
+                <td>{{ bid.client }}</td>
+                <td>{{ bid.status.value }}</td>
+                <td>test</td>
+                <!-- <td>
+                  <button type="submit" form="finish_edit_bid_form">Archived</button>
+                </td> -->
+              </tr>
             {% endfor %}
           </form>
           {% else %}
-          <form>
+          <form action="{{ url_for('bidding.edited_bids') }}" method="post" id="finish_edit_bid_form">
             {% for bid in bids %}
-            <tr>
-              <td><a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
-              <td>{{ bid.title }}</td>
-              <td>test</td>
-              <td>{{ bid.client }}</td>
-              <td>{{ bid.status.value }}</td>
-              <td>test</td>
-            </tr>
+              <tr>
+                <td><a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
+                <td>{{ bid.title }}</td>
+                <td>test</td>
+                <td>{{ bid.client }}</td>
+                <td>{{ bid.status.value }}</td>
+                <td>test</td>
+              </tr>
             {% endfor %}
           </form>
           {% endif %}

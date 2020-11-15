@@ -11,7 +11,7 @@ from app.logger import log
 bidding_blueprint = Blueprint("bidding", __name__)
 
 
-@bidding_blueprint.route("/edit_bid_table")
+@bidding_blueprint.route("/edit_bid")
 @login_required
 def edit_bid():
     session["edit_bid"] = True
@@ -25,14 +25,17 @@ def finish_edit_bid():
     return redirect(url_for("bidding.biddings"))
 
 
-@bidding_blueprint.route("/edited_bid_table", methods=["GET", "POST"])
+@bidding_blueprint.route("/edited_bids", methods=["GET", "POST"])
 @login_required
-def edited_bid():
+def edited_bids():
     # form = FlaskForm(request.form)
     bids_list = request.form.get('bid_choice', 'off')
+    bids_list = [bid for bid in request.form if request.form.get('bid_choice', '') == 'on']
+    # for bid in request.form
+
     for bid in bids_list:
         if request.form['bid_choice'] == 'on':
-            # x = 10
+
             pass
     return redirect(url_for("bidding.biddings"))
 

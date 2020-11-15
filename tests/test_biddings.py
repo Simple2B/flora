@@ -15,8 +15,8 @@ def client():
         app_ctx.push()
         db.drop_all()
         db.create_all()
-        bid_generation()
         populate_db_by_test_data()
+        bid_generation()
         register("sam")
         login(client, "sam")
         yield client

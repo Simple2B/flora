@@ -4,7 +4,7 @@ from app.models import Bid
 
 def bid_generation():
     Bid(
-        procore_bid_id=105,
+        procore_bid_id=106,
         title="bidding 5",
         client="Procore (Test Companies)",
         status=Bid.Status.b_draft
@@ -12,15 +12,15 @@ def bid_generation():
 
     for i in range(3):
         Bid(
-            procore_bid_id=106+i,
+            procore_bid_id=107+i,
             title="bidding i",
-            client="Procore (Test Companies)",
+            client="Test company",
             status=Bid.Status.c_submitted
         ).save()
 
     for i in range(4):
         Bid(
-            procore_bid_id=109+i,
+            procore_bid_id=110+i,
             title=f"bidding {3+i}",
             client="Procore (Test Companies)",
             status=Bid.Status.d_archived

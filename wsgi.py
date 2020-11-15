@@ -51,8 +51,8 @@ def fill_db():
     user.save()
 
     if app.config['GENERATE_TEST_DATA']:
-        bid_generation()
         populate_db_by_test_data()
+        bid_generation()
 
 
 @app.cli.command()
