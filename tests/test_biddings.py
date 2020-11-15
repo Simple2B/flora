@@ -27,4 +27,4 @@ def client():
 def test_biddings(client):
     response = client.get("/biddings")
     assert response.status_code == 200
-    assert b"Procore (Test Companies)" in response.data
+    assert b"Client" in response.data
