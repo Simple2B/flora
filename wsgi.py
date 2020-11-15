@@ -4,7 +4,7 @@ import click
 
 from app import create_app, db, models, forms
 from app.models import User
-from app.controllers import populate_db_by_test_data
+from app.controllers import populate_db_by_test_data, bid_generation
 
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "1234")
@@ -51,6 +51,7 @@ def fill_db():
     user.save()
 
     if app.config['GENERATE_TEST_DATA']:
+        bid_generation()
         populate_db_by_test_data()
 
 

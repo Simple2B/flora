@@ -2,7 +2,7 @@ import pytest
 
 from app import db, create_app
 from tests.utils import register, login
-from app.controllers import populate_db_by_test_data
+from app.controllers import populate_db_by_test_data, bid_generation
 
 
 @pytest.fixture
@@ -15,6 +15,7 @@ def client():
         app_ctx.push()
         db.drop_all()
         db.create_all()
+        bid_generation()
         populate_db_by_test_data()
         register("sam")
         login(client, "sam")
