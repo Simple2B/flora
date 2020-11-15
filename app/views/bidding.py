@@ -11,6 +11,20 @@ from app.logger import log
 bidding_blueprint = Blueprint("bidding", __name__)
 
 
+@bidding_blueprint.route("/edit_bid")
+@login_required
+def edit_bid():
+    session["edit_bid"] = True
+    return redirect(url_for("bidding.biddings"))
+
+
+@bidding_blueprint.route("/finish_edit_bid")
+@login_required
+def finish_edit_bid():
+    session["edit_bid"] = False
+    return redirect(url_for("bidding.biddings"))
+
+
 @bidding_blueprint.route("/biddings")
 @login_required
 def biddings():
@@ -45,7 +59,7 @@ def biddings():
             )
             bidding.save()
 
-    bids = Bid.query.order_by(Bid.status).all()
+    edit_bid = session.get('edit_bid', False)
 
     status_active_all = session.get("status_active_all", "")
     status_active_submitted = session.get("status_active_submitted", "")
@@ -92,6 +106,7 @@ def biddings():
     return render_template(
         "biddings.html",
         bids=bids,
+        edit_bid=edit_bid,
         status_active_all=status_active_all,
         status_active_submitted=status_active_submitted,
         status_active_archived=status_active_archived,

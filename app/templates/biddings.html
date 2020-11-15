@@ -28,9 +28,19 @@
         <option value="Most popular" name="Most popular">Most popular</option>
         <option value="Most recent" name="Most recent">Most recent</option>
       </select>
-      <button type="button" class="_btn--gray" data-toggle="modal" data-target="#exampleModal">
+      {% if edit_bid %}
+      <a href="{{ url_for('bidding.finish_edit_bid') }}">
+        <button class="_btn--gray">
+        Finish Editing
+        </button>
+      </a>
+      {% else %}
+      <a href="{{ url_for('bidding.edit_bid') }}">
+        <button class="_btn--gray">
         Edit
-      </button>
+        </button>
+      </a>
+      {% endif %}
       <input type="input" style="float: right;">
       </input>
     </span>
@@ -53,14 +63,37 @@
     <div class="margin--top">
       <table id="" class="patientsTable table table-striped table-sm">
         <thead class="bck-ground">
+          {% if edit_bid %}
+          <th></th>
           <th>Bidding ID</th>
           <th>Title</th>
           <th>PM</th>
           <th>Client</th>
           <th>Status</th>
           <th>Last updated</th>
+          {% else %}
+          <th>Bidding ID</th>
+          <th>Title</th>
+          <th>PM</th>
+          <th>Client</th>
+          <th>Status</th>
+          <th>Last updated</th>
+          {% endif %}
         </thead>
         <tbody>
+          {% if edit_bid %}
+          {% for bid in bids %}
+          <tr>
+            <td><input class="form-control" type="checkbox"></td>
+            <td><a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
+            <td>{{ bid.title }}</td>
+            <td>test</td>
+            <td>{{ bid.client }}</td>
+            <td>{{ bid.status.value }}</td>
+            <td>test</td>
+          </tr>
+          {% endfor %}
+          {% else %}
           {% for bid in bids %}
           <tr>
             <td><a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
@@ -71,6 +104,7 @@
             <td>test</td>
           </tr>
           {% endfor %}
+          {% endif %}
         </tbody>
       </table>
     </div>
