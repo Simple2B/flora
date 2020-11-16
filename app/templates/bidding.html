@@ -62,28 +62,20 @@
     <div class="main-container_bidding-header">
       <div class="__bid-header_start_block">
         <div class="bid-header__status">
-          <form action="{{ url_for('bid.bidding', bid_id=bid.id) }}" method="post">
+          <form action="{{ url_for('bid.bidding_change_status', bid_id=bid.id) }}" method="post">
             <select onchange="this.form.submit()" name="bid_status">
-              {% if form_bid.bid_status == "Draft" %}
+              {% if bid.status.value == "Draft" %}
               <option selected value="Draft"> {{ bid.status.value }} </option>
-              <option value="New"> New </option>
               <option value="Submitted"> Submitted </option>
               <option value="Archived"> Archived </option>
-              {% elif form_bid.bid_status == "New" %}
+              {% elif bid.status.value == "Submitted" %}
               <option value="Draft"> Draft </option>
-              <option selected value="New"> {{ bid.status.value }} </option>
-              <option value="Submitted"> Submitted </option>
-              <option value="Archived"> Archived </option>
-              {% elif form_bid.bid_status == "Submitted" %}
-              <option value="Draft"> Draft </option>
-              <option value="New"> New </option>
               <option selected value="Submitted"> {{ bid.status.value }} </option>
               <option value="Archived"> Archived </option>
               {% else %}
-              <option selected value="Draft"> Draft </option>
-              <option value="New"> New </option>
+              <option value="Draft"> Draft </option>
               <option value="Submitted"> Submitted </option>
-              <option selected value="{{ bid.status.value }}"> {{ bid.status.value }} </option>
+              <option selected value="Archived"> {{ bid.status.value }} </option>
               {% endif %}
             </select>
           </form>

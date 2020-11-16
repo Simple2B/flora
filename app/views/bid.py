@@ -198,11 +198,31 @@ def edit_clarifications(bid_id):
     return redirect(url_for("clarification.clarifications", bid_id=bid_id))
 
 
-@bid_blueprint.route("/bidding/<int:bid_id>", methods=["GET", "POST"])
+@bid_blueprint.route("/bidding_change_status/<int:bid_id>", methods=["POST"])
+@login_required
+def bidding_change_status(bid_id):
+    form = BidForm(request.form)
+    bid = Bid.query.get(bid_id)
+    if form.validate_on_submit():
+        if request.form.get("bid_status", "") == "Draft":
+            bid.status = Bid.Status.b_draft
+            bid.save()
+        elif request.form.get("bid_status", "") == "Submitted":
+            bid.status = Bid.Status.c_submitted
+            bid.save()
+        else:
+            bid.status = Bid.Status.d_archived
+            bid.save()
+    elif bid.is_submitted():
+        log(log.WARNING, "Bid status form is submitted")
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
+
+
+@bid_blueprint.route("/bidding/<int:bid_id>", methods=["GET"])
 @login_required
 def bidding(bid_id):
     bid = Bid.query.get(bid_id)
-    form_bid = BidForm(request.form)
+    form_bid = BidForm()
     form = WorkItemLineForm()
 
     form_bid.global_work_items = (
@@ -231,15 +251,6 @@ def bidding(bid_id):
     ) + "."
     show_clarifications = show_clarifications.capitalize()
     calculate_subtotal(bid_id)
-
-    # form_bid.status_lists = [attr for attr in dir(bid.Status) if not attr.startswith("__")]
-    form_bid.bid_status = "Draft"
-    if form_bid.validate_on_submit():
-        form_bid.bid_status = request.form["bid_status"]
-        bid.status = Bid.status.a_new
-        bid.save()
-    elif form_bid.is_submitted():
-        log(log.WARNING, "Bid status form is submitted")
 
     return render_template(
         "bidding.html",
