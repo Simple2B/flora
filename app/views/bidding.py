@@ -88,32 +88,6 @@ def biddings():
         status_active_all = "status-active"
         bids = Bid.query.order_by(Bid.status).all()
 
-    # form = FlaskForm(request.form)
-    # if form.validate_on_submit():
-    #     session["status_active_draft"] = ""
-    #     session["status_active_submitted"] = ""
-    #     session["status_active_archived"] = ""
-    #     session["status_active_all"] = ""
-    #     if request.form["bids_status"] == "Draft":
-    #         session["status_active_draft"] = "status-active"
-    #     elif request.form["bids_status"] == "Submitted":
-    #         session["status_active_submitted"] = "status-active"
-    #     elif request.form["bids_status"] == "Archived":
-    #         session["status_active_archived"] = "status-active"
-    #     else:
-    #         session["status_active_all"] = "status-active"
-    #     return redirect(url_for("bidding.biddings"))
-    # elif form.is_submitted():
-    #     log(log.INFO, "Form submitted")
-
-    # return render_template(
-    #     "biddings.html",
-    #     bids=bids,
-    #     status_active_all=status_active_all,
-    #     status_active_submitted=status_active_submitted,
-    #     status_active_archived=status_active_archived,
-    #     status_active_draft=status_active_draft,
-    # )
 
     return render_template(
         "biddings.html",
