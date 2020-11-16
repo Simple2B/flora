@@ -132,7 +132,7 @@
             padding-right: 1rem;
         }
 
-        /********** begin bid price container */
+        /********** begin bid work items container */
 
         .bid_work_items_container {
             display: -webkit-box;
@@ -140,6 +140,7 @@
             -webkit-box-orient: vertical;
         }
 
+        /* Pagination */
         .keep-together {
             page-break-inside: avoid;
         }
@@ -151,22 +152,23 @@
         .break-after {
             page-break-after: always;
         }
+        /* end Pagination */
 
-        .bid_work_items_container .bid_subtotal_value {
+        .bid_subtotal_value {
             display: -webkit-box;
             -webkit-box-pack: end;
             font-weight: bold;
             font-size: 18px;
         }
 
-        .bid_work_items_container .bid_work_item {
+        .bid_work_item {
             display: -webkit-box;
             -webkit-box-pack: justify;
             font-weight: bold;
             font-size: 18px;
         }
 
-        .bid_work_items_container .work_item_note {
+        .work_item_note {
             display: -webkit-box;
             -webkit-box-pack: justify;
             margin-bottom: 1rem;
@@ -221,16 +223,16 @@
         .group_title span
         {border-bottom: 3px solid #333333;}
 
-        .bid_work_items_container ._group-block {
+        ._group-block {
             padding: 0.5rem;
         }
 
-        .bid_work_items_container .bid_subtotal_container .bid_subtotal {
+        .bid_subtotal_container .bid_subtotal {
             display: -webkit-box;
             -webkit-box-pack: end;
         }
 
-        /********** end bid price container */
+        /********** end bid work items container */
 
         .bid_subtotal .bid_subtotal_bid_features {
             display: -webkit-box;
@@ -388,8 +390,7 @@
                     <div class="section_letter">Section A: Scope of Work</div>
                     <h5>Please find our detailed Quote for the above referenced project as outlined below:</h5>
 
-                    <div class="bid_work_items_container keep-together">
-                        <div class="">
+                    <div class="bid_work_items_container break-after">
 
                         {% for link_work_item in global_work_items %}
                         <div class="bid_work_item">
@@ -418,9 +419,9 @@
                         </div>
                         {% endfor %}
 
-                        </div>
-                        <!-- # Pagination -->
-                        <div class="">
+                    </div>
+                    <!-- # Pagination -->
+                    <div class="bid_work_items_container keep-together">
 
                         {% for group in groups %}
                         <div> <h4 class="group_title"> <span> Work Group: {{ group.name }} </span> </h4> </div>
@@ -454,111 +455,110 @@
                             {% endfor %}
                         </div>
                         {% endfor %}
-                        </div>
+                    </div>
 
-                        <div class="bid_subtotal_container">
-                            <div class="bid_subtotal">
-                                <div class="bid_subtotal_bid_features">
-                                    <div class="feature_price">
-                                        <div>
-                                            Subtotal:
-                                        </div>
-                                        <div class="feature_price">
-                                            ${{ bid.subtotal }}
-                                        </div>
+                    <div class="bid_subtotal_container keep-together">
+                        <div class="bid_subtotal">
+                            <div class="bid_subtotal_bid_features">
+                                <div class="feature_price">
+                                    <div>
+                                        Subtotal:
                                     </div>
                                     <div class="feature_price">
-                                        <div>
-                                            Permit/Filing Free:
-                                        </div>
-                                        {% if bid.permit_filling_fee %}
-                                        <div>
-                                            ${{ bid.permit_filling_fee }}
-                                        </div>
-                                        {% else %}
-                                        <div>
-                                            T.B.D
-                                        </div>
-                                        {% endif %}
+                                        ${{ bid.subtotal }}
                                     </div>
-                                    <div class="feature_price">
-                                        <div class="general_padding-r">
-                                            General Conditions:
-                                        </div>
-                                        {% if bid.general_conditions %}
-                                        <div>
-                                            ${{ bid.general_conditions }}
-                                        </div>
-                                        {% else %}
-                                        <div>
-                                            T.B.D
-                                        </div>
-                                        {% endif %}
+                                </div>
+                                <div class="feature_price">
+                                    <div>
+                                        Permit/Filing Free:
                                     </div>
-                                    <div class="feature_price">
-                                        <div>
-                                            Insurance/Tax:
-                                        </div>
-                                        {% if bid.insurance_tax %}
-                                        <div>
-                                            ${{ bid.insurance_tax }}
-                                        </div>
-                                        {% else %}
-                                        <div>
-                                            T.B.D
-                                        </div>
-                                        {% endif %}
+                                    {% if bid.permit_filling_fee %}
+                                    <div>
+                                        ${{ bid.permit_filling_fee }}
                                     </div>
-                                    <div class="feature_price">
-                                        <div>
-                                            Overhead:
-                                        </div>
-                                        {% if bid.overhead %}
-                                        <div>
-                                            ${{ bid.overhead }}
-                                        </div>
-                                        {% else %}
-                                        <div>
-                                            T.B.D
-                                        </div>
-                                        {% endif %}
+                                    {% else %}
+                                    <div>
+                                        T.B.D
                                     </div>
-                                    <div class="feature_price">
-                                        <div>
-                                            Profit:
-                                        </div>
-                                        {% if bid.profit %}
-                                        <div>
-                                            ${{ bid.profit }}
-                                        </div>
-                                        {% else %}
-                                        <div>
-                                            T.B.D
-                                        </div>
-                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <div class="feature_price">
+                                    <div class="general_padding-r">
+                                        General Conditions:
                                     </div>
-                                    <div class="feature_price">
-                                        <div>
-                                            Bond:
-                                        </div>
-                                        {% if bid.bond %}
-                                        <div>
-                                            ${{ bid.bond }}
-                                        </div>
-                                        {% else %}
-                                        <div>
-                                            T.B.D
-                                        </div>
-                                        {% endif %}
+                                    {% if bid.general_conditions %}
+                                    <div>
+                                        ${{ bid.general_conditions }}
                                     </div>
+                                    {% else %}
+                                    <div>
+                                        T.B.D
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div class="feature_price">
+                                    <div>
+                                        Insurance/Tax:
+                                    </div>
+                                    {% if bid.insurance_tax %}
+                                    <div>
+                                        ${{ bid.insurance_tax }}
+                                    </div>
+                                    {% else %}
+                                    <div>
+                                        T.B.D
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div class="feature_price">
+                                    <div>
+                                        Overhead:
+                                    </div>
+                                    {% if bid.overhead %}
+                                    <div>
+                                        ${{ bid.overhead }}
+                                    </div>
+                                    {% else %}
+                                    <div>
+                                        T.B.D
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div class="feature_price">
+                                    <div>
+                                        Profit:
+                                    </div>
+                                    {% if bid.profit %}
+                                    <div>
+                                        ${{ bid.profit }}
+                                    </div>
+                                    {% else %}
+                                    <div>
+                                        T.B.D
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div class="feature_price">
+                                    <div>
+                                        Bond:
+                                    </div>
+                                    {% if bid.bond %}
+                                    <div>
+                                        ${{ bid.bond }}
+                                    </div>
+                                    {% else %}
+                                    <div>
+                                        T.B.D
+                                    </div>
+                                    {% endif %}
+                                </div>
 
-                                    <div class="feature_price">
-                                        <div>
-                                            Grand Total:
-                                        </div>
-                                        <div>
-                                            ${{ bid.grand_subtotal }}
-                                        </div>
+                                <div class="feature_price">
+                                    <div>
+                                        Grand Total:
+                                    </div>
+                                    <div>
+                                        ${{ bid.grand_subtotal }}
                                     </div>
                                 </div>
                             </div>
