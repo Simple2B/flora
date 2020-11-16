@@ -23,44 +23,111 @@
   </nav>
   <div class="container" id="work-item-container">
 
-    <span>
-      <select>
-        <option value="Most popular" name="Most popular">Most popular</option>
-        <option value="Most recent" name="Most recent">Most recent</option>
-      </select>
-      <button type="button" class="_btn--gray" data-toggle="modal" data-target="#exampleModal">
-        Edit
-      </button>
-      <input type="input" style="float: right;">
+    <div class="container__header-block">
+      <div>
+        <select class="form-control form-control-resize">
+          <option value="Most popular" name="Most popular">Most popular</option>
+          <option value="Most recent" name="Most recent">Most recent</option>
+        </select>
+        <div>
+        {% if edit_bid %}
+        <a href="{{ url_for('bidding.finish_edit_bid') }}">
+          <button class="edit_btn ddb-cursor-handle">
+            Finish Editing
+          </button>
+        </a>
+        {% else %}
+        <a href="{{ url_for('bidding.edit_bid') }}">
+          <button class="edit_btn ddb-cursor-handle">
+          Edit
+          </button>
+        </a>
+        {% endif %}
+        </div>
+      </div>
+      <input type="input">
       </input>
-    </span>
+    </div>
 
-    <form>
-    <div class="margin--top">
+    {% if edit_bid %}
+    <div class="bids_status_btns">
+      <button type="submit" form="edit_bids_form" class="_btn--white ddb-cursor-handle">
+      <div>
+        <img src="{{ url_for('static', filename='images/bids_status_box.svg') }}">
+      </div>
+      <span>Archived</span>
+      </button>
+    </div>
+    {% endif %}
+
+    <form action="{{ url_for('bidding.change_status') }}" method="post" id="status_form_id">
+      <div class="status_block">
+        <span class="t-gray">Showing {{ bids|length }} Documents</span>
+        <div class="status_block__bids_status">
+
+          <div> <button type="submit" name="bids_status" value="Draft" class="{{ status_active_draft }}" id="bids_draft_id"> Draft </button></div>
+          <div id="bids_submitted_id"  > <button name="bids_status" value="Submitted" class="{{ status_active_submitted }}">Submitted </button></div>
+          <div> <button name="bids_status" value="Archived" id="bids_archived_id" class="{{ status_active_archived }}">Archived </button></div>
+          <div> <button name="bids_status" id="bids_all_id" class="{{ status_active_all }}">All </button></div>
+
+        </div>
+      </div>
+    </form>
+
+    <div class="biddings-table margin--top">
       <table id="" class="patientsTable table table-striped table-sm">
         <thead class="bck-ground">
+          {% if edit_bid %}
+          <th></th>
           <th>Bidding ID</th>
           <th>Title</th>
           <th>PM</th>
           <th>Client</th>
           <th>Status</th>
           <th>Last updated</th>
+          {% else %}
+          <th>Bidding ID</th>
+          <th>Title</th>
+          <th>PM</th>
+          <th>Client</th>
+          <th>Status</th>
+          <th>Last updated</th>
+          {% endif %}
         </thead>
         <tbody>
-          {% for bid in bids %}
-          <tr>
-            <td><a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
-            <td>{{ bid.title }}</td>
-            <td>test</td>
-            <td>{{ bid.client }}</td>
-            <td>{{ bid.status.value }}</td>
-            <td>test</td>
-          </tr>
-          {% endfor %}
+          {% if edit_bid %}
+          <form action="{{ url_for('bidding.edited_bids') }}" method="post" id="edit_bids_form">
+            {% for bid in bids %}
+              <tr>
+                <td class="biddings-table_check-box">
+                  <input class="form-control" type="checkbox" name="{{bid.id}}">
+                </td>
+                <td><a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
+                <td>{{ bid.title }}</td>
+                <td>test</td>
+                <td>{{ bid.client }}</td>
+                <td>{{ bid.status.value }}</td>
+                <td>test</td>
+              </tr>
+            {% endfor %}
+          </form>
+          {% else %}
+          <form action="{{ url_for('bidding.edited_bids') }}" method="post" id="edit_bids_form">
+            {% for bid in bids %}
+              <tr>
+                <td><a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
+                <td>{{ bid.title }}</td>
+                <td>test</td>
+                <td>{{ bid.client }}</td>
+                <td>{{ bid.status.value }}</td>
+                <td>test</td>
+              </tr>
+            {% endfor %}
+          </form>
+          {% endif %}
         </tbody>
       </table>
     </div>
-    </form>
 
   </div>
 </section>

@@ -1,11 +1,40 @@
-from flask import Blueprint, render_template, redirect, url_for, session
+from flask import Blueprint, render_template, redirect, url_for, session, request
 from flask_login import login_required
 from flask import current_app
+from flask_wtf import FlaskForm
+
 from app.procore import ProcoreApi
 
 from app.models import Bid
+from app.logger import log
 
 bidding_blueprint = Blueprint("bidding", __name__)
+
+
+@bidding_blueprint.route("/edit_bid")
+@login_required
+def edit_bid():
+    session["edit_bid"] = True
+    return redirect(url_for("bidding.biddings"))
+
+
+@bidding_blueprint.route("/finish_edit_bid")
+@login_required
+def finish_edit_bid():
+    session["edit_bid"] = False
+    return redirect(url_for("bidding.biddings"))
+
+
+@bidding_blueprint.route("/edited_bids", methods=["GET", "POST"])
+@login_required
+def edited_bids():
+    FlaskForm(request.form)
+    bids_list = [int(bid_id) for bid_id in request.form if request.form.get(bid_id, '') == 'on']
+    for bid_id in bids_list:
+        bid = Bid.query.get(bid_id)
+        bid.status = Bid.Status.d_archived
+        bid.save()
+    return redirect(url_for("bidding.biddings"))
 
 
 @bidding_blueprint.route("/biddings")
@@ -42,9 +71,55 @@ def biddings():
             )
             bidding.save()
 
-    bids = Bid.query.order_by(Bid.status).all()
+    edit_bid = session.get('edit_bid', False)
 
-    return render_template("biddings.html", bids=bids)
+    status_active_all = session.get("status_active_all", "")
+    status_active_submitted = session.get("status_active_submitted", "")
+    status_active_archived = session.get("status_active_archived", "")
+    status_active_draft = session.get("status_active_draft", "")
+
+    if status_active_submitted:
+        bids = Bid.query.filter(Bid.status == Bid.Status.c_submitted).all()
+    elif status_active_archived:
+        bids = Bid.query.filter(Bid.status == Bid.Status.d_archived).all()
+    elif status_active_draft:
+        bids = Bid.query.filter(Bid.status == Bid.Status.b_draft).all()
+    else:
+        status_active_all = "status-active"
+        bids = Bid.query.order_by(Bid.status).all()
+
+    return render_template(
+        "biddings.html",
+        bids=bids,
+        edit_bid=edit_bid,
+        status_active_all=status_active_all,
+        status_active_submitted=status_active_submitted,
+        status_active_archived=status_active_archived,
+        status_active_draft=status_active_draft,
+    )
+
+
+@bidding_blueprint.route("/change_status", methods=["POST"])
+@login_required
+def change_status():
+    form = FlaskForm(request.form)
+    if form.validate_on_submit():
+        session["status_active_draft"] = ""
+        session["status_active_submitted"] = ""
+        session["status_active_archived"] = ""
+        session["status_active_all"] = ""
+        if request.form["bids_status"] == "Draft":
+            session["status_active_draft"] = "status-active"
+        elif request.form["bids_status"] == "Submitted":
+            session["status_active_submitted"] = "status-active"
+        elif request.form["bids_status"] == "Archived":
+            session["status_active_archived"] = "status-active"
+        else:
+            session["status_active_all"] = "status-active"
+        return redirect(url_for("bidding.biddings"))
+    elif form.is_submitted():
+        log(log.INFO, "Form submitted")
+    return redirect(url_for("bidding.biddings"))
 
 
 @bidding_blueprint.route("/delete_exclusions/<int:bid_id>")
@@ -68,9 +143,7 @@ def delete_clarifications(bid_id):
     bid = Bid.query.get(bid_id)
     for clarification_link in bid.clarification_links:
         clarification_link.delete()
-    return redirect(
-        url_for("bid.bidding", bid_id=bid_id, _anchor="bid_clarification")
-    )
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_clarification"))
 
 
 @bidding_blueprint.route("/edit_clarifications/<int:bid_id>")
