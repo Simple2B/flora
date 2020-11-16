@@ -941,6 +941,14 @@ ul {
 ._btn--add_to_bidding {
   margin-top: 3rem; }
 
+.__bid_status-default, .__bid_status-draft, .__bid_status-submitted, .__bid_status-archived {
+  color: white;
+  padding: .5rem 1rem;
+  border-radius: .3rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
 .navbar-nav .nav-link {
   padding-left: 1rem; }
 
@@ -1048,11 +1056,21 @@ ul {
   color: #FFFFFF;
   padding: 0rem 0.5rem 0rem 0rem; }
 
-.bid-header__status {
-  color: white;
-  padding: .5rem 1rem;
-  background-color: #EB5757;
-  border-radius: .3rem; }
+.__bid_status-default {
+  color: #000;
+  background-color: #FFFFFF; }
+  .__bid_status-default:hover {
+    background-color: #F2F2F2;
+    cursor: pointer; }
+
+.__bid_status-draft {
+  background-color: #EB5757; }
+
+.__bid_status-submitted {
+  background-color: #2F80ED; }
+
+.__bid_status-archived {
+  background-color: #979797; }
 
 .bid-header__title {
   color: white;

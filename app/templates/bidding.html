@@ -61,23 +61,30 @@
   <div class="main-container_bidding" id="work-item-container">
     <div class="main-container_bidding-header">
       <div class="__bid-header_start_block">
-        <div class="bid-header__status">
+        <div>
           <form action="{{ url_for('bid.bidding_change_status', bid_id=bid.id) }}" method="post">
-            <select onchange="this.form.submit()" name="bid_status">
-              {% if bid.status.value == "Draft" %}
-              <option selected value="Draft"> {{ bid.status.value }} </option>
-              <option value="Submitted"> Submitted </option>
-              <option value="Archived"> Archived </option>
-              {% elif bid.status.value == "Submitted" %}
-              <option value="Draft"> Draft </option>
-              <option selected value="Submitted"> {{ bid.status.value }} </option>
-              <option value="Archived"> Archived </option>
-              {% else %}
-              <option value="Draft"> Draft </option>
-              <option value="Submitted"> Submitted </option>
-              <option selected value="Archived"> {{ bid.status.value }} </option>
-              {% endif %}
+            {% if bid.status.value == "Draft" %}
+            <select class="__bid_status-draft" onchange="this.form.submit()" name="bid_status">
+              {{ bid.status.value }}
+              <option class="__bid_status-default" selected value="Draft"> {{ bid.status.value }} </option>
+              <option class="__bid_status-default" value="Submitted"> Submitted </option>
+              <option class="__bid_status-default" value="Archived"> Archived </option>
             </select>
+            {% elif bid.status.value == "Submitted" %}
+            <select class="__bid_status-submitted" onchange="this.form.submit()" name="bid_status">
+              {{ bid.status.value }}
+              <option class="__bid_status-default" value="Draft"> Draft </option>
+              <option class="__bid_status-default" selected value="Submitted"> {{ bid.status.value }} </option>
+              <option class="__bid_status-default" value="Archived"> Archived </option>
+            </select>
+            {% else %}
+            <select class="__bid_status-archived" onchange="this.form.submit()" name="bid_status">
+              {{ bid.status.value }}
+              <option class="__bid_status-default" value="Draft"> Draft </option>
+              <option class="__bid_status-default" value="Submitted"> Submitted </option>
+              <option class="__bid_status-default" selected value="Archived"> {{ bid.status.value }} </option>
+            </select>
+            {% endif %}
           </form>
         </div>
         <div class="bid-header__title"><strong>
