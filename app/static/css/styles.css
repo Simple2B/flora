@@ -945,6 +945,8 @@ ul {
   color: white;
   padding: .5rem 1rem;
   border-radius: .3rem;
+  -moz-text-align-last: center;
+  text-align-last: center;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none; }

@@ -6,6 +6,7 @@
     color: white;
     padding: .5rem 1rem;
     border-radius: .3rem;
+    text-align-last: center;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -152,6 +153,7 @@
     @extend %bid_status;
     color: $black;
     background-color: $white;
+
     &:hover {
         background-color: #F2F2F2;
         cursor: pointer;
