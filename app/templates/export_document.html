@@ -134,7 +134,7 @@
 
         /********** begin bid price container */
 
-        .bid_price_container {
+        .bid_work_items_container {
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: vertical;
@@ -144,21 +144,29 @@
             page-break-inside: avoid;
         }
 
-        .bid_price_container .bid_subtotal_value {
+        .break-before {
+            page-break-before: always;
+        }
+
+        .break-after {
+            page-break-after: always;
+        }
+
+        .bid_work_items_container .bid_subtotal_value {
             display: -webkit-box;
             -webkit-box-pack: end;
             font-weight: bold;
             font-size: 18px;
         }
 
-        .bid_price_container .bid_work_item {
+        .bid_work_items_container .bid_work_item {
             display: -webkit-box;
             -webkit-box-pack: justify;
             font-weight: bold;
             font-size: 18px;
         }
 
-        .bid_price_container .work_item_note {
+        .bid_work_items_container .work_item_note {
             display: -webkit-box;
             -webkit-box-pack: justify;
             margin-bottom: 1rem;
@@ -213,11 +221,11 @@
         .group_title span
         {border-bottom: 3px solid #333333;}
 
-        .bid_price_container ._group-block {
+        .bid_work_items_container ._group-block {
             padding: 0.5rem;
         }
 
-        .bid_price_container .bid_subtotal_container .bid_subtotal {
+        .bid_work_items_container .bid_subtotal_container .bid_subtotal {
             display: -webkit-box;
             -webkit-box-pack: end;
         }
@@ -380,7 +388,9 @@
                     <div class="section_letter">Section A: Scope of Work</div>
                     <h5>Please find our detailed Quote for the above referenced project as outlined below:</h5>
 
-                    <div class="bid_price_container keep-together">
+                    <div class="bid_work_items_container keep-together">
+                        <div class="">
+
                         {% for link_work_item in global_work_items %}
                         <div class="bid_work_item">
                             <div class="work_item_pdf">
@@ -407,6 +417,11 @@
                             <div></div>
                         </div>
                         {% endfor %}
+
+                        </div>
+                        <!-- # Pagination -->
+                        <div class="">
+
                         {% for group in groups %}
                         <div> <h4 class="group_title"> <span> Work Group: {{ group.name }} </span> </h4> </div>
                         <div class="section_group_letter">
@@ -439,6 +454,7 @@
                             {% endfor %}
                         </div>
                         {% endfor %}
+                        </div>
 
                         <div class="bid_subtotal_container">
                             <div class="bid_subtotal">
@@ -585,7 +601,7 @@
                                     <input type="text" class="input-underline">
                                 </div>
                                 <div>Name &nbsp; Edward Albanese</div>
-                                <div>Name &nbsp; 05/26.2020</div>
+                                <div>Date &nbsp; 05/26.2020</div>
                             </div>
                             <div class="by_name_date">
                                 <div class="input_field">
