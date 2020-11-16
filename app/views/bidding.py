@@ -88,7 +88,6 @@ def biddings():
         status_active_all = "status-active"
         bids = Bid.query.order_by(Bid.status).all()
 
-
     return render_template(
         "biddings.html",
         bids=bids,
