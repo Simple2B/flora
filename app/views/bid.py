@@ -1,6 +1,7 @@
 import io
 import os
 import datetime
+import time
 
 from flask import (
     Blueprint,
@@ -53,6 +54,11 @@ def test_pdf(bid_id):
 @login_required
 def add_work_item_line(bid_id, link_work_item_id):
     WorkItemLine(link_work_items_id=link_work_item_id).save()
+    bid = Bid.query.get(bid_id)
+    if bid:
+        bid.time_updated = round(time.time())
+        bid.last_updated = "1 min ago"
+        bid.save()
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
 
 

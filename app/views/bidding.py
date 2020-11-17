@@ -1,4 +1,5 @@
-from datetime import datetime
+import datetime
+import time
 from flask import Blueprint, render_template, redirect, url_for, session, request
 from flask_login import login_required
 from flask import current_app
@@ -75,7 +76,7 @@ def biddings():
 
     edit_bid = session.get('edit_bid', False)
 
-    status_active_all = session.get("status_active_all", "")
+    status_active_all = session.get("status_active_all", "status-active")
     status_active_submitted = session.get("status_active_submitted", "")
     status_active_archived = session.get("status_active_archived", "")
     status_active_draft = session.get("status_active_draft", "")
@@ -87,10 +88,14 @@ def biddings():
     elif status_active_draft:
         bids = Bid.query.filter(Bid.status == Bid.Status.b_draft).all()
     else:
-        status_active_all = "status-active"
         bids = Bid.query.order_by(Bid.status).all()
+        time_now = round(time.time())
+        for bid in bids:
+            if bid.time_updated != 0.0:
+                bid.last_updated = f'{time_now - bid.time_updated} ago'
+                bid.save()
 
-    date_today = datetime.today().strftime("%m/%d/%Y")
+    date_today = datetime.datetime.today().strftime("%m/%d/%Y")
     return render_template(
         "biddings.html",
         bids=bids,
