@@ -1,5 +1,6 @@
 const biddings_ = document.getElementById('bidding_id');
 
 if ( biddings_.href == window.location.href ) {
-  document.getElementById('bidding_id').classList.toggle('test-class');
+  bid_href_id.classList.remove('menu__item');
+  bid_href_id.classList.toggle('active-tab');
 };

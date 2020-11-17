@@ -80,5 +80,8 @@ barToggle.addEventListener('click', (e) => {
 const href_work_items_ = document.getElementsByClassName('__text-decor-active');
 
 if ( href_work_items_[0].href == window.location.href ) {
-  document.getElementById('bidding_id').classList.toggle('test-class');
+  document.getElementById('bidding_id').classList.toggle('active-tab');
 };
+
+// bid_href_id.classList.remove('menu__item');
+// bid_href_id.classList.toggle('active-tab');
