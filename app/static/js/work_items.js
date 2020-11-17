@@ -67,15 +67,6 @@ listArray.forEach( el => {
     });
 });
 
-
-// SideBar close/show-panel
-// const sidebarWrapper = document.getElementById('sidebar-wrapper');
-// const barToggle = document.getElementById('ddb-background');
-// barToggle.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     sidebarWrapper.classList.toggle('hidden');
-// });
-
 const href_work_items_ = document.getElementsByClassName('__text-decor-active');
 
 if ( href_work_items_[0].href == window.location.href ) {
