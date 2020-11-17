@@ -201,20 +201,17 @@ def edit_clarifications(bid_id):
 @bid_blueprint.route("/bidding_change_status/<int:bid_id>", methods=["POST"])
 @login_required
 def bidding_change_status(bid_id):
-    form = BidForm(request.form)
+    BidForm(request.form)
     bid = Bid.query.get(bid_id)
-    if form.validate_on_submit():
-        if request.form.get("bid_status", "") == "Draft":
-            bid.status = Bid.Status.b_draft
-            bid.save()
-        elif request.form.get("bid_status", "") == "Submitted":
-            bid.status = Bid.Status.c_submitted
-            bid.save()
-        else:
-            bid.status = Bid.Status.d_archived
-            bid.save()
-    elif bid.is_submitted():
-        log(log.WARNING, "Bid status form is submitted")
+    if request.form.get("bid_status", "") == "Draft":
+        bid.status = Bid.Status.b_draft
+        bid.save()
+    elif request.form.get("bid_status", "") == "Submitted":
+        bid.status = Bid.Status.c_submitted
+        bid.save()
+    else:
+        bid.status = Bid.Status.d_archived
+        bid.save()
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
 
 
