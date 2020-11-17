@@ -69,19 +69,15 @@ listArray.forEach( el => {
 
 
 // SideBar close/show-panel
-const sidebarWrapper = document.getElementById('wrapper');
-const barToggle = document.getElementById('ddb-background');
-barToggle.addEventListener('click', (e) => {
-    e.preventDefault();
-    sidebarWrapper.classList.toggle('hidden');
-});
-
+// const sidebarWrapper = document.getElementById('sidebar-wrapper');
+// const barToggle = document.getElementById('ddb-background');
+// barToggle.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     sidebarWrapper.classList.toggle('hidden');
+// });
 
 const href_work_items_ = document.getElementsByClassName('__text-decor-active');
 
 if ( href_work_items_[0].href == window.location.href ) {
   document.getElementById('bidding_id').classList.toggle('active-tab');
 };
-
-// bid_href_id.classList.remove('menu__item');
-// bid_href_id.classList.toggle('active-tab');
