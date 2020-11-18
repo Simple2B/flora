@@ -187,6 +187,10 @@
     flex-flow: column wrap;
     padding: $m1rem;
     margin-bottom: $m1rem;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    outline: 0;
 
     ._date_revision {
         width: 50vw;
@@ -618,7 +622,7 @@
 }
 
 .bidding_margin {
-    margin: 0rem 0rem $m1rem $m0-5rem;
+    margin: $m1rem 0rem $m1rem $m0-5rem;
 }
 
 .direction_element {

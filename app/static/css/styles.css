@@ -1134,7 +1134,11 @@ ul {
   display: flex;
   flex-flow: column wrap;
   padding: 1rem;
-  margin-bottom: 1rem; }
+  margin-bottom: 1rem;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  outline: 0; }
   .main-container__project_general ._date_revision {
     width: 50vw;
     margin-top: 1rem;
@@ -1398,7 +1402,7 @@ ul {
     align-items: baseline; }
 
 .bidding_margin {
-  margin: 0rem 0rem 1rem 0.5rem; }
+  margin: 1rem 0rem 1rem 0.5rem; }
 
 .direction_element {
   border: none;

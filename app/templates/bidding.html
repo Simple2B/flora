@@ -685,8 +685,13 @@
       </div>
 
       <div class="box-shadow add_item_block" id="bid_exclusion">
-        <h5 class="--padding">Exclusions</h5>
-          <div class="d-flex bd-highlight bidding_margin">
+        <!-- <h5 class="--padding">Exclusions</h5> -->
+        <span>
+          <strong>
+            Exclusions
+          </strong>
+        </span>
+        <div class="d-flex bd-highlight bidding_margin">
         {% if bid.exclusion_links %}
           <div class="p-2 flex-shrink-1 bd-highlight">
             <a href="{{url_for('bid.delete_exclusions', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
@@ -714,7 +719,12 @@
       </div>
 
       <div class="add_item_block clarification_block" id="bid_clarification">
-        <h5 class="--padding">Clarifications</h5>
+        <!-- <h5 class="--padding">Clarifications</h5> -->
+        <span>
+          <strong>
+            Clarifications
+          </strong>
+        </span>
           <div class="d-flex bd-highlight bidding_margin">
           {% if bid.clarification_links %}
             <div class="p-2 flex-shrink-1 bd-highlight">
