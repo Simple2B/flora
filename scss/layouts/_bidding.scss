@@ -270,11 +270,6 @@
             align-items: center;
             border: 1px solid #E5E5E5;
 
-            .title-text-style {
-                color: #000000;
-                font-weight: 500;
-            }
-
         }
 
         ._flex-center {
@@ -284,6 +279,10 @@
 
     }
 
+    .title-text-style {
+        color: #000000;
+        font-weight: 500;
+    }
 }
 
 .bidding__side_bar {

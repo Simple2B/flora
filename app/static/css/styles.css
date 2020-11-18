@@ -1189,12 +1189,12 @@ ul {
     justify-content: space-between;
     align-items: center;
     border: 1px solid #E5E5E5; }
-    .main-container__project_general .__drawing-log ._show-drawing_log_panel .title-text-style {
-      color: #000000;
-      font-weight: 500; }
   .main-container__project_general .__drawing-log ._flex-center {
     display: flex;
     justify-content: center; }
+  .main-container__project_general .title-text-style {
+    color: #000000;
+    font-weight: 500; }
 
 .bidding__side_bar {
   height: 64vh;
