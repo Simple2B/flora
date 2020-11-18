@@ -25,9 +25,9 @@
 
     <div class="container__header-block">
       <div>
-        <select class="form-control form-control-resize">
+        <select class="form-control form-control-resize" onchange="this.form.submit()">
           <option value="Most popular" name="Most popular">Most popular</option>
-          <option value="Most recent" name="Most recent">Most recent</option>
+          <option selected value="Most recent" name="Most recent">Most recent</option>
         </select>
         <div>
         {% if edit_bid %}

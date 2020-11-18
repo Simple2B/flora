@@ -146,6 +146,15 @@ def change_status():
     return redirect(url_for("bidding.biddings"))
 
 
+@bidding_blueprint.route("/sorting", methods=["POST"])
+@login_required
+def sorting():
+    # FlaskForm(request.form)
+    test = request
+        # session["most_recent"] = ""
+    return redirect(url_for("bidding.biddings"))
+
+
 @bidding_blueprint.route("/delete_exclusions/<int:bid_id>")
 @login_required
 def delete_exclusions(bid_id):
