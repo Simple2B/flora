@@ -311,6 +311,12 @@
 .__bidding--scroll {
     div.add_item_block {
         margin: $m1rem 0rem;
+        padding: 0.5rem;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: .3rem;
+        outline: 0;
     }
 
     .clarification_block {
@@ -609,6 +615,10 @@
         flex-flow: row wrap;
         align-items: baseline;
     }
+}
+
+.bidding_margin {
+    margin: 0rem 0rem $m1rem $m0-5rem;
 }
 
 .direction_element {
