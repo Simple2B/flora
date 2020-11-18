@@ -93,9 +93,13 @@ def biddings():
     for bid in bids:
         if bid.time_updated != 0.0:
             seconds_ago = int(time_now - bid.time_updated)
-            if seconds_ago >= 60 and seconds_ago < 3600:
-                bid.last_updated = f'{seconds_ago // 60} mins ago'
-                bid.save()
+            if seconds_ago < 3600:
+                if seconds_ago <= 60:
+                    bid.last_updated = '1 min ago'
+                    bid.save()
+                else:
+                    bid.last_updated = f'{seconds_ago // 60} mins ago'
+                    bid.save()
             elif seconds_ago >= 3600 and seconds_ago < 86400:
                 bid.last_updated = f'{seconds_ago // 3600} hours ago'
                 bid.save()
