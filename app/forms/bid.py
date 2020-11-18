@@ -8,3 +8,4 @@ class BidForm(FlaskForm):
     preview = SubmitField('Preview')  # selected "Export Preview"
     export_pdf = SubmitField('Export to PDF')  # pressed "export to PDF"
     export_docx = SubmitField('Export to DOCX')  # pressed "export to DOCX"
+    status = SubmitField('Status')

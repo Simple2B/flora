@@ -61,7 +61,32 @@
   <div class="main-container_bidding" id="work-item-container">
     <div class="main-container_bidding-header">
       <div class="__bid-header_start_block">
-        <div class="bid-header__status">Draft</div>
+        <div>
+          <form action="{{ url_for('bid.bidding_change_status', bid_id=bid.id) }}" method="post">
+            {% if bid.status.value == "Draft" %}
+            <select class="__bid_status-draft" onchange="this.form.submit()" name="bid_status">
+              {{ bid.status.value }}
+              <option class="__bid_status-default" selected value="Draft"> {{ bid.status.value }} </option>
+              <option class="__bid_status-default" value="Submitted"> Submitted </option>
+              <option class="__bid_status-default" value="Archived"> Archived </option>
+            </select>
+            {% elif bid.status.value == "Submitted" %}
+            <select class="__bid_status-submitted" onchange="this.form.submit()" name="bid_status">
+              {{ bid.status.value }}
+              <option class="__bid_status-default" value="Draft"> Draft </option>
+              <option class="__bid_status-default" selected value="Submitted"> {{ bid.status.value }} </option>
+              <option class="__bid_status-default" value="Archived"> Archived </option>
+            </select>
+            {% else %}
+            <select class="__bid_status-archived" onchange="this.form.submit()" name="bid_status">
+              {{ bid.status.value }}
+              <option class="__bid_status-default" value="Draft"> Draft </option>
+              <option class="__bid_status-default" value="Submitted"> Submitted </option>
+              <option class="__bid_status-default" selected value="Archived"> {{ bid.status.value }} </option>
+            </select>
+            {% endif %}
+          </form>
+        </div>
         <div class="bid-header__title"><strong>
           # {{ bid.procore_bid_id }} - {{ bid.client }}
         </strong></div>
