@@ -26,10 +26,22 @@
     <div class="container__header-block">
       <div>
         <form action="{{ url_for('bidding.select_sort') }}" method="post">
-          <select class="form-control form-control-resize" onchange="this.form.submit()">
-            <option value="Most popular" name="Most popular">Most popular</option>
-            <option selected value="Most recent" name="Most recent">Most recent</option>
-          </select>
+          {% if most_popular %}
+            <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
+              <option selected value="Most popular" name="Most popular">Most popular</option>
+              <option value="Most recent" name="Most recent">Most recent</option>
+            </select>
+          {% elif most_recent %}
+            <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
+              <option value="Most popular" name="Most popular">Most popular</option>
+              <option selected value="Most recent" name="Most recent">Most recent</option>
+            </select>
+          {% else %}
+            <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
+              <option value="Most popular" name="Most popular">Most popular</option>
+              <option selected value="Most recent" name="Most recent">Most recent</option>
+            </select>
+          {% endif %}
         </form>
         <div>
         {% if edit_bid %}

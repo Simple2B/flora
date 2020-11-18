@@ -1549,6 +1549,8 @@ ul {
       width: 100%; }
       .container__header-block > div:first-child div button {
         padding: 0.5rem 1rem 0.5rem; }
+  .container__header-block form {
+    margin-right: 1rem; }
 
 .ddb_nav-side-bar {
   height: 64vh; }

@@ -74,6 +74,9 @@ def biddings():
             )
             bidding.save()
 
+    most_popular = session.get("most_popular", "")
+    most_recent = session.get("most_recent", "")
+
     edit_bid = session.get('edit_bid', False)
 
     status_active_all = session.get("status_active_all", "status-active")
@@ -83,12 +86,25 @@ def biddings():
 
     if status_active_submitted:
         bids = Bid.query.filter(Bid.status == Bid.Status.c_submitted).all()
+        if most_recent:
+            bids = Bid.query.filter(Bid.status == Bid.Status.c_submitted).order_by(Bid.time_updated).all()
+            bids.reverse()
     elif status_active_archived:
         bids = Bid.query.filter(Bid.status == Bid.Status.d_archived).all()
+        if most_recent:
+            bids = Bid.query.filter(Bid.status == Bid.Status.d_archived).order_by(Bid.time_updated).all()
+            bids.reverse()
     elif status_active_draft:
         bids = Bid.query.filter(Bid.status == Bid.Status.b_draft).all()
+        if most_recent:
+            bids = Bid.query.filter(Bid.status == Bid.Status.b_draft).order_by(Bid.time_updated).all()
+            bids.reverse()
     else:
         bids = Bid.query.order_by(Bid.status).all()
+        if most_recent:
+            bids = Bid.query.order_by(Bid.time_updated).all()
+            bids.reverse()
+
     time_now = round(time.time())
     for bid in bids:
         if bid.time_updated != 0.0:
@@ -116,6 +132,8 @@ def biddings():
         bids=bids,
         edit_bid=edit_bid,
         date_today=date_today,
+        most_popular=most_popular,
+        most_recent=most_recent,
         status_active_all=status_active_all,
         status_active_submitted=status_active_submitted,
         status_active_archived=status_active_archived,
@@ -149,37 +167,10 @@ def change_status():
 @bidding_blueprint.route("/select_sort", methods=["POST"])
 @login_required
 def select_sort():
-    FlaskForm(request.form)
-    test = request
-        # session["most_recent"] = ""
+    if request.form.get("select_sort", "") == "Most recent":
+        session["most_recent"] = "Most recent"
+        session["most_popular"] = ""
+    elif request.form.get("select_sort", "") == "Most popular":
+        session["most_popular"] = "Most popular"
+        session["most_recent"] = ""
     return redirect(url_for("bidding.biddings"))
-
-
-# @bidding_blueprint.route("/delete_exclusions/<int:bid_id>")
-# @login_required
-# def delete_exclusions(bid_id):
-#     bid = Bid.query.get(bid_id)
-#     for exclusion_link in bid.exclusion_links:
-#         exclusion_link.delete()
-#     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_exclusion"))
-
-
-# @bidding_blueprint.route("/edit_exclusions/<int:bid_id>")
-# @login_required
-# def edit_exclusions(bid_id):
-#     return redirect(url_for("exclusion.exclusions", bid_id=bid_id))
-
-
-# @bidding_blueprint.route("/delete_clarifications/<int:bid_id>")
-# @login_required
-# def delete_clarifications(bid_id):
-#     bid = Bid.query.get(bid_id)
-#     for clarification_link in bid.clarification_links:
-#         clarification_link.delete()
-#     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_clarification"))
-
-
-# @bidding_blueprint.route("/edit_clarifications/<int:bid_id>")
-# @login_required
-# def edit_clarifications(bid_id):
-#     return redirect(url_for("clarification.clarifications", bid_id=bid_id))
