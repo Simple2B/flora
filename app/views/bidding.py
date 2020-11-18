@@ -89,10 +89,21 @@ def biddings():
         bids = Bid.query.filter(Bid.status == Bid.Status.b_draft).all()
     else:
         bids = Bid.query.order_by(Bid.status).all()
-        time_now = round(time.time())
-        for bid in bids:
-            if bid.time_updated != 0.0:
-                bid.last_updated = f'{time_now - bid.time_updated} ago'
+    time_now = round(time.time())
+    for bid in bids:
+        if bid.time_updated != 0.0:
+            seconds_ago = int(time_now - bid.time_updated)
+            if seconds_ago >= 60 and seconds_ago < 3600:
+                bid.last_updated = f'{seconds_ago // 60} mins ago'
+                bid.save()
+            elif seconds_ago >= 3600 and seconds_ago < 86400:
+                bid.last_updated = f'{seconds_ago // 3600} hours ago'
+                bid.save()
+            elif seconds_ago >= 86400 and seconds_ago < 2073600:
+                bid.last_updated = f'{seconds_ago // 86400} days ago'
+                bid.save()
+            else:
+                bid.last_updated = time.strftime("%m/%d/%Y", time.gmtime(bid.time_updated))
                 bid.save()
 
     date_today = datetime.datetime.today().strftime("%m/%d/%Y")
