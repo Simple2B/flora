@@ -1134,7 +1134,11 @@ ul {
   display: flex;
   flex-flow: column wrap;
   padding: 1rem;
-  margin-bottom: 1rem; }
+  margin-bottom: 1rem;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  outline: 0; }
   .main-container__project_general ._date_revision {
     width: 50vw;
     margin-top: 1rem;
@@ -1185,12 +1189,12 @@ ul {
     justify-content: space-between;
     align-items: center;
     border: 1px solid #E5E5E5; }
-    .main-container__project_general .__drawing-log ._show-drawing_log_panel .title-text-style {
-      color: #000000;
-      font-weight: 500; }
   .main-container__project_general .__drawing-log ._flex-center {
     display: flex;
     justify-content: center; }
+  .main-container__project_general .title-text-style {
+    color: #000000;
+    font-weight: 500; }
 
 .bidding__side_bar {
   height: 64vh;
@@ -1212,7 +1216,13 @@ ul {
   color: #fff; }
 
 .__bidding--scroll div.add_item_block {
-  margin: 1rem 0rem; }
+  margin: 1rem 0rem;
+  padding: 0.5rem;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: .3rem;
+  outline: 0; }
 
 .__bidding--scroll .clarification_block {
   margin-bottom: 1rem;
@@ -1390,6 +1400,9 @@ ul {
     justify-content: flex-end;
     flex-flow: row wrap;
     align-items: baseline; }
+
+.bidding_margin {
+  margin: 1rem 0rem 1rem 0.5rem; }
 
 .direction_element {
   border: none;

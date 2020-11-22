@@ -142,7 +142,7 @@
 
       <div class="__client_job_info">
         <div class="_show-client_panel">
-          <div>Client and Job Info</div>
+          <div class="title-text-style">Client and Job Info</div>
           <div> *Information edited in Procore
             <button class="border-none ddb-cursor-handle" id="client_and_job_close_panel_id">
               <img src="{{ url_for('static', filename='images/up_direction_element.svg') }}">
@@ -269,7 +269,7 @@
     </div>
     <div class="__bidding--scroll">
       <div class="scope_of_work_container modal-content modal--padding box-shadow" id="bid_scope_of_work">
-        <div class="_work_items_block add_item_block">
+        <div class="_work_items_block">
           <span class="ddb-margin-top"><strong>Scope of Work</strong></span>
           <br>
           {% for link_work_item in form_bid.global_work_items %}
@@ -684,9 +684,13 @@
         </div>
       </div>
 
-      <div class="modal-content modal--padding box-shadow add_item_block " id="bid_exclusion">
-        <h5 class="--padding">Exclusions</h5>
-          <div class="d-flex bd-highlight ddb-margin-bottom ">
+      <div class="box-shadow add_item_block" id="bid_exclusion">
+        <span>
+          <strong>
+            Exclusions
+          </strong>
+        </span>
+        <div class="d-flex bd-highlight bidding_margin">
         {% if bid.exclusion_links %}
           <div class="p-2 flex-shrink-1 bd-highlight">
             <a href="{{url_for('bid.delete_exclusions', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
@@ -713,9 +717,13 @@
         </div>
       </div>
 
-      <div class="modal-content modal--padding add_item_block clarification_block" id="bid_clarification">
-        <h5 class="--padding">Clarifications</h5>
-          <div class="d-flex bd-highlight ddb-margin-bottom ">
+      <div class="add_item_block clarification_block" id="bid_clarification">
+        <span>
+          <strong>
+            Clarifications
+          </strong>
+        </span>
+          <div class="d-flex bd-highlight bidding_margin">
           {% if bid.clarification_links %}
             <div class="p-2 flex-shrink-1 bd-highlight">
              <a href="{{url_for('bid.delete_clarifications', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
@@ -745,7 +753,6 @@
       </div>
     </div>
   </div>
-  <a href="{{ url_for('bid.test_pdf', bid_id=bid.id) }}" target="_blank">test preview</a>
 </section>
 
 <!-- Edit Modal -->

@@ -187,6 +187,10 @@
     flex-flow: column wrap;
     padding: $m1rem;
     margin-bottom: $m1rem;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    outline: 0;
 
     ._date_revision {
         width: 50vw;
@@ -266,11 +270,6 @@
             align-items: center;
             border: 1px solid #E5E5E5;
 
-            .title-text-style {
-                color: #000000;
-                font-weight: 500;
-            }
-
         }
 
         ._flex-center {
@@ -280,6 +279,10 @@
 
     }
 
+    .title-text-style {
+        color: #000000;
+        font-weight: 500;
+    }
 }
 
 .bidding__side_bar {
@@ -311,6 +314,12 @@
 .__bidding--scroll {
     div.add_item_block {
         margin: $m1rem 0rem;
+        padding: 0.5rem;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: .3rem;
+        outline: 0;
     }
 
     .clarification_block {
@@ -609,6 +618,10 @@
         flex-flow: row wrap;
         align-items: baseline;
     }
+}
+
+.bidding_margin {
+    margin: $m1rem 0rem $m1rem $m0-5rem;
 }
 
 .direction_element {
