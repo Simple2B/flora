@@ -1636,6 +1636,14 @@ ul {
 .ddb_nav-side-bar {
   height: 64vh; }
 
+.__side_bar-title {
+  min-height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F2F2F2;
+  border-right: 5px solid #175593; }
+
 .form-control-resize {
   min-width: 10vw;
   cursor: pointer; }
@@ -1689,9 +1697,12 @@ ul {
     .status_block__bids_status .status-active {
       border-bottom: 5px solid #175593; }
 
-.biddings-table_check-box {
-  width: 26.5px;
-  vertical-align: middle !important; }
+.biddings-table {
+  overflow-y: auto;
+  max-height: 75vh; }
+  .biddings-table_check-box {
+    width: 26.5px;
+    vertical-align: middle !important; }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }
