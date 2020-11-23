@@ -105,7 +105,6 @@
         }
 
         .section_E_and_F {
-            margin-top: 1rem;
             display: -webkit-box;
             -webkit-box-pack: justify;
             text-align: center;
@@ -132,6 +131,18 @@
             padding-right: 1rem;
         }
 
+        .section_E_and_F--table {
+            margin-top: 1rem;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+            font-size: 18px;
+            color: #333333;
+            background-color: #4682B4;
+            border-top-color: #333333;
+            border-top-style: solid;
+            border-top-width: 3px;
+        }
         /********** begin bid work items container */
 
         .bid_work_items_container {
@@ -586,10 +597,20 @@
                     <div></div>
 
                     <div class="keep-together">
-                        <div class="section_E_and_F">
+                        <!-- <div class="section_E_and_F">
                             <div><span class="section_E">Section E: Submitted by: </span></div>
                             <div><span class="section_F">Section F: Approved by: </span></div>
-                        </div>
+                        </div> -->
+
+                        <table class="section_E_and_F--table">
+                            <tbody>
+                                <tr>
+                                    <td><span class="section_E">Section E: Submitted by: </span></td>
+                                    <td><span class="section_F">Section F: Approved by: </span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
                         <div class="ddb_titles">
                             <div> DDB Contracting, LLC. </div>
                             <div> Premier Project Management </div>
