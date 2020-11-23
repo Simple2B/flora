@@ -104,32 +104,6 @@
             margin-top: 1rem;
         }
 
-        .section_E_and_F {
-            display: -webkit-box;
-            -webkit-box-pack: justify;
-            text-align: center;
-            font-weight: 600;
-            font-size: 18px;
-            color: #333333;
-            background-color: #4682B4;
-            border-top-color: #333333;
-            border-top-style: solid;
-            border-top-width: 3px;
-            margin-top: 1rem;
-        }
-
-        .section_E_and_F div {
-            width: 15vw;
-            text-decoration: underline;
-        }
-
-        .section_E_and_F .section_E {
-            padding-left: 1rem;
-        }
-
-        .section_E_and_F .section_F {
-            padding-right: 1rem;
-        }
 
         .section_E_and_F--table {
             margin-top: 1rem;
@@ -398,38 +372,36 @@
                         </div>
                     </div>
 
-                    <div class="section_letter">Section A: Scope of Work</div>
-                    <h5>Please find our detailed Quote for the above referenced project as outlined below:</h5>
-
-                    <div class="bid_work_items_container break-after">
+                    <div class="bid_work_items_container keep-together">
+                        <div class="section_letter">Section A: Scope of Work</div>
+                        <h5>Please find our detailed Quote for the above referenced project as outlined below:</h5>
 
                         {% for link_work_item in global_work_items %}
-                        <div class="bid_work_item">
-                            <div class="work_item_pdf">
-                                <div> {{ link_work_item.work_item.code }} &nbsp; &nbsp;</div>
-                                <div> {{ link_work_item.work_item.name }} &nbsp; &nbsp;</div>
+                            <div class="bid_work_item">
+                                <div class="work_item_pdf">
+                                    <div> {{ link_work_item.work_item.code }} &nbsp; &nbsp;</div>
+                                    <div> {{ link_work_item.work_item.name }} &nbsp; &nbsp;</div>
+                                </div>
+                                <div class="bid_subtotal_value">${{ link_work_item.link_subtotal }}</div>
                             </div>
-                            <div class="bid_subtotal_value">${{ link_work_item.link_subtotal }}</div>
-                        </div>
-                        <div class="work_item_note">
-                            <div class="__note-box">
-                                <div class="_note">
-                                    Furnish & Install new double pane
-                                    sliding transaction window in existing opening
-                                    <div>
-                                        NOTE: System to utilize surface
-                                        mounted hardware
+                            <div class="work_item_note">
+                                <div class="__note-box">
+                                    <div class="_note">
+                                        Furnish & Install new double pane
+                                        sliding transaction window in existing opening
+                                        <div>
+                                            NOTE: System to utilize surface
+                                            mounted hardware
+                                        </div>
+                                    </div>
+                                    <div class="_unit">
+                                        <div>1</div>
+                                        <div>LS</div>
                                     </div>
                                 </div>
-                                <div class="_unit">
-                                    <div>1</div>
-                                    <div>LS</div>
-                                </div>
+                                <div></div>
                             </div>
-                            <div></div>
-                        </div>
                         {% endfor %}
-
                     </div>
                     <!-- # Pagination -->
                     <div class="bid_work_items_container keep-together">
@@ -597,10 +569,6 @@
                     <div></div>
 
                     <div class="keep-together">
-                        <!-- <div class="section_E_and_F">
-                            <div><span class="section_E">Section E: Submitted by: </span></div>
-                            <div><span class="section_F">Section F: Approved by: </span></div>
-                        </div> -->
 
                         <table class="section_E_and_F--table">
                             <tbody>
