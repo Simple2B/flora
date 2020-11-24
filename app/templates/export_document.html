@@ -45,8 +45,14 @@
         }
 
         .__due_time {
-            display: -webkit-box;
-            -webkit-box-pack: end;
+            /* display: -webkit-box;
+            -webkit-box-pack: end; */
+            width: 100%
+        }
+
+        .__due_time td:nth-child(2) {
+            width: 30%;
+            font-weight: bold;
         }
 
         .__client_project_block {
@@ -63,11 +69,11 @@
             -webkit-box-pack: justify;
             -webkit-box-orient: vertical;
         }
-        .__client_project_block ._client_project .client_project-info:first-child {
+        .__client_project_block ._client_project .client_project-info div:nth-child(1) {
             font-weight: bold;
         }
 
-        .__client_project_block ._client_project .client_project-info:last-child {
+        .__client_project_block ._client_project .client_project-info div:last-child {
             font-weight: bold;
         }
 
@@ -337,9 +343,18 @@
                         <img class="_ddb_img_logo" src="{{ path_to_img }}ddb_logo_pdf.png">
                     </div>
                     {% endif %}
-                    <div class="__due_time">
+                    <!-- <div class="__due_time">
                         05/26/20
-                    </div>
+                    </div> -->
+
+                    <table class="__due_time">
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td>05/26/20</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                     <div class="__client_project_block">
                         <div class="_client_project client-padding">
@@ -607,16 +622,16 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="send_copies">
-                        Send copies to the following:
-                        <ul>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                    </div>
-                    <span>No drawings have been received for this project</span>
+                        <div class="send_copies">
+                            Send copies to the following:
+                            <ul>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                        <span>No drawings have been received for this project</span>
+                        </div>
                     </div>
                 </div>
             </div>
