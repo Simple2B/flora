@@ -405,8 +405,9 @@
             </div>
           </div>
 
-          {% for group_link in group.link_work_items %}
           <div id="group_panel_id-{{group.name}}">
+          {% for group_link in group.link_work_items %}
+
             <div class="_work_item-link">
               <div class="_flex-start">
                 <div>{{ loop.index }}</div>
@@ -517,8 +518,8 @@
               {% endfor %} {# end of lines #}
 
             </div>
-          </div>
           {% endfor %} {# end of work item links #}
+          </div>
 
           {% endfor %} {# end of groups #}
 
