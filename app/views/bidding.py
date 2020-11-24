@@ -1,4 +1,3 @@
-import datetime
 import time
 from flask import Blueprint, render_template, redirect, url_for, session, request
 from flask_login import login_required
@@ -9,6 +8,7 @@ from app.procore import ProcoreApi
 
 from app.models import Bid
 from app.logger import log
+from app.utils import date
 
 
 bidding_blueprint = Blueprint("bidding", __name__)
@@ -126,12 +126,12 @@ def biddings():
                 bid.last_updated = time.strftime("%m/%d/%Y", time.gmtime(bid.time_updated))
                 bid.save()
 
-    date_today = datetime.datetime.today().strftime("%m/%d/%Y")
+    today_date = date()
     return render_template(
         "biddings.html",
         bids=bids,
         edit_bid=edit_bid,
-        date_today=date_today,
+        today_date=today_date,
         most_popular=most_popular,
         most_recent=most_recent,
         status_active_all=status_active_all,

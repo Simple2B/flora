@@ -1,10 +1,8 @@
 import enum
-import datetime
 from app import db
 from app.models.utils import ModelMixin
 from sqlalchemy.orm import relationship
-
-date_today = datetime.datetime.today().strftime("%m/%d/%Y")
+from app.utils import date
 
 
 class Bid(db.Model, ModelMixin):
@@ -30,7 +28,7 @@ class Bid(db.Model, ModelMixin):
     bond = db.Column(db.Float, default=0.0)
     subtotal = db.Column(db.Float, default=0.0)
     grand_subtotal = db.Column(db.Float, default=0.0)
-    last_updated = db.Column(db.String(256), default=date_today, nullable=False)
+    last_updated = db.Column(db.String(256), default=date(), nullable=False)
     time_updated = db.Column(db.Float, default=0.0, nullable=False)
 
     link_work_items = relationship("LinkWorkItem")

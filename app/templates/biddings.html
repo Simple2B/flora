@@ -118,7 +118,7 @@
                 </td>
                 <td><a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">#{{ bid.procore_bid_id }}</a></td>
                 <td>{{ bid.title }}</td>
-                <td>{{ date_today }}</td>
+                <td>{{ today_date }}</td>
                 <td>{{ bid.client }}</td>
                 <td>{{ bid.status.value }}</td>
                 <td>{{ bid.last_updated }}</td>
@@ -131,7 +131,7 @@
               <tr>
                 <td><a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">#{{ bid.procore_bid_id }}</a></td>
                 <td>{{ bid.title }}</td>
-                <td>{{ date_today }}</td>
+                <td>{{ today_date }}</td>
                 <td>{{ bid.client }}</td>
                 <td>{{ bid.status.value }}</td>
                 <td>{{ bid.last_updated }}</td>
