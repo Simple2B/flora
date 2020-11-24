@@ -45,8 +45,11 @@
         {% endif %}
         </div>
       </div>
-      <input type="text" id="biddingsSearch">
-      </input>
+      <div class="_form-search">
+        <img src="{{ url_for('static', filename='images/Search_icon.png') }}" alt="">
+        <input type="text" placeholder="Search Bidding" id="biddingsSearch">
+        </input>
+      </div>
     </div>
 
     {% if edit_bid %}
