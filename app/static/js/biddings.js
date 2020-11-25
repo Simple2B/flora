@@ -17,3 +17,12 @@ $(document).ready(function() {
       }});
     });
 });
+
+$('#biddingsTableId').DataTable({
+  "pageLength": 10,
+  "order": [],
+  "displayStart": 0,
+  // "drawCallback": function( settings ) {
+  //     $("#workItemsTable thead").remove();
+  // }
+});
