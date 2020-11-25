@@ -1659,7 +1659,8 @@ ul {
   .bids_status_btns button {
     display: inline-flex;
     color: #000000;
-    border: 1px solid #E4E4E4; }
+    border: 1px solid #E4E4E4;
+    margin: 1rem 1rem 0 0; }
     .bids_status_btns button > div {
       padding-right: 0.5rem; }
     .bids_status_btns button:hover {
