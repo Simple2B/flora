@@ -103,6 +103,7 @@ def exclusions(bid_id):
     form = ExclusionForm(request.form)
     form.exclusions = Exclusion.query.all()
     exclusion_cart_form = ExclusionCartForm()
+    bid = Bid.query.get(bid_id)
     selected_exclusion_item_ids = session.get("SelectedExclusionItemsDict", None)
     if selected_exclusion_item_ids is None:
         selected_exclusion_item_ids = {
@@ -127,7 +128,7 @@ def exclusions(bid_id):
         "exclusions.html",
         form=form,
         exclusion_cart_form=exclusion_cart_form,
-        bid_id=bid_id,
+        bid=bid,
     )
 
 

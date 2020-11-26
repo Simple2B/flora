@@ -108,6 +108,7 @@ def edit_clarification_item(bid_id, item_id):
 def clarifications(bid_id):
     form = ClarificationForm(request.form)
     clarification_cart_form = ClarificationCartForm()
+    bid = Bid.query.get(bid_id)
     selected_clarification_ids = session.get("SelectedClarificationsDict", None)
     if selected_clarification_ids is None:
         bid = Bid.query.get(bid_id)
@@ -135,7 +136,7 @@ def clarifications(bid_id):
         form=form,
         clarifications_list=clarification_list,
         clarification_cart_form=clarification_cart_form,
-        bid_id=bid_id,
+        bid=bid,
     )
 
 

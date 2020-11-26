@@ -2,7 +2,7 @@
 
 .work-items-section {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
 
     & .ddb__side_bar {
         max-height: 50vh;
@@ -18,59 +18,6 @@
     max-height: 50vh;
 }
 
-.sidebar {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: space-evenly;
-    height: 80%;
-
-    &__bid-title {
-        font-weight: 400;
-        line-height: 21px;
-        margin-bottom: -1rem;
-    }
-
-    &__nav-links {
-        list-style-type: disc;
-
-        .__disc-blue {
-            color: #007bff;
-
-            .__select_work_item-active {
-                // border-right: solid 2px #E6A73E;
-                // background-color: #F2F2F2;
-                // text-decoration: none;
-                color: #BDBDBD;
-                // &:hover {
-
-                // }
-            }
-        }
-
-        & li {
-            margin: 0.5rem;
-
-        }
-
-        & li a {
-            color: #BDBDBD;
-
-            &:hover {
-                color: #2F80ED;
-            }
-        }
-
-        .__text-decor-active {
-            color: #007bff;
-
-            &:hover {
-                color: #2F80ED;
-                text-decoration: underline;
-            }
-        }
-    }
-}
 
 .main-container {
     min-width: 75%;
@@ -79,10 +26,19 @@
 
     .__body {
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: column wrap;
         width: 100%;
         min-height: 75vh;
         box-shadow: $shadow;
+    }
+
+    .tables-block {
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    .btns-block {
+        margin-right: $m1rem;
     }
 }
 

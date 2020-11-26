@@ -41,6 +41,9 @@
             margin-bottom: 0.5rem;
         }
 
+        #clarificationTable {
+            margin-top: $m1rem;
+        }
     }
 
     .__border-none {
@@ -68,6 +71,7 @@
             & h6 {
                 font-weight: $fw-700;
                 padding: 1rem;
+                width: 100%;
             }
             & div {
                 padding: 0rem 1.2rem 0.1rem 1.2rem;

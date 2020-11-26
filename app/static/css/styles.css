@@ -57,6 +57,34 @@ ul {
   list-style: none;
   margin: 0; }
 
+.sidebar {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 80%; }
+  .sidebar__bid-title {
+    font-weight: 400;
+    line-height: 21px;
+    margin-bottom: -1rem; }
+  .sidebar__nav-links {
+    list-style-type: disc; }
+    .sidebar__nav-links .__disc-blue {
+      color: #007bff; }
+    .sidebar__nav-links .__select_work_item-active {
+      color: #BDBDBD; }
+    .sidebar__nav-links li {
+      margin: 0.5rem; }
+    .sidebar__nav-links li a {
+      color: #BDBDBD; }
+      .sidebar__nav-links li a:hover {
+        color: #2F80ED; }
+    .sidebar__nav-links .__text-decor-active {
+      color: #007bff; }
+      .sidebar__nav-links .__text-decor-active:hover {
+        color: #2F80ED;
+        text-decoration: underline; }
+
 .list-group-item.active {
   border-color: #333333;
   color: #333333; }
@@ -141,6 +169,8 @@ ul {
   .__box-add-bid-cancel--margins a {
     text-decoration: none;
     color: #FFFFFF; }
+  .__box-add-bid-cancel--margins a:first-child {
+    margin-right: 1rem; }
 
 .text--center {
   text-align: center; }
@@ -1606,6 +1636,14 @@ ul {
 .ddb_nav-side-bar {
   height: 64vh; }
 
+.__side_bar-title {
+  min-height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F2F2F2;
+  border-right: 5px solid #175593; }
+
 .form-control-resize {
   min-width: 10vw;
   cursor: pointer; }
@@ -1659,9 +1697,12 @@ ul {
     .status_block__bids_status .status-active {
       border-bottom: 5px solid #175593; }
 
-.biddings-table_check-box {
-  width: 26.5px;
-  vertical-align: middle !important; }
+.biddings-table {
+  overflow-y: auto;
+  max-height: 75vh; }
+  .biddings-table_check-box {
+    width: 26.5px;
+    vertical-align: middle !important; }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }
@@ -1698,7 +1739,7 @@ ul {
 
 .work-items-section {
   display: flex;
-  flex-flow: row nowrap; }
+  flex-flow: row wrap; }
   .work-items-section .ddb__side_bar {
     max-height: 50vh;
     cursor: pointer; }
@@ -1709,43 +1750,20 @@ ul {
   border-top: 1px solid #f1f1f1;
   max-height: 50vh; }
 
-.sidebar {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 80%; }
-  .sidebar__bid-title {
-    font-weight: 400;
-    line-height: 21px;
-    margin-bottom: -1rem; }
-  .sidebar__nav-links {
-    list-style-type: disc; }
-    .sidebar__nav-links .__disc-blue {
-      color: #007bff; }
-      .sidebar__nav-links .__disc-blue .__select_work_item-active {
-        color: #BDBDBD; }
-    .sidebar__nav-links li {
-      margin: 0.5rem; }
-    .sidebar__nav-links li a {
-      color: #BDBDBD; }
-      .sidebar__nav-links li a:hover {
-        color: #2F80ED; }
-    .sidebar__nav-links .__text-decor-active {
-      color: #007bff; }
-      .sidebar__nav-links .__text-decor-active:hover {
-        color: #2F80ED;
-        text-decoration: underline; }
-
 .main-container {
   min-width: 75%;
   margin: 0 1rem; }
   .main-container .__body {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
     width: 100%;
     min-height: 75vh;
     box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25); }
+  .main-container .tables-block {
+    display: flex;
+    flex-flow: row wrap; }
+  .main-container .btns-block {
+    margin-right: 1rem; }
 
 .chart-left {
   padding: 0.7rem;
@@ -1929,6 +1947,8 @@ ul {
         padding: 0.55rem 15rem 0.55rem 0.35rem;
         font-size: 0.90rem;
         background-color: #828282; }
+    .__box-table-exclusion .__box-table--left #exclusionTable {
+      margin-top: 1rem; }
   .__box-table-exclusion .__border-none {
     border: none; }
   .__box-table-exclusion .__box-table--right {
@@ -1946,7 +1966,8 @@ ul {
       width: 29vw; }
       .__box-table-exclusion .__box-table--right .__exclusion-box--description h6 {
         font-weight: 700;
-        padding: 1rem; }
+        padding: 1rem;
+        width: 100%; }
       .__box-table-exclusion .__box-table--right .__exclusion-box--description div {
         padding: 0rem 1.2rem 0.1rem 1.2rem; }
       .__box-table-exclusion .__box-table--right .__exclusion-box--description ._box-text--width {
@@ -2021,6 +2042,8 @@ ul {
       float: right;
       margin-top: 0.5rem;
       margin-bottom: 0.5rem; }
+    .__box-table-clarification .__box-table--left #clarificationTable {
+      margin-top: 1rem; }
   .__box-table-clarification .__border-none {
     border: none; }
   .__box-table-clarification .__box-table--right {
@@ -2038,7 +2061,8 @@ ul {
       width: 29vw; }
       .__box-table-clarification .__box-table--right .__clarification-box--description h6 {
         font-weight: 700;
-        padding: 1rem; }
+        padding: 1rem;
+        width: 100%; }
       .__box-table-clarification .__box-table--right .__clarification-box--description div {
         padding: 0rem 1.2rem 0.1rem 1.2rem; }
   .__box-table-clarification h6 {
