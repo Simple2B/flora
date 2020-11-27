@@ -10,5 +10,6 @@
     "python.linting.enabled": true,
     "cSpell.words": [
         "wtforms"
-    ]
+    ],
+    "python.pythonPath": ".venv/bin/python"
 }
