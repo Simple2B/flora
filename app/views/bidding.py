@@ -75,7 +75,7 @@ def biddings():
             bidding.save()
 
     most_popular = session.get("most_popular", "")
-    most_recent = session.get("most_recent", "")
+    most_recent = session.get("most_recent", "Most recent")
 
     edit_bid = session.get('edit_bid', False)
 
