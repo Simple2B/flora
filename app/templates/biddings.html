@@ -90,7 +90,7 @@
         </div>
       </div>
     </form>
-  
+
     <form action="{{ url_for('bidding.edited_bids') }}" method="post" id="edit_bids_form">
       <div class="biddings-table margin--top">
         <table id="biddingsTableId" class="patientsTable table table-striped table-sm">
@@ -117,21 +117,21 @@
                   <td class="biddings-table_check-box">
                     <input class="form-control" type="checkbox" name="{{bid.id}}">
                   </td>
-                  <td><a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
+                  <td>#<a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
                   <td>{{ bid.title }}</td>
                   <td>{{ bid.client }}</td>
                   <td>{{ bid.status.value }}</td>
-                  <td>test</td>
+                  <td>{{ bid.last_updated }}</td>
                 </tr>
               {% endfor %}
             {% else %}
               {% for bid in bids %}
                 <tr>
-                  <td><a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
+                  <td>#<a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
                   <td>{{ bid.title }}</td>
                   <td>{{ bid.client }}</td>
                   <td>{{ bid.status.value }}</td>
-                  <td>test</td>
+                  <td>{{ bid.last_updated }}</td>
                 </tr>
               {% endfor %}
             {% endif %}
@@ -139,7 +139,7 @@
         </table>
       </div>
     </form>
-  
+
   </div>
 </section>
 

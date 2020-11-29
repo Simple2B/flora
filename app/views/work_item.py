@@ -111,9 +111,15 @@ def work_item_group(bid_id):
     groups = session.get("GroupDict", {})
     group_name = form.name.data
     if group_name:
+        existed_name = WorkItemGroup.query.filter(WorkItemGroup.name == group_name).first()
         if group_name not in groups:
-            groups[group_name] = []
-            session["GroupDict"] = groups
+            if not existed_name:
+                groups[group_name] = []
+                session["GroupDict"] = groups
+            else:
+                flash(f"Group name '{group_name}' already exist!", 'warning')
+                log(log.WARNING, f"Group name '{group_name}' already exist!")
+                return redirect(url_for("work_item.work_items", bid_id=bid_id))
         return redirect(url_for("work_item.work_items", bid_id=bid_id))
     else:
         flash("Invalid group name!", "warning")
@@ -224,6 +230,7 @@ def add_to_bidding(bid_id):
                 work_item_id=int(item),
                 work_item_group=work_group
             ).save()
+
     bid = Bid.query.get(bid_id)
     if bid:
         bid.time_updated = round(time.time())

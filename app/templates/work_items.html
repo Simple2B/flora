@@ -168,12 +168,14 @@
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
               {% for category, message in messages %}
-                <div class="alert alert-{{ category }} alert-dismisible login__error">
-                  <button class="_flash-btn" type="button" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true"><img src="{{ url_for('static', filename='images/close_button_ddb.svg') }}"></span>
-                  </button>
-                  {{ message }}
-                </div>
+                {% if category == 'warning' %}
+                  <div class="alert alert-{{ category }} alert-dismisible login__error">
+                    <button class="_flash-btn" type="button" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true"><img src="{{ url_for('static', filename='images/close_button_ddb.svg') }}"></span>
+                    </button>
+                    {{ message }}
+                  </div>
+                {% endif %}
               {% endfor %}
             {% endif %}
             {% endwith %}
@@ -278,11 +280,13 @@
       </div>
       <!-- End Right Chart -->
       <div class="__box-add-bid-cancel--margins btns-block">
-        <a class="none-underline _btn--black" href="{{ url_for('exclusion.add_exclusions_to_bid', bid_id=bid.id) }}">
-          Add to bidding
-        </a>
-        <a class="_btn--gray" href="{{ url_for('bid.bidding', bid_id=bid.id, _anchor='bid_exclusion') }}">
-          Cancel
+        <form action="{{ url_for('work_item.add_to_bidding', bid_id=bid.id) }}" method="post">
+          <button type="submit" class="none-underline _btn--black">
+            Add to bidding
+          </button>
+        </form>
+        <a class="_btn--gray" href="{{ url_for('work_item.work_item_cancel', bid_id=bid.id) }}">
+            Cancel
         </a>
       </div>
     </div>

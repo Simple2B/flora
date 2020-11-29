@@ -184,16 +184,17 @@ ul {
 }
 
 .__box-add-bid-cancel--margins {
+    display: flex;
     margin-left: auto;
     margin-top: auto;
     margin-bottom: 1rem;
-
     & a {
         text-decoration: none;
         color: #FFFFFF
     }
 
-    a:first-child {
+    & button {
+        cursor: pointer;
         margin-right: $m1rem;
     }
 }
