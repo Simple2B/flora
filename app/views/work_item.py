@@ -1,3 +1,4 @@
+import time
 from flask import Blueprint, render_template, url_for, redirect, flash, request, session
 from flask_login import login_required
 
@@ -223,6 +224,10 @@ def add_to_bidding(bid_id):
                 work_item_id=int(item),
                 work_item_group=work_group
             ).save()
+    bid = Bid.query.get(bid_id)
+    if bid:
+        bid.time_updated = round(time.time())
+        bid.save()
 
     session.pop("SelectedWorkItemsDict", None)
     session.pop("DeletedWorkItem", None)

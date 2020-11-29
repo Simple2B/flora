@@ -1,3 +1,5 @@
+import time
+from datetime import datetime
 from flask import Blueprint, render_template, redirect, url_for, session, request
 from flask_login import login_required
 from flask import current_app
@@ -7,6 +9,7 @@ from app.procore import ProcoreApi
 
 from app.models import Bid
 from app.logger import log
+
 
 bidding_blueprint = Blueprint("bidding", __name__)
 
@@ -71,27 +74,66 @@ def biddings():
             )
             bidding.save()
 
+    most_popular = session.get("most_popular", "")
+    most_recent = session.get("most_recent", "Most recent")
+
     edit_bid = session.get('edit_bid', False)
 
-    status_active_all = session.get("status_active_all", "")
+    status_active_all = session.get("status_active_all", "status-active")
     status_active_submitted = session.get("status_active_submitted", "")
     status_active_archived = session.get("status_active_archived", "")
     status_active_draft = session.get("status_active_draft", "")
 
     if status_active_submitted:
         bids = Bid.query.filter(Bid.status == Bid.Status.c_submitted).all()
+        if most_recent:
+            bids = Bid.query.filter(Bid.status == Bid.Status.c_submitted).order_by(Bid.time_updated).all()
+            bids.reverse()
     elif status_active_archived:
         bids = Bid.query.filter(Bid.status == Bid.Status.d_archived).all()
+        if most_recent:
+            bids = Bid.query.filter(Bid.status == Bid.Status.d_archived).order_by(Bid.time_updated).all()
+            bids.reverse()
     elif status_active_draft:
         bids = Bid.query.filter(Bid.status == Bid.Status.b_draft).all()
+        if most_recent:
+            bids = Bid.query.filter(Bid.status == Bid.Status.b_draft).order_by(Bid.time_updated).all()
+            bids.reverse()
     else:
-        status_active_all = "status-active"
         bids = Bid.query.order_by(Bid.status).all()
+        if most_recent:
+            bids = Bid.query.order_by(Bid.time_updated).all()
+            bids.reverse()
 
+    time_now = round(time.time())
+    for bid in bids:
+        if bid.time_updated != 0.0:
+            seconds_ago = int(time_now - bid.time_updated)
+            if seconds_ago < 3600:
+                if seconds_ago <= 60:
+                    bid.last_updated = '1 min ago'
+                    bid.save()
+                else:
+                    bid.last_updated = f'{seconds_ago // 60} mins ago'
+                    bid.save()
+            elif seconds_ago >= 3600 and seconds_ago < 86400:
+                bid.last_updated = f'{seconds_ago // 3600} hours ago'
+                bid.save()
+            elif seconds_ago >= 86400 and seconds_ago < 2073600:
+                bid.last_updated = f'{seconds_ago // 86400} days ago'
+                bid.save()
+            else:
+                bid.last_updated = time.strftime("%m/%d/%Y", time.gmtime(bid.time_updated))
+                bid.save()
+
+    today_date = datetime.today().strftime("%m/%d/%Y")
     return render_template(
         "biddings.html",
         bids=bids,
         edit_bid=edit_bid,
+        today_date=today_date,
+        most_popular=most_popular,
+        most_recent=most_recent,
         status_active_all=status_active_all,
         status_active_submitted=status_active_submitted,
         status_active_archived=status_active_archived,
@@ -122,31 +164,13 @@ def change_status():
     return redirect(url_for("bidding.biddings"))
 
 
-@bidding_blueprint.route("/delete_exclusions/<int:bid_id>")
+@bidding_blueprint.route("/select_sort", methods=["POST"])
 @login_required
-def delete_exclusions(bid_id):
-    bid = Bid.query.get(bid_id)
-    for exclusion_link in bid.exclusion_links:
-        exclusion_link.delete()
-    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_exclusion"))
-
-
-@bidding_blueprint.route("/edit_exclusions/<int:bid_id>")
-@login_required
-def edit_exclusions(bid_id):
-    return redirect(url_for("exclusion.exclusions", bid_id=bid_id))
-
-
-@bidding_blueprint.route("/delete_clarifications/<int:bid_id>")
-@login_required
-def delete_clarifications(bid_id):
-    bid = Bid.query.get(bid_id)
-    for clarification_link in bid.clarification_links:
-        clarification_link.delete()
-    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_clarification"))
-
-
-@bidding_blueprint.route("/edit_clarifications/<int:bid_id>")
-@login_required
-def edit_clarifications(bid_id):
-    return redirect(url_for("clarification.clarifications", bid_id=bid_id))
+def select_sort():
+    if request.form.get("select_sort", "") == "Most recent":
+        session["most_recent"] = "Most recent"
+        session["most_popular"] = ""
+    elif request.form.get("select_sort", "") == "Most popular":
+        session["most_popular"] = "Most popular"
+        session["most_recent"] = ""
+    return redirect(url_for("bidding.biddings"))

@@ -17,7 +17,7 @@ from app.models import Bid, WorkItemLine, LinkWorkItem, WorkItem, WorkItemGroup
 
 from app.forms import WorkItemLineForm, BidForm
 
-from app.controllers import calculate_subtotal
+from app.controllers import calculate_subtotal, time_update
 
 from app.logger import log
 
@@ -53,6 +53,7 @@ def test_pdf(bid_id):
 @login_required
 def add_work_item_line(bid_id, link_work_item_id):
     WorkItemLine(link_work_items_id=link_work_item_id).save()
+    time_update(bid_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
 
 
@@ -69,6 +70,7 @@ def delete_group(bid_id, group_name):
             line.delete()
         link.delete()
     group.delete()
+    time_update(bid_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id))
 
 
@@ -78,6 +80,7 @@ def delete_group(bid_id, group_name):
 @login_required
 def add_group_work_item_line(bid_id, group_link_id):
     WorkItemLine(link_work_items_id=group_link_id).save()
+    time_update(bid_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id))
 
 
@@ -98,6 +101,7 @@ def edit_work_item_line(bid_id, work_item_line_id):
                 line.quantity = form.quantity.data
                 line.tbd = form.tbd.data
                 line.save()
+                time_update(bid_id)
             else:
                 line.note = form.note.data
                 line.description = form.description.data
@@ -106,6 +110,7 @@ def edit_work_item_line(bid_id, work_item_line_id):
                 line.quantity = form.quantity.data
                 line.tbd = form.tbd.data
                 line.save()
+                time_update(bid_id)
         else:
             log(log.ERROR, "Unknown work_item_line_id: %d", work_item_line_id)
 
@@ -122,6 +127,7 @@ def delete_link_work_item(bid_id, link_work_item_id):
         for line in link.work_item_lines:
             line.delete()
         link.delete()
+        time_update(bid_id)
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", link_work_item_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
@@ -137,6 +143,7 @@ def delete_group_link_work_item(bid_id, group_link_id):
         for line in link.work_item_lines:
             line.delete()
         link.delete()
+        time_update(bid_id)
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", group_link_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
@@ -150,6 +157,7 @@ def delete_work_item_line(bid_id, work_item_line_id):
     line = WorkItemLine.query.get(work_item_line_id)
     if line:
         line.delete()
+        time_update(bid_id)
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", work_item_line_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
@@ -163,6 +171,7 @@ def delete_group_work_item_line(bid_id, group_link_id):
     line = WorkItemLine.query.get(group_link_id)
     if line:
         line.delete()
+        time_update(bid_id)
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", group_link_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
@@ -174,6 +183,7 @@ def delete_exclusions(bid_id):
     bid = Bid.query.get(bid_id)
     for exclusion_link in bid.exclusion_links:
         exclusion_link.delete()
+    time_update(bid_id)
     return redirect(url_for("bidding.bidding", bid_id=bid_id, _anchor="bid_exclusion"))
 
 
@@ -189,6 +199,7 @@ def delete_clarifications(bid_id):
     bid = Bid.query.get(bid_id)
     for clarification_link in bid.clarification_links:
         clarification_link.delete()
+    time_update(bid_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_clarification"))
 
 

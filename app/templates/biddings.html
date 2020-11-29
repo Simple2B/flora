@@ -25,10 +25,24 @@
 
     <div class="container__header-block">
       <div>
-        <select class="form-control form-control-resize">
-          <option value="Most popular" name="Most popular">Most popular</option>
-          <option value="Most recent" name="Most recent">Most recent</option>
-        </select>
+        <form action="{{ url_for('bidding.select_sort') }}" method="post">
+          {% if most_popular %}
+            <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
+              <option selected value="Most popular" name="Most popular">Most popular</option>
+              <option value="Most recent" name="Most recent">Most recent</option>
+            </select>
+          {% elif most_recent %}
+            <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
+              <option value="Most popular" name="Most popular">Most popular</option>
+              <option selected value="Most recent" name="Most recent">Most recent</option>
+            </select>
+          {% else %}
+            <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
+              <option value="Most popular" name="Most popular">Most popular</option>
+              <option selected value="Most recent" name="Most recent">Most recent</option>
+            </select>
+          {% endif %}
+        </form>
         <div>
         {% if edit_bid %}
         <a href="{{ url_for('bidding.finish_edit_bid') }}">
@@ -76,7 +90,7 @@
         </div>
       </div>
     </form>
-
+  
     <form action="{{ url_for('bidding.edited_bids') }}" method="post" id="edit_bids_form">
       <div class="biddings-table margin--top">
         <table id="biddingsTableId" class="patientsTable table table-striped table-sm">
@@ -125,7 +139,7 @@
         </table>
       </div>
     </form>
-
+  
   </div>
 </section>
 
