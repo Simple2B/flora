@@ -42,3 +42,16 @@
         margin-left: -15%;
     }
 }
+
+@media (min-width: 500px) and (max-width: 767px) {
+  #sidebar-wrapper {
+      margin-left: 0;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -26%;
+  }
+  .work-items-section .ddb__side_bar {
+    max-height: 27vh;
+    cursor: pointer;
+  }
+}

@@ -63,17 +63,3 @@ closeWrapper.addEventListener('click', (e) => {
     $('#subtotal_img_id').attr('src', "/static/images/up_direction_element.svg");
   };
 });
-
-const clientCloseWrapper = document.getElementById('client_and_job_close_panel_id');
-const clientClosePanel = document.getElementById('client_job_hidden_id');
-clientCloseWrapper.addEventListener('click', (e) => {
-  e.preventDefault();
-  clientClosePanel.classList.toggle('hidden');
-});
-
-const drawingLogCloseWrapper = document.getElementById('drawing_log_close_panel_id');
-const drawingLogClosePanel = document.getElementById('drawing_log_hidden_id');
-drawingLogCloseWrapper.addEventListener('click', (e) => {
-  e.preventDefault();
-  drawingLogClosePanel.classList.toggle('hidden');
-});

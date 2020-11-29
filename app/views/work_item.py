@@ -254,7 +254,7 @@ def work_item_cancel(bid_id):
 def work_items(bid_id):
     form = NewWorkItemForm()
     form_group = WorkItemGroupForm()
-    bid_id = bid_id
+    bid = Bid.query.get(bid_id)
     work_cart_form = WorkItemCartForm()
     selected_work_item_ids = session.get("SelectedWorkItemsDict", {})
     form.deleted_work_item_id = session.get("DeletedWorkItem", {})
@@ -279,7 +279,7 @@ def work_items(bid_id):
         "work_items.html",
         form=form,
         form_group=form_group,
-        bid_id=bid_id,
+        bid=bid,
         work_cart_form=work_cart_form,
         str_function=str_function,
     )

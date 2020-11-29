@@ -9,7 +9,7 @@ class BaseConfig(object):
     APP_NAME = "Flora"
     DEBUG_TB_ENABLED = False
     SECRET_KEY = os.environ.get(
-        "SECRET_KEY", "Ensure you set a secret key, this is important!"
+        "SECRET_KEY", "bdb9a7da402bf4f386c75a4f7b273706ba619afeebef602ba151d95f707df928d3fc1e2ccf56419a6e8f76"
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     WTF_CSRF_ENABLED = False

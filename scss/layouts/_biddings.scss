@@ -6,6 +6,19 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        #biddingsSearch {
+            border: none;
+            background-color: #F2F2F2;
+            opacity: 0.5;
+            outline: none;
+            &:focus {
+                transition: 0.5s;
+                opacity: 1;
+                border-bottom: 2px solid black;
+            }
+        }
+
         & > div:first-child {
             display: inherit;
             align-items: baseline;
@@ -25,6 +38,15 @@
 
 .ddb_nav-side-bar {
     height: 64vh;
+}
+
+.__side_bar-title {
+    min-height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F2F2F2;
+    border-right: 5px solid #175593;
 }
 
 .form-control-resize {
@@ -52,6 +74,7 @@
         display: inline-flex;
         color: #000000;
         border: 1px solid #E4E4E4;
+        margin: $m1rem $m1rem 0 0;
 
         & > div {
             padding-right: $m0-5rem;
@@ -88,6 +111,9 @@
 }
 
 .biddings-table {
+    overflow-y: auto;
+    max-height: 75vh;
+
     &_check-box {
         width: 26.5px;
         vertical-align: middle !important;

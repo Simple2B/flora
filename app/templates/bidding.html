@@ -61,7 +61,32 @@
   <div class="main-container_bidding" id="work-item-container">
     <div class="main-container_bidding-header">
       <div class="__bid-header_start_block">
-        <div class="bid-header__status">Draft</div>
+        <div>
+          <form action="{{ url_for('bid.bidding_change_status', bid_id=bid.id) }}" method="post">
+            {% if bid.status.value == "Draft" %}
+            <select class="__bid_status-draft" onchange="this.form.submit()" name="bid_status">
+              {{ bid.status.value }}
+              <option class="__bid_status-default" selected value="Draft"> {{ bid.status.value }} </option>
+              <option class="__bid_status-default" value="Submitted"> Submitted </option>
+              <option class="__bid_status-default" value="Archived"> Archived </option>
+            </select>
+            {% elif bid.status.value == "Submitted" %}
+            <select class="__bid_status-submitted" onchange="this.form.submit()" name="bid_status">
+              {{ bid.status.value }}
+              <option class="__bid_status-default" value="Draft"> Draft </option>
+              <option class="__bid_status-default" selected value="Submitted"> {{ bid.status.value }} </option>
+              <option class="__bid_status-default" value="Archived"> Archived </option>
+            </select>
+            {% else %}
+            <select class="__bid_status-archived" onchange="this.form.submit()" name="bid_status">
+              {{ bid.status.value }}
+              <option class="__bid_status-default" value="Draft"> Draft </option>
+              <option class="__bid_status-default" value="Submitted"> Submitted </option>
+              <option class="__bid_status-default" selected value="Archived"> {{ bid.status.value }} </option>
+            </select>
+            {% endif %}
+          </form>
+        </div>
         <div class="bid-header__title"><strong>
           # {{ bid.procore_bid_id }} - {{ bid.client }}
         </strong></div>
@@ -117,10 +142,10 @@
 
       <div class="__client_job_info">
         <div class="_show-client_panel">
-          <div>Client and Job Info</div>
+          <div class="title-text-style">Client and Job Info</div>
           <div> *Information edited in Procore
             <button class="border-none ddb-cursor-handle" id="client_and_job_close_panel_id">
-              <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="">
+              <img src="{{ url_for('static', filename='images/up_direction_element.svg') }}">
             </button>
           </div>
         </div>
@@ -198,7 +223,7 @@
           <div class="title-text-style">Drawing Log</div>
           <div> *Information edited in Procore
             <button class="border-none ddb-cursor-handle" id="drawing_log_close_panel_id">
-              <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="">
+              <img src="{{ url_for('static', filename='images/up_direction_element.svg') }}">
             </button>
           </div>
         </div>
@@ -244,7 +269,7 @@
     </div>
     <div class="__bidding--scroll">
       <div class="scope_of_work_container modal-content modal--padding box-shadow" id="bid_scope_of_work">
-        <div class="_work_items_block add_item_block">
+        <div class="_work_items_block">
           <span class="ddb-margin-top"><strong>Scope of Work</strong></span>
           <br>
           {% for link_work_item in form_bid.global_work_items %}
@@ -380,8 +405,9 @@
             </div>
           </div>
 
-          {% for group_link in group.link_work_items %}
           <div id="group_panel_id-{{group.name}}">
+          {% for group_link in group.link_work_items %}
+
             <div class="_work_item-link">
               <div class="_flex-start">
                 <div>{{ loop.index }}</div>
@@ -492,8 +518,8 @@
               {% endfor %} {# end of lines #}
 
             </div>
-          </div>
           {% endfor %} {# end of work item links #}
+          </div>
 
           {% endfor %} {# end of groups #}
 
@@ -659,9 +685,13 @@
         </div>
       </div>
 
-      <div class="modal-content modal--padding box-shadow add_item_block " id="bid_exclusion">
-        <h5 class="--padding">Exclusions</h5>
-          <div class="d-flex bd-highlight ddb-margin-bottom ">
+      <div class="box-shadow add_item_block" id="bid_exclusion">
+        <span>
+          <strong>
+            Exclusions
+          </strong>
+        </span>
+        <div class="d-flex bd-highlight bidding_margin">
         {% if bid.exclusion_links %}
           <div class="p-2 flex-shrink-1 bd-highlight">
             <a href="{{url_for('bid.delete_exclusions', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
@@ -688,9 +718,13 @@
         </div>
       </div>
 
-      <div class="modal-content modal--padding add_item_block clarification_block" id="bid_clarification">
-        <h5 class="--padding">Clarifications</h5>
-          <div class="d-flex bd-highlight ddb-margin-bottom ">
+      <div class="add_item_block clarification_block" id="bid_clarification">
+        <span>
+          <strong>
+            Clarifications
+          </strong>
+        </span>
+          <div class="d-flex bd-highlight bidding_margin">
           {% if bid.clarification_links %}
             <div class="p-2 flex-shrink-1 bd-highlight">
              <a href="{{url_for('bid.delete_clarifications', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
@@ -811,7 +845,8 @@
 <script src="/static/js/jquery.dataTables.min.js"></script>
 <script src="/static/js/bidding.js" defer></script>
 <script>
-  bid_href_id.classList.toggle('test-class');
+  bid_href_id.classList.remove('menu__item');
+  bid_href_id.classList.toggle('active-tab');
 </script>
 {% endblock %}
 

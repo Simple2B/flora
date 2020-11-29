@@ -7,45 +7,49 @@
 {% block content %}
 
 <section class="page-section section-block bidding d-flex overflow-x-hidden" id="wrapper">
-  <!-- begin Sidebar -->
-  <!-- <div> -->
-  <div class="border-right box-shadow __side-bar-box" id="sidebar-wrapper">
-    <div class="sidebar-heading">DDB Contracting</div>
-    <div class="text--center list-group list-group-flush none-underline">
-      <a href="{{ url_for('bidding.biddings') }}">
-      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
-      <img src="{{ url_for('static', filename='images/right-hand.svg') }}"> Back to Editing </button></a>
-      <a href="{{ url_for('work_item.work_items', bid_id=bid_id) }}">
-      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
-      Scope of work </button> </a>
-      <a href="{{ url_for('exclusion.exclusions', bid_id=bid_id) }}" id='href_exclusion_id'>
-      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks --border">
-      Exclusions
-      </button> </a>
-      <a href="{{ url_for('clarification.clarifications', bid_id=bid_id) }}">
-      <button class="ddb-cursor-handle list-group-item list-group-item-action bg-light normalized tablinks">
-      Clarifications
-      </button> </a>
 
-
+  <!-- Sidebar -->
+  <div class="sidebar-container" id="sidebar-wrapper">
+    <div class="sidebar">
+      <span class="sidebar__return-link t-gray">
+        <a href="{{ url_for('bid.bidding', bid_id=bid.id)}}"><img src="{{ url_for('static', filename='images/right-hand.svg') }}">
+        Back to editing
+        </a>
+      </span>
+      <span class="sidebar__bid-title">{{ bid.id }} - {{ bid.client }}</span>
+      <ul class="sidebar__nav-links">
+        <li><a href="{{ url_for('bid.bidding', bid_id=bid.id) }}">Project General</a></li>
+        <li><a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}">
+          Scope of Work
+        </li>
+        <li class="__disc-blue">
+          <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}" class="__text-decor-active"  id='href_exclusion_id'>
+            Exclusion
+          </a>
+        </li>
+        <li><a href="{{ url_for('clarification.clarifications', bid_id=bid.id) }}">Clarification</a></li>
+        <li><a href="#">Alternates</a></li>
+      </ul>
     </div>
   </div>
-  <!-- </div> -->
-  <!-- end Sidebar -->
+
   <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size box-shadow" id="ddb-background">
   </nav>
+  <!-- End Sidebar -->
+
+
   <!-- <div class="ddb-container"> -->
   <div class="container exclusions-container" id="exclusion-container">
     <div class="__bid-header">
       <div class="bid-header__status">Draft</div>
       <div class="bid-header__title"><strong>
-        # {{ bid_id }} - TEST bid
+        # {{ bid.id }} - {{ bid.client }}
       </strong></div>
     </div>
 
     <div class="container __box-table-exclusion flex-flow-wrap">
       <div class="__box-table--left">
-        <form role="form" action="{{ url_for('exclusion.add_new_exclusion', bid_id=bid_id) }}" method="post">
+        <form role="form" action="{{ url_for('exclusion.add_new_exclusion', bid_id=bid.id) }}" method="post">
 
           <div class="modal-content border-none">
             <div class="form-row __add-exclusion--box">
@@ -63,16 +67,11 @@
           </div>
         </form>
 
-        <form class="form" id="exclusions" role="form" action="{{ url_for('exclusion.add_exclusion_to_cart', bid_id=bid_id) }}" method="post">
-          <div id="exclusionTable" class="box-shadow __box-table--mtop ddb-margin-top">
-            <span>
-              <select>
-                <option value="Most popular" name="Most popular">Most popular</option>
-                <option value="Most recent" name="Most recent">Most recent</option>
-              </select>
-              <!-- <button type="button" class="_btn--blue" data-toggle="modal" data-target="#exampleModal">
-            Add new
-          </button> -->
+        <form class="form" id="exclusions" role="form" action="{{ url_for('exclusion.add_exclusion_to_cart', bid_id=bid.id) }}" method="post">
+          <div id="exclusionTable" class="box-shadow">
+
+            <span class="t-gray">
+              Showing {{ form.exclusions|length }} Exclusions
             </span>
 
             <div class="__table-item--thead">
@@ -96,13 +95,13 @@
                     <td><input class="form-control" type="checkbox" name="{{exclusion.id}}"></td>
                     <td>{{exclusion.title}}</td>
                     <td><button type="button" value="{{exclusion.id}}" class="__border-none"
-                      data-toggle="modal" data-target="#exampleModal" data-target_link="{{url_for('exclusion.edit_exclusion_item', bid_id=bid_id, item_id=exclusion.id)}}"
+                      data-toggle="modal" data-target="#exampleModal" data-target_link="{{url_for('exclusion.edit_exclusion_item', bid_id=bid.id, item_id=exclusion.id)}}"
                       data-title="{{exclusion.title}}">
                       <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
                       </button>
 
                       <button type="button" value="{{exclusion.id}}" class="__border-none" data-toggle="modal" data-target="#modalDelete"
-                      data-delete="{{exclusion.title}}" data-target_link_delete="{{url_for('exclusion.delete_exclusion_item_from_items', bid_id=bid_id, item_id=exclusion.id)}}">
+                      data-delete="{{exclusion.title}}" data-target_link_delete="{{url_for('exclusion.delete_exclusion_item_from_items', bid_id=bid.id, item_id=exclusion.id)}}">
                       <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
                       </button>
                     </td>
@@ -131,7 +130,7 @@
               <tr>
                 <td><a href="" class="t-gray">{{item.title}}</a></td>
                 <td>
-                  <a href="{{url_for('exclusion.delete_exclusion_item_from_cart', bid_id=bid_id, item_id=item.id)}}"><img
+                  <a href="{{url_for('exclusion.delete_exclusion_item_from_cart', bid_id=bid.id, item_id=item.id)}}"><img
                       src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
                 </td>
               </tr>
@@ -152,12 +151,12 @@
       </div>
 
       <div class="__box-add-bid-cancel--margins">
-      <a class="none-underline _btn--black" href="{{ url_for('exclusion.add_exclusions_to_bid', bid_id=bid_id) }}">
-        Add to bidding
-      </a>
-      <a class="_btn--gray" href="{{ url_for('bid.bidding', bid_id=bid_id, _anchor='bid_exclusion') }}">
-          Cancel
-      </a>
+        <a class="none-underline _btn--black" href="{{ url_for('exclusion.add_exclusions_to_bid', bid_id=bid.id) }}">
+          Add to bidding
+        </a>
+        <a class="_btn--gray" href="{{ url_for('bid.bidding', bid_id=bid.id, _anchor='bid_exclusion') }}">
+            Cancel
+        </a>
       </div>
 
     </div>

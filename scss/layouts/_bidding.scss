@@ -2,6 +2,17 @@
 @import '../global/components/buttons';
 
 
+%bid_status {
+    color: white;
+    padding: .5rem 1rem;
+    border-radius: .3rem;
+    text-align-last: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+
 // custom class
 .navbar-nav .nav-link {
     padding-left: $m1rem;
@@ -135,12 +146,36 @@
     padding: 0rem $m0-5rem 0rem 0rem;
 }
 
-.bid-header__status {
-    color: white;
-    padding: .5rem 1rem;
-    background-color: $red;
-    border-radius: .3rem;
+
+//  Begin bid status //
+
+.__bid_status-default {
+    @extend %bid_status;
+    color: $black;
+    background-color: $white;
+
+    &:hover {
+        background-color: #F2F2F2;
+        cursor: pointer;
+    }
 }
+
+.__bid_status-draft {
+    @extend %bid_status;
+    background-color: $red;
+}
+
+.__bid_status-submitted {
+    @extend %bid_status;
+    background-color: $light_blue;
+}
+
+.__bid_status-archived {
+    @extend %bid_status;
+    background-color: $gray;
+}
+// End bid status //
+
 
 .bid-header__title {
     color: white;
@@ -152,6 +187,10 @@
     flex-flow: column wrap;
     padding: $m1rem;
     margin-bottom: $m1rem;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    outline: 0;
 
     ._date_revision {
         width: 50vw;
@@ -231,11 +270,6 @@
             align-items: center;
             border: 1px solid #E5E5E5;
 
-            .title-text-style {
-                color: #000000;
-                font-weight: 500;
-            }
-
         }
 
         ._flex-center {
@@ -245,6 +279,10 @@
 
     }
 
+    .title-text-style {
+        color: #000000;
+        font-weight: 500;
+    }
 }
 
 .bidding__side_bar {
@@ -276,6 +314,12 @@
 .__bidding--scroll {
     div.add_item_block {
         margin: $m1rem 0rem;
+        padding: 0.5rem;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: .3rem;
+        outline: 0;
     }
 
     .clarification_block {
@@ -574,6 +618,10 @@
         flex-flow: row wrap;
         align-items: baseline;
     }
+}
+
+.bidding_margin {
+    margin: $m1rem 0rem $m1rem $m0-5rem;
 }
 
 .direction_element {
