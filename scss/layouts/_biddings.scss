@@ -6,6 +6,19 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        #biddingsSearch {
+            border: none;
+            background-color: #F2F2F2;
+            opacity: 0.5;
+            outline: none;
+            &:focus {
+                transition: 0.5s;
+                opacity: 1;
+                border-bottom: 2px solid black;
+            }
+        }
+
         & > div:first-child {
             display: inherit;
             align-items: baseline;
@@ -61,6 +74,7 @@
         display: inline-flex;
         color: #000000;
         border: 1px solid #E4E4E4;
+        margin: $m1rem $m1rem 0 0;
 
         & > div {
             padding-right: $m0-5rem;

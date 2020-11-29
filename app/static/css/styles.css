@@ -498,6 +498,20 @@ ul {
 ._form-input-size--l {
   font-size: 1rem; }
 
+._form-search {
+  display: block;
+  margin-right: 1rem;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  background-color: #F2F2F2; }
+
 ._form-text_area {
   border: 1px solid transparent;
   line-height: 2rem;
@@ -1623,6 +1637,15 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center; }
+  .container__header-block #biddingsSearch {
+    border: none;
+    background-color: #F2F2F2;
+    opacity: 0.5;
+    outline: none; }
+    .container__header-block #biddingsSearch:focus {
+      transition: 0.5s;
+      opacity: 1;
+      border-bottom: 2px solid black; }
   .container__header-block > div:first-child {
     display: inherit;
     align-items: baseline; }
@@ -1674,7 +1697,8 @@ ul {
   .bids_status_btns button {
     display: inline-flex;
     color: #000000;
-    border: 1px solid #E4E4E4; }
+    border: 1px solid #E4E4E4;
+    margin: 1rem 1rem 0 0; }
     .bids_status_btns button > div {
       padding-right: 0.5rem; }
     .bids_status_btns button:hover {

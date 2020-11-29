@@ -56,20 +56,20 @@ def biddings():
         return render_template("biddings.html", bids=bids)
 
     # Take bids
-    # papi = ProcoreApi()
-    # bids_from_procore = papi.bids()
+    papi = ProcoreApi()
+    bids_from_procore = papi.bids()
 
     # assert bids_from_procore
-    # for bid in bids_from_procore:
-    #     bid_package_id = bid["bid_package_id"]
-    #     db_bid = Bid.query.filter(Bid.procore_bid_id == bid_package_id).first()
-    #     if not db_bid:
-    #         bidding = Bid(
-    #             procore_bid_id=bid["bid_package_id"],
-    #             title=bid["bid_package_title"],
-    #             client=bid["vendor"]["name"],
-    #         )
-    #         bidding.save()
+    for bid in bids_from_procore:
+        bid_package_id = bid["bid_package_id"]
+        db_bid = Bid.query.filter(Bid.procore_bid_id == bid_package_id).first()
+        if not db_bid:
+            bidding = Bid(
+                procore_bid_id=bid["bid_package_id"],
+                title=bid["bid_package_title"],
+                client=bid["vendor"]["name"],
+            )
+            bidding.save()
 
     edit_bid = session.get('edit_bid', False)
 
