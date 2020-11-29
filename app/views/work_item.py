@@ -1,11 +1,10 @@
-import time
 from flask import Blueprint, render_template, url_for, redirect, flash, request, session
 from flask_login import login_required
 
 from app.models import WorkItem, Bid
 from app.models import LinkWorkItem, WorkItemGroup
 from app.forms import NewWorkItemForm, WorkItemCartForm, WorkItemGroupForm
-from app.controllers import add_work_item_validator, str_function
+from app.controllers import add_work_item_validator, str_function, time_update
 from app.logger import log
 
 work_item_blueprint = Blueprint("work_item", __name__)
@@ -230,11 +229,7 @@ def add_to_bidding(bid_id):
                 work_item_id=int(item),
                 work_item_group=work_group
             ).save()
-
-    bid = Bid.query.get(bid_id)
-    if bid:
-        bid.time_updated = round(time.time())
-        bid.save()
+    time_update(bid_id)
 
     session.pop("SelectedWorkItemsDict", None)
     session.pop("DeletedWorkItem", None)
