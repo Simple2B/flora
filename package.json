@@ -1,7 +1,7 @@
 {
   "name": "flora",
   "version": "1.0.0",
-  "description": "Bidding manager project",
+  "description": "### 1. Install gulp CLI library using npm globally: ``` sudo npm i gulp-cli -g ```",
   "main": "index.js",
   "directories": {
     "doc": "docs",
@@ -14,20 +14,19 @@
     "type": "git",
     "url": "git+https://github.com/Simple2B/flora.git"
   },
-  "author": "Viktor Radchenko",
-  "license": "MIT",
+  "author": "",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/Simple2B/flora/issues"
   },
   "homepage": "https://github.com/Simple2B/flora#readme",
-  "devDependencies": {
-    "browser-sync": "^2.26.12",
+  "dependencies": {
+    "browser-sync": "^2.26.13",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-clean-css": "^4.3.0",
     "gulp-plumber": "^1.2.1",
     "gulp-sass": "^4.1.0",
-    "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2"
   }
 }
