@@ -21,11 +21,10 @@ def work_item(bid_id):
                 code=form.code.data,
             )
             work_item.save()
-            # flash("Registration successful. You are logged in.", "success")
+            flash("Add new work item", "success")
             return redirect(url_for("work_item.work_items", bid_id=bid_id))
         else:
-            pass
-            # flash("The given data was invalid.", "danger")
+            flash("The given data was invalid.", "danger")
             return redirect(url_for("work_item.work_items", bid_id=bid_id))
     elif form.is_submitted():
         flash("The given data was invalid.", "danger")
@@ -66,7 +65,7 @@ def add_work_item_to_cart(bid_id):
             session["SelectedWorkItemsDict"] = global_work_items
     elif form.is_submitted():
         log(log.WARNING, "The given data was invalid")
-        # flash("The given data was invalid.", "danger")
+        flash("The given data was invalid.", "danger")
     return redirect(url_for("work_item.work_items", bid_id=bid_id))
 
 
@@ -110,7 +109,8 @@ def work_item_group(bid_id):
     groups = session.get("GroupDict", {})
     group_name = form.name.data
     if group_name:
-        existed_name = WorkItemGroup.query.filter(WorkItemGroup.name == group_name).first()
+        existed_name = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).filter(
+            WorkItemGroup.name == group_name).first()
         if group_name not in groups:
             if not existed_name:
                 groups[group_name] = []

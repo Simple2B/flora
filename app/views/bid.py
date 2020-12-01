@@ -325,7 +325,8 @@ def export_pdf(bid_id):
                 global_work_items=global_work_items,
                 path_to_img=PATH_TO_IMG,
             )
-            pdf_content = pdfkit.from_string(html_content, False)
+            options = {'enable-local-file-access': None}
+            pdf_content = pdfkit.from_string(html_content, False, options=options)
             stream = io.BytesIO(pdf_content)
 
             now = datetime.datetime.now()
