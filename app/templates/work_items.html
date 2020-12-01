@@ -15,7 +15,7 @@
         Back to editing
         </a>
       </span>
-      <span class="sidebar__bid-title">{{ bid.id }} - {{ bid.client }}</span>
+      <span class="sidebar__bid-title">#{{ bid.id }} - {{ bid.client }}</span>
       <ul class="sidebar__nav-links">
         <li><a href="{{ url_for('bid.bidding', bid_id=bid.id) }}">Project General</a></li>
         <li class="__disc-blue"><a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}" class="__text-decor-active">
@@ -38,10 +38,12 @@
   <!-- Chart Container -->
   <div class="main-container">
     <div class="__bid-header">
-      <div class="bid-header__status">Draft</div>
-      <div class="bid-header__title"><strong>
-        # {{ bid.id }} - {{ bid.client }}
-      </strong></div>
+      <div class="bid-header__status status-change_color">{{ bid.status.value }}</div>
+      <div class="bid-header__title">
+        <strong>
+          # {{ bid.id }} - {{ bid.client }}
+        </strong>
+      </div>
     </div>
     <div class="__body">
       <div class="tables-block">

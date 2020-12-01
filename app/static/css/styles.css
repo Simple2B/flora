@@ -170,6 +170,8 @@ ul {
   .__box-add-bid-cancel--margins a {
     text-decoration: none;
     color: #FFFFFF; }
+  .__box-add-bid-cancel--margins > a:first-child {
+    margin-right: 1rem; }
   .__box-add-bid-cancel--margins button {
     cursor: pointer;
     margin-right: 1rem; }
@@ -246,6 +248,15 @@ ul {
     color: #2F80ED !important; }
     .active a:hover {
       color: #0e50a8 !important; }
+
+.status-change_color_draft {
+  background-color: #EB5757 !important; }
+
+.status-change_color_submitted {
+  background-color: #2F80ED !important; }
+
+.status-change_color_archived {
+  background-color: #979797 !important; }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }

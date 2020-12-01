@@ -51,6 +51,30 @@ $(document).ready( function() {
   });
 });
 
+
+// change Bid status color
+
+$(document).ready( function() {
+  let changeStatus = document.querySelector('.status-change_color');
+  if (changeStatus.textContent == 'Draft') {
+    changeStatus.classList.toggle('status-change_color_draft');
+    changeStatus.classList.remove('status-change_color_submitted');
+    changeStatus.classList.remove('status-change_color_archived');
+  };
+  if (changeStatus.textContent == 'Submitted') {
+    changeStatus.classList.toggle('status-change_color_submitted');
+    changeStatus.classList.remove('status-change_color_draft');
+    changeStatus.classList.remove('status-change_color_archived');
+  } 
+  if (changeStatus.textContent == 'Archived') {
+    changeStatus.classList.toggle('status-change_color_archived');
+    changeStatus.classList.remove('status-change_color_submitted');
+    changeStatus.classList.remove('status-change_color_draft');
+  };
+});
+// end change Bid status color
+
+
 const closeWrapper = document.getElementById('subtotal_close_panel_id');
 const subtotalClosePanel = document.getElementById('subtotal_inputs_fields_id');
 closeWrapper.addEventListener('click', (e) => {
