@@ -91,12 +91,16 @@
           # {{ bid.procore_bid_id }} - {{ bid.client }}
         </strong></div>
       </div>
+      {% if form_bid.save_in_cloud %}
       <div class="__bid-header_end_block">
         <span class="cloud_title">All changes saved in the cloud</span>
-        <button class="bck-black border-none ddb-cursor-handle">
-          <img src="{{ url_for('static', filename='images/close_x_element.svg') }}" alt="">
-        </button>
+        <a href="{{ url_for('bid.bidding_save_in_cloud', bid_id=bid.id) }}">
+          <button class="bck-black border-none ddb-cursor-handle">
+            <img src="{{ url_for('static', filename='images/close_x_element.svg') }}" alt="">
+          </button>
+        </a>
       </div>
+      {% endif %}
     </div>
     <div class="main-container__project_general box-shadow">
       <span class="ddb-margin-top"><strong>Project General</strong></span>
@@ -121,14 +125,15 @@
             Chose a project type
           </div>
           <div>
-            <input type="radio" id="admin" name="user_type" value="admin"
-                  checked>
-            <label for="admin">Budget</label>
-
-
-
-            <input type="radio" id="user" name="user_type" value="user">
-            <label for="user">Quote</label>
+            <div>
+              <input type="radio" id="admin" name="user_type" value="admin"
+                    checked>
+              <label for="admin">Budget</label>
+            </div>
+            <div>
+              <input type="radio" id="user" name="user_type" value="user">
+              <label for="user">Quote</label>
+            </div>
           </div>
         </div>
       </div>
@@ -396,8 +401,8 @@
               <span>Work Group: {{ group.name }}</span>
             </div>
             <div class="group-btns">
-              <img class="ddb-cursor-handle" data-group_panel_id="{{group.name}}"
-              src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}"
+              <img class="ddb-cursor-handle" data-group_panel_id="{{group.id}}"
+              src="{{ url_for('static', filename='images/up_direction_element.svg') }}"
               id="bid_group_id">
               <a href="{{ url_for('bid.delete_group', bid_id=bid.id, group_name=group.name)}}">
                 <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
@@ -405,7 +410,7 @@
             </div>
           </div>
 
-          <div id="group_panel_id-{{group.name}}">
+          <div id="group_panel_id-{{group.id}}">
           {% for group_link in group.link_work_items %}
 
             <div class="_work_item-link">

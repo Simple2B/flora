@@ -55,8 +55,8 @@ const listArray = Array.from(groupToggle);
 listArray.forEach( el => {
     el.addEventListener('click', (e) => {
         e.preventDefault();
-        const buttonId = e.currentTarget.id
-        const areaToShow = document.querySelector(`#groupTableWrapper-${buttonId}`)
+        let buttonId = e.currentTarget.id;
+        const areaToShow = document.querySelector(`#groupTableWrapper-${buttonId}`);
         let changeLineImg = document.querySelector(`#${buttonId}_img_id`).getAttribute('src');
         areaToShow.classList.toggle('hidden');
         if (changeLineImg == "/static/images/up_direction_element.svg") {

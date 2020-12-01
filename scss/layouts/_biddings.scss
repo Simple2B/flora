@@ -22,7 +22,7 @@
         & > div:first-child {
             display: inherit;
             align-items: baseline;
-            select {
+            form {
                 margin-right: $m1rem;
             }
             div {
@@ -47,6 +47,10 @@
     justify-content: center;
     background-color: #F2F2F2;
     border-right: 5px solid #175593;
+
+    img {
+        margin-right: $m1rem;
+    }
 }
 
 .form-control-resize {

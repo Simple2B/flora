@@ -163,13 +163,17 @@ ul {
   height: 50vh; }
 
 .__box-add-bid-cancel--margins {
+  display: flex;
   margin-left: auto;
   margin-top: auto;
   margin-bottom: 1rem; }
   .__box-add-bid-cancel--margins a {
     text-decoration: none;
     color: #FFFFFF; }
-  .__box-add-bid-cancel--margins a:first-child {
+  .__box-add-bid-cancel--margins > a:first-child {
+    margin-right: 1rem; }
+  .__box-add-bid-cancel--margins button {
+    cursor: pointer;
     margin-right: 1rem; }
 
 .text--center {
@@ -244,6 +248,15 @@ ul {
     color: #2F80ED !important; }
     .active a:hover {
       color: #0e50a8 !important; }
+
+.status-change_color_draft {
+  background-color: #EB5757 !important; }
+
+.status-change_color_submitted {
+  background-color: #2F80ED !important; }
+
+.status-change_color_archived {
+  background-color: #979797 !important; }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }
@@ -1121,7 +1134,7 @@ ul {
   padding-bottom: 1rem; }
 
 .main-container_bidding {
-  max-width: 75%;
+  max-width: 75vw;
   margin: 0 1rem;
   display: flex;
   flex-flow: column;
@@ -1195,6 +1208,12 @@ ul {
       align-items: center; }
     .main-container__project_general ._date_revision ._date_time_img {
       padding-left: 1rem; }
+    .main-container__project_general ._date_revision .project_type-radio-select > div:last-child {
+      display: flex; }
+      .main-container__project_general ._date_revision .project_type-radio-select > div:last-child div {
+        margin-right: 1rem; }
+        .main-container__project_general ._date_revision .project_type-radio-select > div:last-child div input {
+          margin-right: 0.3rem; }
   .main-container__project_general ._titles_prices {
     width: 60vw;
     margin-top: 1rem;
@@ -1222,7 +1241,11 @@ ul {
       justify-content: space-between;
       align-items: center;
       color: #979797;
-      font-weight: bold; }
+      font-weight: bold;
+      padding-left: 0.5rem; }
+      .main-container__project_general .__client_job_info .client-job--span div {
+        min-width: 15%;
+        width: 25%; }
     .main-container__project_general .__client_job_info .proj_gen-text-info {
       color: #000000;
       font-weight: normal; }
@@ -1649,7 +1672,7 @@ ul {
   .container__header-block > div:first-child {
     display: inherit;
     align-items: baseline; }
-    .container__header-block > div:first-child select {
+    .container__header-block > div:first-child form {
       margin-right: 1rem; }
     .container__header-block > div:first-child div {
       width: 100%; }
@@ -1666,6 +1689,8 @@ ul {
   justify-content: center;
   background-color: #F2F2F2;
   border-right: 5px solid #175593; }
+  .__side_bar-title img {
+    margin-right: 1rem; }
 
 .form-control-resize {
   min-width: 10vw;
@@ -1727,9 +1752,8 @@ ul {
   .biddings-table_check-box {
     width: 26.5px;
     vertical-align: middle !important; }
-
-.biddings-table a {
-  color: #000; }
+  .biddings-table a {
+    color: #000; }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }
@@ -1805,7 +1829,7 @@ ul {
   .chart-left__header-add-item {
     width: 100%;
     display: inline-flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-evenly; }
   .chart-left .__table-item--thead {
     display: flex;

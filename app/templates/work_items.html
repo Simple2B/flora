@@ -15,7 +15,7 @@
         Back to editing
         </a>
       </span>
-      <span class="sidebar__bid-title">{{ bid.id }} - {{ bid.client }}</span>
+      <span class="sidebar__bid-title">#{{ bid.id }} - {{ bid.client }}</span>
       <ul class="sidebar__nav-links">
         <li><a href="{{ url_for('bid.bidding', bid_id=bid.id) }}">Project General</a></li>
         <li class="__disc-blue"><a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}" class="__text-decor-active">
@@ -38,10 +38,12 @@
   <!-- Chart Container -->
   <div class="main-container">
     <div class="__bid-header">
-      <div class="bid-header__status">Draft</div>
-      <div class="bid-header__title"><strong>
-        # {{ bid.id }} - {{ bid.client }}
-      </strong></div>
+      <div class="bid-header__status status-change_color">{{ bid.status.value }}</div>
+      <div class="bid-header__title">
+        <strong>
+          # {{ bid.id }} - {{ bid.client }}
+        </strong>
+      </div>
     </div>
     <div class="__body">
       <div class="tables-block">
@@ -168,12 +170,14 @@
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
               {% for category, message in messages %}
-                <div class="alert alert-{{ category }} alert-dismisible login__error">
-                  <button class="_flash-btn" type="button" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true"><img src="{{ url_for('static', filename='images/close_button_ddb.svg') }}"></span>
-                  </button>
-                  {{ message }}
-                </div>
+                {% if category == 'warning' %}
+                  <div class="alert alert-{{ category }} alert-dismisible login__error">
+                    <button class="_flash-btn" type="button" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true"><img src="{{ url_for('static', filename='images/close_button_ddb.svg') }}"></span>
+                    </button>
+                    {{ message }}
+                  </div>
+                {% endif %}
               {% endfor %}
             {% endif %}
             {% endwith %}
@@ -216,7 +220,8 @@
 
           <div class="chart-right__group_name-box">
             {% if form_group.groups %}
-            {% for group_name in form_group.groups %}
+            {% for group_name_js_id in form_group.groups %}
+            {% for group_name in form_group.groups[group_name_js_id] %}
 
             <div class="chart-right__group-name-block">
 
@@ -237,12 +242,12 @@
               data-target_link_group_delete="{{url_for('work_item.delete_group', bid_id=bid.id, group_name=group_name)}}" data-group_name="{{group_name}}">
                 <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
               </button>
-              <button id='{{ group_name }}' class="ddb-cursor-handle btnGroup_js">
-                <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" id="{{ group_name }}_img_id">
+              <button id='{{ group_name_js_id }}' class="ddb-cursor-handle btnGroup_js">
+                <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" id="{{ group_name_js_id }}_img_id">
               </button>
 
             </div>
-            <div id="groupTableWrapper-{{ group_name }}" class="hidden __box-scroll--group-table groupTableWrapper_js">
+            <div id="groupTableWrapper-{{ group_name_js_id }}" class="hidden __box-scroll--group-table groupTableWrapper_js">
               <table id="selectedWorkItemGroupTable" class="table table-striped table-sm dropdown-content">
                 <thead class="">
                   <th>Code</th>
@@ -250,7 +255,7 @@
                   <th>Delete</th>
                 </thead>
                 <tbody>
-                  {% for item in form_group.groups[group_name] %}
+                  {% for item in form_group.groups[group_name_js_id][group_name] %}
                   <tr>
                     <td><a href="" class="t-gray">{{item.code}}</a></td>
                     <td>{{item.name}}</td>
@@ -265,6 +270,8 @@
               </table>
             </div>
             {% endfor %}
+            {% endfor %}
+
             {% else %}
             <form class="__group_name" id="work_item_group_name" role="form" action="{{ url_for('work_item.work_item_group', bid_id=bid.id) }}" method="post">
             </form>
@@ -278,11 +285,13 @@
       </div>
       <!-- End Right Chart -->
       <div class="__box-add-bid-cancel--margins btns-block">
-        <a class="none-underline _btn--black" href="{{ url_for('exclusion.add_exclusions_to_bid', bid_id=bid.id) }}">
-          Add to bidding
-        </a>
-        <a class="_btn--gray" href="{{ url_for('bid.bidding', bid_id=bid.id, _anchor='bid_exclusion') }}">
-          Cancel
+        <form action="{{ url_for('work_item.add_to_bidding', bid_id=bid.id) }}" method="post">
+          <button type="submit" class="none-underline _btn--black">
+            Add to bidding
+          </button>
+        </form>
+        <a class="_btn--gray" href="{{ url_for('work_item.work_item_cancel', bid_id=bid.id) }}">
+            Cancel
         </a>
       </div>
     </div>

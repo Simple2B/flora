@@ -184,16 +184,21 @@ ul {
 }
 
 .__box-add-bid-cancel--margins {
+    display: flex;
     margin-left: auto;
     margin-top: auto;
     margin-bottom: 1rem;
-
     & a {
         text-decoration: none;
         color: #FFFFFF
     }
 
-    a:first-child {
+    & > a:first-child {
+        margin-right: $m1rem;
+    }
+
+    & button {
+        cursor: pointer;
         margin-right: $m1rem;
     }
 }
@@ -288,7 +293,6 @@ ul {
     }
 }
 
-
 .active {
     color: $light_blue !important;
     a {
@@ -297,5 +301,19 @@ ul {
         &:hover {
             color: darken($light_blue, 20%) !important;
         }
+    }
+}
+
+.status-change_color {
+    &_draft {
+        background-color: #EB5757 !important;
+    }
+
+    &_submitted {
+        background-color: #2F80ED !important;
+    }
+
+    &_archived {
+        background-color: #979797 !important;
     }
 }
