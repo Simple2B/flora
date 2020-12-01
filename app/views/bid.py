@@ -223,6 +223,7 @@ def bidding_change_status(bid_id):
     else:
         bid.status = Bid.Status.d_archived
         bid.save()
+    time_update(bid_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
 
 

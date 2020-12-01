@@ -103,7 +103,7 @@
 }
 
 .main-container_bidding {
-    max-width: 75%;
+    max-width: 75vw;
     margin: 0 $m1rem;
     display: flex;
     flex-flow: column;
@@ -249,7 +249,11 @@
             align-items: center;
             color: #979797;
             font-weight: bold;
-
+            padding-left: $m0-5rem;
+            & div {
+                min-width: 15%;
+                width: 25%;
+            }
         }
 
         .proj_gen-text-info {
