@@ -55,7 +55,7 @@ $(document).ready( function() {
 // change Bid status color
 
 $(document).ready( function() {
-  let changeStatus = document.querySelector('.status-change_color');
+  const changeStatus = document.querySelector('.status-change_color');
   if (changeStatus.textContent == 'Draft') {
     changeStatus.classList.toggle('status-change_color_draft');
     changeStatus.classList.remove('status-change_color_submitted');
