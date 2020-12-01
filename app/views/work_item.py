@@ -52,10 +52,11 @@ def add_work_item_to_cart(bid_id):
             # Add all selected work items into all selected groups
             groups = session.get("GroupDict", {})
             for group_name in selected_group_names:
-                if group_name not in groups:
-                    groups[group_name] = []
-                for work_item in selected_work_items_choices:
-                    groups[group_name] += [work_item]
+                for group_name_js_id in groups:
+                    if group_name not in groups[group_name_js_id]:
+                        groups[group_name] = []
+                    for work_item in selected_work_items_choices:
+                        groups[group_name_js_id][group_name] += [work_item]
             session["GroupDict"] = groups
         else:
             # Add all selected work items into global list
@@ -109,11 +110,12 @@ def work_item_group(bid_id):
     groups = session.get("GroupDict", {})
     group_name = form.name.data
     if group_name:
-        existed_name = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).filter(
+        existed_name = WorkItemGroup.query.filter(WorkItemGroup.bid_id == int(bid_id)).filter(
             WorkItemGroup.name == group_name).first()
+        group_name_js_id = group_name.replace(' ', '-')
         if group_name not in groups:
             if not existed_name:
-                groups[group_name] = []
+                groups[group_name_js_id] = {f'{group_name}': []}
                 session["GroupDict"] = groups
             else:
                 flash(f"Group name '{group_name}' already exist!", 'warning')
@@ -132,13 +134,15 @@ def work_item_group(bid_id):
 @login_required
 def delete_work_item_from_group(group_name, work_item_id, bid_id):
     groups = session.get("GroupDict", {})
-    if group_name in groups:
-        if work_item_id in groups[group_name]:
-            groups[group_name].remove(work_item_id)
-            session["DeletedWorkGroupItem"] = {group_name: work_item_id}
-        session["GroupDict"] = groups
-    else:
-        log(log.WARNING, "Not found group [%s]!", group_name)
+    for group_name_js_id in groups:
+        if group_name in groups[group_name_js_id]:
+            if work_item_id in groups[group_name_js_id][group_name]:
+                groups[group_name_js_id][group_name].remove(work_item_id)
+                session["DeletedWorkGroupItem"] = {group_name: work_item_id}
+            session["GroupDict"] = groups
+            break
+        else:
+            log(log.WARNING, "Not found group [%s]!", group_name)
     return redirect(url_for("work_item.work_items", bid_id=bid_id))
 
 
@@ -151,10 +155,11 @@ def undo_work_item_from_group(group_name, item_id, bid_id):
     selected_ids = session.get("SelectedWorkItemsGroupDict", {})
     deleted_work_item_group_id = session.get("DeletedWorkGroupItem", {})
     groups = session.get("GroupDict", {})
-    if deleted_work_item_group_id:
-        groups[group_name].append(item_id)
-        session["DeletedWorkGroupItem"] = {}
-        return redirect(url_for("work_item.work_items", bid_id=bid_id))
+    for group_name_js_id in groups:
+        if deleted_work_item_group_id:
+            groups[group_name_js_id][group_name].append(item_id)
+            session["DeletedWorkGroupItem"] = {}
+            return redirect(url_for("work_item.work_items", bid_id=bid_id))
     session["SelectedWorkItemsGroupDict"] = selected_ids
     return redirect(url_for("work_item.work_items", bid_id=bid_id))
 
@@ -164,9 +169,11 @@ def undo_work_item_from_group(group_name, item_id, bid_id):
 def delete_group(bid_id, group_name):
     if group_name:
         groups = session.get("GroupDict", {})
-        if str(group_name) in groups:
-            del groups[group_name]
-            session["GroupDict"] = groups
+        for group_name_js_id in groups:
+            if str(group_name) in groups[group_name_js_id]:
+                del groups[group_name_js_id]
+            break
+        session["GroupDict"] = groups
     return redirect(url_for("work_item.work_items", bid_id=bid_id))
 
 
@@ -218,17 +225,18 @@ def add_to_bidding(bid_id):
 
     groups = session.get("GroupDict", {})
     for grp in groups:
-        work_group = WorkItemGroup(
-            bid_id=bid_id,
-            name=grp
-        ).save()
-        items = groups[grp]
-        for item in items:
-            LinkWorkItem(
+        for gorup_name in groups[grp]:
+            work_group = WorkItemGroup(
                 bid_id=bid_id,
-                work_item_id=int(item),
-                work_item_group=work_group
+                name=gorup_name
             ).save()
+            items = groups[grp][gorup_name]
+            for item in items:
+                LinkWorkItem(
+                    bid_id=bid_id,
+                    work_item_id=int(item),
+                    work_item_group=work_group
+                ).save()
     time_update(bid_id)
 
     session.pop("SelectedWorkItemsDict", None)
@@ -268,14 +276,16 @@ def work_items(bid_id):
 
     form.work_items = WorkItem.query.all()
 
-    groups_work_items_ids = session.get("GroupDict", [])
+    groups_work_items_ids = session.get("GroupDict", {})
     form_group.groups = {}
-    for group in groups_work_items_ids:
-        form_group.groups[group] = []
-        for work_item_id in groups_work_items_ids[group]:
-            form_group.groups[group] += [
-                WorkItem.query.filter(WorkItem.id == int(work_item_id)).first()
-            ]
+    for group_name_js_id in groups_work_items_ids:
+        form_group.groups[group_name_js_id] = {}
+        for group_name in groups_work_items_ids[group_name_js_id]:
+            form_group.groups[group_name_js_id][group_name] = []
+            for work_item_id in groups_work_items_ids[group_name_js_id][group_name]:
+                form_group.groups[group_name_js_id][group_name] += [
+                    WorkItem.query.filter(WorkItem.id == int(work_item_id)).first()
+                ]
 
     return render_template(
         "work_items.html",

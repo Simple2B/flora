@@ -396,7 +396,7 @@
               <span>Work Group: {{ group.name }}</span>
             </div>
             <div class="group-btns">
-              <img class="ddb-cursor-handle" data-group_panel_id="{{group.name}}"
+              <img class="ddb-cursor-handle" data-group_panel_id="{{group.id}}"
               src="{{ url_for('static', filename='images/up_direction_element.svg') }}"
               id="bid_group_id">
               <a href="{{ url_for('bid.delete_group', bid_id=bid.id, group_name=group.name)}}">
@@ -405,7 +405,7 @@
             </div>
           </div>
 
-          <div id="group_panel_id-{{group.name}}">
+          <div id="group_panel_id-{{group.id}}">
           {% for group_link in group.link_work_items %}
 
             <div class="_work_item-link">
