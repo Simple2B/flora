@@ -54,6 +54,7 @@ def test_pdf(bid_id):
 def add_work_item_line(bid_id, link_work_item_id):
     WorkItemLine(link_work_items_id=link_work_item_id).save()
     time_update(bid_id)
+    session['saveInCloud'] = True
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
 
 
@@ -71,6 +72,7 @@ def delete_group(bid_id, group_name):
         link.delete()
     group.delete()
     time_update(bid_id)
+    session['saveInCloud'] = True
     return redirect(url_for("bid.bidding", bid_id=bid_id))
 
 
@@ -81,6 +83,7 @@ def delete_group(bid_id, group_name):
 def add_group_work_item_line(bid_id, group_link_id):
     WorkItemLine(link_work_items_id=group_link_id).save()
     time_update(bid_id)
+    session['saveInCloud'] = True
     return redirect(url_for("bid.bidding", bid_id=bid_id))
 
 
@@ -102,6 +105,7 @@ def edit_work_item_line(bid_id, work_item_line_id):
                 line.tbd = form.tbd.data
                 line.save()
                 time_update(bid_id)
+                session['saveInCloud'] = True
             else:
                 line.note = form.note.data
                 line.description = form.description.data
@@ -111,6 +115,7 @@ def edit_work_item_line(bid_id, work_item_line_id):
                 line.tbd = form.tbd.data
                 line.save()
                 time_update(bid_id)
+                session['saveInCloud'] = True
         else:
             log(log.ERROR, "Unknown work_item_line_id: %d", work_item_line_id)
 
@@ -128,6 +133,7 @@ def delete_link_work_item(bid_id, link_work_item_id):
             line.delete()
         link.delete()
         time_update(bid_id)
+        session['saveInCloud'] = True
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", link_work_item_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
@@ -144,6 +150,7 @@ def delete_group_link_work_item(bid_id, group_link_id):
             line.delete()
         link.delete()
         time_update(bid_id)
+        session['saveInCloud'] = True
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", group_link_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
@@ -183,6 +190,7 @@ def delete_exclusions(bid_id):
     bid = Bid.query.get(bid_id)
     for exclusion_link in bid.exclusion_links:
         exclusion_link.delete()
+    session['saveInCloud'] = True
     time_update(bid_id)
     return redirect(url_for("bidding.bidding", bid_id=bid_id, _anchor="bid_exclusion"))
 
@@ -199,6 +207,7 @@ def delete_clarifications(bid_id):
     bid = Bid.query.get(bid_id)
     for clarification_link in bid.clarification_links:
         clarification_link.delete()
+    session['saveInCloud'] = True
     time_update(bid_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_clarification"))
 
@@ -223,7 +232,15 @@ def bidding_change_status(bid_id):
     else:
         bid.status = Bid.Status.d_archived
         bid.save()
+    session['saveInCloud'] = True
     time_update(bid_id)
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
+
+
+@bid_blueprint.route("/bidding_save_in_cloud/<int:bid_id>", methods=["GET"])
+@login_required
+def bidding_save_in_cloud(bid_id):
+    session['saveInCloud'] = False
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
 
 
@@ -233,6 +250,7 @@ def bidding(bid_id):
     bid = Bid.query.get(bid_id)
     form_bid = BidForm()
     form = WorkItemLineForm()
+    form_bid.save_in_cloud = session.get('saveInCloud', False)
 
     form_bid.global_work_items = (
         LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)

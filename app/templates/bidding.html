@@ -91,12 +91,16 @@
           # {{ bid.procore_bid_id }} - {{ bid.client }}
         </strong></div>
       </div>
+      {% if form_bid.save_in_cloud %}
       <div class="__bid-header_end_block">
         <span class="cloud_title">All changes saved in the cloud</span>
-        <button class="bck-black border-none ddb-cursor-handle">
-          <img src="{{ url_for('static', filename='images/close_x_element.svg') }}" alt="">
-        </button>
+        <a href="{{ url_for('bid.bidding_save_in_cloud', bid_id=bid.id) }}">
+          <button class="bck-black border-none ddb-cursor-handle">
+            <img src="{{ url_for('static', filename='images/close_x_element.svg') }}" alt="">
+          </button>
+        </a>
       </div>
+      {% endif %}
     </div>
     <div class="main-container__project_general box-shadow">
       <span class="ddb-margin-top"><strong>Project General</strong></span>
