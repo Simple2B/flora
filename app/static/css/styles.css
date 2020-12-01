@@ -1197,6 +1197,12 @@ ul {
       align-items: center; }
     .main-container__project_general ._date_revision ._date_time_img {
       padding-left: 1rem; }
+    .main-container__project_general ._date_revision .project_type-radio-select > div:last-child {
+      display: flex; }
+      .main-container__project_general ._date_revision .project_type-radio-select > div:last-child div {
+        margin-right: 1rem; }
+        .main-container__project_general ._date_revision .project_type-radio-select > div:last-child div input {
+          margin-right: 0.3rem; }
   .main-container__project_general ._titles_prices {
     width: 60vw;
     margin-top: 1rem;
@@ -1672,6 +1678,8 @@ ul {
   justify-content: center;
   background-color: #F2F2F2;
   border-right: 5px solid #175593; }
+  .__side_bar-title img {
+    margin-right: 1rem; }
 
 .form-control-resize {
   min-width: 10vw;
