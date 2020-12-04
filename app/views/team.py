@@ -21,6 +21,14 @@ def edit_card(user_id):
     return redirect(url_for("team.team"))
 
 
+@team_blueprint.route("/delete_card/<int:user_id>")
+@login_required
+def delete_card(user_id):
+    user = User.query.get(user_id)
+    user.delete()
+    return redirect(url_for("team.team"))
+
+
 @team_blueprint.route("/team")
 @login_required
 def team():
