@@ -7,23 +7,37 @@
   <div class="team__inner">
     <div class="team-header">
       <span class="team-header__counter t-gray">Showing {{ users|length }} users</span>
-      <button type="button" class="team-header__button _btn--blue" data-toggle="modal" data-target="#exampleModal">
+      <button type="button" class="ddb-cursor-handle _btn--blue" data-toggle="modal" data-target="#addModal">
         Add new
       </button>
     </div>
     <div class="team-cards">
       {% for user in users %}
         <div class="user-card">
-          <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt='user-icon'>
-          <div class="user-card__details">
-            <div class="user-card__details__name">
-              <li>{{user.username}}</li>
-              <li class="t-gray">{{user.position}}</li>
+          <div class="user-card__info">
+            <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt='user-icon'>
+            <div class="user-card__details">
+              <div class="user-card__details__name">
+                <li>{{user.username}}</li>
+                <li class="t-gray">{{user.position}}</li>
+              </div>
+              <div class="user-card__details__contact">
+                <li>Email: {{user.email}}</li>
+                <li>Phone: {{user.phone}}</li>
+              </div>
             </div>
-            <div class="user-card__details__contact">
-              <li>Email: {{user.email}}</li>
-              <li>Phone: {{user.phone}}</li>
-            </div>
+          </div>
+          <div class="user-card__edit_and_delete">
+            <button class="border-none ddb-cursor-handle" type="button" data-toggle="modal" data-target="#modalDeleteCard"
+              data-target_link_delete_card="" data-group_name="">
+              <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+            </button>
+            <button type="button" class="border-none ddb-cursor-handle"
+              data-toggle="modal" data-target="#editTeamModal" data-target_link_edit_card=""
+              data-username="{{ user.username }}" data-position="{{ user.position }}" data-email="{{ user.email }}"
+              data-phone="{{ user.phone }}" data-edit_card-link="{{ url_for('team.edit_card', user_id=user.id) }}">
+              <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+            </button>
           </div>
         </div>
       {% endfor %}
@@ -32,64 +46,163 @@
 </section>
 
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <h5>Add user</h5>
-        <div class="modal-body">
-          <form class="form" role="form" action="{{ url_for('auth.register') }}" method="post">
-            <div class="form-row">
-              <div>
-                {{form.username(class='_form-input')}}
-                <label class="_label">Username</label>
-              </div>
-
-              <div>
-                {{form.email(class='_form-input')}}
-                <label class="_label">Email</label>
-              </div>
-
-              <div>
-                {{form.password(class='_form-input')}}
-                <label class="_label">Password</label>
-              </div>
-
-              <div>
-                {{form.password_confirmation(class='_form-input')}}
-                <label class="_label">Confirm password</label>
-              </div>
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <h5>Add user</h5>
+      <div class="modal-body">
+        <form class="form" role="form" action="{{ url_for('auth.register') }}" method="post" id="add_user-form">
+          <div class="form-row">
+            <div>
+              {{form.username(class='_form-input')}}
+              <label class="_label">Username</label>
             </div>
-            <div class="form-row">
-              <div>
-                {{form.position(class='_form-input')}}
-                <label class="_label">Position</label>
-              </div>
 
-              <div>
-                {{form.phone(class='_form-input')}}
-                <label class="_label">Phone</label>
-              </div>
-
-              <div class="team-radio-select m-1">
-                <div>
-                  <input type="radio" id="admin" name="user_type" value="admin"
-                        checked>
-                  <label for="admin">Admin</label>
-                </div>
-
-                <div>
-                  <input type="radio" id="user" name="user_type" value="user">
-                  <label for="user">Non admin</label>
-                </div>
-
-              </div>
+            <div>
+              {{form.email(class='_form-input')}}
+              <label class="_label">Email</label>
             </div>
-        </div>
-        <div class="bt_add-new-user">
-          {{form.submit(class='_btn--black')}}
-        </div>
+
+            <div>
+              {{form.password(class='_form-input')}}
+              <label class="_label">Password</label>
+            </div>
+
+            <div>
+              {{form.password_confirmation(class='_form-input')}}
+              <label class="_label">Confirm password</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div>
+              {{form.position(class='_form-input')}}
+              <label class="_label">Position</label>
+            </div>
+
+            <div>
+              {{form.phone(class='_form-input')}}
+              <label class="_label">Phone</label>
+            </div>
+
+            <div class="team-radio-select m-1">
+              <div>
+                <input type="radio" id="admin" name="user_type" value="admin"
+                      checked>
+                <label for="admin">Admin</label>
+              </div>
+
+              <div>
+                <input type="radio" id="user" name="user_type" value="user">
+                <label for="user">Non admin</label>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="bt_add-new-user">
+        {{form.submit(class='_btn--black', form='add_user-form')}}
       </div>
     </div>
   </div>
+</div>
+
+<!-- Edit Card Modal -->
+<div class="modal fade" id="editTeamModal" tabindex="-2" role="dialog" aria-labelledby="editTeamModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content box-shadow">
+      <h5>Edit user</h5>
+      <div class="modal-body">
+        <form class="form" role="form" action="" method="post" id="edit_user-form">
+          <div class="form-row">
+            <div>
+              {{form.username(class='_form-input', id="edit_card-username")}}
+              <label class="_label">Username</label>
+            </div>
+
+            <div>
+              {{form.email(class='_form-input', id="edit_card-email")}}
+              <label class="_label">Email</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div>
+              {{form.password(class='_form-input', id="edit_card-password")}}
+              <label class="_label">Password</label>
+            </div>
+
+            <div>
+              {{form.password_confirmation(class='_form-input', id="edit_card-password_confirm")}}
+              <label class="_label">Confirm password</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div>
+              {{form.position(class='_form-input', id="edit_card-position")}}
+              <label class="_label">Position</label>
+            </div>
+
+            <div>
+              {{form.phone(class='_form-input', id="edit_card-phone")}}
+              <label class="_label">Phone</label>
+            </div>
+          </div>
+    
+          <div class="team-radio-select m-1">
+            <div>
+              <input type="radio" id="admin" name="user_type" value="admin"
+                    checked>
+              <label for="admin">Admin</label>
+            </div>
+
+            <div>
+              <input type="radio" id="user" name="user_type" value="user">
+              <label for="user">Non admin</label>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div class="bt_add-new-user">
+        {{form.submit(class='_btn--black', form='edit_user-form', value='Edit User')}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Card Modal -->
+<div class="modal fade" id="modalDeleteCard" tabindex="-3" role="dialog" aria-labelledby="ModalLabelDeleteCard"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <h5 class="--padding">Are you sure want to delete Card?</h5>
+      <div class="modal-body">
+        <form class="form_delete" role="form" action="" method="post" id="_modal_delete_group">
+          <div class="__modal-inputs--flex-row">
+
+            <div id="_group_input_delete">
+              <label class="_label input--label">Group Name</label>
+              <input class="_form-input" id="_input_group_name" disabled>
+            </div>
+
+            <div class="">
+              <input class="_btn--black btn btn-secondary ddb-cursor-handle" name="submit" type="submit" value="Delete">
+            </div>
+
+            <div class="">
+              <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of Delete Card Modal -->
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/team.js"></script>
 {% endblock %}

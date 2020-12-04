@@ -6,7 +6,7 @@
     margin: .5rem 0;
     min-width: 20rem;
     flex: 0 49%;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: flex-start;
     box-shadow: $shadow;
     padding: .5rem;
@@ -17,5 +17,16 @@
 
     &__details__contact {
         padding-top: .3rem;
+    }
+
+    &__info {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    &__edit_and_delete {
+        button {
+            background-color: $white;
+        }
     }
 }
