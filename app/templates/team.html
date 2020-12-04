@@ -28,12 +28,13 @@
             </div>
           </div>
           <div class="user-card__edit_and_delete">
-            <button class="border-none ddb-cursor-handle" type="button" data-toggle="modal" data-target="#modalDeleteCard"
-              data-target_link_delete_card="" data-group_name="">
+            <button class="border-none ddb-cursor-handle" type="button" data-toggle="modal" data-target="#deleteTeamModal"
+              data-username="{{ user.username }}" data-position="{{ user.position }}" data-email="{{ user.email }}"
+              data-phone="{{ user.phone }}" data-delete_card-link="{{ url_for('team.delete_card', user_id=user.id) }}">
               <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
             </button>
             <button type="button" class="border-none ddb-cursor-handle"
-              data-toggle="modal" data-target="#editTeamModal" data-target_link_edit_card=""
+              data-toggle="modal" data-target="#editTeamModal"
               data-username="{{ user.username }}" data-position="{{ user.position }}" data-email="{{ user.email }}"
               data-phone="{{ user.phone }}" data-edit_card-link="{{ url_for('team.edit_card', user_id=user.id) }}">
               <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
@@ -172,30 +173,62 @@
 </div>
 
 <!-- Delete Card Modal -->
-<div class="modal fade" id="modalDeleteCard" tabindex="-3" role="dialog" aria-labelledby="ModalLabelDeleteCard"
+<div class="modal fade" id="deleteTeamModal" tabindex="-3" role="dialog" aria-labelledby="deleteTeamModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <h5 class="--padding">Are you sure want to delete Card?</h5>
+    <div class="modal-content box-shadow">
+      <h5 class="--padding">Are you sure want to delete User?</h5>
       <div class="modal-body">
-        <form class="form_delete" role="form" action="" method="post" id="_modal_delete_group">
-          <div class="__modal-inputs--flex-row">
 
-            <div id="_group_input_delete">
-              <label class="_label input--label">Group Name</label>
-              <input class="_form-input" id="_input_group_name" disabled>
-            </div>
-
-            <div class="">
-              <input class="_btn--black btn btn-secondary ddb-cursor-handle" name="submit" type="submit" value="Delete">
-            </div>
-
-            <div class="">
-              <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
-            </div>
-
+        <div class="form-row">
+          <div>
+            {{form.username(class='_form-input', id="add_card-username")}}
+            <label class="_label">Username</label>
           </div>
-        </form>
+
+          <div>
+            {{form.email(class='_form-input', id="add_card-email")}}
+            <label class="_label">Email</label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            {{form.position(class='_form-input', id="add_card-position")}}
+            <label class="_label">Position</label>
+          </div>
+
+          <div>
+            {{form.phone(class='_form-input', id="add_card-phone")}}
+            <label class="_label">Phone</label>
+          </div>
+        </div>
+  
+        <div class="team-radio-select m-1">
+          <div>
+            <input type="radio" id="admin" name="user_type" value="admin"
+                  checked>
+            <label for="admin">Admin</label>
+          </div>
+
+          <div>
+            <input type="radio" id="user" name="user_type" value="user">
+            <label for="user">Non admin</label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="">
+            <a href="">
+              <button class="_btn--black btn btn-secondary ddb-cursor-handle">Delete</button>
+            </a>
+          </div>
+
+          <div class="">
+            <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

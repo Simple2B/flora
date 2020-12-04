@@ -19,3 +19,18 @@ $('#editTeamModal').on('show.bs.modal', function (event) {
     modal.find('.modal-body #edit_card-email').val(email);
     modal.find('.modal-body #edit_card-phone').val(phone);
   });
+
+$('#deleteTeamModal').on('show.bs.modal', function (event) {
+    const button = $(event.relatedTarget); // Button that triggered the modal
+    const deleteCardLink = button.data('delete_card-link');
+    const username = button.data('username');
+    const position = button.data('position');
+    const email = button.data('email');
+    const phone = button.data('phone');
+    const modal = $(this);
+    modal.find('.modal-body a').attr('href', deleteCardLink);
+    modal.find('.modal-body #add_card-username').val(username);
+    modal.find('.modal-body #add_card-position').val(position);
+    modal.find('.modal-body #add_card-email').val(email);
+    modal.find('.modal-body #add_card-phone').val(phone);
+  });
