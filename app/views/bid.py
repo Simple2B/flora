@@ -278,7 +278,7 @@ def bidding(bid_id):
     ) + "."
     show_clarifications = show_clarifications.capitalize()
     calculate_subtotal(bid_id)
-
+    due_date = datetime.datetime.now().strftime('%Y-%m-%d')
     return render_template(
         "bidding.html",
         bid=bid,
@@ -286,6 +286,7 @@ def bidding(bid_id):
         show_exclusions=show_exclusions,
         show_clarifications=show_clarifications,
         form_bid=form_bid,
+        due_date=due_date
     )
 
 # Export document

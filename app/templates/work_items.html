@@ -78,10 +78,10 @@
 
 
           <div class="__block-add_to_cart">
-            <div class='_btn--gray __btn-add_to_cart'>
+            <button class='_btn--gray __btn-add_to_cart ddb-cursor-handle' type="submit" form="form_work_items">
               <img src="{{ url_for('static', filename='images/cart_element.svg') }}">
-              {{ work_cart_form.submit(class='__input-add-to-cart-from', form="form_work_items") }}
-            </div>
+              <span>Add to cart</span>
+            </button>
 
           </div>
 
