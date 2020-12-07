@@ -93,8 +93,15 @@
             margin-right: 1rem;
             width: 9vw;
 
-            .__input-add-to-cart-from:hover {
-                text-decoration: underline;
+            &:hover {
+                background-color: $black;
+                span {
+                    color: $white;
+                }
+            }
+
+            span {
+                color: black;
             }
         }
 

@@ -1853,8 +1853,12 @@ ul {
       border: 1px solid #BDBDBD;
       margin-right: 1rem;
       width: 9vw; }
-      .chart-left .__block-add_to_cart .__btn-add_to_cart .__input-add-to-cart-from:hover {
-        text-decoration: underline; }
+      .chart-left .__block-add_to_cart .__btn-add_to_cart:hover {
+        background-color: #000; }
+        .chart-left .__block-add_to_cart .__btn-add_to_cart:hover span {
+          color: #FFFFFF; }
+      .chart-left .__block-add_to_cart .__btn-add_to_cart span {
+        color: black; }
     .chart-left .__block-add_to_cart .__input-add-to-cart-from {
       cursor: pointer;
       border: none;
