@@ -27,24 +27,45 @@ from GrabzIt import GrabzItClient
 bid_blueprint = Blueprint("bid", __name__)
 
 
-@bid_blueprint.route("/test_pdf/<bid_id>", methods=["GET"])
+@bid_blueprint.route("/test_pdf/<int:bid_id>", methods=["GET"])
 @login_required
 def test_pdf(bid_id):
     bid = Bid.query.get(bid_id)
-    global_work_items = (
-        LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
-        .filter(LinkWorkItem.work_item_group == None)  # noqa 711
-        .all()
-    )
-    groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
-    preview_pdf_bool = True
-    return render_template(
-        "export_document.html",
-        bid=bid,
-        groups=groups,
-        global_work_items=global_work_items,
-        preview_pdf_bool=preview_pdf_bool,
-    )
+    # global_work_items = (
+    #     LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
+    #     .filter(LinkWorkItem.work_item_group == None)  # noqa 711
+    #     .all()
+    # )
+    # groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
+    # preview_pdf_bool = True
+    # return render_template(
+    #     "export_document.html",
+    #     bid=bid,
+    #     groups=groups,
+    #     global_work_items=global_work_items,
+    #     preview_pdf_bool=preview_pdf_bool,
+    # )
+    
+    if request.args:
+        tbd_choices = [i for i in request.args]
+        calculate_subtotal(bid_id, tbd_choices)
+        log(log.DEBUG, 'request is Ok')
+        global_work_items = (
+            LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
+            .filter(LinkWorkItem.work_item_group == None)  # noqa 711
+            .all()
+        )
+        groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
+        preview_pdf_bool = True
+        return render_template(
+            "export_document.html",
+            bid=bid,
+            groups=groups,
+            global_work_items=global_work_items,
+            preview_pdf_bool=preview_pdf_bool,
+        )
+    else:
+        log(log.DEBUG, 'No requesr.args')
 
 
 @bid_blueprint.route(

@@ -17,6 +17,11 @@ $('#modalWorkItemLineEdit').on('show.bs.modal', function (event) {
     modal.find('#modal_tdb').val(tdb);
 });
 
+// Active decoration on header menu-item by border-bottom
+bid_href_id.classList.remove('menu__item');
+bid_href_id.classList.toggle('active-tab');
+// end decoration
+
 const groupCloseWrapper = document.querySelectorAll('#bid_group_id');
 groupCloseWrapper.forEach(element => {
     element.addEventListener('click', (e) => {
@@ -58,3 +63,33 @@ clientCloseWrapper.addEventListener('click', (e) => {
     document.querySelector('#client_and_job_close_panel_id img').setAttribute('src', "/static/images/up_direction_element.svg");
   };
 });
+
+// TBD Choice
+const test = document.querySelectorAll('input[type="checkbox"]');
+// const window_ = window.location.href
+// let wasChangeTBD = false; 
+
+const bidID = document.querySelector('.bidIdJs').getAttribute('value');
+test.forEach( el => {
+  el.addEventListener('click', () => {
+    if (el.checked) {
+      const myRequest = async () => {
+        try {
+          const response = await fetch(`http://127.0.0.1:5000/test_pdf/${bidID}?${el.getAttribute('name')}=${el.checked}`, {method: 'GET'})
+          if (response.ok) {
+            const resData = await response.json()
+            // someDiv.innerHTML = resData.someValue
+            console.log(response.ok)
+          }
+        }
+        catch (err){
+          console.warn(err)
+        }
+      };
+      myRequest()
+
+    }; 
+  });
+});
+
+
