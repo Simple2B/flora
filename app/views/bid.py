@@ -27,6 +27,13 @@ from GrabzIt import GrabzItClient
 bid_blueprint = Blueprint("bid", __name__)
 
 
+@bid_blueprint.route("/test_/<int:bid_id>", methods=["GET"])
+@login_required
+def test_(bid_id):
+    bid = Bid.query.get(bid_id)
+    return f"{bid.overhead}"
+
+
 @bid_blueprint.route("/test_pdf/<int:bid_id>", methods=["GET"])
 @login_required
 def test_pdf(bid_id):
