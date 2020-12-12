@@ -66,8 +66,6 @@ clientCloseWrapper.addEventListener('click', (e) => {
 
 // TBD Choice
 
-
-
 const test = document.querySelectorAll('input[type="checkbox"]');
 const bidID = document.querySelector('.bidIdJs').getAttribute('value');
 test.forEach( el => {
@@ -75,8 +73,9 @@ test.forEach( el => {
     const response = await fetch(`http://127.0.0.1:5000/test_/${bidID}`, {method: 'GET'})
     if (response.ok) {
       response.text().then(result => {
-        if (result != '0.0') { console.log(result); el.checked = false; }
-        else {el.checked = true}
+        console.log(response.ok)
+        if (result == "0.0" || result == "0") { el.checked = true }
+        else { el.checked = false };
       });
     }
   };
@@ -86,11 +85,15 @@ test.forEach( el => {
     if (el.checked) {
       const myRequest = async () => {
         try {
-          const request = await fetch(`http://127.0.0.1:5000/test_pdf/${bidID}?${el.getAttribute('name')}=${el.checked}`, {method: 'GET'})
+          const request = await fetch(`http://127.0.0.1:5000/save_tbd/${bidID}?=${el.getAttribute('name')}`, {method: 'GET'})
           if (request.ok) {
             const resData = await request.json()
+            
             // someDiv.innerHTML = resData.someValue
+            
+            console.log(resData)
             console.log(request.ok)
+            console.log(request)
           }
         }
         catch (err){

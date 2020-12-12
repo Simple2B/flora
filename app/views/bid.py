@@ -1,5 +1,6 @@
 import io
 import os
+import json
 import datetime
 
 from flask import (
@@ -31,48 +32,24 @@ bid_blueprint = Blueprint("bid", __name__)
 @login_required
 def test_(bid_id):
     bid = Bid.query.get(bid_id)
+    bid.overhead = 0.0
+    bid.save()
     return f"{bid.overhead}"
 
 
-@bid_blueprint.route("/test_pdf/<int:bid_id>", methods=["GET"])
+@bid_blueprint.route("/save_tbd/<int:bid_id>", methods=["GET"])
 @login_required
-def test_pdf(bid_id):
-    bid = Bid.query.get(bid_id)
-    # global_work_items = (
-    #     LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
-    #     .filter(LinkWorkItem.work_item_group == None)  # noqa 711
-    #     .all()
-    # )
-    # groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
-    # preview_pdf_bool = True
-    # return render_template(
-    #     "export_document.html",
-    #     bid=bid,
-    #     groups=groups,
-    #     global_work_items=global_work_items,
-    #     preview_pdf_bool=preview_pdf_bool,
-    # )
-    
+def save_tbd(bid_id):
     if request.args:
-        tbd_choices = [i for i in request.args]
+        tbd_name = request.args['']
+        tbd_choices = [tbd_name]
         calculate_subtotal(bid_id, tbd_choices)
-        log(log.DEBUG, 'request is Ok')
-        global_work_items = (
-            LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
-            .filter(LinkWorkItem.work_item_group == None)  # noqa 711
-            .all()
-        )
-        groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
-        preview_pdf_bool = True
-        return render_template(
-            "export_document.html",
-            bid=bid,
-            groups=groups,
-            global_work_items=global_work_items,
-            preview_pdf_bool=preview_pdf_bool,
-        )
+        log(log.INFO, f"Response is '{tbd_name}'")
+        test = 'tbd: ' + f'{tbd_name}'
+        return json.dumps(test)
     else:
         log(log.DEBUG, 'No requesr.args')
+        return 'tbd:' + 'false'
 
 
 @bid_blueprint.route(
