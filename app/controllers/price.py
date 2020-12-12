@@ -97,3 +97,20 @@ def calculate_subtotal(bid_id, tbd_choices=[]):
 
     if was_change:
         bid.save()
+
+
+def check_bid_tbd(bid_id, tbd_name):
+    bid = Bid.query.get(bid_id)
+    switch = {
+        "permit": lambda: bid.permit_filling_fee,
+        "general": lambda: bid.general_conditions,
+        "overhead": lambda: bid.overhead,
+        "insurance": lambda: bid.insurance_tax,
+        "profit": lambda: bid.profit,
+        "bond": lambda: bid.bond
+    }
+
+    def default_case():
+        raise Exception('No case found!')
+
+    return switch.get(tbd_name, default_case)()
