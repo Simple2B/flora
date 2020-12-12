@@ -18,7 +18,7 @@ from app.models import Bid, WorkItemLine, LinkWorkItem, WorkItem, WorkItemGroup
 
 from app.forms import WorkItemLineForm, BidForm
 
-from app.controllers import calculate_subtotal, time_update
+from app.controllers import calculate_subtotal, time_update, check_bid_tbd
 
 from app.logger import log
 
@@ -28,28 +28,33 @@ from GrabzIt import GrabzItClient
 bid_blueprint = Blueprint("bid", __name__)
 
 
-@bid_blueprint.route("/test_/<int:bid_id>", methods=["GET"])
+@bid_blueprint.route("/test_/<int:bid_id>/<tbd_name>", methods=["GET"])
 @login_required
-def test_(bid_id):
-    bid = Bid.query.get(bid_id)
-    bid.overhead = 0.0
-    bid.save()
-    return f"{bid.overhead}"
+def test_(bid_id, tbd_name):
+    bid_tbd = check_bid_tbd(bid_id, tbd_name)
+    return f"{bid_tbd}"
 
 
 @bid_blueprint.route("/save_tbd/<int:bid_id>", methods=["GET"])
 @login_required
 def save_tbd(bid_id):
     if request.args:
-        tbd_name = request.args['']
-        tbd_choices = [tbd_name]
-        calculate_subtotal(bid_id, tbd_choices)
-        log(log.INFO, f"Response is '{tbd_name}'")
-        test = 'tbd: ' + f'{tbd_name}'
-        return json.dumps(test)
+        if request.args.get('', None):
+            tbd_name = request.args['']
+            tbd_choices = session.get("tbdChoices", []) + [tbd_name]
+            session["tbdChoices"] = tbd_choices
+            calculate_subtotal(bid_id, [tbd_name])
+            log(log.INFO, f"Response is '{tbd_name}'")
+            json_tbd_name = 'tbd: ' + f'{tbd_name}'
+            return json.dumps(json_tbd_name)
+        else:
+            tbd_choices = session.get("tbdChoices", [])
+            tbd_choices.remove(request.args['false'])
+            return json.dumps('tbd:' + 'false')
     else:
+        session["tbdChoices"] = []
         log(log.DEBUG, 'No requesr.args')
-        return 'tbd:' + 'false'
+        return json.dumps('tbd:' + 'false')
 
 
 @bid_blueprint.route(
@@ -255,6 +260,7 @@ def bidding(bid_id):
     bid = Bid.query.get(bid_id)
     form_bid = BidForm()
     form = WorkItemLineForm()
+    tbd_choices = session.get("tbdChoices", [])
     form_bid.save_in_cloud = session.get('saveInCloud', False)
 
     form_bid.global_work_items = (
@@ -282,7 +288,7 @@ def bidding(bid_id):
         ]
     ) + "."
     show_clarifications = show_clarifications.capitalize()
-    calculate_subtotal(bid_id)
+    calculate_subtotal(bid_id, tbd_choices)
     due_date = datetime.datetime.now().strftime('%Y-%m-%d')
     return render_template(
         "bidding.html",
