@@ -28,11 +28,15 @@ from GrabzIt import GrabzItClient
 bid_blueprint = Blueprint("bid", __name__)
 
 
-@bid_blueprint.route("/test_/<int:bid_id>/<tbd_name>", methods=["GET"])
+@bid_blueprint.route("/check_tbd/<int:bid_id>/<tbd_name>", methods=["GET"])
 @login_required
-def test_(bid_id, tbd_name):
-    bid_tbd = check_bid_tbd(bid_id, tbd_name)
-    return f"{bid_tbd}"
+def check_tbd(bid_id, tbd_name):
+    if tbd_name.startswith('work_item_line_'):
+        work_item_line = WorkItemLine.query.get(int(tbd_name[15:]))
+        return f"{work_item_line.price}"
+    else:
+        bid_tbd = check_bid_tbd(bid_id, tbd_name)
+        return f"{bid_tbd}"
 
 
 @bid_blueprint.route("/save_tbd/<int:bid_id>", methods=["GET"])

@@ -66,12 +66,12 @@ clientCloseWrapper.addEventListener('click', (e) => {
 
 // TBD Choice
 
-const test = document.querySelectorAll('input[type="checkbox"]');
+const inputs = document.querySelectorAll('input[type="checkbox"]');
 const bidID = document.querySelector('.bidIdJs').getAttribute('value');
-test.forEach( el => {
+inputs.forEach( el => {
   console.log(el)
   const myResponse = async () => {
-    const response = await fetch(`http://127.0.0.1:5000/test_/${bidID}/${el.getAttribute('name')}`, {method: 'GET'})
+    const response = await fetch(`http://127.0.0.1:5000/check_tbd/${bidID}/${el.getAttribute('name')}`, {method: 'GET'})
     if (response.ok) {
       response.text().then(result => {
         console.log(response.ok)
@@ -105,24 +105,18 @@ test.forEach( el => {
       myRequest()
     } 
     else {
-      const myFalseRequest = async () => {
+      const tbdUnchecked = async () => {
         try {
           const request = await fetch(`http://127.0.0.1:5000/save_tbd/${bidID}?false=${el.getAttribute('name')}`, {method: 'GET'})
           if (request.ok) {
             const resData = await request.json()
-            
-            // someDiv.innerHTML = resData.someValue
-            
-            console.log(resData)
-            console.log(request.ok)
-            console.log(request)
           }
         }
         catch (err){
           console.warn(err)
         }
       };
-      myFalseRequest()
+      tbdUnchecked()
       console.log(el.checked);
     }
   });

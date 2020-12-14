@@ -65,21 +65,21 @@
         <div>
           <form action="{{ url_for('bid.bidding_change_status', bid_id=bid.id) }}" method="post">
             {% if bid.status.value == "Draft" %}
-            <select class="__bid_status-draft" onchange="this.form.submit()" name="bid_status">
+            <select class="__bid_status-draft ddb-cursor-handle" onchange="this.form.submit()" name="bid_status">
               {{ bid.status.value }}
               <option class="__bid_status-default" selected value="Draft"> {{ bid.status.value }} </option>
               <option class="__bid_status-default" value="Submitted"> Submitted </option>
               <option class="__bid_status-default" value="Archived"> Archived </option>
             </select>
             {% elif bid.status.value == "Submitted" %}
-            <select class="__bid_status-submitted" onchange="this.form.submit()" name="bid_status">
+            <select class="__bid_status-submitted ddb-cursor-handle" onchange="this.form.submit()" name="bid_status">
               {{ bid.status.value }}
               <option class="__bid_status-default" value="Draft"> Draft </option>
               <option class="__bid_status-default" selected value="Submitted"> {{ bid.status.value }} </option>
               <option class="__bid_status-default" value="Archived"> Archived </option>
             </select>
             {% else %}
-            <select class="__bid_status-archived" onchange="this.form.submit()" name="bid_status">
+            <select class="__bid_status-archived ddb-cursor-handle" onchange="this.form.submit()" name="bid_status">
               {{ bid.status.value }}
               <option class="__bid_status-default" value="Draft"> Draft </option>
               <option class="__bid_status-default" value="Submitted"> Submitted </option>
@@ -363,7 +363,7 @@
                     </div>
                     <div>
                       <div class="check_box-TBD">
-                        <input class="form-control" type="checkbox">
+                        <input class="form-control" type="checkbox" name="work_item_line_{{work_item_line.id}}">
                       </div>
                       <span class="">TBD</span>
                     </div>
@@ -498,7 +498,7 @@
                       </div>
                       <div>
                         <div class="check_box-TBD">
-                          <input class="form-control" type="checkbox">
+                          <input class="form-control" type="checkbox" name="{{work_item_line.id}}">
                         </div>
                         <span class="">TBD</span>
                       </div>
