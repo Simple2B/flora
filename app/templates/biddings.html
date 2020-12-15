@@ -69,19 +69,19 @@
 
     {% if edit_bid %}
     <div class="bids_status_btns">
-      <button type="submit" form="edit_bids_form" class="_btn--white ddb-cursor-handle">
+      <button type="submit" form="edit_bids_form" class="_btn--white ddb-cursor-handle" name="arcive" value="true">
       <div>
         <img src="{{ url_for('static', filename='images/bids_status_box.svg') }}">
       </div>
       <span>Archive</span>
       </button>
-
-      <button type="submit" form="edit_bids_form" class="_btn--white ddb-cursor-handle">
+      <button type="submit" form="edit_bids_form" class="_btn--white ddb-cursor-handle" name="multiply_export" value="true">
         <div>
           <img src="{{ url_for('static', filename='images/export_biddings.svg') }}">
         </div>
         <span>Export</span>
-        </button>
+      </button>
+      <!-- form.multiply_export(class='_btn--white ddb-cursor-handle', id="modal_note") -->
 
     </div>
     {% endif %}

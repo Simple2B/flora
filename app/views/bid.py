@@ -53,7 +53,8 @@ def save_tbd(bid_id):
             return json.dumps(json_tbd_name)
         else:
             tbd_choices = session.get("tbdChoices", [])
-            tbd_choices.remove(request.args['false'])
+            if tbd_choices:
+                tbd_choices.remove(request.args['false'])
             return json.dumps('tbd:' + 'false')
     else:
         session["tbdChoices"] = []

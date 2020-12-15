@@ -121,5 +121,3 @@ inputs.forEach( el => {
     }
   });
 });
-
-

@@ -9,7 +9,7 @@ from app.procore import ProcoreApi
 
 from app.models import Bid
 from app.logger import log
-
+from app.controllers import upload_pdf_file
 
 bidding_blueprint = Blueprint("bidding", __name__)
 
@@ -28,15 +28,26 @@ def finish_edit_bid():
     return redirect(url_for("bidding.biddings"))
 
 
+def test_f(len_list):
+    while len_list > 0:
+        len_list = len_list - 1
+
+
 @bidding_blueprint.route("/edited_bids", methods=["GET", "POST"])
 @login_required
 def edited_bids():
     FlaskForm(request.form)
-    bids_list = [int(bid_id) for bid_id in request.form if request.form.get(bid_id, '') == 'on']
-    for bid_id in bids_list:
-        bid = Bid.query.get(bid_id)
-        bid.status = Bid.Status.d_archived
-        bid.save()
+    bid_ides_list = [int(bid_id) for bid_id in request.form if request.form.get(bid_id, '') == 'on']
+    if request.form.get('arcive', ''):
+        for bid_id in bid_ides_list:
+            bid = Bid.query.get(bid_id)
+            bid.status = Bid.Status.d_archived
+            bid.save()
+    elif request.form.get('multiply_export', ''):
+        for bid_id in bid_ides_list:
+            upload_pdf_file(bid_id)
+            test = upload_pdf_file(bid_id)
+            # return test
     return redirect(url_for("bidding.biddings"))
 
 
