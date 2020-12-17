@@ -45,16 +45,14 @@ def save_tbd(bid_id):
     if request.args:
         if request.args.get('', None):
             tbd_name = request.args['']
-            tbd_choices = session.get("tbdChoices", []) + [tbd_name]
-            session["tbdChoices"] = tbd_choices
-            calculate_subtotal(bid_id, [tbd_name])
+            calculate_subtotal(bid_id, tbd_name=tbd_name)
             log(log.INFO, f"Response is '{tbd_name}'")
             json_tbd_name = 'tbd: ' + f'{tbd_name}'
             return json.dumps(json_tbd_name)
         else:
-            tbd_choices = session.get("tbdChoices", [])
-            if tbd_choices:
-                tbd_choices.remove(request.args['false'])
+            if True:
+                tbd_name = request.args['false']
+                calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
             return json.dumps('tbd:' + 'false')
     else:
         session["tbdChoices"] = []
@@ -295,6 +293,7 @@ def bidding(bid_id):
     show_clarifications = show_clarifications.capitalize()
     calculate_subtotal(bid_id, tbd_choices)
     due_date = datetime.datetime.now().strftime('%Y-%m-%d')
+    session["tbdChoices"] = []
     return render_template(
         "bidding.html",
         bid=bid,
