@@ -81,7 +81,7 @@
         </div>
         <span>Export</span>
       </button>
-      <!-- form.multiply_export(class='_btn--white ddb-cursor-handle', id="modal_note") -->
+
 
     </div>
     {% endif %}
@@ -100,7 +100,7 @@
       </div>
     </form>
 
-    <form action="{{ url_for('bidding.edited_bids') }}" method="post" id="edit_bids_form">
+    <form action="{{ url_for('bidding.archive_or_export') }}" method="post" id="edit_bids_form">
       <div class="biddings-table margin--top">
         <table id="biddingsTableId" class="patientsTable table table-striped table-sm">
           <thead class="bck-ground">
