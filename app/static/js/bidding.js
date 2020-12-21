@@ -70,7 +70,7 @@ const inputs = document.querySelectorAll('input[type="checkbox"]');
 const bidID = document.querySelector('.bidIdJs').getAttribute('value');
 inputs.forEach( el => {
   const myResponse = async () => {
-    const response = await fetch(`http://127.0.0.1:5000/check_tbd/${bidID}/${el.getAttribute('name')}`, {method: 'GET'})
+    const response = await fetch(`/check_tbd/${bidID}/${el.getAttribute('name')}`, {method: 'GET'})
     if (response.ok) {
       response.text().then(result => {
         console.log(response.ok)
@@ -85,7 +85,7 @@ inputs.forEach( el => {
     if (el.checked) {
       const myRequest = async () => {
         try {
-          const request = await fetch(`http://127.0.0.1:5000/save_tbd/${bidID}?=${el.getAttribute('name')}`, {method: 'GET'})
+          const request = await fetch(`/save_tbd/${bidID}?=${el.getAttribute('name')}`, {method: 'GET'})
           if (request.ok) {
             const resData = await request.json()
           }
@@ -99,7 +99,7 @@ inputs.forEach( el => {
     else {
       const tbdUnchecked = async () => {
         try {
-          const request = await fetch(`http://127.0.0.1:5000/save_tbd/${bidID}?false=${el.getAttribute('name')}`, {method: 'GET'})
+          const request = await fetch(`/save_tbd/${bidID}?false=${el.getAttribute('name')}`, {method: 'GET'})
           if (request.ok) {
             const resData = await request.json()
           }
