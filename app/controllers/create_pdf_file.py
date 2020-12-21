@@ -1,8 +1,7 @@
 import os
 import io
-import datetime
 
-from flask import render_template, send_file
+from flask import render_template
 
 from .price import calculate_subtotal
 
@@ -10,7 +9,7 @@ from app.models import Bid, LinkWorkItem, WorkItemGroup
 import pdfkit
 
 
-def upload_pdf_file(bid_id):
+def create_pdf_file(bid_id):
     bid = Bid.query.get(bid_id)
     global_work_items = (
         LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
@@ -33,13 +32,4 @@ def upload_pdf_file(bid_id):
     options = {'enable-local-file-access': None}
     pdf_content = pdfkit.from_string(html_content, False, options=options)
     stream = io.BytesIO(pdf_content)
-
-    now = datetime.datetime.now()
-    return send_file(
-        stream,
-        as_attachment=True,
-        attachment_filename=f"bidding_{bid_id}_{now.strftime('%Y-%m-%d-%H-%M-%S')}.pdf",
-        mimetype="application/pdf",
-        cache_timeout=0,
-        last_modified=now,
-    )
+    return stream
