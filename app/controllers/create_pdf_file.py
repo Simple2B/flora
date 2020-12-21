@@ -2,11 +2,14 @@ import os
 import io
 
 from flask import render_template
+import pdfkit
 
 from .price import calculate_subtotal
-
 from app.models import Bid, LinkWorkItem, WorkItemGroup
-import pdfkit
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PATH_TO_IMG = os.path.join(BASE_DIR, "static/images/")
 
 
 def create_pdf_file(bid_id):
@@ -17,8 +20,6 @@ def create_pdf_file(bid_id):
         .all()
     )
     groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    PATH_TO_IMG = os.path.join(BASE_DIR, "static/images/")
     preview_pdf_bool = False
     calculate_subtotal(bid_id)
     html_content = render_template(

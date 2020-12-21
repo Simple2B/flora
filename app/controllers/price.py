@@ -1,6 +1,6 @@
 from flask import current_app as app
-from app.models import Bid
 from sqlalchemy import inspect
+from app.models import Bid
 
 
 def calculate_subtotal(bid_id, tbd_choices=[], tbd_name=None, on_tbd=True):
