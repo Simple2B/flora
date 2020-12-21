@@ -15,6 +15,7 @@ def create_app(environment="development"):
     from config import config
     from app.views import (
         main_blueprint,
+        team_blueprint,
         auth_blueprint,
         work_item_blueprint,
         exclusion_blueprint,
@@ -42,6 +43,7 @@ def create_app(environment="development"):
     # Register blueprints.
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(main_blueprint)
+    app.register_blueprint(team_blueprint)
     app.register_blueprint(work_item_blueprint)
     app.register_blueprint(exclusion_blueprint)
     app.register_blueprint(clarification_blueprint)

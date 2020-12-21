@@ -11,7 +11,7 @@
     font-size: 12px;
 
     .team-header {
-        padding: 1rem 2rem;;
+        padding: $m1rem 2rem;;
         display: inline-flex;
         justify-content: space-between;
         align-items: baseline;
@@ -22,7 +22,25 @@
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
-        padding-top: 1rem;
+        padding-top: $m1rem;
         padding: 0 2rem;
+    }
+}
+
+// Customize model window
+
+.modal-content {
+    padding: $m1rem;
+
+    .form-row div {
+        padding-left: $m0-5rem;
+    }
+
+    .team-radio-select {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding-top: $m1rem;
+        padding-left: $m0-5rem;
     }
 }

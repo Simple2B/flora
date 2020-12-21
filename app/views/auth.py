@@ -27,13 +27,13 @@ def register():
             )
             user.save()
             flash("Registration successful. You are logged in.", "success")
-            return redirect(url_for("main.team"))
+            return redirect(url_for("team.team"))
         else:
             flash("The given data was invalid.", "danger")
-            return redirect(url_for("main.team"))
+            return redirect(url_for("team.team"))
     elif form.is_submitted():
         flash("The given data was invalid.", "danger")
-    return redirect(url_for("main.team"))
+    return redirect(url_for("team.team"))
 
 
 @auth_blueprint.route("/login", methods=["GET", "POST"])
@@ -44,7 +44,7 @@ def login():
         if user is not None:
             login_user(user)
             flash("Login successful.", "success")
-            return redirect(url_for("main.team"))
+            return redirect(url_for("team.team"))
         flash("Wrong user login/email or password.", "danger")
     return render_template("auth/login.html", form=form)
 
