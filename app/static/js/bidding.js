@@ -17,6 +17,11 @@ $('#modalWorkItemLineEdit').on('show.bs.modal', function (event) {
     modal.find('#modal_tdb').val(tdb);
 });
 
+// Active decoration on header menu-item by border-bottom
+bid_href_id.classList.remove('menu__item');
+bid_href_id.classList.toggle('active-tab');
+// end decoration
+
 const groupCloseWrapper = document.querySelectorAll('#bid_group_id');
 groupCloseWrapper.forEach(element => {
     element.addEventListener('click', (e) => {
@@ -57,4 +62,53 @@ clientCloseWrapper.addEventListener('click', (e) => {
   } else {
     document.querySelector('#client_and_job_close_panel_id img').setAttribute('src', "/static/images/up_direction_element.svg");
   };
+});
+
+// TBD Choice
+
+const inputs = document.querySelectorAll('input[type="checkbox"]');
+const bidID = document.querySelector('.bidIdJs').getAttribute('value');
+inputs.forEach( el => {
+  const myResponse = async () => {
+    const response = await fetch(`/check_tbd/${bidID}/${el.getAttribute('name')}`, {method: 'GET'})
+    if (response.ok) {
+      response.text().then(result => {
+        console.log(response.ok)
+        if (result == "0.0" || result == "0") { el.checked = true }
+        else { el.checked = false };
+      });
+    }
+  };
+  myResponse();
+
+  el.addEventListener('click', () => {
+    if (el.checked) {
+      const myRequest = async () => {
+        try {
+          const request = await fetch(`/save_tbd/${bidID}?=${el.getAttribute('name')}`, {method: 'GET'})
+          if (request.ok) {
+            const resData = await request.json()
+          }
+        }
+        catch (err){
+          console.warn(err)
+        }
+      };
+      myRequest()
+    } 
+    else {
+      const tbdUnchecked = async () => {
+        try {
+          const request = await fetch(`/save_tbd/${bidID}?false=${el.getAttribute('name')}`, {method: 'GET'})
+          if (request.ok) {
+            const resData = await request.json()
+          }
+        }
+        catch (err){
+          console.warn(err)
+        }
+      };
+      tbdUnchecked()
+    }
+  });
 });

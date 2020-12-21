@@ -1,24 +1,19 @@
 import time
+import zipfile
+from io import BytesIO
+
 from datetime import datetime
-from flask import Blueprint, render_template, redirect, url_for, session, request
+from flask import Blueprint, render_template, redirect, url_for, session, request, send_file
 from flask_login import login_required
 from flask import current_app
 from flask_wtf import FlaskForm
 
 from app.procore import ProcoreApi
-
 from app.models import Bid
 from app.logger import log
-
+from app.controllers import create_pdf_file
 
 bidding_blueprint = Blueprint("bidding", __name__)
-
-
-@bidding_blueprint.route("/edit_bid")
-@login_required
-def edit_bid():
-    session["edit_bid"] = True
-    return redirect(url_for("bidding.biddings"))
 
 
 @bidding_blueprint.route("/finish_edit_bid")
@@ -28,15 +23,47 @@ def finish_edit_bid():
     return redirect(url_for("bidding.biddings"))
 
 
-@bidding_blueprint.route("/edited_bids", methods=["GET", "POST"])
+@bidding_blueprint.route("/edit_bid")
 @login_required
-def edited_bids():
+def edit_bid():
+    session["edit_bid"] = True
+    return redirect(url_for("bidding.biddings"))
+
+
+@bidding_blueprint.route("/archive_or_export", methods=["POST"])
+@login_required
+def archive_or_export():
     FlaskForm(request.form)
-    bids_list = [int(bid_id) for bid_id in request.form if request.form.get(bid_id, '') == 'on']
-    for bid_id in bids_list:
-        bid = Bid.query.get(bid_id)
-        bid.status = Bid.Status.d_archived
-        bid.save()
+    bid_ides_list = [int(bid_id) for bid_id in request.form if request.form.get(bid_id, '') == 'on']
+    if request.form.get('arcive', ''):
+        for bid_id in bid_ides_list:
+            bid = Bid.query.get(bid_id)
+            bid.status = Bid.Status.d_archived
+            bid.save()
+    elif request.form.get('multiply_export', ''):
+        stream_of_bids = []
+        for bid_id in bid_ides_list:
+            bid = Bid.query.get(bid_id)
+            stream = create_pdf_file(bid_id)
+            stream_of_bids += [(f'bidding_{bid.procore_bid_id}', stream)]
+            log(log.INFO, f"Sending file({type(stream)})")
+
+        zipped_file = BytesIO()
+        with zipfile.ZipFile(zipped_file, 'w') as zip:
+            for i in stream_of_bids:
+                stream.seek(0)
+                zip.writestr(f"{i[0]}.pdf", i[1].read())
+        zipped_file.seek(0)
+
+        now = datetime.datetime.now()
+        return send_file(
+            zipped_file,
+            as_attachment=True,
+            attachment_filename="bids_pdf.zip",
+            mimetype="application/zip",
+            cache_timeout=0,
+            last_modified=now,
+        )
     return redirect(url_for("bidding.biddings"))
 
 

@@ -1,5 +1,6 @@
 import io
 import os
+import json
 import datetime
 
 from flask import (
@@ -17,7 +18,7 @@ from app.models import Bid, WorkItemLine, LinkWorkItem, WorkItem, WorkItemGroup
 
 from app.forms import WorkItemLineForm, BidForm
 
-from app.controllers import calculate_subtotal, time_update
+from app.controllers import calculate_subtotal, time_update, check_bid_tbd
 
 from app.logger import log
 
@@ -27,24 +28,36 @@ from GrabzIt import GrabzItClient
 bid_blueprint = Blueprint("bid", __name__)
 
 
-@bid_blueprint.route("/test_pdf/<bid_id>", methods=["GET"])
+@bid_blueprint.route("/check_tbd/<int:bid_id>/<tbd_name>", methods=["GET"])
 @login_required
-def test_pdf(bid_id):
-    bid = Bid.query.get(bid_id)
-    global_work_items = (
-        LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
-        .filter(LinkWorkItem.work_item_group == None)  # noqa 711
-        .all()
-    )
-    groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
-    preview_pdf_bool = True
-    return render_template(
-        "export_document.html",
-        bid=bid,
-        groups=groups,
-        global_work_items=global_work_items,
-        preview_pdf_bool=preview_pdf_bool,
-    )
+def check_tbd(bid_id, tbd_name):
+    if tbd_name.startswith('work_item_line_'):
+        work_item_line = WorkItemLine.query.get(int(tbd_name[15:]))
+        return f"{work_item_line.price}"
+    else:
+        bid_tbd = check_bid_tbd(bid_id, tbd_name)
+        return f"{bid_tbd}"
+
+
+@bid_blueprint.route("/save_tbd/<int:bid_id>", methods=["GET"])
+@login_required
+def save_tbd(bid_id):
+    if request.args:
+        if request.args.get('', None):
+            tbd_name = request.args['']
+            calculate_subtotal(bid_id, tbd_name=tbd_name)
+            log(log.INFO, f"Response is '{tbd_name}'")
+            json_tbd_name = 'tbd: ' + f'{tbd_name}'
+            return json.dumps(json_tbd_name)
+        else:
+            if True:
+                tbd_name = request.args['false']
+                calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
+            return json.dumps('tbd:' + 'false')
+    else:
+        session["tbdChoices"] = []
+        log(log.DEBUG, 'No requesr.args')
+        return json.dumps('tbd:' + 'false')
 
 
 @bid_blueprint.route(
@@ -250,6 +263,7 @@ def bidding(bid_id):
     bid = Bid.query.get(bid_id)
     form_bid = BidForm()
     form = WorkItemLineForm()
+    tbd_choices = session.get("tbdChoices", [])
     form_bid.save_in_cloud = session.get('saveInCloud', False)
 
     form_bid.global_work_items = (
@@ -277,8 +291,9 @@ def bidding(bid_id):
         ]
     ) + "."
     show_clarifications = show_clarifications.capitalize()
-    calculate_subtotal(bid_id)
+    calculate_subtotal(bid_id, tbd_choices)
     due_date = datetime.datetime.now().strftime('%Y-%m-%d')
+    session["tbdChoices"] = []
     return render_template(
         "bidding.html",
         bid=bid,

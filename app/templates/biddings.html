@@ -69,19 +69,19 @@
 
     {% if edit_bid %}
     <div class="bids_status_btns">
-      <button type="submit" form="edit_bids_form" class="_btn--white ddb-cursor-handle">
+      <button type="submit" form="edit_bids_form" class="_btn--white ddb-cursor-handle" name="arcive" value="true">
       <div>
         <img src="{{ url_for('static', filename='images/bids_status_box.svg') }}">
       </div>
       <span>Archive</span>
       </button>
-
-      <button type="submit" form="edit_bids_form" class="_btn--white ddb-cursor-handle">
+      <button type="submit" form="edit_bids_form" class="_btn--white ddb-cursor-handle" name="multiply_export" value="true">
         <div>
           <img src="{{ url_for('static', filename='images/export_biddings.svg') }}">
         </div>
         <span>Export</span>
-        </button>
+      </button>
+
 
     </div>
     {% endif %}
@@ -100,7 +100,7 @@
       </div>
     </form>
 
-    <form action="{{ url_for('bidding.edited_bids') }}" method="post" id="edit_bids_form">
+    <form action="{{ url_for('bidding.archive_or_export') }}" method="post" id="edit_bids_form">
       <div class="biddings-table margin--top">
         <table id="biddingsTableId" class="patientsTable table table-striped table-sm">
           <thead class="bck-ground">
