@@ -57,12 +57,12 @@ listArray.forEach( el => {
         e.preventDefault();
         let buttonId = e.currentTarget.id;
         const areaToShow = document.querySelector(`#groupTableWrapper-${buttonId}`);
-        let changeLineImg = document.querySelector(`#${buttonId}_img_id`).getAttribute('src');
+        let changeLineImg = document.getElementById(`${buttonId}_img_id`).getAttribute('src');
         areaToShow.classList.toggle('hidden');
         if (changeLineImg == "/static/images/up_direction_element.svg") {
-            $(`#${buttonId}_img_id`).attr('src', "/static/images/direction_element_bottom.svg");
+            document.getElementById(`${buttonId}_img_id`).setAttribute('src', "/static/images/direction_element_bottom.svg");
           } else {
-            $(`#${buttonId}_img_id`).attr('src', "/static/images/up_direction_element.svg");
+            document.getElementById(`${buttonId}_img_id`).setAttribute('src', "/static/images/up_direction_element.svg");
           };
     });
 });

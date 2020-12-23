@@ -53,10 +53,11 @@ def add_work_item_to_cart(bid_id):
             groups = session.get("GroupDict", {})
             for group_name in selected_group_names:
                 for group_name_js_id in groups:
-                    if group_name not in groups[group_name_js_id]:
-                        groups[group_name] = []
-                    for work_item in selected_work_items_choices:
-                        groups[group_name_js_id][group_name] += [work_item]
+                    if group_name in groups[group_name_js_id]:
+                        for work_item in selected_work_items_choices:
+                            groups[group_name_js_id][group_name] += [work_item]
+                        break
+
             session["GroupDict"] = groups
         else:
             # Add all selected work items into global list
@@ -172,7 +173,7 @@ def delete_group(bid_id, group_name):
         for group_name_js_id in groups:
             if str(group_name) in groups[group_name_js_id]:
                 del groups[group_name_js_id]
-            break
+                break
         session["GroupDict"] = groups
     return redirect(url_for("work_item.work_items", bid_id=bid_id))
 
