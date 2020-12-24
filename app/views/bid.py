@@ -1,4 +1,4 @@
-from io import StringIO, BytesIO
+import io
 import os
 import json
 import datetime
@@ -23,7 +23,6 @@ from app.controllers import calculate_subtotal, time_update, check_bid_tbd
 from app.logger import log
 
 import pdfkit
-from docx import Document
 
 # from GrabzIt import GrabzItClient
 
@@ -392,7 +391,7 @@ def export_pdf(bid_id):
             # docx_content = grabzit.SaveTo()
 
             with open('test_docx.docx', 'rb') as f:
-                stream = BytesIO(f.read())
+                stream = io.BytesIO(f.read())
             # target_stream = StringIO()
             # document.save(target_stream)
             now = datetime.datetime.now()

@@ -2,8 +2,8 @@ import os
 # from io import StringIO
 from docx import Document
 from docx.enum.style import WD_STYLE_TYPE
-from docx.shared import Inches, Cm, Pt, RGBColor
-from docx.enum.table import WD_ALIGN_VERTICAL, WD_ROW_HEIGHT
+from docx.shared import Cm, Pt, RGBColor
+from docx.enum.table import WD_ROW_HEIGHT
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_COLOR_INDEX
 
 
@@ -12,7 +12,7 @@ PATH_TO_IMG = os.path.join(BASE_DIR, "static/images/docx/")
 
 
 def create_docx():
-# /// Document "margins to all document" block
+    # /// Document "margins to all document" block
 
     # with open('foobar.docx', 'rb') as f:
     #     source_stream = StringIO(f.read())
@@ -28,9 +28,10 @@ def create_docx():
         section.right_margin = Cm(1.02)
 
     # export this function to controller
-    def write_to_docx(insert = False, cell = None, content='', font_name = 'Arial', font_size = 12, font_bold = False, font_italic = False, font_underline = False, color = RGBColor(0, 0, 0),
-                    before_spacing = 5, after_spacing = 5, line_spacing = 1.34, keep_together = True, keep_with_next = False, page_break_before = False,
-                    widow_control = False, align = 'left', style = ''):
+    def write_to_docx(insert=False, cell=None, content='', font_name='Arial', font_size=12, font_bold=False,
+                      font_underline=False, color=RGBColor(0, 0, 0), font_italic=False,
+                      before_spacing=5, after_spacing=5, line_spacing=1.34, keep_together=True, keep_with_next=False,
+                      page_break_before=False, widow_control=False, align='left', style=''):
         '''
         parametr 'cell' is not the _cell Object, but paragraph Object!
         '''
@@ -69,7 +70,6 @@ def create_docx():
             font.color.rgb = color
 
     # /// endblock
-
 
     # ////// Begin to create document
     document.add_picture(f'{PATH_TO_IMG}logo_pdf.png', width=Cm(6.91), height=Cm(2.64))
@@ -111,34 +111,34 @@ def create_docx():
     document.add_picture(f'{PATH_TO_IMG}Section_A.png', width=Cm(18.99), height=Cm(0.65))
     write_to_docx(
         content='Please find our detailed Quote for the above referenced project as outlined below:',
-        font_name='Arial', 
+        font_name='Arial',
         font_size=11.5,
         font_bold=True,
         after_spacing=50
-        )
+    )
     document.add_picture(f'{PATH_TO_IMG}Section_B.png', width=Cm(18.99), height=Cm(0.65))
     write_to_docx(
         content='Unless expressly stated, the following exclusions apply:',
-        font_name='Arial', 
+        font_name='Arial',
         font_size=11.5,
         font_bold=True,
         after_spacing=50,
         style='exclusion_style_name'
-        )
+    )
     document.add_picture(f'{PATH_TO_IMG}Section_C.png', width=Cm(18.99), height=Cm(0.65))
     write_to_docx(
         content='Please note the following clarifications:',
-        font_name='Arial', 
+        font_name='Arial',
         font_size=11.5,
         font_bold=True,
         after_spacing=50,
         style='clarification_style_name'
-        )
+    )
     document.add_picture(f'{PATH_TO_IMG}Section_D.png', width=Cm(18.99), height=Cm(0.65))
     write_to_docx(
         after_spacing=50,
         style='alternates_style_name'
-        )
+    )
     document.add_picture(f'{PATH_TO_IMG}Section_E_F.png', width=Cm(18.99), height=Cm(0.79))
 
     document.add_page_break()
