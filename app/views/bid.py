@@ -1,4 +1,4 @@
-import io
+from io import StringIO, BytesIO
 import os
 import json
 import datetime
@@ -23,7 +23,9 @@ from app.controllers import calculate_subtotal, time_update, check_bid_tbd
 from app.logger import log
 
 import pdfkit
-from GrabzIt import GrabzItClient
+from docx import Document
+
+# from GrabzIt import GrabzItClient
 
 bid_blueprint = Blueprint("bid", __name__)
 
@@ -334,7 +336,6 @@ def preview_pdf(bid_id):
 @login_required
 def export_pdf(bid_id):
     form = BidForm(request.form)
-
     if form.validate_on_submit():
         bid = Bid.query.get(bid_id)
         global_work_items = (
@@ -376,17 +377,24 @@ def export_pdf(bid_id):
 
         elif form.export_docx.data:
             preview_pdf_bool = False
-            calculate_subtotal(bid_id, tbd_choices)
-            html_content = render_template(
-                "export_document_docx.html", bid=bid, preview_pdf_bool=preview_pdf_bool
-            )
-            grabzit = GrabzItClient.GrabzItClient(
-                "NDBhNjEyMmI3MjY5NDExMmEwNzJlOTYzZmY1ZGNiNGM=",
-                "QD8/MT8/Pz9aP0EIPz8/P096S28/P1M/Bj8/RD8/Pxg=",
-            )
-            grabzit.HTMLToDOCX(html_content)
-            docx_content = grabzit.SaveTo()
-            stream = io.BytesIO(docx_content)
+            from app.controllers.create_docx import create_docx
+            create_docx()
+            # with open()
+            # calculate_subtotal(bid_id, tbd_choices)
+            # html_content = render_template(
+            #     "export_document_docx.html", bid=bid, preview_pdf_bool=preview_pdf_bool
+            # )
+            # grabzit = GrabzItClient.GrabzItClient(
+            #     "NDBhNjEyMmI3MjY5NDExMmEwNzJlOTYzZmY1ZGNiNGM=",
+            #     "QD8/MT8/Pz9aP0EIPz8/P096S28/P1M/Bj8/RD8/Pxg=",
+            # )
+            # grabzit.HTMLToDOCX(html_content)
+            # docx_content = grabzit.SaveTo()
+
+            with open('test_docx.docx', 'rb') as f:
+                stream = BytesIO(f.read())
+            # target_stream = StringIO()
+            # document.save(target_stream)
             now = datetime.datetime.now()
             return send_file(
                 stream,
@@ -396,6 +404,7 @@ def export_pdf(bid_id):
                 cache_timeout=0,
                 last_modified=now,
             )
+
     else:
         log(log.ERROR, "Form submitted")
         return redirect(url_for("bid.bidding", bid_id=bid_id))
