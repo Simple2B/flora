@@ -17,3 +17,4 @@ Werkzeug
 WTForms
 pdfkit
 GrabzIt
+python-docx
