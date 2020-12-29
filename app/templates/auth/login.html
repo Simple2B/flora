@@ -26,7 +26,7 @@
             <hr>
             {% for category, message in messages %}
               <div class="alert alert-{{ category }} alert-dismisible login__error">
-                <button type="button" data-dismiss="alert" aria-label="Close">
+                <button type="button" data-dismiss="alert" aria-label="Close" class="ddb-cursor-handle _close_button">
                   <span aria-hidden="true"><img src="{{ url_for('static', filename='images/close_button_ddb.svg') }}"></span>
                 </button>
                 {{ message }}
