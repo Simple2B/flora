@@ -390,7 +390,7 @@ def export_pdf(bid_id):
             # grabzit.HTMLToDOCX(html_content)
             # docx_content = grabzit.SaveTo()
 
-            with open('test_docx.docx', 'rb') as f:
+            with open('demo.docx', 'rb') as f:
                 stream = io.BytesIO(f.read())
             # target_stream = StringIO()
             # document.save(target_stream)
