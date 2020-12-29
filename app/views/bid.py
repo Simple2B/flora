@@ -403,7 +403,6 @@ def export_pdf(bid_id):
                 cache_timeout=0,
                 last_modified=now,
             )
-
     else:
         log(log.ERROR, "Form submitted")
         return redirect(url_for("bid.bidding", bid_id=bid_id))
