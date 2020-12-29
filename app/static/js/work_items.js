@@ -1,12 +1,45 @@
+// Create custom search
+function setAttributes(el, attrs) {
+    for(var key in attrs) {
+      el.setAttribute(key, attrs[key]);
+    }
+};
+
+const div = document.createElement('div');
+const img = document.createElement('img');
+const input = document.createElement('input');
+
+div.setAttribute('class', '_form-search');
+img.setAttribute('src', '/static/images/Search_icon.png');
+setAttributes(input, {
+    "class": "input_search", 
+    "placeholder": "Search", 
+    "aria-controls": "workItemsTable",
+    "id": "customSearchId",
+});
+div.prepend(img);
+div.append(input);
+document.querySelector('.chart-left .form').before(div);
+
+
+// endblock
 $(document).ready(function() {
-    $('#workItemsTable').DataTable({
+    let workItemTable = $('#workItemsTable').DataTable({
         "pageLength": 10,
         "order": [],
         "displayStart": 0,
+        "language": { search: "", searchPlaceholder: "Search"},
+        sDom: 'lrtip',
+        searching: true,
         "drawCallback": function( settings ) {
             $("#workItemsTable thead").remove();
         }
     });
+
+    $('#customSearchId').on( 'keyup', function () {
+        workItemTable.search( this.value ).draw();
+    });
+
     $('#selectedWorkItemsTable').DataTable({
         "pageLength": 10,
         "order": [],
@@ -44,7 +77,16 @@ $(document).ready(function() {
         modal.find('#_group_input_delete #_input_group_name').val(name);
     });
 
+    // const inputSearchWorkItem = document.querySelector('#workItemsTable_filter label input');
+    // const workItemsTableLength = document.getElementById('workItemsTable_length');
+    // inputSearchWorkItem.classList.add('input_search');
+    // workItemsTableLength.setAttribute('style', 'margin-top: 0.3rem;');
+    // inputSearchWorkItem.setAttribute('placeholder', 'Search');
 
+    // document.querySelector('#workItemsTable_filter label')
+    // let innerLabel = document.querySelector('#workItemsTable_filter label')
+    // const input = innerLabel.innerHTML.slice(7)
+    // innerLabel.innerText = ''
 } );
 
 // Group close/show-panel
