@@ -79,6 +79,11 @@
 
     }
 
+    ._td_work_item_name {
+        overflow-wrap: break-word;
+        max-width: 10vw;
+    }
+
     .__block-add_to_cart {
         display: flex;
         justify-content: flex-end;
@@ -112,7 +117,6 @@
         }
 
     }
-
 }
 
 .chart-right {
