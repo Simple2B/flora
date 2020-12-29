@@ -8,7 +8,7 @@ from docx.enum.table import WD_ALIGN_VERTICAL, WD_ROW_HEIGHT
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_COLOR_INDEX
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PATH_TO_IMG = BASE_DIR + '\images'
+PATH_TO_IMG = BASE_DIR + '/images'
 PATH_TO_SAVE_FILE = os.path.dirname(BASE_DIR) + '\\test_docx_files'
 print(PATH_TO_IMG, PATH_TO_SAVE_FILE, os.path, sep='\n\n')
 
@@ -108,7 +108,7 @@ for section in sections:
 
 
 # ////// Begin to create document
-document.add_picture(f'{PATH_TO_IMG}\logo_pdf.png', width=Cm(6.91), height=Cm(2.64))
+document.add_picture(f'{PATH_TO_IMG}/logo_pdf.png', width=Cm(6.91), height=Cm(2.64))
 
 date = document.add_table(rows=1, cols=2)
 row = date.rows[0]
@@ -148,7 +148,7 @@ for i in range(4):
 
 # begin Section A (work_items) block
 document.add_paragraph()
-document.add_picture(f'{PATH_TO_IMG}\Section_A.png', width=Cm(18.99), height=Cm(0.65))
+document.add_picture(f'{PATH_TO_IMG}/Section_A.png', width=Cm(18.99), height=Cm(0.65))
 write_to_docx(
     content='Please find our detailed Quote for the above referenced project as outlined below:',
     font_size=12.5,
@@ -236,7 +236,7 @@ for i, j in enumerate(db_subtotal_data):
 
 
 # begin Section B block
-document.add_picture(f'{PATH_TO_IMG}\Section_B.png', width=Cm(18.99), height=Cm(0.65))
+document.add_picture(f'{PATH_TO_IMG}/Section_B.png', width=Cm(18.99), height=Cm(0.65))
 write_to_docx(
     content='Unless expressly stated, the following exclusions apply:',
     font_size=12.5,
@@ -263,7 +263,7 @@ for i in range(3):
 # endblock
 
 # begin Section C block
-document.add_picture(f'{PATH_TO_IMG}\Section_C.png', width=Cm(18.99), height=Cm(0.65))
+document.add_picture(f'{PATH_TO_IMG}/Section_C.png', width=Cm(18.99), height=Cm(0.65))
 write_to_docx(
     content='Please note the following clarifications:',
     font_size=12.5,
@@ -291,7 +291,7 @@ for i in range(3):
 # document.add_page_break()
 
 # begin Section D block
-document.add_picture(f'{PATH_TO_IMG}\Section_D.png', width=Cm(18.99), height=Cm(0.65))
+document.add_picture(f'{PATH_TO_IMG}/Section_D.png', width=Cm(18.99), height=Cm(0.65))
 write_to_docx(
     after_spacing=20,
     style='alternates_style_name'
@@ -299,7 +299,7 @@ write_to_docx(
 # endblock
 
 # begin Section E_F block
-document.add_picture(f'{PATH_TO_IMG}\Section_E_F.png', width=Cm(18.99), height=Cm(0.79))
+document.add_picture(f'{PATH_TO_IMG}/Section_E_F.png', width=Cm(18.99), height=Cm(0.79))
 
 
 management_table = document.add_table(rows=0, cols=2)
