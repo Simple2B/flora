@@ -17,6 +17,6 @@ $(document).ready(function() {
     });
 
   $('#biddingsSearch').on( 'keyup', function () {
-  table.search( this.value ).draw();
+    table.search( this.value ).draw();
   });
 });

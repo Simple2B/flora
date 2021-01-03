@@ -22,7 +22,6 @@ div.append(input);
 document.querySelector('.chart-left .form').before(div);
 
 
-// endblock
 $(document).ready(function() {
     let workItemTable = $('#workItemsTable').DataTable({
         "pageLength": 10,
@@ -77,16 +76,6 @@ $(document).ready(function() {
         modal.find('#_group_input_delete #_input_group_name').val(name);
     });
 
-    // const inputSearchWorkItem = document.querySelector('#workItemsTable_filter label input');
-    // const workItemsTableLength = document.getElementById('workItemsTable_length');
-    // inputSearchWorkItem.classList.add('input_search');
-    // workItemsTableLength.setAttribute('style', 'margin-top: 0.3rem;');
-    // inputSearchWorkItem.setAttribute('placeholder', 'Search');
-
-    // document.querySelector('#workItemsTable_filter label')
-    // let innerLabel = document.querySelector('#workItemsTable_filter label')
-    // const input = innerLabel.innerHTML.slice(7)
-    // innerLabel.innerText = ''
 } );
 
 // Group close/show-panel
