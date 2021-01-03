@@ -46,6 +46,15 @@
     padding: 0.7rem;
     flex: 1;
 
+    ._form-search {
+        margin-right: 0rem;
+        input {
+            width: 97%;
+            padding-left: 0.5rem;
+            transition: 0.2s;
+        }
+    }
+
     &__header-search {
         input {
             width: 90%;

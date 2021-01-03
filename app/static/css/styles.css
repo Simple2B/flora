@@ -1843,6 +1843,12 @@ ul {
 .chart-left {
   padding: 0.7rem;
   flex: 1; }
+  .chart-left ._form-search {
+    margin-right: 0rem; }
+    .chart-left ._form-search input {
+      width: 97%;
+      padding-left: 0.5rem;
+      transition: 0.2s; }
   .chart-left__header-search input {
     width: 90%;
     background-color: #F2F2F2;
