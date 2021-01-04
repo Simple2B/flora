@@ -162,6 +162,11 @@ ul {
 .__side-bar-box {
   height: 50vh; }
 
+.__sidebar-css {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between; }
+
 .__box-add-bid-cancel--margins {
   display: flex;
   margin-left: auto;
@@ -1105,7 +1110,7 @@ ul {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: flex-start;
-  height: 80%; }
+  margin-top: 1rem; }
   .side_dar_bidding__return-link {
     width: 100%;
     min-height: 5vh;
@@ -1131,7 +1136,8 @@ ul {
 ._preview_export_btns {
   display: flex;
   flex-direction: column;
-  align-items: center; }
+  align-items: center;
+  margin-bottom: 1rem; }
   ._preview_export_btns ._btn button {
     padding: .5rem 1.5rem;
     color: #fff;
