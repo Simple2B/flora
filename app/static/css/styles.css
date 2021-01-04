@@ -2121,12 +2121,19 @@ ul {
 
 .__box-table-clarification {
   width: 100%;
-  min-height: 75vh;
   max-height: 90vh;
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
   overflow: visible; }
   .__box-table-clarification .__box-table--left {
     width: 53%; }
+    .__box-table-clarification .__box-table--left ._form-search {
+      display: flex;
+      margin-top: 0.5rem;
+      margin-right: 0rem; }
+      .__box-table-clarification .__box-table--left ._form-search input {
+        width: 97%;
+        padding-left: 0.5rem;
+        transition: 0.2s; }
     .__box-table-clarification .__box-table--left .__add-clarification--box {
       margin-bottom: 1rem; }
     .__box-table-clarification .__box-table--left .__add_to_cart--place {
