@@ -22,8 +22,16 @@ div.append(input);
 document.querySelector('.chart-left .form').before(div);
 
 
+$.fn.dataTableExt.oApi.fnFilterAll = function (oSettings, sInput, iColumn, bRegex, bSmart) {
+    let settings = $.fn.dataTableSettings;
+
+    for (let i = 0; i < settings.length; i++) {
+        settings[i].oInstance.fnFilter(sInput, iColumn, bRegex, bSmart);
+    }
+};
+
 $(document).ready(function() {
-    let workItemTable = $('#workItemsTable').DataTable({
+    $('#workItemsTable').DataTable({
         "pageLength": 10,
         "order": [],
         "displayStart": 0,
@@ -35,14 +43,25 @@ $(document).ready(function() {
         }
     });
 
+    const workItemTable = $("#table1").dataTable();
+
     $('#customSearchId').on( 'keyup', function () {
-        workItemTable.search( this.value ).draw();
+        // workItemTable.search( this.value ).draw();
+        workItemTable.fnFilterAll(this.value);
     });
 
     $('#selectedWorkItemsTable').DataTable({
         "pageLength": 10,
         "order": [],
-        "displayStart": 0
+        "displayStart": 0,
+        sDom: 'lrtip',
+        searching: true,
+    });
+
+    const selectedWorkItems = $('#selectedWorkItemsTable').DataTable();
+
+    $('#customSearchId').on( 'keyup', function () {
+        selectedWorkItems.fnFilterAll(this.value);
     });
 
     $('#modalEdit').on('show.bs.modal', function (event) {
