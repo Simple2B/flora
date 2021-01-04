@@ -20,14 +20,21 @@ $(document).ready(function() {
         modal.find('#delete_item').attr('action', target_link);
     });
 
-    $('#exclusionsTable').DataTable({
+    let exclusionTable = $('#exclusionsTable').DataTable({
         "pageLength": 10,
         "order": [],
         "displayStart": 0,
+        "language": { search: "", searchPlaceholder: "Search"},
+        sDom: 'lrtip',
         "drawCallback": function( settings ) {
             $("#exclusionsTable thead").remove();
         }
     });
+
+    $('#exclusionSearchId').on( 'keyup', function () {
+      exclusionTable.search( this.value ).draw();
+    });
+    
     // $('#selectedExclusionTable').DataTable({
     //     "pageLength": 10,
     //     "order": [],

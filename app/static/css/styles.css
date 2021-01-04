@@ -2008,12 +2008,19 @@ ul {
 
 .__box-table-exclusion {
   width: 100%;
-  min-height: 75vh;
   max-height: 90vh;
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
   overflow: visible; }
   .__box-table-exclusion .__box-table--left {
     width: 53%; }
+    .__box-table-exclusion .__box-table--left ._form-search {
+      display: flex;
+      margin-top: 0.5rem;
+      margin-right: 0rem; }
+      .__box-table-exclusion .__box-table--left ._form-search input {
+        width: 97%;
+        padding-left: 0.5rem;
+        transition: 0.2s; }
     .__box-table-exclusion .__box-table--left .__add-exclusion--box .__add_new_excl--margin {
       margin-top: 1rem;
       margin-left: 1rem; }
