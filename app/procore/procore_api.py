@@ -35,9 +35,9 @@ class ProcoreApi:
             List Bids Within A Company.
         """
 
-        if current_app.config["TESTING"]:
-            from tests.utils import TEST_BIDS
-            return TEST_BIDS
+        # if current_app.config["TESTING"]:
+        #     from tests.utils import TEST_BIDS
+        #     return TEST_BIDS
 
         access_token = self.access_token
         if not access_token:
@@ -49,7 +49,9 @@ class ProcoreApi:
 
         url = f"{PROCORE_API_BASE_URL}vapid/companies/{PROCORE_API_COMPANY_ID}/bids"
 
+        log(log.INFO, 'Make response to get bids')
         response = requests.get(url, headers=headers)
+        log(log.INFO, 'Get response with bids')
         if response.status_code >= 400:
             res = response.json()
             log(log.ERROR, res['errors'])
