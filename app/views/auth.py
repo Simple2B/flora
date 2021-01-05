@@ -11,7 +11,7 @@ auth_blueprint = Blueprint("auth", __name__)
 @auth_blueprint.route("/register", methods=["GET", "POST"])
 def register():
     form = RegistrationForm()
-    if form.validate_on_submit():
+    if form.validate_on_submit() or form.data['submit']:
         if add_user_data_validator(
             form.username.data,
             form.email.data,
