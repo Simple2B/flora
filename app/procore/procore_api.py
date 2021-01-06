@@ -29,36 +29,14 @@ class ProcoreApi:
 
         return me_json["login"], me_json["id"]
 
-    def bids(self):
+    def bids(self, ignore_testing=False):
         """
         DESCRIPTION:
             List Bids Within A Company.
         """
-
-        if current_app.config["TESTING"]:
+        if current_app.config["TESTING"] and not ignore_testing:
             from tests.utils import TEST_BIDS
             return TEST_BIDS
-        if current_app.config["TESTING_PROCORE_API"]:
-            access_token = self.access_token
-            if not access_token:
-                log(log.ERROR, "ProcoreApi.bids: need access_token!")
-                return []
-            headers = {"Authorization": "Bearer " + access_token}
-            PROCORE_API_BASE_URL = current_app.config["PROCORE_API_BASE_URL"]
-            PROCORE_API_COMPANY_ID = current_app.config["PROCORE_API_COMPANY_ID"]
-
-            url = f"{PROCORE_API_BASE_URL}vapid/companies/{PROCORE_API_COMPANY_ID}/bids"
-
-            log(log.INFO, 'Make response to get bids')
-            now = datetime.now()
-            response = requests.get(url, headers=headers)
-            then = datetime.now()
-            log(log.INFO, f'Get response with bids after "{(then - now).seconds}" seconds')
-            if response.status_code == 200 and response.json():
-                return []
-            else:
-                log(log.ERROR, f"End with response-status: {response.status_code}")
-                return []
 
         access_token = self.access_token
         if not access_token:
@@ -70,9 +48,9 @@ class ProcoreApi:
 
         url = f"{PROCORE_API_BASE_URL}vapid/companies/{PROCORE_API_COMPANY_ID}/bids"
 
-        log(log.INFO, 'Make response to get bids')
+        log(log.DEBUG, 'Make response to get bids')
         response = requests.get(url, headers=headers)
-        log(log.INFO, 'Get response with bids')
+        log(log.DEBUG, 'Get response with bids')
         if response.status_code >= 400:
             res = response.json()
             log(log.ERROR, res['errors'])
@@ -80,7 +58,6 @@ class ProcoreApi:
         bids_json = response.json()
 
         return bids_json
-        # return json.loads(bids_json)
 
     def make_authorization_url(self):
         """
@@ -147,25 +124,20 @@ class ProcoreApi:
             response_json['created_at']    = the date and time the user's access
             token was generated
         """
-        log(log.INFO, 'Make response to get access token')
+        log(log.DEBUG, 'Make response to get access token')
         now = datetime.now()
         post_data = {
             "grant_type": "client_credentials",
             "client_id": current_app.config["PROCORE_API_CLIENT_ID"],
             "client_secret": current_app.config["PROCORE_API_CLIENT_SECRET"],
         }
-        if current_app.config["TESTING_PROCORE_API"]:
-            response = requests.post(
-                "https://api.procore.com" + "/oauth/token",
-                data=post_data,
-            )
-        else:
-            response = requests.post(
-                current_app.config["PROCORE_API_BASE_URL"] + "/oauth/token",
-                data=post_data,
-            )
+
+        response = requests.post(
+            current_app.config["PROCORE_API_BASE_URL"] + "/oauth/token",
+            data=post_data,
+        )
         response_json = response.json()
         then = datetime.now()
-        log(log.INFO, f'Get response with access token after "{(then - now).seconds}"')
+        log(log.DEBUG, f'Get response with access token after "{(then - now).seconds}"')
         log(log.DEBUG, "%s", response_json)
         return response_json["access_token"]
