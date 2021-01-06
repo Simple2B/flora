@@ -80,7 +80,7 @@ def biddings():
                 bidding = Bid(
                     procore_bid_id=bid["bid_package_id"],
                     title=bid["bid_package_title"],
-                    client=bid["vendor"]["name"],
+                    client=bid["name"],
                 )
                 bidding.save()
         bids = Bid.query.all()
@@ -95,7 +95,6 @@ def biddings():
         bids_from_procore = papi.bids()
         log(log.INFO, 'Take bids')
         # assert bids_from_procore
-        session['timer'] = time.time()
         for bid in bids_from_procore:
             bid_package_id = bid["bid_package_id"]
             db_bid = Bid.query.filter(Bid.procore_bid_id == bid_package_id).first()
