@@ -6,3 +6,4 @@ from .bid_generation import bid_generation  # noqa 401
 from .time_update import time_update  # noqa 401
 from .create_pdf_file import create_pdf_file  # noqa 401
 from .timer import timer  # noqa 401
+from .procore import update_bids  # noqa 401
