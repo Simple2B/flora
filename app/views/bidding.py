@@ -34,14 +34,14 @@ def edit_bid():
 @bidding_blueprint.route("/archive_or_export", methods=["POST"])
 @login_required
 def archive_or_export():
-    FlaskForm(request.form)
+    form = BidForm(request.form)
     bid_ides_list = [int(bid_id) for bid_id in request.form if request.form.get(bid_id, '') == 'on']
     if request.form.get('arcive', ''):
         for bid_id in bid_ides_list:
             bid = Bid.query.get(bid_id)
             bid.status = Bid.Status.d_archived
             bid.save()
-    elif request.form.get('multiply_export', ''):
+    elif form.data['export_pdf']:
         stream_of_bids = []
         for bid_id in bid_ides_list:
             bid = Bid.query.get(bid_id)
@@ -56,7 +56,7 @@ def archive_or_export():
                 zip.writestr(f"{i[0]}.pdf", i[1].read())
         zipped_file.seek(0)
 
-        now = datetime.datetime.now()
+        now = datetime.now()
         return send_file(
             zipped_file,
             as_attachment=True,
@@ -65,6 +65,8 @@ def archive_or_export():
             cache_timeout=0,
             last_modified=now,
         )
+    elif form.data['export_docx']:
+        pass
     return redirect(url_for("bidding.biddings"))
 
 
