@@ -5,6 +5,7 @@ import click
 from app import create_app, db, models, forms
 from app.models import User
 from app.controllers import populate_db_by_test_data, bid_generation
+from app.logger import log
 
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "1234")
@@ -27,6 +28,7 @@ CLARIFICATION_DESCRIPTION = os.environ.get(
     "CLARIFICATION_DESCRIPTION", "some clarification"
 )
 
+log.set_level(log.DEBUG)
 app = create_app()
 
 
@@ -34,7 +36,7 @@ app = create_app()
 @app.shell_context_processor
 def get_context():
     """Objects exposed here will be automatically available from the shell."""
-    return dict(app=app, db=db, models=models, forms=forms)
+    return dict(app=app, db=db, m=models, forms=forms)
 
 
 def fill_db():
@@ -61,6 +63,13 @@ def reset_db():
     db.drop_all()
     db.create_all()
     fill_db()
+
+
+@app.cli.command()
+def update_bids():
+    """Gets new bids from ProCore system"""
+    from app.controllers import update_bids
+    update_bids()
 
 
 if __name__ == "__main__":
