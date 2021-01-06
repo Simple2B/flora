@@ -7,6 +7,8 @@ from docx.shared import Cm, Pt, RGBColor
 from docx.enum.table import WD_ALIGN_VERTICAL, WD_ROW_HEIGHT
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_COLOR_INDEX
 
+from app.models import Bid
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PATH_TO_IMG = BASE_DIR + '/images'
 PATH_TO_SAVE_FILE = os.path.dirname(BASE_DIR) + '\\test_docx_files'
