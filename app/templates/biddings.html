@@ -75,7 +75,7 @@
       </div>
       <span>Archive</span>
       </button>
-      <button type="submit" form="edit_bids_form" class="_btn--white ddb-cursor-handle" name="multiply_export" value="true">
+      <button type="button" class="_btn--white ddb-cursor-handle" data-target="#modalMultiplyExport" data-toggle="modal">
         <div>
           <img src="{{ url_for('static', filename='images/export_biddings.svg') }}">
         </div>
@@ -151,6 +151,34 @@
 
   </div>
 </section>
+
+<!-- Begin Multiply Export Modal -->
+<div class="modal fade" id="modalMultiplyExport" tabindex="-2" role="dialog" aria-labelledby="ModalMultiplyExport"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <h5 class="--padding">Export</h5>
+      <div>
+        <div class="__modal-inputs--flex-row">
+          <div class="">
+            <div class="_modal_btns">
+              <div>
+                {{ form.export_pdf(class="_btn--black ddb-cursor-handle", form="edit_bids_form") }}
+              </div>
+              <div>
+                {{ form.export_docx(class="_btn--black ddb-cursor-handle", form="edit_bids_form") }}
+              </div>
+              <div>
+                <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Multiply Export Modal -->
 
 {% endblock %}
 
