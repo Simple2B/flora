@@ -19,6 +19,8 @@ class Bid(db.Model, ModelMixin):
     procore_bid_id = db.Column(db.Integer, nullable=False)
     title = db.Column(db.String(256), nullable=False)
     client = db.Column(db.String(256), nullable=False)
+    address_street = db.Column(db.String(128), nullable=False, default='100 Willoughby Street')
+    address_city = db.Column(db.String(128), nullable=False, default='Broklyn, NY, 11201')
     status = db.Column(db.Enum(Status), default=Status.a_new, nullable=False)
     permit_filling_fee = db.Column(db.Float, default=0.0)
     general_conditions = db.Column(db.Float, default=0.0)

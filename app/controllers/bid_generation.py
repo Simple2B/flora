@@ -8,7 +8,7 @@ def bid_generation():
         title="bidding 5",
         client="Procore (Test Companies)",
         status=Bid.Status.b_draft
-    ).save()
+    ).save(commit=False)
 
     for i in range(3):
         Bid(
@@ -16,7 +16,7 @@ def bid_generation():
             title="bidding i",
             client="Test company",
             status=Bid.Status.c_submitted
-        ).save()
+        ).save(commit=False)
 
     for i in range(4):
         Bid(
@@ -24,5 +24,6 @@ def bid_generation():
             title=f"bidding {3+i}",
             client="Procore (Test Companies)",
             status=Bid.Status.d_archived
-        ).save()
+        ).save(commit=False)
+
     db.session.commit()

@@ -302,7 +302,8 @@ def bidding(bid_id):
         show_exclusions=show_exclusions,
         show_clarifications=show_clarifications,
         form_bid=form_bid,
-        due_date=due_date
+        due_date=due_date,
+        round=round
     )
 
 # Export document

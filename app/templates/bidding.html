@@ -139,10 +139,10 @@
         </div>
       </div>
       <div class="_titles_prices">
-        <div>Subtotal &nbsp; &nbsp; $0.00</div>
-        <div>Adds-on &nbsp; &nbsp; $0.00</div>
+        <div>Subtotal &nbsp; &nbsp; ${{bid.subtotal}}</div>
+        <div>Adds-on &nbsp; &nbsp; ${{round(bid.grand_subtotal-bid.subtotal, 2)}}</div>
         <div>
-          <strong> Grand Total &nbsp; &nbsp; $0.00</strong>
+          <strong> Grand Total &nbsp; &nbsp; ${{bid.grand_subtotal}}</strong>
         </div>
       </div>
 
@@ -177,9 +177,9 @@
               <div>
                 <span>Address</span> &nbsp; &nbsp;
                 <span class="proj_gen-text-info block-text--width">
-                  100 Willoughby Street
+                  {{bid.address_street}}
                   Suite # 502
-                  Broklyn, NY, 11201
+                  {{bid.address_city}}
                 </span>
               </div>
               <div>
@@ -215,9 +215,9 @@
               <div>
                 <span>Address</span> &nbsp; &nbsp;
                 <span class="proj_gen-text-info">
-                  100 Willoughby Street
+                  {{bid.address_street}}
                   Suite # 502
-                  Broklyn, NY, 11201</span>
+                  {{bid.address_city}}</span>
               </div>
             </div>
           </div>
@@ -233,7 +233,7 @@
             </button>
           </div>
         </div>
-        <span class="team-header__counter t-gray">Showing {{ users|length }} users</span>
+        <span class="team-header__counter t-gray">Showing {{ users|length }} drawings</span>
         <div class="_flex-center" id="drawing_log_hidden_id">
           <table>
             <thead class="_drawing-table">
@@ -244,28 +244,28 @@
             </thead>
             <tbody>
               <tr>
-                <td>Test</td>
-                <td>Test</td>
-                <td>Test</td>
-                <td>Test</td>
+                <td>A-101</td>
+                <td>Construction Floor Plan</td>
+                <td>08/24/2020</td>
+                <td>0</td>
               </tr>
               <tr>
-                <td>Test</td>
-                <td>Test</td>
-                <td>Test</td>
-                <td>Test</td>
+                <td>A-101</td>
+                <td>Construction Floor Plan</td>
+                <td>08/24/2020</td>
+                <td>0</td>
               </tr>
               <tr>
-                <td>Test</td>
-                <td>Test</td>
-                <td>Test</td>
-                <td>Test</td>
+                <td>A-101</td>
+                <td>Construction Floor Plan</td>
+                <td>08/24/2020</td>
+                <td>0</td>
               </tr>
               <tr>
-                <td>Test</td>
-                <td>Test</td>
-                <td>Test</td>
-                <td>Test</td>
+                <td>A-101</td>
+                <td>Construction Floor Plan</td>
+                <td>08/24/2020</td>
+                <td>0</td>
               </tr>
             </tbody>
           </table>

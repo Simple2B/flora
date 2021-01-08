@@ -50,11 +50,12 @@ def fill_db():
     )
 
     user.password = ADMIN_PASSWORD
-    user.save()
+    user.save(commit=False)
 
     if app.config['GENERATE_TEST_DATA']:
         populate_db_by_test_data()
         bid_generation()
+    db.session.commit()
 
 
 @app.cli.command()

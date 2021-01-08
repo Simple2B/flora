@@ -42,7 +42,7 @@ def populate_db_by_test_data():
         title="bidding 5",
         client="Procore (Test Companies)",
         status=Bid.Status.b_draft
-    ).save()
+    ).save(commit=False)
 
     work_item = WorkItem.query.first()
     link_wi = LinkWorkItem(bid_id=bid.id, work_item_id=work_item.id).save()
@@ -53,7 +53,7 @@ def populate_db_by_test_data():
         unit='item',
         quantity=5,
         link_work_items_id=link_wi.id
-    ).save()
+    ).save(commit=False)
 
     WorkItemLine(
         note="Work Item line 2 note",
@@ -62,14 +62,14 @@ def populate_db_by_test_data():
         unit='item',
         quantity=2,
         link_work_items_id=link_wi.id
-    ).save()
+    ).save(commit=False)
 
     ######################################
     # Add Group1
     work_item_group = WorkItemGroup(
         bid_id=bid.id,
         name="Group1"
-    ).save()
+    ).save(commit=False)
     link_wi = LinkWorkItem(bid_id=bid.id, work_item_id=work_item.id, work_item_group=work_item_group).save()
     WorkItemLine(
         note="Work Item line 1 in group1 ",
@@ -78,7 +78,7 @@ def populate_db_by_test_data():
         unit='item',
         quantity=5,
         link_work_items_id=link_wi.id
-    ).save()
+    ).save(commit=False)
 
     WorkItemLine(
         note="Work Item line 2 in group1",
@@ -87,29 +87,29 @@ def populate_db_by_test_data():
         unit='item',
         quantity=2,
         link_work_items_id=link_wi.id
-    ).save()
+    ).save(commit=False)
     ######################################
 
     clarifications = Clarification.query.all()
     ClarificationLink(
         bid_id=bid.id,
         clarification_id=clarifications[0].id
-    ).save()
+    ).save(commit=False)
 
     ClarificationLink(
         bid_id=bid.id,
         clarification_id=clarifications[1].id
-    ).save()
+    ).save(commit=False)
 
     exclusion = Exclusion.query.all()
     ExclusionLink(
         bid_id=bid.id,
         exclusion_id=exclusion[0].id
-    ).save()
+    ).save(commit=False)
 
     ExclusionLink(
         bid_id=bid.id,
         exclusion_id=exclusion[1].id
-    ).save()
+    ).save(commit=False)
 
     db.session.commit()
