@@ -21,5 +21,5 @@ RUN rm mycron
 # COPY . .
 
 EXPOSE 5000
-
+CMD service cron start
 CMD [ "flask", "run", "-h", "0.0.0.0" ]
