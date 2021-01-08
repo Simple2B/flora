@@ -183,6 +183,12 @@ ul {
     height: 50vh;
 }
 
+.__sidebar-css {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
 .__box-add-bid-cancel--margins {
     display: flex;
     margin-left: auto;
@@ -317,3 +323,8 @@ ul {
         background-color: #979797 !important;
     }
 }
+
+._vertical_centralized {
+    vertical-align: middle !important;
+}
+

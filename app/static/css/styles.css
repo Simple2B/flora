@@ -162,6 +162,11 @@ ul {
 .__side-bar-box {
   height: 50vh; }
 
+.__sidebar-css {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between; }
+
 .__box-add-bid-cancel--margins {
   display: flex;
   margin-left: auto;
@@ -257,6 +262,9 @@ ul {
 
 .status-change_color_archived {
   background-color: #979797 !important; }
+
+._vertical_centralized {
+  vertical-align: middle !important; }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }
@@ -564,6 +572,16 @@ ul {
   color: #333333;
   background-color: #fff;
   font-size: 13px; }
+
+.input_search {
+  border: none;
+  background-color: #F2F2F2;
+  opacity: 0.5;
+  outline: none; }
+  .input_search:focus {
+    transition: 0.5s;
+    opacity: 1;
+    border-bottom: 2px solid black; }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }
@@ -1092,7 +1110,7 @@ ul {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: flex-start;
-  height: 80%; }
+  margin-top: 1rem; }
   .side_dar_bidding__return-link {
     width: 100%;
     min-height: 5vh;
@@ -1118,7 +1136,8 @@ ul {
 ._preview_export_btns {
   display: flex;
   flex-direction: column;
-  align-items: center; }
+  align-items: center;
+  margin-bottom: 1rem; }
   ._preview_export_btns ._btn button {
     padding: .5rem 1.5rem;
     color: #fff;
@@ -1680,15 +1699,6 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center; }
-  .container__header-block #biddingsSearch {
-    border: none;
-    background-color: #F2F2F2;
-    opacity: 0.5;
-    outline: none; }
-    .container__header-block #biddingsSearch:focus {
-      transition: 0.5s;
-      opacity: 1;
-      border-bottom: 2px solid black; }
   .container__header-block > div:first-child {
     display: inherit;
     align-items: baseline; }
@@ -1839,6 +1849,12 @@ ul {
 .chart-left {
   padding: 0.7rem;
   flex: 1; }
+  .chart-left ._form-search {
+    margin-right: 0rem; }
+    .chart-left ._form-search input {
+      width: 97%;
+      padding-left: 0.5rem;
+      transition: 0.2s; }
   .chart-left__header-search input {
     width: 90%;
     background-color: #F2F2F2;
@@ -1861,6 +1877,9 @@ ul {
     color: #fff; }
     .chart-left .__table-item--thead ._cart_item--style-work-name {
       padding-left: 5rem; }
+  .chart-left ._td_work_item_name {
+    overflow-wrap: break-word;
+    max-width: 10vw; }
   .chart-left .__block-add_to_cart {
     display: flex;
     justify-content: flex-end;
@@ -1871,8 +1890,7 @@ ul {
       align-items: center;
       background-color: #FFFFFF;
       border: 1px solid #BDBDBD;
-      margin-right: 1rem;
-      width: 9vw; }
+      margin-right: 1rem; }
       .chart-left .__block-add_to_cart .__btn-add_to_cart:hover {
         background-color: #000; }
         .chart-left .__block-add_to_cart .__btn-add_to_cart:hover span {
@@ -1904,24 +1922,27 @@ ul {
       margin-left: 1rem; }
     .chart-right .__inline--blocks ._label {
       left: 1.5rem; }
-  .chart-right .chart-right__group_name-box .chart-right__group-name-block {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: #FFFFFF; }
-    .chart-right .chart-right__group_name-box .chart-right__group-name-block .__inline--items {
-      display: inline-flex;
-      flex-flow: row;
-      align-items: center;
-      width: 10%; }
-    .chart-right .chart-right__group_name-box .chart-right__group-name-block .__group_name {
+  .chart-right .chart-right__group_name-box {
+    max-height: 50vh;
+    overflow: auto; }
+    .chart-right .chart-right__group_name-box .chart-right__group-name-block {
       display: flex;
-      align-items: center;
-      margin-right: auto;
-      margin-left: 0.5rem;
-      width: 30%; }
-    .chart-right .chart-right__group_name-box .chart-right__group-name-block .__delete-group {
-      margin-right: 0.5rem; }
+      flex-direction: row;
+      justify-content: space-between;
+      background-color: #FFFFFF; }
+      .chart-right .chart-right__group_name-box .chart-right__group-name-block .__inline--items {
+        display: inline-flex;
+        flex-flow: row;
+        align-items: center;
+        width: 10%; }
+      .chart-right .chart-right__group_name-box .chart-right__group-name-block .__group_name {
+        display: flex;
+        align-items: center;
+        margin-right: auto;
+        margin-left: 0.5rem;
+        width: 30%; }
+      .chart-right .chart-right__group_name-box .chart-right__group-name-block .__delete-group {
+        margin-right: 0.5rem; }
   .chart-right__undo-block {
     background-color: #E6A73E;
     border-radius: 0.5rem;
@@ -1937,7 +1958,7 @@ ul {
     color: #fff;
     text-decoration: none; }
   .chart-right .__box-scroll--group-table {
-    max-height: 17vh;
+    max-height: 30vh;
     overflow: auto; }
   .chart-right .chart-right__buttons {
     display: flex;
@@ -1995,12 +2016,19 @@ ul {
 
 .__box-table-exclusion {
   width: 100%;
-  min-height: 75vh;
   max-height: 90vh;
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
   overflow: visible; }
   .__box-table-exclusion .__box-table--left {
     width: 53%; }
+    .__box-table-exclusion .__box-table--left ._form-search {
+      display: flex;
+      margin-top: 0.5rem;
+      margin-right: 0rem; }
+      .__box-table-exclusion .__box-table--left ._form-search input {
+        width: 97%;
+        padding-left: 0.5rem;
+        transition: 0.2s; }
     .__box-table-exclusion .__box-table--left .__add-exclusion--box .__add_new_excl--margin {
       margin-top: 1rem;
       margin-left: 1rem; }
@@ -2101,12 +2129,19 @@ ul {
 
 .__box-table-clarification {
   width: 100%;
-  min-height: 75vh;
   max-height: 90vh;
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
   overflow: visible; }
   .__box-table-clarification .__box-table--left {
     width: 53%; }
+    .__box-table-clarification .__box-table--left ._form-search {
+      display: flex;
+      margin-top: 0.5rem;
+      margin-right: 0rem; }
+      .__box-table-clarification .__box-table--left ._form-search input {
+        width: 97%;
+        padding-left: 0.5rem;
+        transition: 0.2s; }
     .__box-table-clarification .__box-table--left .__add-clarification--box {
       margin-bottom: 1rem; }
     .__box-table-clarification .__box-table--left .__add_to_cart--place {

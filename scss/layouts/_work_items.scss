@@ -46,6 +46,15 @@
     padding: 0.7rem;
     flex: 1;
 
+    ._form-search {
+        margin-right: 0rem;
+        input {
+            width: 97%;
+            padding-left: 0.5rem;
+            transition: 0.2s;
+        }
+    }
+
     &__header-search {
         input {
             width: 90%;
@@ -79,6 +88,11 @@
 
     }
 
+    ._td_work_item_name {
+        overflow-wrap: break-word;
+        max-width: 10vw;
+    }
+
     .__block-add_to_cart {
         display: flex;
         justify-content: flex-end;
@@ -91,7 +105,7 @@
             background-color: #FFFFFF;
             border: 1px solid #BDBDBD;
             margin-right: 1rem;
-            width: 9vw;
+            // width: 9vw;
 
             &:hover {
                 background-color: $black;
@@ -112,7 +126,6 @@
         }
 
     }
-
 }
 
 .chart-right {
@@ -147,7 +160,8 @@
     }
 
     & .chart-right__group_name-box {
-
+        max-height: 50vh;
+        overflow: auto;
         .chart-right__group-name-block {
             display: flex;
             flex-direction: row;
@@ -196,7 +210,7 @@
     }
 
     & .__box-scroll--group-table {
-        max-height: 17vh;
+        max-height: 30vh;
         overflow: auto;
     }
 

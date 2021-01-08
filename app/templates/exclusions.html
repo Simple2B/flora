@@ -49,6 +49,12 @@
 
     <div class="container __box-table-exclusion flex-flow-wrap">
       <div class="__box-table--left">
+        <div class="_form-search">
+          <div>
+            <img src="/static/images/Search_icon.png">
+          </div>
+          <input class="input_search" placeholder="Search" aria-controls="exclusionsTable" id="exclusionSearchId">
+        </div>
         <form role="form" action="{{ url_for('exclusion.add_new_exclusion', bid_id=bid.id) }}" method="post">
 
           <div class="modal-content border-none">

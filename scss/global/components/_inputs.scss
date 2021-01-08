@@ -107,3 +107,15 @@
     background-color: #fff;
     font-size: 13px;
 }
+
+.input_search {
+    border: none;
+    background-color: #F2F2F2;
+    opacity: 0.5;
+    outline: none;
+    &:focus {
+        transition: 0.5s;
+        opacity: 1;
+        border-bottom: 2px solid black;
+    }
+}

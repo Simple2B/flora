@@ -97,9 +97,9 @@
               <tbody>
                 {% for work_item in form.work_items %}
                 <tr>
-                  <td><input class="form-control" type="checkbox" name="{{work_item.id}}"></td>
-                  <td><span class="t-gray">{{work_item.code}}</span></td>
-                  <td>{{work_item.name}}</td>
+                  <td class="_vertical_centralized"><input class="form-control" type="checkbox" name="{{work_item.id}}"></td>
+                  <td class="_vertical_centralized"><span class="t-gray">{{work_item.code}}</span></td>
+                  <td class="_td_work_item_name">{{work_item.name}}</td>
                   <td><button type="button" value="{{work_item.id}}" class="border-none ddb-cursor-handle"
                       data-toggle="modal" data-target="#modalEdit" data-target_link="{{url_for('work_item.edit_work_item', bid_id=bid.id, item_id=work_item.id)}}"
                       data-code="{{work_item.code}}" data-name="{{work_item.name}}">

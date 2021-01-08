@@ -1,16 +1,67 @@
+// Create custom search
+function setAttributes(el, attrs) {
+    for(var key in attrs) {
+      el.setAttribute(key, attrs[key]);
+    }
+};
+
+const div = document.createElement('div');
+const img = document.createElement('img');
+const input = document.createElement('input');
+
+div.setAttribute('class', '_form-search');
+img.setAttribute('src', '/static/images/Search_icon.png');
+setAttributes(input, {
+    "class": "input_search", 
+    "placeholder": "Search", 
+    "aria-controls": "workItemsTable",
+    "id": "customSearchId",
+});
+div.prepend(img);
+div.append(input);
+document.querySelector('.chart-left .form').before(div);
+
+
+$.fn.dataTableExt.oApi.fnFilterAll = function (oSettings, sInput, iColumn, bRegex, bSmart) {
+    let settings = $.fn.dataTableSettings;
+
+    for (let i = 0; i < settings.length; i++) {
+        settings[i].oInstance.fnFilter(sInput, iColumn, bRegex, bSmart);
+    }
+};
+
 $(document).ready(function() {
     $('#workItemsTable').DataTable({
         "pageLength": 10,
         "order": [],
         "displayStart": 0,
+        "language": { search: "", searchPlaceholder: "Search"},
+        sDom: 'lrtip',
+        searching: true,
         "drawCallback": function( settings ) {
             $("#workItemsTable thead").remove();
         }
     });
+
+    const workItemTable = $("#table1").dataTable();
+
+    $('#customSearchId').on( 'keyup', function () {
+        // workItemTable.search( this.value ).draw();
+        workItemTable.fnFilterAll(this.value);
+    });
+
     $('#selectedWorkItemsTable').DataTable({
         "pageLength": 10,
         "order": [],
-        "displayStart": 0
+        "displayStart": 0,
+        sDom: 'lrtip',
+        searching: true,
+    });
+
+    const selectedWorkItems = $('#selectedWorkItemsTable').DataTable();
+
+    $('#customSearchId').on( 'keyup', function () {
+        selectedWorkItems.fnFilterAll(this.value);
     });
 
     $('#modalEdit').on('show.bs.modal', function (event) {
@@ -43,7 +94,6 @@ $(document).ready(function() {
         modal.find('#_modal_delete_group').attr('action', target_link);
         modal.find('#_group_input_delete #_input_group_name').val(name);
     });
-
 
 } );
 

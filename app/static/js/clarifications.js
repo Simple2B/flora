@@ -1,11 +1,17 @@
 $(document).ready(function() {
-    $('#clarificationsTable').DataTable({
+    const clarificationTable = $('#clarificationsTable').DataTable({
         "pageLength": 10,
         "order": [],
         "displayStart": 0,
+        sDom: 'lrtip',
+        searching: true,
         "drawCallback": function( settings ) {
             $("#clarificationTable thead").remove();
         }
+    });
+
+    $('#clarificationSearchId').on( 'keyup', function () {
+      clarificationTable.search( this.value ).draw();
     });
 
     $('#AddModalClarification').on('show.bs.modal', function (event) {
