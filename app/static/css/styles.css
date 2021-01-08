@@ -1295,9 +1295,12 @@ ul {
     justify-content: space-between;
     align-items: center;
     border: 1px solid #E5E5E5; }
-  .main-container__project_general .__drawing-log ._flex-center {
+  .main-container__project_general .__drawing-log ._drawing_table {
     display: flex;
     justify-content: center; }
+    .main-container__project_general .__drawing-log ._drawing_table table {
+      width: 100%;
+      padding: 1rem; }
   .main-container__project_general .title-text-style {
     color: #000000;
     font-weight: 500; }
