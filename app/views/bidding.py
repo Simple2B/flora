@@ -5,13 +5,11 @@ from datetime import datetime
 
 from flask import Blueprint, render_template, redirect, url_for, session, request, send_file
 from flask_login import login_required
-from flask import current_app
 from flask_wtf import FlaskForm
 
-from app.procore import ProcoreApi
 from app.models import Bid
 from app.logger import log
-from app.controllers import create_pdf_file, timer
+from app.controllers import create_pdf_file
 
 bidding_blueprint = Blueprint("bidding", __name__)
 
@@ -70,43 +68,43 @@ def archive_or_export():
 @bidding_blueprint.route("/biddings")
 @login_required
 def biddings():
-    if current_app.config["TESTING"]:
-        papi = ProcoreApi()
-        bids_from_procore = papi.bids()
-        for bid in bids_from_procore:
-            bid_id = bid["id"]
-            db_bid = Bid.query.filter(Bid.procore_bid_id == bid_id).first()
-            if not db_bid:
-                bidding = Bid(
-                    procore_bid_id=bid["bid_package_id"],
-                    title=bid["bid_package_title"],
-                    client=bid["name"],
-                )
-                bidding.save()
-        bids = Bid.query.all()
-        log(log.INFO, 'Final rendering template')
+    # if current_app.config["TESTING"]:
+    #     papi = ProcoreApi()
+    #     bids_from_procore = papi.bids()
+    #     for bid in bids_from_procore:
+    #         bid_id = bid["id"]
+    #         db_bid = Bid.query.filter(Bid.procore_bid_id == bid_id).first()
+    #         if not db_bid:
+    #             bidding = Bid(
+    #                 procore_bid_id=bid["bid_package_id"],
+    #                 title=bid["bid_package_title"],
+    #                 client=bid["name"],
+    #             )
+    #             bidding.save()
+    #     bids = Bid.query.all()
+    #     log(log.INFO, 'Final rendering template')
 
-        return render_template("biddings.html", bids=bids)
+    #     return render_template("biddings.html", bids=bids)
 
     # Take bids
 
-    if session.get('timer', timer()) >= 600:
-        papi = ProcoreApi()
-        bids_from_procore = papi.bids()
-        log(log.INFO, 'Take bids')
-        # assert bids_from_procore
-        for bid in bids_from_procore:
-            bid_package_id = bid["bid_package_id"]
-            db_bid = Bid.query.filter(Bid.procore_bid_id == bid_package_id).first()
-            if not db_bid:
-                bidding = Bid(
-                    procore_bid_id=bid["bid_package_id"],
-                    title=bid["bid_package_title"],
-                    client=bid["vendor"]["name"],
-                )
-                bidding.save()
+    # if session.get('timer', timer()) >= 600:
+    #     papi = ProcoreApi()
+    #     bids_from_procore = papi.bids()
+    #     log(log.INFO, 'Take bids')
+    #     # assert bids_from_procore
+    #     for bid in bids_from_procore:
+    #         bid_id = bid["id"]
+    #         db_bid = Bid.query.filter(Bid.procore_bid_id == bid_id).first()
+    #         if not db_bid:
+    #             bidding = Bid(
+    #                 procore_bid_id=bid["id"],
+    #                 title=bid["bid_package_title"],
+    #                 client=bid["vendor"]["name"],
+    #             )
+    #             bidding.save()
 
-    session['timer'] = timer(time.time())
+    # session['timer'] = timer(time.time())
 
     most_popular = session.get("most_popular", "")
     most_recent = session.get("most_recent", "Most recent")

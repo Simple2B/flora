@@ -1,6 +1,8 @@
 import os
+from dotenv import load_dotenv
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(base_dir, ".env"))
 
 
 class BaseConfig(object):
@@ -55,7 +57,6 @@ class TestingConfig(BaseConfig):
     """Testing configuration."""
 
     TESTING = True
-    TESTING_PROCORE_API = True
     PRESERVE_CONTEXT_ON_EXCEPTION = False
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         "TEST_DATABASE_URL",
