@@ -8,18 +8,18 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 RUN apt-get update
 RUN apt-get install wkhtmltopdf -y
-RUN apt-get install cron -y
+# RUN apt-get install cron -y
 # install cron job
 # RUN crontab -l > mycron
 #echo new cron into cron file
-RUN echo "* * * * *   /usr/src/app/update_bids_docker.sh" >> mycron
+# RUN echo "* * * * *   /usr/src/app/update_bids_docker.sh" >> mycron
 #install new cron file
-RUN crontab mycron
-RUN rm mycron
+# RUN crontab mycron
+# RUN rm mycron
 
 
 # COPY . .
 
 EXPOSE 5000
-CMD /usr/sbin/cron -f
+# CMD /usr/sbin/cron -f
 CMD [ "flask", "run", "-h", "0.0.0.0" ]
