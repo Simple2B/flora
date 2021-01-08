@@ -157,6 +157,6 @@ def check_bid_tbd(bid_id, tbd_name):
     }
 
     def default_case():
-        raise Exception('No case found!')
+        return 'No case found!'
 
     return switch.get(tbd_name, default_case)()
