@@ -14,9 +14,14 @@
                 "FLASK_ENV": "development",
             },
             "args": [
-                "run"
+                "run",
+                "-p",
+                "5017",
+                "-h",
+                "46.101.202.101"
             ],
-            "jinja": true
+            "jinja": true,
+
         },
         {
             "name": "Update bids",

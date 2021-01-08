@@ -32,15 +32,25 @@ def update_bids():
                 log(log.ERROR, "Bad bid format [%s]. Not found [project.address]", bid_id)
                 continue
 
-            address = bid["project"]["address"]
-            addr_lines = address.split("<br>")
+            vendor_address = bid["bid_requester"]["vendor_address"]
+            v_addr_lines = vendor_address.split("<br>")
+            project_address = bid["project"]["address"]
+            p_addr_lines = project_address.split("<br>")
+            bid_requester = bid['bid_requester']
+            contact_lines = bid_requester['contact'].split(" (")
 
             bidding = Bid(
                 procore_bid_id=bid["id"],
                 title=bid["bid_package_title"],
                 client=(bid["vendor"]["name"] if "name" in bid["vendor"] else "Unknown name"),
-                address_street=(addr_lines[0] if addr_lines else ""),
-                address_city=(addr_lines[1] if len(addr_lines) > 1 else "")
+                vendor_address_street=(v_addr_lines[0] if v_addr_lines else ""),
+                vendor_address_city=(v_addr_lines[1] if len(v_addr_lines) > 1 else ""),
+                address_street=(p_addr_lines[0] if p_addr_lines else ""),
+                address_city=(p_addr_lines[1] if len(p_addr_lines) > 1 else ""),
+                phone=bid_requester['business_phone'],
+                email=bid_requester['email_address'],
+                fax=bid_requester['fax_number'],
+                contact=(contact_lines[0] if contact_lines else "")
             )
             bidding.save(commit=False)
             need_commit = True

@@ -166,31 +166,30 @@
               </div>
               <div>
                 <span>Phone &nbsp; &nbsp;
-                <span class="proj_gen-text-info">+1 738-927-9182</span>
+                <span class="proj_gen-text-info">{{ bid.phone }}</span>
               </div>
               <div>
-                <span>Fox</span> &nbsp; &nbsp;
-                <span class="proj_gen-text-info">+1 738-927-9182</span>
+                <span>Fax</span> &nbsp; &nbsp;
+                <span class="proj_gen-text-info">{{ bid.fax }}</span>
               </div>
             </div>
             <div class="client-job--span">
               <div>
                 <span>Address</span> &nbsp; &nbsp;
                 <span class="proj_gen-text-info block-text--width">
-                  {{bid.address_street}}
+                  {{bid.vendor_address_street}}
                   Suite # 502
-                  {{bid.address_city}}
+                  {{bid.vendor_address_city}}
                 </span>
               </div>
               <div>
                 <span>Email &nbsp; &nbsp;
-                <span class="proj_gen-text-info">gh7028@nyu.edu</span>
+                <span class="proj_gen-text-info">{{ bid.email }}</span>
               </div>
               <div>
                 <span>Contact</span> &nbsp; &nbsp;
                 <span class="proj_gen-text-info">
-                  James Pumarada
-                  Mr, Dr
+                  {{ bid.contact }}
                 </span>
               </div>
             </div>
@@ -234,7 +233,7 @@
           </div>
         </div>
         <span class="team-header__counter t-gray">Showing {{ users|length }} drawings</span>
-        <div class="_flex-center" id="drawing_log_hidden_id">
+        <div class="_drawing_table" id="drawing_log_hidden_id">
           <table>
             <thead class="_drawing-table">
               <th>Drawing ID</th>

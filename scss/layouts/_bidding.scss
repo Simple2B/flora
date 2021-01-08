@@ -212,7 +212,7 @@
         }
 
         .project_type-radio-select {
-            & > div:last-child {                
+            & > div:last-child {
                 display: flex;
                 div {
                     margin-right: $m1rem;
@@ -290,9 +290,14 @@
 
         }
 
-        ._flex-center {
+        ._drawing_table {
             display: flex;
             justify-content: center;
+
+            table {
+                width: 100%;
+                padding: $m1rem;
+            }
         }
 
     }
