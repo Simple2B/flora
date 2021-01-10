@@ -1,5 +1,6 @@
 import random
 import pytest
+import datetime
 
 from app import db, create_app
 from tests.utils import register, login
@@ -26,14 +27,16 @@ def client():
                     procore_bid_id=i+1,
                     title="bidding {}".format(str(i+1)),
                     client=list_bids_client[i],
-                    status=Bid.Status.a_new
+                    status=Bid.Status.a_new,
+                    due_date=datetime.date.today()
                 ).save()
             else:
                 Bid(
                     procore_bid_id=i+1,
                     title="bidding {}".format(str(i+1)),
                     client=list_bids_client[i],
-                    status=Bid.Status.b_draft
+                    status=Bid.Status.b_draft,
+                    due_date=datetime.date.today()
                 ).save()
         register("sam")
         login(client, "sam")
