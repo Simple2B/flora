@@ -64,7 +64,7 @@ def archive_or_export():
             last_modified=now,
         )
     elif form.data['export_docx']:
-        create_docx()
+        create_docx(1)
         with open('test_docx.docx', 'rb') as f:
             stream = BytesIO(f.read())
         now = datetime.now()

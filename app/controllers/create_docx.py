@@ -1,5 +1,7 @@
 import os.path
 # import io
+import datetime
+from app.models import Bid
 
 from docx import Document
 from docx.enum.style import WD_STYLE_TYPE
@@ -28,13 +30,14 @@ management_head_list = [
 management_info_list = [f'By{" "*10}', f'Name{" "*4}', f'Date{" "*6}']
 
 
-def create_docx():
-    # export this function to controller
+def create_docx(bid_id):
+    bid = Bid.query.get(bid_id)
+
     def write_to_docx(insert=False, cell_paragraph=None, edit_first_paragraph=False, content='', font_name='Arial',
                       font_size=12, font_bold=False, font_italic=False, font_underline=False, color=RGBColor(0, 0, 0),
-                      before_spacing=5, after_spacing=5, line_spacing=1.34, keep_together=True, keep_with_next=False,
-                      page_break_before=False, widow_control=False, left_indent=None, right_indent=None, align='left',
-                      style=''):
+                      font_highlight_color=None, before_spacing=5, after_spacing=5, line_spacing=1.34,
+                      keep_together=True, keep_with_next=False, page_break_before=False, widow_control=False,
+                      left_indent=None, right_indent=None, align='left', style=''):
         if insert:
             if cell_paragraph:
                 font = cell_paragraph.add_run(content)
@@ -83,6 +86,7 @@ def create_docx():
         font.bold = font_bold
         font.italic = font_italic
         font.underline = font_underline
+        font.highlight_color = font_highlight_color
 
         if not insert:
             font.color.rgb = color
@@ -104,46 +108,205 @@ def create_docx():
 
     # /// endblock
 
-    # ////// Begin to create document
+# ////// Begin to create document
+# /// add bid information block
     document.add_picture(f'{PATH_TO_IMG}/logo_pdf.png', width=Cm(6.91), height=Cm(2.64))
 
-    date = document.add_table(rows=1, cols=2)
-    row = date.rows[0]
-    row.height_rule = WD_ROW_HEIGHT.EXACTLY
+    bid_table_info = document.add_table(rows=0, cols=4)
+    bid_table_info.autofit = False
+    bid_table_info.columns[0].width = Cm((9.5*0.2))
+    bid_table_info.columns[1].width = Cm((9.5*0.8))
+    bid_table_info.columns[2].width = Cm((9.5*0.35))
+    bid_table_info.columns[3].width = Cm((9.5*0.65))    # entire width of 4 cols are 19,00 Cm
+
+    row = bid_table_info.add_row()  # 1 row
+    row.height_rule = WD_ROW_HEIGHT.AT_LEAST
     row.height = Pt(15)
-    cell = row.cells[1]
-    cell.paragraphs[0].clear()
-    print(cell.paragraphs, 'cell.paragraphs[0].text', sep='\n')
+    for cell in row.cells:
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    cell_date = row.cells[3]
+    write_to_docx(
+        cell_paragraph=cell_date,
+        edit_first_paragraph=True,
+        content=f"{datetime.datetime.now().strftime('%Y-%m-%d')}",
+        font_bold=True,
+        font_size=10.5,
+        align='left',
+        style=f'bid_date_{"bid.date"}'
+    )
 
-    paragraph_text = cell.paragraphs[0].add_run(f'{" "*43}05/26/20')
-    paragraph_text.bold = True
+    row = bid_table_info.add_row()  # 2 row with 'Client' and 'Project'
+    row.height_rule = WD_ROW_HEIGHT.AT_LEAST
+    row.height = Pt(15)
+    for cell in row.cells:
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    cell_client = row.cells[0]
+    cell_client_name = row.cells[1]
+    cell_project = row.cells[2]
+    cell_project_name = row.cells[3]
+    write_to_docx(
+        cell_paragraph=cell_client,
+        edit_first_paragraph=True,
+        content="Client",
+        font_bold=True,
+        font_size=10.5,
+        align='left',
+        style='bid_client'
+    )
+    write_to_docx(
+        cell_paragraph=cell_client_name,
+        edit_first_paragraph=True,
+        content=f"{bid.client}",
+        font_bold=True,
+        font_size=10.5,
+        align='left',
+        style=f'bid_client_{bid.client}'
+    )
+    write_to_docx(
+        cell_paragraph=cell_project,
+        edit_first_paragraph=True,
+        content="Project",
+        font_bold=True,
+        font_size=10.5,
+        align='left',
+        left_indent=Cm(1),
+        style='bid_project'
+    )
+    write_to_docx(
+        cell_paragraph=cell_project_name,
+        edit_first_paragraph=True,
+        content="Transaction Window & Sink",
+        font_bold=True,
+        font_size=10.5,
+        align='left',
+        style='bid_client_Transaction Window & Sink'
+    )
 
-    table = document.add_table(rows=1, cols=2)
-    table.autofit = True
-    row = table.rows[0]
-    hdr_cells = row.cells
-    cell_paragraph_1 = hdr_cells[0].add_paragraph(f'Client{" "*6}')
-    write_to_docx(insert=True, cell_paragraph=cell_paragraph_1, content='Client name', font_bold=True)
-    cell_paragraph_2 = hdr_cells[1].add_paragraph(f'{" "*24}Project')
-    cell_paragraph_2.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    write_to_docx(insert=True, cell_paragraph=cell_paragraph_2,
-                  content=f'{" "*5}Transaction Window & Sink', font_bold=True)
+    # for i in range(4):
+    #     row = bid_table_info.add_row()
+    #     row.height_rule = WD_ROW_HEIGHT.AT_LEAST
+    #     row.height = Pt(15)
+    #     for cell in row.cells:
+    #         cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    row = bid_table_info.add_row()
+    row.height_rule = WD_ROW_HEIGHT.AT_LEAST
+    row.height = Pt(15)
+    for cell in row.cells:
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    cell_client_info = row.cells[1]
+    cell_project_info = row.cells[3]
+    write_to_docx(
+        cell_paragraph=cell_client_info,
+        edit_first_paragraph=True,
+        content=f"{bid.vendor_address_street}",
+        font_bold=False,
+        align='left',
+        style=f'bid_client_street_{bid.vendor_address_street}'
+    )
+    write_to_docx(
+        cell_paragraph=cell_project_info,
+        edit_first_paragraph=True,
+        content=f"{bid.address_street}",
+        font_bold=False,
+        font_size=11.5,
+        align='left',
+        style=f'bid_project_street_{bid.address_street}'
+    )
 
-    for i in range(4):
-        row = table.add_row()
-        row.height_rule = WD_ROW_HEIGHT.EXACTLY
-        row.height = Pt(15)
-        row.cells[0].text = f'{" "*17}75 Montgomery'
-        paragraph = row.cells[1].paragraphs[0]
-        paragraph.text = f'{" "*43}right_cell'
-        paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        if i == 3:
-            paragraph.runs[0].text = f'{" "*43}'
-            paragraph.add_run('Quote # B-20-034 R1')
-            paragraph.runs[1].font.highlight_color = WD_COLOR_INDEX.YELLOW
+    row = bid_table_info.add_row()
+    row.height_rule = WD_ROW_HEIGHT.AT_LEAST
+    row.height = Pt(15)
+    for cell in row.cells:
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    cell_client_info = row.cells[1]
+    cell_project_info = row.cells[3]
+    write_to_docx(
+        cell_paragraph=cell_client_info,
+        edit_first_paragraph=True,
+        content="Suite # 502",
+        font_bold=False,
+        font_size=11.5,
+        align='left',
+        style='bid_client_75 Montgomery'
+    )
+    write_to_docx(
+        cell_paragraph=cell_project_info,
+        edit_first_paragraph=True,
+        content="Suite # 502",
+        font_bold=False,
+        font_size=10.5,
+        align='left',
+        style='bid_project_75 Montgomery'
+    )
 
-        # row.SetLeftIndent()
+    # 5 row
+    row = bid_table_info.add_row()
+    row.height_rule = WD_ROW_HEIGHT.AT_LEAST
+    row.height = Pt(15)
+    for cell in row.cells:
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    cell_client_info = row.cells[1]
+    cell_project_info = row.cells[3]
+    write_to_docx(
+        cell_paragraph=cell_client_info,
+        edit_first_paragraph=True,
+        content=f"{bid.vendor_address_city}",
+        font_bold=False,
+        align='left',
+        style=f'bid_client_{bid.vendor_address_city}'
+    )
+    write_to_docx(
+        cell_paragraph=cell_project_info,
+        edit_first_paragraph=True,
+        content=f"{bid.address_city}",
+        font_bold=False,
+        font_size=10.5,
+        align='left',
+        style=f'bid_project_{bid.address_city}'
+    )
 
+    row = bid_table_info.add_row()
+    row.height_rule = WD_ROW_HEIGHT.AT_LEAST
+    row.height = Pt(15)
+    for cell in row.cells:
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    cell_client_info = row.cells[1]
+    cell_project_info = row.cells[3]
+    write_to_docx(
+        cell_paragraph=cell_client_info,
+        edit_first_paragraph=True,
+        content=f"{bid.contact}",
+        font_bold=True,
+        align='left',
+        style=f'bid_client_contact{bid.contact}'
+    )
+    write_to_docx(
+        cell_paragraph=cell_project_info,
+        edit_first_paragraph=True,
+        content="Quote # B-20-034 R1",
+        font_bold=True,
+        font_size=10.5,
+        font_highlight_color=WD_COLOR_INDEX.YELLOW,
+        align='left',
+        style='bid_project_Quote # B-20-034 R1'
+    )
+
+    # for i in range(4):
+    #     row = table.add_row()
+    #     row.height_rule = WD_ROW_HEIGHT.EXACTLY
+    #     row.height = Pt(15)
+    #     row.cells[0].text = f'{" "*17}75 Montgomery'
+    #     paragraph = row.cells[1].paragraphs[0]
+    #     paragraph.text = f'{" "*43}right_cell'
+    #     paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    #     if i == 3:
+    #         paragraph.runs[0].text = f'{" "*43}'
+    #         paragraph.add_run('Quote # B-20-034 R1')
+    #         paragraph.runs[1].font.highlight_color = WD_COLOR_INDEX.YELLOW
+
+    #    # row.SetLeftIndent()
+
+    # /// endblock
     # begin Section A (work_items) block
     document.add_paragraph()
     document.add_picture(f'{PATH_TO_IMG}/Section_A.png', width=Cm(18.99), height=Cm(0.65))
@@ -348,3 +511,5 @@ def create_docx():
     # endblock
 
     document.add_page_break()
+
+    document.save('test_docx.docx')

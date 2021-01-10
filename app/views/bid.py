@@ -378,7 +378,7 @@ def export_pdf(bid_id):
         elif form.export_docx.data:
             preview_pdf_bool = False
             from app.controllers.create_docx import create_docx
-            create_docx()
+            create_docx(1)
             # with open()
             # calculate_subtotal(bid_id, tbd_choices)
             # html_content = render_template(
