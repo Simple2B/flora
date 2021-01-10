@@ -1,6 +1,6 @@
 import time
 import zipfile
-from io import BytesIO
+from io import BytesIO, StringIO
 from datetime import datetime
 
 from flask import Blueprint, render_template, redirect, url_for, session, request, send_file
@@ -10,7 +10,7 @@ from flask_wtf import FlaskForm
 from app.models import Bid
 from app.forms import BidForm
 from app.logger import log
-from app.controllers import create_pdf_file
+from app.controllers import create_pdf_file, create_docx
 
 bidding_blueprint = Blueprint("bidding", __name__)
 
@@ -64,7 +64,19 @@ def archive_or_export():
             last_modified=now,
         )
     elif form.data['export_docx']:
-        pass
+        create_docx()
+        with open('test_docx.docx', 'rb') as f:
+            stream = BytesIO(f.read())
+        now = datetime.now()
+        # return None
+        return send_file(
+            stream,
+            # as_attachment=True,
+            attachment_filename="test_docx.docx",
+            mimetype="application/msword",
+            cache_timeout=0,
+            last_modified=now,
+        )
     return redirect(url_for("bidding.biddings"))
 
 
