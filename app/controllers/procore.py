@@ -1,3 +1,5 @@
+import datetime
+
 from app.procore import ProcoreApi
 from app.models import Bid
 from app.logger import log
@@ -38,6 +40,8 @@ def update_bids():
             p_addr_lines = project_address.split("<br>")
             bid_requester = bid['bid_requester']
             contact_lines = bid_requester['contact'].split(" (")
+            due_date = bid["due_date"]
+            due_date = datetime.datetime.strptime(due_date, "%Y-%m-%dT%H:%M:%SZ")
 
             bidding = Bid(
                 procore_bid_id=bid["id"],
@@ -50,7 +54,8 @@ def update_bids():
                 phone=bid_requester['business_phone'],
                 email=bid_requester['email_address'],
                 fax=bid_requester['fax_number'],
-                contact=(contact_lines[0] if contact_lines else "")
+                contact=(contact_lines[0] if contact_lines else ""),
+                due_date=due_date
             )
             bidding.save(commit=False)
             need_commit = True

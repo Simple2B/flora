@@ -1245,6 +1245,9 @@ ul {
     .main-container__project_general ._date_revision ._input-date_time {
       display: inline-flex;
       align-items: center; }
+      .main-container__project_general ._date_revision ._input-date_time input {
+        min-width: 4rem;
+        margin-left: 1rem; }
     .main-container__project_general ._date_revision ._date_time_img {
       padding-left: 1rem; }
     .main-container__project_general ._date_revision .project_type-radio-select > div:last-child {

@@ -12,3 +12,4 @@ node_modules/
 /*.sqlite3
 node_modules
 /update-bids.log
+/npm-debug.log

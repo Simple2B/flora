@@ -109,16 +109,13 @@
         <div>
           <div class="_input-date_time">
             <div>
-              <input class="_form-input _form-input--m" type="text" readonly placeholder="{{ due_date }}">
+              <input class="_form-input" type="date" value="{{ bid.due_date }}" id="due_date_id">
               <label class="_label">Due Date</label>
-            </div>
-            <div class="_date_time_img">
-              <img src="{{ url_for('static', filename='images/data_time_element.svg') }}" alt="">
             </div>
           </div>
         </div>
         <div>
-          <input class="_form-input _form-input--m" type="text">
+          <input class="_form-input _form-input--m" type="number" min="0" value="{{ bid.revision }}" id="revision_id">
           <label class="_label">Revision</label>
         </div>
         <div class="project_type-radio-select m-1">

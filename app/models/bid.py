@@ -38,6 +38,8 @@ class Bid(db.Model, ModelMixin):
     grand_subtotal = db.Column(db.Float, default=0.0)
     last_updated = db.Column(db.String(16), default=(lambda: datetime.today().strftime("%m/%d/%Y"))(), nullable=False)
     time_updated = db.Column(db.Float, default=0.0, nullable=False)
+    due_date = db.Column(db.Date, nullable=False)
+    revision = db.Column(db.Integer, default=0)
 
     link_work_items = relationship("LinkWorkItem")
     work_item_groups = relationship("WorkItemGroup")
@@ -46,7 +48,7 @@ class Bid(db.Model, ModelMixin):
     exclusion_links = relationship("ExclusionLink")
 
     def __str__(self):
-        return f"<Bid:{self.id} - {self.title} - {self.status}>"
+        return self.__repr__()
 
     def __repr__(self):
-        return f"<Bid:{self.id} - {self.title} - {self.status}>"
+        return f"<Bid:{self.id}({self.procore_bid_id}) [{self.status.value}>]"

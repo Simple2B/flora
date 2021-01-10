@@ -1,3 +1,4 @@
+import datetime
 from app import db
 from app.models import User, WorkItem, Exclusion, Clarification, Bid, WorkItemGroup
 from app.models import WorkItemLine, ClarificationLink, ExclusionLink, LinkWorkItem
@@ -41,7 +42,8 @@ def populate_db_by_test_data():
         procore_bid_id=105,
         title="bidding 5",
         client="Procore (Test Companies)",
-        status=Bid.Status.b_draft
+        status=Bid.Status.b_draft,
+        due_date=datetime.date.today()
     ).save(commit=False)
 
     work_item = WorkItem.query.first()

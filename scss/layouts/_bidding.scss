@@ -205,6 +205,10 @@
         ._input-date_time {
             display: inline-flex;
             align-items: center;
+            input {
+                min-width: 4rem;
+                margin-left: $m1rem;
+            }
         }
 
         ._date_time_img {

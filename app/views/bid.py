@@ -293,7 +293,6 @@ def bidding(bid_id):
     ) + "."
     show_clarifications = show_clarifications.capitalize()
     calculate_subtotal(bid_id, tbd_choices)
-    due_date = datetime.datetime.now().strftime('%Y-%m-%d')
     session["tbdChoices"] = []
     return render_template(
         "bidding.html",
@@ -302,7 +301,6 @@ def bidding(bid_id):
         show_exclusions=show_exclusions,
         show_clarifications=show_clarifications,
         form_bid=form_bid,
-        due_date=due_date,
         round=round
     )
 
@@ -407,3 +405,21 @@ def export_pdf(bid_id):
     else:
         log(log.ERROR, "Form submitted")
         return redirect(url_for("bid.bidding", bid_id=bid_id))
+
+
+@bid_blueprint.route("/update_due_date/<int:bid_id>/<due_date>", methods=["GET"])
+@login_required
+def update_due_date(bid_id, due_date):
+    bid = Bid.query.get(bid_id)
+    bid.due_date = datetime.datetime.strptime(due_date, "%Y-%m-%d")
+    bid.save()
+    return "OK"
+
+
+@bid_blueprint.route("/update_revision/<int:bid_id>/<int:revision>", methods=["GET"])
+@login_required
+def update_revision(bid_id, revision):
+    bid = Bid.query.get(bid_id)
+    bid.revision = revision
+    bid.save()
+    return "OK"
