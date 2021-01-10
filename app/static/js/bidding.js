@@ -1,3 +1,17 @@
+const clientCloseWrapper = document.getElementById('client_and_job_close_panel_id');
+const clientClosePanel = document.getElementById('client_job_hidden_id');
+clientCloseWrapper.addEventListener('click', (e) => {
+  e.preventDefault();
+  let changeClientImg = document.querySelector('#client_and_job_close_panel_id img').getAttribute('src');
+  clientClosePanel.classList.toggle('hidden');
+  if (changeClientImg == "/static/images/up_direction_element.svg") {
+    document.querySelector('#client_and_job_close_panel_id img').setAttribute('src', "/static/images/direction_element_bottom.svg");
+    console.log('Hello');
+  } else {
+    document.querySelector('#client_and_job_close_panel_id img').setAttribute('src', "/static/images/up_direction_element.svg");
+  };
+});
+
 $(document).ready(function() {
   const bidID = document.querySelector('.bidIdJs').getAttribute('value');
 
@@ -54,18 +68,6 @@ $(document).ready(function() {
     };
   });
 
-  const clientCloseWrapper = document.getElementById('client_and_job_close_panel_id');
-  const clientClosePanel = document.getElementById('client_job_hidden_id');
-  clientCloseWrapper.addEventListener('click', (e) => {
-    e.preventDefault();
-    let changeClientImg = document.querySelector('#client_and_job_close_panel_id img').getAttribute('src');
-    clientClosePanel.classList.toggle('hidden');
-    if (changeClientImg == "/static/images/up_direction_element.svg") {
-      document.querySelector('#client_and_job_close_panel_id img').setAttribute('src', "/static/images/direction_element_bottom.svg");
-    } else {
-      document.querySelector('#client_and_job_close_panel_id img').setAttribute('src', "/static/images/up_direction_element.svg");
-    };
-  });
 
   // Due Date
   const dueDate = document.getElementById('due_date_id');
