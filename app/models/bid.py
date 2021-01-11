@@ -42,6 +42,7 @@ class Bid(db.Model, ModelMixin):
     revision = db.Column(db.Integer, default=0)
     project_type = db.Column(db.String(16), default="Quote", nullable=False)
 
+
     link_work_items = relationship("LinkWorkItem")
     work_item_groups = relationship("WorkItemGroup")
     attachments = relationship("Attachment")

@@ -53,6 +53,7 @@ $(document).ready(function() {
   bid_href_id.classList.toggle('active-tab');
   // end decoration
 
+
   const groupCloseWrapper = document.querySelectorAll('#bid_group_id');
   groupCloseWrapper.forEach(element => {
       element.addEventListener('click', (e) => {
@@ -107,16 +108,6 @@ $(document).ready(function() {
       updateProjectType();
     });
   });
-  // const budget = document.getElementById('budget');
-  // const quote = document.getElementById('quote');
-
-  // budget.addEventListener('on', (element) => {
-  //   updateProjectType(element);
-  // });
-
-  // quote.addEventListener('on', (element) => {
-  //   updateProjectType(element);
-  // });
 
   // TBD Choice
 
@@ -167,3 +158,8 @@ $(document).ready(function() {
     });
   });
 });
+
+// Active decoration on header menu-item by border-bottom
+// bid_href_id.classList.remove('menu__item');
+bid_href_id.classList.add('active-tab');
+// end decoration
