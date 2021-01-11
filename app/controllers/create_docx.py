@@ -1,7 +1,6 @@
 import os.path
-# import io
-import datetime
-from app.models import Bid
+
+from app.models import Bid, WorkItemGroup, LinkWorkItem
 
 from docx import Document
 from docx.enum.style import WD_STYLE_TYPE
@@ -13,16 +12,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PATH_TO_IMG = os.path.join(BASE_DIR, 'static/images/docx')
 # PATH_TO_SAVE_FILE = os.path.dirname(BASE_DIR) + '\\test_docx_files'
 
-db_subtotal_data = {
-    'Subtotal:': '$880.72',
-    'Permit/Filing Free:': '$70.46',
-    'General Conditions:': '$44.04',
-    'Insurance/Tax:': '$44.04',
-    'Overhead:': '$44.04',
-    'Profit:': '$44.04',
-    'Bond:': '$44.04',
-    'Grand Total:': '$1171.38'
-}
 management_head_list = [
     ('DDB Contracting, LLC', 'management_style_submit'),
     ('Premier Project Management', 'management_style_approve')
@@ -33,6 +22,36 @@ management_info_list = [f'By{" "*10}', f'Name{" "*4}', f'Date{" "*6}']
 def create_docx(bid_id):
     bid = Bid.query.get(bid_id)
 
+    db_subtotal_data = {
+        'Subtotal:': bid.subtotal,
+        'Permit/Filing Free:': bid.permit_filling_fee,
+        'General Conditions:': bid.general_conditions,
+        'Insurance/Tax:': bid.insurance_tax,
+        'Overhead:': bid.overhead,
+        'Profit:': bid.profit,
+        'Bond:': bid.bond,
+        'Grand Total:': bid.grand_subtotal
+    }
+
+    bid_global_work_items = LinkWorkItem.query.filter(
+        LinkWorkItem.bid_id == bid_id).filter(LinkWorkItem.work_item_group == None).all()  # noqa 711
+    groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
+
+    def check_tbd(arg):
+        if db_subtotal_data.get(arg, 'T.B.D') == 0:
+            return 'T.B.D'
+        else:
+            return db_subtotal_data.get(arg, 'T.B.D')
+
+    def set_row_height(row, arg, pt=True):
+        row.height_rule = WD_ROW_HEIGHT.AT_LEAST
+        if pt:
+            row.height = Pt(arg)
+        else:
+            row.height = Cm(arg)
+        for cell in row.cells:
+            cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+
     def write_to_docx(insert=False, cell_paragraph=None, edit_first_paragraph=False, content='', font_name='Arial',
                       font_size=12, font_bold=False, font_italic=False, font_underline=False, color=RGBColor(0, 0, 0),
                       font_highlight_color=None, before_spacing=5, after_spacing=5, line_spacing=1.34,
@@ -40,16 +59,16 @@ def create_docx(bid_id):
                       left_indent=None, right_indent=None, align='left', style=''):
         if insert:
             if cell_paragraph:
-                font = cell_paragraph.add_run(content)
+                font = cell_paragraph.add_run(content).font
                 paragraph = cell_paragraph
-                paragraph_format = cell_paragraph.paragraph_format
+                paragraph_format = paragraph.paragraph_format
             else:
                 pass  # put here log_info
         else:
             if cell_paragraph:
                 if edit_first_paragraph:
                     paragraph = cell_paragraph.paragraphs[0]
-                    cell_paragraph.style = document.styles.add_style(style, WD_STYLE_TYPE.PARAGRAPH)
+                    paragraph.style = document.styles.add_style(style, WD_STYLE_TYPE.PARAGRAPH)
                     paragraph.text = str(content)
                 else:
                     paragraph = cell_paragraph.add_paragraph(str(content))
@@ -120,15 +139,12 @@ def create_docx(bid_id):
     bid_table_info.columns[3].width = Cm((9.5*0.65))    # entire width of 4 cols are 19,00 Cm
 
     row = bid_table_info.add_row()  # 1 row
-    row.height_rule = WD_ROW_HEIGHT.AT_LEAST
-    row.height = Pt(15)
-    for cell in row.cells:
-        cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    set_row_height(row, 15)
     cell_date = row.cells[3]
     write_to_docx(
         cell_paragraph=cell_date,
         edit_first_paragraph=True,
-        content=f"{datetime.datetime.now().strftime('%Y-%m-%d')}",
+        content=f"{bid.due_date}",
         font_bold=True,
         font_size=10.5,
         align='left',
@@ -136,10 +152,7 @@ def create_docx(bid_id):
     )
 
     row = bid_table_info.add_row()  # 2 row with 'Client' and 'Project'
-    row.height_rule = WD_ROW_HEIGHT.AT_LEAST
-    row.height = Pt(15)
-    for cell in row.cells:
-        cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    set_row_height(row, 15)
     cell_client = row.cells[0]
     cell_client_name = row.cells[1]
     cell_project = row.cells[2]
@@ -182,17 +195,8 @@ def create_docx(bid_id):
         style='bid_client_Transaction Window & Sink'
     )
 
-    # for i in range(4):
-    #     row = bid_table_info.add_row()
-    #     row.height_rule = WD_ROW_HEIGHT.AT_LEAST
-    #     row.height = Pt(15)
-    #     for cell in row.cells:
-    #         cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
     row = bid_table_info.add_row()
-    row.height_rule = WD_ROW_HEIGHT.AT_LEAST
-    row.height = Pt(15)
-    for cell in row.cells:
-        cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    set_row_height(row, 15)
     cell_client_info = row.cells[1]
     cell_project_info = row.cells[3]
     write_to_docx(
@@ -214,10 +218,7 @@ def create_docx(bid_id):
     )
 
     row = bid_table_info.add_row()
-    row.height_rule = WD_ROW_HEIGHT.AT_LEAST
-    row.height = Pt(15)
-    for cell in row.cells:
-        cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    set_row_height(row, 15)
     cell_client_info = row.cells[1]
     cell_project_info = row.cells[3]
     write_to_docx(
@@ -225,7 +226,7 @@ def create_docx(bid_id):
         edit_first_paragraph=True,
         content="Suite # 502",
         font_bold=False,
-        font_size=11.5,
+        font_size=10.5,
         align='left',
         style='bid_client_75 Montgomery'
     )
@@ -241,10 +242,7 @@ def create_docx(bid_id):
 
     # 5 row
     row = bid_table_info.add_row()
-    row.height_rule = WD_ROW_HEIGHT.AT_LEAST
-    row.height = Pt(15)
-    for cell in row.cells:
-        cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    set_row_height(row, 15)
     cell_client_info = row.cells[1]
     cell_project_info = row.cells[3]
     write_to_docx(
@@ -266,10 +264,7 @@ def create_docx(bid_id):
     )
 
     row = bid_table_info.add_row()
-    row.height_rule = WD_ROW_HEIGHT.AT_LEAST
-    row.height = Pt(15)
-    for cell in row.cells:
-        cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    set_row_height(row, 15)
     cell_client_info = row.cells[1]
     cell_project_info = row.cells[3]
     write_to_docx(
@@ -277,34 +272,20 @@ def create_docx(bid_id):
         edit_first_paragraph=True,
         content=f"{bid.contact}",
         font_bold=True,
+        font_size=10.5,
         align='left',
         style=f'bid_client_contact{bid.contact}'
     )
     write_to_docx(
         cell_paragraph=cell_project_info,
         edit_first_paragraph=True,
-        content="Quote # B-20-034 R1",
+        content=f"{bid.project_type} # B-20-034 R1",
         font_bold=True,
         font_size=10.5,
         font_highlight_color=WD_COLOR_INDEX.YELLOW,
         align='left',
-        style='bid_project_Quote # B-20-034 R1'
+        style=f'bid_project_type_{bid.project_type} # B-20-034 R1'
     )
-
-    # for i in range(4):
-    #     row = table.add_row()
-    #     row.height_rule = WD_ROW_HEIGHT.EXACTLY
-    #     row.height = Pt(15)
-    #     row.cells[0].text = f'{" "*17}75 Montgomery'
-    #     paragraph = row.cells[1].paragraphs[0]
-    #     paragraph.text = f'{" "*43}right_cell'
-    #     paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    #     if i == 3:
-    #         paragraph.runs[0].text = f'{" "*43}'
-    #         paragraph.add_run('Quote # B-20-034 R1')
-    #         paragraph.runs[1].font.highlight_color = WD_COLOR_INDEX.YELLOW
-
-    #    # row.SetLeftIndent()
 
     # /// endblock
     # begin Section A (work_items) block
@@ -314,48 +295,205 @@ def create_docx(bid_id):
         content='Please find our detailed Quote for the above referenced project as outlined below:',
         font_size=12.5,
         font_bold=True,
-        after_spacing=20
+        after_spacing=10
     )
 
+    #  / Render work_item's information
     work_item_table = document.add_table(rows=0, cols=3)
     work_item_table.columns[0].width = Cm(10.5)
     work_item_table.columns[1].width = Cm(5.695)
     work_item_table.columns[2].width = Cm(3.18)
-    for i in range(1):
+    work_item_table.autofit = False
+
+    for link_work_item in bid_global_work_items:
         row = work_item_table.add_row()
         row.height_rule = WD_ROW_HEIGHT.AT_LEAST
         row.height = Cm(0.55)
         paragraph_1 = row.cells[0].paragraphs[0]
         paragraph_2 = row.cells[2].paragraphs[0]
-        write_to_docx(
-            insert=True,
-            cell_paragraph=paragraph_2,
-            content='$440.36',
-            font_size=10.5,
-            font_bold=True,
-            align='right',
-            style='bold_workitem_subtotal'
-        )
 
         write_to_docx(
             insert=True,
             cell_paragraph=paragraph_1,
-            content='0.0',
+            content=f'{link_work_item.work_item.code}',
             font_size=10.5,
             font_bold=True,
-            style='bold_workitem_id'
+            style=f'bold_workitem_code_{link_work_item.work_item.code}'
         )
         paragraph_1.runs[0].add_tab()
         write_to_docx(
             insert=True,
             cell_paragraph=paragraph_1,
-            content='Work Item',
+            content=f'{link_work_item.work_item.name}',
             font_size=10.5,
             font_bold=True,
-            style='bold_workitem_name'
+            style=f'bold_workitem_name_{link_work_item.work_item.name}'
         )
+        write_to_docx(
+            insert=True,
+            cell_paragraph=paragraph_2,
+            content=f'$ {link_work_item.link_subtotal}',
+            font_size=10.5,
+            font_bold=True,
+            align='right',
+            style=f'bold_workitem_subtotal_{link_work_item.link_subtotal}'
+        )
+        for work_item_line in link_work_item.work_item_lines:
+            work_item_line_table = document.add_table(rows=0, cols=3)
+            work_item_line_table.columns[0].width = Cm(9.6875*0.25)
+            work_item_line_table.columns[1].width = Cm(9.6875*0.5)
+            work_item_line_table.columns[2].width = Cm(19.375/2 + 9.6875*0.25)
+            work_item_line_table.autofit = False
+            row = work_item_line_table.add_row()
+            row.height_rule = WD_ROW_HEIGHT.AT_LEAST
+            row.height = Cm(0.35)
+            paragraph_1 = row.cells[1].paragraphs[0]
+            paragraph_2 = row.cells[2].paragraphs[0]
+            # second cell
+            write_to_docx(
+                insert=True,
+                cell_paragraph=paragraph_1,
+                content=f'{work_item_line.description}',
+                font_size=10.5,
+                style=f'work_item_line_description_{work_item_line.id}'
+            )
+            write_to_docx(
+                cell_paragraph=row.cells[1],
+                content=f'Note: {work_item_line.note}',
+                font_size=9.5,
+                left_indent=Cm(0.5),
+                style=f'work_item_line_note_{work_item_line.id}'
+            )
+            # third cell
+            write_to_docx(
+                insert=True,
+                cell_paragraph=paragraph_2,
+                content=f'{work_item_line.quantity}     {work_item_line.unit}',
+                left_indent=Cm(2),
+                font_size=9.5,
+                style=f'work_item_line_q_u_{work_item_line.id}'
+            )
 
-    # / bid_subtotal on this section
+    #  /  Render Work item group
+    for group in groups:
+        write_to_docx(
+            content=f'{group.name}:',
+            font_underline=True,
+            font_bold=True,
+            font_size=12,
+            page_break_before=True,
+            style=f'group_name_{group.name}'
+        )
+        document.add_picture(f'{PATH_TO_IMG}/group.png', width=Cm(19), height=Cm(0.65))
+
+        group_work_item_table = document.add_table(rows=0, cols=3)
+        group_work_item_table.columns[0].width = Cm(10.5)
+        group_work_item_table.columns[1].width = Cm(5.695)
+        group_work_item_table.columns[2].width = Cm(3.18)
+        group_work_item_table.autofit = False
+
+        for link_work_item in group.link_work_items:
+            row = group_work_item_table.add_row()
+            row.height_rule = WD_ROW_HEIGHT.AT_LEAST
+            row.height = Cm(0.55)
+            paragraph_1 = row.cells[0].paragraphs[0]
+            paragraph_2 = row.cells[2].paragraphs[0]
+
+            write_to_docx(
+                insert=True,
+                cell_paragraph=paragraph_1,
+                content=f'{link_work_item.work_item.code}',
+                font_size=10.5,
+                font_bold=True,
+                style='bold_workitem_id'
+            )
+            paragraph_1.runs[0].add_tab()
+            write_to_docx(
+                insert=True,
+                cell_paragraph=paragraph_1,
+                content=f'{link_work_item.work_item.name}',
+                font_size=10.5,
+                font_bold=True,
+                style='bold_workitem_name'
+            )
+            write_to_docx(
+                insert=True,
+                cell_paragraph=paragraph_2,
+                content=f'$ {link_work_item.link_subtotal}',
+                font_size=10.5,
+                font_bold=True,
+                align='right',
+                style='bold_workitem_subtotal'
+            )
+            for work_item_line in link_work_item.work_item_lines:
+                group_work_item_line_table = document.add_table(rows=0, cols=3)
+                group_work_item_line_table.columns[0].width = Cm(9.6875*0.25)
+                group_work_item_line_table.columns[1].width = Cm(9.6875*0.5)
+                group_work_item_line_table.columns[2].width = Cm(19.375/2 + 9.6875*0.25)
+                group_work_item_line_table.autofit = False
+                row = group_work_item_line_table.add_row()
+                row.height_rule = WD_ROW_HEIGHT.AT_LEAST
+                row.height = Cm(0.35)
+                paragraph_1 = row.cells[1].paragraphs[0]
+                paragraph_2 = row.cells[2].paragraphs[0]
+                # second cell
+                write_to_docx(
+                    insert=True,
+                    cell_paragraph=paragraph_1,
+                    content=f'{work_item_line.description}',
+                    font_size=9.5,
+                    style=f'work_item_line_description_{work_item_line.id}'
+                )
+                write_to_docx(
+                    cell_paragraph=row.cells[1],
+                    content=f'Note: {work_item_line.note}',
+                    font_size=9.5,
+                    left_indent=Cm(0.5),
+                    keep_with_next=True,
+                    style=f'work_item_line_note_{work_item_line.id}'
+                )
+                # third cell
+                write_to_docx(
+                    insert=True,
+                    cell_paragraph=paragraph_2,
+                    content=f'{work_item_line.quantity}',
+                    font_size=9.5,
+                    style=f'work_item_line_q_u_{work_item_line.id}'
+                )
+                write_to_docx(
+                    insert=True,
+                    cell_paragraph=paragraph_2,
+                    content=f'   {work_item_line.unit}',
+                    font_size=9.5,
+                    left_indent=Cm(1.88),
+                    style=f'work_item_line_q_u_{work_item_line.id}'
+                )
+                # write_to_docx(
+                #     insert=True,
+                #     cell_paragraph=paragraph_2,
+                #     content=f'{work_item_line.unit}',
+                #     left_indent=Cm(1.9),
+                #     font_size=9.5,
+                #     style=f'work_item_line_q_u_{work_item_line.id}'
+                # )
+                # write_to_docx(
+                #     insert=True,
+                #     cell_paragraph=paragraph_2,
+                #     content=f'{work_item_line.unit}',
+                #     left_indent=Cm(1.9),
+                #     font_size=9.5,
+                #     style=f'work_item_line_q_u_{work_item_line.id}'
+                # )
+                # write_to_docx(
+                #     insert=True,
+                #     cell_paragraph=paragraph_2,
+                #     content=f'{work_item_line.unit}',
+                #     left_indent=Cm(1.9),
+                #     font_size=9.5,
+                #     style=f'work_item_line_q_u_{work_item_line.id}'
+                # )
+
+    #  / bid_subtotal on this section
     bid_subtotal_table = document.add_table(rows=0, cols=3)
     bid_subtotal_table.autofit = False
     bid_subtotal_table.columns[0].width = Cm(10.5)
@@ -364,10 +502,7 @@ def create_docx(bid_id):
 
     for i, j in enumerate(db_subtotal_data):
         row = bid_subtotal_table.add_row()
-        row.height_rule = WD_ROW_HEIGHT.AT_LEAST
-        row.height = Cm(0.55)
-        for cell in row.cells:
-            cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+        set_row_height(row, 0.55, pt=False)
         cell_1 = row.cells[1]
         cell_1.width = Cm(5.695)  # 2050415
         cell_2 = row.cells[2]
@@ -385,7 +520,7 @@ def create_docx(bid_id):
         write_to_docx(
             cell_paragraph=cell_2,
             edit_first_paragraph=True,
-            content=db_subtotal_data[j],
+            content=(f'$ {check_tbd(j)}' if check_tbd(j) != 'T.B.D' else 'T.B.D'),
             font_bold=True,
             align='right',
             font_size=10.5,
@@ -398,23 +533,23 @@ def create_docx(bid_id):
         content='Unless expressly stated, the following exclusions apply:',
         font_size=12.5,
         font_bold=True,
-        after_spacing=20,
+        after_spacing=10,
         style='exclusion_style_heading'
     )
 
     exclusion_paragraph = write_to_docx(
         content=' ',
         font_size=9.5,
-        after_spacing=20,
+        after_spacing=10,
         style='exclusion_style_first_paraprgaph'
     )
-    for i in range(3):
+    for exclusion_link in bid.exclusion_links:
         write_to_docx(
             insert=True,
             cell_paragraph=exclusion_paragraph,
-            content=f'Exclusion {i}, ',
+            content=f'{exclusion_link.exclusion.title}, ',
             font_size=9.5,
-            after_spacing=20,
+            after_spacing=10,
             style=f'exclusion_style_title_{i}'
         )
     # endblock
@@ -425,7 +560,7 @@ def create_docx(bid_id):
         content='Please note the following clarifications:',
         font_size=12.5,
         font_bold=True,
-        after_spacing=20,
+        after_spacing=10,
         style='clarification_style_heading'
     )
 
@@ -435,11 +570,11 @@ def create_docx(bid_id):
         after_spacing=10,
         style='clarification_style_first_paraprgaph'
     )
-    for i in range(3):
+    for clarification_link in bid.clarification_links:
         write_to_docx(
             insert=True,
             cell_paragraph=clarification_paragraph,
-            content=f'Clarification {i}, ',
+            content=f'{clarification_link.clarification.note}, ',
             font_size=9.5,
             style=f'clarification_style_title_{i}'
         )
@@ -489,7 +624,7 @@ def create_docx(bid_id):
             if i == 1 and j == 0:
                 write_to_docx(
                     insert=True,
-                    content='Edward Albanese',
+                    content=f'{bid.contact}',
                     cell_paragraph=paragraph,
                     font_size=10,
                     before_spacing=5,
@@ -499,7 +634,7 @@ def create_docx(bid_id):
             elif i == 2 and j == 0:
                 write_to_docx(
                     insert=True,
-                    content='05/26.2020',
+                    content=f'{bid.phone}',
                     cell_paragraph=paragraph,
                     font_size=10,
                     before_spacing=5,
@@ -509,7 +644,5 @@ def create_docx(bid_id):
             else:
                 paragraph.runs[1].add_picture(f'{PATH_TO_IMG}/underline.png', width=Cm(3.75), height=Cm(0.05))
     # endblock
-
-    document.add_page_break()
 
     document.save('test_docx.docx')

@@ -239,30 +239,14 @@
               <th>Revison</th>
             </thead>
             <tbody>
+              {% for draw in bid.drawings %}
               <tr>
-                <td>A-101</td>
-                <td>Construction Floor Plan</td>
-                <td>08/24/2020</td>
-                <td>0</td>
+                <td><a href="{{ draw.png_url }}" target="_blank">{{ draw.number }}</a></td>
+                <td>{{ draw.title }}</td>
+                <td>{{ draw.updated_at }}</td>
+                <td>{{ draw.revision_number }}</td>
               </tr>
-              <tr>
-                <td>A-101</td>
-                <td>Construction Floor Plan</td>
-                <td>08/24/2020</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>A-101</td>
-                <td>Construction Floor Plan</td>
-                <td>08/24/2020</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>A-101</td>
-                <td>Construction Floor Plan</td>
-                <td>08/24/2020</td>
-                <td>0</td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
