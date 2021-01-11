@@ -20,10 +20,6 @@ $(document).ready(function() {
       modal.find('#modal_tdb').val(tdb);
   });
 
-  // Active decoration on header menu-item by border-bottom
-  bid_href_id.classList.remove('menu__item');
-  bid_href_id.classList.toggle('active-tab');
-  // end decoration
 
   const groupCloseWrapper = document.querySelectorAll('#bid_group_id');
   groupCloseWrapper.forEach(element => {
@@ -140,3 +136,8 @@ $(document).ready(function() {
     });
   });
 });
+
+// Active decoration on header menu-item by border-bottom
+// bid_href_id.classList.remove('menu__item');
+bid_href_id.classList.add('active-tab');
+// end decoration
