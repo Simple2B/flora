@@ -1,6 +1,6 @@
 import requests
 import urllib
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from flask import current_app
 
@@ -8,8 +8,14 @@ from app.logger import log
 
 
 class ProcoreApi:
+
+    TOKEN_EXPIRED_PERIOD = timedelta(hours=2)
+
     def __init__(self):
-        pass
+        self.token_updated = None
+        self.__access_token = None
+        self.__drawings = {}
+        self.__drawing_uploads = {}
 
     def get_me(self):
         """
@@ -124,8 +130,11 @@ class ProcoreApi:
             response_json['created_at']    = the date and time the user's access
             token was generated
         """
-        log(log.DEBUG, 'Make response to get access token')
         now = datetime.now()
+        log(log.DEBUG, 'Make response to get access token')
+        if self.token_updated and (now - self.token_updated) < self.TOKEN_EXPIRED_PERIOD:
+            return self.__access_token
+
         post_data = {
             "grant_type": "client_credentials",
             "client_id": current_app.config["PROCORE_API_CLIENT_ID"],
@@ -137,7 +146,81 @@ class ProcoreApi:
             data=post_data,
         )
         response_json = response.json()
-        then = datetime.now()
-        log(log.DEBUG, f'Get response with access token after "{(then - now).seconds}"')
+        self.token_updated = datetime.now()
+        log(log.DEBUG, f'Get response with access token after "{(self.token_updated - now).seconds}"')
         log(log.DEBUG, "%s", response_json)
-        return response_json["access_token"]
+        self.__access_token = response_json["access_token"]
+        return self.__access_token
+
+    @property
+    def projects(self):
+        """
+        DESCRIPTION:
+            List Projects Within A Company.
+        """
+        access_token = self.access_token
+        if not access_token:
+            log(log.ERROR, "ProcoreApi.bids: need access_token!")
+            return []
+        headers = {"Authorization": "Bearer " + access_token}
+        PROCORE_API_BASE_URL = current_app.config["PROCORE_API_BASE_URL"]
+        PROCORE_API_COMPANY_ID = current_app.config["PROCORE_API_COMPANY_ID"]
+
+        url = f"{PROCORE_API_BASE_URL}vapid/projects?company_id={PROCORE_API_COMPANY_ID}"
+
+        log(log.DEBUG, 'Make request to get projects')
+        response = requests.get(url, headers=headers)
+        log(log.DEBUG, 'Get response with projects')
+        if response.status_code >= 400:
+            res = response.json()
+            log(log.ERROR, res['errors'])
+            return []
+        return response.json()
+
+    def drawing_uploads(self, project_id):
+        """
+        DESCRIPTION:
+            List Projects Within A Company.
+        """
+        log(log.DEBUG, "drawing_uploads for project_id:%d", project_id)
+        if project_id in self.__drawing_uploads:
+            return self.__drawing_uploads[project_id]
+        access_token = self.access_token
+        if not access_token:
+            log(log.ERROR, "ProcoreApi.bids: need access_token!")
+            return []
+        headers = {"Authorization": "Bearer " + access_token}
+        PROCORE_API_BASE_URL = current_app.config["PROCORE_API_BASE_URL"]
+        url = f"{PROCORE_API_BASE_URL}rest/v1.0/projects/{project_id}/drawing_uploads"
+        response = requests.get(url, headers=headers)
+        if response.status_code >= 400:
+            res = response.json()
+            log(log.ERROR, res['errors'])
+            return []
+        result = response.json()
+        self.__drawing_uploads[project_id] = result
+        return result
+
+    def drawings(self, drawing_area_id):
+        """
+        DESCRIPTION:
+            List Drawings by drawing_area_id
+        """
+        log(log.DEBUG, "drawings for drawing_area_id:%d", drawing_area_id)
+        if drawing_area_id in self.__drawings:
+            return self.__drawings[drawing_area_id]
+        access_token = self.access_token
+        if not access_token:
+            log(log.ERROR, "ProcoreApi.bids: need access_token!")
+            return []
+        headers = {"Authorization": "Bearer " + access_token}
+        PROCORE_API_BASE_URL = current_app.config["PROCORE_API_BASE_URL"]
+        url = f"{PROCORE_API_BASE_URL}vapid/drawing_areas/{drawing_area_id}/drawings"
+        response = requests.get(url, headers=headers)
+        if response.status_code >= 400:
+            res = response.json()
+            log(log.ERROR, res['errors'])
+            return []
+        result = response.json()
+        self.__drawings[drawing_area_id] = result
+        return result
