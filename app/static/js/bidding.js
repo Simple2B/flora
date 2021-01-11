@@ -1,14 +1,13 @@
-const clientCloseWrapper = document.getElementById('client_and_job_close_panel_id');
-const clientClosePanel = document.getElementById('client_job_hidden_id');
-clientCloseWrapper.addEventListener('click', (e) => {
+const drawingLogCloseWrapper = document.getElementById('drawing_log_close_panel_id');
+const drawingLogClosePanel = document.getElementById('drawing_log_hidden_id');
+drawingLogCloseWrapper.addEventListener('click', (e) => {
   e.preventDefault();
-  let changeClientImg = document.querySelector('#client_and_job_close_panel_id img').getAttribute('src');
-  clientClosePanel.classList.toggle('hidden');
-  if (changeClientImg == "/static/images/up_direction_element.svg") {
-    document.querySelector('#client_and_job_close_panel_id img').setAttribute('src', "/static/images/direction_element_bottom.svg");
-    console.log('Hello');
+  let changeDrawingLogImg = document.querySelector('#drawing_log_close_panel_id img').getAttribute('src');
+  drawingLogClosePanel.classList.toggle('hidden');
+  if (changeDrawingLogImg == "/static/images/up_direction_element.svg") {
+    document.querySelector('#drawing_log_close_panel_id img').setAttribute('src', "/static/images/direction_element_bottom.svg");
   } else {
-    document.querySelector('#client_and_job_close_panel_id img').setAttribute('src', "/static/images/up_direction_element.svg");
+    document.querySelector('#drawing_log_close_panel_id img').setAttribute('src', "/static/images/up_direction_element.svg");
   };
 });
 
@@ -34,6 +33,21 @@ $(document).ready(function() {
       modal.find('#modal_tdb').val(tdb);
   });
 
+  const clientCloseWrapper = document.getElementById('client_and_job_close_panel_id');
+  const clientClosePanel = document.getElementById('client_job_hidden_id');
+  clientCloseWrapper.addEventListener('click', (e) => {
+    e.preventDefault();
+    let changeClientImg = document.querySelector('#client_and_job_close_panel_id img').getAttribute('src');
+    clientClosePanel.classList.toggle('hidden');
+    if (changeClientImg == "/static/images/up_direction_element.svg") {
+      document.querySelector('#client_and_job_close_panel_id img').setAttribute('src', "/static/images/direction_element_bottom.svg");
+      console.log('Hello');
+    } else {
+      document.querySelector('#client_and_job_close_panel_id img').setAttribute('src', "/static/images/up_direction_element.svg");
+    };
+  });
+
+
   // Active decoration on header menu-item by border-bottom
   bid_href_id.classList.remove('menu__item');
   bid_href_id.classList.toggle('active-tab');
@@ -53,19 +67,6 @@ $(document).ready(function() {
               element.setAttribute('src', "/static/images/up_direction_element.svg");
           };
       });
-  });
-
-  const drawingLogCloseWrapper = document.getElementById('drawing_log_close_panel_id');
-  const drawingLogClosePanel = document.getElementById('drawing_log_hidden_id');
-  drawingLogCloseWrapper.addEventListener('click', (e) => {
-    e.preventDefault();
-    let changeDrawingLogImg = document.querySelector('#drawing_log_close_panel_id img').getAttribute('src');
-    drawingLogClosePanel.classList.toggle('hidden');
-    if (changeDrawingLogImg == "/static/images/up_direction_element.svg") {
-      document.querySelector('#drawing_log_close_panel_id img').setAttribute('src', "/static/images/direction_element_bottom.svg");
-    } else {
-      document.querySelector('#drawing_log_close_panel_id img').setAttribute('src', "/static/images/up_direction_element.svg");
-    };
   });
 
 
@@ -92,6 +93,30 @@ $(document).ready(function() {
     };
     updateRevision();
   });
+
+  // Project Type
+
+  document.querySelectorAll('input[name="project_type"]').forEach((elem) => {
+    elem.addEventListener("change", function(event) {
+      const updateProjectType = async () => {
+        const response = await fetch(`/project_type/${bidID}/${event.target.value}`, {method: 'GET'})
+        if (!response.ok) {
+          console.error("Error update project type!")
+        }
+      };
+      updateProjectType();
+    });
+  });
+  // const budget = document.getElementById('budget');
+  // const quote = document.getElementById('quote');
+
+  // budget.addEventListener('on', (element) => {
+  //   updateProjectType(element);
+  // });
+
+  // quote.addEventListener('on', (element) => {
+  //   updateProjectType(element);
+  // });
 
   // TBD Choice
 

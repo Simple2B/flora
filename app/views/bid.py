@@ -423,3 +423,12 @@ def update_revision(bid_id, revision):
     bid.revision = revision
     bid.save()
     return "OK"
+
+
+@bid_blueprint.route("/project_type/<int:bid_id>/<project_type_name>", methods=["GET"])
+@login_required
+def project_type(bid_id, project_type_name):
+    bid = Bid.query.get(bid_id)
+    bid.project_type = project_type_name
+    bid.save()
+    return "OK"
