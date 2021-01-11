@@ -41,7 +41,6 @@ $(document).ready(function() {
     clientClosePanel.classList.toggle('hidden');
     if (changeClientImg == "/static/images/up_direction_element.svg") {
       document.querySelector('#client_and_job_close_panel_id img').setAttribute('src', "/static/images/direction_element_bottom.svg");
-      console.log('Hello');
     } else {
       document.querySelector('#client_and_job_close_panel_id img').setAttribute('src', "/static/images/up_direction_element.svg");
     };

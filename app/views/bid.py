@@ -429,6 +429,9 @@ def update_revision(bid_id, revision):
 @login_required
 def project_type(bid_id, project_type_name):
     bid = Bid.query.get(bid_id)
-    bid.project_type = project_type_name
+    if project_type_name == 'Budget':
+        bid.project_type = Bid.ProjectType.a_budget
+    else:
+        bid.project_type = Bid.ProjectType.b_quote
     bid.save()
     return "OK"
