@@ -54,7 +54,7 @@ class ProcoreApi:
 
         url = f"{PROCORE_API_BASE_URL}vapid/companies/{PROCORE_API_COMPANY_ID}/bids"
 
-        log(log.DEBUG, 'Make response to get bids')
+        log(log.DEBUG, 'Make request to get bids')
         response = requests.get(url, headers=headers)
         log(log.DEBUG, 'Get response with bids')
         if response.status_code >= 400:
