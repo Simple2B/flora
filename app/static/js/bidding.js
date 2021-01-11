@@ -107,16 +107,6 @@ $(document).ready(function() {
       updateProjectType();
     });
   });
-  // const budget = document.getElementById('budget');
-  // const quote = document.getElementById('quote');
-
-  // budget.addEventListener('on', (element) => {
-  //   updateProjectType(element);
-  // });
-
-  // quote.addEventListener('on', (element) => {
-  //   updateProjectType(element);
-  // });
 
   // TBD Choice
 
