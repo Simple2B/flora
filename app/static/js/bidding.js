@@ -48,8 +48,7 @@ $(document).ready(function() {
 
 
   // Active decoration on header menu-item by border-bottom
-  bid_href_id.classList.remove('menu__item');
-  bid_href_id.classList.toggle('active-tab');
+  bid_href_id.classList.add('active-tab');
   // end decoration
 
 
