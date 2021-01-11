@@ -423,3 +423,15 @@ def update_revision(bid_id, revision):
     bid.revision = revision
     bid.save()
     return "OK"
+
+
+@bid_blueprint.route("/project_type/<int:bid_id>/<project_type_name>", methods=["GET"])
+@login_required
+def project_type(bid_id, project_type_name):
+    bid = Bid.query.get(bid_id)
+    if project_type_name == 'Budget':
+        bid.project_type = Bid.ProjectType.a_budget
+    else:
+        bid.project_type = Bid.ProjectType.b_quote
+    bid.save()
+    return "OK"

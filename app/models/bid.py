@@ -9,6 +9,10 @@ class Bid(db.Model, ModelMixin):
 
     __tablename__ = "bids"
 
+    class ProjectType(enum.Enum):
+        a_budget = "Budget"
+        b_quote = "Quote"
+
     class Status(enum.Enum):
         a_new = "New"
         b_draft = "Draft"
@@ -40,7 +44,7 @@ class Bid(db.Model, ModelMixin):
     time_updated = db.Column(db.Float, default=0.0, nullable=False)
     due_date = db.Column(db.Date, nullable=False)
     revision = db.Column(db.Integer, default=0)
-    project_type = db.Column(db.String(16), default="Quate", nullable=False)
+    project_type = db.Column(db.Enum(ProjectType), default=ProjectType.b_quote, nullable=False)
 
     link_work_items = relationship("LinkWorkItem")
     work_item_groups = relationship("WorkItemGroup")
