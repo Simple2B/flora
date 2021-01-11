@@ -124,11 +124,19 @@
           </div>
           <div>
             <div>
+              {% if bid.project_type.value ==  "Budget" %}
+              <input type="radio" id="budget" name="project_type" value="Budget" checked>
+              {% else %}
               <input type="radio" id="budget" name="project_type" value="Budget">
+              {% endif %}
               <label for="budget">Budget</label>
             </div>
             <div>
+              {% if bid.project_type.value ==  "Quote" %}
               <input type="radio" id="quote" name="project_type" value="Quote" checked>
+              {% else %}
+              <input type="radio" id="quote" name="project_type" value="Quote">
+              {% endif %}
               <label for="quote">Quote</label>
             </div>
           </div>
