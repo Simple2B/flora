@@ -1282,13 +1282,22 @@ ul {
       display: inline-flex;
       justify-content: space-between;
       align-items: center;
+      flex-flow: row wrap;
       color: #979797;
       font-weight: bold;
       padding-left: 0.5rem; }
+      .main-container__project_general .__client_job_info .client-job--span > div {
+        display: flex;
+        align-items: center;
+        width: 30%; }
+        .main-container__project_general .__client_job_info .client-job--span > div > div:first-child {
+          width: 20%; }
+        .main-container__project_general .__client_job_info .client-job--span > div > div:last-child {
+          width: 50%; }
       .main-container__project_general .__client_job_info .client-job--span div {
-        min-width: 15%;
-        width: 25%; }
+        min-width: 15%; }
     .main-container__project_general .__client_job_info .proj_gen-text-info {
+      display: flex;
       color: #000000;
       font-weight: normal; }
   .main-container__project_general .__drawing-log ._drawing-table {

@@ -265,16 +265,28 @@
             display: inline-flex;
             justify-content: space-between;
             align-items: center;
+            flex-flow: row wrap;
             color: #979797;
             font-weight: bold;
             padding-left: $m0-5rem;
+            & > div {
+                display: flex;
+                align-items: center;
+                width:30%;
+                & > div:first-child {
+                    width: 20%;
+                }
+                & > div:last-child {
+                    width: 50%;
+                }
+            }
             & div {
                 min-width: 15%;
-                width: 25%;
             }
         }
 
         .proj_gen-text-info {
+            display: flex;
             color: #000000;
             font-weight: normal;
         }
