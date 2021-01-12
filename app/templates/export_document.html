@@ -51,7 +51,7 @@
         }
 
         .__due_time td:nth-child(2) {
-            width: 30%;
+            width: 37.5%;
             font-weight: bold;
         }
 
@@ -168,13 +168,17 @@
         .work_item_note .__note-box {
             display: -webkit-box;
             -webkit-box-pack: end;
-            width: 60%;
+            width: 65%;
         }
 
         .work_item_note ._note {
             width: 65%;
             overflow-wrap: break-word;
-            margin-right: 1rem;
+            /* margin-right: 1rem; */
+        }
+
+        ._group_note {
+            overflow-wrap: break-word;
         }
 
         ._note div {
@@ -348,7 +352,7 @@
                         <tbody>
                             <tr>
                                 <td></td>
-                                <td>05/26/20</td>
+                                <td>{{ bid.due_date }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -360,10 +364,10 @@
                                 <div>
                                     {{ bid.client }}
                                 </div>
-                                <div>75 Montgomery</div>
-                                <div>Suite #502</div>
-                                <div>Jersey City, NJ 07302</div>
-                                <div>James Pumarada, DPT, STC, CSCS</div>
+                                <div>{{ bid.vendor_address_street }}</div>
+                                <div>Suite # 502</div>
+                                <div>{{ bid.vendor_address_city }}</div>
+                                <div>{{ bid.contact }}</div>
                             </div>
                         </div>
                         <div class="_client_project project-padding">
@@ -372,12 +376,12 @@
                                 <div>
                                     Transaction Window & Sink
                                 </div>
-                                <div>75 Montgomery</div>
-                                <div>Suite 502</div>
-                                <div>Jersey City, NJ 07302</div>
+                                <div>{{ bid.address_street }}</div>
+                                <div>Suite # 502</div>
+                                <div>{{ bid.address_city }}</div>
                                 <div>
                                     <span class="project_quote">
-                                        Quote # B-20-034 R1
+                                        {{ bid.project_type }} # B-20-034 R1
                                     </span>
                                 </div>
                             </div>
@@ -396,23 +400,23 @@
                                 </div>
                                 <div class="bid_subtotal_value">${{ link_work_item.link_subtotal }}</div>
                             </div>
+                            {% for work_item_line in link_work_item.work_item_lines%}
                             <div class="work_item_note">
                                 <div class="__note-box">
                                     <div class="_note">
-                                        Furnish & Install new double pane
-                                        sliding transaction window in existing opening
+                                        {{ work_item_line.description }}
                                         <div>
-                                            NOTE: System to utilize surface
-                                            mounted hardware
+                                            NOTE: {{ work_item_line.note }}
                                         </div>
                                     </div>
                                     <div class="_unit">
-                                        <div>1</div>
-                                        <div>LS</div>
+                                        <div>{{ work_item_line.quantity }}</div>
+                                        <div>{{ work_item_line.unit }}</div>
                                     </div>
                                 </div>
                                 <div></div>
                             </div>
+                            {% endfor %}
                         {% endfor %}
                     </div>
                     <!-- # Pagination -->
@@ -440,13 +444,37 @@
                                     <div> {{ link.work_item.code }} &nbsp; &nbsp;</div>
                                     <div> {{ link.work_item.name }} &nbsp; &nbsp;</div>
                                 </div>
-                                <div class="line_qty">
-                                    {% for line in link.work_item_lines %}
-                                    <div> {{ line.quantity }} </div>
-                                    {% endfor %}
-                                </div>
+                                <!-- <div class="line_qty">
+                                    % for line in link.work_item_lines %
+                                    <div>  line.quantity  </div>
+                                    % endfor %
+                                </div> -->
                                 <div class="bid_subtotal_value">${{ link.link_subtotal }}</div>
                             </div>
+                            <!-- test table -->
+                                {% for work_item_line in link.work_item_lines %}
+                                <table style="width: 100%;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 14%;"></td>
+                                            <td style="width: 29%;">
+                                                <div class="_group_note _note">
+                                                    {{ work_item_line.description }}
+                                                    <div>
+                                                        NOTE: {{ work_item_line.note }}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="width: 8%; vertical-align: top;">{{ work_item_line.quantity }}</td>
+                                            <td style="width: 8.5%; vertical-align: top;">{{ work_item_line.unit }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                {% endfor %}
+
                             {% endfor %}
                         </div>
                         {% endfor %}
@@ -564,7 +592,11 @@
                     <h5>Unless expressly stated, the following exclusions apply: </h5>
                     <div>
                         {% for exclusion_link in bid.exclusion_links %}
-                            {{ exclusion_link.exclusion.title }}
+                            {% if exclusion_link == bid.exclusion_links[-1] %}
+                                {{ exclusion_link.exclusion.title }}
+                            {% else %}
+                                {{ exclusion_link.exclusion.title }},
+                            {% endif %}
                         {% endfor %}
                     </div>
 
@@ -572,7 +604,11 @@
                     <h5>Please note the following clarifications: </h5>
                     <div>
                         {% for clarification_link in bid.clarification_links %}
-                            {{ clarification_link.clarification.note }}
+                            {% if clarification_link == bid.clarification_links[-1] %}
+                                {{ clarification_link.clarification.note }}
+                            {% else %}
+                                {{ clarification_link.clarification.note }},
+                            {% endif %}
                         {% endfor %}
                     </div>
                     <div class="qoute_clarification"></div>
@@ -598,15 +634,15 @@
                         <div class="inputs_forms">
                             <div class="by_name_date">
                                 <div class="input_field">
-                                    <div>By &nbsp; </div>
+                                    <div>By &nbsp; &nbsp; &nbsp; &nbsp; </div>
                                     <input type="text" class="input-underline">
                                 </div>
-                                <div>Name &nbsp; Edward Albanese</div>
-                                <div>Date &nbsp; 05/26.2020</div>
+                                <div>Name &nbsp; {{ bid.contact }}</div>
+                                <div>Date &nbsp; &nbsp; {{ bid.due_date }}</div>
                             </div>
                             <div class="by_name_date">
                                 <div class="input_field">
-                                    <div> By &nbsp; </div>
+                                    <div> By &nbsp; &nbsp; &nbsp; &nbsp;</div>
                                     <input type="text" class="input-underline">
                                 </div>
                                 <div class="input_field">
@@ -614,7 +650,7 @@
                                     <input type="text" class="input-underline">
                                 </div>
                                 <div class="input_field">
-                                    <div> Date &nbsp; </div>
+                                    <div> Date &nbsp; &nbsp;</div>
                                     <input type="text" class="input-underline">
                                 </div>
                             </div>

@@ -1,5 +1,6 @@
 import enum
-from datetime import datetime
+# from datetime import datetime
+import time
 from app import db
 from app.models.utils import ModelMixin
 from sqlalchemy.orm import relationship
@@ -40,8 +41,7 @@ class Bid(db.Model, ModelMixin):
     bond = db.Column(db.Float, default=0.0)
     subtotal = db.Column(db.Float, default=0.0)
     grand_subtotal = db.Column(db.Float, default=0.0)
-    last_updated = db.Column(db.String(16), default=(lambda: datetime.today().strftime("%m/%d/%Y"))(), nullable=False)
-    time_updated = db.Column(db.Float, default=0.0, nullable=False)
+    time_updated = db.Column(db.Float, default=time.time, nullable=False)
     due_date = db.Column(db.Date, nullable=False)
     revision = db.Column(db.Integer, default=0)
     project_type = db.Column(db.Enum(ProjectType), default=ProjectType.b_quote, nullable=False)
