@@ -32,6 +32,7 @@ class Bid(db.Model, ModelMixin):
     email = db.Column(db.String(128), nullable=False, default='ealbanese@ddbcontracting.com')
     fax = db.Column(db.String(128), nullable=False, default='973 300-0805')
     contact = db.Column(db.String(128), nullable=False, default='Edward Albanese')
+    project_name = db.Column(db.String(128), nullable=False, default='!Unknown project!')
     status = db.Column(db.Enum(Status), default=Status.a_new, nullable=False)
     permit_filling_fee = db.Column(db.Float, default=0.0)
     general_conditions = db.Column(db.Float, default=0.0)

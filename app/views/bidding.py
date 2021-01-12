@@ -1,6 +1,6 @@
 import time
 import zipfile
-from io import BytesIO, StringIO
+from io import BytesIO
 from datetime import datetime
 
 from flask import Blueprint, render_template, redirect, url_for, session, request, send_file
@@ -117,7 +117,6 @@ def biddings():
     #             client=bid["vendor"]["name"],
     #         )
     #         bidding.save()
-
 
     form = BidForm()
     most_popular = session.get("most_popular", "")

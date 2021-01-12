@@ -188,7 +188,7 @@ def create_docx(bid_id):
     write_to_docx(
         cell_paragraph=cell_project_name,
         edit_first_paragraph=True,
-        content="Transaction Window & Sink",
+        content=f"{bid.project_name}",
         font_bold=True,
         font_size=10.5,
         align='left',
@@ -284,7 +284,7 @@ def create_docx(bid_id):
         font_size=10.5,
         font_highlight_color=WD_COLOR_INDEX.YELLOW,
         align='left',
-        style=f'bid_project_type_{bid.project_type} # B-20-034 R1'
+        style=f'bid_project_type_{bid.project_type.value} # B-20-034 R1'
     )
 
     # /// endblock

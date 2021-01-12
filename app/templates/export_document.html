@@ -374,14 +374,14 @@
                             <div class="project_title">Project</div>
                             <div  class="client_project-info">
                                 <div>
-                                    Transaction Window & Sink
+                                    {{ bid.project_name }}
                                 </div>
                                 <div>{{ bid.address_street }}</div>
                                 <div>Suite # 502</div>
                                 <div>{{ bid.address_city }}</div>
                                 <div>
                                     <span class="project_quote">
-                                        {{ bid.project_type }} # B-20-034 R1
+                                        {{ bid.project_type.value }} # B-20-034 R1
                                     </span>
                                 </div>
                             </div>
@@ -444,11 +444,6 @@
                                     <div> {{ link.work_item.code }} &nbsp; &nbsp;</div>
                                     <div> {{ link.work_item.name }} &nbsp; &nbsp;</div>
                                 </div>
-                                <!-- <div class="line_qty">
-                                    % for line in link.work_item_lines %
-                                    <div>  line.quantity  </div>
-                                    % endfor %
-                                </div> -->
                                 <div class="bid_subtotal_value">${{ link.link_subtotal }}</div>
                             </div>
                             <!-- test table -->
@@ -638,7 +633,7 @@
                                     <input type="text" class="input-underline">
                                 </div>
                                 <div>Name &nbsp; {{ bid.contact }}</div>
-                                <div>Date &nbsp; &nbsp; {{ bid.due_date }}</div>
+                                <div>Date &nbsp; &nbsp; {{ date_today }}</div>
                             </div>
                             <div class="by_name_date">
                                 <div class="input_field">
