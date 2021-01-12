@@ -1,4 +1,5 @@
 import os.path
+import datetime
 
 from app.models import Bid, WorkItemGroup, LinkWorkItem
 
@@ -279,7 +280,7 @@ def create_docx(bid_id):
     write_to_docx(
         cell_paragraph=cell_project_info,
         edit_first_paragraph=True,
-        content=f"{bid.project_type} # B-20-034 R1",
+        content=f"{bid.project_type.value} # B-20-034 R1",
         font_bold=True,
         font_size=10.5,
         font_highlight_color=WD_COLOR_INDEX.YELLOW,
@@ -547,7 +548,7 @@ def create_docx(bid_id):
         write_to_docx(
             insert=True,
             cell_paragraph=exclusion_paragraph,
-            content=f'{exclusion_link.exclusion.title}, ',
+            content=(f'{exclusion_link.exclusion.title}' if exclusion_link == bid.exclusion_links[-1] else f'{exclusion_link.exclusion.title}, '),  # noqa 501
             font_size=9.5,
             after_spacing=10,
             style=f'exclusion_style_title_{i}'
@@ -574,7 +575,7 @@ def create_docx(bid_id):
         write_to_docx(
             insert=True,
             cell_paragraph=clarification_paragraph,
-            content=f'{clarification_link.clarification.note}, ',
+            content=(f'{clarification_link.clarification.note}' if clarification_link == bid.clarification_links[-1] else f'{clarification_link.clarification.note}, '),  # noqa 501
             font_size=9.5,
             style=f'clarification_style_title_{i}'
         )
@@ -589,7 +590,7 @@ def create_docx(bid_id):
         style='alternates_style_name'
     )
     # endblock
-
+    document.add_page_break()
     # begin Section E_F block
     document.add_picture(f'{PATH_TO_IMG}/Section_E_F.png', width=Cm(18.99), height=Cm(0.79))
 
@@ -634,7 +635,7 @@ def create_docx(bid_id):
             elif i == 2 and j == 0:
                 write_to_docx(
                     insert=True,
-                    content=f'{bid.phone}',
+                    content=f'{datetime.datetime.today().strftime("%Y-%m-%d")}',
                     cell_paragraph=paragraph,
                     font_size=10,
                     before_spacing=5,
