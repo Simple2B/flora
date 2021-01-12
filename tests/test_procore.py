@@ -23,7 +23,7 @@ def client():
         app_ctx.pop()
 
 
-def test_get_bids(client):
+def _test_get_bids(client):
     papi = ProcoreApi()
     for _ in range(10):
         bids_from_procore = papi.bids(ignore_testing=True)
