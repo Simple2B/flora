@@ -4,6 +4,7 @@ import time
 from app import db
 from app.models.utils import ModelMixin
 from sqlalchemy.orm import relationship
+from config import BaseConfig as config
 
 
 class Bid(db.Model, ModelMixin):
@@ -33,6 +34,14 @@ class Bid(db.Model, ModelMixin):
     fax = db.Column(db.String(128), nullable=False, default='973 300-0805')
     contact = db.Column(db.String(128), nullable=False, default='Edward Albanese')
     status = db.Column(db.Enum(Status), default=Status.a_new, nullable=False)
+
+    percent_permit_fee = db.Column(db.Float, default=config.PERCENT_PERMIT_FEE)
+    percent_general_condition = db.Column(db.Float, default=config.PERCENT_GENERAL_CONDITION)
+    percent_overhead = db.Column(db.Float, default=config.PERCENT_OVERHEAD)
+    percent_insurance_tax = db.Column(db.Float, default=config.PERCENT_INSURANCE_TAX)
+    percent_profit = db.Column(db.Float, default=config.PERCENT_PROFIT)
+    percent_bond = db.Column(db.Float, default=config.PERCENT_BOND)
+
     permit_filling_fee = db.Column(db.Float, default=0.0)
     general_conditions = db.Column(db.Float, default=0.0)
     overhead = db.Column(db.Float, default=0.0)
@@ -41,6 +50,7 @@ class Bid(db.Model, ModelMixin):
     bond = db.Column(db.Float, default=0.0)
     subtotal = db.Column(db.Float, default=0.0)
     grand_subtotal = db.Column(db.Float, default=0.0)
+
     time_updated = db.Column(db.Float, default=time.time, nullable=False)
     due_date = db.Column(db.Date, nullable=False)
     revision = db.Column(db.Integer, default=0)
