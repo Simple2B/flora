@@ -318,10 +318,11 @@ def preview_pdf(bid_id):
     preview_pdf_bool = True
     tbd_choices = session.get("tbdChoices", [])
     calculate_subtotal(bid_id, tbd_choices)
-
+    date_today = datetime.datetime.today().strftime("%Y-%m-%d")
     return render_template(
         "export_document.html",
         bid=bid,
+        date_today=date_today,
         global_work_items=global_work_items,
         groups=groups,
         preview_pdf_bool=preview_pdf_bool,
@@ -374,7 +375,7 @@ def export_pdf(bid_id):
         elif form.export_docx.data:
             preview_pdf_bool = False
             from app.controllers.create_docx import create_docx
-            create_docx(1)
+            create_docx(bid_id)
             # with open()
             # calculate_subtotal(bid_id, tbd_choices)
             # html_content = render_template(
