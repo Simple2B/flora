@@ -157,19 +157,14 @@ def biddings():
             if seconds_ago < 3600:
                 if seconds_ago <= 60:
                     bid.last_updated = '1 min ago'
-                    bid.save()
                 else:
                     bid.last_updated = f'{seconds_ago // 60} mins ago'
-                    bid.save()
             elif seconds_ago >= 3600 and seconds_ago < 86400:
                 bid.last_updated = f'{seconds_ago // 3600} hours ago'
-                bid.save()
             elif seconds_ago >= 86400 and seconds_ago < 2073600:
                 bid.last_updated = f'{seconds_ago // 86400} days ago'
-                bid.save()
             else:
                 bid.last_updated = time.strftime("%m/%d/%Y", time.gmtime(bid.time_updated))
-                bid.save()
 
     today_date = datetime.today().strftime("%m/%d/%Y")
     return render_template(
