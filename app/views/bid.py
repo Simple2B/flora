@@ -320,10 +320,11 @@ def preview_pdf(bid_id):
     preview_pdf_bool = True
     tbd_choices = session.get("tbdChoices", [])
     calculate_subtotal(bid_id, tbd_choices)
-
+    date_today = datetime.datetime.today().strftime("%Y-%m-%d")
     return render_template(
         "export_document.html",
         bid=bid,
+        date_today=date_today,
         global_work_items=global_work_items,
         groups=groups,
         preview_pdf_bool=preview_pdf_bool,

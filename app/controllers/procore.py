@@ -58,6 +58,7 @@ def update_bids():
                 client=(
                     bid["vendor"]["name"] if "name" in bid["vendor"] else "Unknown name"
                 ),
+                project_name=bid['project']['name'],
                 vendor_address_street=(v_addr_lines[0] if v_addr_lines else ""),
                 vendor_address_city=(v_addr_lines[1] if len(v_addr_lines) > 1 else ""),
                 address_street=(p_addr_lines[0] if p_addr_lines else ""),
