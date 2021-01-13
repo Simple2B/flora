@@ -40,10 +40,11 @@
       {% if current_user.is_authenticated %}
       <div class="header--right">
         <div class="user-info">
-          <div class="user-info__img">
-            <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt="Icon">
-          </div>
-
+          <form action="{{ url_for('profile.get_window_location_link') }}" method="post">
+            <button class="user-info__btn ddb-cursor-handle" onclick="this.form.submit()" name="user-info__img" value="test">
+              <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt="Icon" id="my_profile_img_id">
+            </button>
+          </form>
           <div class="user-info__details">
             <span class="flex-row">
             <div>{{current_user.username}}</div>
