@@ -267,6 +267,10 @@ def bidding(bid_id):
     tbd_choices = session.get("tbdChoices", [])
     form_bid.save_in_cloud = session.get('saveInCloud', False)
 
+    if bid.status.value == "New":
+        bid.status = Bid.Status.b_draft
+        bid.save()
+
     form_bid.global_work_items = (
         LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
         .filter(LinkWorkItem.work_item_group == None)  # noqa 711
