@@ -267,9 +267,8 @@ def bidding(bid_id):
     tbd_choices = session.get("tbdChoices", [])
     form_bid.save_in_cloud = session.get('saveInCloud', False)
 
-    if bid.status.value == "New":
+    if bid.status == Bid.Status.a_new:
         bid.status = Bid.Status.b_draft
-        bid.save(commit=False)
     bid.popularity += 1
     bid.save()
 
