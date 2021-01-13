@@ -6,6 +6,7 @@ from datetime import datetime
 from flask import Blueprint, render_template, redirect, url_for, session, request, send_file
 from flask_login import login_required
 from flask_wtf import FlaskForm
+from sqlalchemy import desc
 
 from app.models import Bid
 from app.forms import BidForm
@@ -93,26 +94,16 @@ def biddings():
     status_active_archived = session.get("status_active_archived", "")
     status_active_draft = session.get("status_active_draft", "")
 
+    bids_query = Bid.query
     if status_active_submitted:
-        bids = Bid.query.filter(Bid.status == Bid.Status.c_submitted).all()
-        if most_recent:
-            bids = Bid.query.filter(Bid.status == Bid.Status.c_submitted).order_by(Bid.time_updated).all()
-            bids.reverse()
+        bids_query = bids_query.filter(Bid.status == Bid.Status.c_submitted)
     elif status_active_archived:
-        bids = Bid.query.filter(Bid.status == Bid.Status.d_archived).all()
-        if most_recent:
-            bids = Bid.query.filter(Bid.status == Bid.Status.d_archived).order_by(Bid.time_updated).all()
-            bids.reverse()
+        bids_query = bids_query.filter(Bid.status == Bid.Status.d_archived)
     elif status_active_draft:
-        bids = Bid.query.filter(Bid.status == Bid.Status.b_draft).all()
-        if most_recent:
-            bids = Bid.query.filter(Bid.status == Bid.Status.b_draft).order_by(Bid.time_updated).all()
-            bids.reverse()
-    else:
-        bids = Bid.query.order_by(Bid.status).all()
-        if most_recent:
-            bids = Bid.query.order_by(Bid.time_updated).all()
-            bids.reverse()
+        bids_query = bids_query.filter(Bid.status == Bid.Status.b_draft)
+    bids_query = bids_query.order_by(desc(Bid.time_updated if most_recent else Bid.popularity))
+
+    bids = bids_query.all()
 
     time_now = round(time.time())
     for bid in bids:

@@ -267,6 +267,11 @@ def bidding(bid_id):
     tbd_choices = session.get("tbdChoices", [])
     form_bid.save_in_cloud = session.get('saveInCloud', False)
 
+    if bid.status == Bid.Status.a_new:
+        bid.status = Bid.Status.b_draft
+    bid.popularity += 1
+    bid.save()
+
     form_bid.global_work_items = (
         LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
         .filter(LinkWorkItem.work_item_group == None)  # noqa 711
@@ -303,6 +308,7 @@ def bidding(bid_id):
         form_bid=form_bid,
         round=round
     )
+
 
 # Export document
 @bid_blueprint.route("/preview_pdf/<int:bid_id>", methods=["GET"])
@@ -434,6 +440,7 @@ def project_type(bid_id, project_type_name):
         bid.project_type = Bid.ProjectType.b_quote
     bid.save()
     return "OK"
+
 
 @bid_blueprint.route("/set_percent_value/<int:bid_id>/<parameter_name>/<value>", methods=["GET"])
 @login_required
