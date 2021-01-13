@@ -305,8 +305,6 @@ def bidding(bid_id):
     )
 
 # Export document
-
-
 @bid_blueprint.route("/preview_pdf/<int:bid_id>", methods=["GET"])
 @login_required
 def preview_pdf(bid_id):
@@ -435,4 +433,16 @@ def project_type(bid_id, project_type_name):
     else:
         bid.project_type = Bid.ProjectType.b_quote
     bid.save()
+    return "OK"
+
+@bid_blueprint.route("/set_percent_value/<int:bid_id>/<parameter_name>/<value>", methods=["GET"])
+@login_required
+def set_percent_value(bid_id, parameter_name, value):
+    bid = Bid.query.get(bid_id)
+    if parameter_name not in dir(bid):
+        log(log.ERROR, "set_percent_value: wrong parameter_name:[%s]", parameter_name)
+        return "ERROR"
+    bid.__setattr__(parameter_name, value.strip("% "))
+    bid.save()
+    calculate_subtotal(bid_id=bid_id)
     return "OK"

@@ -155,6 +155,27 @@ $(document).ready(function() {
       }
     });
   });
+
+  document.querySelectorAll(".percent_parameter").forEach( (e) => {
+    e.addEventListener("change", () => {
+      const value = parseFloat(e.value);
+      if(!value) {
+        e.value = "0.0%";
+      } else {
+        e.value = value + "%";
+      }
+      console.log("Percents " + e.id + " changed to " + e.value);
+      // Update percent parameter value in the DB
+      const storeInDB = async () => {
+        const response = await fetch(`/set_percent_value/${bidID}/${e.id}/${e.value}`, {method: 'GET'})
+        if (!response.ok) {
+          console.error(`Cannot store parameter [${e.id}]`);
+        }
+      };
+      storeInDB();
+    });
+  } );
+
 });
 
 // Active decoration on header menu-item by border-bottom
