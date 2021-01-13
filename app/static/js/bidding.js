@@ -115,9 +115,11 @@ $(document).ready(function() {
     const myResponse = async () => {
       const response = await fetch(`/check_tbd/${bidID}/${el.getAttribute('name')}`, {method: 'GET'})
       if (response.ok) {
+        console.log('new response')
         response.text().then(result => {
-          console.log(response.ok)
-          if (result == "0.0" || result == "0") { el.checked = true }
+          console.log(response.ok, '/check_tbd')
+          console.log(result)
+          if (result == "0.0" || result == "0" || result == "tbd_work_item_line_on") { el.checked = true }
           else { el.checked = false };
         });
       }
@@ -140,7 +142,7 @@ $(document).ready(function() {
         myRequest()
       }
       else {
-        const tbdUnchecked = async () => {
+        const tbdTurnOff = async () => {
           try {
             const request = await fetch(`/save_tbd/${bidID}?false=${el.getAttribute('name')}`, {method: 'GET'})
             if (request.ok) {
@@ -151,7 +153,7 @@ $(document).ready(function() {
             console.warn(err)
           }
         };
-        tbdUnchecked()
+        tbdTurnOff()
       }
     });
   });
