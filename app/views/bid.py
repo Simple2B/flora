@@ -309,6 +309,7 @@ def bidding(bid_id):
         round=round
     )
 
+
 # Export document
 @bid_blueprint.route("/preview_pdf/<int:bid_id>", methods=["GET"])
 @login_required
@@ -439,6 +440,7 @@ def project_type(bid_id, project_type_name):
         bid.project_type = Bid.ProjectType.b_quote
     bid.save()
     return "OK"
+
 
 @bid_blueprint.route("/set_percent_value/<int:bid_id>/<parameter_name>/<value>", methods=["GET"])
 @login_required
