@@ -114,6 +114,10 @@ def biddings():
             bids = Bid.query.order_by(Bid.time_updated).all()
             bids.reverse()
 
+    if most_popular:
+        bids = Bid.query.order_by(Bid.popularity).all()
+        bids.reverse()
+
     time_now = round(time.time())
     for bid in bids:
         if bid.time_updated != 0.0:

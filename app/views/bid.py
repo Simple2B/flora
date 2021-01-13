@@ -269,7 +269,9 @@ def bidding(bid_id):
 
     if bid.status.value == "New":
         bid.status = Bid.Status.b_draft
-        bid.save()
+        bid.save(commit=False)
+    bid.popularity += 1
+    bid.save()
 
     form_bid.global_work_items = (
         LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)

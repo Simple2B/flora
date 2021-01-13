@@ -52,6 +52,7 @@ class Bid(db.Model, ModelMixin):
     subtotal = db.Column(db.Float, default=0.0)
     grand_subtotal = db.Column(db.Float, default=0.0)
 
+    popularity = db.Column(db.Integer, default=0)
     time_updated = db.Column(db.Float, default=time.time, nullable=False)
     due_date = db.Column(db.Date, nullable=False)
     revision = db.Column(db.Integer, default=0)
