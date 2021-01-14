@@ -7,3 +7,4 @@ from .clarification import clarification_blueprint  # noqa 401
 from .bidding import bidding_blueprint  # noqa 401
 from .bid import bid_blueprint  # noqa 401
 from .alternate import alternate_blueprint  # noqa 401
+from .profile import profile_blueprint  # noqa 401
