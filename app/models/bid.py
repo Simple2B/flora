@@ -64,6 +64,7 @@ class Bid(db.Model, ModelMixin):
     clarification_links = relationship("ClarificationLink")
     exclusion_links = relationship("ExclusionLink")
     drawings = relationship("Drawing")
+    alternates = relationship("Alternate")
 
     def __str__(self):
         return self.__repr__()
