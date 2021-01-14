@@ -65,15 +65,49 @@ $(document).ready( function() {
     changeStatus.classList.toggle('status-change_color_submitted');
     changeStatus.classList.remove('status-change_color_draft');
     changeStatus.classList.remove('status-change_color_archived');
-  } 
+  }
   if (changeStatus.textContent == 'Archived') {
     changeStatus.classList.toggle('status-change_color_archived');
     changeStatus.classList.remove('status-change_color_submitted');
     changeStatus.classList.remove('status-change_color_draft');
   };
-});
-// end change Bid status color
+  // end change Bid status color
 
+});
+
+// begin to get My Profile link
+const myProfileSubmitBtn = document.getElementById('my_profile_submit_id');
+let windowLocationLink = window.location.href
+
+myProfileSubmitBtn.setAttribute('value', windowLocationLink);
+
+const sideBarNavLinks = document.querySelectorAll('#sidebar__nav-links-bidding li span a');
+sideBarNavLinks.forEach( (e) => {
+  e.addEventListener('click', () =>  {
+    console.log('On_click');
+    windowLocationLink = e.href
+    console.log(windowLocationLink);
+    myProfileSubmitBtn.setAttribute('value', windowLocationLink);
+  });
+});
+
+myProfileSubmitBtn.addEventListener('click', (e) => {
+  console.log(e);
+  console.log(windowLocationLink);
+  // response.text().then(result => {
+//   const getWindowLocationLink = async () => {
+//     const response = await fetch(`/get_window_location_link?current_link=${windowLocationLink}`, {method: 'GET'})
+//     console.log(response)
+//     if (response.ok) {
+//       const resData = await response.text()
+//         console.log(resData)
+//     } else {
+//       console.error(`Cannot store parameter [${windowLocationLink}]`);
+//     }
+//   };
+//   getWindowLocationLink();
+});
+// end My Profile link block
 
 const closeWrapper = document.getElementById('subtotal_close_panel_id');
 const subtotalClosePanel = document.getElementById('subtotal_inputs_fields_id');

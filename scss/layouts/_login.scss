@@ -1,4 +1,5 @@
 @import '../global/variables';
+@import '../global/mixins';
 
 .login__inner {
     display: flex;
@@ -14,15 +15,11 @@
 }
 
 .login__error {
-    background-color: white;
-    color: $red;
-    font-weight: 500;
-    border: 0;
-    margin: auto;
+   @include flash_default;
 }
 
 .login__title {
-    
+
     &--welcome {
         font-size: 18px;
         font-weight: 500;

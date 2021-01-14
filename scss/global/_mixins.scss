@@ -1,1 +1,9 @@
 @import 'variables';
+
+@mixin flash_default {
+    background-color: white;
+    color: $red;
+    font-weight: 500;
+    border: 0;
+    margin: auto;
+}
