@@ -29,19 +29,6 @@ def profile():
         for error in form.errors:
             for msg in form.errors[error]:
                 flash(msg, "warning")
-            # error_message = form.errors.get('password_confirmation', '')
-            # if error_message:
-            #     flash(error_message, "warning")
-            # if form.errors.get('password', ''):
-            #     flash("Password field must be between 6 and 30 characters long.", "warning")
-            # elif form.errors.get('password_confirmation', ''):
-            #     flash("Password do not match!", "warning")
-            # else:
-            #     flash("User name field must be between 2 and 30 characters long.", "warning")
-    # form.username.data = current_user.username
-    # form.email.data = current_user.email
-    # form.position.data = current_user.position
-    # form.phone.data = current_user.phone
 
     return render_template(
         "profile.html",

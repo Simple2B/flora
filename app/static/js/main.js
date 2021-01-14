@@ -75,39 +75,18 @@ $(document).ready( function() {
 
 });
 
-// begin to get My Profile link
+// begin My Profile
 const myProfileSubmitBtn = document.getElementById('my_profile_submit_id');
-let windowLocationLink = window.location.href
-
-myProfileSubmitBtn.setAttribute('value', windowLocationLink);
+myProfileSubmitBtn.setAttribute('value', window.location.href);
 
 const sideBarNavLinks = document.querySelectorAll('#sidebar__nav-links-bidding li span a');
 sideBarNavLinks.forEach( (e) => {
-  e.addEventListener('click', () =>  {
-    console.log('On_click');
-    windowLocationLink = e.href
-    console.log(windowLocationLink);
-    myProfileSubmitBtn.setAttribute('value', windowLocationLink);
+  e.addEventListener('click', () => {
+    const myProfileSubmitBtn = document.getElementById('my_profile_submit_id');
+    myProfileSubmitBtn.setAttribute('value', e.href);
   });
 });
-
-myProfileSubmitBtn.addEventListener('click', (e) => {
-  console.log(e);
-  console.log(windowLocationLink);
-  // response.text().then(result => {
-//   const getWindowLocationLink = async () => {
-//     const response = await fetch(`/get_window_location_link?current_link=${windowLocationLink}`, {method: 'GET'})
-//     console.log(response)
-//     if (response.ok) {
-//       const resData = await response.text()
-//         console.log(resData)
-//     } else {
-//       console.error(`Cannot store parameter [${windowLocationLink}]`);
-//     }
-//   };
-//   getWindowLocationLink();
-});
-// end My Profile link block
+// end My Profile block
 
 const closeWrapper = document.getElementById('subtotal_close_panel_id');
 const subtotalClosePanel = document.getElementById('subtotal_inputs_fields_id');
