@@ -4,16 +4,16 @@ from wtforms import (
     SubmitField,
     TextField,
     FloatField,
-    BooleanField,
+    BooleanField
 )
 from wtforms.validators import DataRequired, Length
 
 
 class AlternateForm(FlaskForm):
     name = StringField("Alternate Item", validators=[DataRequired(), Length(1, 128)])
-    description = TextField("Description", validators=[DataRequired()])
-    price = FloatField("Price", validators=[DataRequired()])
-    unit = StringField("Unit")
-    quantity = FloatField("Quantity", validators=[DataRequired()])
     tbd = BooleanField("TDB")
+    description = TextField("Description")
+    quantity = FloatField("Quantity", default='1', validators=[DataRequired()])
+    unit = StringField("Unit", default='LS', validators=[DataRequired()])
+    price = FloatField("Price", default='0.0', validators=[DataRequired()])
     save_submit = SubmitField("Save")
