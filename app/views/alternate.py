@@ -1,8 +1,9 @@
-from flask import Blueprint, render_template, url_for, redirect, request, session, flash
+from flask import Blueprint, render_template, url_for, redirect, flash
 from flask_login import login_required
 
 from app.models import Alternate
 from app.forms import AlternateForm
+from app.logger import log
 
 alternate_blueprint = Blueprint("alternate", __name__, url_prefix="/alternate")
 
@@ -19,14 +20,16 @@ def new_alternate(bid_id):
             description=form.description.data,
             quantity=form.quantity.data,
             unit=form.unit.data,
-            price=form.price.data
+            price=form.price.data,
         )
         alternate.save()
-        # flash("Alternate added successful.", "success")
+        log(log.DEBUG, "Alternate added successful.", "success")
         return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="alternates"))
-    if form.is_submitted():
-        flash("The given data was invalid.", "danger")
-        # TODO
+    elif form.is_submitted():
+        log(log.ERROR, "%s", form.errors)
+        for error in form.errors:
+            for msg in form.errors[error]:
+                flash(msg, "warning")
     return render_template(
         "alternate.html",
         form=form,
@@ -49,12 +52,18 @@ def edit_alternate(bid_id, alternate_id):
         alternate.unit = form.unit.data
         alternate.price = form.price.data
         alternate.save()
-        # flash("Alternate added successful.", "success")
+        log(log.DEBUG, "Alternate added successful.", "success")
         return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="alternates"))
     elif form.is_submitted():
-        flash("The given data was invalid.", "danger")
-        # TODO
-    return redirect(url_for("alternate.new_alternate", bid_id=bid_id))
+        for error in form.errors:
+            for msg in form.errors[error]:
+                log(log.ERROR, "edit_alternate(): %s", msg)
+                flash(msg, "warning")
+    return render_template(
+        "alternate.html",
+        form=form,
+        cancel_url=url_for("bid.bidding", bid_id=bid_id, _anchor="alternates"),
+    )
 
 
 @alternate_blueprint.route("/delete/<int:bid_id>/<int:alternate_id>", methods=["GET"])
