@@ -143,6 +143,14 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name=None, on_tbd=True):
             bid.save()
 
 
+def calculate_alternate_total(bid_id):
+    bid = Bid.query.get(bid_id)
+    alternate_total = 0
+    for alternate in bid.alternates:
+        alternate_total += (alternate.price * alternate.quantity)
+    return alternate_total
+
+
 # work mostly with JS
 
 def check_bid_tbd(bid_id, tbd_name):
