@@ -77,13 +77,19 @@ def test_edit_alternate(client):
     alternate_id = bid.alternates[0].id
     EDIT_URL = f"/alternate/edit/{bid.id}/{alternate_id}"
     ALT_NAME_EDITED = "Some alternate (Edited)"
+    ALT_TBD_EDITED = True
+    ALT_DESCRIPTION_EDITED = "Some alternate description"
+    ALT_QUANTITY_EDITED = 56
+    ALT_UNIT_EDITED = "LS"
+    ALT_PRICE_EDITED = 100
+
     res = client.post(EDIT_URL, data=dict(
         name=ALT_NAME_EDITED,
-        tbd=True,
-        description="Some alternate description",
-        quantity=56,
-        unit="LS",
-        price=100
+        tbd=ALT_TBD_EDITED,
+        description=ALT_DESCRIPTION_EDITED,
+        quantity=ALT_QUANTITY_EDITED,
+        unit=ALT_UNIT_EDITED,
+        price=ALT_PRICE_EDITED
     ))
     assert res.status_code == 302
     assert "bidding" in res.location
@@ -93,6 +99,11 @@ def test_edit_alternate(client):
     assert bid.alternates
     assert len(bid.alternates) == 1
     assert bid.alternates[0].name == ALT_NAME_EDITED
+    assert bid.alternates[0].tbd == ALT_TBD_EDITED
+    assert bid.alternates[0].description == ALT_DESCRIPTION_EDITED
+    assert bid.alternates[0].quantity == ALT_QUANTITY_EDITED
+    assert bid.alternates[0].unit == ALT_UNIT_EDITED
+    assert bid.alternates[0].price == ALT_PRICE_EDITED
 
     logout(client)
     res = client.get(EDIT_URL)
