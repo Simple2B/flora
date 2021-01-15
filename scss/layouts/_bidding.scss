@@ -209,6 +209,10 @@
                 min-width: 4rem;
                 margin-left: $m1rem;
             }
+
+            label {
+                left: 1.8rem;
+            }
         }
 
         ._date_time_img {
@@ -262,7 +266,7 @@
         }
 
         .client-job--span {
-            display: inline-flex;
+            display: flex;
             justify-content: space-between;
             align-items: center;
             flex-flow: row wrap;
@@ -303,7 +307,7 @@
             justify-content: space-between;
             align-items: center;
             border: 1px solid #E5E5E5;
-
+            margin-bottom: $m0-5rem;
         }
 
         ._drawing_table {
@@ -418,7 +422,8 @@
 
         ._show-line_panel {
             padding: 0rem 0rem 0rem $m0-5rem;
-            width: 50vw;
+            // width: 50vw;
+            width: 100%;
             display: inline-flex;
             flex-flow: row wrap;
             justify-content: space-between;

@@ -192,23 +192,23 @@
               </div>
               <div>
                 <div>Contact</div> &nbsp; &nbsp;
-                <span class="proj_gen-text-info">
+                <div class="proj_gen-text-info">
                   {{ bid.contact }}
-                </span>
+                </div>
               </div>
             </div>
           </div>
           <div class="job-address">
             <div class="client-job--span">
               <div>
-                <span>Job</span> &nbsp; &nbsp;
-                <span class="proj_gen-text-info block-text--width">
+                <div>Job</div> &nbsp; &nbsp;
+                <div class="proj_gen-text-info block-text--width">
                   Transaction Window & Sink
-                </span>
+                </div>
               </div>
               <div>
-                <span>Note &nbsp; &nbsp;
-                <span class="proj_gen-text-info"></span>
+                <div>Note &nbsp; &nbsp;</div>
+                <div class="proj_gen-text-info"></div>
               </div>
               <div>
 
@@ -216,11 +216,11 @@
             </div>
             <div class="client-job--span">
               <div>
-                <span>Address</span> &nbsp; &nbsp;
-                <span class="proj_gen-text-info">
+                <div>Address</div> &nbsp; &nbsp;
+                <div class="proj_gen-text-info">
                   {{bid.address_street}}
                   Suite # 502
-                  {{bid.address_city}}</span>
+                  {{bid.address_city}}</div>
               </div>
             </div>
           </div>
@@ -236,7 +236,7 @@
             </button>
           </div>
         </div>
-        <span class="team-header__counter t-gray">Showing {{ users|length }} drawings</span>
+        <div class="counter t-gray">Showing {{ users|length }} drawings</div>
         <div class="_drawing_table hidden" id="drawing_log_hidden_id">
           <table>
             <thead class="_drawing-table">
@@ -309,8 +309,8 @@
               </div>
             </div>
           </div>
+          {% for work_item_line in link_work_item.work_item_lines%}
           <div class="_work_item-line">
-            {% for work_item_line in link_work_item.work_item_lines%}
             <div>
               <div class="_show-line_panel bck-color">
                 <div class="title-text-style">Line </div>
@@ -375,9 +375,9 @@
                 </a>
               </div>
             </div>
-            {% endfor %} {# end of lines #}
 
           </div>
+          {% endfor %} {# end of lines #}
           {% endfor %} {# end of work item links #}
 
         </div>
