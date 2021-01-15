@@ -12,11 +12,21 @@ alternate_blueprint = Blueprint("alternate", __name__, url_prefix="/alternate")
 def new_alternate(bid_id):
     form = AlternateForm()
     if form.validate_on_submit():
-        # TODO
-        flash("Alternate added successful.", "success")
+        alternate = Alternate(
+            bid_id=bid_id,
+            name=form.name.data,
+            tbd=form.tbd.data,
+            description=form.description.data,
+            quantity=form.quantity.data,
+            unit=form.unit.data,
+            price=form.price.data
+        )
+        alternate.save()
+        # flash("Alternate added successful.", "success")
         return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="alternates"))
     if form.is_submitted():
         flash("The given data was invalid.", "danger")
+        # TODO
     return render_template(
         "alternate.html",
         form=form,
@@ -31,12 +41,19 @@ def new_alternate(bid_id):
 def edit_alternate(bid_id, alternate_id):
     form = AlternateForm()
     if form.validate_on_submit():
-        # TODO
-        flash("Alternate added successful.", "success")
+        alternate = Alternate.query.get(alternate_id)
+        alternate.name = form.name.data
+        alternate.tbd = form.tbd.data
+        alternate.description = form.description.data
+        alternate.quantity = form.quantity.data
+        alternate.unit = form.unit.data
+        alternate.price = form.price.data
+        alternate.save()
+        # flash("Alternate added successful.", "success")
         return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="alternates"))
     elif form.is_submitted():
-        pass
         flash("The given data was invalid.", "danger")
+        # TODO
     return redirect(url_for("alternate.new_alternate", bid_id=bid_id))
 
 
