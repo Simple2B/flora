@@ -36,6 +36,7 @@
 
     ._account_inputs {
         display: flex;
+        flex-wrap: wrap;
         flex-direction: column;
 
         &_row {

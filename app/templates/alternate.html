@@ -26,7 +26,7 @@
           <span class="">Alternates</span>
         </div>
         <div class="_account_inputs">
-          <div class="_account_inputs_row">
+          <div class="_account_inputs_row alternate_bgc">
             <div>
               {{ form.name(class='_form-input') }}
               <label class="_label">{{form.name.label.text }}</label>
@@ -36,12 +36,12 @@
               <label class="_label">{{form.tbd.label.text }}</label>
             </div>
           </div>
-          <div class="_account_inputs_row">
+          <div class="_account_inputs_row alternate_bgc">
             <div>
               <textarea class="_form-text_area" placeholder="Enter Note here..." rows="4" name="description">{{form.description.data}}</textarea>
             </div>
           </div>
-          <div class="_account_inputs_row">
+          <div class="_account_inputs_row alternate_bgc">
             <div>
               {{ form.quantity(class='_form-input', type="number") }}
               <label class="_label">{{form.quantity.label.text}}</label>

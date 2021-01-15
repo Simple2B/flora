@@ -806,12 +806,24 @@
         {% endif %}
         <hr>
         <div class="_alternate_flex_add_alternate_row bidding_margin">
-          <div class="">
+          <div>
             <a href="{{ url_for('alternate.new_alternate', bid_id=bid.id) }}">
               <button class="ddb-cursor-handle _btn--base-gray">
                 Add alternate
               </button>
             </a>
+          </div>
+          <div class="__alternate_total">
+              <span>
+                <strong>
+                  Total:
+                </strong>
+              </span>
+              <span>
+                <strong>
+                  $ {{form.calculate_alternate_total}}
+                </strong>
+              </span>
           </div>
         </div>
       </div>
