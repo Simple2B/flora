@@ -123,11 +123,11 @@ ul {
     height: 89.5vh;
 }
 
-.flex-row-box--sb {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
+// .flex-row-box--sb {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-around;
+// }
 
 .flex-flow-wrap {
     flex-flow: row wrap;
@@ -259,10 +259,6 @@ ul {
 
 .border-none {
     border: none;
-}
-
-.welcome {
-    text-align: center;
 }
 
 .overflow-x-hidden{

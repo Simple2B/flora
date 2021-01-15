@@ -489,6 +489,7 @@
             align-items: center;
             background-color: #EDF8FF;
             padding: $m0-5rem;
+            margin-top: $m0-5rem;
 
             .group-title {
                 & img {
@@ -653,4 +654,15 @@
     display: flex;
     flex-flow: wrap;
     padding: 0rem 1.5rem;
+}
+
+._alternate_flex {
+    display: flex;
+    align-items: center;
+
+    &_add_alternate_row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
