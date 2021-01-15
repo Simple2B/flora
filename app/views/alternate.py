@@ -43,8 +43,8 @@ def new_alternate(bid_id):
 @login_required
 def edit_alternate(bid_id, alternate_id):
     form = AlternateForm()
+    alternate = Alternate.query.get(alternate_id)
     if form.validate_on_submit():
-        alternate = Alternate.query.get(alternate_id)
         alternate.name = form.name.data
         alternate.tbd = form.tbd.data
         alternate.description = form.description.data
@@ -59,6 +59,12 @@ def edit_alternate(bid_id, alternate_id):
             for msg in form.errors[error]:
                 log(log.ERROR, "edit_alternate(): %s", msg)
                 flash(msg, "warning")
+    form.name.data = alternate.name
+    form.tbd.data = alternate.tbd
+    form.description.data = alternate.description
+    form.quantity.data = alternate.quantity
+    form.unit.data = alternate.unit
+    form.price.data = alternate.price
     return render_template(
         "alternate.html",
         form=form,
