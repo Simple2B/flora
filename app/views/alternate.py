@@ -29,7 +29,7 @@ def new_alternate(bid_id):
         log(log.ERROR, "%s", form.errors)
         for error in form.errors:
             for msg in form.errors[error]:
-                flash(msg, "warning")
+                flash(f"{error}: {msg}", "warning")
     return render_template(
         "alternate.html",
         form=form,
