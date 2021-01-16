@@ -1,5 +1,5 @@
 from sqlalchemy import inspect
-from app.models import Bid, WorkItemLine
+from app.models import Bid
 
 
 def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
@@ -11,9 +11,6 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
     percent_insurance_tax = bid.percent_insurance_tax
     percent_profit = bid.percent_profit
     percent_bond = bid.percent_bond
-
-    # bid.subtotal
-    subtotal = 0.0
 
     if tbd_name:
         if tbd_name == 'permit':
@@ -52,17 +49,12 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
             else:
                 bid.bond = round((percent_bond * bid.subtotal) / 100, 2)
                 bid.grand_subtotal = bid.grand_subtotal + bid.bond
-        else:
-            work_item_line = WorkItemLine.query.get(int(tbd_name[-1]))
-            if not on_tbd:
-                work_item_line.tbd = False
-                work_item_line.save()
-            else:
-                work_item_line.tbd = True
-                work_item_line.save()
-
         bid.save()
+
     else:
+        # bid.subtotal
+        subtotal = 0.0
+
         dictionary_bid_attrs = inspect(bid).dict
         if not tbd_choices:
             tbd_choices = {i for i in dictionary_bid_attrs if dictionary_bid_attrs[i] == 0}
@@ -74,7 +66,8 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
                     continue
                 else:
                     subtotal += line.price * line.quantity
-                    link.link_subtotal += round((line.price * line.quantity), 2)
+                    link.link_subtotal += line.price * line.quantity
+            link.link_subtotal = round(link.link_subtotal, 2)
 
         subtotal = round(subtotal, 2)
         was_change = False

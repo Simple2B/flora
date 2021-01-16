@@ -68,4 +68,4 @@ class Bid(db.Model, ModelMixin):
         return self.__repr__()
 
     def __repr__(self):
-        return f"<Bid:{self.id}({self.procore_bid_id}) [{self.status.value}>]"
+        return f"<Bid:{self.id}({self.procore_bid_id}) [{self.status.value}]>"

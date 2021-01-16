@@ -115,17 +115,21 @@ $(document).ready(function() {
     const myResponse = async () => {
       const response = await fetch(`/check_tbd/${bidID}/${el.getAttribute('name')}`, {method: 'GET'})
       if (response.ok) {
-        console.log('new response')
-        response.text().then(result => {
-          console.log(response.ok, '/check_tbd')
-          console.log(result)
-          if (result == "0.0" || result == "0" || result == "tbd_work_item_line_on") { el.checked = true }
-          else { el.checked = false };
-        });
-      }
+        console.log('new response');
+        const responseData = await response.text()
+        console.log("Response Data: ", responseData);
+        if (responseData == "0.0" || responseData == "0" || responseData == "tbd_work_item_line_on") {
+           el.checked = true
+          }
+        else {
+          el.checked = false;
+        };
+      };
     };
     myResponse();
+  });
 
+  inputs.forEach( el => {
     el.addEventListener('click', () => {
       if (el.checked) {
         const myRequest = async () => {
@@ -181,6 +185,5 @@ $(document).ready(function() {
 });
 
 // Active decoration on header menu-item by border-bottom
-// bid_href_id.classList.remove('menu__item');
 bid_href_id.classList.add('active-tab');
 // end decoration
