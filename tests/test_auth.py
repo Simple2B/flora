@@ -2,6 +2,7 @@ import pytest
 
 from app import db, create_app
 from tests.utils import register, login, logout
+from app.models import User
 
 
 @pytest.fixture
@@ -65,6 +66,9 @@ def test_login_and_logout(client):
 
 
 def test_edit_user(client):
+    register("sam")
+    login(client, "sam")
+    u = User.query.get(1)
     # /edit_card/<int:user_id>
     EDIT_USER_URL = "/edit_card/1"
     TEST_USER_NAME = "UserName"
@@ -76,9 +80,13 @@ def test_edit_user(client):
         position="Boss",
         phone="00000000",
         password=TEST_PASS,
-        password_confirmation=TEST_PASS
+        password_confirmation=TEST_PASS,
+        user_type=u.user_type.value
     ))
     assert res.status_code == 302
+    u = User.query.get(1)
+    assert u.username == TEST_USER_NAME
+    assert u.email == TEST_EMAIL
 
     res = client.post(EDIT_USER_URL, data=dict(
         username=TEST_USER_NAME,
