@@ -3,7 +3,7 @@
 {% block content %}
 
 <section class="page-section">
-    <div class="profile_container">
+    <div class="container_60vw">
         <!-- Flash Massage -->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -21,13 +21,13 @@
         {% endwith %}
         <!-- End Flash Massage -->
         <form class="" role="form" method="post" id="profile-form">
-        <div class="profile_container__account_block box-shadow">
+        <div class="container_60vw__inner_block box-shadow">
             <div class="_account_title">
                 <span class="">Account Information</span>
                 <span class="">{{user.user_type.value}}</span>
             </div>
-                <div class="_account_inputs">
-                    <div class="_account_inputs_row">
+                <div class="_inner_inputs">
+                    <div class="_inner_inputs_row">
                         <div>
                             {{ form.username(class='_form-input', id="profile_card-username") }}
                             <label class="_label">Name</label>
@@ -44,7 +44,7 @@
                         </div>
                     </div>
 
-                    <div class="_account_inputs_row">
+                    <div class="_inner_inputs_row">
                         <div>
                             {{ form.position(class='_form-input', id="profile_card-position") }}
                             <label class="_label">Position</label>
