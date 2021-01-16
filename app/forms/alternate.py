@@ -14,5 +14,5 @@ class AlternateForm(FlaskForm):
     description = StringField("Description", default="")
     quantity = FloatField("Quantity", default='1.0', validators=[InputRequired(), NumberRange(min=0)])
     unit = StringField("Unit", default='LS', validators=[DataRequired()])
-    price = FloatField("Price", default='0.0', validators=[DataRequired()])
+    price = FloatField("Price", default='0.0', validators=[InputRequired()])
     save_submit = SubmitField("Save")
