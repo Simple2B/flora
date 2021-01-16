@@ -781,9 +781,9 @@
         </span>
         {% if bid.alternates %}
         {% for alternate in bid.alternates%}
-        <div class="_alternate_flex bidding_margin">
+        <div class="_alternate_block bidding_margin">
 
-          <div class="modal_inputs-features">
+          <div>
             <div>
               <input class="_form-input" value="{{alternate.name}}">
               <label class="_label">Alternate item</label>
@@ -805,7 +805,7 @@
         {% endfor %}
         {% endif %}
         <hr>
-        <div class="_alternate_flex_add_alternate_row bidding_margin">
+        <div class="_alternate_block_add_alternate_row bidding_margin">
           <div>
             <a href="{{ url_for('alternate.new_alternate', bid_id=bid.id) }}">
               <button class="ddb-cursor-handle _btn--base-gray">

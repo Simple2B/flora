@@ -3,3 +3,21 @@
 .alternate_bgc {
     background-color: #FAFAFA;
 }
+
+._alternate_input_row {
+    display: flex;
+    align-items: baseline;
+    padding: $m0-5rem;
+
+    & > div {
+        padding-left: $m0-5rem;
+        padding-right: $m0-5rem*4;
+
+    }
+
+    ._alternate_name {
+        display: flex;
+        width: 12%;
+        align-items: center;
+    }
+}

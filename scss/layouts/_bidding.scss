@@ -656,7 +656,7 @@
     padding: 0rem 1.5rem;
 }
 
-._alternate_flex {
+._alternate_block {
     display: flex;
     align-items: center;
 
@@ -664,6 +664,10 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+
+    & > div:first-child {
+        margin-right: $m1rem*2;
     }
 }
 

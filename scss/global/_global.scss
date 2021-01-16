@@ -32,6 +32,9 @@ ul {
     margin: 0;
 }
 
+hr {
+    border: 1px solid #BDBDBD;
+}
 
 // side-bar style (for work_items,
 // exclusions, clarifications)
@@ -102,6 +105,32 @@ ul {
 .box-shadow {
     box-shadow: 0 .2rem .2rem rgba(0, 0, 0, 0.25);
 }
+
+// profile and alternate container
+.container_60vw {
+    &__inner_block {
+        max-width: 60vw;
+        border-top: 1px solid #ebebeb;
+        margin: auto;
+        overflow: hidden;
+    }
+}
+
+._inner_inputs {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    &_row {
+        display: flex;
+        padding: $m0-5rem;
+        div {
+            padding-left: $m0-5rem;
+            padding-right: $m0-5rem*5;
+        }
+    }
+}
+// end profile and alternate block
 
 .box-scroll {
     max-height: 35vh;

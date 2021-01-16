@@ -57,6 +57,9 @@ ul {
   list-style: none;
   margin: 0; }
 
+hr {
+  border: 1px solid #BDBDBD; }
+
 .sidebar {
   display: flex;
   flex-flow: column nowrap;
@@ -97,6 +100,23 @@ ul {
 
 .box-shadow {
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25); }
+
+.container_60vw__inner_block {
+  max-width: 60vw;
+  border-top: 1px solid #ebebeb;
+  margin: auto;
+  overflow: hidden; }
+
+._inner_inputs {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column; }
+  ._inner_inputs_row {
+    display: flex;
+    padding: 0.5rem; }
+    ._inner_inputs_row div {
+      padding-left: 0.5rem;
+      padding-right: 2.5rem; }
 
 .box-scroll {
   max-height: 35vh;
@@ -1549,13 +1569,15 @@ ul {
   flex-flow: wrap;
   padding: 0rem 1.5rem; }
 
-._alternate_flex {
+._alternate_block {
   display: flex;
   align-items: center; }
-  ._alternate_flex_add_alternate_row {
+  ._alternate_block_add_alternate_row {
     display: flex;
     justify-content: space-between;
     align-items: center; }
+  ._alternate_block > div:first-child {
+    margin-right: 2rem; }
 
 .__alternate_total {
   display: flex;
@@ -2317,16 +2339,10 @@ ul {
       color: white;
       margin-left: 8rem; }
 
-.profile_container__account_block {
-  max-width: 60vw;
-  border-top: 1px solid #ebebeb;
-  margin: auto;
-  overflow: hidden; }
-
-.profile_container ._flash-btn {
+._flash-btn {
   background-color: #fff3cd; }
 
-.profile_container ._profile_flash {
+._profile_flash {
   background-color: white;
   color: #EB5757;
   font-weight: 500;
@@ -2336,39 +2352,28 @@ ul {
   background-color: #fff3cd;
   text-align: center; }
 
-.profile_container ._account_title {
+._account_title {
   padding-top: 1rem;
   padding-left: 1rem; }
-  .profile_container ._account_title span:first-child {
+  ._account_title span:first-child {
     font-weight: 700;
     margin-right: 1rem; }
-  .profile_container ._account_title span:last-child {
+  ._account_title span:last-child {
     font-style: normal;
     font-weight: normal;
     color: #828282; }
 
-.profile_container ._account_inputs {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column; }
-  .profile_container ._account_inputs_row {
-    display: flex;
-    padding: 0.5rem; }
-    .profile_container ._account_inputs_row div {
-      padding-left: 0.5rem;
-      padding-right: 2.5rem; }
-
-.profile_container ._submit_btns {
+._submit_btns {
   display: flex;
   align-items: center;
   padding: 0.5rem; }
-  .profile_container ._submit_btns div {
+  ._submit_btns div {
     padding-left: 0.5rem;
     padding-right: 0.5rem; }
-  .profile_container ._submit_btns a {
+  ._submit_btns a {
     text-decoration: none;
     border: none; }
-    .profile_container ._submit_btns a:hover {
+    ._submit_btns a:hover {
       color: #fff; }
 
 .sidebar__nav-links-bidding {
@@ -2406,3 +2411,15 @@ ul {
 
 .alternate_bgc {
   background-color: #FAFAFA; }
+
+._alternate_input_row {
+  display: flex;
+  align-items: baseline;
+  padding: 0.5rem; }
+  ._alternate_input_row > div {
+    padding-left: 0.5rem;
+    padding-right: 2rem; }
+  ._alternate_input_row ._alternate_name {
+    display: flex;
+    width: 12%;
+    align-items: center; }
