@@ -170,6 +170,12 @@ ul {
     cursor: pointer;
 }
 
+.ddb-border {
+    border: 1px solid #BDBDBD;
+    border-radius: 5px;
+    width: 100%;
+}
+
 .--border {
     background-color: #dae0e5 !important;
     color: black !important;
@@ -271,6 +277,9 @@ ul {
 
 .hidden {
     display: none !important;
+}
+
+.test-hidden {
 }
 
 .bck-black {

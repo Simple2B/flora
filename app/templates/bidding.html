@@ -314,13 +314,13 @@
             <div>
               <div class="_show-line_panel bck-color">
                 <div class="title-text-style">Line </div>
-                <div>
+                <!-- <div> -->
                   <div>
                     <button id="btn_line_id" data-line_id="line-{{work_item_line.id}}" class="border-none ddb-cursor-handle btnLine_element_direction_js">
                       <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt="" id="line-{{work_item_line.id}}_img_id">
                     </button>
                   </div>
-                </div>
+                <!-- </div> -->
               </div>
               <div class="_work_item_line--inputs line_hidden_js hidden" id="line-{{work_item_line.id}}">
                 <div class="bck-color">
@@ -660,9 +660,6 @@
           </form>
 
           <div class="_bottom_block">
-
-            <div></div>
-
             <div class="__right-block">
               <div class="_grand_subtotal-block">
                 <div class="subtotal">
@@ -674,7 +671,6 @@
                 </div>
               </div>
             </div>
-
           </div>
 
         </div>
@@ -687,29 +683,26 @@
           </strong>
         </span>
         <div class="d-flex bd-highlight bidding_margin">
-        {% if bid.exclusion_links %}
-          <div class="p-2 flex-shrink-1 bd-highlight">
-            <a href="{{url_for('bid.delete_exclusions', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
-              <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-            </a>
-          </div>
-          <div class="p-2 w-100 bd-highlight" style="border: 1px solid #BDBDBD">
-            <h6>Unless expressly stated, the following exclusions apply:</h6>
-            {{ show_exclusions }}
-          </div>
-          <div class="px-2 flex-shrink-1 bd-highlight">
-            <a href="{{url_for('bid.edit_exclusions', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
-              <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
-            </a>
-          </div>
-
-        {% else %}
-
-        <div class="__modal-inputs--flex-row">
-            <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--base-gray">Add exclusion</button></a>
-        </div>
-
-        {% endif %}
+          {% if bid.exclusion_links %}
+            <div class="delete_element">
+              <a href="{{url_for('bid.delete_exclusions', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
+                <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+              </a>
+            </div>
+            <div class="ddb-border p-2 bd-highlight">
+              <h6>Unless expressly stated, the following exclusions apply:</h6>
+              {{ show_exclusions }}
+            </div>
+            <div class="edit_element flex-shrink-1 bd-highlight">
+              <a href="{{url_for('bid.edit_exclusions', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
+                <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+              </a>
+            </div>
+          {% else %}
+            <div class="">
+                <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--base-gray">Add exclusion</button></a>
+            </div>
+          {% endif %}
         </div>
       </div>
 
@@ -719,33 +712,33 @@
             Clarifications
           </strong>
         </span>
-          <div class="d-flex bd-highlight bidding_margin">
+        <div class="d-flex bd-highlight bidding_margin">
           {% if bid.clarification_links %}
-            <div class="p-2 flex-shrink-1 bd-highlight">
+            <div class="delete_element">
              <a href="{{url_for('bid.delete_clarifications', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
                <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
              </a>
             </div>
-           <div class="p-2 w-100 bd-highlight" style="border: 1px solid #BDBDBD">
-            <h6>Please note the following clarifications:</h6>
-            {{ show_clarifications }}
+            <div class="ddb-border p-2 bd-highlight">
+              <h6>Please note the following clarifications:</h6>
+              {{ show_clarifications }}
             </div>
-            <div class="px-2 flex-shrink-1 bd-highlight">
+            <div class="edit_element">
              <a href="{{url_for('bid.edit_clarifications', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
                <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
              </a>
             </div>
 
             {% else %}
-            <div class="__modal-inputs--flex-row">
-              <a href="{{ url_for('clarification.clarifications', bid_id=bid.id) }}">
-                <button class="ddb-cursor-handle _btn--base-gray">
-                  Add clarification
-                </button>
-              </a>
-            </div>
-          </div>
-         {% endif %}
+              <div class="__modal-inputs--flex-row">
+                <a href="{{ url_for('clarification.clarifications', bid_id=bid.id) }}">
+                  <button class="ddb-cursor-handle _btn--base-gray">
+                    Add clarification
+                  </button>
+                </a>
+              </div>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>

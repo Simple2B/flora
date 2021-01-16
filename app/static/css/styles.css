@@ -152,6 +152,11 @@ ul {
 .ddb-cursor-handle {
   cursor: pointer; }
 
+.ddb-border {
+  border: 1px solid #BDBDBD;
+  border-radius: 5px;
+  width: 100%; }
+
 .--border {
   background-color: #dae0e5 !important;
   color: black !important; }
@@ -1395,6 +1400,9 @@ ul {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: .3rem;
   outline: 0; }
+  .__bidding--scroll div.add_item_block h6 {
+    font-weight: 700;
+    font-size: 16px; }
 
 .__bidding--scroll .clarification_block {
   margin-bottom: 1rem;
@@ -1430,12 +1438,13 @@ ul {
   justify-content: flex-end;
   margin-top: 1rem; }
   .__bidding--scroll ._work_item-line ._work_item_line--inputs {
+    width: 50vw;
     margin-bottom: 1rem; }
   .__bidding--scroll ._work_item-line .bck-color {
     background-color: #FAFAFA; }
   .__bidding--scroll ._work_item-line ._show-line_panel {
     padding: 0rem 0rem 0rem 0.5rem;
-    width: 100%;
+    width: 50vw;
     display: inline-flex;
     flex-flow: row wrap;
     justify-content: space-between; }
@@ -1500,7 +1509,8 @@ ul {
     justify-content: flex-end; }
     .__bidding--scroll .add_work_item-group ._center_block .inputs_fields {
       display: flex;
-      flex-direction: column; }
+      flex-direction: column;
+      padding-right: 1rem; }
       .__bidding--scroll .add_work_item-group ._center_block .inputs_fields div.input-row {
         display: flex;
         flex-flow: row wrap;
@@ -1522,17 +1532,24 @@ ul {
     display: flex;
     justify-content: flex-end;
     align-items: baseline; }
-  .__bidding--scroll .add_work_item-group ._bottom_block {
-    margin: 1rem 0rem; }
   .__bidding--scroll .add_work_item-group .__right-block {
     display: flex;
     justify-content: flex-end; }
     .__bidding--scroll .add_work_item-group .__right-block ._grand_subtotal-block {
-      width: 50vw;
+      width: 36.9vw;
       display: flex;
       flex-flow: row wrap;
-      justify-content: space-evenly;
       align-items: baseline; }
+    .__bidding--scroll .add_work_item-group .__right-block div.subtotal {
+      margin-right: 3.2rem;
+      flex-grow: 1; }
+    .__bidding--scroll .add_work_item-group .__right-block div.subtotal_price {
+      flex-grow: 1; }
+  .__bidding--scroll .add_work_item-group ._bottom_block {
+    margin: 1rem 0rem; }
+    .__bidding--scroll .add_work_item-group ._bottom_block div.subtotal {
+      margin-right: 0rem;
+      width: 22%; }
   .__bidding--scroll .add_work_item-group .subtotal {
     font-size: 18px;
     font-weight: bold;
@@ -1540,6 +1557,14 @@ ul {
   .__bidding--scroll .add_work_item-group .subtotal_price {
     color: #EB5757;
     font-weight: bold; }
+
+.delete_element {
+  margin-right: 0.5rem;
+  padding-right: 0.5rem; }
+
+.edit_element {
+  margin-left: 0.5rem;
+  padding: 0rem 0.5rem; }
 
 .check_box-TBD {
   width: 70px;

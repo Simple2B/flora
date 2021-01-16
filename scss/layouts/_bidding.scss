@@ -363,6 +363,11 @@
         border: 1px solid rgba(0,0,0,.2);
         border-radius: .3rem;
         outline: 0;
+
+        h6 {
+            font-weight: 700;
+            font-size: 16px;
+        }
     }
 
     .clarification_block {
@@ -413,6 +418,7 @@
         margin-top: $m1rem;
 
         ._work_item_line--inputs {
+            width: 50vw;
             margin-bottom: $m1rem;
         }
 
@@ -422,8 +428,8 @@
 
         ._show-line_panel {
             padding: 0rem 0rem 0rem $m0-5rem;
-            // width: 50vw;
-            width: 100%;
+            width: 50vw;
+            // width: 100%;
             display: inline-flex;
             flex-flow: row wrap;
             justify-content: space-between;
@@ -533,6 +539,7 @@
             .inputs_fields {
                 display: flex;
                 flex-direction: column;
+                padding-right: $m1rem;
 
                 div.input-row {
                     display: flex;
@@ -582,21 +589,35 @@
             }
         }
 
-        ._bottom_block {
-            margin: $m1rem 0rem;
-        }
-
         .__right-block {
 
             display: flex;
             justify-content: flex-end;
 
             ._grand_subtotal-block {
-                width: 50vw;
+                width: 36.9vw;
                 display: flex;
                 flex-flow: row wrap;
-                justify-content: space-evenly;
+                // justify-content: space-evenly;
                 align-items: baseline;
+            }
+
+            div.subtotal {
+                margin-right: $m1rem*3.2;
+                flex-grow: 1;
+            }
+
+            div.subtotal_price {
+                flex-grow: 1;
+            }
+        }
+
+        ._bottom_block {
+            margin: $m1rem 0rem;
+
+            div.subtotal {
+                margin-right: 0rem;
+                width: 22%;
             }
         }
 
@@ -611,6 +632,16 @@
             font-weight: bold;
         }
     }
+}
+
+.delete_element {
+    margin-right: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.edit_element {
+    margin-left: 0.5rem;
+    padding: 0rem 0.5rem;
 }
 
 .check_box-TBD {
