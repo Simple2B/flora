@@ -41,3 +41,11 @@ class RegistrationForm(FlaskForm):
     def validate_email(form, field):
         if User.query.filter_by(email=field.data).first() is not None:
             raise ValidationError("This email is already registered.")
+
+
+class EditUserForm(RegistrationForm):
+    def validate_username(form, field):
+        pass
+
+    def validate_email(form, field):
+        pass

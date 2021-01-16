@@ -62,3 +62,31 @@ def test_login_and_logout(client):
     # Correct credentials should login
     response = login(client, "sam")
     assert b"sam" in response.data
+
+
+def test_edit_user(client):
+    # /edit_card/<int:user_id>
+    EDIT_USER_URL = "/edit_card/1"
+    TEST_USER_NAME = "UserName"
+    TEST_EMAIL = "user@bubu.com"
+    TEST_PASS = "Pa$$word1"
+    res = client.post(EDIT_USER_URL, data=dict(
+        username=TEST_USER_NAME,
+        email=TEST_EMAIL,
+        position="Boss",
+        phone="00000000",
+        password=TEST_PASS,
+        password_confirmation=TEST_PASS
+    ))
+    assert res.status_code == 302
+
+    res = client.post(EDIT_USER_URL, data=dict(
+        username=TEST_USER_NAME,
+        email=TEST_EMAIL,
+        position="Boss",
+        phone="00000000",
+        password=TEST_PASS,
+        password_confirmation="Another value"
+    ), follow_redirects=True)
+    assert res.status_code == 200
+    assert b"Password do not match" in res.data
