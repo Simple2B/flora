@@ -147,7 +147,10 @@ def calculate_alternate_total(bid_id):
     bid = Bid.query.get(bid_id)
     alternate_total = 0
     for alternate in bid.alternates:
-        alternate_total += (alternate.price * alternate.quantity)
+        if alternate.tbd is True:
+            continue
+        else:
+            alternate_total += (alternate.price * alternate.quantity)
     return alternate_total
 
 
