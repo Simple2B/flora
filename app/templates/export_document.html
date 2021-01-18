@@ -588,7 +588,7 @@
                     <div>
                         {% for exclusion_link in bid.exclusion_links %}
                             {% if exclusion_link == bid.exclusion_links[-1] %}
-                                {{ exclusion_link.exclusion.title }}
+                                {{ exclusion_link.exclusion.title }}.
                             {% else %}
                                 {{ exclusion_link.exclusion.title }},
                             {% endif %}
@@ -600,7 +600,7 @@
                     <div>
                         {% for clarification_link in bid.clarification_links %}
                             {% if clarification_link == bid.clarification_links[-1] %}
-                                {{ clarification_link.clarification.note }}
+                                {{ clarification_link.clarification.note }}.
                             {% else %}
                                 {{ clarification_link.clarification.note }},
                             {% endif %}
@@ -609,7 +609,15 @@
                     <div class="qoute_clarification"></div>
 
                     <div class="section_letter">Section D: Alternates</div>
-                    <div></div>
+                    <div>
+                        {% for alternate in bid.alternates %}
+                            {% if alternate == bid.alternates[-1] %}
+                                {{ alternate.name }}.
+                            {% else %}
+                                {{ alternate.name }},
+                            {% endif %}
+                        {% endfor %}
+                    </div>
 
                     <div class="keep-together">
 
