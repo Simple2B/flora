@@ -8,3 +8,4 @@ from .create_pdf_file import create_pdf_file  # noqa 401
 from .timer import timer  # noqa 401
 from .procore import update_bids  # noqa 401
 from .create_docx import create_docx  # noqa 401
+from .price import calculate_alternate_total  # noqa 401

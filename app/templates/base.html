@@ -37,13 +37,15 @@
               <span class="nav-indicator"></span>
           </nav>
       </div>
+      <!-- onclick="this.form.submit()" -->
       {% if current_user.is_authenticated %}
       <div class="header--right">
         <div class="user-info">
-          <div class="user-info__img">
-            <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt="Icon">
-          </div>
-
+          <form action="{{ url_for('profile.profile') }}" method="get">
+            <button class="user-info__btn ddb-cursor-handle" onclick="this.form.submit()" name="next_link" value="" id="my_profile_submit_id">
+              <img src="{{ url_for('static', filename='images/user-icon.svg') }}" alt="Icon">
+            </button>
+          </form>
           <div class="user-info__details">
             <span class="flex-row">
             <div>{{current_user.username}}</div>

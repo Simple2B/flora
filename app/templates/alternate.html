@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="page-section">
+  <div class="container_60vw">
+    <!-- Flash Massage -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if category == 'warning' %}
+    <div class="alert alert-{{ category }} alert-dismisible _profile_flash">
+      <button class="_flash-btn" type="button" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true"><img src="{{ url_for('static', filename='images/close_button_ddb.svg') }}"></span>
+      </button>
+      {{ message }}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <!-- End Flash Massage -->
+    <form class="" role="form" method="post" id="alternate-form">
+      <div class="container_60vw__inner_block box-shadow">
+        <div class="_account_title">
+          <span class="">Alternates</span>
+        </div>
+        <div class="_inner_inputs">
+          <div class="_alternate_input_row alternate_bgc">
+            <div>
+              {{ form.name(class='_form-input') }}
+              <label class="_label">{{form.name.label.text }}</label>
+            </div>
+            <!-- <div >
+               form.tbd(class='_form-input')
+              <label class="_label">form.tbd.label.text </label>
+            </div> -->
+            <div class="_alternate_name">
+              <div class="check_box-TBD">
+                {{form.tbd(class='form-control')}}
+              </div>
+              <span class="">TBD</span>
+            </div>
+          </div>
+          <div class="_alternate_input_row alternate_bgc">
+            <div>
+              <textarea class="_form-text_area" placeholder="Enter Note here..." rows="4" name="description">{{form.description.data}}</textarea>
+            </div>
+          </div>
+          <div class="_alternate_input_row alternate_bgc">
+            <div>
+              {{ form.quantity(class='_form-input', type="number") }}
+              <label class="_label">{{form.quantity.label.text}}</label>
+            </div>
+            <div>
+              {{ form.unit(class='_form-input') }}
+              <label class="_label">{{form.unit.label.text}}</label>
+            </div>
+            <div>
+              {{ form.price(class='_form-input') }}
+              <label class="_label">{{form.price.label.text}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="_submit_btns">
+          <div>
+            {{ form.save_submit(class="_btn--black ddb-cursor-handle") }}
+          </div>
+          <div>
+            <a href="{{cancel_url}}" class="_btn--gray ddb-cursor-handle"> Cancel </a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

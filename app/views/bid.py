@@ -18,7 +18,12 @@ from app.models import Bid, WorkItemLine, LinkWorkItem, WorkItem, WorkItemGroup
 
 from app.forms import WorkItemLineForm, BidForm
 
-from app.controllers import calculate_subtotal, time_update, check_bid_tbd
+from app.controllers import (
+    calculate_subtotal,
+    calculate_alternate_total,
+    time_update,
+    check_bid_tbd,
+)
 
 from app.logger import log
 
@@ -39,9 +44,9 @@ def check_tbd(bid_id, tbd_name):
             return "tbd_work_item_line_on"
         else:
             return "tbd_work_item_line_off"
-    else:
-        bid_tbd = check_bid_tbd(bid_id, tbd_name)
-        return f"{bid_tbd}"
+    if tbd_name.startswith("work_item_line_"):
+        work_item_line = WorkItemLine.query.get(int(tbd_name[15:]))
+        return f"{work_item_line.price}"
 
 
 @bid_blueprint.route("/save_tbd/<int:bid_id>", methods=["GET"])
@@ -73,10 +78,17 @@ def save_tbd(bid_id):
                 calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
                 log(log.INFO, f"Response: 'tbd_name: {tbd_name} is false'")
             return json.dumps('tbd:' + 'false')
-    else:
-        session["tbdChoices"] = []
-        log(log.DEBUG, 'No requesr.args')
-        return json.dumps('tbd:' + 'false')
+        if request.args.get("", None):
+            tbd_name = request.args[""]
+            calculate_subtotal(bid_id, tbd_name=tbd_name)
+            log(log.INFO, f"Response is '{tbd_name}'")
+            json_tbd_name = "tbd: " + f"{tbd_name}"
+            return json.dumps(json_tbd_name)
+        else:
+            if True:
+                tbd_name = request.args["false"]
+                calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
+            return json.dumps("tbd:" + "false")
 
 
 @bid_blueprint.route(
@@ -86,7 +98,7 @@ def save_tbd(bid_id):
 def add_work_item_line(bid_id, link_work_item_id):
     WorkItemLine(link_work_items_id=link_work_item_id).save()
     time_update(bid_id)
-    session['saveInCloud'] = True
+    session["saveInCloud"] = True
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
 
 
@@ -104,7 +116,7 @@ def delete_group(bid_id, group_name):
         link.delete()
     group.delete()
     time_update(bid_id)
-    session['saveInCloud'] = True
+    session["saveInCloud"] = True
     return redirect(url_for("bid.bidding", bid_id=bid_id))
 
 
@@ -115,7 +127,7 @@ def delete_group(bid_id, group_name):
 def add_group_work_item_line(bid_id, group_link_id):
     WorkItemLine(link_work_items_id=group_link_id).save()
     time_update(bid_id)
-    session['saveInCloud'] = True
+    session["saveInCloud"] = True
     return redirect(url_for("bid.bidding", bid_id=bid_id))
 
 
@@ -137,7 +149,7 @@ def edit_work_item_line(bid_id, work_item_line_id):
                 line.tbd = form.tbd.data
                 line.save()
                 time_update(bid_id)
-                session['saveInCloud'] = True
+                session["saveInCloud"] = True
             else:
                 line.note = form.note.data
                 line.description = form.description.data
@@ -147,7 +159,7 @@ def edit_work_item_line(bid_id, work_item_line_id):
                 line.tbd = form.tbd.data
                 line.save()
                 time_update(bid_id)
-                session['saveInCloud'] = True
+                session["saveInCloud"] = True
         else:
             log(log.ERROR, "Unknown work_item_line_id: %d", work_item_line_id)
 
@@ -165,7 +177,7 @@ def delete_link_work_item(bid_id, link_work_item_id):
             line.delete()
         link.delete()
         time_update(bid_id)
-        session['saveInCloud'] = True
+        session["saveInCloud"] = True
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", link_work_item_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
@@ -182,7 +194,7 @@ def delete_group_link_work_item(bid_id, group_link_id):
             line.delete()
         link.delete()
         time_update(bid_id)
-        session['saveInCloud'] = True
+        session["saveInCloud"] = True
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", group_link_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
@@ -222,7 +234,7 @@ def delete_exclusions(bid_id):
     bid = Bid.query.get(bid_id)
     for exclusion_link in bid.exclusion_links:
         exclusion_link.delete()
-    session['saveInCloud'] = True
+    session["saveInCloud"] = True
     time_update(bid_id)
     return redirect(url_for("bidding.bidding", bid_id=bid_id, _anchor="bid_exclusion"))
 
@@ -239,7 +251,7 @@ def delete_clarifications(bid_id):
     bid = Bid.query.get(bid_id)
     for clarification_link in bid.clarification_links:
         clarification_link.delete()
-    session['saveInCloud'] = True
+    session["saveInCloud"] = True
     time_update(bid_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_clarification"))
 
@@ -264,7 +276,7 @@ def bidding_change_status(bid_id):
     else:
         bid.status = Bid.Status.d_archived
         bid.save()
-    session['saveInCloud'] = True
+    session["saveInCloud"] = True
     time_update(bid_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
 
@@ -272,7 +284,7 @@ def bidding_change_status(bid_id):
 @bid_blueprint.route("/bidding_save_in_cloud/<int:bid_id>", methods=["GET"])
 @login_required
 def bidding_save_in_cloud(bid_id):
-    session['saveInCloud'] = False
+    session["saveInCloud"] = False
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
 
 
@@ -283,7 +295,12 @@ def bidding(bid_id):
     form_bid = BidForm()
     form = WorkItemLineForm()
     tbd_choices = session.get("tbdChoices", [])
-    form_bid.save_in_cloud = session.get('saveInCloud', False)
+    form_bid.save_in_cloud = session.get("saveInCloud", False)
+
+    if bid.status == Bid.Status.a_new:
+        bid.status = Bid.Status.b_draft
+    bid.popularity += 1
+    bid.save()
 
     form_bid.global_work_items = (
         LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
@@ -311,6 +328,7 @@ def bidding(bid_id):
     ) + "."
     show_clarifications = show_clarifications.capitalize()
     calculate_subtotal(bid_id, tbd_choices)
+    form.calculate_alternate_total = calculate_alternate_total(bid_id)
     session["tbdChoices"] = []
     return render_template(
         "bidding.html",
@@ -319,7 +337,7 @@ def bidding(bid_id):
         show_exclusions=show_exclusions,
         show_clarifications=show_clarifications,
         form_bid=form_bid,
-        round=round
+        round=round,
     )
 
 
@@ -377,7 +395,7 @@ def export_pdf(bid_id):
                 global_work_items=global_work_items,
                 path_to_img=PATH_TO_IMG,
             )
-            options = {'enable-local-file-access': None}
+            options = {"enable-local-file-access": None}
             pdf_content = pdfkit.from_string(html_content, False, options=options)
             stream = io.BytesIO(pdf_content)
 
@@ -394,6 +412,7 @@ def export_pdf(bid_id):
         elif form.export_docx.data:
             preview_pdf_bool = False
             from app.controllers.create_docx import create_docx
+
             create_docx(bid_id)
             # with open()
             # calculate_subtotal(bid_id, tbd_choices)
@@ -407,7 +426,7 @@ def export_pdf(bid_id):
             # grabzit.HTMLToDOCX(html_content)
             # docx_content = grabzit.SaveTo()
 
-            with open('test_docx.docx', 'rb') as f:
+            with open("test_docx.docx", "rb") as f:
                 stream = io.BytesIO(f.read())
             # target_stream = StringIO()
             # document.save(target_stream)
@@ -447,7 +466,7 @@ def update_revision(bid_id, revision):
 @login_required
 def project_type(bid_id, project_type_name):
     bid = Bid.query.get(bid_id)
-    if project_type_name == 'Budget':
+    if project_type_name == "Budget":
         bid.project_type = Bid.ProjectType.a_budget
     else:
         bid.project_type = Bid.ProjectType.b_quote
@@ -455,7 +474,9 @@ def project_type(bid_id, project_type_name):
     return "OK"
 
 
-@bid_blueprint.route("/set_percent_value/<int:bid_id>/<parameter_name>/<value>", methods=["GET"])
+@bid_blueprint.route(
+    "/set_percent_value/<int:bid_id>/<parameter_name>/<value>", methods=["GET"]
+)
 @login_required
 def set_percent_value(bid_id, parameter_name, value):
     bid = Bid.query.get(bid_id)

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="page-section">
+    <div class="container_60vw">
+        <!-- Flash Massage -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            {% if category == 'warning' %}
+              <div class="alert alert-{{ category }} alert-dismisible _profile_flash">
+                <button class="_flash-btn" type="button" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true"><img src="{{ url_for('static', filename='images/close_button_ddb.svg') }}"></span>
+                </button>
+                {{ message }}
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <!-- End Flash Massage -->
+        <form class="" role="form" method="post" id="profile-form">
+        <div class="container_60vw__inner_block box-shadow">
+            <div class="_account_title">
+                <span class="">Account Information</span>
+                <span class="">{{user.user_type.value}}</span>
+            </div>
+                <div class="_inner_inputs">
+                    <div class="_inner_inputs_row">
+                        <div>
+                            {{ form.username(class='_form-input', id="profile_card-username") }}
+                            <label class="_label">Name</label>
+                        </div>
+
+                        <div>
+                            {{ form.password(class='_form-input', id="profile_card-password") }}
+                            <label class="_label">Password</label>
+                        </div>
+
+                        <div>
+                            {{ form.password_confirmation(class='_form-input', id="profile_card-password_confirm") }}
+                            <label class="_label">Confirm password</label>
+                        </div>
+                    </div>
+
+                    <div class="_inner_inputs_row">
+                        <div>
+                            {{ form.position(class='_form-input', id="profile_card-position") }}
+                            <label class="_label">Position</label>
+                        </div>
+
+                        <div>
+                            {{ form.phone(class='_form-input', id="profile_card-phone") }}
+                            <label class="_label">Phone</label>
+                        </div>
+
+                        <div>
+                            {{ form.email(class='_form-input', id="profile_card-email") }}
+                            <label class="_label">Email</label>
+                        </div>
+                    </div>
+                </div>
+            <div class="_submit_btns">
+                <div>
+                    {{ form.submit(class="_btn--black ddb-cursor-handle") }}
+                </div>
+                <div>
+                    <a href="{{previous_route}}" class="_btn--gray ddb-cursor-handle"> Cancel </a>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

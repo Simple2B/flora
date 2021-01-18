@@ -138,6 +138,11 @@
             align-items: center;
             margin-top: .5rem;
 
+            &__btn {
+                border: none;
+                background: none;
+            }
+
             &__details {
                 display: flex;
                 flex-flow: column nowrap;
