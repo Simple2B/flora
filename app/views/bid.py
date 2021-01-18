@@ -44,9 +44,9 @@ def check_tbd(bid_id, tbd_name):
             return "tbd_work_item_line_on"
         else:
             return "tbd_work_item_line_off"
-    if tbd_name.startswith("work_item_line_"):
-        work_item_line = WorkItemLine.query.get(int(tbd_name[15:]))
-        return f"{work_item_line.price}"
+    else:
+        bid_tbd = check_bid_tbd(bid_id, tbd_name)
+        return f"{bid_tbd}"
 
 
 @bid_blueprint.route("/save_tbd/<int:bid_id>", methods=["GET"])
