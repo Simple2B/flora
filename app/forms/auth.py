@@ -4,7 +4,6 @@ from wtforms import (
     PasswordField,
     SubmitField,
     ValidationError,
-    IntegerField,
 )
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 
@@ -45,7 +44,11 @@ class RegistrationForm(FlaskForm):
 
 class EditUserForm(RegistrationForm):
     def validate_username(form, field):
-        pass
+        # validate but only if the field filled
+        if field:
+            return RegistrationForm.validate_username(form, field)
 
     def validate_email(form, field):
-        pass
+        # validate but only if the field filled
+        if field:
+            return RegistrationForm.validate_email(form, field)
