@@ -37,18 +37,47 @@ bid_blueprint = Blueprint("bid", __name__)
 @bid_blueprint.route("/check_tbd/<int:bid_id>/<tbd_name>", methods=["GET"])
 @login_required
 def check_tbd(bid_id, tbd_name):
+    if tbd_name.startswith('work_item_line_tbd_'):
+        line_id = int(tbd_name.strip('work_item_line_tbd_'))
+        work_item_line = WorkItemLine.query.get(line_id)
+        if work_item_line.tbd:
+            return "tbd_work_item_line_on"
+        else:
+            return "tbd_work_item_line_off"
     if tbd_name.startswith("work_item_line_"):
         work_item_line = WorkItemLine.query.get(int(tbd_name[15:]))
         return f"{work_item_line.price}"
-    else:
-        bid_tbd = check_bid_tbd(bid_id, tbd_name)
-        return f"{bid_tbd}"
 
 
 @bid_blueprint.route("/save_tbd/<int:bid_id>", methods=["GET"])
 @login_required
 def save_tbd(bid_id):
     if request.args:
+        tbd_name = request.args.get('', None)
+        if tbd_name:
+            if tbd_name.startswith('work_item_line_tbd_'):
+                line_id = int(tbd_name.strip('work_item_line_tbd_'))
+                work_item_line = WorkItemLine.query.get(line_id)
+                work_item_line.tbd = True
+                work_item_line.save()
+                log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is true'")
+                return json.dumps('tbd: ' + f'{tbd_name}')
+            else:
+                calculate_subtotal(bid_id, tbd_name=tbd_name)
+                log(log.INFO, f"Response is '{tbd_name}'")
+                return json.dumps('tbd: ' + f'{tbd_name}')
+        else:
+            tbd_name = request.args['false']
+            if tbd_name.startswith('work_item_line_tbd_'):
+                line_id = int(tbd_name.strip('work_item_line_tbd_'))
+                work_item_line = WorkItemLine.query.get(line_id)
+                work_item_line.tbd = False
+                work_item_line.save()
+                log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is false'")
+            else:
+                calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
+                log(log.INFO, f"Response: 'tbd_name: {tbd_name} is false'")
+            return json.dumps('tbd:' + 'false')
         if request.args.get("", None):
             tbd_name = request.args[""]
             calculate_subtotal(bid_id, tbd_name=tbd_name)
@@ -60,10 +89,6 @@ def save_tbd(bid_id):
                 tbd_name = request.args["false"]
                 calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
             return json.dumps("tbd:" + "false")
-    else:
-        session["tbdChoices"] = []
-        log(log.DEBUG, "No requesr.args")
-        return json.dumps("tbd:" + "false")
 
 
 @bid_blueprint.route(
