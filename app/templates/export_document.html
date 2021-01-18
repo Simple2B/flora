@@ -9,35 +9,71 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        body {
+            font-family: "Poppins";
+        }
+
+        a {
+            color: #212529;
+            text-decoration: none;
+            outline: none;
+        }
+        a:hover {
+            color: #212529;
+            text-decoration: none;
+            outline: none;
+        }
+
         .export_container {
             display: flex;
             justify-content: center;
             margin-top: 1rem;
         }
 
+        .box_shadow {
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        .__top-content {
+            display: -webkit-box; /* wkhtmltopdf uses this one */
+            /* display: -webkit-flex; */
+            /* display: flex; */
+            -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
+            -webkit-box-align: center;
+            padding: 0.5rem;
+        }
+
         .preview_document {
             padding-top: 1rem;
             font-weight: 700;
         }
-
-        .__top-content {
-
-            display: -webkit-box; /* wkhtmltopdf uses this one */
-            /* display: -webkit-flex; */
-            /* display: flex; */
-            flex-direction: row;
-            -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
-            -webkit-box-align: center;
-            /* justify-content: space-between;
-            align-items: center; */
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            margin-bottom: 1rem;
-            padding: 1rem;
+        .back img {
+            margin-right: 0.5rem;
+        }
+        .preview_export_btn {
+            padding: .5rem 1.5rem;
+            color: #fff;
+            cursor: pointer;
+            background-color: #828282;
+            border-radius: .5rem;
+            border: 1px solid;
+            outline: none;
+            font-size: 14px;
+            transition: .3s;
+        }
+        .preview_export_btn:focus {
+            outline: none;
+        }
+        .preview_export_btn:active {
+            outline: none;
+        }
+        .preview_export_btn:hover {
+            background-color: rgba(0, 0, 0, 0.65);
         }
 
         .__main-content {
+            margin-top: 1rem;
             padding: 1rem;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
         .__main-content  .__ddb_logo {
             display: flex;
@@ -51,7 +87,7 @@
         }
 
         .__due_time td:nth-child(2) {
-            width: 34.3%;
+            width: 33.2%;
             font-weight: bold;
         }
 
@@ -95,6 +131,10 @@
 
         .project_title {
             padding-right: 2rem;
+        }
+
+        .alternate {
+            margin-top: 1rem;
         }
 
         .section_letter {
@@ -334,13 +374,30 @@
 <body>
 
     <section>
+
         <div class="export_container">
             <div>
                 {% if preview_pdf_bool %}
                 <h6 class="preview_document">Preview Document</h6>
+                <form role="form" action="{{ url_for('bid.export_pdf', bid_id=bid.id) }}" method="post">
+                    <div class="__top-content box_shadow">
+                        <div class="back">
+                            <a href="{{previous_url}}">
+                                <img src="{{ url_for('static', filename='images/right-hand.png') }}">
+                                <span> Back </span>
+                            </a>
+                        </div>
+                        <div>
+                            <button type="submit" name="export_pdf" value="True" class="preview_export_btn">
+                                <img src="{{ url_for('static', filename='images/export.png') }}">
+                                &nbsp;
+                                Export
+                            </button>
+                        </div>
+                    </div>
+                </form>
                 {% endif %}
-
-                <div class="__main-content">
+                <div class="__main-content box_shadow">
 
                     {% if preview_pdf_bool %}
                     <div class="__ddb_logo">
@@ -400,7 +457,7 @@
                         <div class="link_work_item_line_padding">
                             <div class="bid_work_item">
                                 <div class="work_item_pdf">
-                                    <div>&nbsp; {{ link_work_item.work_item.code }} &nbsp; &nbsp;</div>
+                                    <div> {{ link_work_item.work_item.code }} &nbsp; &nbsp;</div>
                                     <div> {{ link_work_item.work_item.name }} &nbsp; &nbsp;</div>
                                 </div>
                                 <div class="bid_subtotal_value">${{ link_work_item.link_subtotal }}</div>
@@ -460,12 +517,11 @@
                             {% for link in group.link_work_items %}
                             <div class="bid_work_item">
                                 <div class="work_item_pdf">
-                                    <div>&nbsp; {{ link.work_item.code }} &nbsp; &nbsp;</div>
+                                    <div> {{ link.work_item.code }} &nbsp; &nbsp;</div>
                                     <div> {{ link.work_item.name }} &nbsp; &nbsp;</div>
                                 </div>
                                 <div class="bid_subtotal_value">${{ link.link_subtotal }}</div>
                             </div>
-                            <!-- test table -->
                                 {% for work_item_line in link.work_item_lines %}
                                 <table style="width: 100%;">
                                     <tbody>
@@ -628,7 +684,7 @@
                     <div class="qoute_clarification"></div>
 
                     <div class="section_letter">Section D: Alternates</div>
-                    <div>
+                    <div class="alternate">
                         {% for alternate in bid.alternates %}
                             {% if alternate == bid.alternates[-1] %}
                                 {{ alternate.name }}.

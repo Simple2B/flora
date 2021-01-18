@@ -376,6 +376,7 @@ def bidding(bid_id):
 @login_required
 def preview_pdf(bid_id):
     bid = Bid.query.get(bid_id)
+    previous_url = session.get('nextUrl', '/')
     global_work_items = (
         LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
         .filter(LinkWorkItem.work_item_group == None)  # noqa 711
@@ -393,6 +394,7 @@ def preview_pdf(bid_id):
         global_work_items=global_work_items,
         groups=groups,
         preview_pdf_bool=preview_pdf_bool,
+        previous_url=previous_url
     )
 
 
@@ -411,6 +413,7 @@ def export_pdf(bid_id):
         tbd_choices = [i for i in request.form if request.form[i] == "on"]
         session["tbdChoices"] = tbd_choices
         if form.preview.data:
+            session['nextUrl'] = request.form.get('next_url', '/')
             return redirect(url_for("bid.preview_pdf", bid_id=bid_id))
         if form.export_pdf.data:
             BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
