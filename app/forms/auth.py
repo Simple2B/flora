@@ -33,22 +33,20 @@ class RegistrationForm(FlaskForm):
     )
     submit = SubmitField("Add new user")
 
-    def validate_username(form, field):
+    def validate_username(self, field):
         if User.query.filter_by(username=field.data).first() is not None:
             raise ValidationError("This username is taken.")
 
-    def validate_email(form, field):
+    def validate_email(self, field):
         if User.query.filter_by(email=field.data).first() is not None:
             raise ValidationError("This email is already registered.")
 
 
 class EditUserForm(RegistrationForm):
-    def validate_username(form, field):
-        # validate but only if the field filled
-        if field:
-            return RegistrationForm.validate_username(form, field)
+    def validate_username(self, field):
+        # do not validate
+        pass
 
-    def validate_email(form, field):
-        # validate but only if the field filled
-        if field:
-            return RegistrationForm.validate_email(form, field)
+    def validate_email(self, field):
+        # do not validate
+        pass
