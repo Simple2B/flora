@@ -51,7 +51,7 @@
         }
 
         .__due_time td:nth-child(2) {
-            width: 37.5%;
+            width: 34.3%;
             font-weight: bold;
         }
 
@@ -129,6 +129,10 @@
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: vertical;
+        }
+
+        .link_work_item_line_padding {
+            padding: 0rem 0.5rem 0.5rem 0.5rem;
         }
 
         /* Pagination */
@@ -393,9 +397,10 @@
                         <h5>Please find our detailed Quote for the above referenced project as outlined below:</h5>
 
                         {% for link_work_item in global_work_items %}
+                        <div class="link_work_item_line_padding">
                             <div class="bid_work_item">
                                 <div class="work_item_pdf">
-                                    <div> {{ link_work_item.work_item.code }} &nbsp; &nbsp;</div>
+                                    <div>&nbsp; {{ link_work_item.work_item.code }} &nbsp; &nbsp;</div>
                                     <div> {{ link_work_item.work_item.name }} &nbsp; &nbsp;</div>
                                 </div>
                                 <div class="bid_subtotal_value">${{ link_work_item.link_subtotal }}</div>
@@ -417,6 +422,7 @@
                                 <div></div>
                             </div>
                             {% endfor %}
+                        </div>
                         {% endfor %}
                     </div>
                     <!-- # Pagination -->
@@ -425,7 +431,7 @@
                         {% for group in groups %}
                         <div> <h4 class="group_title"> <span> Work Group: {{ group.name }} </span> </h4> </div>
                         <div class="section_group_letter">
-                            <div class="_inner_block">
+                            <!-- <div class="_inner_block">
                                 <div>Phase</div>
                                 <div>Description</div>
                             </div>
@@ -435,13 +441,26 @@
                                 <div>Unit Cost</div>
                                 <div>Item Cost</div>
                                 <div>Phase Cost</div>
-                            </div>
+                            </div> -->
+                            <table style="width: 100%;">
+                                <tbody>
+                                    <tr style="text-align: left;">
+                                        <td style="width: 11%;">&nbsp; &nbsp;Phase</td>
+                                        <td style="width: 44.5%;"> Description</td>
+                                        <td style="width: 5%;">Qty</td>
+                                        <td style="width: 8.5%;">Unit</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="_group-block">
                             {% for link in group.link_work_items %}
                             <div class="bid_work_item">
                                 <div class="work_item_pdf">
-                                    <div> {{ link.work_item.code }} &nbsp; &nbsp;</div>
+                                    <div>&nbsp; {{ link.work_item.code }} &nbsp; &nbsp;</div>
                                     <div> {{ link.work_item.name }} &nbsp; &nbsp;</div>
                                 </div>
                                 <div class="bid_subtotal_value">${{ link.link_subtotal }}</div>
@@ -452,7 +471,7 @@
                                     <tbody>
                                         <tr>
                                             <td style="width: 14%;"></td>
-                                            <td style="width: 29%;">
+                                            <td style="width: 42%;">
                                                 <div class="_group_note _note">
                                                     {{ work_item_line.description }}
                                                     <div>
@@ -460,7 +479,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td style="width: 8%; vertical-align: top;">{{ work_item_line.quantity }}</td>
+                                            <td style="width: 5%; vertical-align: top;">{{ work_item_line.quantity }}</td>
                                             <td style="width: 8.5%; vertical-align: top;">{{ work_item_line.unit }}</td>
                                             <td></td>
                                             <td></td>
@@ -516,11 +535,11 @@
                                 </div>
                                 <div class="feature_price">
                                     <div>
-                                        Insurance/Tax:
+                                        Overhead:
                                     </div>
-                                    {% if bid.insurance_tax %}
+                                    {% if bid.overhead %}
                                     <div>
-                                        ${{ bid.insurance_tax }}
+                                        ${{ bid.overhead }}
                                     </div>
                                     {% else %}
                                     <div>
@@ -530,11 +549,11 @@
                                 </div>
                                 <div class="feature_price">
                                     <div>
-                                        Overhead:
+                                        Insurance/Tax:
                                     </div>
-                                    {% if bid.overhead %}
+                                    {% if bid.insurance_tax %}
                                     <div>
-                                        ${{ bid.overhead }}
+                                        ${{ bid.insurance_tax }}
                                     </div>
                                     {% else %}
                                     <div>
