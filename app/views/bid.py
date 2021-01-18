@@ -44,9 +44,9 @@ def check_tbd(bid_id, tbd_name):
             return "tbd_work_item_line_on"
         else:
             return "tbd_work_item_line_off"
-    if tbd_name.startswith("work_item_line_"):
-        work_item_line = WorkItemLine.query.get(int(tbd_name[15:]))
-        return f"{work_item_line.price}"
+    else:
+        bid_tbd = check_bid_tbd(bid_id, tbd_name)
+        return f"{bid_tbd}"
 
 
 @bid_blueprint.route("/save_tbd/<int:bid_id>", methods=["GET"])
@@ -78,17 +78,10 @@ def save_tbd(bid_id):
                 calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
                 log(log.INFO, f"Response: 'tbd_name: {tbd_name} is false'")
             return json.dumps('tbd:' + 'false')
-        if request.args.get("", None):
-            tbd_name = request.args[""]
-            calculate_subtotal(bid_id, tbd_name=tbd_name)
-            log(log.INFO, f"Response is '{tbd_name}'")
-            json_tbd_name = "tbd: " + f"{tbd_name}"
-            return json.dumps(json_tbd_name)
-        else:
-            if True:
-                tbd_name = request.args["false"]
-                calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
-            return json.dumps("tbd:" + "false")
+    else:
+        session["tbdChoices"] = []
+        log(log.DEBUG, 'No requesr.args')
+        return json.dumps('tbd:' + 'false')
 
 
 @bid_blueprint.route(
@@ -346,6 +339,7 @@ def bidding(bid_id):
 @login_required
 def preview_pdf(bid_id):
     bid = Bid.query.get(bid_id)
+    previous_url = session.get('nextUrl', '/')
     global_work_items = (
         LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
         .filter(LinkWorkItem.work_item_group == None)  # noqa 711
@@ -363,6 +357,7 @@ def preview_pdf(bid_id):
         global_work_items=global_work_items,
         groups=groups,
         preview_pdf_bool=preview_pdf_bool,
+        previous_url=previous_url
     )
 
 
@@ -381,6 +376,7 @@ def export_pdf(bid_id):
         tbd_choices = [i for i in request.form if request.form[i] == "on"]
         session["tbdChoices"] = tbd_choices
         if form.preview.data:
+            session['nextUrl'] = request.form.get('next_url', '/')
             return redirect(url_for("bid.preview_pdf", bid_id=bid_id))
         if form.export_pdf.data:
             BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

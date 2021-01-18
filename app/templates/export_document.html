@@ -9,35 +9,71 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        body {
+            font-family: "Poppins";
+        }
+
+        a {
+            color: #212529;
+            text-decoration: none;
+            outline: none;
+        }
+        a:hover {
+            color: #212529;
+            text-decoration: none;
+            outline: none;
+        }
+
         .export_container {
             display: flex;
             justify-content: center;
             margin-top: 1rem;
         }
 
+        .box_shadow {
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        .__top-content {
+            display: -webkit-box; /* wkhtmltopdf uses this one */
+            /* display: -webkit-flex; */
+            /* display: flex; */
+            -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
+            -webkit-box-align: center;
+            padding: 0.5rem;
+        }
+
         .preview_document {
             padding-top: 1rem;
             font-weight: 700;
         }
-
-        .__top-content {
-
-            display: -webkit-box; /* wkhtmltopdf uses this one */
-            /* display: -webkit-flex; */
-            /* display: flex; */
-            flex-direction: row;
-            -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
-            -webkit-box-align: center;
-            /* justify-content: space-between;
-            align-items: center; */
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            margin-bottom: 1rem;
-            padding: 1rem;
+        .back img {
+            margin-right: 0.5rem;
+        }
+        .preview_export_btn {
+            padding: .5rem 1.5rem;
+            color: #fff;
+            cursor: pointer;
+            background-color: #828282;
+            border-radius: .5rem;
+            border: 1px solid;
+            outline: none;
+            font-size: 14px;
+            transition: .3s;
+        }
+        .preview_export_btn:focus {
+            outline: none;
+        }
+        .preview_export_btn:active {
+            outline: none;
+        }
+        .preview_export_btn:hover {
+            background-color: rgba(0, 0, 0, 0.65);
         }
 
         .__main-content {
+            margin-top: 1rem;
             padding: 1rem;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
         .__main-content  .__ddb_logo {
             display: flex;
@@ -51,7 +87,7 @@
         }
 
         .__due_time td:nth-child(2) {
-            width: 37.5%;
+            width: 33.2%;
             font-weight: bold;
         }
 
@@ -97,6 +133,10 @@
             padding-right: 2rem;
         }
 
+        .alternate {
+            margin-top: 1rem;
+        }
+
         .section_letter {
             text-align: center;
             font-weight: 600;
@@ -129,6 +169,10 @@
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: vertical;
+        }
+
+        .link_work_item_line_padding {
+            padding: 0rem 0.5rem 0.5rem 0.5rem;
         }
 
         /* Pagination */
@@ -330,13 +374,30 @@
 <body>
 
     <section>
+
         <div class="export_container">
             <div>
                 {% if preview_pdf_bool %}
                 <h6 class="preview_document">Preview Document</h6>
+                <form role="form" action="{{ url_for('bid.export_pdf', bid_id=bid.id) }}" method="post">
+                    <div class="__top-content box_shadow">
+                        <div class="back">
+                            <a href="{{previous_url}}">
+                                <img src="{{ url_for('static', filename='images/right-hand.png') }}">
+                                <span> Back </span>
+                            </a>
+                        </div>
+                        <div>
+                            <button type="submit" name="export_pdf" value="True" class="preview_export_btn">
+                                <img src="{{ url_for('static', filename='images/export.png') }}">
+                                &nbsp;
+                                Export
+                            </button>
+                        </div>
+                    </div>
+                </form>
                 {% endif %}
-
-                <div class="__main-content">
+                <div class="__main-content box_shadow">
 
                     {% if preview_pdf_bool %}
                     <div class="__ddb_logo">
@@ -393,6 +454,7 @@
                         <h5>Please find our detailed Quote for the above referenced project as outlined below:</h5>
 
                         {% for link_work_item in global_work_items %}
+                        <div class="link_work_item_line_padding">
                             <div class="bid_work_item">
                                 <div class="work_item_pdf">
                                     <div> {{ link_work_item.work_item.code }} &nbsp; &nbsp;</div>
@@ -417,6 +479,7 @@
                                 <div></div>
                             </div>
                             {% endfor %}
+                        </div>
                         {% endfor %}
                     </div>
                     <!-- # Pagination -->
@@ -425,17 +488,19 @@
                         {% for group in groups %}
                         <div> <h4 class="group_title"> <span> Work Group: {{ group.name }} </span> </h4> </div>
                         <div class="section_group_letter">
-                            <div class="_inner_block">
-                                <div>Phase</div>
-                                <div>Description</div>
-                            </div>
-                            <div class="_inner_block">
-                                <div>Qty</div>
-                                <div>Unit</div>
-                                <div>Unit Cost</div>
-                                <div>Item Cost</div>
-                                <div>Phase Cost</div>
-                            </div>
+                            <table style="width: 100%;">
+                                <tbody>
+                                    <tr style="text-align: left;">
+                                        <td style="width: 11%;">&nbsp; &nbsp;Phase</td>
+                                        <td style="width: 44.5%;"> Description</td>
+                                        <td style="width: 5%;">Qty</td>
+                                        <td style="width: 8.5%;">Unit</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="_group-block">
                             {% for link in group.link_work_items %}
@@ -446,13 +511,12 @@
                                 </div>
                                 <div class="bid_subtotal_value">${{ link.link_subtotal }}</div>
                             </div>
-                            <!-- test table -->
                                 {% for work_item_line in link.work_item_lines %}
                                 <table style="width: 100%;">
                                     <tbody>
                                         <tr>
                                             <td style="width: 14%;"></td>
-                                            <td style="width: 29%;">
+                                            <td style="width: 42%;">
                                                 <div class="_group_note _note">
                                                     {{ work_item_line.description }}
                                                     <div>
@@ -460,7 +524,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td style="width: 8%; vertical-align: top;">{{ work_item_line.quantity }}</td>
+                                            <td style="width: 5%; vertical-align: top;">{{ work_item_line.quantity }}</td>
                                             <td style="width: 8.5%; vertical-align: top;">{{ work_item_line.unit }}</td>
                                             <td></td>
                                             <td></td>
@@ -516,11 +580,11 @@
                                 </div>
                                 <div class="feature_price">
                                     <div>
-                                        Insurance/Tax:
+                                        Overhead:
                                     </div>
-                                    {% if bid.insurance_tax %}
+                                    {% if bid.overhead %}
                                     <div>
-                                        ${{ bid.insurance_tax }}
+                                        ${{ bid.overhead }}
                                     </div>
                                     {% else %}
                                     <div>
@@ -530,11 +594,11 @@
                                 </div>
                                 <div class="feature_price">
                                     <div>
-                                        Overhead:
+                                        Insurance/Tax:
                                     </div>
-                                    {% if bid.overhead %}
+                                    {% if bid.insurance_tax %}
                                     <div>
-                                        ${{ bid.overhead }}
+                                        ${{ bid.insurance_tax }}
                                     </div>
                                     {% else %}
                                     <div>
@@ -588,7 +652,7 @@
                     <div>
                         {% for exclusion_link in bid.exclusion_links %}
                             {% if exclusion_link == bid.exclusion_links[-1] %}
-                                {{ exclusion_link.exclusion.title }}
+                                {{ exclusion_link.exclusion.title }}.
                             {% else %}
                                 {{ exclusion_link.exclusion.title }},
                             {% endif %}
@@ -600,7 +664,7 @@
                     <div>
                         {% for clarification_link in bid.clarification_links %}
                             {% if clarification_link == bid.clarification_links[-1] %}
-                                {{ clarification_link.clarification.note }}
+                                {{ clarification_link.clarification.note }}.
                             {% else %}
                                 {{ clarification_link.clarification.note }},
                             {% endif %}
@@ -609,7 +673,15 @@
                     <div class="qoute_clarification"></div>
 
                     <div class="section_letter">Section D: Alternates</div>
-                    <div></div>
+                    <div class="alternate">
+                        {% for alternate in bid.alternates %}
+                            {% if alternate == bid.alternates[-1] %}
+                                {{ alternate.name }}.
+                            {% else %}
+                                {{ alternate.name }},
+                            {% endif %}
+                        {% endfor %}
+                    </div>
 
                     <div class="keep-together">
 
