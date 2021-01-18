@@ -11,6 +11,29 @@
         Add new
       </button>
     </div>
+    <!-- Flash Massage -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if category == 'warning' %}
+    <div class="alert alert-{{ category }} alert-dismisible _profile_flash">
+      <button class="_flash-btn" type="button" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true"><img src="{{ url_for('static', filename='images/close_button_ddb.svg') }}"></span>
+      </button>
+      {{ message }}
+    </div>
+    {% else %}
+    <div class="alert alert-{{ category }} alert-dismisible _profile_flash">
+      <button class="_flash-btn" type="button" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true"><img src="{{ url_for('static', filename='images/close_button_ddb.svg') }}"></span>
+      </button>
+      {{ message }}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <!-- End Flash Massage -->
     <div class="team-cards">
       {% for user in users %}
         <div class="user-card">
@@ -149,7 +172,7 @@
               <label class="_label">Phone</label>
             </div>
           </div>
-    
+
           <div class="team-radio-select m-1">
             <div>
               <input type="radio" id="admin" name="user_type" value="admin"
@@ -166,7 +189,7 @@
         </form>
       </div>
       <div class="bt_add-new-user">
-        {{form.submit(class='_btn--black', form='edit_user-form', value='Edit User')}}
+        {{form.submit(class='_btn--black', form='edit_user-form', value='Save')}}
       </div>
     </div>
   </div>
@@ -203,7 +226,7 @@
             <label class="_label">Phone</label>
           </div>
         </div>
-  
+
         <div class="team-radio-select m-1">
           <div>
             <input type="radio" id="admin" name="user_type" value="admin"
