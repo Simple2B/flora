@@ -548,7 +548,7 @@ def create_docx(bid_id):
         write_to_docx(
             insert=True,
             cell_paragraph=exclusion_paragraph,
-            content=(f'{exclusion_link.exclusion.title}' if exclusion_link == bid.exclusion_links[-1] else f'{exclusion_link.exclusion.title}, '),  # noqa 501
+            content=(f'{exclusion_link.exclusion.title}.' if exclusion_link == bid.exclusion_links[-1] else f'{exclusion_link.exclusion.title}, '),  # noqa 501
             font_size=9.5,
             after_spacing=10,
             style=f'exclusion_style_title_{i}'
@@ -575,7 +575,7 @@ def create_docx(bid_id):
         write_to_docx(
             insert=True,
             cell_paragraph=clarification_paragraph,
-            content=(f'{clarification_link.clarification.note}' if clarification_link == bid.clarification_links[-1] else f'{clarification_link.clarification.note}, '),  # noqa 501
+            content=(f'{clarification_link.clarification.note}.' if clarification_link == bid.clarification_links[-1] else f'{clarification_link.clarification.note}, '),  # noqa 501
             font_size=9.5,
             style=f'clarification_style_title_{i}'
         )
@@ -585,10 +585,34 @@ def create_docx(bid_id):
 
     # begin Section D block
     document.add_picture(f'{PATH_TO_IMG}/Section_D.png', width=Cm(18.99), height=Cm(0.65))
-    write_to_docx(
-        after_spacing=20,
-        style='alternates_style_name'
+    # write_to_docx(
+    #     after_spacing=10,
+    #     style='alternates_style_name'
+    # )
+
+    alternate_paragraph = write_to_docx(
+        content=' ',
+        font_size=9.5,
+        after_spacing=10,
+        style='alternate_style_first_paraprgaph'
     )
+    if bid.alternates:
+        for alternate in bid.alternates:
+            write_to_docx(
+                insert=True,
+                cell_paragraph=alternate_paragraph,
+                content=(f'{alternate.name}.' if alternate == bid.alternates[-1] else f'{alternate.name}, '),  # noqa 501
+                font_size=9.5,
+                style=f'alternate_style_title_{i}'
+            )
+    else:
+        write_to_docx(
+                insert=True,
+                cell_paragraph=alternate_paragraph,
+                content='No alternates speciefied.',  # noqa 501
+                font_size=9.5,
+                style=f'alternate_style_default_title_{i}'
+            )
     # endblock
     document.add_page_break()
     # begin Section E_F block
