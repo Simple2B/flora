@@ -52,43 +52,6 @@ def check_tbd(bid_id, tbd_name):
 @bid_blueprint.route("/save_tbd/<int:bid_id>", methods=["GET"])
 @login_required
 def save_tbd(bid_id):
-    # if request.args:
-    #     tbd_name = request.args.get('', None)
-    #     if tbd_name:
-    #         if tbd_name.startswith('work_item_line_tbd_'):
-    #             line_id = int(tbd_name.strip('work_item_line_tbd_'))
-    #             work_item_line = WorkItemLine.query.get(line_id)
-    #             work_item_line.tbd = True
-    #             work_item_line.save()
-    #             log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is true'")
-    #             return json.dumps('tbd: ' + f'{tbd_name}')
-    #         else:
-    #             calculate_subtotal(bid_id, tbd_name=tbd_name)
-    #             log(log.INFO, f"Response is '{tbd_name}'")
-    #             return json.dumps('tbd: ' + f'{tbd_name}')
-    #     else:
-    #         tbd_name = request.args['false']
-    #         if tbd_name.startswith('work_item_line_tbd_'):
-    #             line_id = int(tbd_name.strip('work_item_line_tbd_'))
-    #             work_item_line = WorkItemLine.query.get(line_id)
-    #             work_item_line.tbd = False
-    #             work_item_line.save()
-    #             log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is false'")
-    #         else:
-    #             calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
-    #             log(log.INFO, f"Response: 'tbd_name: {tbd_name} is false'")
-    #         return json.dumps('tbd:' + 'false')
-    #     if request.args.get("", None):
-    #         tbd_name = request.args[""]
-    #         calculate_subtotal(bid_id, tbd_name=tbd_name)
-    #         log(log.INFO, f"Response is '{tbd_name}'")
-    #         json_tbd_name = "tbd: " + f"{tbd_name}"
-    #         return json.dumps(json_tbd_name)
-    #     else:
-    #         if True:
-    #             tbd_name = request.args["false"]
-    #             calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
-    #         return json.dumps("tbd:" + "false")
     if request.args:
         tbd_name = request.args.get('', None)
         if tbd_name:
