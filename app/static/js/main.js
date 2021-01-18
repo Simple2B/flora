@@ -65,15 +65,30 @@ $(document).ready( function() {
     changeStatus.classList.toggle('status-change_color_submitted');
     changeStatus.classList.remove('status-change_color_draft');
     changeStatus.classList.remove('status-change_color_archived');
-  } 
+  }
   if (changeStatus.textContent == 'Archived') {
     changeStatus.classList.toggle('status-change_color_archived');
     changeStatus.classList.remove('status-change_color_submitted');
     changeStatus.classList.remove('status-change_color_draft');
   };
-});
-// end change Bid status color
+  // end change Bid status color
 
+});
+
+// begin My Profile
+const previewUrl = document.getElementById('current_url');
+const myProfileSubmitBtn = document.getElementById('my_profile_submit_id');
+myProfileSubmitBtn.setAttribute('value', window.location.href);
+
+const sideBarNavLinks = document.querySelectorAll('#sidebar__nav-links-bidding li span a');
+sideBarNavLinks.forEach( (e) => {
+  e.addEventListener('click', () => {
+    const myProfileSubmitBtn = document.getElementById('my_profile_submit_id');
+    myProfileSubmitBtn.setAttribute('value', e.href);
+    previewUrl.setAttribute('value', e.href);
+  });
+});
+// end My Profile block
 
 const closeWrapper = document.getElementById('subtotal_close_panel_id');
 const subtotalClosePanel = document.getElementById('subtotal_inputs_fields_id');

@@ -1,6 +1,18 @@
 @import '../variables';
 @import '../mixins';
 
+@mixin _input {
+    border: 1px solid transparent;
+    // line-height: 2rem;
+    height: 2rem;
+    padding: 0;
+    margin: 0 auto;
+}
+
+// %form_input_template {
+
+// }
+
 
 ._form-input {
     @include _input;

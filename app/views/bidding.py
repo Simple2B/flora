@@ -1,11 +1,12 @@
 import time
 import zipfile
-from io import BytesIO, StringIO
+from io import BytesIO
 from datetime import datetime
 
 from flask import Blueprint, render_template, redirect, url_for, session, request, send_file
 from flask_login import login_required
 from flask_wtf import FlaskForm
+from sqlalchemy import desc
 
 from app.models import Bid
 from app.forms import BidForm
@@ -83,42 +84,6 @@ def archive_or_export():
 @bidding_blueprint.route("/biddings")
 @login_required
 def biddings():
-    # if current_app.config["TESTING"]:
-    #     papi = ProcoreApi()
-    #     bids_from_procore = papi.bids()
-    #     for bid in bids_from_procore:
-    #         bid_id = bid["id"]
-    #         db_bid = Bid.query.filter(Bid.procore_bid_id == bid_id).first()
-    #         if not db_bid:
-    #             bidding = Bid(
-    #                 procore_bid_id=bid["bid_package_id"],
-    #                 title=bid["bid_package_title"],
-    #                 client=bid["name"],
-    #             )
-    #             bidding.save()
-    #     bids = Bid.query.all()
-    #     log(log.INFO, 'Final rendering template')
-
-    #     return render_template("biddings.html", bids=bids)
-
-    # Take bids
-
-    # papi = ProcoreApi()
-    # bids_from_procore = papi.bids()
-
-    # # assert bids_from_procore
-    # for bid in bids_from_procore:
-    #     bid_package_id = bid["bid_package_id"]
-    #     db_bid = Bid.query.filter(Bid.procore_bid_id == bid_package_id).first()
-    #     if not db_bid:
-    #         bidding = Bid(
-    #             procore_bid_id=bid["bid_package_id"],
-    #             title=bid["bid_package_title"],
-    #             client=bid["vendor"]["name"],
-    #         )
-    #         bidding.save()
-
-
     form = BidForm()
     most_popular = session.get("most_popular", "")
     most_recent = session.get("most_recent", "Most recent")
@@ -129,26 +94,16 @@ def biddings():
     status_active_archived = session.get("status_active_archived", "")
     status_active_draft = session.get("status_active_draft", "")
 
+    bids_query = Bid.query
     if status_active_submitted:
-        bids = Bid.query.filter(Bid.status == Bid.Status.c_submitted).all()
-        if most_recent:
-            bids = Bid.query.filter(Bid.status == Bid.Status.c_submitted).order_by(Bid.time_updated).all()
-            bids.reverse()
+        bids_query = bids_query.filter(Bid.status == Bid.Status.c_submitted)
     elif status_active_archived:
-        bids = Bid.query.filter(Bid.status == Bid.Status.d_archived).all()
-        if most_recent:
-            bids = Bid.query.filter(Bid.status == Bid.Status.d_archived).order_by(Bid.time_updated).all()
-            bids.reverse()
+        bids_query = bids_query.filter(Bid.status == Bid.Status.d_archived)
     elif status_active_draft:
-        bids = Bid.query.filter(Bid.status == Bid.Status.b_draft).all()
-        if most_recent:
-            bids = Bid.query.filter(Bid.status == Bid.Status.b_draft).order_by(Bid.time_updated).all()
-            bids.reverse()
-    else:
-        bids = Bid.query.order_by(Bid.status).all()
-        if most_recent:
-            bids = Bid.query.order_by(Bid.time_updated).all()
-            bids.reverse()
+        bids_query = bids_query.filter(Bid.status == Bid.Status.b_draft)
+    bids_query = bids_query.order_by(desc(Bid.time_updated if most_recent else Bid.popularity))
+
+    bids = bids_query.all()
 
     time_now = round(time.time())
     for bid in bids:
@@ -157,19 +112,14 @@ def biddings():
             if seconds_ago < 3600:
                 if seconds_ago <= 60:
                     bid.last_updated = '1 min ago'
-                    bid.save()
                 else:
                     bid.last_updated = f'{seconds_ago // 60} mins ago'
-                    bid.save()
             elif seconds_ago >= 3600 and seconds_ago < 86400:
                 bid.last_updated = f'{seconds_ago // 3600} hours ago'
-                bid.save()
             elif seconds_ago >= 86400 and seconds_ago < 2073600:
                 bid.last_updated = f'{seconds_ago // 86400} days ago'
-                bid.save()
             else:
                 bid.last_updated = time.strftime("%m/%d/%Y", time.gmtime(bid.time_updated))
-                bid.save()
 
     today_date = datetime.today().strftime("%m/%d/%Y")
     return render_template(

@@ -1,0 +1,44 @@
+@import '../global/variables';
+@import '../global/mixins';
+
+
+._flash-btn {
+    background-color: #fff3cd;
+}
+._profile_flash {
+    @include flash_default;
+    width: 60vw;
+    background-color: #fff3cd;
+    text-align: center;
+}
+
+._account_title {
+    padding-top: $m1rem;
+    padding-left: $m1rem;
+    span:first-child {
+        font-weight: 700;
+        margin-right: $m1rem;
+    }
+    span:last-child {
+        font-style: normal;
+        font-weight: normal;
+        color: #828282;
+    }
+}
+
+._submit_btns {
+    display: flex;
+    align-items: center;
+    padding: $m0-5rem;
+    div {
+        padding-left: $m0-5rem;
+        padding-right: $m0-5rem;
+    }
+    a {
+        text-decoration: none;
+        border: none;
+        &:hover {
+            color: #fff;
+        }
+    }
+}

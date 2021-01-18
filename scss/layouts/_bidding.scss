@@ -512,6 +512,7 @@
             align-items: center;
             background-color: #EDF8FF;
             padding: $m0-5rem;
+            margin-top: $m0-5rem;
 
             .group-title {
                 & img {
@@ -701,4 +702,26 @@
     display: flex;
     flex-flow: wrap;
     padding: 0rem 1.5rem;
+}
+
+._alternate_block {
+    display: flex;
+    align-items: center;
+
+    &_add_alternate_row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    & > div:first-child {
+        margin-right: $m1rem*2;
+    }
+}
+
+.__alternate_total {
+    display: flex;
+    width: 12vw;
+    justify-content: space-between;
+    padding-right: 4rem;
 }

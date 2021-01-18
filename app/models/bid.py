@@ -1,8 +1,10 @@
 import enum
-from datetime import datetime
+# from datetime import datetime
+import time
 from app import db
 from app.models.utils import ModelMixin
 from sqlalchemy.orm import relationship
+from config import BaseConfig as config
 
 
 class Bid(db.Model, ModelMixin):
@@ -31,7 +33,16 @@ class Bid(db.Model, ModelMixin):
     email = db.Column(db.String(128), nullable=False, default='ealbanese@ddbcontracting.com')
     fax = db.Column(db.String(128), nullable=False, default='973 300-0805')
     contact = db.Column(db.String(128), nullable=False, default='Edward Albanese')
+    project_name = db.Column(db.String(128), nullable=False, default='!Unknown project!')
     status = db.Column(db.Enum(Status), default=Status.a_new, nullable=False)
+
+    percent_permit_fee = db.Column(db.Float, default=config.PERCENT_PERMIT_FEE)
+    percent_general_condition = db.Column(db.Float, default=config.PERCENT_GENERAL_CONDITION)
+    percent_overhead = db.Column(db.Float, default=config.PERCENT_OVERHEAD)
+    percent_insurance_tax = db.Column(db.Float, default=config.PERCENT_INSURANCE_TAX)
+    percent_profit = db.Column(db.Float, default=config.PERCENT_PROFIT)
+    percent_bond = db.Column(db.Float, default=config.PERCENT_BOND)
+
     permit_filling_fee = db.Column(db.Float, default=0.0)
     general_conditions = db.Column(db.Float, default=0.0)
     overhead = db.Column(db.Float, default=0.0)
@@ -40,8 +51,9 @@ class Bid(db.Model, ModelMixin):
     bond = db.Column(db.Float, default=0.0)
     subtotal = db.Column(db.Float, default=0.0)
     grand_subtotal = db.Column(db.Float, default=0.0)
-    last_updated = db.Column(db.String(16), default=(lambda: datetime.today().strftime("%m/%d/%Y"))(), nullable=False)
-    time_updated = db.Column(db.Float, default=0.0, nullable=False)
+
+    popularity = db.Column(db.Integer, default=0)
+    time_updated = db.Column(db.Float, default=time.time, nullable=False)
     due_date = db.Column(db.Date, nullable=False)
     revision = db.Column(db.Integer, default=0)
     project_type = db.Column(db.Enum(ProjectType), default=ProjectType.b_quote, nullable=False)
@@ -52,9 +64,10 @@ class Bid(db.Model, ModelMixin):
     clarification_links = relationship("ClarificationLink")
     exclusion_links = relationship("ExclusionLink")
     drawings = relationship("Drawing")
+    alternates = relationship("Alternate")
 
     def __str__(self):
         return self.__repr__()
 
     def __repr__(self):
-        return f"<Bid:{self.id}({self.procore_bid_id}) [{self.status.value}>]"
+        return f"<Bid:{self.id}({self.procore_bid_id}) [{self.status.value}]>"

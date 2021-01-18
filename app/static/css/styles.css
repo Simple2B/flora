@@ -57,6 +57,9 @@ ul {
   list-style: none;
   margin: 0; }
 
+hr {
+  border: 1px solid #BDBDBD; }
+
 .sidebar {
   display: flex;
   flex-flow: column nowrap;
@@ -96,7 +99,24 @@ ul {
   margin-bottom: 1rem; }
 
 .box-shadow {
-  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25); }
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); }
+
+.container_60vw__inner_block {
+  max-width: 60vw;
+  border-top: 1px solid #ebebeb;
+  margin: auto;
+  overflow: hidden; }
+
+._inner_inputs {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column; }
+  ._inner_inputs_row {
+    display: flex;
+    padding: 0.5rem; }
+    ._inner_inputs_row div {
+      padding-left: 0.5rem;
+      padding-right: 2.5rem; }
 
 .box-scroll {
   max-height: 35vh;
@@ -113,11 +133,6 @@ ul {
 
 .section-block {
   height: 89.5vh; }
-
-.flex-row-box--sb {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around; }
 
 .flex-flow-wrap {
   flex-flow: row wrap;
@@ -225,9 +240,6 @@ ul {
 
 .border-none {
   border: none; }
-
-.welcome {
-  text-align: center; }
 
 .overflow-x-hidden {
   overflow-x: hidden; }
@@ -524,7 +536,6 @@ ul {
 
 ._form-input {
   border: 1px solid transparent;
-  line-height: 2rem;
   height: 2rem;
   padding: 0;
   margin: 0 auto;
@@ -573,7 +584,6 @@ ul {
 
 ._form-text_area {
   border: 1px solid transparent;
-  line-height: 2rem;
   height: 2rem;
   padding: 0;
   margin: 0 auto;
@@ -595,7 +605,6 @@ ul {
 
 ._label {
   border: 1px solid transparent;
-  line-height: 2rem;
   height: 2rem;
   padding: 0;
   margin: 0 auto;
@@ -688,6 +697,39 @@ ul {
     align-items: flex-start; }
   .user-card__edit_and_delete button {
     background-color: #FFFFFF; }
+
+.sidebar__nav-links-bidding {
+  list-style-type: disc; }
+  .sidebar__nav-links-bidding .__disc-blue {
+    color: #007bff; }
+    .sidebar__nav-links-bidding .__disc-blue .__select_work_item-active {
+      color: #BDBDBD; }
+  .sidebar__nav-links-bidding li {
+    margin: 0.5rem; }
+  .sidebar__nav-links-bidding li a {
+    color: #BDBDBD; }
+  .sidebar__nav-links-bidding:hover {
+    color: #2F80ED; }
+
+.main-container, .exclusions-container, .clarifications-container {
+  display: flex;
+  flex-flow: column;
+  margin-left: auto;
+  margin-right: auto; }
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
+    background-color: black;
+    display: inline-flex;
+    justify-content: flex-start;
+    padding: .5rem 1rem;
+    align-items: center; }
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
+      color: white;
+      padding: .5rem 1rem;
+      background-color: #EB5757;
+      border-radius: .3rem; }
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
+      color: white;
+      margin-left: 8rem; }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }
@@ -955,6 +997,9 @@ ul {
       display: flex;
       align-items: center;
       margin-top: .5rem; }
+      .header--right .user-info__btn {
+        border: none;
+        background: none; }
       .header--right .user-info__details {
         display: flex;
         flex-flow: column nowrap;
@@ -1496,7 +1541,8 @@ ul {
     justify-content: space-between;
     align-items: center;
     background-color: #EDF8FF;
-    padding: 0.5rem; }
+    padding: 0.5rem;
+    margin-top: 0.5rem; }
     .__bidding--scroll .add_work_item-group ._group-block .group-title img {
       margin-right: 1rem; }
     .__bidding--scroll .add_work_item-group ._group-block .group-btns img:first-child {
@@ -1607,6 +1653,22 @@ ul {
   display: flex;
   flex-flow: wrap;
   padding: 0rem 1.5rem; }
+
+._alternate_block {
+  display: flex;
+  align-items: center; }
+  ._alternate_block_add_alternate_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+  ._alternate_block > div:first-child {
+    margin-right: 2rem; }
+
+.__alternate_total {
+  display: flex;
+  width: 12vw;
+  justify-content: space-between;
+  padding-right: 4rem; }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }
@@ -2107,7 +2169,6 @@ ul {
 
 .__box-table-exclusion {
   width: 100%;
-  max-height: 90vh;
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
   overflow: visible; }
   .__box-table-exclusion .__box-table--left {
@@ -2296,3 +2357,154 @@ ul {
 ._submit--margins {
   margin-left: 1.3rem;
   margin-top: 1.5rem; }
+
+.sidebar__nav-links-bidding {
+  list-style-type: disc; }
+  .sidebar__nav-links-bidding .__disc-blue {
+    color: #007bff; }
+    .sidebar__nav-links-bidding .__disc-blue .__select_work_item-active {
+      color: #BDBDBD; }
+  .sidebar__nav-links-bidding li {
+    margin: 0.5rem; }
+  .sidebar__nav-links-bidding li a {
+    color: #BDBDBD; }
+  .sidebar__nav-links-bidding:hover {
+    color: #2F80ED; }
+
+.main-container, .exclusions-container, .clarifications-container {
+  display: flex;
+  flex-flow: column;
+  margin-left: auto;
+  margin-right: auto; }
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
+    background-color: black;
+    display: inline-flex;
+    justify-content: flex-start;
+    padding: .5rem 1rem;
+    align-items: center; }
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
+      color: white;
+      padding: .5rem 1rem;
+      background-color: #EB5757;
+      border-radius: .3rem; }
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
+      color: white;
+      margin-left: 8rem; }
+
+.sidebar__nav-links-bidding {
+  list-style-type: disc; }
+  .sidebar__nav-links-bidding .__disc-blue {
+    color: #007bff; }
+    .sidebar__nav-links-bidding .__disc-blue .__select_work_item-active {
+      color: #BDBDBD; }
+  .sidebar__nav-links-bidding li {
+    margin: 0.5rem; }
+  .sidebar__nav-links-bidding li a {
+    color: #BDBDBD; }
+  .sidebar__nav-links-bidding:hover {
+    color: #2F80ED; }
+
+.main-container, .exclusions-container, .clarifications-container {
+  display: flex;
+  flex-flow: column;
+  margin-left: auto;
+  margin-right: auto; }
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
+    background-color: black;
+    display: inline-flex;
+    justify-content: flex-start;
+    padding: .5rem 1rem;
+    align-items: center; }
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
+      color: white;
+      padding: .5rem 1rem;
+      background-color: #EB5757;
+      border-radius: .3rem; }
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
+      color: white;
+      margin-left: 8rem; }
+
+._flash-btn {
+  background-color: #fff3cd; }
+
+._profile_flash {
+  background-color: white;
+  color: #EB5757;
+  font-weight: 500;
+  border: 0;
+  margin: auto;
+  width: 60vw;
+  background-color: #fff3cd;
+  text-align: center; }
+
+._account_title {
+  padding-top: 1rem;
+  padding-left: 1rem; }
+  ._account_title span:first-child {
+    font-weight: 700;
+    margin-right: 1rem; }
+  ._account_title span:last-child {
+    font-style: normal;
+    font-weight: normal;
+    color: #828282; }
+
+._submit_btns {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem; }
+  ._submit_btns div {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem; }
+  ._submit_btns a {
+    text-decoration: none;
+    border: none; }
+    ._submit_btns a:hover {
+      color: #fff; }
+
+.sidebar__nav-links-bidding {
+  list-style-type: disc; }
+  .sidebar__nav-links-bidding .__disc-blue {
+    color: #007bff; }
+    .sidebar__nav-links-bidding .__disc-blue .__select_work_item-active {
+      color: #BDBDBD; }
+  .sidebar__nav-links-bidding li {
+    margin: 0.5rem; }
+  .sidebar__nav-links-bidding li a {
+    color: #BDBDBD; }
+  .sidebar__nav-links-bidding:hover {
+    color: #2F80ED; }
+
+.main-container, .exclusions-container, .clarifications-container {
+  display: flex;
+  flex-flow: column;
+  margin-left: auto;
+  margin-right: auto; }
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
+    background-color: black;
+    display: inline-flex;
+    justify-content: flex-start;
+    padding: .5rem 1rem;
+    align-items: center; }
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
+      color: white;
+      padding: .5rem 1rem;
+      background-color: #EB5757;
+      border-radius: .3rem; }
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
+      color: white;
+      margin-left: 8rem; }
+
+.alternate_bgc {
+  background-color: #FAFAFA; }
+
+._alternate_input_row {
+  display: flex;
+  align-items: baseline;
+  padding: 0.5rem; }
+  ._alternate_input_row > div {
+    padding-left: 0.5rem;
+    padding-right: 2rem; }
+  ._alternate_input_row ._alternate_name {
+    display: flex;
+    width: 12%;
+    align-items: center; }

@@ -25,7 +25,7 @@
 .__box-table-exclusion {
     width: 100%;
     // min-height: 75vh;
-    max-height: 90vh;
+    // max-height: 90vh;
     box-shadow: $shadow;
     overflow: visible;
 
@@ -42,7 +42,7 @@
                 padding-left: 0.5rem;
                 transition: 0.2s;
             }
-        }    
+        }
 
     .__add-exclusion--box {
         .__add_new_excl--margin {
