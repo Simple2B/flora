@@ -141,7 +141,6 @@ def edit_work_item_line(bid_id, work_item_line_id):
                 line.tbd = form.tbd.data
                 line.save()
                 time_update(bid_id)
-                # session["saveInCloud"] = True
             else:
                 line.note = form.note.data
                 line.description = form.description.data
@@ -151,7 +150,6 @@ def edit_work_item_line(bid_id, work_item_line_id):
                 line.tbd = form.tbd.data
                 line.save()
                 time_update(bid_id)
-                # session["saveInCloud"] = True
         else:
             log(log.ERROR, "Unknown work_item_line_id: %d", work_item_line_id)
 
@@ -287,7 +285,6 @@ def bidding(bid_id):
     form_bid = BidForm()
     form = WorkItemLineForm()
     tbd_choices = session.get("tbdChoices", [])
-    # form_bid.save_in_cloud = session.get("saveInCloud", False)
     form_bid.save_in_cloud = False
 
     if bid.status == Bid.Status.a_new:
