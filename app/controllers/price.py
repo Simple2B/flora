@@ -16,36 +16,42 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
         if tbd_name == 'permit':
             if on_tbd:
                 bid.permit_filling_fee = 0.0
+                bid.permit_filling_fee_tbd = True
             else:
                 bid.permit_filling_fee = round((percent_permit_fee * bid.subtotal) / 100, 2)
                 bid.grand_subtotal = bid.grand_subtotal + bid.permit_filling_fee
         elif tbd_name == 'general':
             if on_tbd:
                 bid.general_conditions = 0.0
+                bid.general_conditions_tbd = True
             else:
                 bid.general_conditions = round((percent_general_condition * bid.subtotal) / 100, 2)
                 bid.grand_subtotal = bid.grand_subtotal + bid.general_conditions
         elif tbd_name == 'overhead':
             if on_tbd:
                 bid.overhead = 0.0
+                bid.overhead_tbd = True
             else:
                 bid.overhead = round((percent_overhead * bid.subtotal) / 100, 2)
                 bid.grand_subtotal = bid.grand_subtotal + bid.overhead
         elif tbd_name == 'insurance':
             if on_tbd:
                 bid.insurance_tax = 0.0
+                bid.insurance_tax_tbd = True
             else:
                 bid.insurance_tax = round((percent_insurance_tax * bid.subtotal) / 100, 2)
                 bid.grand_subtotal = bid.grand_subtotal + bid.insurance_tax
         elif tbd_name == 'profit':
             if on_tbd:
                 bid.profit = 0.0
+                bid.profit_tbd = True
             else:
                 bid.profit = round((percent_profit * bid.subtotal) / 100, 2)
                 bid.grand_subtotal = bid.grand_subtotal + bid.profit
         elif tbd_name == 'bond':
             if on_tbd:
                 bid.bond = 0.0
+                bid.bond_tbd = True
             else:
                 bid.bond = round((percent_bond * bid.subtotal) / 100, 2)
                 bid.grand_subtotal = bid.grand_subtotal + bid.bond
@@ -156,7 +162,7 @@ def calculate_alternate_total(bid_id):
             continue
         else:
             alternate_total += (alternate.price * alternate.quantity)
-    return alternate_total
+    return round(alternate_total, 2)
 
 
 # work mostly with JS
@@ -164,15 +170,20 @@ def calculate_alternate_total(bid_id):
 def check_bid_tbd(bid_id, tbd_name):
     bid = Bid.query.get(bid_id)
     switch = {
-        "permit": lambda: bid.permit_filling_fee,
-        "general": lambda: bid.general_conditions,
-        "overhead": lambda: bid.overhead,
-        "insurance": lambda: bid.insurance_tax,
-        "profit": lambda: bid.profit,
-        "bond": lambda: bid.bond
+        "permit": lambda: bid.permit_filling_fee_tbd,
+        "general": lambda: bid.general_conditions_tbd,
+        "overhead": lambda: bid.overhead_tbd,
+        "insurance": lambda: bid.insurance_tax_tbd,
+        "profit": lambda: bid.profit_tbd,
+        "bond": lambda: bid.bond_tbd
     }
 
     def default_case():
         return 'No case found!'
 
-    return switch.get(tbd_name, default_case)()
+    bid_tbd = switch.get(tbd_name, default_case)()
+
+    if not bid_tbd and bid_tbd != 'No case found!':
+        calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
+
+    return bid_tbd

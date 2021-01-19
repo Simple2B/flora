@@ -320,8 +320,14 @@
           <div class="_work_item-line">
             <div>
               <div class="_show-line_panel bck-color">
-                <div class="title-text-style">Line </div>
-                <!-- <div> -->
+                <div class="title-text-style">Line {{ loop.index }}
+                  {% if work_item_line.note|length < 31 %}
+                  <span> {{ work_item_line.note }}</span>
+                  {% else %}
+                    <span> {{ work_item_line.note[:30] }}...</span>
+                  {% endif %}
+                </div>
+                <div>
                   <div>
                     <button id="btn_line_id" data-line_id="line-{{work_item_line.id}}"
                       class="border-none ddb-cursor-handle btnLine_element_direction_js">
@@ -460,7 +466,13 @@
               {% for work_item_line in group_link.work_item_lines %}
               <div>
                 <div class="_show-line_panel bck-color">
-                  <div class="title-text-style">Line </div>
+                  <div class="title-text-style">Line {{ loop.index }}
+                    {% if work_item_line.note|length < 31 %}
+                    <span> {{ work_item_line.note }}</span>
+                    {% else %}
+                      <span> {{ work_item_line.note[:30] }}...</span>
+                    {% endif %}
+                  </div>
                   <div>
                     <div>
                       <button id="btn_line_id" data-line_id="line-{{work_item_line.id}}"
@@ -734,7 +746,7 @@
             <div class="">
                 <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--base-gray">Add exclusion</button></a>
             </div>
-          
+
           {% endif %}
         </div>
       </div>

@@ -218,30 +218,7 @@ def create_docx(bid_id):
         style=f'bid_project_street_{bid.address_street}'
     )
 
-    row = bid_table_info.add_row()
-    set_row_height(row, 15)
-    cell_client_info = row.cells[1]
-    cell_project_info = row.cells[3]
-    write_to_docx(
-        cell_paragraph=cell_client_info,
-        edit_first_paragraph=True,
-        content="Suite # 502",
-        font_bold=False,
-        font_size=10.5,
-        align='left',
-        style='bid_client_75 Montgomery'
-    )
-    write_to_docx(
-        cell_paragraph=cell_project_info,
-        edit_first_paragraph=True,
-        content="Suite # 502",
-        font_bold=False,
-        font_size=10.5,
-        align='left',
-        style='bid_project_75 Montgomery'
-    )
-
-    # 5 row
+    # 4 row
     row = bid_table_info.add_row()
     set_row_height(row, 15)
     cell_client_info = row.cells[1]
@@ -469,30 +446,6 @@ def create_docx(bid_id):
                     left_indent=Cm(1.88),
                     style=f'work_item_line_q_u_{work_item_line.id}'
                 )
-                # write_to_docx(
-                #     insert=True,
-                #     cell_paragraph=paragraph_2,
-                #     content=f'{work_item_line.unit}',
-                #     left_indent=Cm(1.9),
-                #     font_size=9.5,
-                #     style=f'work_item_line_q_u_{work_item_line.id}'
-                # )
-                # write_to_docx(
-                #     insert=True,
-                #     cell_paragraph=paragraph_2,
-                #     content=f'{work_item_line.unit}',
-                #     left_indent=Cm(1.9),
-                #     font_size=9.5,
-                #     style=f'work_item_line_q_u_{work_item_line.id}'
-                # )
-                # write_to_docx(
-                #     insert=True,
-                #     cell_paragraph=paragraph_2,
-                #     content=f'{work_item_line.unit}',
-                #     left_indent=Cm(1.9),
-                #     font_size=9.5,
-                #     style=f'work_item_line_q_u_{work_item_line.id}'
-                # )
 
     #  / bid_subtotal on this section
     bid_subtotal_table = document.add_table(rows=0, cols=3)
@@ -585,10 +538,6 @@ def create_docx(bid_id):
 
     # begin Section D block
     document.add_picture(f'{PATH_TO_IMG}/Section_D.png', width=Cm(18.99), height=Cm(0.65))
-    # write_to_docx(
-    #     after_spacing=10,
-    #     style='alternates_style_name'
-    # )
 
     alternate_paragraph = write_to_docx(
         content=' ',

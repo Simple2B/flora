@@ -321,10 +321,15 @@
         }
 
     }
+}
 
-    .title-text-style {
-        color: #000000;
-        font-weight: 500;
+.title-text-style {
+    color: #000000;
+    font-weight: 500;
+    span {
+        margin-left: 1rem;
+        color: #828282;
+        font-style: italic;
     }
 }
 
@@ -457,6 +462,14 @@
                 padding-left: $m1rem;
             }
 
+            & > div:last-child {
+                display: flex;
+                padding-left: 0;
+                padding-right: 1rem;
+                div {
+                   padding-left: 0;
+                }
+            }
         }
 
         ._edit_delete-btns {
@@ -578,16 +591,6 @@
             display: flex;
             justify-content: flex-end;
             align-items: baseline;
-            &-inner_block {
-
-                .subtotal {
-                    // padding-right: ;
-                }
-
-                .subtotal_price {
-                    // padding-left: 1rem;
-                }
-            }
         }
 
         .__right-block {

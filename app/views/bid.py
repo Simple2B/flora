@@ -60,12 +60,11 @@ def save_tbd(bid_id):
                 work_item_line = WorkItemLine.query.get(line_id)
                 work_item_line.tbd = True
                 work_item_line.save()
-                log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is true'")
-                return json.dumps('tbd: ' + f'{tbd_name}')
+                log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is True'")
             else:
                 calculate_subtotal(bid_id, tbd_name=tbd_name)
                 log(log.INFO, f"Response is '{tbd_name}'")
-                return json.dumps('tbd: ' + f'{tbd_name}')
+            return json.dumps(f'tbd_{tbd_name}:' + 'True')
         else:
             tbd_name = request.args['false']
             if tbd_name.startswith('work_item_line_tbd_'):
@@ -73,11 +72,11 @@ def save_tbd(bid_id):
                 work_item_line = WorkItemLine.query.get(line_id)
                 work_item_line.tbd = False
                 work_item_line.save()
-                log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is false'")
+                log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is False'")
             else:
                 calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
-                log(log.INFO, f"Response: 'tbd_name: {tbd_name} is false'")
-            return json.dumps('tbd:' + 'false')
+                log(log.INFO, f"Response: 'tbd_name: {tbd_name} is False'")
+            return json.dumps(f'tbd_{tbd_name}:' + 'False')
     else:
         session["tbdChoices"] = []
         log(log.DEBUG, 'No requesr.args')
@@ -109,7 +108,6 @@ def delete_group(bid_id, group_name):
         link.delete()
     group.delete()
     time_update(bid_id)
-    session["saveInCloud"] = True
     return redirect(url_for("bid.bidding", bid_id=bid_id))
 
 
@@ -120,7 +118,6 @@ def delete_group(bid_id, group_name):
 def add_group_work_item_line(bid_id, group_link_id):
     WorkItemLine(link_work_items_id=group_link_id).save()
     time_update(bid_id)
-    session["saveInCloud"] = True
     return redirect(url_for("bid.bidding", bid_id=bid_id))
 
 
@@ -142,7 +139,6 @@ def edit_work_item_line(bid_id, work_item_line_id):
                 line.tbd = form.tbd.data
                 line.save()
                 time_update(bid_id)
-                session["saveInCloud"] = True
             else:
                 line.note = form.note.data
                 line.description = form.description.data
@@ -152,7 +148,6 @@ def edit_work_item_line(bid_id, work_item_line_id):
                 line.tbd = form.tbd.data
                 line.save()
                 time_update(bid_id)
-                session["saveInCloud"] = True
         else:
             log(log.ERROR, "Unknown work_item_line_id: %d", work_item_line_id)
 
@@ -187,7 +182,6 @@ def delete_group_link_work_item(bid_id, group_link_id):
             line.delete()
         link.delete()
         time_update(bid_id)
-        session["saveInCloud"] = True
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", group_link_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
@@ -288,7 +282,7 @@ def bidding(bid_id):
     form_bid = BidForm()
     form = WorkItemLineForm()
     tbd_choices = session.get("tbdChoices", [])
-    form_bid.save_in_cloud = session.get("saveInCloud", False)
+    form_bid.save_in_cloud = False
 
     if bid.status == Bid.Status.a_new:
         bid.status = Bid.Status.b_draft
