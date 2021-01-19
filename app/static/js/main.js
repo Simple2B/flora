@@ -78,6 +78,7 @@ $(document).ready( function() {
 // begin My Profile
 const previewUrl = document.getElementById('current_url');
 const myProfileSubmitBtn = document.getElementById('my_profile_submit_id');
+previewUrl.setAttribute('value', window.location.href);
 myProfileSubmitBtn.setAttribute('value', window.location.href);
 
 const sideBarNavLinks = document.querySelectorAll('#sidebar__nav-links-bidding li span a');
