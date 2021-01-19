@@ -52,6 +52,7 @@ def check_tbd(bid_id, tbd_name):
 @bid_blueprint.route("/save_tbd/<int:bid_id>", methods=["GET"])
 @login_required
 def save_tbd(bid_id):
+    bid = Bid.query.get(bid_id)
     if request.args:
         tbd_name = request.args.get('', None)
         if tbd_name:
@@ -64,7 +65,7 @@ def save_tbd(bid_id):
             else:
                 calculate_subtotal(bid_id, tbd_name=tbd_name)
                 log(log.INFO, f"Response is '{tbd_name}'")
-            return json.dumps(f'tbd_{tbd_name}:' + 'True')
+            # return json.dumps(f'tbd_{tbd_name}:' + 'True')
         else:
             tbd_name = request.args['false']
             if tbd_name.startswith('work_item_line_tbd_'):
@@ -76,7 +77,9 @@ def save_tbd(bid_id):
             else:
                 calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
                 log(log.INFO, f"Response: 'tbd_name: {tbd_name} is False'")
-            return json.dumps(f'tbd_{tbd_name}:' + 'False')
+            # return json.dumps(f'tbd_{tbd_name}:' + 'False')
+        response = dict(subtotal=bid.subtotal, grandSubtotal=bid.grand_subtotal)
+        return json.dumps(response)
     else:
         session["tbdChoices"] = []
         log(log.DEBUG, 'No requesr.args')
