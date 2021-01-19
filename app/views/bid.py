@@ -108,7 +108,7 @@ def delete_group(bid_id, group_name):
         link.delete()
     group.delete()
     time_update(bid_id)
-    session["saveInCloud"] = True
+    # session["saveInCloud"] = True
     return redirect(url_for("bid.bidding", bid_id=bid_id))
 
 
@@ -119,7 +119,7 @@ def delete_group(bid_id, group_name):
 def add_group_work_item_line(bid_id, group_link_id):
     WorkItemLine(link_work_items_id=group_link_id).save()
     time_update(bid_id)
-    session["saveInCloud"] = True
+    # session["saveInCloud"] = True
     return redirect(url_for("bid.bidding", bid_id=bid_id))
 
 
@@ -186,7 +186,7 @@ def delete_group_link_work_item(bid_id, group_link_id):
             line.delete()
         link.delete()
         time_update(bid_id)
-        session["saveInCloud"] = True
+        # session["saveInCloud"] = True
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", group_link_id)
     return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))

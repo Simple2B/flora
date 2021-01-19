@@ -50,6 +50,10 @@
         .back img {
             margin-right: 0.5rem;
         }
+        .back span:hover {
+            color: #000000;
+            font-weight: 600;
+        }
         .preview_export_btn {
             padding: .5rem 1.5rem;
             color: #fff;
@@ -338,24 +342,29 @@
             /* -webkit-box-align: end; */
         }
 
-        .by_name_date .input-underline {
+        .input-underline {
             border: none;
             border-bottom: 2px solid #333333;
         }
 
+        .table_of_sections_E_F {
+            width: 100%;
+        }
+
+        .td_width {
+            width: 5%;
+        }
+
         .ddb_titles {
-            display: -webkit-box;
-            -webkit-box-pack: justify;
-            font-weight: bold;
+            margin-top: 1rem;
+            width: 100%;
             font-size: 16px;
+            font-weight: bold;
+            text-align: center;
         }
 
-        .ddb_titles :first-child {
-            margin: 1rem 0rem 0rem 5rem;
-        }
-
-        .ddb_titles :last-child {
-            margin: 1rem 5rem 0rem 0rem;
+        .ddb_titles td {
+            width: 50%;
         }
 
         .send_copies {
@@ -366,7 +375,6 @@
             margin-top: 0.5rem;
             font-weight: 600;
         }
-
     </style>
 
 </head>
@@ -426,7 +434,6 @@
                                     {{ bid.client }}
                                 </div>
                                 <div>{{ bid.vendor_address_street }}</div>
-                                <div>Suite # 502</div>
                                 <div>{{ bid.vendor_address_city }}</div>
                                 <div>{{ bid.contact }}</div>
                             </div>
@@ -438,7 +445,6 @@
                                     {{ bid.project_name }}
                                 </div>
                                 <div>{{ bid.address_street }}</div>
-                                <div>Suite # 502</div>
                                 <div>{{ bid.address_city }}</div>
                                 <div>
                                     <span class="project_quote">
@@ -462,7 +468,7 @@
                                 </div>
                                 <div class="bid_subtotal_value">${{ link_work_item.link_subtotal }}</div>
                             </div>
-                            {% for work_item_line in link_work_item.work_item_lines%}
+                            {% for work_item_line in link_work_item.work_item_lines %}
                             <div class="work_item_note">
                                 <div class="__note-box">
                                     <div class="_note">
@@ -694,33 +700,105 @@
                             </tbody>
                         </table>
 
-                        <div class="ddb_titles">
-                            <div> DDB Contracting, LLC. </div>
-                            <div> Premier Project Management </div>
-                        </div>
+                        <table class="ddb_titles">
+                            <tr>
+                                <td> DDB Contracting, LLC. </td>
+                                <td> Premier Project Management </td>
+                            </tr>
+                        </table>
+                        <!-- <div class="inputs_forms">
+                            <div class="by_name_date">
+                                <div class="input_field">
+                                    <div class="wi-17">By</div>
+                                    <input type="text" class="input-underline">
+                                </div>
+                                <div class="wi-17">Name</div>
+                                <div>
+                                {{ bid.contact }}</div>
+                                <div class="wi-17">Date {{ date_today }}</div>
+                            </div>
+                            <div class="by_name_date">
+                                <div class="input_field">
+                                    <div class="wi-17"> By </div>
+                                    <input type="text" class="input-underline">
+                                </div>
+                                <div class="input_field">
+                                    <div class="wi-17"> Name </div>
+                                    <input type="text" class="input-underline">
+                                </div>
+                                <div class="input_field">
+                                    <div class="wi-17"> Date </div>
+                                    <input type="text" class="input-underline">
+                                </div>
+                            </div>
+                        </div> -->
                         <div class="inputs_forms">
-                            <div class="by_name_date">
-                                <div class="input_field">
-                                    <div>By &nbsp; &nbsp; &nbsp; &nbsp; </div>
-                                    <input type="text" class="input-underline">
-                                </div>
-                                <div>Name &nbsp; {{ bid.contact }}</div>
-                                <div>Date &nbsp; &nbsp; {{ date_today }}</div>
-                            </div>
-                            <div class="by_name_date">
-                                <div class="input_field">
-                                    <div> By &nbsp; &nbsp; &nbsp; &nbsp;</div>
-                                    <input type="text" class="input-underline">
-                                </div>
-                                <div class="input_field">
-                                    <div> Name &nbsp; </div>
-                                    <input type="text" class="input-underline">
-                                </div>
-                                <div class="input_field">
-                                    <div> Date &nbsp; &nbsp;</div>
-                                    <input type="text" class="input-underline">
-                                </div>
-                            </div>
+                            <table class="table_of_sections_E_F">
+                                <tr>
+                                    <td>
+                                        <table class="inner_table" style="padding: 0px;">
+                                            <tr>
+                                                <td>
+                                                    <td>By &nbsp;</td>
+                                                </td>
+                                                <td>
+                                                    <td class="td_width"></td>
+                                                    <td><input type="text" class="input-underline"></td>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <td>Name &nbsp;</td>
+                                                </td>
+                                                <td>
+                                                    <td  class="td_width"></td>
+                                                    <td>{{ bid.contact }}</td>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <td>Date &nbsp;</td>
+                                                </td>
+                                                <td>
+                                                    <td  class="td_width"></td>
+                                                    <td>{{ date_today }}</td>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table class="inner_table">
+                                            <tr>
+                                                <td>
+                                                    <td>By &nbsp;</td>
+                                                </td>
+                                                <td>
+                                                    <td class="td_width"></td>
+                                                    <td><input type="text" class="input-underline"></td>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <td>Name &nbsp;</td>
+                                                </td>
+                                                <td>
+                                                    <td class="td_width"></td>
+                                                    <td><input type="text" class="input-underline"></td>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <td>Date &nbsp;</td>
+                                                </td>
+                                                <td>
+                                                    <td class="td_width"></td>
+                                                    <td><input type="text" class="input-underline"></td>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="send_copies">
                             Send copies to the following:

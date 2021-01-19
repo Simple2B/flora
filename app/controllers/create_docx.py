@@ -218,28 +218,28 @@ def create_docx(bid_id):
         style=f'bid_project_street_{bid.address_street}'
     )
 
-    row = bid_table_info.add_row()
-    set_row_height(row, 15)
-    cell_client_info = row.cells[1]
-    cell_project_info = row.cells[3]
-    write_to_docx(
-        cell_paragraph=cell_client_info,
-        edit_first_paragraph=True,
-        content="Suite # 502",
-        font_bold=False,
-        font_size=10.5,
-        align='left',
-        style='bid_client_75 Montgomery'
-    )
-    write_to_docx(
-        cell_paragraph=cell_project_info,
-        edit_first_paragraph=True,
-        content="Suite # 502",
-        font_bold=False,
-        font_size=10.5,
-        align='left',
-        style='bid_project_75 Montgomery'
-    )
+    # row = bid_table_info.add_row()
+    # set_row_height(row, 15)
+    # cell_client_info = row.cells[1]
+    # cell_project_info = row.cells[3]
+    # write_to_docx(
+    #     cell_paragraph=cell_client_info,
+    #     edit_first_paragraph=True,
+    #     content="Suite # 502",
+    #     font_bold=False,
+    #     font_size=10.5,
+    #     align='left',
+    #     style='bid_client_75 Montgomery'
+    # )
+    # write_to_docx(
+    #     cell_paragraph=cell_project_info,
+    #     edit_first_paragraph=True,
+    #     content="Suite # 502",
+    #     font_bold=False,
+    #     font_size=10.5,
+    #     align='left',
+    #     style='bid_project_75 Montgomery'
+    # )
 
     # 5 row
     row = bid_table_info.add_row()
