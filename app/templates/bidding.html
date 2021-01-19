@@ -353,7 +353,7 @@
                     </div>
                     <div>
                       <div class="check_box-TBD">
-                        <input class="form-control" type="checkbox" name="work_item_line_{{work_item_line.id}}">
+                        <input class="form-control" type="checkbox" name="work_item_line_tbd_{{work_item_line.id}}">
                       </div>
                       <span class="">TBD</span>
                     </div>
@@ -495,7 +495,7 @@
                       </div>
                       <div>
                         <div class="check_box-TBD">
-                          <input class="form-control" type="checkbox" name="{{work_item_line.id}}">
+                          <input class="form-control" type="checkbox" name="work_item_line_tbd_{{work_item_line.id}}">
                         </div>
                         <span class="">TBD</span>
                       </div>
@@ -557,6 +557,7 @@
 
           <form class="form" id="bid_subtotal_data" role="form" action="{{ url_for('bid.export_pdf', bid_id=bid.id) }}"
             method="post">
+            <input class="hidden" name="next_url" value="" id="current_url"></input>
             <div class="_center_block">
               <div class="inputs_fields" id="subtotal_inputs_fields_id">
                 <div class="input-row">
@@ -702,7 +703,7 @@
         </div>
       </div>
 
-      <div class="box-shadow add_item_block" id="bid_exclusion">
+      <div class="add_item_block box-shadow" id="bid_exclusion">
         <span>
           <strong>
             Exclusions
@@ -760,7 +761,6 @@
               <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
             </a>
           </div>
-
           {% else %}
           <div class="__modal-inputs--flex-row">
             <a href="{{ url_for('clarification.clarifications', bid_id=bid.id) }}">
@@ -769,8 +769,66 @@
               </button>
             </a>
           </div>
+          {% endif %}
         </div>
+      </div>
+
+      <!-- Alternates -->
+      <div class="add_item_block box-shadow" id="alternates">
+        <span>
+          <strong>
+            Alternates
+          </strong>
+        </span>
+        {% if bid.alternates %}
+        {% for alternate in bid.alternates%}
+        <div class="_alternate_block bidding_margin">
+
+          <div>
+            <div>
+              <input class="_form-input" value="{{alternate.name}}" readonly>
+              <label class="_label">Alternate item</label>
+            </div>
+          </div>
+          <div class="p-2 flex-shrink-1 bd-highlight">
+            <a href="{{url_for('alternate.delete_alternate', bid_id=bid.id, alternate_id=alternate.id)}}"
+              class="delete-button border-none ddb-cursor-handle bck-white">
+              <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+            </a>
+          </div>
+          <div class="px-2 flex-shrink-1 bd-highlight">
+            <a href="{{url_for('alternate.edit_alternate', bid_id=bid.id, alternate_id=alternate.id)}}" class="border-none ddb-cursor-handle">
+              <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+            </a>
+          </div>
+
+        </div>
+        {% endfor %}
         {% endif %}
+        <hr>
+        <div class="_alternate_block_add_alternate_row bidding_margin">
+          <div>
+            <a href="{{ url_for('alternate.new_alternate', bid_id=bid.id) }}">
+              <button class="ddb-cursor-handle _btn--base-gray">
+                Add alternate
+              </button>
+            </a>
+          </div>
+          {% if bid.alternates %}
+          <div class="__alternate_total">
+              <span>
+                <strong>
+                  Total:
+                </strong>
+              </span>
+              <span>
+                <strong>
+                  $ {{form.calculate_alternate_total}}
+                </strong>
+              </span>
+          </div>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
@@ -809,7 +867,7 @@
                   {{form.price(class='_form-input', id="modal_price")}}
                 </div>
                 <div>
-                  {{form.tbd(class='', type="checkbox", id="modal_price")}}
+                  {{form.tbd(class='', type="checkbox", id="modal_tbd")}}
                   <label> TBD </label>
                 </div>
               </div>

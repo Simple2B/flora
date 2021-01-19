@@ -76,6 +76,7 @@ $(document).ready( function() {
 });
 
 // begin My Profile
+const previewUrl = document.getElementById('current_url');
 const myProfileSubmitBtn = document.getElementById('my_profile_submit_id');
 myProfileSubmitBtn.setAttribute('value', window.location.href);
 
@@ -84,6 +85,7 @@ sideBarNavLinks.forEach( (e) => {
   e.addEventListener('click', () => {
     const myProfileSubmitBtn = document.getElementById('my_profile_submit_id');
     myProfileSubmitBtn.setAttribute('value', e.href);
+    previewUrl.setAttribute('value', e.href);
   });
 });
 // end My Profile block

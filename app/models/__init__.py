@@ -11,3 +11,4 @@ from .work_item_line import WorkItemLine  # noqa f401
 from .work_item import WorkItem  # noqa f401
 from .docx import Docx  # noqa f401
 from .drawing import Drawing  # noqa f401
+from .alternate import Alternate  # noqa f401

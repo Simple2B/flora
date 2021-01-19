@@ -115,15 +115,21 @@ $(document).ready(function() {
     const myResponse = async () => {
       const response = await fetch(`/check_tbd/${bidID}/${el.getAttribute('name')}`, {method: 'GET'})
       if (response.ok) {
-        response.text().then(result => {
-          console.log(response.ok)
-          if (result == "0.0" || result == "0") { el.checked = true }
-          else { el.checked = false };
-        });
-      }
+        console.log('new response');
+        const responseData = await response.text()
+        console.log("Response Data: ", responseData);
+        if (responseData == "0.0" || responseData == "0" || responseData == "tbd_work_item_line_on") {
+           el.checked = true
+          }
+        else {
+          el.checked = false;
+        };
+      };
     };
     myResponse();
+  });
 
+  inputs.forEach( el => {
     el.addEventListener('click', () => {
       if (el.checked) {
         const myRequest = async () => {
@@ -140,7 +146,7 @@ $(document).ready(function() {
         myRequest()
       }
       else {
-        const tbdUnchecked = async () => {
+        const tbdTurnOff = async () => {
           try {
             const request = await fetch(`/save_tbd/${bidID}?false=${el.getAttribute('name')}`, {method: 'GET'})
             if (request.ok) {
@@ -151,7 +157,7 @@ $(document).ready(function() {
             console.warn(err)
           }
         };
-        tbdUnchecked()
+        tbdTurnOff()
       }
     });
   });
@@ -179,6 +185,5 @@ $(document).ready(function() {
 });
 
 // Active decoration on header menu-item by border-bottom
-// bid_href_id.classList.remove('menu__item');
 bid_href_id.classList.add('active-tab');
 // end decoration

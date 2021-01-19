@@ -1,67 +1,44 @@
 @import '../global/variables';
 @import '../global/mixins';
 
-.profile_container {
-    &__account_block {
-        max-width: 60vw;
-        border-top: 1px solid #ebebeb;
-        margin: auto;
-        overflow: hidden;
 
+._flash-btn {
+    background-color: #fff3cd;
+}
+._profile_flash {
+    @include flash_default;
+    width: 60vw;
+    background-color: #fff3cd;
+    text-align: center;
+}
+
+._account_title {
+    padding-top: $m1rem;
+    padding-left: $m1rem;
+    span:first-child {
+        font-weight: 700;
+        margin-right: $m1rem;
     }
-
-    ._flash-btn {
-        background-color: #fff3cd;
+    span:last-child {
+        font-style: normal;
+        font-weight: normal;
+        color: #828282;
     }
-    ._profile_flash {
-       @include flash_default;
-       width: 60vw;
-       background-color: #fff3cd;
-       text-align: center;
+}
+
+._submit_btns {
+    display: flex;
+    align-items: center;
+    padding: $m0-5rem;
+    div {
+        padding-left: $m0-5rem;
+        padding-right: $m0-5rem;
     }
-
-    ._account_title {
-        padding-top: $m1rem;
-        padding-left: $m1rem;
-        span:first-child {
-            font-weight: 700;
-            margin-right: $m1rem;
-        }
-        span:last-child {
-            font-style: normal;
-            font-weight: normal;
-            color: #828282;
-        }
-    }
-
-    ._account_inputs {
-        display: flex;
-        flex-direction: column;
-
-        &_row {
-            display: flex;
-            padding: $m0-5rem;
-            div {
-                padding-left: $m0-5rem;
-                padding-right: $m0-5rem*5;
-            }
-        }
-    }
-
-    ._submit_btns {
-        display: flex;
-        align-items: center;
-        padding: $m0-5rem;
-        div {
-            padding-left: $m0-5rem;
-            padding-right: $m0-5rem;
-        }
-        a {
-            text-decoration: none;
-            border: none;
-            &:hover {
-                color: #fff;
-            }
+    a {
+        text-decoration: none;
+        border: none;
+        &:hover {
+            color: #fff;
         }
     }
 }

@@ -64,9 +64,10 @@ class Bid(db.Model, ModelMixin):
     clarification_links = relationship("ClarificationLink")
     exclusion_links = relationship("ExclusionLink")
     drawings = relationship("Drawing")
+    alternates = relationship("Alternate")
 
     def __str__(self):
         return self.__repr__()
 
     def __repr__(self):
-        return f"<Bid:{self.id}({self.procore_bid_id}) [{self.status.value}>]"
+        return f"<Bid:{self.id}({self.procore_bid_id}) [{self.status.value}]>"

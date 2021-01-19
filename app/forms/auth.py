@@ -4,7 +4,6 @@ from wtforms import (
     PasswordField,
     SubmitField,
     ValidationError,
-    IntegerField,
 )
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 
@@ -21,7 +20,7 @@ class RegistrationForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired(), Length(2, 30)])
     email = StringField("Email Address", validators=[DataRequired(), Email()])
     position = StringField("Position", validators=[DataRequired()])
-    phone = IntegerField("Phone", validators=[DataRequired()])
+    phone = StringField("Phone", validators=[DataRequired()])
     user_type = StringField("User type", validators=[DataRequired()])
 
     password = PasswordField("Password", validators=[DataRequired(), Length(6, 30)])
@@ -34,10 +33,20 @@ class RegistrationForm(FlaskForm):
     )
     submit = SubmitField("Add new user")
 
-    def validate_username(form, field):
+    def validate_username(self, field):
         if User.query.filter_by(username=field.data).first() is not None:
             raise ValidationError("This username is taken.")
 
-    def validate_email(form, field):
+    def validate_email(self, field):
         if User.query.filter_by(email=field.data).first() is not None:
             raise ValidationError("This email is already registered.")
+
+
+class EditUserForm(RegistrationForm):
+    def validate_username(self, field):
+        # do not validate
+        pass
+
+    def validate_email(self, field):
+        # do not validate
+        pass

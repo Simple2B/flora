@@ -2,12 +2,12 @@ version: "3.8"
 services:
   app:
     build: .
-    container_name: app
+    container_name: flora
     command: flask run -h 0.0.0.0
     volumes:
       - .:/usr/src/app
     ports:
-      - 5000:5000
+      - 127.0.0.1:5016:5000
     deploy:
       restart_policy:
         condition: any

@@ -2,7 +2,7 @@ from sqlalchemy import inspect
 from app.models import Bid
 
 
-def calculate_subtotal(bid_id, tbd_choices=[], tbd_name=None, on_tbd=True):
+def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
     bid = Bid.query.get(bid_id)
 
     percent_permit_fee = bid.percent_permit_fee
@@ -11,9 +11,6 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name=None, on_tbd=True):
     percent_insurance_tax = bid.percent_insurance_tax
     percent_profit = bid.percent_profit
     percent_bond = bid.percent_bond
-
-    # bid.subtotal
-    subtotal = 0.0
 
     if tbd_name:
         if tbd_name == 'permit':
@@ -53,7 +50,11 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name=None, on_tbd=True):
                 bid.bond = round((percent_bond * bid.subtotal) / 100, 2)
                 bid.grand_subtotal = bid.grand_subtotal + bid.bond
         bid.save()
+
     else:
+        # bid.subtotal
+        subtotal = 0.0
+
         dictionary_bid_attrs = inspect(bid).dict
         if not tbd_choices:
             tbd_choices = {i for i in dictionary_bid_attrs if dictionary_bid_attrs[i] == 0}
@@ -61,8 +62,12 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name=None, on_tbd=True):
         for link in bid.link_work_items:
             link.link_subtotal = 0.0
             for line in link.work_item_lines:
-                subtotal += line.price * line.quantity
-                link.link_subtotal += round((line.price * line.quantity), 2)
+                if line.tbd:
+                    continue
+                else:
+                    subtotal += line.price * line.quantity
+                    link.link_subtotal += line.price * line.quantity
+            link.link_subtotal = round(link.link_subtotal, 2)
 
         subtotal = round(subtotal, 2)
         was_change = False
@@ -141,6 +146,17 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name=None, on_tbd=True):
 
         if was_change:
             bid.save()
+
+
+def calculate_alternate_total(bid_id):
+    bid = Bid.query.get(bid_id)
+    alternate_total = 0
+    for alternate in bid.alternates:
+        if alternate.tbd is True:
+            continue
+        else:
+            alternate_total += (alternate.price * alternate.quantity)
+    return alternate_total
 
 
 # work mostly with JS
