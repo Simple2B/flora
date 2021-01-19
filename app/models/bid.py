@@ -52,6 +52,13 @@ class Bid(db.Model, ModelMixin):
     subtotal = db.Column(db.Float, default=0.0)
     grand_subtotal = db.Column(db.Float, default=0.0)
 
+    permit_filling_fee_tbd = db.Column(db.Boolean, default=False)
+    general_conditions_tbd = db.Column(db.Boolean, default=False)
+    overhead_tbd = db.Column(db.Boolean, default=False)
+    insurance_tax_tbd = db.Column(db.Boolean, default=False)
+    profit_tbd = db.Column(db.Boolean, default=False)
+    bond_tbd = db.Column(db.Boolean, default=False)
+
     popularity = db.Column(db.Integer, default=0)
     time_updated = db.Column(db.Float, default=time.time, nullable=False)
     due_date = db.Column(db.Date, nullable=False)

@@ -556,7 +556,7 @@ hr {
   border-color: #BDBDBD;
   text-indent: 5px;
   height: 8rem;
-  width: 24rem;
+  width: 22vw;
   margin-top: 1rem; }
   ._form-text_area:focus {
     border-color: #ffdd48;
@@ -1349,9 +1349,14 @@ hr {
     .main-container__project_general .__drawing-log ._drawing_table table {
       width: 100%;
       padding: 1rem; }
-  .main-container__project_general .title-text-style {
-    color: #000000;
-    font-weight: 500; }
+
+.title-text-style {
+  color: #000000;
+  font-weight: 500; }
+  .title-text-style span {
+    margin-left: 1rem;
+    color: #828282;
+    font-style: italic; }
 
 .bidding__side_bar {
   height: 64vh;
@@ -1438,6 +1443,12 @@ hr {
     align-items: baseline; }
     .__bidding--scroll ._work_item-line .inputs-features div {
       padding-left: 1rem; }
+    .__bidding--scroll ._work_item-line .inputs-features > div:last-child {
+      display: flex;
+      padding-left: 0;
+      padding-right: 1rem; }
+      .__bidding--scroll ._work_item-line .inputs-features > div:last-child div {
+        padding-left: 0; }
   .__bidding--scroll ._work_item-line ._edit_delete-btns {
     display: flex;
     flex-direction: column;
