@@ -118,7 +118,7 @@ $(document).ready(function() {
         console.log('new response');
         const responseData = await response.text()
         console.log("Response Data: ", responseData);
-        if (responseData == "0.0" || responseData == "0" || responseData == "tbd_work_item_line_on") {
+        if (responseData === 'True' || responseData == "tbd_work_item_line_on") {
            el.checked = true
           }
         else {
