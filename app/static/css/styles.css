@@ -167,6 +167,11 @@ hr {
 .ddb-cursor-handle {
   cursor: pointer; }
 
+.ddb-border {
+  border: 1px solid #BDBDBD;
+  border-radius: 5px;
+  width: 100%; }
+
 .--border {
   background-color: #dae0e5 !important;
   color: black !important; }
@@ -496,6 +501,39 @@ hr {
       color: white;
       margin-left: 8rem; }
 
+.sidebar__nav-links-bidding {
+  list-style-type: disc; }
+  .sidebar__nav-links-bidding .__disc-blue {
+    color: #007bff; }
+    .sidebar__nav-links-bidding .__disc-blue .__select_work_item-active {
+      color: #BDBDBD; }
+  .sidebar__nav-links-bidding li {
+    margin: 0.5rem; }
+  .sidebar__nav-links-bidding li a {
+    color: #BDBDBD; }
+  .sidebar__nav-links-bidding:hover {
+    color: #2F80ED; }
+
+.main-container, .exclusions-container, .clarifications-container {
+  display: flex;
+  flex-flow: column;
+  margin-left: auto;
+  margin-right: auto; }
+  .main-container .__bid-header, .exclusions-container .__bid-header, .clarifications-container .__bid-header {
+    background-color: black;
+    display: inline-flex;
+    justify-content: flex-start;
+    padding: .5rem 1rem;
+    align-items: center; }
+    .main-container .__bid-header .bid-header__status, .exclusions-container .__bid-header .bid-header__status, .clarifications-container .__bid-header .bid-header__status {
+      color: white;
+      padding: .5rem 1rem;
+      background-color: #EB5757;
+      border-radius: .3rem; }
+    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
+      color: white;
+      margin-left: 8rem; }
+
 ._form-input {
   border: 1px solid transparent;
   height: 2rem;
@@ -581,6 +619,21 @@ hr {
   color: #333333;
   background-color: #fff;
   font-size: 13px; }
+
+._label--lg {
+  z-index: 2;
+  float: left;
+  height: .5rem;
+  line-height: .1rem;
+  padding: .1rem .5rem .1rem .2rem;
+  position: relative;
+  left: 1rem;
+  top: -2.7rem;
+  color: #333333;
+  background-color: #fff;
+  font-size: 13px;
+  top: -2.65rem;
+  left: 2rem; }
 
 .input_search {
   border: none;
@@ -1293,6 +1346,8 @@ hr {
       .main-container__project_general ._date_revision ._input-date_time input {
         min-width: 4rem;
         margin-left: 1rem; }
+      .main-container__project_general ._date_revision ._input-date_time label {
+        left: 1.8rem; }
     .main-container__project_general ._date_revision ._date_time_img {
       padding-left: 1rem; }
     .main-container__project_general ._date_revision .project_type-radio-select > div:last-child {
@@ -1324,16 +1379,25 @@ hr {
       flex-flow: column wrap;
       border: 1px solid #E5E5E5; }
     .main-container__project_general .__client_job_info .client-job--span {
-      display: inline-flex;
+      display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-flow: row wrap;
       color: #979797;
       font-weight: bold;
       padding-left: 0.5rem; }
+      .main-container__project_general .__client_job_info .client-job--span > div {
+        display: flex;
+        align-items: center;
+        width: 30%; }
+        .main-container__project_general .__client_job_info .client-job--span > div > div:first-child {
+          width: 20%; }
+        .main-container__project_general .__client_job_info .client-job--span > div > div:last-child {
+          width: 50%; }
       .main-container__project_general .__client_job_info .client-job--span div {
-        min-width: 15%;
-        width: 25%; }
+        min-width: 15%; }
     .main-container__project_general .__client_job_info .proj_gen-text-info {
+      display: flex;
       color: #000000;
       font-weight: normal; }
   .main-container__project_general .__drawing-log ._drawing-table {
@@ -1342,7 +1406,8 @@ hr {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #E5E5E5; }
+    border: 1px solid #E5E5E5;
+    margin-bottom: 0.5rem; }
   .main-container__project_general .__drawing-log ._drawing_table {
     display: flex;
     justify-content: center; }
@@ -1385,6 +1450,9 @@ hr {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: .3rem;
   outline: 0; }
+  .__bidding--scroll div.add_item_block h6 {
+    font-weight: 700;
+    font-size: 16px; }
 
 .__bidding--scroll .clarification_block {
   margin-bottom: 1rem;
@@ -1420,6 +1488,7 @@ hr {
   justify-content: flex-end;
   margin-top: 1rem; }
   .__bidding--scroll ._work_item-line ._work_item_line--inputs {
+    width: 50vw;
     margin-bottom: 1rem; }
   .__bidding--scroll ._work_item-line .bck-color {
     background-color: #FAFAFA; }
@@ -1497,7 +1566,8 @@ hr {
     justify-content: flex-end; }
     .__bidding--scroll .add_work_item-group ._center_block .inputs_fields {
       display: flex;
-      flex-direction: column; }
+      flex-direction: column;
+      padding-right: 1rem; }
       .__bidding--scroll .add_work_item-group ._center_block .inputs_fields div.input-row {
         display: flex;
         flex-flow: row wrap;
@@ -1519,17 +1589,24 @@ hr {
     display: flex;
     justify-content: flex-end;
     align-items: baseline; }
-  .__bidding--scroll .add_work_item-group ._bottom_block {
-    margin: 1rem 0rem; }
   .__bidding--scroll .add_work_item-group .__right-block {
     display: flex;
     justify-content: flex-end; }
     .__bidding--scroll .add_work_item-group .__right-block ._grand_subtotal-block {
-      width: 50vw;
+      width: 36.9vw;
       display: flex;
       flex-flow: row wrap;
-      justify-content: space-evenly;
       align-items: baseline; }
+    .__bidding--scroll .add_work_item-group .__right-block div.subtotal {
+      margin-right: 3.2rem;
+      flex-grow: 1; }
+    .__bidding--scroll .add_work_item-group .__right-block div.subtotal_price {
+      flex-grow: 1; }
+  .__bidding--scroll .add_work_item-group ._bottom_block {
+    margin: 1rem 0rem; }
+    .__bidding--scroll .add_work_item-group ._bottom_block div.subtotal {
+      margin-right: 0rem;
+      width: 22%; }
   .__bidding--scroll .add_work_item-group .subtotal {
     font-size: 18px;
     font-weight: bold;
@@ -1537,6 +1614,14 @@ hr {
   .__bidding--scroll .add_work_item-group .subtotal_price {
     color: #EB5757;
     font-weight: bold; }
+
+.delete_element {
+  margin-right: 0.5rem;
+  padding-right: 0.5rem; }
+
+.edit_element {
+  margin-left: 0.5rem;
+  padding: 0rem 0.5rem; }
 
 .check_box-TBD {
   width: 70px;

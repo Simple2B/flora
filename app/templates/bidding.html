@@ -161,51 +161,57 @@
           <div class="_client-block_info">
             <div class="client-job--span">
               <div>
-                <span>Client</span> &nbsp; &nbsp;
-                <span class="proj_gen-text-info">
+                <div>Client</div> &nbsp; &nbsp;
+                <div class="proj_gen-text-info">
                   {{ bid.client }}
-                </span>
+                </div>
               </div>
               <div>
-                <span>Phone &nbsp; &nbsp;
-                  <span class="proj_gen-text-info">{{ bid.phone }}</span>
+
+                <div>Phone</div> &nbsp; &nbsp;
+                <div class="proj_gen-text-info">{{ bid.phone }}</div>
+
               </div>
               <div>
-                <span>Fax</span> &nbsp; &nbsp;
-                <span class="proj_gen-text-info">{{ bid.fax }}</span>
+                <div>Fax</div> &nbsp; &nbsp;
+                <div class="proj_gen-text-info">{{ bid.fax }}</div>
               </div>
             </div>
             <div class="client-job--span">
               <div>
-                <span>Address</span> &nbsp; &nbsp;
-                <span class="proj_gen-text-info block-text--width">
+                <div>Address</div> &nbsp; &nbsp;
+                <div class="proj_gen-text-info block-text--width">
                   {{bid.vendor_address_street}}
                   {{bid.vendor_address_city}}
-                </span>
+                </div>
               </div>
               <div>
-                <span>Email &nbsp; &nbsp;
-                  <span class="proj_gen-text-info">{{ bid.email }}</span>
+
+                <div>Email</div> &nbsp; &nbsp;
+                <span class="proj_gen-text-info">{{ bid.email }}</span>
+
               </div>
               <div>
-                <span>Contact</span> &nbsp; &nbsp;
-                <span class="proj_gen-text-info">
+                <div>Contact</div> &nbsp; &nbsp;
+                <div class="proj_gen-text-info">
                   {{ bid.contact }}
-                </span>
+                </div>
               </div>
             </div>
           </div>
           <div class="job-address">
             <div class="client-job--span">
               <div>
-                <span>Job</span> &nbsp; &nbsp;
-                <span class="proj_gen-text-info block-text--width">
+                <div>Job</div> &nbsp; &nbsp;
+                <div class="proj_gen-text-info block-text--width">
                   Transaction Window & Sink
-                </span>
+                </div>
               </div>
               <div>
-                <span>Note &nbsp; &nbsp;
-                  <span class="proj_gen-text-info"></span>
+
+                <div>Note &nbsp; &nbsp;</div>
+                <div class="proj_gen-text-info"></div>
+
               </div>
               <div>
 
@@ -213,10 +219,11 @@
             </div>
             <div class="client-job--span">
               <div>
-                <span>Address</span> &nbsp; &nbsp;
-                <span class="proj_gen-text-info">
+                <div>Address</div> &nbsp; &nbsp;
+                <div class="proj_gen-text-info">
                   {{bid.address_street}}
-                  {{bid.address_city}}</span>
+                  {{bid.address_city}}
+                </div>
               </div>
             </div>
           </div>
@@ -232,7 +239,9 @@
             </button>
           </div>
         </div>
-        <span class="team-header__counter t-gray">Showing {{ bid.drawings|length }} drawings</span>
+
+        <div class="counter t-gray">Showing {{ users|length }} drawings</div>
+
         <div class="_drawing_table hidden" id="drawing_log_hidden_id">
           <table>
             <thead class="_drawing-table">
@@ -306,8 +315,8 @@
               </div>
             </div>
           </div>
+          {% for work_item_line in link_work_item.work_item_lines%}
           <div class="_work_item-line">
-            {% for work_item_line in link_work_item.work_item_lines%}
             <div>
               <div class="_show-line_panel bck-color">
                 <div class="title-text-style">Line {{ loop.index }}
@@ -325,7 +334,7 @@
                         id="line-{{work_item_line.id}}_img_id">
                     </button>
                   </div>
-                </div>
+                <!-- </div> -->
               </div>
               <div class="_work_item_line--inputs line_hidden_js hidden" id="line-{{work_item_line.id}}">
                 <div class="bck-color">
@@ -383,9 +392,9 @@
                 </a>
               </div>
             </div>
-            {% endfor %} {# end of lines #}
 
           </div>
+          {% endfor %} {# end of lines #}
           {% endfor %} {# end of work item links #}
 
         </div>
@@ -693,9 +702,6 @@
           </form>
 
           <div class="_bottom_block">
-
-            <div></div>
-
             <div class="__right-block">
               <div class="_grand_subtotal-block">
                 <div class="subtotal">
@@ -707,7 +713,6 @@
                 </div>
               </div>
             </div>
-
           </div>
 
         </div>
@@ -721,28 +726,25 @@
         </span>
         <div class="d-flex bd-highlight bidding_margin">
           {% if bid.exclusion_links %}
-          <div class="p-2 flex-shrink-1 bd-highlight">
-            <a href="{{url_for('bid.delete_exclusions', bid_id=bid.id)}}"
-              class="delete-button border-none ddb-cursor-handle bck-white">
-              <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-            </a>
-          </div>
-          <div class="p-2 w-100 bd-highlight" style="border: 1px solid #BDBDBD">
-            <h6>Unless expressly stated, the following exclusions apply:</h6>
-            {{ show_exclusions }}
-          </div>
-          <div class="px-2 flex-shrink-1 bd-highlight">
-            <a href="{{url_for('bid.edit_exclusions', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
-              <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
-            </a>
-          </div>
 
+            <div class="delete_element">
+              <a href="{{url_for('bid.delete_exclusions', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
+                <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+              </a>
+            </div>
+            <div class="ddb-border p-2 bd-highlight">
+              <h6>Unless expressly stated, the following exclusions apply:</h6>
+              {{ show_exclusions }}
+            </div>
+            <div class="edit_element flex-shrink-1 bd-highlight">
+              <a href="{{url_for('bid.edit_exclusions', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
+                <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+              </a>
+            </div>
           {% else %}
-
-          <div class="__modal-inputs--flex-row">
-            <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}"><button
-                class="ddb-cursor-handle _btn--base-gray">Add exclusion</button></a>
-          </div>
+            <div class="">
+                <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--base-gray">Add exclusion</button></a>
+            </div>
 
           {% endif %}
         </div>
@@ -756,29 +758,31 @@
         </span>
         <div class="d-flex bd-highlight bidding_margin">
           {% if bid.clarification_links %}
-          <div class="p-2 flex-shrink-1 bd-highlight">
-            <a href="{{url_for('bid.delete_clarifications', bid_id=bid.id)}}"
-              class="delete-button border-none ddb-cursor-handle bck-white">
-              <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-            </a>
-          </div>
-          <div class="p-2 w-100 bd-highlight" style="border: 1px solid #BDBDBD">
-            <h6>Please note the following clarifications:</h6>
-            {{ show_clarifications }}
-          </div>
-          <div class="px-2 flex-shrink-1 bd-highlight">
-            <a href="{{url_for('bid.edit_clarifications', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
-              <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
-            </a>
-          </div>
-          {% else %}
-          <div class="__modal-inputs--flex-row">
-            <a href="{{ url_for('clarification.clarifications', bid_id=bid.id) }}">
-              <button class="ddb-cursor-handle _btn--base-gray">
-                Add clarification
-              </button>
-            </a>
-          </div>
+
+            <div class="delete_element">
+             <a href="{{url_for('bid.delete_clarifications', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
+               <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+             </a>
+            </div>
+            <div class="ddb-border p-2 bd-highlight">
+              <h6>Please note the following clarifications:</h6>
+              {{ show_clarifications }}
+            </div>
+            <div class="edit_element">
+             <a href="{{url_for('bid.edit_clarifications', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
+               <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+             </a>
+            </div>
+
+            {% else %}
+              <div class="__modal-inputs--flex-row">
+                <a href="{{ url_for('clarification.clarifications', bid_id=bid.id) }}">
+                  <button class="ddb-cursor-handle _btn--base-gray">
+                    Add clarification
+                  </button>
+                </a>
+              </div>
+
           {% endif %}
         </div>
       </div>
@@ -837,6 +841,7 @@
                 </strong>
               </span>
           </div>
+
           {% endif %}
         </div>
       </div>
