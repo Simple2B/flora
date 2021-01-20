@@ -65,7 +65,13 @@ def archive_or_export():
             last_modified=now,
         )
     elif form.data['export_docx']:
-        create_docx(1)
+        stream_of_bids = []
+        for bid_id in bid_ides_list:
+            bid = Bid.query.get(bid_id)
+            create_docx(bid_id)
+        zipped_file = BytesIO()
+            with zipfile.ZipFile(zipped_file, 'w') as zip:
+                pass
         with open('test_docx.docx', 'rb') as f:
             stream = BytesIO(f.read())
         now = datetime.now()

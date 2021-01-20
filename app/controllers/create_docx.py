@@ -1,7 +1,7 @@
 import os.path
 import datetime
 
-from app.models import Bid, WorkItemGroup, LinkWorkItem
+from app.models import Bid, WorkItemGroup, LinkWorkItem, Docx
 
 from docx import Document
 from docx.enum.style import WD_STYLE_TYPE
@@ -22,6 +22,11 @@ management_info_list = [f'By{" "*10}', f'Name{" "*4}', f'Date{" "*6}']
 
 def create_docx(bid_id):
     bid = Bid.query.get(bid_id)
+
+    PATH_TO_SAVE_DOCX = f'/docx/docx_{bid.procore_bid_id}.docx'
+    Docx(
+        path_to_file=PATH_TO_SAVE_DOCX
+    ).save()
 
     db_subtotal_data = {
         'Subtotal:': bid.subtotal,
@@ -619,4 +624,4 @@ def create_docx(bid_id):
                 paragraph.runs[1].add_picture(f'{PATH_TO_IMG}/underline.png', width=Cm(3.75), height=Cm(0.05))
     # endblock
 
-    document.save('test_docx.docx')
+    document.save(PATH_TO_SAVE_DOCX)
