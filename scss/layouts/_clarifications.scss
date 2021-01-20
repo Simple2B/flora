@@ -16,15 +16,11 @@
 }
 
 .__box-table-clarification {
-    width: 100%;
-    // min-height: 75vh;
-    max-height: 90vh;
-    box-shadow: $shadow;
-    overflow: visible;
+    @extend %tpl-table;
 
     .__box-table--left {
         width: 53%;
-        
+
         ._form-search {
             display: flex;
             margin-top: 0.5rem;
@@ -34,7 +30,7 @@
                 padding-left: 0.5rem;
                 transition: 0.2s;
             }
-        }    
+        }
 
         .__add-clarification--box {
             margin-bottom: $m1rem;
