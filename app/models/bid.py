@@ -1,5 +1,4 @@
 import enum
-# from datetime import datetime
 import time
 from app import db
 from app.models.utils import ModelMixin

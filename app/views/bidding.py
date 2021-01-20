@@ -1,3 +1,4 @@
+import os
 import time
 import zipfile
 from io import BytesIO
@@ -30,7 +31,7 @@ def edit_bid():
     return redirect(url_for("bidding.biddings"))
 
 
-@bidding_blueprint.route("/archive_or_export", methods=["POST"])
+@bidding_blueprint.route("/archive_or_export", methods=["GET", "POST"])
 @login_required
 def archive_or_export():
     form = BidForm(request.form)
@@ -45,8 +46,8 @@ def archive_or_export():
         for bid_id in bid_ides_list:
             bid = Bid.query.get(bid_id)
             stream = create_pdf_file(bid_id)
-            stream_of_bids += [(f'bidding_{bid.procore_bid_id}', stream)]
-            log(log.INFO, f"Sending file({type(stream)})")
+            stream_of_bids += [(f'pdf_bid_{bid.procore_bid_id}', stream)]
+            log(log.DEBUG, "Sending pdf file([%s])", stream)
 
         zipped_file = BytesIO()
         with zipfile.ZipFile(zipped_file, 'w') as zip:
@@ -65,16 +66,31 @@ def archive_or_export():
             last_modified=now,
         )
     elif form.data['export_docx']:
-        create_docx(1)
-        with open('test_docx.docx', 'rb') as f:
-            stream = BytesIO(f.read())
+        stream_of_bids = []
+        for bid_id in bid_ides_list:
+            bid = Bid.query.get(bid_id)
+            filepath = create_docx(bid_id)
+            stream = None
+            with open(filepath, 'rb') as f:
+                stream = BytesIO(f.read())
+            os.remove(filepath)
+            if not stream:
+                log(log.ERROR, "archive_or_export() cannot open [%s]", filepath)
+                return redirect(url_for("bidding.biddings"))
+            stream_of_bids += [(f'pdf_bid_{bid.procore_bid_id}', stream)]
+            log(log.DEBUG, "Sending docx file([%s])", stream)
+        zipped_file = BytesIO()
+        with zipfile.ZipFile(zipped_file, 'w') as zip:
+            for i in stream_of_bids:
+                stream.seek(0)
+                zip.writestr(f"{i[0]}.docx", i[1].read())
+        zipped_file.seek(0)
         now = datetime.now()
-        # return None
         return send_file(
-            stream,
-            # as_attachment=True,
-            attachment_filename="test_docx.docx",
-            mimetype="application/msword",
+            zipped_file,
+            as_attachment=True,
+            attachment_filename="bids_docx.zip",
+            mimetype="application/zip",
             cache_timeout=0,
             last_modified=now,
         )
