@@ -1,7 +1,7 @@
 import os.path
 import datetime
 
-from app.models import Bid, WorkItemGroup, LinkWorkItem, Docx
+from app.models import Bid, WorkItemGroup, LinkWorkItem
 
 from docx import Document
 from docx.enum.style import WD_STYLE_TYPE
@@ -9,9 +9,8 @@ from docx.shared import Cm, Pt, RGBColor
 from docx.enum.table import WD_ALIGN_VERTICAL, WD_ROW_HEIGHT
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_COLOR_INDEX
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PATH_TO_IMG = os.path.join(BASE_DIR, 'static/images/docx')
-# PATH_TO_SAVE_FILE = os.path.dirname(BASE_DIR) + '\\test_docx_files'
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PATH_TO_IMG = os.path.join(BASE_DIR, 'app/static/images/docx')
 
 management_head_list = [
     ('DDB Contracting, LLC', 'management_style_submit'),
@@ -23,10 +22,7 @@ management_info_list = [f'By{" "*10}', f'Name{" "*4}', f'Date{" "*6}']
 def create_docx(bid_id):
     bid = Bid.query.get(bid_id)
 
-    PATH_TO_SAVE_DOCX = f'/docx/docx_{bid.procore_bid_id}.docx'
-    Docx(
-        path_to_file=PATH_TO_SAVE_DOCX
-    ).save()
+    PATH_TO_SAVE_DOCX = f'/tmp/docx_{bid.procore_bid_id}.docx'
 
     db_subtotal_data = {
         'Subtotal:': bid.subtotal,
@@ -625,3 +621,5 @@ def create_docx(bid_id):
     # endblock
 
     document.save(PATH_TO_SAVE_DOCX)
+
+    return PATH_TO_SAVE_DOCX
