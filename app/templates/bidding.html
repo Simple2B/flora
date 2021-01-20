@@ -141,9 +141,9 @@
         </div>
       </div>
       <div class="_titles_prices">
-        <div>Subtotal &nbsp; &nbsp; ${{bid.subtotal}}</div>
-        <div>Adds-on &nbsp; &nbsp; ${{round(bid.grand_subtotal-bid.subtotal, 2)}}</div>
-        <div>
+        <div id="subtotal_project_general_id">Subtotal: &nbsp; &nbsp; ${{bid.subtotal}}</div>
+        <div id="addson_project_general_id">Adds-on: &nbsp; &nbsp; ${{round(bid.grand_subtotal-bid.subtotal, 2)}}</div>
+        <div id="grand_subtotal_project_general_id">
           <strong> Grand Total &nbsp; &nbsp; ${{bid.grand_subtotal}}</strong>
         </div>
       </div>
@@ -182,7 +182,6 @@
                 <div>Address</div> &nbsp; &nbsp;
                 <div class="proj_gen-text-info block-text--width">
                   {{bid.vendor_address_street}}
-                  Suite # 502
                   {{bid.vendor_address_city}}
                 </div>
               </div>
@@ -223,8 +222,8 @@
                 <div>Address</div> &nbsp; &nbsp;
                 <div class="proj_gen-text-info">
                   {{bid.address_street}}
-                  Suite # 502
-                  {{bid.address_city}}</div>
+                  {{bid.address_city}}
+                </div>
               </div>
             </div>
           </div>
@@ -568,7 +567,7 @@
                   Subtotal:
                 </div>
 
-                <div class="subtotal_price">
+                <div class="subtotal_price" id="subtotal_id">
                   $ {{bid.subtotal}}
                 </div>
               </div>
@@ -709,7 +708,7 @@
                   Grand Subtotal:
                 </div>
 
-                <div class="subtotal_price">
+                <div class="subtotal_price" id="grand_subtotal_id">
                   $ {{ bid.grand_subtotal }}
                 </div>
               </div>
@@ -881,10 +880,6 @@
                 </div>
                 <div>
                   {{form.price(class='_form-input', id="modal_price")}}
-                </div>
-                <div>
-                  {{form.tbd(class='', type="checkbox", id="modal_tbd")}}
-                  <label> TBD </label>
                 </div>
               </div>
 

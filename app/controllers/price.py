@@ -1,5 +1,5 @@
-from sqlalchemy import inspect
 from app.models import Bid
+from app.logger import log
 
 
 def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
@@ -20,6 +20,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
             else:
                 bid.permit_filling_fee = round((percent_permit_fee * bid.subtotal) / 100, 2)
                 bid.grand_subtotal = bid.grand_subtotal + bid.permit_filling_fee
+                bid.permit_filling_fee_tbd = False
         elif tbd_name == 'general':
             if on_tbd:
                 bid.general_conditions = 0.0
@@ -27,6 +28,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
             else:
                 bid.general_conditions = round((percent_general_condition * bid.subtotal) / 100, 2)
                 bid.grand_subtotal = bid.grand_subtotal + bid.general_conditions
+                bid.general_conditions_tbd = False
         elif tbd_name == 'overhead':
             if on_tbd:
                 bid.overhead = 0.0
@@ -34,6 +36,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
             else:
                 bid.overhead = round((percent_overhead * bid.subtotal) / 100, 2)
                 bid.grand_subtotal = bid.grand_subtotal + bid.overhead
+                bid.overhead_tbd = False
         elif tbd_name == 'insurance':
             if on_tbd:
                 bid.insurance_tax = 0.0
@@ -41,6 +44,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
             else:
                 bid.insurance_tax = round((percent_insurance_tax * bid.subtotal) / 100, 2)
                 bid.grand_subtotal = bid.grand_subtotal + bid.insurance_tax
+                bid.insurance_tax_tbd = False
         elif tbd_name == 'profit':
             if on_tbd:
                 bid.profit = 0.0
@@ -48,6 +52,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
             else:
                 bid.profit = round((percent_profit * bid.subtotal) / 100, 2)
                 bid.grand_subtotal = bid.grand_subtotal + bid.profit
+                bid.profit_tbd = False
         elif tbd_name == 'bond':
             if on_tbd:
                 bid.bond = 0.0
@@ -55,15 +60,12 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
             else:
                 bid.bond = round((percent_bond * bid.subtotal) / 100, 2)
                 bid.grand_subtotal = bid.grand_subtotal + bid.bond
+                bid.bond_tbd = False
         bid.save()
 
     else:
         # bid.subtotal
         subtotal = 0.0
-
-        dictionary_bid_attrs = inspect(bid).dict
-        if not tbd_choices:
-            tbd_choices = {i for i in dictionary_bid_attrs if dictionary_bid_attrs[i] == 0}
 
         for link in bid.link_work_items:
             link.link_subtotal = 0.0
@@ -81,7 +83,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
             bid.subtotal = subtotal
             was_change = True
 
-        if "permit" in tbd_choices or "permit_filling_fee" in tbd_choices:
+        if bid.permit_filling_fee_tbd:
             permit_filling_fee = 0.0
             bid.permit_filling_fee = 0.0
             was_change = True
@@ -90,7 +92,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
             if bid.permit_filling_fee != permit_filling_fee:
                 bid.permit_filling_fee = permit_filling_fee
                 was_change = True
-        if "general" in tbd_choices or "general_conditions" in tbd_choices:
+        if bid.general_conditions_tbd:
             general_conditions = 0.0
             bid.general_conditions = 0.0
             was_change = True
@@ -99,7 +101,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
             if bid.general_conditions != general_conditions:
                 bid.general_conditions = general_conditions
                 was_change = True
-        if "overhead" in tbd_choices:
+        if bid.overhead_tbd:
             overhead = 0.0
             bid.overhead = 0.0
             was_change = True
@@ -108,7 +110,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
             if bid.overhead != overhead:
                 bid.overhead = overhead
                 was_change = True
-        if "insurance" in tbd_choices or "insurance_tax" in tbd_choices:
+        if bid.insurance_tax_tbd:
             insurance_tax = 0.0
             bid.insurance_tax = 0.0
             was_change = True
@@ -117,7 +119,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
             if bid.insurance_tax != insurance_tax:
                 bid.insurance_tax = insurance_tax
                 was_change = True
-        if "profit" in tbd_choices:
+        if bid.profit_tbd:
             profit = 0.0
             bid.profit = 0.0
             was_change = True
@@ -126,7 +128,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
             if bid.profit != profit:
                 bid.profit = profit
                 was_change = True
-        if "bond" in tbd_choices:
+        if bid.bond_tbd:
             bond = 0.0
             bid.bond = 0.0
             was_change = True
@@ -168,22 +170,19 @@ def calculate_alternate_total(bid_id):
 # work mostly with JS
 
 def check_bid_tbd(bid_id, tbd_name):
+    log(log.DEBUG, "check_bid_tbd() tbd_name:[%s] bid_id:[%d]", tbd_name, bid_id)
     bid = Bid.query.get(bid_id)
     switch = {
-        "permit": lambda: bid.permit_filling_fee_tbd,
-        "general": lambda: bid.general_conditions_tbd,
-        "overhead": lambda: bid.overhead_tbd,
-        "insurance": lambda: bid.insurance_tax_tbd,
-        "profit": lambda: bid.profit_tbd,
-        "bond": lambda: bid.bond_tbd
+        "permit": bid.permit_filling_fee_tbd,
+        "general": bid.general_conditions_tbd,
+        "overhead": bid.overhead_tbd,
+        "insurance": bid.insurance_tax_tbd,
+        "profit": bid.profit_tbd,
+        "bond": bid.bond_tbd
     }
 
-    def default_case():
+    if tbd_name not in switch:
+        log(log.ERROR, "check_bid_tbd() tbd_name:[%s] unknown", tbd_name)
         return 'No case found!'
 
-    bid_tbd = switch.get(tbd_name, default_case)()
-
-    if not bid_tbd and bid_tbd != 'No case found!':
-        calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
-
-    return bid_tbd
+    return switch[tbd_name]
