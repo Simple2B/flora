@@ -70,3 +70,11 @@ $border-bottom: 5px solid #175593;
         }
     }
 }
+
+%tpl-table {
+    width: 100%;
+    // min-height: 75vh;
+    // max-height: 90vh;
+    box-shadow: $shadow;
+    overflow: visible;
+}

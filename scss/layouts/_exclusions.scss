@@ -23,11 +23,7 @@
 //
 
 .__box-table-exclusion {
-    width: 100%;
-    // min-height: 75vh;
-    // max-height: 90vh;
-    box-shadow: $shadow;
-    overflow: visible;
+    @extend %tpl-table;
 
     .__box-table--left {
         // display: block;
