@@ -348,8 +348,6 @@ def preview_pdf(bid_id):
     )
     groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
     preview_pdf_bool = True
-    # tbd_choices = session.get("tbdChoices", [])
-    # calculate_subtotal(bid_id, tbd_choices)
     date_today = datetime.datetime.today().strftime("%Y-%m-%d")
     return render_template(
         "export_document.html",
