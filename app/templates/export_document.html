@@ -560,7 +560,7 @@
                                     <div>
                                         Permit/Filing Free:
                                     </div>
-                                    {% if bid.permit_filling_fee %}
+                                    {% if not bid.permit_filling_fee_tbd %}
                                     <div>
                                         ${{ bid.permit_filling_fee }}
                                     </div>
@@ -574,7 +574,7 @@
                                     <div class="general_padding-r">
                                         General Conditions:
                                     </div>
-                                    {% if bid.general_conditions %}
+                                    {% if not bid.general_conditions_tbd %}
                                     <div>
                                         ${{ bid.general_conditions }}
                                     </div>
@@ -588,7 +588,7 @@
                                     <div>
                                         Overhead:
                                     </div>
-                                    {% if bid.overhead %}
+                                    {% if not bid.overhead_tbd %}
                                     <div>
                                         ${{ bid.overhead }}
                                     </div>
@@ -602,7 +602,7 @@
                                     <div>
                                         Insurance/Tax:
                                     </div>
-                                    {% if bid.insurance_tax %}
+                                    {% if not bid.insurance_tax_tbd %}
                                     <div>
                                         ${{ bid.insurance_tax }}
                                     </div>
@@ -616,7 +616,7 @@
                                     <div>
                                         Profit:
                                     </div>
-                                    {% if bid.profit %}
+                                    {% if not bid.profit_tbd %}
                                     <div>
                                         ${{ bid.profit }}
                                     </div>
@@ -630,7 +630,7 @@
                                     <div>
                                         Bond:
                                     </div>
-                                    {% if bid.bond %}
+                                    {% if not bid.bond_tbd %}
                                     <div>
                                         ${{ bid.bond }}
                                     </div>
@@ -706,7 +706,7 @@
                                 <td> Premier Project Management </td>
                             </tr>
                         </table>
-                        
+
                         <div class="inputs_forms">
                             <table class="table_of_sections_E_F">
                                 <tr>

@@ -109,11 +109,11 @@ $(document).ready(function() {
 
   // TBD Choice
 
-  const bidGrandSubtotal = document.getElementById('grand_subtotal_id');
-  const bidSubtotal = document.getElementById('subtotal_id');
-  const subtotalProjectGeneral = document.getElementById('subtotal_project_general_id');
-  const addsOn = document.getElementById('addson_project_general_id');
-  const grandSubtotalProjectGeneral = document.getElementById('grand_subtotal_project_general_id');
+  // const bidGrandSubtotal = document.getElementById('grand_subtotal_id');
+  // const bidSubtotal = document.getElementById('subtotal_id');
+  // const subtotalProjectGeneral = document.getElementById('subtotal_project_general_id');
+  // const addsOn = document.getElementById('addson_project_general_id');
+  // const grandSubtotalProjectGeneral = document.getElementById('grand_subtotal_project_general_id');
 
   const inputs = document.querySelectorAll('input[type="checkbox"]');
 
@@ -143,15 +143,15 @@ $(document).ready(function() {
             const request = await fetch(`/save_tbd/${bidID}?=${el.getAttribute('name')}`, {method: 'GET'})
             if (request.ok) {
               const resData = await request.json()
-              let grandSubtotalValue = Math.round(( resData.grandSubtotal + Number.EPSILON) * 100) / 100;
-              let subtotalValue = Math.round(( resData.subtotal + Number.EPSILON) * 100) / 100;
-              let addsOnValue = grandSubtotalValue - subtotalValue;
+              // const grandSubtotalValue = Math.round(( resData.grandSubtotal + Number.EPSILON) * 100) / 100;
+              // const subtotalValue = Math.round(( resData.subtotal + Number.EPSILON) * 100) / 100;
+              // const addsOnValue = Math.round(( resData.grandSubtotal + Number.EPSILON) * 100) / 100 - Math.round(( resData.subtotal + Number.EPSILON) * 100) / 100;
 
-              bidGrandSubtotal.innerText = '$ ' + grandSubtotalValue;
-              bidSubtotal.innerText = '$ ' + subtotalValue;
-              subtotalProjectGeneral.innerText = 'Subtotal &nbsp; &nbsp; $' + subtotalValue;
-              addsOn.innerText = 'Subtotal &nbsp; &nbsp; $' + addsOnValue;
-              grandSubtotalProjectGeneral.innerText = 'Subtotal &nbsp; &nbsp; $' + grandSubtotalValue;
+              // bidGrandSubtotal.innerText = '$ ' + grandSubtotalValue;
+              // bidSubtotal.innerText = '$ ' + subtotalValue;
+              // subtotalProjectGeneral.innerText = 'Subtotal    $' + subtotalValue;
+              // addsOn.innerText = 'Subtotal    $' + addsOnValue;
+              // grandSubtotalProjectGeneral.innerText = 'Subtotal    $' + grandSubtotalValue;
             }
           }
           catch (err){
@@ -167,15 +167,15 @@ $(document).ready(function() {
             if (request.ok) {
               const resData = await request.json()
               console.log(resData);
-              let grandSubtotalValue = Math.round(( resData.grandSubtotal + Number.EPSILON) * 100) / 100;
-              let subtotalValue = Math.round(( resData.subtotal + Number.EPSILON) * 100) / 100;
-              let addsOnValue = grandSubtotalValue - subtotalValue;
+              // const grandSubtotalValue = Math.round(( resData.grandSubtotal + Number.EPSILON) * 100) / 100;
+              // const subtotalValue = Math.round(( resData.subtotal + Number.EPSILON) * 100) / 100;
+              // const addsOnValue = grandSubtotalValue - subtotalValue;
 
-              bidGrandSubtotal.innerText = '$ ' + grandSubtotalValue;
-              bidSubtotal.innerText = '$ ' + subtotalValue;
-              subtotalProjectGeneral.innerText = 'Subtotal &nbsp; &nbsp; $' + subtotalValue;
-              addsOn.innerText = 'Subtotal &nbsp; &nbsp; $' + addsOnValue;
-              grandSubtotalProjectGeneral.innerText = 'Subtotal &nbsp; &nbsp; $' + grandSubtotalValue;
+              // bidGrandSubtotal.innerText = '$ ' + grandSubtotalValue;
+              // bidSubtotal.innerText = '$ ' + subtotalValue;
+              // subtotalProjectGeneral.innerText = 'Subtotal    $' + subtotalValue;
+              // addsOn.innerText = 'Subtotal    $' + addsOnValue;
+              // grandSubtotalProjectGeneral.innerText = 'Subtotal    $' + grandSubtotalValue;
             }
           }
           catch (err){

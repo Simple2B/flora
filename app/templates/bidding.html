@@ -141,8 +141,8 @@
         </div>
       </div>
       <div class="_titles_prices">
-        <div id="subtotal_project_general_id">Subtotal &nbsp; &nbsp; ${{bid.subtotal}}</div>
-        <div id="addson_project_general_id">Adds-on &nbsp; &nbsp; ${{round(bid.grand_subtotal-bid.subtotal, 2)}}</div>
+        <div id="subtotal_project_general_id">Subtotal: &nbsp; &nbsp; ${{bid.subtotal}}</div>
+        <div id="addson_project_general_id">Adds-on: &nbsp; &nbsp; ${{round(bid.grand_subtotal-bid.subtotal, 2)}}</div>
         <div id="grand_subtotal_project_general_id">
           <strong> Grand Total &nbsp; &nbsp; ${{bid.grand_subtotal}}</strong>
         </div>
@@ -877,10 +877,10 @@
                 <div>
                   {{form.price(class='_form-input', id="modal_price")}}
                 </div>
-                <div>
-                  {{form.tbd(class='', type="checkbox", id="modal_tbd")}}
+                <!-- <div>
+                  form.tbd(class='', type="checkbox", id="modal_tbd")
                   <label> TBD </label>
-                </div>
+                </div> -->
               </div>
 
               <div class="_modal_btns">
