@@ -65,7 +65,6 @@ def save_tbd(bid_id):
             else:
                 calculate_subtotal(bid_id, tbd_name=tbd_name)
                 log(log.INFO, f"Response is '{tbd_name}'")
-            # return json.dumps(f'tbd_{tbd_name}:' + 'True')
         else:
             tbd_name = request.args['false']
             if tbd_name.startswith('work_item_line_tbd_'):
@@ -77,7 +76,6 @@ def save_tbd(bid_id):
             else:
                 calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
                 log(log.INFO, f"Response: 'tbd_name: {tbd_name} is False'")
-            # return json.dumps(f'tbd_{tbd_name}:' + 'False')
         response = dict(subtotal=bid.subtotal, grandSubtotal=bid.grand_subtotal)
         return json.dumps(response)
     else:
