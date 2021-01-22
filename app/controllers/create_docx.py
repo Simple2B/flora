@@ -3,6 +3,7 @@ import datetime
 import uuid
 
 from app.models import Bid, WorkItemGroup, LinkWorkItem
+from app.controllers import calculate_alternate_total
 
 from docx import Document
 from docx.enum.style import WD_STYLE_TYPE
@@ -60,7 +61,7 @@ def create_docx(bid_id):
                       font_highlight_color=None, before_spacing=5, after_spacing=5, line_spacing=1.34,
                       keep_together=True, keep_with_next=False, page_break_before=False, widow_control=False,
                       left_indent=None, right_indent=None, align='left', style=''):
-        if insert:
+        if insert:  # insert object into paragraph
             if cell_paragraph:
                 font = cell_paragraph.add_run(content).font
                 paragraph = cell_paragraph
@@ -483,6 +484,7 @@ def create_docx(bid_id):
             style=f'bid_data_{db_subtotal_data[j]}_{i}'
         )
 
+# /// exclusions, clarifications, alternates blocks
     # begin Section B block
     document.add_picture(f'{PATH_TO_IMG}/Section_B.png', width=Cm(18.99), height=Cm(0.65))
     write_to_docx(
@@ -541,30 +543,43 @@ def create_docx(bid_id):
     # begin Section D block
     document.add_picture(f'{PATH_TO_IMG}/Section_D.png', width=Cm(18.99), height=Cm(0.65))
 
-    alternate_paragraph = write_to_docx(
-        content=' ',
-        font_size=9.5,
-        after_spacing=10,
-        style='alternate_style_first_paraprgaph'
-    )
+    alternate_table = document.add_table(rows=0, cols=3)
+    alternate_table.autofit = False
+    alternate_table.columns[0].width = Cm(16.195)
+    alternate_table.columns[1].width = Cm(3.18)
+    row = alternate_table.add_row()
+    set_row_height(row, 15)
+    alternate_paragraph = row.cells[0].paragraphs[0]
+    paragraph_alternates_name = row.cells[0].paragraphs[0]
+    paragraph_total_price = row.cells[1].paragraphs[0]
     if bid.alternates:
         for alternate in bid.alternates:
             write_to_docx(
                 insert=True,
-                cell_paragraph=alternate_paragraph,
+                cell_paragraph=paragraph_alternates_name,
                 content=(f'{alternate.name}.' if alternate == bid.alternates[-1] else f'{alternate.name}, '),  # noqa 501
                 font_size=9.5,
                 style=f'alternate_style_title_{i}'
             )
+        write_to_docx(
+            insert=True,
+            cell_paragraph=paragraph_total_price,
+            content=f'$ {calculate_alternate_total(bid_id)}',
+            font_bold=True,
+            font_size=9.5,
+            align='right',
+            style=f'alternate_style_default_title_{i}'
+        )
     else:
         write_to_docx(
                 insert=True,
                 cell_paragraph=alternate_paragraph,
-                content='No alternates speciefied.',  # noqa 501
+                content='No alternates speciefied.',
                 font_size=9.5,
                 style=f'alternate_style_default_title_{i}'
             )
     # endblock
+
     document.add_page_break()
     # begin Section E_F block
     document.add_picture(f'{PATH_TO_IMG}/Section_E_F.png', width=Cm(18.99), height=Cm(0.79))

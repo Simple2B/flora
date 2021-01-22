@@ -20,8 +20,6 @@
 
 
 .main-container {
-    min-width: 75%;
-    margin: 0 1rem;
     @extend %tpl_main-container;
 
     .__body {

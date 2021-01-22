@@ -340,11 +340,13 @@ def preview_pdf(bid_id):
         .all()
     )
     groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
+    alternate_total = calculate_alternate_total(bid_id)
     preview_pdf_bool = True
     date_today = datetime.datetime.today().strftime("%Y-%m-%d")
     return render_template(
         "export_document.html",
         bid=bid,
+        alternate_total=alternate_total,
         date_today=date_today,
         global_work_items=global_work_items,
         groups=groups,
