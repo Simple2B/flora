@@ -387,7 +387,7 @@
             <div>
                 {% if preview_pdf_bool %}
                 <h6 class="preview_document">Preview Document</h6>
-                <form role="form" action="{{ url_for('bid.export_pdf', bid_id=bid.id) }}" method="post">
+                <form role="form" action="{{ url_for('bid.export', bid_id=bid.id) }}" method="post">
                     <div class="__top-content box_shadow">
                         <div class="back">
                             <a href="{{previous_url}}">
@@ -396,7 +396,7 @@
                             </a>
                         </div>
                         <div>
-                            <button type="submit" name="export_pdf" value="True" class="preview_export_btn">
+                            <button type="submit" name="export" value="True" class="preview_export_btn">
                                 <img src="{{ url_for('static', filename='images/export.png') }}">
                                 &nbsp;
                                 Export
