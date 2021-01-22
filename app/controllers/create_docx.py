@@ -286,95 +286,9 @@ def create_docx(bid_id):
     work_item_table.columns[2].width = Cm(3.18)
     work_item_table.autofit = False
 
-    for link_work_item in bid_global_work_items:
-        row = work_item_table.add_row()
-        row.height_rule = WD_ROW_HEIGHT.AT_LEAST
-        row.height = Cm(0.55)
-        paragraph_1 = row.cells[0].paragraphs[0]
-        paragraph_2 = row.cells[2].paragraphs[0]
-
-        write_to_docx(
-            insert=True,
-            cell_paragraph=paragraph_1,
-            content=f'{link_work_item.work_item.code}',
-            font_size=10.5,
-            font_bold=True,
-            style=f'bold_workitem_code_{link_work_item.work_item.code}'
-        )
-        paragraph_1.runs[0].add_tab()
-        write_to_docx(
-            insert=True,
-            cell_paragraph=paragraph_1,
-            content=f'{link_work_item.work_item.name}',
-            font_size=10.5,
-            font_bold=True,
-            style=f'bold_workitem_name_{link_work_item.work_item.name}'
-        )
-        write_to_docx(
-            insert=True,
-            cell_paragraph=paragraph_2,
-            content=f'$ {link_work_item.link_subtotal}',
-            font_size=10.5,
-            font_bold=True,
-            align='right',
-            style=f'bold_workitem_subtotal_{link_work_item.link_subtotal}'
-        )
-        for work_item_line in link_work_item.work_item_lines:
-            work_item_line_table = document.add_table(rows=0, cols=3)
-            work_item_line_table.columns[0].width = Cm(9.6875*0.25)
-            work_item_line_table.columns[1].width = Cm(9.6875*0.5)
-            work_item_line_table.columns[2].width = Cm(19.375/2 + 9.6875*0.25)
-            work_item_line_table.autofit = False
-            row = work_item_line_table.add_row()
-            row.height_rule = WD_ROW_HEIGHT.AT_LEAST
-            row.height = Cm(0.35)
-            paragraph_1 = row.cells[1].paragraphs[0]
-            paragraph_2 = row.cells[2].paragraphs[0]
-            # second cell
-            write_to_docx(
-                insert=True,
-                cell_paragraph=paragraph_1,
-                content=f'{work_item_line.description}',
-                font_size=10.5,
-                style=f'work_item_line_description_{work_item_line.id}'
-            )
-            write_to_docx(
-                cell_paragraph=row.cells[1],
-                content=f'Note: {work_item_line.note}',
-                font_size=9.5,
-                left_indent=Cm(0.5),
-                style=f'work_item_line_note_{work_item_line.id}'
-            )
-            # third cell
-            write_to_docx(
-                insert=True,
-                cell_paragraph=paragraph_2,
-                content=f'{work_item_line.quantity}     {work_item_line.unit}',
-                left_indent=Cm(2),
-                font_size=9.5,
-                style=f'work_item_line_q_u_{work_item_line.id}'
-            )
-
-    #  /  Render Work item group
-    for group in groups:
-        write_to_docx(
-            content=f'{group.name}:',
-            font_underline=True,
-            font_bold=True,
-            font_size=12,
-            page_break_before=True,
-            style=f'group_name_{group.name}'
-        )
-        document.add_picture(f'{PATH_TO_IMG}/group.png', width=Cm(19), height=Cm(0.65))
-
-        group_work_item_table = document.add_table(rows=0, cols=3)
-        group_work_item_table.columns[0].width = Cm(10.5)
-        group_work_item_table.columns[1].width = Cm(5.695)
-        group_work_item_table.columns[2].width = Cm(3.18)
-        group_work_item_table.autofit = False
-
-        for link_work_item in group.link_work_items:
-            row = group_work_item_table.add_row()
+    if bid_global_work_items:
+        for link_work_item in bid_global_work_items:
+            row = work_item_table.add_row()
             row.height_rule = WD_ROW_HEIGHT.AT_LEAST
             row.height = Cm(0.55)
             paragraph_1 = row.cells[0].paragraphs[0]
@@ -386,7 +300,7 @@ def create_docx(bid_id):
                 content=f'{link_work_item.work_item.code}',
                 font_size=10.5,
                 font_bold=True,
-                style='bold_workitem_id'
+                style=f'bold_workitem_code_{link_work_item.work_item.code}'
             )
             paragraph_1.runs[0].add_tab()
             write_to_docx(
@@ -395,7 +309,7 @@ def create_docx(bid_id):
                 content=f'{link_work_item.work_item.name}',
                 font_size=10.5,
                 font_bold=True,
-                style='bold_workitem_name'
+                style=f'bold_workitem_name_{link_work_item.work_item.name}'
             )
             write_to_docx(
                 insert=True,
@@ -404,15 +318,15 @@ def create_docx(bid_id):
                 font_size=10.5,
                 font_bold=True,
                 align='right',
-                style='bold_workitem_subtotal'
+                style=f'bold_workitem_subtotal_{link_work_item.link_subtotal}'
             )
             for work_item_line in link_work_item.work_item_lines:
-                group_work_item_line_table = document.add_table(rows=0, cols=3)
-                group_work_item_line_table.columns[0].width = Cm(9.6875*0.25)
-                group_work_item_line_table.columns[1].width = Cm(9.6875*0.5)
-                group_work_item_line_table.columns[2].width = Cm(19.375/2 + 9.6875*0.25)
-                group_work_item_line_table.autofit = False
-                row = group_work_item_line_table.add_row()
+                work_item_line_table = document.add_table(rows=0, cols=3)
+                work_item_line_table.columns[0].width = Cm(9.6875*0.25)
+                work_item_line_table.columns[1].width = Cm(9.6875*0.5)
+                work_item_line_table.columns[2].width = Cm(19.375/2 + 9.6875*0.25)
+                work_item_line_table.autofit = False
+                row = work_item_line_table.add_row()
                 row.height_rule = WD_ROW_HEIGHT.AT_LEAST
                 row.height = Cm(0.35)
                 paragraph_1 = row.cells[1].paragraphs[0]
@@ -422,7 +336,7 @@ def create_docx(bid_id):
                     insert=True,
                     cell_paragraph=paragraph_1,
                     content=f'{work_item_line.description}',
-                    font_size=9.5,
+                    font_size=10.5,
                     style=f'work_item_line_description_{work_item_line.id}'
                 )
                 write_to_docx(
@@ -430,25 +344,113 @@ def create_docx(bid_id):
                     content=f'Note: {work_item_line.note}',
                     font_size=9.5,
                     left_indent=Cm(0.5),
-                    keep_with_next=True,
                     style=f'work_item_line_note_{work_item_line.id}'
                 )
                 # third cell
                 write_to_docx(
                     insert=True,
                     cell_paragraph=paragraph_2,
-                    content=f'{work_item_line.quantity}',
+                    content=f'{work_item_line.quantity}     {work_item_line.unit}',
+                    left_indent=Cm(2),
                     font_size=9.5,
                     style=f'work_item_line_q_u_{work_item_line.id}'
+                )
+
+    #  /  Render Work item group
+    if groups:
+        for group in groups:
+            write_to_docx(
+                content=f'{group.name}:',
+                font_underline=True,
+                font_bold=True,
+                font_size=12,
+                page_break_before=True,
+                style=f'group_name_{group.name}'
+            )
+            document.add_picture(f'{PATH_TO_IMG}/group.png', width=Cm(19), height=Cm(0.65))
+
+            group_work_item_table = document.add_table(rows=0, cols=3)
+            group_work_item_table.columns[0].width = Cm(10.5)
+            group_work_item_table.columns[1].width = Cm(5.695)
+            group_work_item_table.columns[2].width = Cm(3.18)
+            group_work_item_table.autofit = False
+
+            for link_work_item in group.link_work_items:
+                row = group_work_item_table.add_row()
+                row.height_rule = WD_ROW_HEIGHT.AT_LEAST
+                row.height = Cm(0.55)
+                paragraph_1 = row.cells[0].paragraphs[0]
+                paragraph_2 = row.cells[2].paragraphs[0]
+
+                write_to_docx(
+                    insert=True,
+                    cell_paragraph=paragraph_1,
+                    content=f'{link_work_item.work_item.code}',
+                    font_size=10.5,
+                    font_bold=True,
+                    style='bold_workitem_id'
+                )
+                paragraph_1.runs[0].add_tab()
+                write_to_docx(
+                    insert=True,
+                    cell_paragraph=paragraph_1,
+                    content=f'{link_work_item.work_item.name}',
+                    font_size=10.5,
+                    font_bold=True,
+                    style='bold_workitem_name'
                 )
                 write_to_docx(
                     insert=True,
                     cell_paragraph=paragraph_2,
-                    content=f'   {work_item_line.unit}',
-                    font_size=9.5,
-                    left_indent=Cm(1.88),
-                    style=f'work_item_line_q_u_{work_item_line.id}'
+                    content=f'$ {link_work_item.link_subtotal}',
+                    font_size=10.5,
+                    font_bold=True,
+                    align='right',
+                    style='bold_workitem_subtotal'
                 )
+                for work_item_line in link_work_item.work_item_lines:
+                    group_work_item_line_table = document.add_table(rows=0, cols=3)
+                    group_work_item_line_table.columns[0].width = Cm(9.6875*0.25)
+                    group_work_item_line_table.columns[1].width = Cm(9.6875*0.5)
+                    group_work_item_line_table.columns[2].width = Cm(19.375/2 + 9.6875*0.25)
+                    group_work_item_line_table.autofit = False
+                    row = group_work_item_line_table.add_row()
+                    row.height_rule = WD_ROW_HEIGHT.AT_LEAST
+                    row.height = Cm(0.35)
+                    paragraph_1 = row.cells[1].paragraphs[0]
+                    paragraph_2 = row.cells[2].paragraphs[0]
+                    # second cell
+                    write_to_docx(
+                        insert=True,
+                        cell_paragraph=paragraph_1,
+                        content=f'{work_item_line.description}',
+                        font_size=9.5,
+                        style=f'work_item_line_description_{work_item_line.id}'
+                    )
+                    write_to_docx(
+                        cell_paragraph=row.cells[1],
+                        content=f'Note: {work_item_line.note}',
+                        font_size=9.5,
+                        left_indent=Cm(0.5),
+                        keep_with_next=True,
+                        style=f'work_item_line_note_{work_item_line.id}'
+                    )
+                    # third cell
+                    write_to_docx(
+                        insert=True,
+                        cell_paragraph=paragraph_2,
+                        content=f'{work_item_line.quantity}',
+                        font_size=9.5,
+                        style=f'work_item_line_q_u_{work_item_line.id}'
+                    )
+                    write_to_docx(
+                        insert=True,
+                        cell_paragraph=paragraph_2,
+                        content=f'   {work_item_line.unit}',
+                        font_size=9.5,
+                        left_indent=Cm(1.88),
+                        style=f'work_item_line_q_u_{work_item_line.id}'
+                    )
 
     #  / bid_subtotal on this section
     bid_subtotal_table = document.add_table(rows=0, cols=3)
@@ -501,15 +503,16 @@ def create_docx(bid_id):
         after_spacing=10,
         style='exclusion_style_first_paraprgaph'
     )
-    for exclusion_link in bid.exclusion_links:
-        write_to_docx(
-            insert=True,
-            cell_paragraph=exclusion_paragraph,
-            content=(f'{exclusion_link.exclusion.title}.' if exclusion_link == bid.exclusion_links[-1] else f'{exclusion_link.exclusion.title}, '),  # noqa 501
-            font_size=9.5,
-            after_spacing=10,
-            style=f'exclusion_style_title_{i}'
-        )
+    if bid.exclusion_links:
+        for exclusion_link in bid.exclusion_links:
+            write_to_docx(
+                insert=True,
+                cell_paragraph=exclusion_paragraph,
+                content=(f'{exclusion_link.exclusion.title}.' if exclusion_link == bid.exclusion_links[-1] else f'{exclusion_link.exclusion.title}, '),  # noqa 501
+                font_size=9.5,
+                after_spacing=10,
+                style=f'exclusion_style_title_{i}'
+            )
     # endblock
 
     # begin Section C block
@@ -528,14 +531,15 @@ def create_docx(bid_id):
         after_spacing=10,
         style='clarification_style_first_paraprgaph'
     )
-    for clarification_link in bid.clarification_links:
-        write_to_docx(
-            insert=True,
-            cell_paragraph=clarification_paragraph,
-            content=(f'{clarification_link.clarification.note}.' if clarification_link == bid.clarification_links[-1] else f'{clarification_link.clarification.note}, '),  # noqa 501
-            font_size=9.5,
-            style=f'clarification_style_title_{i}'
-        )
+    if bid.clarification_links:
+        for clarification_link in bid.clarification_links:
+            write_to_docx(
+                insert=True,
+                cell_paragraph=clarification_paragraph,
+                content=(f'{clarification_link.clarification.note}.' if clarification_link == bid.clarification_links[-1] else f'{clarification_link.clarification.note}, '),  # noqa 501
+                font_size=9.5,
+                style=f'clarification_style_title_{i}'
+            )
     # endblock
 
     # document.add_page_break()
