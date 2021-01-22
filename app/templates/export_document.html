@@ -137,10 +137,6 @@
             padding-right: 2rem;
         }
 
-        .alternate {
-            margin-top: 1rem;
-        }
-
         .section_letter {
             text-align: center;
             font-weight: 600;
@@ -345,6 +341,20 @@
         .input-underline {
             border: none;
             border-bottom: 2px solid #333333;
+        }
+
+        .alternate {
+            margin-top: 1rem;
+        }
+        .alternate_table {
+            width: 100%;
+        }
+        .alternates_name {
+            width: 80%;
+        }
+        .alternates_total {
+            text-align: right;
+            font-weight: bold;
         }
 
         .table_of_sections_E_F {
@@ -553,7 +563,7 @@
                                         Subtotal:
                                     </div>
                                     <div class="feature_price">
-                                        ${{ bid.subtotal }}
+                                        $ {{ bid.subtotal }}
                                     </div>
                                 </div>
                                 <div class="feature_price">
@@ -562,7 +572,7 @@
                                     </div>
                                     {% if not bid.permit_filling_fee_tbd %}
                                     <div>
-                                        ${{ bid.permit_filling_fee }}
+                                        $ {{ bid.permit_filling_fee }}
                                     </div>
                                     {% else %}
                                     <div>
@@ -576,7 +586,7 @@
                                     </div>
                                     {% if not bid.general_conditions_tbd %}
                                     <div>
-                                        ${{ bid.general_conditions }}
+                                        $ {{ bid.general_conditions }}
                                     </div>
                                     {% else %}
                                     <div>
@@ -590,7 +600,7 @@
                                     </div>
                                     {% if not bid.overhead_tbd %}
                                     <div>
-                                        ${{ bid.overhead }}
+                                        $ {{ bid.overhead }}
                                     </div>
                                     {% else %}
                                     <div>
@@ -604,7 +614,7 @@
                                     </div>
                                     {% if not bid.insurance_tax_tbd %}
                                     <div>
-                                        ${{ bid.insurance_tax }}
+                                        $ {{ bid.insurance_tax }}
                                     </div>
                                     {% else %}
                                     <div>
@@ -618,7 +628,7 @@
                                     </div>
                                     {% if not bid.profit_tbd %}
                                     <div>
-                                        ${{ bid.profit }}
+                                        $ {{ bid.profit }}
                                     </div>
                                     {% else %}
                                     <div>
@@ -632,7 +642,7 @@
                                     </div>
                                     {% if not bid.bond_tbd %}
                                     <div>
-                                        ${{ bid.bond }}
+                                        $ {{ bid.bond }}
                                     </div>
                                     {% else %}
                                     <div>
@@ -680,13 +690,28 @@
 
                     <div class="section_letter">Section D: Alternates</div>
                     <div class="alternate">
-                        {% for alternate in bid.alternates %}
-                            {% if alternate == bid.alternates[-1] %}
-                                {{ alternate.name }}.
-                            {% else %}
-                                {{ alternate.name }},
-                            {% endif %}
-                        {% endfor %}
+                        <table class="alternate_table">
+                            <tbody>
+                                <tr>
+                                    <td class="alternates_name">
+                                        {% if bid.alternates %}
+                                        {% for alternate in bid.alternates %}
+                                            {% if alternate == bid.alternates[-1] %}
+                                                {{ alternate.name }}.
+                                            {% else %}
+                                                {{ alternate.name }},
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% else %}
+                                         No alternates speciefied.
+                                        {% endif %}
+                                    </td>
+                                    <td class="alternates_total">
+                                        $ {{ alternate_total }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="keep-together">
