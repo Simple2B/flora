@@ -29,7 +29,6 @@ from app.logger import log
 
 import pdfkit
 
-# from GrabzIt import GrabzItClient
 
 bid_blueprint = Blueprint("bid", __name__)
 
@@ -354,9 +353,9 @@ def preview_pdf(bid_id):
     )
 
 
-@bid_blueprint.route("/export_pdf/<int:bid_id>", methods=["POST"])
+@bid_blueprint.route("/export/<int:bid_id>", methods=["POST"])
 @login_required
-def export_pdf(bid_id):
+def export(bid_id):
     form = BidForm(request.form)
     if form.validate_on_submit():
         bid = Bid.query.get(bid_id)
@@ -401,29 +400,20 @@ def export_pdf(bid_id):
         elif form.export_docx.data:
             preview_pdf_bool = False
             from app.controllers.create_docx import create_docx
-
-            create_docx(bid_id)
-            # with open()
-            # calculate_subtotal(bid_id, tbd_choices)
-            # html_content = render_template(
-            #     "export_document_docx.html", bid=bid, preview_pdf_bool=preview_pdf_bool
-            # )
-            # grabzit = GrabzItClient.GrabzItClient(
-            #     "NDBhNjEyMmI3MjY5NDExMmEwNzJlOTYzZmY1ZGNiNGM=",
-            #     "QD8/MT8/Pz9aP0EIPz8/P096S28/P1M/Bj8/RD8/Pxg=",
-            # )
-            # grabzit.HTMLToDOCX(html_content)
-            # docx_content = grabzit.SaveTo()
-
-            with open("test_docx.docx", "rb") as f:
+            filepath = create_docx(bid_id)
+            with open(filepath, "rb") as f:
                 stream = io.BytesIO(f.read())
-            # target_stream = StringIO()
-            # document.save(target_stream)
+            os.remove(filepath)
+            if not stream:
+                log(log.ERROR, "archive_or_export() cannot open [%s]", filepath)
+                return redirect(url_for("bidding.biddings"))
+            file_name = f"bidding_#{bid.procore_bid_id}_{now.strftime('%Y-%m-%d-%H-%M-%S')}.docx"
+            log(log.DEBUG, "Sending docx file([%s]): [%s]", stream, file_name)
             now = datetime.datetime.now()
             return send_file(
                 stream,
                 as_attachment=True,
-                attachment_filename=f"bidding_{bid_id}_{now.strftime('%Y-%m-%d-%H-%M-%S')}.docx",
+                attachment_filename=file_name,
                 mimetype="application/docx",
                 cache_timeout=0,
                 last_modified=now,

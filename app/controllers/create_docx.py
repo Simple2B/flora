@@ -1,5 +1,6 @@
 import os.path
 import datetime
+import uuid
 
 from app.models import Bid, WorkItemGroup, LinkWorkItem
 
@@ -22,7 +23,7 @@ management_info_list = [f'By{" "*10}', f'Name{" "*4}', f'Date{" "*6}']
 def create_docx(bid_id):
     bid = Bid.query.get(bid_id)
 
-    PATH_TO_SAVE_DOCX = f'/tmp/docx_{bid.procore_bid_id}.docx'
+    PATH_TO_SAVE_DOCX = f'/tmp/docx_{uuid.uuid4()}.docx'
 
     db_subtotal_data = {
         'Subtotal:': bid.subtotal,

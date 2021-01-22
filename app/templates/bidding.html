@@ -574,7 +574,7 @@
             </div>
           </div>
 
-          <form class="form" id="bid_subtotal_data" role="form" action="{{ url_for('bid.export_pdf', bid_id=bid.id) }}"
+          <form class="form" id="bid_subtotal_data" role="form" action="{{ url_for('bid.export', bid_id=bid.id) }}"
             method="post">
             <input class="hidden" name="next_url" value="" id="current_url"></input>
             <div class="_center_block">
