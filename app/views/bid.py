@@ -407,9 +407,9 @@ def export(bid_id):
             if not stream:
                 log(log.ERROR, "archive_or_export() cannot open [%s]", filepath)
                 return redirect(url_for("bidding.biddings"))
+            now = datetime.datetime.now()
             file_name = f"bidding_#{bid.procore_bid_id}_{now.strftime('%Y-%m-%d-%H-%M-%S')}.docx"
             log(log.DEBUG, "Sending docx file([%s]): [%s]", stream, file_name)
-            now = datetime.datetime.now()
             return send_file(
                 stream,
                 as_attachment=True,
