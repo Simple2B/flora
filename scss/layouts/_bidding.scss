@@ -249,50 +249,57 @@
             justify-content: space-between;
             align-items: center;
             border: 1px solid #E5E5E5;
+            border-radius: 5px;
+            padding: $m0-5rem;
+            button {
+                background-color: inherit;
+            }
         }
 
         ._client-block_info {
             display: flex;
             flex-flow: column wrap;
             border: 1px solid #E5E5E5;
-
+            border-radius: 3px;
         }
 
         .job-address {
             display: flex;
             flex-flow: column wrap;
             border: 1px solid #E5E5E5;
-
+            border-radius: 3px;
         }
 
         .client-job--span {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             flex-flow: row wrap;
             color: #979797;
             font-weight: bold;
-            padding-left: $m0-5rem;
+            padding: $m0-5rem $m0-5rem 0rem;
             & > div {
                 display: flex;
-                align-items: center;
+                align-items: flex-start;
                 width:30%;
                 & > div:first-child {
-                    width: 20%;
+                    width: 23%;
+                    margin-right: $m0-5rem;
                 }
                 & > div:last-child {
                     width: 50%;
                 }
             }
-            & div {
-                min-width: 15%;
-            }
+            // & div {
+            //     min-width: 15%;
+            // }
         }
 
         .proj_gen-text-info {
             display: flex;
             color: #000000;
             font-weight: normal;
+            word-break: break-all;
         }
 
     }
@@ -307,7 +314,12 @@
             justify-content: space-between;
             align-items: center;
             border: 1px solid #E5E5E5;
+            border-radius: 5px;
             margin-bottom: $m0-5rem;
+            padding: $m0-5rem;
+            button {
+                background-color: inherit;
+            }
         }
 
         ._drawing_table {
