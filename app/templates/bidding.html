@@ -797,12 +797,12 @@
         {% if bid.alternates %}
         {% for alternate in bid.alternates%}
         <div class="_alternate_block bidding_margin">
-
           <div>
-            <div>
-              <input class="_form-input" value="{{alternate.name}}" readonly>
-              <label class="_label">Alternate item</label>
-            </div>
+            <input class="_form-input" value="{{alternate.name}}" readonly>
+            <label class="_label">Alternate item</label>
+          </div>
+          <div>
+            <input class="_form-input" value="$ {{alternate.price}}" readonly>
           </div>
           <div class="p-2 flex-shrink-1 bd-highlight">
             <a href="{{url_for('alternate.delete_alternate', bid_id=bid.id, alternate_id=alternate.id)}}"
@@ -815,12 +815,11 @@
               <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
             </a>
           </div>
-
         </div>
         {% endfor %}
         {% endif %}
         <hr>
-        <div class="_alternate_block_add_alternate_row bidding_margin">
+        <div class="bidding_margin">
           <div>
             <a href="{{ url_for('alternate.new_alternate', bid_id=bid.id) }}">
               <button class="ddb-cursor-handle _btn--base-gray">
@@ -828,8 +827,8 @@
               </button>
             </a>
           </div>
-          {% if bid.alternates %}
-          <div class="__alternate_total">
+          <!-- % if bid.alternates % -->
+          <!-- <div class="__alternate_total">
               <span>
                 <strong>
                   Total:
@@ -837,12 +836,11 @@
               </span>
               <span>
                 <strong>
-                  $ {{form.calculate_alternate_total}}
+                  $ form.calculate_alternate_total
                 </strong>
               </span>
-          </div>
-
-          {% endif %}
+          </div> -->
+          <!-- % endif % -->
         </div>
       </div>
     </div>

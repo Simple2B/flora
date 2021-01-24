@@ -329,9 +329,11 @@
             table {
                 width: 100%;
                 padding: $m1rem;
+                th:first-child {
+                    padding: 0.25rem;
+                }
             }
         }
-
     }
 }
 
@@ -721,22 +723,18 @@
 
 ._alternate_block {
     display: flex;
-    align-items: center;
-
-    &_add_alternate_row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+    align-items: baseline;
 
     & > div:first-child {
-        margin-right: $m1rem*2;
+        margin-right: $m1rem;
+    }
+    & > div:nth-child(2) {
+        margin-right: $m1rem;
     }
 }
-
-.__alternate_total {
-    display: flex;
-    width: 12vw;
-    justify-content: space-between;
-    padding-right: 4rem;
-}
+// .__alternate_total {
+//     display: flex;
+//     // width: 12vw;
+//     justify-content: space-between;
+//     padding-right: 4rem;
+// }
