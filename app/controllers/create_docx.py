@@ -4,6 +4,7 @@ import uuid
 
 from app.models import Bid, WorkItemGroup, LinkWorkItem
 from app.controllers import calculate_alternate_total
+from app.logger import log
 
 from docx import Document
 from docx.enum.style import WD_STYLE_TYPE
@@ -27,14 +28,14 @@ def create_docx(bid_id):
     PATH_TO_SAVE_DOCX = f'/tmp/docx_{uuid.uuid4()}.docx'
 
     db_subtotal_data = {
-        'Subtotal:': bid.subtotal,
-        'Permit/Filing Free:': bid.permit_filling_fee,
-        'General Conditions:': bid.general_conditions,
-        'Insurance/Tax:': bid.insurance_tax,
-        'Overhead:': bid.overhead,
-        'Profit:': bid.profit,
-        'Bond:': bid.bond,
-        'Grand Total:': bid.grand_subtotal
+        'Subtotal:': (bid.subtotal, 1),
+        'Permit/Filing Free:': (bid.permit_filling_fee, bid.percent_permit_fee),
+        'General Conditions:': (bid.general_conditions, bid.percent_general_condition),
+        'Overhead:': (bid.insurance_tax, bid.percent_overhead),
+        'Insurance/Tax:': (bid.overhead, bid.percent_insurance_tax),
+        'Profit:': (bid.profit, bid.percent_profit),
+        'Bond:': (bid.bond, bid.percent_bond),
+        'Grand Total:': (bid.grand_subtotal, 1)
     }
 
     bid_global_work_items = LinkWorkItem.query.filter(
@@ -42,10 +43,10 @@ def create_docx(bid_id):
     groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
 
     def check_tbd(arg):
-        if db_subtotal_data.get(arg, 'T.B.D') == 0:
+        if db_subtotal_data.get(arg, 'T.B.D')[0] == 0:
             return 'T.B.D'
         else:
-            return db_subtotal_data.get(arg, 'T.B.D')
+            return db_subtotal_data.get(arg, 'T.B.D')[0]
 
     def set_row_height(row, arg, pt=True):
         row.height_rule = WD_ROW_HEIGHT.AT_LEAST
@@ -460,31 +461,34 @@ def create_docx(bid_id):
     bid_subtotal_table.columns[2].width = Cm(3.18)
 
     for i, j in enumerate(db_subtotal_data):
-        row = bid_subtotal_table.add_row()
-        set_row_height(row, 0.55, pt=False)
-        cell_1 = row.cells[1]
-        cell_1.width = Cm(5.695)  # 2050415
-        cell_2 = row.cells[2]
-        cell_2.width = Cm(3.18)
-        write_to_docx(
-            cell_paragraph=cell_1,
-            edit_first_paragraph=True,
-            content=j,
-            font_bold=True,
-            font_size=10.5,
-            align='left',
-            left_indent=Cm(1),
-            style=f'bid_data_{j.lower()}'
-        )
-        write_to_docx(
-            cell_paragraph=cell_2,
-            edit_first_paragraph=True,
-            content=(f'$ {check_tbd(j)}' if check_tbd(j) != 'T.B.D' else 'T.B.D'),
-            font_bold=True,
-            align='right',
-            font_size=10.5,
-            style=f'bid_data_{db_subtotal_data[j]}_{i}'
-        )
+        if db_subtotal_data[j][1] < 0.001:
+            log(log.DEBUG, "Percent of [%s]", str(db_subtotal_data[j]) + " " + str(db_subtotal_data[j][1]))
+        else:
+            row = bid_subtotal_table.add_row()
+            set_row_height(row, 0.55, pt=False)
+            cell_1 = row.cells[1]
+            cell_1.width = Cm(5.695)  # 2050415
+            cell_2 = row.cells[2]
+            cell_2.width = Cm(3.18)
+            write_to_docx(
+                cell_paragraph=cell_1,
+                edit_first_paragraph=True,
+                content=j,
+                font_bold=True,
+                font_size=10.5,
+                align='left',
+                left_indent=Cm(1),
+                style=f'bid_data_{j.lower()}'
+            )
+            write_to_docx(
+                cell_paragraph=cell_2,
+                edit_first_paragraph=True,
+                content=(f'$ {check_tbd(j)}' if check_tbd(j) != 'T.B.D' else 'T.B.D'),
+                font_bold=True,
+                align='right',
+                font_size=10.5,
+                style=f'bid_data_{db_subtotal_data[j]}_{i}'
+            )
 
 # /// exclusions, clarifications, alternates blocks
     # begin Section B block

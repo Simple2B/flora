@@ -575,6 +575,8 @@
                                         $ {{ bid.subtotal }}
                                     </div>
                                 </div>
+                                {% if bid.percent_permit_fee < 0.001 %}
+                                {% else %}
                                 <div class="feature_price">
                                     <div>
                                         Permit/Filing Free:
@@ -589,6 +591,9 @@
                                     </div>
                                     {% endif %}
                                 </div>
+                                {% endif %}
+                                {% if bid.percent_general_condition < 0.001 %}
+                                {% else %}
                                 <div class="feature_price">
                                     <div class="general_padding-r">
                                         General Conditions:
@@ -603,6 +608,9 @@
                                     </div>
                                     {% endif %}
                                 </div>
+                                {% endif %}
+                                {% if bid.percent_overhead < 0.001 %}
+                                {% else %}
                                 <div class="feature_price">
                                     <div>
                                         Overhead:
@@ -617,6 +625,9 @@
                                     </div>
                                     {% endif %}
                                 </div>
+                                {% endif %}
+                                {% if bid.percent_insurance_tax < 0.001 %}
+                                {% else %}
                                 <div class="feature_price">
                                     <div>
                                         Insurance/Tax:
@@ -631,6 +642,9 @@
                                     </div>
                                     {% endif %}
                                 </div>
+                                {% endif %}
+                                {% if bid.percent_profit < 0.001 %}
+                                {% else %}
                                 <div class="feature_price">
                                     <div>
                                         Profit:
@@ -645,6 +659,9 @@
                                     </div>
                                     {% endif %}
                                 </div>
+                                {% endif %}
+                                {% if bid.percent_bond < 0.001 %}
+                                {% else %}
                                 <div class="feature_price">
                                     <div>
                                         Bond:
@@ -659,7 +676,7 @@
                                     </div>
                                     {% endif %}
                                 </div>
-
+                                {% endif %}
                                 <div class="feature_price">
                                     <div>
                                         Grand Total:
