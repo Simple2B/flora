@@ -151,7 +151,7 @@ def create_docx(bid_id):
         content=f"{bid.due_date}",
         font_bold=True,
         font_size=10.5,
-        align='left',
+        align='right',
         style=f'bid_date_{"bid.date"}'
     )
 
@@ -260,12 +260,12 @@ def create_docx(bid_id):
     write_to_docx(
         cell_paragraph=cell_project_info,
         edit_first_paragraph=True,
-        content=f"{bid.project_type.value} # B-20-034 R1",
+        content=f"{bid.project_type.value} # B-20-034 R{bid.revision}",
         font_bold=True,
         font_size=10.5,
         font_highlight_color=WD_COLOR_INDEX.YELLOW,
         align='left',
-        style=f'bid_project_type_{bid.project_type.value} # B-20-034 R1'
+        style=f'bid_project_type_{bid.project_type.value} # B-20-034 R{bid.revision}'
     )
 
     # /// endblock
@@ -536,7 +536,7 @@ def create_docx(bid_id):
             write_to_docx(
                 insert=True,
                 cell_paragraph=clarification_paragraph,
-                content=(f'{clarification_link.clarification.note}.' if clarification_link == bid.clarification_links[-1] else f'{clarification_link.clarification.note}, '),  # noqa 501
+                content=(f'{clarification_link.clarification.description}.' if clarification_link == bid.clarification_links[-1] else f'{clarification_link.clarification.description}, '),  # noqa 501
                 font_size=9.5,
                 style=f'clarification_style_title_{i}'
             )
