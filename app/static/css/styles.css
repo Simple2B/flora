@@ -2202,7 +2202,8 @@ hr {
         margin-left: 0.5rem;
         width: 30%; }
       .chart-right .chart-right__group_name-box .chart-right__group-name-block .__delete-group {
-        margin-right: 0.5rem; }
+        margin-right: 0.5rem;
+        background-color: inherit; }
   .chart-right__undo-block {
     background-color: #E6A73E;
     border-radius: 0.5rem;
@@ -2228,6 +2229,9 @@ hr {
 #_group_input_delete .input--label {
   top: 0.8rem;
   left: 3.5rem; }
+
+#workItemsTable tr td:last-child button {
+  background-color: inherit; }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }

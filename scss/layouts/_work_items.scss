@@ -182,6 +182,7 @@
             }
             .__delete-group {
                 margin-right: $m0-5rem;
+                background-color: inherit;
             }
         }
     }
@@ -227,4 +228,8 @@
         top: 0.8rem;
         left: 3.5rem;
     }
+}
+
+#workItemsTable tr td:last-child button {
+    background-color: inherit;
 }
