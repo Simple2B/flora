@@ -190,9 +190,15 @@ def delete_work_item(bid_id, item_id):
     work_item = WorkItem.query.get(item_id)
     if work_item:
         selected = session.get("SelectedWorkItemsDict", {})
-        if str(work_item.id) in selected:
-            del selected[str(work_item.id)]
+        groups = session["GroupDict"]
+        if item_id in selected:
+            del selected[item_id]
             session["SelectedWorkItemsDict"] = selected
+            for group_name_js in groups:
+                for group in groups[group_name_js]:
+                    if item_id in groups[group_name_js][group]:
+                        groups[group_name_js][group].remove(item_id)
+        session["GroupDict"] = groups
         work_item.delete()
     return redirect(url_for("work_item.work_items", bid_id=bid_id))
 
