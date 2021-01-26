@@ -101,8 +101,16 @@ def archive_or_export():
 @login_required
 def biddings():
     form = BidForm()
-    most_popular = session.get("most_popular", "")
-    most_recent = session.get("most_recent", "Most recent")
+    due_date = session.get("due_date", "")
+    bidding_id = session.get("bidding_id", "")
+    recent_edited = session.get("recent_edited", "recent_edited")
+    if due_date:
+        sorting = Bid.due_date
+    elif bidding_id:
+        sorting = ""
+    else:
+        sorting = Bid.time_updated
+
     edit_bid = session.get('edit_bid', False)
 
     status_active_all = session.get("status_active_all", "status-active")
@@ -117,7 +125,7 @@ def biddings():
         bids_query = bids_query.filter(Bid.status == Bid.Status.d_archived)
     elif status_active_draft:
         bids_query = bids_query.filter(Bid.status == Bid.Status.b_draft)
-    bids_query = bids_query.order_by(desc(Bid.time_updated if most_recent else Bid.popularity))
+    bids_query = bids_query.order_by(desc(sorting) if sorting else Bid.procore_bid_id)
 
     bids = bids_query.all()
 
@@ -144,8 +152,9 @@ def biddings():
         form=form,
         edit_bid=edit_bid,
         today_date=today_date,
-        most_popular=most_popular,
-        most_recent=most_recent,
+        due_date=due_date,
+        bidding_id=bidding_id,
+        recent_edited=recent_edited,
         status_active_all=status_active_all,
         status_active_submitted=status_active_submitted,
         status_active_archived=status_active_archived,
@@ -179,10 +188,16 @@ def change_status():
 @bidding_blueprint.route("/select_sort", methods=["POST"])
 @login_required
 def select_sort():
-    if request.form.get("select_sort", "") == "Most recent":
-        session["most_recent"] = "Most recent"
-        session["most_popular"] = ""
-    elif request.form.get("select_sort", "") == "Most popular":
-        session["most_popular"] = "Most popular"
-        session["most_recent"] = ""
+    if request.form.get("select_sort", "") == "recent_edited":
+        session["recent_edited"] = "recent_edited"
+        session["due_date"] = ""
+        session["bidding_id"] = ""
+    elif request.form.get("select_sort", "") == "due_date":
+        session["due_date"] = "due_date"
+        session["recent_edited"] = ""
+        session["bidding_id"] = ""
+    elif request.form.get("select_sort", "") == "bidding_id":
+        session["due_date"] = ""
+        session["recent_edited"] = ""
+        session["bidding_id"] = "bidding_id"
     return redirect(url_for("bidding.biddings"))

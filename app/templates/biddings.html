@@ -27,20 +27,23 @@
     <div class="container__header-block">
       <div>
         <form action="{{ url_for('bidding.select_sort') }}" method="post">
-          {% if most_popular %}
+          {% if bidding_id %}
             <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
-              <option selected value="Most popular" name="Most popular">Most popular</option>
-              <option value="Most recent" name="Most recent">Most recent</option>
+              <option selected value="bidding_id" name="bidding_id">By Bidding ID</option>
+              <option value="recent_edited" name="recent_edited">Recent Edited</option>
+              <option value="due_date" name="due_date">By Due Date</option>
             </select>
-          {% elif most_recent %}
+          {% elif due_date %}
             <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
-              <option value="Most popular" name="Most popular">Most popular</option>
-              <option selected value="Most recent" name="Most recent">Most recent</option>
+              <option value="bidding_id" name="bidding_id">By Bidding ID</option>
+              <option value="recent_edited" name="recent_edited">Recent Edited</option>
+              <option selected value="due_date" name="due_date">By Due Date</option>
             </select>
           {% else %}
             <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
-              <option value="Most popular" name="Most popular">Most popular</option>
-              <option selected value="Most recent" name="Most recent">Most recent</option>
+              <option value="bidding_id" name="bidding_id">By Bidding ID</option>
+              <option selected value="recent_edited" name="recent_edited">Recent Edited</option>
+              <option value="due_date" name="due_date">By Due Date</option>
             </select>
           {% endif %}
         </form>
