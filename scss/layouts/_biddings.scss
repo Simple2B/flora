@@ -85,7 +85,7 @@
 
     &__bids_status {
         display: flex;
-        & > div {
+        div {
             padding: 0rem $m1rem;
             & > button {
                 font-weight: 600;

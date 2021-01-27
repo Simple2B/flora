@@ -97,26 +97,33 @@ def archive_or_export():
     return redirect(url_for("bidding.biddings"))
 
 
-@bidding_blueprint.route("/biddings")
+@bidding_blueprint.route("/biddings", methods=["GET"])
 @login_required
 def biddings():
     form = BidForm()
-    due_date = session.get("due_date", "")
-    bidding_id = session.get("bidding_id", "")
-    recent_edited = session.get("recent_edited", "recent_edited")
-    if due_date:
-        sorting = Bid.due_date
-    elif bidding_id:
-        sorting = ""
+    sort_by = request.args.get("select_sort", "")
+    due_date = "due_date"
+    bidding_id = "bidding_id"
+    if sort_by == due_date:
+        sort_by = Bid.due_date
+        bidding_id = ""
+    elif sort_by == bidding_id:
+        sort_by = ""
+        due_date = ""
     else:
-        sorting = Bid.time_updated
+        sort_by = Bid.time_updated
+        due_date = ""
+        bidding_id = ""
 
     edit_bid = session.get('edit_bid', False)
 
-    status_active_all = session.get("status_active_all", "status-active")
-    status_active_submitted = session.get("status_active_submitted", "")
-    status_active_archived = session.get("status_active_archived", "")
-    status_active_draft = session.get("status_active_draft", "")
+    status_active_submitted = request.args.get("Submitted", "")
+    status_active_archived = request.args.get("Archived", "")
+    status_active_draft = request.args.get("Draft", "")
+    if status_active_submitted or status_active_archived or status_active_draft:
+        status_active_all = ""
+    else:
+        status_active_all = "status-active"
 
     bids_query = Bid.query
     if status_active_submitted:
@@ -125,7 +132,7 @@ def biddings():
         bids_query = bids_query.filter(Bid.status == Bid.Status.d_archived)
     elif status_active_draft:
         bids_query = bids_query.filter(Bid.status == Bid.Status.b_draft)
-    bids_query = bids_query.order_by(desc(sorting) if sorting else Bid.procore_bid_id)
+    bids_query = bids_query.order_by(desc(sort_by) if sort_by else Bid.procore_bid_id)
 
     bids = bids_query.all()
 
@@ -154,50 +161,8 @@ def biddings():
         today_date=today_date,
         due_date=due_date,
         bidding_id=bidding_id,
-        recent_edited=recent_edited,
         status_active_all=status_active_all,
         status_active_submitted=status_active_submitted,
         status_active_archived=status_active_archived,
         status_active_draft=status_active_draft,
     )
-
-
-@bidding_blueprint.route("/change_status", methods=["POST"])
-@login_required
-def change_status():
-    form = FlaskForm(request.form)
-    if form.validate_on_submit():
-        session["status_active_draft"] = ""
-        session["status_active_submitted"] = ""
-        session["status_active_archived"] = ""
-        session["status_active_all"] = ""
-        if request.form["bids_status"] == "Draft":
-            session["status_active_draft"] = "status-active"
-        elif request.form["bids_status"] == "Submitted":
-            session["status_active_submitted"] = "status-active"
-        elif request.form["bids_status"] == "Archived":
-            session["status_active_archived"] = "status-active"
-        else:
-            session["status_active_all"] = "status-active"
-        return redirect(url_for("bidding.biddings"))
-    elif form.is_submitted():
-        log(log.INFO, "Form submitted")
-    return redirect(url_for("bidding.biddings"))
-
-
-@bidding_blueprint.route("/select_sort", methods=["POST"])
-@login_required
-def select_sort():
-    if request.form.get("select_sort", "") == "recent_edited":
-        session["recent_edited"] = "recent_edited"
-        session["due_date"] = ""
-        session["bidding_id"] = ""
-    elif request.form.get("select_sort", "") == "due_date":
-        session["due_date"] = "due_date"
-        session["recent_edited"] = ""
-        session["bidding_id"] = ""
-    elif request.form.get("select_sort", "") == "bidding_id":
-        session["due_date"] = ""
-        session["recent_edited"] = ""
-        session["bidding_id"] = "bidding_id"
-    return redirect(url_for("bidding.biddings"))

@@ -2020,9 +2020,9 @@ hr {
   margin: 1rem 0rem 0.5rem; }
   .status_block__bids_status {
     display: flex; }
-    .status_block__bids_status > div {
+    .status_block__bids_status div {
       padding: 0rem 1rem; }
-      .status_block__bids_status > div > button {
+      .status_block__bids_status div > button {
         font-weight: 600;
         font-size: 14px;
         cursor: pointer;
