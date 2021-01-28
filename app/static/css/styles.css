@@ -66,6 +66,12 @@ ul {
 hr {
   border: 1px solid #BDBDBD; }
 
+.sidebar-container {
+  width: 12vw;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  border-top: 1px solid #f1f1f1;
+  max-height: 50vh; }
+
 .sidebar {
   display: flex;
   flex-flow: column nowrap;
@@ -96,6 +102,12 @@ hr {
       .sidebar__nav-links .__text-decor-active:hover {
         color: #2F80ED;
         text-decoration: underline; }
+
+.sticky {
+  display: flex;
+  position: fixed;
+  top: 6rem;
+  z-index: 101; }
 
 .list-group-item.active {
   border-color: #333333;
@@ -189,7 +201,8 @@ hr {
   text-decoration: none !important; }
 
 .__side-bar-box {
-  height: 50vh; }
+  height: 50vh;
+  width: 12vw; }
 
 .__sidebar-css {
   display: flex;
@@ -223,7 +236,7 @@ hr {
     background-color: #828282; }
 
 ._side-bar-size {
-  padding: 0.5rem 2.8rem; }
+  padding: 0.5rem 2.3rem; }
 
 .ddb__side_bar {
   height: 65vh;
@@ -337,6 +350,10 @@ hr {
 ._flash {
   background-color: none;
   color: #EB5757; }
+
+.ddb_mr-auto {
+  margin-left: 12.5vw !important;
+  margin-right: 12.5vw !important; }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }
@@ -488,6 +505,31 @@ hr {
 
 ._btn--add_to_bidding {
   margin-top: 3rem; }
+
+.close {
+  position: absolute;
+  right: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3; }
+
+.close:hover {
+  opacity: 1; }
+
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  top: 0px;
+  width: 2px;
+  background-color: #333; }
+
+.close:before {
+  transform: rotate(45deg); }
+
+.close:after {
+  transform: rotate(-45deg); }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }
@@ -831,7 +873,9 @@ hr {
   color: #EB5757;
   font-weight: 500;
   border: 0;
-  margin: auto; }
+  margin: auto;
+  display: flex;
+  align-items: center; }
 
 .login__title--welcome {
   font-size: 18px;
@@ -909,6 +953,19 @@ hr {
     justify-content: space-between;
     padding-top: 1rem;
     padding: 0 2rem; }
+
+.user-card__details li {
+  list-style-type: none;
+  font-weight: 600; }
+
+.user-card__details__name li:last-child {
+  font-weight: 400;
+  color: #828282; }
+
+.user-card__edit_and_delete {
+  display: flex; }
+  .user-card__edit_and_delete button {
+    width: 2rem; }
 
 .modal-content {
   padding: 1rem; }
@@ -1261,6 +1318,31 @@ hr {
 ._btn--add_to_bidding {
   margin-top: 3rem; }
 
+.close {
+  position: absolute;
+  right: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3; }
+
+.close:hover {
+  opacity: 1; }
+
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  top: 0px;
+  width: 2px;
+  background-color: #333; }
+
+.close:before {
+  transform: rotate(45deg); }
+
+.close:after {
+  transform: rotate(-45deg); }
+
 .__bid_status-default, .__bid_status-draft, .__bid_status-submitted, .__bid_status-archived {
   color: white;
   padding: .5rem 1rem;
@@ -1346,12 +1428,12 @@ hr {
   padding-bottom: 1rem; }
 
 .main-container_bidding {
-  max-width: 75vw;
+  width: 75vw;
   margin: 0 1rem;
   display: flex;
   flex-flow: column;
-  margin-left: auto;
-  margin-right: auto; }
+  margin-left: calc(12.5vw + 6vw + 2.3rem);
+  transition: margin .25s ease-out; }
   .main-container_bidding-header {
     background-color: black;
     justify-content: space-between;
@@ -1907,6 +1989,31 @@ hr {
 ._btn--add_to_bidding {
   margin-top: 3rem; }
 
+.close {
+  position: absolute;
+  right: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3; }
+
+.close:hover {
+  opacity: 1; }
+
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  top: 0px;
+  width: 2px;
+  background-color: #333; }
+
+.close:before {
+  transform: rotate(45deg); }
+
+.close:after {
+  transform: rotate(-45deg); }
+
 .sidebar__nav-links-bidding {
   list-style-type: disc; }
   .sidebar__nav-links-bidding .__disc-blue {
@@ -1959,9 +2066,6 @@ hr {
       width: 100%; }
       .container__header-block > div:first-child div button {
         padding: 0.5rem 1rem 0.5rem; }
-
-.ddb_nav-side-bar {
-  height: 64vh; }
 
 .__side_bar-title {
   min-height: 5vh;
@@ -2081,12 +2185,6 @@ hr {
   .work-items-section .ddb__side_bar {
     max-height: 50vh;
     cursor: pointer; }
-
-.sidebar-container {
-  min-width: 15%;
-  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
-  border-top: 1px solid #f1f1f1;
-  max-height: 50vh; }
 
 .main-container .__body {
   display: flex;

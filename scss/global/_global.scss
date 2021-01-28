@@ -36,8 +36,14 @@ hr {
     border: 1px solid #BDBDBD;
 }
 
-// side-bar style (for work_items,
-// exclusions, clarifications)
+// side-bar style
+.sidebar-container {
+    // min-width: 15%;
+    width: 12vw;
+    box-shadow: $shadow;
+    border-top: 1px solid #f1f1f1;
+    max-height: 50vh;
+}
 
 .sidebar {
     display: flex;
@@ -89,7 +95,12 @@ hr {
         }
     }
 }
-
+.sticky {
+    display: flex;
+    position: fixed;
+    top: 6rem;
+    z-index: 101;
+}
 // end side-bar
 
 .list-group-item.active {
@@ -214,6 +225,7 @@ hr {
 
 .__side-bar-box {
     height: 50vh;
+    width: 12vw;
 }
 
 .__sidebar-css {
@@ -258,7 +270,7 @@ hr {
 }
 
 ._side-bar-size{
-    padding:0.5rem 2.8rem;
+    padding:0.5rem 2.3rem;
 }
 
 .ddb__side_bar {
@@ -300,9 +312,6 @@ hr {
 
 .hidden {
     display: none !important;
-}
-
-.test-hidden {
 }
 
 .bck-black {

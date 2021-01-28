@@ -11,14 +11,6 @@
 
 }
 
-.sidebar-container {
-    min-width: 15%;
-    box-shadow: $shadow;
-    border-top: 1px solid #f1f1f1;
-    max-height: 50vh;
-}
-
-
 .main-container {
     @extend %tpl_main-container;
 

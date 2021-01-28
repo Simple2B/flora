@@ -10,10 +10,8 @@
     {% for category, message in messages %}
     {% if category == 'warning' %}
     <div class="alert alert-{{ category }} alert-dismisible _profile_flash">
-      <button class="_flash-btn" type="button" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true"><img src="{{ url_for('static', filename='images/close_button_ddb.svg') }}"></span>
-      </button>
       {{ message }}
+      <button data-dismiss="alert" aria-label="Close" class="close"></button>
     </div>
     {% endif %}
     {% endfor %}

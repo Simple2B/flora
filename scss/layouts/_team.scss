@@ -27,6 +27,24 @@
     }
 }
 
+.user-card__details {
+    li {
+        list-style-type: none;
+        font-weight: 600;
+    }
+    &__name {
+        li:last-child {
+            font-weight: 400;
+            color: #828282;
+        }
+    }
+}
+.user-card__edit_and_delete {
+    display: flex;
+    button {
+        width: $m1rem*2;
+    }
+}
 // Customize model window
 
 .modal-content {
