@@ -341,7 +341,7 @@ def preview_pdf(bid_id):
     )
     groups = WorkItemGroup.query.filter(WorkItemGroup.bid_id == bid_id).all()
     preview_pdf_bool = True
-    date_today = datetime.datetime.today().strftime("%Y-%m-%d")
+    date_today = datetime.datetime.today().strftime("%m/%d/%Y")
     return render_template(
         "export_document.html",
         bid=bid,
@@ -376,10 +376,12 @@ def export(bid_id):
             PATH_TO_IMG = os.path.join(BASE_DIR, "static/images/")
             preview_pdf_bool = False
             calculate_subtotal(bid_id, tbd_choices)
+            date_today = datetime.datetime.today().strftime("%m/%d/%Y")
             html_content = render_template(
                 "export_document.html",
                 bid=bid,
                 alternate_total=calculate_alternate_total(bid_id),
+                date_today=date_today,
                 preview_pdf_bool=preview_pdf_bool,
                 groups=groups,
                 global_work_items=global_work_items,
