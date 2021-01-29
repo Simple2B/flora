@@ -1526,37 +1526,43 @@ hr {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border: 1px solid #E5E5E5; }
+      border: 1px solid #E5E5E5;
+      border-radius: 5px;
+      padding: 0.5rem; }
+      .main-container__project_general .__client_job_info ._show-client_panel button {
+        background-color: inherit; }
     .main-container__project_general .__client_job_info ._client-block_info {
       display: flex;
       flex-flow: column wrap;
-      border: 1px solid #E5E5E5; }
+      border: 1px solid #E5E5E5;
+      border-radius: 3px; }
     .main-container__project_general .__client_job_info .job-address {
       display: flex;
       flex-flow: column wrap;
-      border: 1px solid #E5E5E5; }
+      border: 1px solid #E5E5E5;
+      border-radius: 3px; }
     .main-container__project_general .__client_job_info .client-job--span {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       flex-flow: row wrap;
       color: #979797;
       font-weight: bold;
-      padding-left: 0.5rem; }
+      padding: 0.5rem 0.5rem 0rem; }
       .main-container__project_general .__client_job_info .client-job--span > div {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         width: 30%; }
         .main-container__project_general .__client_job_info .client-job--span > div > div:first-child {
-          width: 20%; }
+          width: 23%;
+          margin-right: 0.5rem; }
         .main-container__project_general .__client_job_info .client-job--span > div > div:last-child {
           width: 50%; }
-      .main-container__project_general .__client_job_info .client-job--span div {
-        min-width: 15%; }
     .main-container__project_general .__client_job_info .proj_gen-text-info {
       display: flex;
       color: #000000;
-      font-weight: normal; }
+      font-weight: normal;
+      word-break: break-all; }
   .main-container__project_general .__drawing-log ._drawing-table {
     background-color: #BEBEBE; }
   .main-container__project_general .__drawing-log ._show-drawing_log_panel {
@@ -1564,13 +1570,19 @@ hr {
     justify-content: space-between;
     align-items: center;
     border: 1px solid #E5E5E5;
-    margin-bottom: 0.5rem; }
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem; }
+    .main-container__project_general .__drawing-log ._show-drawing_log_panel button {
+      background-color: inherit; }
   .main-container__project_general .__drawing-log ._drawing_table {
     display: flex;
     justify-content: center; }
     .main-container__project_general .__drawing-log ._drawing_table table {
       width: 100%;
       padding: 1rem; }
+      .main-container__project_general .__drawing-log ._drawing_table table th:first-child {
+        padding: 0.25rem; }
 
 .title-text-style {
   color: #000000;
@@ -1824,19 +1836,11 @@ hr {
 
 ._alternate_block {
   display: flex;
-  align-items: center; }
-  ._alternate_block_add_alternate_row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; }
+  align-items: baseline; }
   ._alternate_block > div:first-child {
-    margin-right: 2rem; }
-
-.__alternate_total {
-  display: flex;
-  width: 12vw;
-  justify-content: space-between;
-  padding-right: 4rem; }
+    margin-right: 1rem; }
+  ._alternate_block > div:nth-child(2) {
+    margin-right: 1rem; }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }
@@ -2120,9 +2124,9 @@ hr {
   margin: 1rem 0rem 0.5rem; }
   .status_block__bids_status {
     display: flex; }
-    .status_block__bids_status > div {
+    .status_block__bids_status div {
       padding: 0rem 1rem; }
-      .status_block__bids_status > div > button {
+      .status_block__bids_status div > button {
         font-weight: 600;
         font-size: 14px;
         cursor: pointer;
@@ -2296,7 +2300,8 @@ hr {
         margin-left: 0.5rem;
         width: 30%; }
       .chart-right .chart-right__group_name-box .chart-right__group-name-block .__delete-group {
-        margin-right: 0.5rem; }
+        margin-right: 0.5rem;
+        background-color: inherit; }
   .chart-right__undo-block {
     background-color: #E6A73E;
     border-radius: 0.5rem;
@@ -2322,6 +2327,9 @@ hr {
 #_group_input_delete .input--label {
   top: 0.8rem;
   left: 3.5rem; }
+
+#workItemsTable tr td:last-child button {
+  background-color: inherit; }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }

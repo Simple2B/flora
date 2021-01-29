@@ -6,7 +6,6 @@ from datetime import datetime
 
 from flask import Blueprint, render_template, redirect, url_for, session, request, send_file
 from flask_login import login_required
-from flask_wtf import FlaskForm
 from sqlalchemy import desc
 
 from app.models import Bid
@@ -97,18 +96,33 @@ def archive_or_export():
     return redirect(url_for("bidding.biddings"))
 
 
-@bidding_blueprint.route("/biddings")
+@bidding_blueprint.route("/biddings", methods=["GET"])
 @login_required
 def biddings():
     form = BidForm()
-    most_popular = session.get("most_popular", "")
-    most_recent = session.get("most_recent", "Most recent")
+    sort_by = request.args.get("select_sort", "")
+    due_date = "due_date"
+    bidding_id = "bidding_id"
+    if sort_by == due_date:
+        sort_by = Bid.due_date
+        bidding_id = ""
+    elif sort_by == bidding_id:
+        sort_by = ""
+        due_date = ""
+    else:
+        sort_by = Bid.time_updated
+        due_date = ""
+        bidding_id = ""
+
     edit_bid = session.get('edit_bid', False)
 
-    status_active_all = session.get("status_active_all", "status-active")
-    status_active_submitted = session.get("status_active_submitted", "")
-    status_active_archived = session.get("status_active_archived", "")
-    status_active_draft = session.get("status_active_draft", "")
+    status_active_submitted = request.args.get("Submitted", "")
+    status_active_archived = request.args.get("Archived", "")
+    status_active_draft = request.args.get("Draft", "")
+    if status_active_submitted or status_active_archived or status_active_draft:
+        status_active_all = ""
+    else:
+        status_active_all = "status-active"
 
     bids_query = Bid.query
     if status_active_submitted:
@@ -117,7 +131,7 @@ def biddings():
         bids_query = bids_query.filter(Bid.status == Bid.Status.d_archived)
     elif status_active_draft:
         bids_query = bids_query.filter(Bid.status == Bid.Status.b_draft)
-    bids_query = bids_query.order_by(desc(Bid.time_updated if most_recent else Bid.popularity))
+    bids_query = bids_query.order_by(desc(sort_by) if sort_by else Bid.procore_bid_id)
 
     bids = bids_query.all()
 
@@ -144,45 +158,10 @@ def biddings():
         form=form,
         edit_bid=edit_bid,
         today_date=today_date,
-        most_popular=most_popular,
-        most_recent=most_recent,
+        due_date=due_date,
+        bidding_id=bidding_id,
         status_active_all=status_active_all,
         status_active_submitted=status_active_submitted,
         status_active_archived=status_active_archived,
         status_active_draft=status_active_draft,
     )
-
-
-@bidding_blueprint.route("/change_status", methods=["POST"])
-@login_required
-def change_status():
-    form = FlaskForm(request.form)
-    if form.validate_on_submit():
-        session["status_active_draft"] = ""
-        session["status_active_submitted"] = ""
-        session["status_active_archived"] = ""
-        session["status_active_all"] = ""
-        if request.form["bids_status"] == "Draft":
-            session["status_active_draft"] = "status-active"
-        elif request.form["bids_status"] == "Submitted":
-            session["status_active_submitted"] = "status-active"
-        elif request.form["bids_status"] == "Archived":
-            session["status_active_archived"] = "status-active"
-        else:
-            session["status_active_all"] = "status-active"
-        return redirect(url_for("bidding.biddings"))
-    elif form.is_submitted():
-        log(log.INFO, "Form submitted")
-    return redirect(url_for("bidding.biddings"))
-
-
-@bidding_blueprint.route("/select_sort", methods=["POST"])
-@login_required
-def select_sort():
-    if request.form.get("select_sort", "") == "Most recent":
-        session["most_recent"] = "Most recent"
-        session["most_popular"] = ""
-    elif request.form.get("select_sort", "") == "Most popular":
-        session["most_popular"] = "Most popular"
-        session["most_recent"] = ""
-    return redirect(url_for("bidding.biddings"))

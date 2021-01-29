@@ -28,24 +28,29 @@
 
     <div class="container__header-block">
       <div>
-        <form action="{{ url_for('bidding.select_sort') }}" method="post">
-          {% if most_popular %}
+          {% if bidding_id %}
+          <form action="?sort_by=bidding_id" method="get">
             <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
-              <option selected value="Most popular" name="Most popular">Most popular</option>
-              <option value="Most recent" name="Most recent">Most recent</option>
+              <option selected value="bidding_id">By Bidding ID</option>
+              <option value="recent_edited">Recent Edited</option>
+              <option value="due_date">By Due Date</option>
             </select>
-          {% elif most_recent %}
+          {% elif due_date %}
+          <form action="?sort_by=due_date" method="get">
             <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
-              <option value="Most popular" name="Most popular">Most popular</option>
-              <option selected value="Most recent" name="Most recent">Most recent</option>
+              <option value="bidding_id">By Bidding ID</option>
+              <option value="recent_edited">Recent Edited</option>
+              <option selected value="due_date">By Due Date</option>
             </select>
           {% else %}
+          <form action="?sort_by=recent_edited" method="get">
             <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
-              <option value="Most popular" name="Most popular">Most popular</option>
-              <option selected value="Most recent" name="Most recent">Most recent</option>
+              <option value="bidding_id">By Bidding ID</option>
+              <option selected value="recent_edited" name="recent_edited">Recent Edited</option>
+              <option value="due_date">By Due Date</option>
             </select>
           {% endif %}
-        </form>
+          </form>
         <div>
         {% if edit_bid %}
         <a href="{{ url_for('bidding.finish_edit_bid') }}">
@@ -87,17 +92,14 @@
 
     </div>
     {% endif %}
-
-    <form action="{{ url_for('bidding.change_status') }}" method="post" id="status_form_id">
+    <form method="get">
       <div class="status_block">
         <span class="t-gray">Showing {{ bids|length }} Documents</span>
         <div class="status_block__bids_status">
-
-          <div> <button type="submit" name="bids_status" value="Draft" class="{{ status_active_draft }}" id="bids_draft_id"> Draft </button></div>
-          <div id="bids_submitted_id"  > <button name="bids_status" value="Submitted" class="{{ status_active_submitted }}">Submitted </button></div>
-          <div> <button name="bids_status" value="Archived" id="bids_archived_id" class="{{ status_active_archived }}">Archived </button></div>
-          <div> <button name="bids_status" id="bids_all_id" class="{{ status_active_all }}">All </button></div>
-
+            <div> <button name="Draft" value="status-active" class="{{ status_active_draft }}"> Draft </button></div>
+            <div> <button name="Submitted" value="status-active" class="{{ status_active_submitted }}">Submitted </button></div>
+            <div> <button name="Archived" value="status-active" class="{{ status_active_archived }}">Archived </button></div>
+            <div> <button class="{{ status_active_all }}">All </button></div>
         </div>
       </div>
     </form>
