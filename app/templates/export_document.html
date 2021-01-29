@@ -25,8 +25,9 @@
         }
 
         .export_container {
-            display: flex;
-            justify-content: center;
+            width: 70vw;
+            margin-right: auto;
+            margin-left: auto;
             margin-top: 1rem;
         }
 
@@ -85,13 +86,12 @@
         }
 
         .__due_time {
-            /* display: -webkit-box;
-            -webkit-box-pack: end; */
             width: 100%
         }
 
         .__due_time td:nth-child(2) {
             width: 33.2%;
+            text-align: right;
             font-weight: bold;
         }
 
@@ -120,7 +120,9 @@
         .project_quote {
             background-color: yellow;
         }
+        .project_quote_revised{
 
+        }
         .client-padding {
             padding-left: 1rem;
         }
@@ -204,8 +206,9 @@
         }
 
         .work_item_note {
-            display: -webkit-box;
-            -webkit-box-pack: justify;
+            /* display: -webkit-box;
+            -webkit-box-pack: justify; */
+
             margin-bottom: 1rem;
         }
 
@@ -216,15 +219,9 @@
         }
 
         .work_item_note ._note {
-            width: 65%;
             overflow-wrap: break-word;
-            /* margin-right: 1rem; */
+            margin-right: 0.5rem;
         }
-
-        ._group_note {
-            overflow-wrap: break-word;
-        }
-
         ._note div {
             margin-left: 1rem;
         }
@@ -254,22 +251,24 @@
         .section_group_letter ._inner_block div {
             padding: 0rem 0.75rem;
         }
-
+        /* group block */
         .group_title {
             margin-bottom: 0.3rem;
         }
-
         .group_title span
         {border-bottom: 3px solid #333333;}
-
         ._group-block {
             padding: 0.5rem;
         }
-
+        ._group_note {
+            overflow-wrap: break-word;
+            margin-right: 0.5rem;
+        }
         .bid_subtotal_container .bid_subtotal {
             display: -webkit-box;
             -webkit-box-pack: end;
         }
+        /* endblock */
 
         /********** end bid work items container */
 
@@ -364,6 +363,9 @@
         .td_width {
             width: 5%;
         }
+        .td_vertical_bottom {
+            vertical-align: bottom;
+        }
 
         .ddb_titles {
             margin-top: 1rem;
@@ -431,7 +433,7 @@
                         <tbody>
                             <tr>
                                 <td></td>
-                                <td>{{ bid.due_date }}</td>
+                                <td>{{ date_today }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -458,7 +460,7 @@
                                 <div>{{ bid.address_city }}</div>
                                 <div>
                                     <span class="project_quote">
-                                        {{ bid.project_type.value }} # B-20-034 R1
+                                        {{ bid.project_type.value }} # B-20-034 R{{ bid.revision }}
                                     </span>
                                 </div>
                             </div>
@@ -480,19 +482,26 @@
                             </div>
                             {% for work_item_line in link_work_item.work_item_lines %}
                             <div class="work_item_note">
-                                <div class="__note-box">
-                                    <div class="_note">
-                                        {{ work_item_line.description }}
-                                        <div>
-                                            NOTE: {{ work_item_line.note }}
-                                        </div>
-                                    </div>
-                                    <div class="_unit">
-                                        <div>{{ work_item_line.quantity }}</div>
-                                        <div>{{ work_item_line.unit }}</div>
-                                    </div>
-                                </div>
-                                <div></div>
+                                <table style="width: 100%;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 11.5%;"></td>
+                                            <td style="width: 43.5%;">
+                                                <div class="_note">
+                                                    {{ work_item_line.description }}
+                                                    <div>
+                                                        NOTE: {{ work_item_line.note }}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="width: 5%; vertical-align: top;">{{ work_item_line.quantity }}</td>
+                                            <td style="width: 8.5%; vertical-align: top;">{{ work_item_line.unit }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             {% endfor %}
                         </div>
@@ -508,7 +517,7 @@
                                 <tbody>
                                     <tr style="text-align: left;">
                                         <td style="width: 11%;">&nbsp; &nbsp;Phase</td>
-                                        <td style="width: 44.5%;"> Description</td>
+                                        <td style="width: 43.5%;"> Description</td>
                                         <td style="width: 5%;">Qty</td>
                                         <td style="width: 8.5%;">Unit</td>
                                         <td></td>
@@ -531,8 +540,8 @@
                                 <table style="width: 100%;">
                                     <tbody>
                                         <tr>
-                                            <td style="width: 14%;"></td>
-                                            <td style="width: 42%;">
+                                            <td style="width: 11.5%;"></td>
+                                            <td style="width: 43.5%;">
                                                 <div class="_group_note _note">
                                                     {{ work_item_line.description }}
                                                     <div>
@@ -566,6 +575,8 @@
                                         $ {{ bid.subtotal }}
                                     </div>
                                 </div>
+                                {% if bid.percent_permit_fee < 0.001 %}
+                                {% else %}
                                 <div class="feature_price">
                                     <div>
                                         Permit/Filing Free:
@@ -580,6 +591,9 @@
                                     </div>
                                     {% endif %}
                                 </div>
+                                {% endif %}
+                                {% if bid.percent_general_condition < 0.001 %}
+                                {% else %}
                                 <div class="feature_price">
                                     <div class="general_padding-r">
                                         General Conditions:
@@ -594,6 +608,9 @@
                                     </div>
                                     {% endif %}
                                 </div>
+                                {% endif %}
+                                {% if bid.percent_overhead < 0.001 %}
+                                {% else %}
                                 <div class="feature_price">
                                     <div>
                                         Overhead:
@@ -608,6 +625,9 @@
                                     </div>
                                     {% endif %}
                                 </div>
+                                {% endif %}
+                                {% if bid.percent_insurance_tax < 0.001 %}
+                                {% else %}
                                 <div class="feature_price">
                                     <div>
                                         Insurance/Tax:
@@ -622,6 +642,9 @@
                                     </div>
                                     {% endif %}
                                 </div>
+                                {% endif %}
+                                {% if bid.percent_profit < 0.001 %}
+                                {% else %}
                                 <div class="feature_price">
                                     <div>
                                         Profit:
@@ -636,6 +659,9 @@
                                     </div>
                                     {% endif %}
                                 </div>
+                                {% endif %}
+                                {% if bid.percent_bond < 0.001 %}
+                                {% else %}
                                 <div class="feature_price">
                                     <div>
                                         Bond:
@@ -650,7 +676,7 @@
                                     </div>
                                     {% endif %}
                                 </div>
-
+                                {% endif %}
                                 <div class="feature_price">
                                     <div>
                                         Grand Total:
@@ -680,9 +706,9 @@
                     <div>
                         {% for clarification_link in bid.clarification_links %}
                             {% if clarification_link == bid.clarification_links[-1] %}
-                                {{ clarification_link.clarification.note }}.
+                                {{ clarification_link.clarification.description }}.
                             {% else %}
-                                {{ clarification_link.clarification.note }},
+                                {{ clarification_link.clarification.description }};
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -739,7 +765,7 @@
                                         <table class="inner_table" style="padding: 0px;">
                                             <tr>
                                                 <td>
-                                                    <td>By &nbsp;</td>
+                                                    <td class="td_vertical_bottom">By &nbsp;</td>
                                                 </td>
                                                 <td>
                                                     <td class="td_width"></td>
@@ -770,7 +796,7 @@
                                         <table class="inner_table">
                                             <tr>
                                                 <td>
-                                                    <td>By &nbsp;</td>
+                                                    <td class="td_vertical_bottom">By &nbsp;</td>
                                                 </td>
                                                 <td>
                                                     <td class="td_width"></td>
@@ -779,7 +805,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <td>Name &nbsp;</td>
+                                                    <td class="td_vertical_bottom">Name &nbsp;</td>
                                                 </td>
                                                 <td>
                                                     <td class="td_width"></td>
@@ -788,7 +814,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <td>Date &nbsp;</td>
+                                                    <td class="td_vertical_bottom">Date &nbsp;</td>
                                                 </td>
                                                 <td>
                                                     <td class="td_width"></td>
@@ -808,7 +834,9 @@
                                 <li></li>
                             </ul>
                         </div>
-                        <span>No drawings have been received for this project</span>
+                        <span><strong>No drawings have been received for this project</strong></span>
+                        <div class="project_quote_revised">
+                            {{ bid.project_type.value }} # B_20_034 REVISED-{{ bid.revision }}
                         </div>
                     </div>
                 </div>
