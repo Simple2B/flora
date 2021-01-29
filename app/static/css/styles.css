@@ -489,6 +489,31 @@ hr {
 ._btn--add_to_bidding {
   margin-top: 3rem; }
 
+.close {
+  position: absolute;
+  right: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3; }
+
+.close:hover {
+  opacity: 1; }
+
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  top: 0px;
+  width: 2px;
+  background-color: #333; }
+
+.close:before {
+  transform: rotate(45deg); }
+
+.close:after {
+  transform: rotate(-45deg); }
+
 .sidebar__nav-links-bidding {
   list-style-type: disc; }
   .sidebar__nav-links-bidding .__disc-blue {
@@ -831,7 +856,9 @@ hr {
   color: #EB5757;
   font-weight: 500;
   border: 0;
-  margin: auto; }
+  margin: auto;
+  display: flex;
+  align-items: center; }
 
 .login__title--welcome {
   font-size: 18px;
@@ -909,6 +936,19 @@ hr {
     justify-content: space-between;
     padding-top: 1rem;
     padding: 0 2rem; }
+
+.user-card__details li {
+  list-style-type: none;
+  font-weight: 600; }
+
+.user-card__details__name li:last-child {
+  font-weight: 400;
+  color: #828282; }
+
+.user-card__edit_and_delete {
+  display: flex; }
+  .user-card__edit_and_delete button {
+    width: 2rem; }
 
 .modal-content {
   padding: 1rem; }
@@ -1260,6 +1300,31 @@ hr {
 
 ._btn--add_to_bidding {
   margin-top: 3rem; }
+
+.close {
+  position: absolute;
+  right: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3; }
+
+.close:hover {
+  opacity: 1; }
+
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  top: 0px;
+  width: 2px;
+  background-color: #333; }
+
+.close:before {
+  transform: rotate(45deg); }
+
+.close:after {
+  transform: rotate(-45deg); }
 
 .__bid_status-default, .__bid_status-draft, .__bid_status-submitted, .__bid_status-archived {
   color: white;
@@ -1910,6 +1975,31 @@ hr {
 
 ._btn--add_to_bidding {
   margin-top: 3rem; }
+
+.close {
+  position: absolute;
+  right: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3; }
+
+.close:hover {
+  opacity: 1; }
+
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  top: 0px;
+  width: 2px;
+  background-color: #333; }
+
+.close:before {
+  transform: rotate(45deg); }
+
+.close:after {
+  transform: rotate(-45deg); }
 
 .sidebar__nav-links-bidding {
   list-style-type: disc; }
