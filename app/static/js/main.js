@@ -25,10 +25,13 @@ items.forEach((item) => {
   item.classList.contains('is-active') && handleIndicator(item);
 });
 
+  // side-bar scrolling and closing
 $("#ddb-background").click(function (e) {
   e.preventDefault();
   $("#wrapper").toggleClass("toggled");
+  $('#work-item-container').toggleClass("ddb_mr-auto");
 });
+  // endscrolling
 
 const bid_href_id = document.getElementById('bidding_id');
 
