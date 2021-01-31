@@ -84,8 +84,6 @@ const myProfileSubmitBtn = document.getElementById('my_profile_submit_id');
 if (previewUrl) {previewUrl.setAttribute('value', window.location.href)};
 myProfileSubmitBtn.setAttribute('value', window.location.href);
 
-const sideBarActiveLink = document.getElementById('projectGeneralLink_ID');
-console.log(sideBarActiveLink);
 const sideBarNavLinks = document.querySelectorAll('#sidebar__nav-links-bidding li');
 sideBarNavLinks.forEach( (e) => {
   e.addEventListener('click', function(e) {
