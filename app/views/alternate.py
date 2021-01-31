@@ -24,7 +24,7 @@ def new_alternate(bid_id):
         )
         alternate.save()
         log(log.DEBUG, "Alternate added successful.", "success")
-        return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="alternates"))
+        return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_alternates"))
     elif form.is_submitted():
         log(log.ERROR, "%s", form.errors)
         for error in form.errors:
@@ -33,7 +33,7 @@ def new_alternate(bid_id):
     return render_template(
         "alternate.html",
         form=form,
-        cancel_url=url_for("bid.bidding", bid_id=bid_id, _anchor="alternates"),
+        cancel_url=url_for("bid.bidding", bid_id=bid_id, _anchor="bid_alternates"),
     )
 
 
@@ -53,7 +53,7 @@ def edit_alternate(bid_id, alternate_id):
         alternate.price = form.price.data
         alternate.save()
         log(log.DEBUG, "Alternate added successful.", "success")
-        return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="alternates"))
+        return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_alternates"))
     elif form.is_submitted():
         for error in form.errors:
             for msg in form.errors[error]:
@@ -68,7 +68,7 @@ def edit_alternate(bid_id, alternate_id):
     return render_template(
         "alternate.html",
         form=form,
-        cancel_url=url_for("bid.bidding", bid_id=bid_id, _anchor="alternates"),
+        cancel_url=url_for("bid.bidding", bid_id=bid_id, _anchor="bid_alternates"),
     )
 
 
@@ -79,4 +79,4 @@ def delete_alternate(bid_id, alternate_id):
     if alternate:
         alternate.delete()
         flash("Alternate deleted.", "success")
-    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="alternates"))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_alternates"))
