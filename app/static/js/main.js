@@ -84,11 +84,15 @@ const myProfileSubmitBtn = document.getElementById('my_profile_submit_id');
 if (previewUrl) {previewUrl.setAttribute('value', window.location.href)};
 myProfileSubmitBtn.setAttribute('value', window.location.href);
 
-const sideBarNavLinks = document.querySelectorAll('#sidebar__nav-links-bidding li span a');
+const sideBarActiveLink = document.getElementById('projectGeneralLink_ID');
+console.log(sideBarActiveLink);
+const sideBarNavLinks = document.querySelectorAll('#sidebar__nav-links-bidding li');
 sideBarNavLinks.forEach( (e) => {
-  e.addEventListener('click', () => {
+  e.addEventListener('click', function(e) {
+    document.querySelector('#sidebar__nav-links-bidding li.active').classList.remove('active');
+    this.classList.add('active'); // add 'active' class to current event
     const myProfileSubmitBtn = document.getElementById('my_profile_submit_id');
-    myProfileSubmitBtn.setAttribute('value', e.href);
+    myProfileSubmitBtn.setAttribute('value', e.target.href); // source element
     if (previewUrl) {previewUrl.setAttribute('value', window.location.href)};
   });
 });
