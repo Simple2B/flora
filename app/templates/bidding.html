@@ -10,81 +10,14 @@
 <section class="page-section bidding d-flex" id="wrapper">
   <!-- begin Sidebar -->
 
-  <div class="sidebar-container __sidebar-css" id="sidebar-wrapper">
-    <div class="side_dar_bidding">
-      <div class="side_dar_bidding__return-link t-gray">
-        <a href="{{ url_for('bidding.biddings') }}">
-          <img src="{{ url_for('static', filename='images/right-hand.svg') }}">
-          My Biddings
-        </a>
-      </div>
-      <div class="side_dar_bidding-bid"># {{ bid.procore_bid_id }} </div>
-      <span class="hidden bidIdJs" value="{{ bid.id }}"></span>
-      <ul class="sidebar__nav-links-bidding" id="sidebar__nav-links-bidding">
-        <li class="active">
-          <span><a href="#">Project general</a> </span>
-        </li>
-        <li>
-          <span><a href="#bid_scope_of_work"> Scope of Work</a> </span>
-        </li>
-        <li>
-          <span><a href="#bid_exclusion"> Exclusions</a> </span>
-        </li>
-        <li>
-          <span><a href="#bid_clarification"> Clarifications</a> </span>
-        </li>
-      </ul>
-    </div>
-    <div class="_preview_export_btns">
-      <div class="_btn">
-        <button class="ddb-cursor-handle" type="submit" name="preview" value="True" form="bid_subtotal_data">
-          <img src="{{ url_for('static', filename='images/eye_preview.svg') }}">
-          &nbsp;
-          Preview
-        </button>
-      </div>
-      <div class="_btn">
-        <button type="button" class="ddb-cursor-handle" data-target="#modalExport" data-toggle="modal">
-          <img src="{{ url_for('static', filename='images/export.svg') }}">
-          &nbsp;
-          Export
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <nav class="navbar-light ddb__side_bar _side-bar-size box-shadow" id="ddb-background">
-  </nav>
-  <!-- end Sidebar -->
-
-  <div class="main-container_bidding" id="work-item-container">
-    <div class="main-container_bidding-header">
-      <div class="__bid-header_start_block">
-        <div>
-          <form action="{{ url_for('bid.bidding_change_status', bid_id=bid.id) }}" method="post">
-            {% if bid.status.value == "Draft" %}
-            <select class="__bid_status-draft ddb-cursor-handle" onchange="this.form.submit()" name="bid_status">
-              {{ bid.status.value }}
-              <option class="__bid_status-default" selected value="Draft"> {{ bid.status.value }} </option>
-              <option class="__bid_status-default" value="Submitted"> Submitted </option>
-              <option class="__bid_status-default" value="Archived"> Archived </option>
-            </select>
-            {% elif bid.status.value == "Submitted" %}
-            <select class="__bid_status-submitted ddb-cursor-handle" onchange="this.form.submit()" name="bid_status">
-              {{ bid.status.value }}
-              <option class="__bid_status-default" value="Draft"> Draft </option>
-              <option class="__bid_status-default" selected value="Submitted"> {{ bid.status.value }} </option>
-              <option class="__bid_status-default" value="Archived"> Archived </option>
-            </select>
-            {% else %}
-            <select class="__bid_status-archived ddb-cursor-handle" onchange="this.form.submit()" name="bid_status">
-              {{ bid.status.value }}
-              <option class="__bid_status-default" value="Draft"> Draft </option>
-              <option class="__bid_status-default" value="Submitted"> Submitted </option>
-              <option class="__bid_status-default" selected value="Archived"> {{ bid.status.value }} </option>
-            </select>
-            {% endif %}
-          </form>
+  <div id="sidebar-wrapper" class="sticky">
+    <div class="sidebar-container __sidebar-css">
+      <div class="side_dar_bidding">
+        <div class="side_dar_bidding__return-link t-gray">
+          <a href="{{ url_for('bidding.biddings') }}">
+            <img src="{{ url_for('static', filename='images/right-hand.svg') }}">
+            My Biddings
+          </a>
         </div>
         <div class="side_dar_bidding-bid"># {{ bid.procore_bid_id }} </div>
         <span class="hidden bidIdJs" value="{{ bid.id }}"></span>
@@ -127,6 +60,7 @@
     <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size box-shadow" id="ddb-background">
     </nav>
   </div>
+
   <!-- end Sidebar -->
   <div class="main-container_bidding" id="work-item-container">
     <div class="main-container_bidding-header">
