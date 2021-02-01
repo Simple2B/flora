@@ -44,7 +44,7 @@ def test_add_alternate(client):
     ))
     assert res.status_code == 302
     assert "bidding" in res.location
-    assert "#alternates" in res.location
+    assert "#bid_alternates" in res.location
     # assert b'Alternate added successful.' in res.data
     bid = Bid.query.get(bid.id)
     assert bid.alternates
@@ -93,7 +93,7 @@ def test_edit_alternate(client):
     ))
     assert res.status_code == 302
     assert "bidding" in res.location
-    assert "#alternates" in res.location
+    assert "#bid_alternates" in res.location
     # assert b'Alternate added successful.' in res.data
     bid = Bid.query.get(bid.id)
     assert bid.alternates
@@ -134,7 +134,7 @@ def test_delete_alternate(client):
     res = client.get(DELETE_URL)
     assert res.status_code == 302
     assert "bidding" in res.location
-    assert "#alternates" in res.location
+    assert "#bid_alternates" in res.location
     bid = Bid.query.get(bid.id)
     assert not bid.alternates
 

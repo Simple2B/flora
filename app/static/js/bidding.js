@@ -12,6 +12,13 @@ drawingLogCloseWrapper.addEventListener('click', (e) => {
 });
 
 $(document).ready(function() {
+
+  if (window.location.hash) {
+    console.log(window.location.hash);
+    document.getElementById('projectGeneralLink_ID').classList.remove('active');
+    document.querySelector(`#sidebar__nav-links-bidding li[id=\\${window.location.hash}_id]`).classList.add('active');
+  };
+
   const bidID = document.querySelector('.bidIdJs').getAttribute('value');
 
   $('#modalWorkItemLineEdit').on('show.bs.modal', function (event) {
