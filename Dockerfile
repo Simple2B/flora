@@ -8,6 +8,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 RUN apt-get update
 RUN apt-get install wkhtmltopdf -y
+RUN dpkg -i wkhtmltox_0.12.5-1.bionic_amd64.deb
+
 # RUN apt-get install cron -y
 # install cron job
 # RUN crontab -l > mycron
