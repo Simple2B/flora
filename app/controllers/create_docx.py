@@ -643,6 +643,13 @@ def create_docx(bid_id):
             else:
                 paragraph.runs[1].add_picture(f'{PATH_TO_IMG}/underline.png', width=Cm(3.75), height=Cm(0.05))
     # endblock
+    document.add_paragraph()
+    write_to_docx(
+        content=f'{bid.project_type.value} # B_20_034 REVISED-{bid.revision}',
+        font_size=10,
+        after_spacing=10,
+        style=f'quote {bid.project_type.value}'
+    )
 
     document.save(PATH_TO_SAVE_DOCX)
 
