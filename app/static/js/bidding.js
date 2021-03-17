@@ -164,32 +164,35 @@ $(document).ready(function() {
     myResponse();
   });
 
+  // async bid_param_tbd
+
+  const bidGrandSubtotal = document.getElementById('grand_subtotal_id');
+  const bidSubtotal = document.getElementById('subtotal_id');
+  const subtotalProjectGeneral = document.getElementById('subtotal_project_general_id');
+  const addsOn = document.getElementById('addson_project_general_id');
+  const grandSubtotalProjectGeneral = document.getElementById('grand_subtotal_project_general_id');
+
   inputs.forEach( el => {
     el.addEventListener('click', () => {
       if (el.checked) {
         const myRequest = async () => {
           try {
-            const request = await fetch(`/save_tbd/${bidID}?=${el.getAttribute('name')}`, {method: 'GET'})
-            if (request.ok) {
-              console.log(request);
-              const resData = await request.json()
+            const response = await fetch(`/save_tbd/${bidID}?=${el.getAttribute('name')}`, {method: 'GET'})
+            if (response.ok) {
+              console.log(response);
+              const resData = await response.json()
               console.log(resData);
 
-              const bidGrandSubtotal = document.getElementById('grand_subtotal_id');
-              // const
-              const bidSubtotal = document.getElementById('subtotal_id');
-              const subtotalProjectGeneral = document.getElementById('subtotal_project_general_id');
-              const addsOn = document.getElementById('addson_project_general_id');
-              const grandSubtotalProjectGeneral = document.getElementById('grand_subtotal_project_general_id');
               const grandSubtotalValue = Math.round(( resData.grandSubtotal + Number.EPSILON) * 100) / 100;
               const subtotalValue = Math.round(( resData.subtotal + Number.EPSILON) * 100) / 100;
-              const addsOnValue = Math.round(( resData.grandSubtotal + Number.EPSILON) * 100) / 100 - Math.round(( resData.subtotal + Number.EPSILON) * 100) / 100;
+              const addsOnValue = Math.round((grandSubtotalValue - subtotalValue) * 100) / 100;
 
+              document.getElementById(`${resData.bid_param_name}_value`).value = '$ ' + '0.0';
               bidGrandSubtotal.innerText = '$ ' + grandSubtotalValue;
               bidSubtotal.innerText = '$ ' + subtotalValue;
-              // subtotalProjectGeneral.innerText = 'Subtotal    $' + subtotalValue;
-              // addsOn.innerText = 'Subtotal    $' + addsOnValue;
-              // grandSubtotalProjectGeneral.innerText = 'Subtotal    $' + grandSubtotalValue;
+              subtotalProjectGeneral.innerHTML = `Subtotal: &nbsp; &nbsp; ${subtotalValue}`;
+              addsOn.innerHTML = `Adds-on: &nbsp; &nbsp; ${addsOnValue}`;
+              grandSubtotalProjectGeneral.innerHTML = `<strong> Grand Total &nbsp; &nbsp; ${grandSubtotalValue}</strong>`;
             }
           }
           catch (err){
@@ -201,19 +204,21 @@ $(document).ready(function() {
       else {
         const tbdTurnOff = async () => {
           try {
-            const request = await fetch(`/save_tbd/${bidID}?false=${el.getAttribute('name')}`, {method: 'GET'})
-            if (request.ok) {
-              const resData = await request.json()
+            const response = await fetch(`/save_tbd/${bidID}?false=${el.getAttribute('name')}`, {method: 'GET'})
+            if (response.ok) {
+              const resData = await response.json()
               console.log(resData);
-              // const grandSubtotalValue = Math.round(( resData.grandSubtotal + Number.EPSILON) * 100) / 100;
-              // const subtotalValue = Math.round(( resData.subtotal + Number.EPSILON) * 100) / 100;
-              // const addsOnValue = grandSubtotalValue - subtotalValue;
 
-              // bidGrandSubtotal.innerText = '$ ' + grandSubtotalValue;
-              // bidSubtotal.innerText = '$ ' + subtotalValue;
-              // subtotalProjectGeneral.innerText = 'Subtotal    $' + subtotalValue;
-              // addsOn.innerText = 'Subtotal    $' + addsOnValue;
-              // grandSubtotalProjectGeneral.innerText = 'Subtotal    $' + grandSubtotalValue;
+              const grandSubtotalValue = Math.round(( resData.grandSubtotal + Number.EPSILON) * 100) / 100;
+              const subtotalValue = Math.round(( resData.subtotal + Number.EPSILON) * 100) / 100;
+              const addsOnValue = Math.round((grandSubtotalValue - subtotalValue) * 100) / 100;
+
+              document.getElementById(`${resData.bid_param_name}_value`).value = '$ ' + resData.bid_param_value;
+              bidGrandSubtotal.innerText = '$ ' + grandSubtotalValue;
+              bidSubtotal.innerText = '$ ' + subtotalValue;
+              subtotalProjectGeneral.innerHTML = `Subtotal: &nbsp; &nbsp; ${subtotalValue}`;
+              addsOn.innerHTML = `Adds-on: &nbsp; &nbsp; ${addsOnValue}`;
+              grandSubtotalProjectGeneral.innerHTML = `<strong> Grand Total &nbsp; &nbsp; ${grandSubtotalValue}</strong>`;
             }
           }
           catch (err){

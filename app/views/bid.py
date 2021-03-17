@@ -55,12 +55,12 @@ def save_tbd(bid_id):
     if request.args:
         tbd_name = request.args.get("", None)
         switch = {
-            "permit": bid.permit_filling_fee,
-            "general": bid.general_conditions,
-            "overhead": bid.overhead,
-            "insurance": bid.insurance_tax,
-            "profit": bid.profit,
-            "bond": bid.bond
+            "permit": (lambda: bid.permit_filling_fee),
+            "general": (lambda: bid.general_conditions),
+            "overhead": (lambda: bid.overhead),
+            "insurance": (lambda: bid.insurance_tax),
+            "profit": (lambda: bid.profit),
+            "bond": (lambda: bid.bond)
         }
         if tbd_name:
             if tbd_name.startswith("work_item_line_tbd_"):
@@ -85,11 +85,19 @@ def save_tbd(bid_id):
             else:
                 calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
                 log(log.INFO, f"Response: 'tbd_name: {tbd_name} is False'")
+                return json.dumps(
+                    dict(
+                        subtotal=bid.subtotal,
+                        grandSubtotal=bid.grand_subtotal,
+                        bid_param_name=f'{tbd_name}',
+                        bid_param_value=switch[tbd_name](),
+                    )
+                )
         return json.dumps(
             dict(
                 subtotal=bid.subtotal,
                 grandSubtotal=bid.grand_subtotal,
-                bid_param={tbd_name: switch[tbd_name]},
+                bid_param_name=f'{tbd_name}',
             )
         )
     else:
