@@ -15,6 +15,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
     if tbd_name:
         if tbd_name == 'permit':
             if on_tbd:
+                bid.grand_subtotal = bid.grand_subtotal - bid.permit_filling_fee
                 bid.permit_filling_fee = 0.0
                 bid.permit_filling_fee_tbd = True
             else:
@@ -23,6 +24,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
                 bid.permit_filling_fee_tbd = False
         elif tbd_name == 'general':
             if on_tbd:
+                bid.grand_subtotal = bid.grand_subtotal - bid.general_conditions
                 bid.general_conditions = 0.0
                 bid.general_conditions_tbd = True
             else:
@@ -31,6 +33,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
                 bid.general_conditions_tbd = False
         elif tbd_name == 'overhead':
             if on_tbd:
+                bid.grand_subtotal = bid.grand_subtotal - bid.overhead
                 bid.overhead = 0.0
                 bid.overhead_tbd = True
             else:
@@ -39,6 +42,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
                 bid.overhead_tbd = False
         elif tbd_name == 'insurance':
             if on_tbd:
+                bid.grand_subtotal = bid.grand_subtotal - bid.insurance_tax
                 bid.insurance_tax = 0.0
                 bid.insurance_tax_tbd = True
             else:
@@ -47,6 +51,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
                 bid.insurance_tax_tbd = False
         elif tbd_name == 'profit':
             if on_tbd:
+                bid.grand_subtotal = bid.grand_subtotal - bid.profit
                 bid.profit = 0.0
                 bid.profit_tbd = True
             else:
@@ -55,6 +60,7 @@ def calculate_subtotal(bid_id, tbd_choices=[], tbd_name='', on_tbd=True):
                 bid.profit_tbd = False
         elif tbd_name == 'bond':
             if on_tbd:
+                bid.grand_subtotal = bid.grand_subtotal - bid.bond
                 bid.bond = 0.0
                 bid.bond_tbd = True
             else:
