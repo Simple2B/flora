@@ -36,8 +36,8 @@ bid_blueprint = Blueprint("bid", __name__)
 @bid_blueprint.route("/check_tbd/<int:bid_id>/<tbd_name>", methods=["GET"])
 @login_required
 def check_tbd(bid_id, tbd_name):
-    if tbd_name.startswith('work_item_line_tbd_'):
-        line_id = int(tbd_name.strip('work_item_line_tbd_'))
+    if tbd_name.startswith("work_item_line_tbd_"):
+        line_id = int(tbd_name.strip("work_item_line_tbd_"))
         work_item_line = WorkItemLine.query.get(line_id)
         if work_item_line.tbd:
             return "tbd_work_item_line_on"
@@ -53,34 +53,57 @@ def check_tbd(bid_id, tbd_name):
 def save_tbd(bid_id):
     bid = Bid.query.get(bid_id)
     if request.args:
-        tbd_name = request.args.get('', None)
+        tbd_name = request.args.get("", None)
+        switch = {
+            "permit": (lambda: bid.permit_filling_fee),
+            "general": (lambda: bid.general_conditions),
+            "overhead": (lambda: bid.overhead),
+            "insurance": (lambda: bid.insurance_tax),
+            "profit": (lambda: bid.profit),
+            "bond": (lambda: bid.bond)
+        }
         if tbd_name:
-            if tbd_name.startswith('work_item_line_tbd_'):
-                line_id = int(tbd_name.strip('work_item_line_tbd_'))
+            if tbd_name.startswith("work_item_line_tbd_"):
+                line_id = int(tbd_name.strip("work_item_line_tbd_"))
                 work_item_line = WorkItemLine.query.get(line_id)
                 work_item_line.tbd = True
                 work_item_line.save()
                 log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is True'")
+                return f"Work item line: {tbd_name}"
             else:
                 calculate_subtotal(bid_id, tbd_name=tbd_name)
                 log(log.INFO, f"Response is '{tbd_name}'")
         else:
-            tbd_name = request.args['false']
-            if tbd_name.startswith('work_item_line_tbd_'):
-                line_id = int(tbd_name.strip('work_item_line_tbd_'))
+            tbd_name = request.args["false"]
+            if tbd_name.startswith("work_item_line_tbd_"):
+                line_id = int(tbd_name.strip("work_item_line_tbd_"))
                 work_item_line = WorkItemLine.query.get(line_id)
                 work_item_line.tbd = False
                 work_item_line.save()
                 log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is False'")
+                return f"Work item line: {tbd_name}"
             else:
                 calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
                 log(log.INFO, f"Response: 'tbd_name: {tbd_name} is False'")
-        response = dict(subtotal=bid.subtotal, grandSubtotal=bid.grand_subtotal)
-        return json.dumps(response)
+                return json.dumps(
+                    dict(
+                        subtotal=bid.subtotal,
+                        grandSubtotal=bid.grand_subtotal,
+                        bid_param_name=f'{tbd_name}',
+                        bid_param_value=switch[tbd_name](),
+                    )
+                )
+        return json.dumps(
+            dict(
+                subtotal=bid.subtotal,
+                grandSubtotal=bid.grand_subtotal,
+                bid_param_name=f'{tbd_name}',
+            )
+        )
     else:
         session["tbdChoices"] = []
-        log(log.DEBUG, 'No requesr.args')
-        return json.dumps('tbd:' + 'false')
+        log(log.ERROR, "No requesr.args")
+        return "Error"
 
 
 @bid_blueprint.route(
@@ -333,7 +356,7 @@ def bidding(bid_id):
 @login_required
 def preview_pdf(bid_id):
     bid = Bid.query.get(bid_id)
-    previous_url = session.get('nextUrl', '/')
+    previous_url = session.get("nextUrl", "/")
     global_work_items = (
         LinkWorkItem.query.filter(LinkWorkItem.bid_id == bid_id)
         .filter(LinkWorkItem.work_item_group == None)  # noqa 711
@@ -350,7 +373,7 @@ def preview_pdf(bid_id):
         global_work_items=global_work_items,
         groups=groups,
         preview_pdf_bool=preview_pdf_bool,
-        previous_url=previous_url
+        previous_url=previous_url,
     )
 
 
@@ -369,7 +392,7 @@ def export(bid_id):
         tbd_choices = [i for i in request.form if request.form[i] == "on"]
         session["tbdChoices"] = tbd_choices
         if form.preview.data:
-            session['nextUrl'] = request.form.get('next_url', '/')
+            session["nextUrl"] = request.form.get("next_url", "/")
             return redirect(url_for("bid.preview_pdf", bid_id=bid_id))
         if form.export_pdf.data:
             BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -404,6 +427,7 @@ def export(bid_id):
         elif form.export_docx.data:
             preview_pdf_bool = False
             from app.controllers.create_docx import create_docx
+
             filepath = create_docx(bid_id)
             with open(filepath, "rb") as f:
                 stream = io.BytesIO(f.read())

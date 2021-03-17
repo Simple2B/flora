@@ -13,11 +13,44 @@ drawingLogCloseWrapper.addEventListener('click', (e) => {
 
 $(document).ready(function() {
 
+  // Sidebar
   if (window.location.hash) {
     console.log(window.location.hash);
     document.getElementById('projectGeneralLink_ID').classList.remove('active');
     document.querySelector(`#sidebar__nav-links-bidding li[id=\\${window.location.hash}_id]`).classList.add('active');
   };
+
+  let isInViewport = function (elem) {
+    let bounding = elem.getBoundingClientRect();
+    return (
+        bounding.top >= 0 &&
+        bounding.left >= 0 &&
+        bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  };
+
+  bidScopeOfWork = document.getElementById('bid_scope_of_work');
+  bidGeneral = document.querySelector('.main-container__project_general');
+
+  // document.getElementById('bid_scope_of_work').addEventlistener('visibilitychange', function () {
+  // window.addEventListener('scroll', function () {
+  //   console.log('New row!!!!!!!!!')
+  //   console.log('bidGeneral:', bidGeneral.getBoundingClientRect());
+  //   console.log('bidExclusion:', document.querySelector('#bid_exclusion').getBoundingClientRect());
+  //   console.log('bidClarification:', document.querySelector('#bid_clarification').getBoundingClientRect());
+  //   console.log('bidAlternates:', document.querySelector('#bid_alternates').getBoundingClientRect());
+  //   console.log('//////////////');
+  //   console.log(bidScopeOfWork.getBoundingClientRect());
+  //   console.log(window.innerHeight, document.documentElement.clientHeight);
+  //   console.log(window.scrollY - 183, document.body.offsetHeight);
+
+  //   if (isInViewport(bidScopeOfWork)) {
+  //     console.log('YES');
+  //   }
+  // });
+
+  // endSidebar
 
   const bidID = document.querySelector('.bidIdJs').getAttribute('value');
 
@@ -52,11 +85,6 @@ $(document).ready(function() {
       document.querySelector('#client_and_job_close_panel_id img').setAttribute('src', "/static/images/up_direction_element.svg");
     };
   });
-
-
-  // Active decoration on header menu-item by border-bottom
-  bid_href_id.classList.add('active-tab');
-  // end decoration
 
 
   const groupCloseWrapper = document.querySelectorAll('#bid_group_id');
@@ -116,12 +144,6 @@ $(document).ready(function() {
 
   // TBD Choice
 
-  // const bidGrandSubtotal = document.getElementById('grand_subtotal_id');
-  // const bidSubtotal = document.getElementById('subtotal_id');
-  // const subtotalProjectGeneral = document.getElementById('subtotal_project_general_id');
-  // const addsOn = document.getElementById('addson_project_general_id');
-  // const grandSubtotalProjectGeneral = document.getElementById('grand_subtotal_project_general_id');
-
   const inputs = document.querySelectorAll('input[type="checkbox"]');
 
   inputs.forEach( el => {
@@ -142,23 +164,35 @@ $(document).ready(function() {
     myResponse();
   });
 
+  // async bid_param_tbd
+
+  const bidGrandSubtotal = document.getElementById('grand_subtotal_id');
+  const bidSubtotal = document.getElementById('subtotal_id');
+  const subtotalProjectGeneral = document.getElementById('subtotal_project_general_id');
+  const addsOn = document.getElementById('addson_project_general_id');
+  const grandSubtotalProjectGeneral = document.getElementById('grand_subtotal_project_general_id');
+
   inputs.forEach( el => {
     el.addEventListener('click', () => {
       if (el.checked) {
         const myRequest = async () => {
           try {
-            const request = await fetch(`/save_tbd/${bidID}?=${el.getAttribute('name')}`, {method: 'GET'})
-            if (request.ok) {
-              const resData = await request.json()
-              // const grandSubtotalValue = Math.round(( resData.grandSubtotal + Number.EPSILON) * 100) / 100;
-              // const subtotalValue = Math.round(( resData.subtotal + Number.EPSILON) * 100) / 100;
-              // const addsOnValue = Math.round(( resData.grandSubtotal + Number.EPSILON) * 100) / 100 - Math.round(( resData.subtotal + Number.EPSILON) * 100) / 100;
+            const response = await fetch(`/save_tbd/${bidID}?=${el.getAttribute('name')}`, {method: 'GET'})
+            if (response.ok) {
+              console.log(response);
+              const resData = await response.json()
+              console.log(resData);
 
-              // bidGrandSubtotal.innerText = '$ ' + grandSubtotalValue;
-              // bidSubtotal.innerText = '$ ' + subtotalValue;
-              // subtotalProjectGeneral.innerText = 'Subtotal    $' + subtotalValue;
-              // addsOn.innerText = 'Subtotal    $' + addsOnValue;
-              // grandSubtotalProjectGeneral.innerText = 'Subtotal    $' + grandSubtotalValue;
+              const grandSubtotalValue = Math.round(( resData.grandSubtotal + Number.EPSILON) * 100) / 100;
+              const subtotalValue = Math.round(( resData.subtotal + Number.EPSILON) * 100) / 100;
+              const addsOnValue = Math.round((grandSubtotalValue - subtotalValue) * 100) / 100;
+
+              document.getElementById(`${resData.bid_param_name}_value`).value = '$ ' + '0.0';
+              bidGrandSubtotal.innerText = '$ ' + grandSubtotalValue;
+              bidSubtotal.innerText = '$ ' + subtotalValue;
+              subtotalProjectGeneral.innerHTML = `Subtotal: &nbsp; &nbsp; ${subtotalValue}`;
+              addsOn.innerHTML = `Adds-on: &nbsp; &nbsp; ${addsOnValue}`;
+              grandSubtotalProjectGeneral.innerHTML = `<strong> Grand Total &nbsp; &nbsp; ${grandSubtotalValue}</strong>`;
             }
           }
           catch (err){
@@ -170,19 +204,21 @@ $(document).ready(function() {
       else {
         const tbdTurnOff = async () => {
           try {
-            const request = await fetch(`/save_tbd/${bidID}?false=${el.getAttribute('name')}`, {method: 'GET'})
-            if (request.ok) {
-              const resData = await request.json()
+            const response = await fetch(`/save_tbd/${bidID}?false=${el.getAttribute('name')}`, {method: 'GET'})
+            if (response.ok) {
+              const resData = await response.json()
               console.log(resData);
-              // const grandSubtotalValue = Math.round(( resData.grandSubtotal + Number.EPSILON) * 100) / 100;
-              // const subtotalValue = Math.round(( resData.subtotal + Number.EPSILON) * 100) / 100;
-              // const addsOnValue = grandSubtotalValue - subtotalValue;
 
-              // bidGrandSubtotal.innerText = '$ ' + grandSubtotalValue;
-              // bidSubtotal.innerText = '$ ' + subtotalValue;
-              // subtotalProjectGeneral.innerText = 'Subtotal    $' + subtotalValue;
-              // addsOn.innerText = 'Subtotal    $' + addsOnValue;
-              // grandSubtotalProjectGeneral.innerText = 'Subtotal    $' + grandSubtotalValue;
+              const grandSubtotalValue = Math.round(( resData.grandSubtotal + Number.EPSILON) * 100) / 100;
+              const subtotalValue = Math.round(( resData.subtotal + Number.EPSILON) * 100) / 100;
+              const addsOnValue = Math.round((grandSubtotalValue - subtotalValue) * 100) / 100;
+
+              document.getElementById(`${resData.bid_param_name}_value`).value = '$ ' + resData.bid_param_value;
+              bidGrandSubtotal.innerText = '$ ' + grandSubtotalValue;
+              bidSubtotal.innerText = '$ ' + subtotalValue;
+              subtotalProjectGeneral.innerHTML = `Subtotal: &nbsp; &nbsp; ${subtotalValue}`;
+              addsOn.innerHTML = `Adds-on: &nbsp; &nbsp; ${addsOnValue}`;
+              grandSubtotalProjectGeneral.innerHTML = `<strong> Grand Total &nbsp; &nbsp; ${grandSubtotalValue}</strong>`;
             }
           }
           catch (err){
@@ -212,7 +248,7 @@ $(document).ready(function() {
       };
       storeInDB();
     });
-  } );
+  });
 
 });
 

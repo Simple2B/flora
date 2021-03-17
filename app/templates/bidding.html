@@ -7,6 +7,7 @@
 
 {% block content %}
 
+<div id="toggle_sidebar"></div>
 <section class="page-section bidding d-flex" id="wrapper">
   <!-- begin Sidebar -->
 
@@ -590,7 +591,7 @@
                       </div>
                       <div>
                         <input class="_form-input _form-input--m" type="text" readonly
-                          value="$ {{bid.permit_filling_fee}}">
+                          value="$ {{bid.permit_filling_fee}}" id="permit_value">
                       </div>
                     </div>
                     <div class="check_box-TBD">
@@ -609,7 +610,7 @@
                       </div>
                       <div>
                         <input class="_form-input _form-input--m" type="text" readonly
-                          value="$ {{bid.general_conditions}}">
+                          value="$ {{bid.general_conditions}}" id="general_value">
                       </div>
                     </div>
                     <div class="check_box-TBD">
@@ -627,7 +628,7 @@
                           value="{{bid.percent_overhead}}%">
                       </div>
                       <div>
-                        <input class="_form-input _form-input--m" type="text" readonly value="$ {{bid.overhead}}">
+                        <input class="_form-input _form-input--m" type="text" readonly value="$ {{bid.overhead}}" id="overhead_value">
                       </div>
                     </div>
                     <div class="check_box-TBD">
@@ -645,7 +646,7 @@
                           value="{{bid.percent_insurance_tax}}%">
                       </div>
                       <div>
-                        <input class="_form-input _form-input--m" type="text" readonly value="$ {{bid.insurance_tax}}">
+                        <input class="_form-input _form-input--m" type="text" readonly value="$ {{bid.insurance_tax}}" id="insurance_value">
                       </div>
                     </div>
                     <div class="check_box-TBD">
@@ -663,7 +664,7 @@
                           value="{{bid.percent_profit}}%">
                       </div>
                       <div>
-                        <input class="_form-input _form-input--m" type="text" readonly value="$ {{bid.profit}}">
+                        <input class="_form-input _form-input--m" type="text" readonly value="$ {{bid.profit}}" id="profit_value">
                       </div>
                     </div>
                     <div class="check_box-TBD">
@@ -681,7 +682,7 @@
                           value="{{bid.percent_bond}}%">
                       </div>
                       <div>
-                        <input class="_form-input _form-input--m" type="text" readonly value="$ {{bid.bond}}">
+                        <input class="_form-input _form-input--m" type="text" readonly value="$ {{bid.bond}}" id="bond_value">
                       </div>
                     </div>
                     <div class="check_box-TBD">
