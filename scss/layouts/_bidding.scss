@@ -662,7 +662,7 @@
 }
 
 .check_box-TBD {
-    width: 70px;
+    width: 4.5rem;
     display: inline-flex;
     align-items: center;
 }
@@ -723,11 +723,18 @@
 ._alternate_block {
     display: flex;
     align-items: baseline;
+    & > div {
+        margin-right: $m1rem;
+    }
+    .__alternate_items {
+        display: flex;
+        align-items: flex-end;
+        & > :first-child {
+            padding: 0rem 0.5rem;
+        }
+    }
+}
 
-    & > div:first-child {
-        margin-right: $m1rem;
-    }
-    & > div:nth-child(2) {
-        margin-right: $m1rem;
-    }
+#toggle_sidebar {
+    z-index: 1;
 }
