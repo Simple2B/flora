@@ -809,16 +809,26 @@
           <div>
             <input class="_form-input" value="$ {{alternate.price}}" readonly>
           </div>
-          <div class="p-2 flex-shrink-1 bd-highlight">
-            <a href="{{url_for('alternate.delete_alternate', bid_id=bid.id, alternate_id=alternate.id)}}"
-              class="delete-button border-none ddb-cursor-handle bck-white">
-              <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-            </a>
-          </div>
-          <div class="px-2 flex-shrink-1 bd-highlight">
-            <a href="{{url_for('alternate.edit_alternate', bid_id=bid.id, alternate_id=alternate.id)}}" class="border-none ddb-cursor-handle">
-              <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
-            </a>
+          <div class="__alternate_items">
+            <div>
+              <a href="{{url_for('alternate.delete_alternate', bid_id=bid.id, alternate_id=alternate.id)}}"
+                class="delete-button border-none ddb-cursor-handle bck-white">
+                <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+              </a>
+            </div>
+            <div class="px-2">
+              <a href="{{url_for('alternate.edit_alternate', bid_id=bid.id, alternate_id=alternate.id)}}" class="border-none ddb-cursor-handle">
+                <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+              </a>
+            </div>
+            <div class="check_box-TBD">
+              {% if alternate.tbd %}
+              <input class="form-control" type="checkbox" name="alternate_id:{{ alternate.id }}_on" checked onclick="return false;">
+              {% else %}
+              <input class="form-control" type="checkbox" name="alternate_id:{{ alternate.id }}_off" onclick="return false;">
+              {% endif %}
+              <span>TBD</span>
+            </div>
           </div>
         </div>
         {% endfor %}

@@ -43,9 +43,12 @@ def check_tbd(bid_id, tbd_name):
             return "tbd_work_item_line_on"
         else:
             return "tbd_work_item_line_off"
-    else:
-        bid_tbd = check_bid_tbd(bid_id, tbd_name)
-        return f"{bid_tbd}"
+    elif tbd_name.startswith("alternate_"):
+        if tbd_name.endswith("off"):
+            return "False"
+        return "True"
+    bid_tbd = check_bid_tbd(bid_id, tbd_name)
+    return f"{bid_tbd}"
 
 
 @bid_blueprint.route("/save_tbd/<int:bid_id>", methods=["GET"])
@@ -70,6 +73,8 @@ def save_tbd(bid_id):
                 work_item_line.save()
                 log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is True'")
                 return f"Work item line: {tbd_name}"
+            elif tbd_name.startswith("alternate_"):
+                return f"Alternate: {tbd_name}"
             else:
                 calculate_subtotal(bid_id, tbd_name=tbd_name)
                 log(log.INFO, f"Response is '{tbd_name}'")
@@ -82,6 +87,8 @@ def save_tbd(bid_id):
                 work_item_line.save()
                 log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is False'")
                 return f"Work item line: {tbd_name}"
+            elif tbd_name.startswith("alternate_"):
+                return f"Alternate: {tbd_name}"
             else:
                 calculate_subtotal(bid_id, tbd_name=tbd_name, on_tbd=False)
                 log(log.INFO, f"Response: 'tbd_name: {tbd_name} is False'")
@@ -344,9 +351,9 @@ def bidding(bid_id):
         "bidding.html",
         bid=bid,
         form=form,
+        form_bid=form_bid,
         show_exclusions=show_exclusions,
         show_clarifications=show_clarifications,
-        form_bid=form_bid,
         round=round,
     )
 
