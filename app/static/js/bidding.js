@@ -20,38 +20,6 @@ $(document).ready(function() {
     document.querySelector(`#sidebar__nav-links-bidding li[id=\\${window.location.hash}_id]`).classList.add('active');
   };
 
-  let isInViewport = function (elem) {
-    let bounding = elem.getBoundingClientRect();
-    return (
-        bounding.top >= 0 &&
-        bounding.left >= 0 &&
-        bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-  };
-
-  bidScopeOfWork = document.getElementById('bid_scope_of_work');
-  bidGeneral = document.querySelector('.main-container__project_general');
-
-  // document.getElementById('bid_scope_of_work').addEventlistener('visibilitychange', function () {
-  // window.addEventListener('scroll', function () {
-  //   console.log('New row!!!!!!!!!')
-  //   console.log('bidGeneral:', bidGeneral.getBoundingClientRect());
-  //   console.log('bidExclusion:', document.querySelector('#bid_exclusion').getBoundingClientRect());
-  //   console.log('bidClarification:', document.querySelector('#bid_clarification').getBoundingClientRect());
-  //   console.log('bidAlternates:', document.querySelector('#bid_alternates').getBoundingClientRect());
-  //   console.log('//////////////');
-  //   console.log(bidScopeOfWork.getBoundingClientRect());
-  //   console.log(window.innerHeight, document.documentElement.clientHeight);
-  //   console.log(window.scrollY - 183, document.body.offsetHeight);
-
-  //   if (isInViewport(bidScopeOfWork)) {
-  //     console.log('YES');
-  //   }
-  // });
-
-  // endSidebar
-
   const bidID = document.querySelector('.bidIdJs').getAttribute('value');
 
   $('#modalWorkItemLineEdit').on('show.bs.modal', function (event) {

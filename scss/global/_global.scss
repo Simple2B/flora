@@ -8,7 +8,7 @@
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
 }
 
 body {
@@ -110,6 +110,7 @@ hr {
 
 .page-section {
     margin-top: 1rem;
+    z-index: 2;
 }
 
 .ddb-margin-bottom {
