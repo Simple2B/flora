@@ -94,7 +94,11 @@ const projectExclusionBlock = document.getElementById('bid_exclusion');
 const projectClarificationBlock = document.getElementById('bid_clarification');
 const projectAlternateBlock = document.getElementById('bid_alternates');
 
+let alternateLiClick = false
+
 const scrollBlocks = function Scrolling() {
+
+  // refactoring TODO: Switch
   if (projectGeneralBlock.offsetTop <= window.pageYOffset && window.pageYOffset <= projectGeneralBlock.offsetHeight)
     {
       document.querySelector('#sidebar__nav-links-bidding li.active').classList.remove('active');
@@ -107,9 +111,9 @@ const scrollBlocks = function Scrolling() {
       document.getElementById('#bid_scope_of_work_id').classList.add('active');
     };
 
-  if (projectExclusionBlock.offsetTop <= window.pageYOffset + 2
+  if (!alternateLiClick &&  projectExclusionBlock.offsetTop <= window.pageYOffset + 2
     && projectExclusionBlock.getBoundingClientRect().bottom >= window.innerHeight*0.55
-    || window.pageYOffset > (projectGeneralBlock.getBoundingClientRect().height + projectScopeOfWorkBlock.getBoundingClientRect().height)
+    || !alternateLiClick &&  window.pageYOffset > (projectGeneralBlock.getBoundingClientRect().height + projectScopeOfWorkBlock.getBoundingClientRect().height)
     - window.innerHeight * 0.25
     )
     {
@@ -117,9 +121,9 @@ const scrollBlocks = function Scrolling() {
       document.getElementById('#bid_exclusion_id').classList.add('active');
     };
 
-  if (projectClarificationBlock.offsetTop <= window.pageYOffset + 2
+  if (!alternateLiClick && projectClarificationBlock.offsetTop <= window.pageYOffset + 2
     && projectClarificationBlock.getBoundingClientRect().bottom >= window.innerHeight*0.55
-    || window.pageYOffset > (projectGeneralBlock.getBoundingClientRect().height + projectScopeOfWorkBlock.getBoundingClientRect().height
+    || !alternateLiClick && window.pageYOffset > (projectGeneralBlock.getBoundingClientRect().height + projectScopeOfWorkBlock.getBoundingClientRect().height
     + projectExclusionBlock.getBoundingClientRect().height)
     - window.innerHeight * 0.25
     )
@@ -128,29 +132,32 @@ const scrollBlocks = function Scrolling() {
       document.getElementById('#bid_clarification_id').classList.add('active');
     };
 
-    if (projectAlternateBlock.offsetTop <= window.pageYOffset + 2
-      && projectAlternateBlock.getBoundingClientRect().bottom >= window.innerHeight*0.55
-      || window.pageYOffset > (projectGeneralBlock.getBoundingClientRect().height + projectScopeOfWorkBlock.getBoundingClientRect().height
-      + projectExclusionBlock.getBoundingClientRect().height + projectClarificationBlock.getBoundingClientRect().height)
-      - window.innerHeight * 0.25
-      )
+  if (projectAlternateBlock.offsetTop <= window.pageYOffset + 2
+    && projectAlternateBlock.getBoundingClientRect().bottom >= window.innerHeight*0.55
+    || window.pageYOffset > (projectGeneralBlock.getBoundingClientRect().height + projectScopeOfWorkBlock.getBoundingClientRect().height
+    + projectExclusionBlock.getBoundingClientRect().height + projectClarificationBlock.getBoundingClientRect().height
+    - window.innerHeight * 0.25)
+    )
     {
       document.querySelector('#sidebar__nav-links-bidding li.active').classList.remove('active');
       document.getElementById('#bid_alternates_id').classList.add('active');
     };
+    alternateLiClick = false
 };
 window.addEventListener('scroll', scrollBlocks);
 // endscroll
 
 // Sidebar
 const sideBarNavLinks = document.querySelectorAll('#sidebar__nav-links-bidding li');
-sideBarNavLinks.forEach( (e) => {
-  e.addEventListener('click', function(e) {
+sideBarNavLinks.forEach( (elem) => {
+  elem.addEventListener('click', function(e) {
     document.querySelector('#sidebar__nav-links-bidding li.active').classList.remove('active');
-    this.classList.add('active'); // add 'active' class to current event
-    const myProfileSubmitBtn = document.getElementById('my_profile_submit_id');
+    this.classList.add('active'); // add 'active' class to current link
     myProfileSubmitBtn.setAttribute('value', e.target.href); // source element
     if (previewUrl) {previewUrl.setAttribute('value', window.location.href)};
+    if (e.target.hash == "#bid_alternates") {
+      alternateLiClick = true
+    }
   });
 });
 // endSidebar
