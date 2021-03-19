@@ -569,7 +569,7 @@ def create_docx(bid_id):
             write_to_docx(
                 insert=True,
                 cell_paragraph=paragraph_price,
-                content=f'$ {alternate.price}' if alternate.tbd else 'TBD',
+                content=f'$ {alternate.price}' if not alternate.tbd else 'TBD',
                 font_bold=True,
                 font_size=9.5,
                 align='right',
