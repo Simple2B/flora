@@ -27,6 +27,9 @@
         .export_container {
             display: flex;
             justify-content: center;
+            /* width: 95vw; */
+            margin-left: auto;
+            margin-right: auto;
             margin-top: 1rem;
         }
 
@@ -477,10 +480,10 @@
                                     <div> {{ link_work_item.work_item.code }} &nbsp; &nbsp;</div>
                                     <div> {{ link_work_item.work_item.name }} &nbsp; &nbsp;</div>
                                 </div>
-                                {% if link.link_subtotal <= 0.001 %}
+                                {% if link_work_item.link_subtotal <= 0.001 %}
                                 <div class="bid_subtotal_value">TBD</div>
                                 {% else %}
-                                <div class="bid_subtotal_value">${{ link.link_subtotal }}</div>
+                                <div class="bid_subtotal_value">${{ link_work_item.link_subtotal }}</div>
                                 {% endif %}
                             </div>
                             {% for work_item_line in link_work_item.work_item_lines %}
