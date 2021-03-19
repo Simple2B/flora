@@ -53,7 +53,7 @@ def update_bids():
             # due_date = bid["due_date"]
             # due_date = datetime.datetime.strptime(due_date, "%Y-%m-%dT%H:%M:%SZ")
 
-            # city, state_code, zip_code = [el for el in bid if el == "city" or el == "state_code" or el == "zip" else continue]
+            # city, state_code, zip_code = [el for el in bid if el == "city" or el == "state_code" or el == "zip" else]
             # adress_city = ",".join([bid[el] for el in bid if el in ("city", "state_code", "zip") and bid[el] != None])
             # if not adress_city:
             #     "Information not in Procore"
