@@ -477,7 +477,11 @@
                                     <div> {{ link_work_item.work_item.code }} &nbsp; &nbsp;</div>
                                     <div> {{ link_work_item.work_item.name }} &nbsp; &nbsp;</div>
                                 </div>
-                                <div class="bid_subtotal_value">${{ link_work_item.link_subtotal }}</div>
+                                {% if link.link_subtotal <= 0.001 %}
+                                <div class="bid_subtotal_value">TBD</div>
+                                {% else %}
+                                <div class="bid_subtotal_value">${{ link.link_subtotal }}</div>
+                                {% endif %}
                             </div>
                             {% for work_item_line in link_work_item.work_item_lines %}
                             <div class="work_item_note">
@@ -487,9 +491,13 @@
                                             <td style="width: 11.5%;"></td>
                                             <td style="width: 43.5%;">
                                                 <div class="_note">
-                                                    {{ work_item_line.description }}
+                                                    {% if work_item_line.tbd %}
+                                                    {{ work_item_line.note }}
+                                                    {% else %}
+                                                    {{ work_item_line.note }} (T.B.D)
+                                                    {% endif %}
                                                     <div>
-                                                        NOTE: {{ work_item_line.note }}
+                                                        NOTE: {{ work_item_line.description }}
                                                     </div>
                                                 </div>
                                             </td>
@@ -533,7 +541,11 @@
                                     <div> {{ link.work_item.code }} &nbsp; &nbsp;</div>
                                     <div> {{ link.work_item.name }} &nbsp; &nbsp;</div>
                                 </div>
+                                {% if link.link_subtotal <= 0.001 %}
+                                <div class="bid_subtotal_value">TBD</div>
+                                {% else %}
                                 <div class="bid_subtotal_value">${{ link.link_subtotal }}</div>
+                                {% endif %}
                             </div>
                                 {% for work_item_line in link.work_item_lines %}
                                 <table style="width: 100%;">
@@ -542,9 +554,13 @@
                                             <td style="width: 11.5%;"></td>
                                             <td style="width: 43.5%;">
                                                 <div class="_group_note _note">
-                                                    {{ work_item_line.description }}
+                                                    {% if work_item_line.tbd %}
+                                                    {{ work_item_line.note }}
+                                                    {% else %}
+                                                    {{ work_item_line.note }} (T.B.D)
+                                                    {% endif %}
                                                     <div>
-                                                        NOTE: {{ work_item_line.note }}
+                                                        NOTE: {{ work_item_line.description }}
                                                     </div>
                                                 </div>
                                             </td>
@@ -833,7 +849,11 @@
                                 <li></li>
                             </ul>
                         </div>
+                        {% if bid.drawings %}
+                        <span><strong>{{ bid.drawings|length }} drawings have been received</strong></span>
+                        {% else %}
                         <span><strong>No drawings have been received for this project</strong></span>
+                        {% endif %}
                         <div class="project_quote_revised">
                             {{ bid.project_type.value }} # B_20_034 REVISED-{{ bid.revision }}
                         </div>
