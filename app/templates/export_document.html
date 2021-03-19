@@ -733,24 +733,24 @@
                     <div class="alternate">
                         <table class="alternate_table">
                             <tbody>
-                                <tr>
-                                    <td class="alternates_name">
-                                        {% if bid.alternates %}
-                                        {% for alternate in bid.alternates %}
-                                            {% if alternate == bid.alternates[-1] %}
-                                                {{ alternate.name }}.
-                                            {% else %}
-                                                {{ alternate.name }},
-                                            {% endif %}
-                                        {% endfor %}
-                                        {% else %}
-                                         No alternates speciefied.
-                                        {% endif %}
-                                    </td>
-                                    <td class="alternates_total">
-                                        $ {{ alternate_total }}
-                                    </td>
-                                </tr>
+                                {% if bid.alternates %}
+                                {% for alternate in bid.alternates %}
+                                    <tr>
+                                        <td class="alternates_name">
+                                            &nbsp; {{ alternate.name }}
+                                        </td>
+                                        <td class="alternates_total">
+                                            $ {{ alternate.price }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                    <tr>
+                                {% else %}
+                                        <td class="alternates_name">
+                                            &nbsp; No alternates speciefied.
+                                        </td>
+                                {% endif %}
+                                    </tr>
                             </tbody>
                         </table>
                     </div>
