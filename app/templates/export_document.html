@@ -544,7 +544,7 @@
                                     <div> {{ link.work_item.code }} &nbsp; &nbsp;</div>
                                     <div> {{ link.work_item.name }} &nbsp; &nbsp;</div>
                                 </div>
-                                {% if link.link_subtotal <= 0.001 %}
+                                {% if link.link_subtotal < 0.001 %}
                                 <div class="bid_subtotal_value">TBD</div>
                                 {% else %}
                                 <div class="bid_subtotal_value">${{ link.link_subtotal }}</div>
@@ -743,7 +743,11 @@
                                             &nbsp; {{ alternate.name }}
                                         </td>
                                         <td class="alternates_total">
+                                            {% if alternate.price < 0.001 %}
+                                            TBD
+                                            {% else %}
                                             $ {{ alternate.price }}
+                                            {% endif %}
                                         </td>
                                     </tr>
                                 {% endfor %}

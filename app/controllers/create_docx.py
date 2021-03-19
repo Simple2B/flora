@@ -312,7 +312,7 @@ def create_docx(bid_id):
             write_to_docx(
                 insert=True,
                 cell_paragraph=paragraph_2,
-                content=(f'$ {link_work_item.link_subtotal}' if {link_work_item.link_subtotal} < 0.001 else 'TBD'),
+                content=(f'$ {link_work_item.link_subtotal}' if link_work_item.link_subtotal < 0.001 else 'TBD'),
                 font_size=10.5,
                 font_bold=True,
                 align='right',
@@ -400,7 +400,7 @@ def create_docx(bid_id):
                 write_to_docx(
                     insert=True,
                     cell_paragraph=paragraph_2,
-                    content=(f'$ {link_work_item.link_subtotal}' if {link_work_item.link_subtotal} < 0.001 else 'TBD'),
+                    content=(f'$ {link_work_item.link_subtotal}' if link_work_item.link_subtotal < 0.001 else 'TBD'),
                     font_size=10.5,
                     font_bold=True,
                     align='right',
@@ -569,7 +569,7 @@ def create_docx(bid_id):
             write_to_docx(
                 insert=True,
                 cell_paragraph=paragraph_price,
-                content=f'$ {alternate.price}',
+                content=f'$ {alternate.price}' if alternate.price < 0.001 else 'TBD',
                 font_bold=True,
                 font_size=9.5,
                 align='right',
