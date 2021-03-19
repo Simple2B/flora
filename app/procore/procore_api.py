@@ -166,7 +166,8 @@ class ProcoreApi:
         PROCORE_API_BASE_URL = current_app.config["PROCORE_API_BASE_URL"]
         PROCORE_API_COMPANY_ID = current_app.config["PROCORE_API_COMPANY_ID"]
 
-        url = f"{PROCORE_API_BASE_URL}vapid/projects?company_id={PROCORE_API_COMPANY_ID}"
+        # url = f"{PROCORE_API_BASE_URL}vapid/projects?company_id={PROCORE_API_COMPANY_ID}"
+        url = f"{PROCORE_API_BASE_URL}/rest/v1.0/projects?company_id={PROCORE_API_COMPANY_ID}"
 
         log(log.DEBUG, 'Make request to get projects')
         response = requests.get(url, headers=headers)
@@ -176,6 +177,49 @@ class ProcoreApi:
             log(log.ERROR, res['errors'])
             return []
         return response.json()
+
+    def get_bids(self):
+        projects = self.projects
+        if projects:
+            access_token = self.access_token
+            if not access_token:
+                log(log.ERROR, "ProcoreApi.bids: need access_token!")
+                return []
+            headers = {"Authorization": "Bearer " + access_token}
+            bids = []
+            for project in projects:
+                bid = {}
+                project_id = project['id']
+                name = project['name'] if project['name'] else "Information not in Procore"
+                bid["name"] = name
+                adress_city = ",".join([project[el] for el in project if el in ("city", "state_code", "zip") and project[el] != None])  # noqa E711
+                address_street = project["address"] if project["address"] else "Information not in Procore"
+                if not adress_city:
+                    adress_city = "Information not in Procore"
+                bid["adress_city"] = adress_city
+                bid["address_street"] = address_street
+                bid["bid_id"] = project_id
+                due_date = project["updated_at"]
+                due_date = datetime.strptime(due_date, "%Y-%m-%dT%H:%M:%SZ")
+                bid["due_date"] = due_date
+                url = f"{current_app.config['PROCORE_API_BASE_URL']}/rest/v1.0/projects/{project_id}/vendors"
+                log(log.DEBUG, 'Make request to get project(%d) vendor', project_id)
+                response = requests.get(url, headers=headers)
+                if response.status_code >= 400:
+                    res = response.json()
+                    log(log.ERROR, res['errors'])
+                    return []
+                vendor = response.json()[0]
+                if vendor:
+                    bid["vendor_name"] = vendor["name"]
+                    bid["vendor_address"] = vendor["address"]
+                    bid["vendor_adress_city"] = ",".join([vendor[el] for el in vendor if el in ("city", "state_code", "zip") and vendor[el] != None])  # noqa E711
+                    bid["business_phone"] = vendor["business_phone"]
+                    bid["email"] = vendor["primary_contact"]["email"]
+                    bid["fax_number"] = vendor["fax_number"]
+                    bid["contact"] = vendor["primary_contact"]["name"]
+                bids += [bid]
+            return bids
 
     def drawing_uploads(self, project_id):
         """
