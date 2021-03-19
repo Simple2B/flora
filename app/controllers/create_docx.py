@@ -3,7 +3,6 @@ import datetime
 import uuid
 
 from app.models import Bid, WorkItemGroup, LinkWorkItem
-from app.controllers import calculate_alternate_total
 from app.logger import log
 
 from docx import Document
