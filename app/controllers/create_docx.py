@@ -3,7 +3,6 @@ import datetime
 import uuid
 
 from app.models import Bid, WorkItemGroup, LinkWorkItem
-from app.controllers import calculate_alternate_total
 from app.logger import log
 
 from docx import Document
@@ -127,8 +126,6 @@ def create_docx(bid_id):
         section.right_margin = Cm(1)
         section.top_margin = Cm(1.34)
         section.bottom_margin = Cm(2.54)
-        # section.header_distance = Mm(12.7)
-        # section.footer_distance = Mm(12.7)
 
     # /// endblock
 
@@ -315,7 +312,7 @@ def create_docx(bid_id):
             write_to_docx(
                 insert=True,
                 cell_paragraph=paragraph_2,
-                content=f'$ {link_work_item.link_subtotal}',
+                content=(f'$ {link_work_item.link_subtotal}' if {link_work_item.link_subtotal} < 0.001 else 'TBD'),
                 font_size=10.5,
                 font_bold=True,
                 align='right',
@@ -336,16 +333,16 @@ def create_docx(bid_id):
                 write_to_docx(
                     insert=True,
                     cell_paragraph=paragraph_1,
-                    content=f'{work_item_line.description}',
+                    content=f'Note: {work_item_line.note}',
                     font_size=10.5,
-                    style=f'work_item_line_description_{work_item_line.id}'
+                    style=f'work_item_line_note{work_item_line.id}'
                 )
                 write_to_docx(
                     cell_paragraph=row.cells[1],
-                    content=f'Note: {work_item_line.note}',
+                    content=f'{work_item_line.description}' + '(TBD)' if {work_item_line.tbd} else '',
                     font_size=9.5,
                     left_indent=Cm(0.5),
-                    style=f'work_item_line_note_{work_item_line.id}'
+                    style=f'work_item_line_description{work_item_line.id}'
                 )
                 # third cell
                 write_to_docx(
@@ -403,7 +400,7 @@ def create_docx(bid_id):
                 write_to_docx(
                     insert=True,
                     cell_paragraph=paragraph_2,
-                    content=f'$ {link_work_item.link_subtotal}',
+                    content=(f'$ {link_work_item.link_subtotal}' if {link_work_item.link_subtotal} < 0.001 else 'TBD'),
                     font_size=10.5,
                     font_bold=True,
                     align='right',
@@ -424,17 +421,17 @@ def create_docx(bid_id):
                     write_to_docx(
                         insert=True,
                         cell_paragraph=paragraph_1,
-                        content=f'{work_item_line.description}',
-                        font_size=9.5,
-                        style=f'work_item_line_description_{work_item_line.id}'
+                        content=f'Note: {work_item_line.note}',
+                        font_size=10.5,
+                        style=f'work_item_line_note_{work_item_line.id}'
                     )
                     write_to_docx(
                         cell_paragraph=row.cells[1],
-                        content=f'Note: {work_item_line.note}',
+                        content=f'{work_item_line.description}' + '(TBD)' if {work_item_line.tbd} else '',
                         font_size=9.5,
                         left_indent=Cm(0.5),
                         keep_with_next=True,
-                        style=f'work_item_line_note_{work_item_line.id}'
+                        style=f'work_item_line_description_{work_item_line.id}'
                     )
                     # third cell
                     write_to_docx(
@@ -559,25 +556,25 @@ def create_docx(bid_id):
     set_row_height(row, 15)
     alternate_paragraph = row.cells[0].paragraphs[0]
     paragraph_alternates_name = row.cells[0].paragraphs[0]
-    paragraph_total_price = row.cells[1].paragraphs[0]
+    paragraph_price = row.cells[1].paragraphs[0]
     if bid.alternates:
         for alternate in bid.alternates:
             write_to_docx(
                 insert=True,
                 cell_paragraph=paragraph_alternates_name,
-                content=(f'{alternate.name}.' if alternate == bid.alternates[-1] else f'{alternate.name}, '),  # noqa 501
+                content=f'{alternate.name}',  # noqa 501
                 font_size=9.5,
                 style=f'alternate_style_title_{i}'
             )
-        write_to_docx(
-            insert=True,
-            cell_paragraph=paragraph_total_price,
-            content=f'$ {calculate_alternate_total(bid_id)}',
-            font_bold=True,
-            font_size=9.5,
-            align='right',
-            style=f'alternate_style_default_title_{i}'
-        )
+            write_to_docx(
+                insert=True,
+                cell_paragraph=paragraph_price,
+                content=f'$ {alternate.price}',
+                font_bold=True,
+                font_size=9.5,
+                align='right',
+                style=f'alternate_style_default_title_{i}'
+            )
     else:
         write_to_docx(
                 insert=True,

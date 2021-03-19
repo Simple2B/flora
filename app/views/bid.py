@@ -148,7 +148,7 @@ def delete_group(bid_id, group_name):
 def add_group_work_item_line(bid_id, group_link_id):
     WorkItemLine(link_work_items_id=group_link_id).save()
     time_update(bid_id)
-    return redirect(url_for("bid.bidding", bid_id=bid_id))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
 
 
 @bid_blueprint.route(
@@ -401,7 +401,7 @@ def export(bid_id):
         if form.preview.data:
             session["nextUrl"] = request.form.get("next_url", "/")
             return redirect(url_for("bid.preview_pdf", bid_id=bid_id))
-        if form.export_pdf.data:
+        if form.export_pdf.data or request.form.get("export", False):
             BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             PATH_TO_IMG = os.path.join(BASE_DIR, "static/images/")
             preview_pdf_bool = False
