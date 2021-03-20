@@ -1,17 +1,24 @@
-const drawingLogCloseWrapper = document.getElementById('drawing_log_close_panel_id');
-const drawingLogClosePanel = document.getElementById('drawing_log_hidden_id');
-drawingLogCloseWrapper.addEventListener('click', (e) => {
-  e.preventDefault();
-  let changeDrawingLogImg = document.querySelector('#drawing_log_close_panel_id img').getAttribute('src');
-  drawingLogClosePanel.classList.toggle('hidden');
-  if (changeDrawingLogImg == "/static/images/up_direction_element.svg") {
-    document.querySelector('#drawing_log_close_panel_id img').setAttribute('src', "/static/images/direction_element_bottom.svg");
-  } else {
-    document.querySelector('#drawing_log_close_panel_id img').setAttribute('src', "/static/images/up_direction_element.svg");
-  };
-});
 
 $(document).ready(function() {
+
+  const pageWindowY = document.getElementById("pageyoffset_ID")
+  if (pageWindowY.innerHTML) {
+    document.documentElement.scrollTop = Number(pageWindowY.innerHTML.split("=").pop())
+    pageWindowY.innerHTML = ""
+  }
+
+  const drawingLogCloseWrapper = document.getElementById('drawing_log_close_panel_id');
+  const drawingLogClosePanel = document.getElementById('drawing_log_hidden_id');
+  drawingLogCloseWrapper.addEventListener('click', (e) => {
+    e.preventDefault();
+    let changeDrawingLogImg = document.querySelector('#drawing_log_close_panel_id img').getAttribute('src');
+    drawingLogClosePanel.classList.toggle('hidden');
+    if (changeDrawingLogImg == "/static/images/up_direction_element.svg") {
+      document.querySelector('#drawing_log_close_panel_id img').setAttribute('src', "/static/images/direction_element_bottom.svg");
+    } else {
+      document.querySelector('#drawing_log_close_panel_id img').setAttribute('src', "/static/images/up_direction_element.svg");
+    };
+  });
 
   // Sidebar
   if (window.location.hash) {
@@ -54,7 +61,6 @@ $(document).ready(function() {
     };
   });
 
-
   const groupCloseWrapper = document.querySelectorAll('#bid_group_id');
   groupCloseWrapper.forEach(element => {
       element.addEventListener('click', (e) => {
@@ -72,10 +78,15 @@ $(document).ready(function() {
   });
 
   // Scrolling Scope of work block
+
   const links = document.querySelectorAll("#bid_scope_of_work a")
+  console.log(links)
   links.forEach((e) => {
-    e.href += `?pageYOffset=${window.pageYOffset}`
-    console.log(e.href)
+    console.log(1, e.href)
+    e.addEventListener('click', () => {
+      e.href += `?pageYOffset=${window.pageYOffset}`
+    })
+    console.log(2, e.href)
   })
   // endScrolling
 
