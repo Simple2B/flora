@@ -71,6 +71,13 @@ $(document).ready(function() {
       });
   });
 
+  // Scrolling Scope of work block
+  const links = document.querySelectorAll("#bid_scope_of_work a")
+  links.forEach((e) => {
+    e.href += `?pageYOffset=${window.pageYOffset}`
+    console.log(e.href)
+  })
+  // endScrolling
 
   // Due Date
   const dueDate = document.getElementById('due_date_id');

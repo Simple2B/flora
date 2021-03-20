@@ -223,12 +223,13 @@ def delete_group_link_work_item(bid_id, group_link_id):
 @login_required
 def delete_work_item_line(bid_id, work_item_line_id):
     line = WorkItemLine.query.get(work_item_line_id)
+    pageyoffset = request.args.get("pageYOffset", None)
     if line:
         line.delete()
         time_update(bid_id)
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", work_item_line_id)
-    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
+    return redirect(url_for("bid.bidding", bid_id=bid_id))
 
 
 @bid_blueprint.route(
