@@ -16,8 +16,6 @@
 
 .login__error {
    @include flash_default;
-   display: flex;
-   align-items: center;
 }
 
 .login__title {
