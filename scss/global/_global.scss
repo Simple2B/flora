@@ -38,11 +38,10 @@ hr {
 
 // side-bar style
 .sidebar-container {
-    // min-width: 15%;
-    width: 12vw;
+    width: 15vw;
     box-shadow: $shadow;
     border-top: 1px solid #f1f1f1;
-    max-height: 50vh;
+    height: 50vh;
 }
 
 .sidebar {

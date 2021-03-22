@@ -29,7 +29,7 @@
     flex-flow: column nowrap;
     align-items: center;
     justify-content: flex-start;
-    margin-top: 1rem;
+    margin-top: $m1rem;
 
     &__return-link {
         width: 100%;
@@ -63,7 +63,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-top: $m1rem;
+    margin-bottom: $m1rem;
     ._btn {
         button {
             @include _btn;
@@ -74,6 +75,9 @@
             &:hover {
                 background-color: darken(#828282, 20%);
             }
+        }
+        & > :first-child {
+            margin-bottom: $m1rem;
         }
     }
 }
