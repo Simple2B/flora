@@ -1,26 +1,30 @@
-const drawingLogCloseWrapper = document.getElementById('drawing_log_close_panel_id');
-const drawingLogClosePanel = document.getElementById('drawing_log_hidden_id');
-drawingLogCloseWrapper.addEventListener('click', (e) => {
-  e.preventDefault();
-  let changeDrawingLogImg = document.querySelector('#drawing_log_close_panel_id img').getAttribute('src');
-  drawingLogClosePanel.classList.toggle('hidden');
-  if (changeDrawingLogImg == "/static/images/up_direction_element.svg") {
-    document.querySelector('#drawing_log_close_panel_id img').setAttribute('src', "/static/images/direction_element_bottom.svg");
-  } else {
-    document.querySelector('#drawing_log_close_panel_id img').setAttribute('src', "/static/images/up_direction_element.svg");
-  };
-});
 
 $(document).ready(function() {
 
+  const bidID = document.querySelector('.bidIdJs').getAttribute('value');
+  if (window.location.search) {
+    document.documentElement.scrollTop = Number(window.location.search.split("=").pop())
+    window.history.replaceState({}, document.title, "/" + "bidding/" + `${bidID}`);
+  }
+
+  const drawingLogCloseWrapper = document.getElementById('drawing_log_close_panel_id');
+  const drawingLogClosePanel = document.getElementById('drawing_log_hidden_id');
+  drawingLogCloseWrapper.addEventListener('click', (e) => {
+    e.preventDefault();
+    let changeDrawingLogImg = document.querySelector('#drawing_log_close_panel_id img').getAttribute('src');
+    drawingLogClosePanel.classList.toggle('hidden');
+    if (changeDrawingLogImg == "/static/images/up_direction_element.svg") {
+      document.querySelector('#drawing_log_close_panel_id img').setAttribute('src', "/static/images/direction_element_bottom.svg");
+    } else {
+      document.querySelector('#drawing_log_close_panel_id img').setAttribute('src', "/static/images/up_direction_element.svg");
+    };
+  });
+
   // Sidebar
   if (window.location.hash) {
-    console.log(window.location.hash);
     document.getElementById('projectGeneralLink_ID').classList.remove('active');
     document.querySelector(`#sidebar__nav-links-bidding li[id=\\${window.location.hash}_id]`).classList.add('active');
   };
-
-  const bidID = document.querySelector('.bidIdJs').getAttribute('value');
 
   $('#modalWorkItemLineEdit').on('show.bs.modal', function (event) {
       const button = $(event.relatedTarget); // Button that triggered the modal
@@ -54,7 +58,6 @@ $(document).ready(function() {
     };
   });
 
-
   const groupCloseWrapper = document.querySelectorAll('#bid_group_id');
   groupCloseWrapper.forEach(element => {
       element.addEventListener('click', (e) => {
@@ -71,6 +74,15 @@ $(document).ready(function() {
       });
   });
 
+  // Scrolling Scope of work block
+
+  const links = document.querySelectorAll("#bid_scope_of_work a")
+  links.forEach((e) => {
+    e.addEventListener('click', () => {
+      e.href += `?pageYOffset=${window.pageYOffset}`
+    })
+  })
+  // endScrolling
 
   // Due Date
   const dueDate = document.getElementById('due_date_id');

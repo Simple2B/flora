@@ -87,6 +87,19 @@ if (previewUrl) {previewUrl.setAttribute('value', window.location.href)};
 myProfileSubmitBtn.setAttribute('value', window.location.href);
 // end My Profile block
 
+const closeWrapper = document.getElementById('subtotal_close_panel_id');
+const subtotalClosePanel = document.getElementById('subtotal_inputs_fields_id');
+closeWrapper.addEventListener('click', (e) => {
+  let changeImg = $('#subtotal_img_id').attr('src');
+  e.preventDefault();
+  subtotalClosePanel.classList.toggle('hidden');
+  if (changeImg == "/static/images/up_direction_element.svg") {
+    $('#subtotal_img_id').attr('src', "/static/images/direction_element_bottom.svg");
+  } else {
+    $('#subtotal_img_id').attr('src', "/static/images/up_direction_element.svg");
+  };
+});
+
 // scroll
 const projectGeneralBlock = document.querySelector('.main-container__project_general');
 const projectScopeOfWorkBlock = document.getElementById('bid_scope_of_work');
@@ -161,16 +174,3 @@ sideBarNavLinks.forEach( (elem) => {
   });
 });
 // endSidebar
-
-const closeWrapper = document.getElementById('subtotal_close_panel_id');
-const subtotalClosePanel = document.getElementById('subtotal_inputs_fields_id');
-closeWrapper.addEventListener('click', (e) => {
-  let changeImg = $('#subtotal_img_id').attr('src');
-  e.preventDefault();
-  subtotalClosePanel.classList.toggle('hidden');
-  if (changeImg == "/static/images/up_direction_element.svg") {
-    $('#subtotal_img_id').attr('src', "/static/images/direction_element_bottom.svg");
-  } else {
-    $('#subtotal_img_id').attr('src', "/static/images/up_direction_element.svg");
-  };
-});
