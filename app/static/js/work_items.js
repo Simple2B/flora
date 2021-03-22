@@ -12,8 +12,8 @@ const input = document.createElement('input');
 div.setAttribute('class', '_form-search');
 img.setAttribute('src', '/static/images/Search_icon.png');
 setAttributes(input, {
-    "class": "input_search", 
-    "placeholder": "Search", 
+    "class": "input_search",
+    "placeholder": "Search",
     "aria-controls": "workItemsTable",
     "id": "customSearchId",
 });
@@ -63,6 +63,9 @@ $(document).ready(function() {
     $('#customSearchId').on( 'keyup', function () {
         selectedWorkItems.fnFilterAll(this.value);
     });
+
+    document.getElementById("workItemsTable_info").classList.add("t-gray");
+    document.getElementById("selectedWorkItemsTable_info").classList.add("t-gray");
 
     $('#modalEdit').on('show.bs.modal', function (event) {
       const button = $(event.relatedTarget); // Button that triggered the modal

@@ -19,20 +19,17 @@
       <ul class="sidebar__nav-links">
         <li><a href="{{ url_for('bid.bidding', bid_id=bid.id) }}">Project General</a></li>
         <li class="__disc-blue"><a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}" class="__text-decor-active">
-          <!-- <ul>Scope of Work</a>
-          <li><span href="" class="__select_work_item-active">Select Work Item</span></li>
-          </ul> -->
           Scope of Work
         </li>
         <li><a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}">Exclusion</a></li>
         <li><a href="{{ url_for('clarification.clarifications', bid_id=bid.id) }}">Clarification</a></li>
-        <li><a href="#">Alternates</a></li>
+        <li><a href="{{ url_for('alternate.new_alternate', bid_id=bid.id) }}">Alternates</a></li>
       </ul>
     </div>
   </div>
 
-  <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size box-shadow" id="ddb-background">
-  </nav>
+  <!-- <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size box-shadow" id="ddb-background">
+  </nav> -->
   <!-- End Sidebar -->
 
   <!-- Chart Container -->

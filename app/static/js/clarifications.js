@@ -14,6 +14,8 @@ $(document).ready(function() {
       clarificationTable.search( this.value ).draw();
     });
 
+    document.getElementById("clarificationsTable_info").classList.add("t-gray");
+
     $('#AddModalClarification').on('show.bs.modal', function (event) {
       const button = $(event.relatedTarget); // Button that triggered the modal
       const target_link = button.data('target_link');

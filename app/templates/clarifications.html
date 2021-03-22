@@ -28,13 +28,11 @@
             Clarification
           </a>
         </li>
-        <li><a href="#">Alternates</a></li>
+        <li><a href="{{ url_for('alternate.new_alternate', bid_id=bid.id) }}">Alternates</a></li>
       </ul>
     </div>
   </div>
 
-  <nav class="navbar-light nav-side-bar ddb__side_bar _side-bar-size box-shadow" id="ddb-background">
-  </nav>
   <!-- End Sidebar -->
 
   <div class="container clarifications-container" id="work-item-container">
