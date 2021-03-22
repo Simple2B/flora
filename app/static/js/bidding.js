@@ -1,10 +1,11 @@
 
 $(document).ready(function() {
 
-  const pageWindowY = document.getElementById("pageyoffset_ID")
-  if (pageWindowY.innerHTML) {
-    document.documentElement.scrollTop = Number(pageWindowY.innerHTML.split("=").pop())
-    pageWindowY.innerHTML = ""
+  const bidID = document.querySelector('.bidIdJs').getAttribute('value');
+  if (window.location.search) {
+    console.log(window.location.search)
+    document.documentElement.scrollTop = Number(window.location.search.split("=").pop())
+    window.history.replaceState({}, document.title, "/" + "bidding/" + `${bidID}`);
   }
 
   const drawingLogCloseWrapper = document.getElementById('drawing_log_close_panel_id');
@@ -26,8 +27,6 @@ $(document).ready(function() {
     document.getElementById('projectGeneralLink_ID').classList.remove('active');
     document.querySelector(`#sidebar__nav-links-bidding li[id=\\${window.location.hash}_id]`).classList.add('active');
   };
-
-  const bidID = document.querySelector('.bidIdJs').getAttribute('value');
 
   $('#modalWorkItemLineEdit').on('show.bs.modal', function (event) {
       const button = $(event.relatedTarget); // Button that triggered the modal

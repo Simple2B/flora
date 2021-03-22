@@ -199,7 +199,7 @@ def delete_link_work_item(bid_id, link_work_item_id):
         session["saveInCloud"] = True
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", link_work_item_id)
-    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, pageyoffset=request.args.get("pageYOffset", "")))
 
 
 @bid_blueprint.route(
@@ -215,7 +215,7 @@ def delete_group_link_work_item(bid_id, group_link_id):
         time_update(bid_id)
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", group_link_id)
-    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, pageyoffset=request.args.get("pageYOffset", "")))
 
 
 @bid_blueprint.route(
@@ -224,13 +224,12 @@ def delete_group_link_work_item(bid_id, group_link_id):
 @login_required
 def delete_work_item_line(bid_id, work_item_line_id):
     line = WorkItemLine.query.get(work_item_line_id)
-    session["pageyoffset"] = request.args.get("pageYOffset", "")
     if line:
         line.delete()
         time_update(bid_id)
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", work_item_line_id)
-    return redirect(url_for("bid.bidding", bid_id=bid_id))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, pageyoffset=request.args.get("pageYOffset", "")))
 
 
 @bid_blueprint.route(
@@ -239,13 +238,12 @@ def delete_work_item_line(bid_id, work_item_line_id):
 @login_required
 def delete_group_work_item_line(bid_id, group_link_id):
     line = WorkItemLine.query.get(group_link_id)
-    session["pageyoffset"] = request.args.get("pageYOffset", "")
     if line:
         line.delete()
         time_update(bid_id)
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", group_link_id)
-    return redirect(url_for("bid.bidding", bid_id=bid_id))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, pageYOffset=request.args.get("pageYOffset", "")))
 
 
 @bid_blueprint.route("/delete_exclusions/<int:bid_id>")
@@ -314,7 +312,6 @@ def bidding(bid_id):
     bid = Bid.query.get(bid_id)
     form_bid = BidForm()
     form = WorkItemLineForm()
-    form.pageyoffset = session.get("pageyoffset", "")
     tbd_choices = session.get("tbdChoices", [])
     form_bid.save_in_cloud = False
 
