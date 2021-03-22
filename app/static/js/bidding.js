@@ -3,7 +3,6 @@ $(document).ready(function() {
 
   const bidID = document.querySelector('.bidIdJs').getAttribute('value');
   if (window.location.search) {
-    console.log(window.location.search)
     document.documentElement.scrollTop = Number(window.location.search.split("=").pop())
     window.history.replaceState({}, document.title, "/" + "bidding/" + `${bidID}`);
   }
@@ -23,7 +22,6 @@ $(document).ready(function() {
 
   // Sidebar
   if (window.location.hash) {
-    console.log(window.location.hash);
     document.getElementById('projectGeneralLink_ID').classList.remove('active');
     document.querySelector(`#sidebar__nav-links-bidding li[id=\\${window.location.hash}_id]`).classList.add('active');
   };
@@ -79,13 +77,10 @@ $(document).ready(function() {
   // Scrolling Scope of work block
 
   const links = document.querySelectorAll("#bid_scope_of_work a")
-  console.log(links)
   links.forEach((e) => {
-    console.log(1, e.href)
     e.addEventListener('click', () => {
       e.href += `?pageYOffset=${window.pageYOffset}`
     })
-    console.log(2, e.href)
   })
   // endScrolling
 
