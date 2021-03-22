@@ -89,6 +89,26 @@
             {% endif %}
           </form>
         </div>
+        <div class="dropdown_status">
+          <form action="{{ url_for('bid.bidding_change_status', bid_id=bid.id) }}" method="post">
+            <div>
+              <button type="button" class="__bid_status-draft ddb-cursor-handle" name="bid_status" id="bidStatusID">
+                {{ bid.status.value }}
+              </button>
+            </div>
+            <div class="select_status" id="selectStatusID">
+              <button type="submit" class="__bid_status-default ddb-cursor-handle" value="Draft" name="bid_status">
+                {{ bid.Status.b_draft.value }}
+              </button>
+              <button type="submit" class="__bid_status-default ddb-cursor-handle" value="Submitted" name="bid_status">
+                {{ bid.Status.c_submitted.value }}
+              </button>
+              <button type="submit" class="__bid_status-default ddb-cursor-handle" value="Archived" name="bid_status">
+                {{ bid.Status.d_archived.value }}
+              </button>
+            </div>
+          </form>
+        </div>
         <div class="bid-header__title"><strong>
             # {{ bid.procore_bid_id }} - {{ bid.client }}
           </strong></div>

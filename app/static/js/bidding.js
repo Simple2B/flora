@@ -24,6 +24,7 @@ $(document).ready(function() {
     document.getElementById('projectGeneralLink_ID').classList.remove('active');
     document.querySelector(`#sidebar__nav-links-bidding li[id=\\${window.location.hash}_id]`).classList.add('active');
   };
+  // endsidebar
 
   $('#modalWorkItemLineEdit').on('show.bs.modal', function (event) {
       const button = $(event.relatedTarget); // Button that triggered the modal
@@ -74,7 +75,6 @@ $(document).ready(function() {
   });
 
   // Scrolling Scope of work block
-
   const links = document.querySelectorAll("#bid_scope_of_work a")
   links.forEach((e) => {
     e.addEventListener('click', () => {
