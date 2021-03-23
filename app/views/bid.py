@@ -75,6 +75,8 @@ def save_tbd(bid_id):
                 link_work_item = work_item_line.link_work_item
                 link_work_item.link_subtotal = round(link_work_item.link_subtotal - (work_item_line.price * work_item_line.quantity), 2)
                 link_work_item.save()
+                bid.subtotal = bid.subtotal - link_work_item.link_subtotal
+                bid.save()
                 return json.dumps(
                     dict(
                             subtotal=bid.subtotal,
@@ -96,15 +98,19 @@ def save_tbd(bid_id):
                 work_item_line.tbd = False
                 work_item_line.save()
                 log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is False'")
-                return f"Work item line: {tbd_name}"
-                # return json.dumps(
-                #     dict(
-                #             subtotal=bid.subtotal,
-                #             grandSubtotal=bid.grand_subtotal,
-                #             bid_param_name=f'{line_id}',
-                #             bid_param_value=switch[tbd_name](),
-                #     )
-                # )
+                link_work_item = work_item_line.link_work_item
+                link_work_item.link_subtotal = round(link_work_item.link_subtotal + (work_item_line.price * work_item_line.quantity), 2)
+                bid.subtotal = bid.subtotal + link_work_item.link_subtotal
+                link_work_item.save()
+                bid.save()
+                return json.dumps(
+                    dict(
+                            subtotal=bid.subtotal,
+                            grandSubtotal=bid.grand_subtotal,
+                            bid_param_name=f'{work_item_line.link_work_items_id}',
+                            bid_param_value=f"{link_work_item.link_subtotal}",
+                    )
+                )
             elif tbd_name.startswith("alternate_"):
                 return f"Alternate: {tbd_name}"
             else:
