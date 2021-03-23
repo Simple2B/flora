@@ -139,7 +139,7 @@ def delete_group(bid_id, group_name):
         link.delete()
     group.delete()
     time_update(bid_id)
-    return redirect(url_for("bid.bidding", bid_id=bid_id))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, pageyoffset=request.args.get("pageYOffset", "")))
 
 
 @bid_blueprint.route(
