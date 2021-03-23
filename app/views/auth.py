@@ -44,7 +44,7 @@ def login():
         if user is not None:
             login_user(user)
             flash("Login successful.", "success")
-            return redirect(url_for("team.team"))
+            return redirect(url_for("bidding.biddings"))
         flash("Wrong user login/email or password.", "danger")
     return render_template("auth/login.html", form=form)
 

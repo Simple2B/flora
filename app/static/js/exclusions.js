@@ -34,7 +34,9 @@ $(document).ready(function() {
     $('#exclusionSearchId').on( 'keyup', function () {
       exclusionTable.search( this.value ).draw();
     });
-    
+
+    document.getElementById("exclusionsTable_info").classList.add("t-gray");
+
     // $('#selectedExclusionTable').DataTable({
     //     "pageLength": 10,
     //     "order": [],

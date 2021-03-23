@@ -29,7 +29,7 @@
     flex-flow: column nowrap;
     align-items: center;
     justify-content: flex-start;
-    margin-top: 1rem;
+    margin-top: $m1rem;
 
     &__return-link {
         width: 100%;
@@ -63,7 +63,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-top: $m1rem;
+    margin-bottom: $m1rem;
     ._btn {
         button {
             @include _btn;
@@ -74,6 +75,9 @@
             &:hover {
                 background-color: darken(#828282, 20%);
             }
+        }
+        & > :first-child {
+            margin-bottom: $m1rem;
         }
     }
 }
@@ -123,6 +127,47 @@
             justify-content: flex-start;
             padding: .5rem 1rem;
             align-items: center;
+
+            .dropdown_status {
+                position: relative;
+
+                &:hover .select_status {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                #bidStatusID {
+                    border: none;
+                    width: 7rem;
+                }
+
+                .select_status {
+                    width: 100%;
+                    display: none;
+                    position: absolute;
+                    z-index: 2;
+
+                    button {
+                        background-color: #FFFFFF;
+                        border: none;
+                        border-bottom: 2px solid darken(#F2F2F2, 10%);
+                    }
+
+                    button:first-child {
+                        border-radius: 5px 5px 0px 0px;
+                    }
+                    button:nth-child(2) {
+                        border-radius: 0px;
+                    }
+                    button:last-child {
+                        border-radius: 0px 0px 5px 5px;
+                        border-bottom: none;
+                    }
+                    button:hover {
+                        background: #F2F2F2;
+                    }
+                }
+            }
         }
 
         .__bid-header_end_block {
@@ -176,12 +221,6 @@
     background-color: $gray;
 }
 // End bid status //
-
-
-.bid-header__title {
-    color: white;
-    margin-left: 8rem;
-}
 
 .main-container__project_general {
     display: flex;
@@ -662,7 +701,7 @@
 }
 
 .check_box-TBD {
-    width: 4.5rem;
+    width: 3.5rem;
     display: inline-flex;
     align-items: center;
 }

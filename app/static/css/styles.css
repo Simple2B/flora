@@ -28,9 +28,6 @@
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -64,13 +61,13 @@ ul {
   margin: 0; }
 
 hr {
-  border: 1px solid #BDBDBD; }
+  border-top: 3px solid #BDBDBD; }
 
 .sidebar-container {
-  width: 12vw;
+  width: 15vw;
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
   border-top: 1px solid #f1f1f1;
-  max-height: 50vh; }
+  height: 60vh; }
 
 .sidebar {
   display: flex;
@@ -108,6 +105,10 @@ hr {
   position: fixed;
   top: 6rem;
   z-index: 101; }
+
+.bid-header__title {
+  color: white;
+  margin-left: 1.5rem; }
 
 .list-group-item.active {
   border-color: #333333;
@@ -336,9 +337,6 @@ hr {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -346,7 +344,7 @@ hr {
   overflow: visible; }
 
 .t-gray {
-  color: #828282; }
+  color: #828282 !important; }
 
 ._flash {
   background-color: none;
@@ -386,9 +384,6 @@ hr {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -565,9 +560,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -604,9 +596,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -687,7 +676,7 @@ button {
   height: 2rem;
   padding: 0;
   margin: 0 auto;
-  z-index: 2;
+  z-index: 1;
   float: left;
   height: .5rem;
   line-height: .1rem;
@@ -700,7 +689,7 @@ button {
   font-size: 13px; }
 
 ._label--lg {
-  z-index: 2;
+  z-index: 1;
   float: left;
   height: .5rem;
   line-height: .1rem;
@@ -754,9 +743,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -813,9 +799,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -852,9 +835,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -878,8 +858,7 @@ button {
   font-weight: 500;
   border: 0;
   margin: auto;
-  display: flex;
-  align-items: center; }
+  text-align: center; }
 
 .login__title--welcome {
   font-size: 18px;
@@ -927,9 +906,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -1012,9 +988,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -1162,9 +1135,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -1201,9 +1171,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -1399,6 +1366,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 1rem;
   margin-bottom: 1rem; }
   ._preview_export_btns ._btn button {
     padding: .5rem 1.5rem;
@@ -1417,6 +1385,8 @@ button {
       outline: none; }
     ._preview_export_btns ._btn button:hover {
       background-color: #4f4f4f; }
+  ._preview_export_btns ._btn > :first-child {
+    margin-bottom: 1rem; }
 
 .sidebar__nav-links-bidding li {
   color: #BDBDBD; }
@@ -1452,6 +1422,32 @@ button {
       justify-content: flex-start;
       padding: .5rem 1rem;
       align-items: center; }
+      .main-container_bidding-header .__bid-header_start_block .dropdown_status {
+        position: relative; }
+        .main-container_bidding-header .__bid-header_start_block .dropdown_status:hover .select_status {
+          display: flex;
+          flex-direction: column; }
+        .main-container_bidding-header .__bid-header_start_block .dropdown_status #bidStatusID {
+          border: none;
+          width: 7rem; }
+        .main-container_bidding-header .__bid-header_start_block .dropdown_status .select_status {
+          width: 100%;
+          display: none;
+          position: absolute;
+          z-index: 2; }
+          .main-container_bidding-header .__bid-header_start_block .dropdown_status .select_status button {
+            background-color: #FFFFFF;
+            border: none;
+            border-bottom: 2px solid #d9d9d9; }
+          .main-container_bidding-header .__bid-header_start_block .dropdown_status .select_status button:first-child {
+            border-radius: 5px 5px 0px 0px; }
+          .main-container_bidding-header .__bid-header_start_block .dropdown_status .select_status button:nth-child(2) {
+            border-radius: 0px; }
+          .main-container_bidding-header .__bid-header_start_block .dropdown_status .select_status button:last-child {
+            border-radius: 0px 0px 5px 5px;
+            border-bottom: none; }
+          .main-container_bidding-header .__bid-header_start_block .dropdown_status .select_status button:hover {
+            background: #F2F2F2; }
     .main-container_bidding-header .__bid-header_end_block {
       display: flex;
       justify-content: flex-end;
@@ -1483,10 +1479,6 @@ button {
 
 .__bid_status-archived {
   background-color: #979797; }
-
-.bid-header__title {
-  color: white;
-  margin-left: 8rem; }
 
 .main-container__project_general {
   display: flex;
@@ -1800,7 +1792,7 @@ button {
   padding: 0rem 0.5rem; }
 
 .check_box-TBD {
-  width: 4.5rem;
+  width: 3.5rem;
   display: inline-flex;
   align-items: center; }
 
@@ -1885,9 +1877,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -2064,9 +2053,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -2190,9 +2176,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -2320,7 +2303,6 @@ button {
         background-color: inherit; }
   .chart-right__undo-block {
     background-color: #E6A73E;
-    border-radius: 0.5rem;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -2377,9 +2359,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -2497,9 +2476,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -2622,9 +2598,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -2661,9 +2634,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -2679,9 +2649,9 @@ button {
   font-weight: 500;
   border: 0;
   margin: auto;
+  text-align: center;
   width: 60vw;
-  background-color: #fff3cd;
-  text-align: center; }
+  background-color: #fff3cd; }
 
 ._account_title {
   padding-top: 1rem;
@@ -2737,9 +2707,6 @@ button {
       padding: .5rem 1rem;
       background-color: #EB5757;
       border-radius: .3rem; }
-    .main-container .__bid-header .bid-header__title, .exclusions-container .__bid-header .bid-header__title, .clarifications-container .__bid-header .bid-header__title {
-      color: white;
-      margin-left: 8rem; }
 
 .__box-table-exclusion, .__box-table-clarification {
   width: 100%;
@@ -2755,7 +2722,7 @@ button {
   padding: 0.5rem; }
   ._alternate_input_row > div {
     padding-left: 0.5rem;
-    padding-right: 2rem; }
+    padding-right: 1rem; }
   ._alternate_input_row ._alternate_name {
     display: flex;
     width: 15%;

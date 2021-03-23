@@ -33,16 +33,15 @@ ul {
 }
 
 hr {
-    border: 1px solid #BDBDBD;
+    border-top: 3px solid #BDBDBD;
 }
 
 // side-bar style
 .sidebar-container {
-    // min-width: 15%;
-    width: 12vw;
+    width: 15vw;
     box-shadow: $shadow;
     border-top: 1px solid #f1f1f1;
-    max-height: 50vh;
+    height: 60vh;
 }
 
 .sidebar {
@@ -102,6 +101,11 @@ hr {
     z-index: 101;
 }
 // end side-bar
+
+.bid-header__title {
+    color: white;
+    margin-left: 1.5rem;
+}
 
 .list-group-item.active {
     border-color: #333333;

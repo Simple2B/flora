@@ -63,30 +63,34 @@
   <div class="main-container_bidding" id="work-item-container">
     <div class="main-container_bidding-header">
       <div class="__bid-header_start_block">
-        <div>
+        <div class="dropdown_status">
           <form action="{{ url_for('bid.bidding_change_status', bid_id=bid.id) }}" method="post">
-            {% if bid.status.value == "Draft" %}
-            <select class="__bid_status-draft ddb-cursor-handle" onchange="this.form.submit()" name="bid_status">
-              {{ bid.status.value }}
-              <option class="__bid_status-default" selected value="Draft"> {{ bid.status.value }} </option>
-              <option class="__bid_status-default" value="Submitted"> Submitted </option>
-              <option class="__bid_status-default" value="Archived"> Archived </option>
-            </select>
-            {% elif bid.status.value == "Submitted" %}
-            <select class="__bid_status-submitted ddb-cursor-handle" onchange="this.form.submit()" name="bid_status">
-              {{ bid.status.value }}
-              <option class="__bid_status-default" value="Draft"> Draft </option>
-              <option class="__bid_status-default" selected value="Submitted"> {{ bid.status.value }} </option>
-              <option class="__bid_status-default" value="Archived"> Archived </option>
-            </select>
-            {% else %}
-            <select class="__bid_status-archived ddb-cursor-handle" onchange="this.form.submit()" name="bid_status">
-              {{ bid.status.value }}
-              <option class="__bid_status-default" value="Draft"> Draft </option>
-              <option class="__bid_status-default" value="Submitted"> Submitted </option>
-              <option class="__bid_status-default" selected value="Archived"> {{ bid.status.value }} </option>
-            </select>
-            {% endif %}
+            <div>
+              {% if bid.status.value == "Draft" %}
+              <button type="button" class="__bid_status-draft ddb-cursor-handle" id="bidStatusID">
+                {{ bid.status.value }}
+              </button>
+              {% elif bid.status.value == "Submitted" %}
+              <button type="button" class="__bid_status-submitted ddb-cursor-handle" id="bidStatusID">
+                {{ bid.status.value }}
+              </button>
+              {% else %}
+              <button type="button" class="__bid_status-archived ddb-cursor-handle" id="bidStatusID">
+                {{ bid.status.value }}
+              </button>
+              {% endif %}
+            </div>
+            <div class="select_status" id="selectStatusID">
+              <button type="submit" class="__bid_status-default" value="Draft" name="bid_status">
+                {{ bid.Status.b_draft.value }}
+              </button>
+              <button type="submit" class="__bid_status-default" value="Submitted" name="bid_status">
+                {{ bid.Status.c_submitted.value }}
+              </button>
+              <button type="submit" class="__bid_status-default" value="Archived" name="bid_status">
+                {{ bid.Status.d_archived.value }}
+              </button>
+            </div>
           </form>
         </div>
         <div class="bid-header__title"><strong>
@@ -342,51 +346,55 @@
                 <div class="bck-color">
                   <div class="text-areas">
                     <div>
-                      <textarea class="_form-text_area" readonly cols="30" rows="10" placeholder="Enter Note here...">
+                      <textarea class="_form-text_area" name="note" cols="30" rows="10" placeholder="Enter Note here..."
+                      onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">
                           {{work_item_line.note}}
                       </textarea>
                     </div>
                     <div>
-                      <textarea class="_form-text_area" readonly cols="30" rows="10"
-                        placeholder="Enter Description here...">
+                      <textarea class="_form-text_area" name="description" cols="30" rows="10"
+                        placeholder="Enter Description here..." data-wil_id="{{work_item_line.id}}" onblur="updateWorkItemLine(this)">
                           {{work_item_line.description}}
                       </textarea>
                     </div>
                   </div>
                   <div class="inputs-features">
                     <div>
-                      <input class="_form-input" type="text" readonly placeholder="1"
-                        value="{{work_item_line.quantity}}">
+                      <input class="_form-input" type="text" name="quantity" placeholder="1"
+                        value="{{work_item_line.quantity}}" onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}"
+                        id="wIl-quantity">
                       <label class="_label">Quantity</label>
                     </div>
                     <div>
-                      <input class="_form-input" type="text" readonly placeholder="LS" value="{{work_item_line.unit}}">
+                      <input class="_form-input" type="text" name="unit" placeholder="LS" value="{{work_item_line.unit}}"
+                      onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">
                       <label class="_label">Unit</label>
                     </div>
                     <div>
-                      <input class="_form-input" type="text" readonly placeholder="$0" value="{{work_item_line.price}}">
+                      <input class="_form-input" type="text" name="price" placeholder="$0" value="{{work_item_line.price}}"
+                      onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}" id="wIl-price">
                     </div>
                     <div>
                       <div class="check_box-TBD">
                         <input class="form-control" type="checkbox" name="work_item_line_tbd_{{work_item_line.id}}">
+                        <span class="">TBD</span>
                       </div>
-                      <span class="">TBD</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="_edit_delete-btns">
-              <div class="edit-height">
+              <!-- <div class="edit-height">
                 <button class="border-none ddb-cursor-handle bck-white" type="button"
-                  data-target="#modalWorkItemLineEdit" data-toggle="modal" data-note="{{work_item_line.description}}"
-                  data-description="{{work_item_line.note}}" data-quantity="{{work_item_line.quantity}}"
-                  data-unit="{{work_item_line.unit}}" data-price="{{work_item_line.price}}"
-                  data-tbd="{{work_item_line.tbd}}"
-                  data-target_link="{{url_for('bid.edit_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)}}">
-                  <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+                  data-target="#modalWorkItemLineEdit" data-toggle="modal" data-note="work_item_line.description"
+                  data-description="work_item_line.note" data-quantity="work_item_line.quantity"
+                  data-unit="work_item_line.unit" data-price="work_item_line.price"
+                  data-tbd="work_item_line.tbd"
+                  data-target_link="url_for('bid.edit_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)">
+                  <img src=" url_for('static', filename='images/edit_element.svg') ">
                 </button>
-              </div>
+              </div> -->
               <div class="delete-height">
                 <a class="border-none ddb-cursor-handle bck-white"
                   href="{{url_for('bid.delete_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)}}">
@@ -488,31 +496,33 @@
                   <div class="bck-color">
                     <div class="text-areas">
                       <div>
-                        <textarea class="_form-text_area" readonly cols="30" rows="10"
-                          placeholder="Enter Description here...">
-                            {{work_item_line.description}}
+                        <textarea class="_form-text_area" name="g-note" cols="30" rows="10" placeholder="Enter Note here..."
+                        onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">
+                            {{work_item_line.note}}
                         </textarea>
                       </div>
                       <div>
-                        <textarea class="_form-text_area" readonly cols="30" rows="10" placeholder="Enter Note here...">
-                            {{work_item_line.note}}
+                        <textarea class="_form-text_area" name="g-description" cols="30" rows="10" placeholder="Enter Note here..."
+                        onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">
+                            {{work_item_line.description}}
                         </textarea>
                       </div>
                     </div>
                     <div class="inputs-features">
                       <div>
-                        <input class="_form-input" type="text" readonly placeholder="1"
-                          value="{{work_item_line.quantity}}">
+                        <input class="_form-input" type="text" name="g-quantity" placeholder="1"
+                        value="{{work_item_line.quantity}}" data-wil_id="{{work_item_line.id}}"
+                        onblur="updateWorkItemLine(this)" id="wIgL-quantity">
                         <label class="_label">Quantity</label>
                       </div>
                       <div>
-                        <input class="_form-input" type="text" readonly placeholder="LS"
-                          value="{{work_item_line.unit}}">
+                        <input class="_form-input" type="text" name="g-unit" placeholder="LS" value="{{work_item_line.unit}}"
+                        onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">
                         <label class="_label">Unit</label>
                       </div>
                       <div>
-                        <input class="_form-input" type="text" readonly placeholder="$0"
-                          value="{{work_item_line.price}}">
+                        <input class="_form-input" type="text" name="g-price" placeholder="$0" value="{{work_item_line.price}}"
+                        onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}" id="wIgL-price">
                       </div>
                       <div>
                         <div class="check_box-TBD">
@@ -525,16 +535,16 @@
                 </div>
               </div>
               <div class="_edit_delete-btns">
-                <div class="edit-height">
+                <!-- <div class="edit-height">
                   <button class="border-none ddb-cursor-handle bck-white" type="button"
-                    data-target="#modalWorkItemLineEdit" data-toggle="modal" data-note="{{work_item_line.description}}"
-                    data-description="{{work_item_line.note}}" data-quantity="{{work_item_line.quantity}}"
-                    data-unit="{{work_item_line.unit}}" data-price="{{work_item_line.price}}"
-                    data-tbd="{{work_item_line.tbd}}"
-                    data-target_link="{{url_for('bid.edit_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)}}">
-                    <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+                    data-target="#modalWorkItemLineEdit" data-toggle="modal" data-note="work_item_line.description"
+                    data-description="work_item_line.note" data-quantity="work_item_line.quantity"
+                    data-unit="work_item_line.unit" data-price="work_item_line.price"
+                    data-tbd="work_item_line.tbd"
+                    data-target_link="url_for('bid.edit_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)">
+                    <img src=" url_for('static', filename='images/edit_element.svg') ">
                   </button>
-                </div>
+                </div> -->
                 <div class="delete-height">
                   <a class="border-none ddb-cursor-handle bck-white"
                     href="{{url_for('bid.delete_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)}}">
