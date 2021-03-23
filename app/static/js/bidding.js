@@ -211,6 +211,12 @@ $(document).ready(function() {
               const subtotalValue = Math.round(( resData.subtotal + Number.EPSILON) * 100) / 100;
               const addsOnValue = Math.round((grandSubtotalValue - subtotalValue) * 100) / 100;
 
+              // work item line subtotal
+              console.log(document.getElementById(`link_subtotal-${resData.bid_param_name}`))
+              const linkSubtotal = document.getElementById(`link_subtotal-${resData.bid_param_name}`)
+              linkSubtotal.value = '$ ' + `${resData.bid_param_value}`;
+              // end
+
               document.getElementById(`${resData.bid_param_name}_value`).value = '$ ' + '0.0';
               bidGrandSubtotal.innerText = '$ ' + grandSubtotalValue;
               bidSubtotal.innerText = '$ ' + subtotalValue;
