@@ -11,7 +11,6 @@ drawingLogCloseWrapper.addEventListener('click', (e) => {
   };
 });
 
-const pageYoffset = window.pageYOffset;
 const bidID = document.querySelector('.bidIdJs').getAttribute('value');
 if (window.location.search) {
   document.documentElement.scrollTop = Number(window.location.search.split("=").pop())
@@ -62,7 +61,7 @@ const updateWorkItemLine = async (el) => {
 };
 // endedit block
 
-$(document).ready(function() {
+// $(document).ready(function() {
 
   // Sidebar
   if (window.location.hash) {
@@ -120,6 +119,7 @@ $(document).ready(function() {
   });
 
   // Scrolling Scope of work block
+  const pageYoffset = window.pageYOffset;
   const links = document.querySelectorAll("#bid_scope_of_work a")
   links.forEach((e) => {
     e.addEventListener('click', () => {
@@ -274,7 +274,7 @@ $(document).ready(function() {
     });
   });
 
-});
+// });
 
 // Active decoration on header menu-item by border-bottom
 bid_href_id.classList.add('active-tab');
