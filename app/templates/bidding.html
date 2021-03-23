@@ -63,47 +63,31 @@
   <div class="main-container_bidding" id="work-item-container">
     <div class="main-container_bidding-header">
       <div class="__bid-header_start_block">
-        <div>
-          <form action="{{ url_for('bid.bidding_change_status', bid_id=bid.id) }}" method="post">
-            {% if bid.status.value == "Draft" %}
-            <select class="__bid_status-draft ddb-cursor-handle" onchange="this.form.submit()" name="bid_status">
-              {{ bid.status.value }}
-              <option class="__bid_status-default" selected value="Draft"> {{ bid.status.value }} </option>
-              <option class="__bid_status-default" value="Submitted"> Submitted </option>
-              <option class="__bid_status-default" value="Archived"> Archived </option>
-            </select>
-            {% elif bid.status.value == "Submitted" %}
-            <select class="__bid_status-submitted ddb-cursor-handle" onchange="this.form.submit()" name="bid_status">
-              {{ bid.status.value }}
-              <option class="__bid_status-default" value="Draft"> Draft </option>
-              <option class="__bid_status-default" selected value="Submitted"> {{ bid.status.value }} </option>
-              <option class="__bid_status-default" value="Archived"> Archived </option>
-            </select>
-            {% else %}
-            <select class="__bid_status-archived ddb-cursor-handle" onchange="this.form.submit()" name="bid_status">
-              {{ bid.status.value }}
-              <option class="__bid_status-default" value="Draft"> Draft </option>
-              <option class="__bid_status-default" value="Submitted"> Submitted </option>
-              <option class="__bid_status-default" selected value="Archived"> {{ bid.status.value }} </option>
-            </select>
-            {% endif %}
-          </form>
-        </div>
         <div class="dropdown_status">
           <form action="{{ url_for('bid.bidding_change_status', bid_id=bid.id) }}" method="post">
             <div>
-              <button type="button" class="__bid_status-draft ddb-cursor-handle" name="bid_status" id="bidStatusID">
+              {% if bid.status.value == "Draft" %}
+              <button type="button" class="__bid_status-draft ddb-cursor-handle" id="bidStatusID">
                 {{ bid.status.value }}
               </button>
+              {% elif bid.status.value == "Submitted" %}
+              <button type="button" class="__bid_status-submitted ddb-cursor-handle" id="bidStatusID">
+                {{ bid.status.value }}
+              </button>
+              {% else %}
+              <button type="button" class="__bid_status-archived ddb-cursor-handle" id="bidStatusID">
+                {{ bid.status.value }}
+              </button>
+              {% endif %}
             </div>
             <div class="select_status" id="selectStatusID">
-              <button type="submit" class="__bid_status-default ddb-cursor-handle" value="Draft" name="bid_status">
+              <button type="submit" class="__bid_status-default" value="Draft" name="bid_status">
                 {{ bid.Status.b_draft.value }}
               </button>
-              <button type="submit" class="__bid_status-default ddb-cursor-handle" value="Submitted" name="bid_status">
+              <button type="submit" class="__bid_status-default" value="Submitted" name="bid_status">
                 {{ bid.Status.c_submitted.value }}
               </button>
-              <button type="submit" class="__bid_status-default ddb-cursor-handle" value="Archived" name="bid_status">
+              <button type="submit" class="__bid_status-default" value="Archived" name="bid_status">
                 {{ bid.Status.d_archived.value }}
               </button>
             </div>

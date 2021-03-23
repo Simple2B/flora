@@ -676,7 +676,7 @@ button {
   height: 2rem;
   padding: 0;
   margin: 0 auto;
-  z-index: 2;
+  z-index: 1;
   float: left;
   height: .5rem;
   line-height: .1rem;
@@ -689,7 +689,7 @@ button {
   font-size: 13px; }
 
 ._label--lg {
-  z-index: 2;
+  z-index: 1;
   float: left;
   height: .5rem;
   line-height: .1rem;
@@ -1429,11 +1429,12 @@ button {
           flex-direction: column; }
         .main-container_bidding-header .__bid-header_start_block .dropdown_status #bidStatusID {
           border: none;
-          width: 100%; }
+          width: 7rem; }
         .main-container_bidding-header .__bid-header_start_block .dropdown_status .select_status {
+          width: 100%;
           display: none;
           position: absolute;
-          z-index: 1; }
+          z-index: 2; }
           .main-container_bidding-header .__bid-header_start_block .dropdown_status .select_status button {
             background-color: #FFFFFF;
             border: none;
