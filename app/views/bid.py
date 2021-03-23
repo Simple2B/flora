@@ -161,28 +161,19 @@ def edit_work_item_line(bid_id, work_item_line_id):
     if form.validate_on_submit():
         line = WorkItemLine.query.get(work_item_line_id)
         if line:
-            if form.tbd.data:
+            line.quantity = form.quantity.data
+            line.price = form.price.data
+            if form.note.data:
                 line.note = form.note.data
+            elif form.description.data:
                 line.description = form.description.data
-                line.price = 0.0
-                line.unit = form.unit.data
-                line.quantity = form.quantity.data
-                line.tbd = form.tbd.data
-                line.save()
-                time_update(bid_id)
             else:
-                line.note = form.note.data
-                line.description = form.description.data
-                line.price = form.price.data
                 line.unit = form.unit.data
-                line.quantity = form.quantity.data
-                line.tbd = form.tbd.data
-                line.save()
-                time_update(bid_id)
+            line.save()
+            time_update(bid_id)
         else:
             log(log.ERROR, "Unknown work_item_line_id: %d", work_item_line_id)
-
-    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, pageyoffset=request.args.get("pageYOffset", "")))
 
 
 @bid_blueprint.route(

@@ -11,13 +11,58 @@ drawingLogCloseWrapper.addEventListener('click', (e) => {
   };
 });
 
-$(document).ready(function() {
+const pageYoffset = window.pageYOffset;
+const bidID = document.querySelector('.bidIdJs').getAttribute('value');
+if (window.location.search) {
+  document.documentElement.scrollTop = Number(window.location.search.split("=").pop())
+  window.history.replaceState({}, document.title, "/" + "bidding/" + `${bidID}`);
+}
 
-  const bidID = document.querySelector('.bidIdJs').getAttribute('value');
-  if (window.location.search) {
-    document.documentElement.scrollTop = Number(window.location.search.split("=").pop())
-    window.history.replaceState({}, document.title, "/" + "bidding/" + `${bidID}`);
+// edit work item line
+const updateWorkItemLine = async (el) => {
+  const lineID = document.getElementById("btn_line_id").dataset.line_id.slice(5);
+  const linePrice = document.getElementById("wIl-price");
+  const lineQuantity = document.getElementById("wIl-quantity");
+  const lineGroupPrice = document.getElementById("wIgL-price");
+  const lineGroupQuantity = document.getElementById("wIgL-quantity");
+
+  let formData = new FormData();
+  formData.append(`submit`, true);
+  if (el.name.startsWith('g-')) {
+    el.name = el.name.slice([2])
+    if (el.name === 'quantity') {
+      formData.append('price', `${lineGroupPrice.value}`);
+    }
+    if (el.name === 'price') {
+      formData.append('quantity', `${lineGroupQuantity.value}`);
+    } else {
+      formData.append('price', `${lineGroupPrice.value}`);
+      formData.append('quantity', `${lineGroupQuantity.value}`);
+    }
+  } else {
+    if (el.name === 'quantity') {
+      formData.append('price', `${linePrice.value}`);
+    }
+    if (el.name === 'price') {
+      formData.append('quantity', `${lineQuantity.value}`);
+    } else {
+      formData.append('price', `${linePrice.value}`);
+      formData.append('quantity', `${lineQuantity.value}`);
+    }
   }
+  formData.append(`${el.name}`, `${el.value}`);
+  fetch(`/edit_work_item_line/${bidID}/${el.dataset.wil_id}?pageYOffset=${pageYoffset}`, {
+    body: formData,
+    method: 'POST'
+  }).then((response) => {
+    if (!response.ok) {
+      console.error("Error update due date!")
+    }
+  });
+};
+// endedit block
+
+$(document).ready(function() {
 
   // Sidebar
   if (window.location.hash) {
@@ -78,7 +123,7 @@ $(document).ready(function() {
   const links = document.querySelectorAll("#bid_scope_of_work a")
   links.forEach((e) => {
     e.addEventListener('click', () => {
-      e.href += `?pageYOffset=${window.pageYOffset}`
+      e.href += `?pageYOffset=${pageYoffset}`
     })
   })
   // endScrolling
