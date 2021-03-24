@@ -1,8 +1,4 @@
 
-
-// $(document).ready(function() {
-// document.addEventListener('DOMContentLoaded', function(){
-
 const drawingLogCloseWrapper = document.getElementById('drawing_log_close_panel_id');
 const drawingLogClosePanel = document.getElementById('drawing_log_hidden_id');
 drawingLogCloseWrapper.addEventListener('click', (e) => {
@@ -351,7 +347,6 @@ document.querySelectorAll(".percent_parameter").forEach( (e) => {
     storeInDB();
   });
 });
-// });
 
 // Active decoration on header menu-item by border-bottom
 bid_href_id.classList.add('active-tab');
