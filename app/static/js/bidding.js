@@ -225,7 +225,31 @@ inputs.forEach( el => {
   myResponse();
 });
 
-// async bid_param_tbd
+// async bid param tbd
+
+function setParamValues(bidParamValues) {
+  document.querySelectorAll(".bid_parameter_value").forEach( (e) => {
+    switch(e.id.split('_').shift()) {
+      case 'permit':
+        e.value = '$ ' + bidParamValues.permit;
+        break;
+      case 'general':
+        e.value = '$ ' + bidParamValues.general;
+        break;
+      case 'overhead':
+        e.value = '$ ' + bidParamValues.overhead;
+        break;
+      case 'insurance':
+        e.value = '$ ' + bidParamValues.insurance;
+        break;
+      case 'profit':
+        e.value = '$ ' + bidParamValues.profit;
+        break;
+      default:
+        e.value = '$ ' + bidParamValues.bond;
+    };
+  });
+};
 
 const bidGrandSubtotal = document.getElementById('grand_subtotal_id');
 const bidSubtotal = document.getElementById('subtotal_id');
@@ -249,12 +273,14 @@ inputs.forEach( el => {
             const addsOnValue = Math.round((grandSubtotalValue - subtotalValue) * 100) / 100;
 
             // work item line subtotal
-            console.log(document.getElementById(`link_subtotal-${resData.bid_param_name}`))
-            const linkSubtotal = document.getElementById(`link_subtotal-${resData.bid_param_name}`)
-            if (linkSubtotal) {linkSubtotal.value = '$ ' + `${resData.bid_param_value}`;}
+            const linkSubtotal = document.getElementById(`link_subtotal-${resData.linkWorkItemID}`)
+            if (linkSubtotal) {
+              linkSubtotal.value = '$ ' + `${resData.linkWorkItemSubtotal}`;
+              setParamValues(resData.bidParamValues)
+            }
+            else {document.getElementById(`${resData.bid_param_name}_value`).value = '$ ' + '0.0'}
             // end
 
-            document.getElementById(`${resData.bid_param_name}_value`).value = '$ ' + '0.0';
             bidGrandSubtotal.innerText = '$ ' + grandSubtotalValue;
             bidSubtotal.innerText = '$ ' + subtotalValue;
             subtotalProjectGeneral.innerHTML = `Subtotal: &nbsp; &nbsp; ${subtotalValue}`;
@@ -281,12 +307,14 @@ inputs.forEach( el => {
             const addsOnValue = Math.round((grandSubtotalValue - subtotalValue) * 100) / 100;
 
             // work item line subtotal
-            console.log(document.getElementById(`link_subtotal-${resData.bid_param_name}`))
-            const linkSubtotal = document.getElementById(`link_subtotal-${resData.bid_param_name}`)
-            if (linkSubtotal) {linkSubtotal.value = '$ ' + `${resData.bid_param_value}`;}
+            const linkSubtotal = document.getElementById(`link_subtotal-${resData.linkWorkItemID}`)
+            if (linkSubtotal) {
+              linkSubtotal.value = '$ ' + `${resData.linkWorkItemSubtotal}`;
+              setParamValues(resData.bidParamValues)
+            }
+            else {document.getElementById(`${resData.bid_param_name}_value`).value = '$ ' + resData.bid_param_value}
               // end
 
-            document.getElementById(`${resData.bid_param_name}_value`).value = '$ ' + resData.bid_param_value;
             bidGrandSubtotal.innerText = '$ ' + grandSubtotalValue;
             bidSubtotal.innerText = '$ ' + subtotalValue;
             subtotalProjectGeneral.innerHTML = `Subtotal: &nbsp; &nbsp; ${subtotalValue}`;
@@ -302,6 +330,7 @@ inputs.forEach( el => {
     }
   });
 });
+// end async bid param tbd
 
 document.querySelectorAll(".percent_parameter").forEach( (e) => {
   e.addEventListener("change", () => {

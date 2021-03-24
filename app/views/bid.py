@@ -19,6 +19,7 @@ from app.models import Bid, WorkItemLine, LinkWorkItem, WorkItem, WorkItemGroup
 from app.forms import WorkItemLineForm, BidForm
 
 from app.controllers import (
+    calculate_link_subtotal,
     calculate_subtotal,
     calculate_alternate_total,
     time_update,
@@ -69,22 +70,13 @@ def save_tbd(bid_id):
             if tbd_name.startswith("work_item_line_tbd_"):
                 line_id = int(tbd_name.strip("work_item_line_tbd_"))
                 work_item_line = WorkItemLine.query.get(line_id)
+                if not work_item_line:
+                    log(log.WARNING, "No work item line with [id:%d] found!", line_id)
+                    return f"No work item line with [id:{line_id}] found!"
                 work_item_line.tbd = True
                 work_item_line.save()
                 log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is True'")
-                link_work_item = work_item_line.link_work_item
-                link_work_item.link_subtotal = round(link_work_item.link_subtotal - (work_item_line.price * work_item_line.quantity), 2)
-                link_work_item.save()
-                bid.subtotal = bid.subtotal - link_work_item.link_subtotal
-                bid.save()
-                return json.dumps(
-                    dict(
-                            subtotal=bid.subtotal,
-                            grandSubtotal=bid.grand_subtotal,
-                            bid_param_name=f'{work_item_line.link_work_items_id}',
-                            bid_param_value=f"{link_work_item.link_subtotal}",
-                    )
-                )
+                return json.dumps(calculate_link_subtotal(bid_id, line_id))
             elif tbd_name.startswith("alternate_"):
                 return f"Alternate: {tbd_name}"
             else:
@@ -98,19 +90,7 @@ def save_tbd(bid_id):
                 work_item_line.tbd = False
                 work_item_line.save()
                 log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is False'")
-                link_work_item = work_item_line.link_work_item
-                link_work_item.link_subtotal = round(link_work_item.link_subtotal + (work_item_line.price * work_item_line.quantity), 2)
-                bid.subtotal = bid.subtotal + link_work_item.link_subtotal
-                link_work_item.save()
-                bid.save()
-                return json.dumps(
-                    dict(
-                            subtotal=bid.subtotal,
-                            grandSubtotal=bid.grand_subtotal,
-                            bid_param_name=f'{work_item_line.link_work_items_id}',
-                            bid_param_value=f"{link_work_item.link_subtotal}",
-                    )
-                )
+                return json.dumps(calculate_link_subtotal(bid_id, line_id))
             elif tbd_name.startswith("alternate_"):
                 return f"Alternate: {tbd_name}"
             else:
