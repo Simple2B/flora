@@ -17,4 +17,20 @@ $(document).ready(function() {
   $('#biddingsSearch').on( 'keyup', function () {
     table.search( this.value ).draw();
   });
+
+  // redirect to bid
+  const rows = Array.from(document.querySelectorAll("#biddingsTableId tr")).slice(1)
+  rows.forEach((e) => {
+    e.addEventListener('mouseover', (event) => {
+      e.classList.add('bid_link');
+      if (event.target) {e.classList.add('bid_link')}
+    })
+    e.addEventListener('mouseout', () => {
+      e.classList.remove('bid_link')
+    })
+    e.addEventListener('click', () => {
+      window.location.href = e.querySelector('a').href;
+    })
+  })
+  // endredirect
 });
