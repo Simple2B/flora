@@ -18,10 +18,9 @@ $(document).ready(function () {
   });
 
   // redirect to bid
-
-  // biddingsTableId_paginate
+  const tablePages = ["paginate_button ", "paginate_button previous", "paginate_button next"]
   function redirectToBid() {
-    let rows = Array.from(document.querySelectorAll("#biddingsTableId tr")).slice(1)
+    const rows = Array.from(document.querySelectorAll("#biddingsTableId tr")).slice(1)
     rows.forEach((e) => {
       e.addEventListener('mouseover', () => {
         e.classList.add('bid_link');
@@ -34,16 +33,10 @@ $(document).ready(function () {
       })
     })
   };
-  redirectToBid()
-  // endredirect
-  const tablePages = document.querySelectorAll('#biddingsTableId_paginate a')
-  tablePages.forEach((e) => {
-    e.addEventListener('click', () => {
-      console.log(e)
-      redirectToBid()
-    })
+  redirectToBid();
+  document.getElementById("biddingsTableId_wrapper").addEventListener('click', (event) => {
+    if (tablePages.includes(event.target.className))
+    redirectToBid();
   })
-  document.getElementById('biddingsTableId_info').addEventListener('change', (event) => {
-    console.log('Again?');
-  });
+  // endredirect
 });
