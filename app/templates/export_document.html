@@ -604,108 +604,91 @@
                                         $ {{ bid.subtotal }}
                                     </div>
                                 </div>
-                                {% if bid.percent_permit_fee < 0.001 %}
-                                {% else %}
+
                                 <div class="feature_price">
                                     <div>
                                         Permit/Filing Free:
                                     </div>
-                                    {% if not bid.permit_filling_fee_tbd %}
-                                    <div>
-                                        $ {{ bid.permit_filling_fee }}
-                                    </div>
-                                    {% else %}
+                                    {% if bid.permit_filling_fee < 0.001 %}
                                     <div>
                                         T.B.D
                                     </div>
+                                    {% else %}
+                                    <div>
+                                        $ {{ bid.permit_filling_fee }}
+                                    </div>
                                     {% endif %}
                                 </div>
-                                {% endif %}
-                                {% if bid.percent_general_condition < 0.001 %}
-                                {% else %}
                                 <div class="feature_price">
                                     <div class="general_padding-r">
                                         General Conditions:
                                     </div>
-                                    {% if not bid.general_conditions_tbd %}
-                                    <div>
-                                        $ {{ bid.general_conditions }}
-                                    </div>
-                                    {% else %}
+                                    {% if bid.general_conditions < 0.001 %}
                                     <div>
                                         T.B.D
                                     </div>
+                                    {% else %}
+                                    <div>
+                                        $ {{ bid.general_conditions }}
+                                    </div>
                                     {% endif %}
                                 </div>
-                                {% endif %}
-                                {% if bid.percent_overhead < 0.001 %}
-                                {% else %}
                                 <div class="feature_price">
                                     <div>
                                         Overhead:
                                     </div>
-                                    {% if not bid.overhead_tbd %}
-                                    <div>
-                                        $ {{ bid.overhead }}
-                                    </div>
-                                    {% else %}
+                                    {% if bid.overhead < 0.001 %}
                                     <div>
                                         T.B.D
                                     </div>
+                                    {% else %}
+                                    <div>
+                                        $ {{ bid.overhead }}
+                                    </div>
                                     {% endif %}
                                 </div>
-                                {% endif %}
-                                {% if bid.percent_insurance_tax < 0.001 %}
-                                {% else %}
                                 <div class="feature_price">
                                     <div>
                                         Insurance/Tax:
                                     </div>
-                                    {% if not bid.insurance_tax_tbd %}
-                                    <div>
-                                        $ {{ bid.insurance_tax }}
-                                    </div>
-                                    {% else %}
+                                    {% if bid.insurance_tax < 0.001 %}
                                     <div>
                                         T.B.D
                                     </div>
+                                    {% else %}
+                                    <div>
+                                        $ {{ bid.insurance_tax }}
+                                    </div>
                                     {% endif %}
                                 </div>
-                                {% endif %}
-                                {% if bid.percent_profit < 0.001 %}
-                                {% else %}
                                 <div class="feature_price">
                                     <div>
                                         Profit:
                                     </div>
-                                    {% if not bid.profit_tbd %}
-                                    <div>
-                                        $ {{ bid.profit }}
-                                    </div>
-                                    {% else %}
+                                    {% if bid.profit < 0.001  %}
                                     <div>
                                         T.B.D
                                     </div>
+                                    {% else %}
+                                    <div>
+                                        $ {{ bid.profit }}
+                                    </div>
                                     {% endif %}
                                 </div>
-                                {% endif %}
-                                {% if bid.percent_bond < 0.001 %}
-                                {% else %}
                                 <div class="feature_price">
                                     <div>
                                         Bond:
                                     </div>
-                                    {% if not bid.bond_tbd %}
-                                    <div>
-                                        $ {{ bid.bond }}
-                                    </div>
-                                    {% else %}
+                                    {% if bid.bond < 0.001 %}
                                     <div>
                                         T.B.D
                                     </div>
+                                    {% else %}
+                                    <div>
+                                        $ {{ bid.bond }}
+                                    </div>
                                     {% endif %}
                                 </div>
-                                {% endif %}
                                 <div class="feature_price">
                                     <div>
                                         Grand Total:

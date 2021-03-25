@@ -21,7 +21,7 @@ class Bid(db.Model, ModelMixin):
         d_archived = "Archived"
 
     id = db.Column(db.Integer, primary_key=True)
-    procore_bid_id = db.Column(db.Integer, nullable=False)
+    procore_bid_id = db.Column(db.String, nullable=False)
     title = db.Column(db.String(256), nullable=False)
     client = db.Column(db.String(256), nullable=False)
     vendor_address_street = db.Column(db.String(128), nullable=False, default='163 Spring Street')

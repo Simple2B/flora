@@ -18,17 +18,32 @@ $(document).ready(function () {
   });
 
   // redirect to bid
-  const rows = Array.from(document.querySelectorAll("#biddingsTableId tr")).slice(1)
-  rows.forEach((e) => {
-    e.addEventListener('mouseover', (event) => {
-      e.classList.add('bid_link');
+
+  // biddingsTableId_paginate
+  function redirectToBid() {
+    let rows = Array.from(document.querySelectorAll("#biddingsTableId tr")).slice(1)
+    rows.forEach((e) => {
+      e.addEventListener('mouseover', () => {
+        e.classList.add('bid_link');
+      })
+      e.addEventListener('mouseout', () => {
+        e.classList.remove('bid_link')
+      })
+      e.addEventListener('click', () => {
+        window.location.href = e.querySelector('a').href;
+      })
     })
-    e.addEventListener('mouseout', () => {
-      e.classList.remove('bid_link')
-    })
+  };
+  redirectToBid()
+  // endredirect
+  const tablePages = document.querySelectorAll('#biddingsTableId_paginate a')
+  tablePages.forEach((e) => {
     e.addEventListener('click', () => {
-      window.location.href = e.querySelector('a').href;
+      console.log(e)
+      redirectToBid()
     })
   })
-  // endredirect
+  document.getElementById('biddingsTableId_info').addEventListener('change', (event) => {
+    console.log('Again?');
+  });
 });

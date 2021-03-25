@@ -24,20 +24,44 @@ def calculate_link_subtotal(bid_id, line_id=None):
             link_work_item.link_subtotal = round(
                 link_work_item.link_subtotal + line_subtotal, 2
             )
-        permit_value = round((bid.percent_permit_fee * bid_subtotal) / 100, 2)
-        general_value = round((bid.percent_general_condition * bid_subtotal) / 100, 2)
-        overhead_value = round((bid.percent_overhead * bid_subtotal) / 100, 2)
-        insurance_value = round((bid.percent_insurance_tax * bid_subtotal) / 100, 2)
-        profit_value = round((bid.percent_profit * bid_subtotal) / 100, 2)
-        bond_value = round((bid.percent_bond * bid_subtotal) / 100, 2)
+        permit_value = (
+            round((bid.percent_permit_fee * bid_subtotal) / 100, 2)
+            if not bid.permit_filling_fee_tbd
+            else "0.0"
+        )
+        general_value = (
+            round((bid.percent_general_condition * bid_subtotal) / 100, 2)
+            if not bid.general_conditions_tbd
+            else "0.0"
+        )
+        overhead_value = (
+            round((bid.percent_overhead * bid_subtotal) / 100, 2)
+            if not bid.overhead_tbd
+            else "0.0"
+        )
+        insurance_value = (
+            round((bid.percent_insurance_tax * bid_subtotal) / 100, 2)
+            if not bid.insurance_tax_tbd
+            else "0.0"
+        )
+        profit_value = (
+            round((bid.percent_profit * bid_subtotal) / 100, 2)
+            if not bid.profit_tbd
+            else "0.0"
+        )
+        bond_value = (
+            round((bid.percent_bond * bid_subtotal) / 100, 2)
+            if not bid.bond_tbd
+            else "0.0"
+        )
         bid.grand_subtotal = round(
             bid_subtotal
-            + permit_value
-            + general_value
-            + overhead_value
-            + insurance_value
-            + profit_value
-            + bond_value,
+            + float(permit_value)
+            + float(general_value)
+            + float(overhead_value)
+            + float(insurance_value)
+            + float(profit_value)
+            + float(bond_value),
             2,
         )
         link_work_item.save()
@@ -61,7 +85,7 @@ def calculate_link_subtotal(bid_id, line_id=None):
     for link in bid.link_work_items:
         link.link_subtotal = 0.0
         for line in link.work_item_lines:
-            if not line.tbd:
+            if line.tbd:
                 continue
             bid_subtotal += line.price * line.quantity
             link.link_subtotal += line.price * line.quantity
@@ -229,7 +253,7 @@ def calculate_alternate_total(bid_id):
     bid = Bid.query.get(bid_id)
     alternate_total = 0
     for alternate in bid.alternates:
-        if not alternate.tbd:
+        if alternate.tbd:
             continue
         alternate_total += alternate.price * alternate.quantity
     return round(alternate_total, 2)

@@ -176,7 +176,7 @@ def create_docx(bid_id):
         font_bold=True,
         font_size=10.5,
         align='left',
-        style=f'bid_client_{bid.client}'
+        style=f'bid_client_title_{bid.client}'
     )
     write_to_docx(
         cell_paragraph=cell_project,
@@ -459,34 +459,32 @@ def create_docx(bid_id):
     bid_subtotal_table.columns[2].width = Cm(3.18)
 
     for i, j in enumerate(db_subtotal_data):
-        if db_subtotal_data[j][1] < 0.001:
-            log(log.DEBUG, "Percent of [%s]", str(db_subtotal_data[j]) + " " + str(db_subtotal_data[j][1]))
-        else:
-            row = bid_subtotal_table.add_row()
-            set_row_height(row, 0.55, pt=False)
-            cell_1 = row.cells[1]
-            cell_1.width = Cm(5.695)  # 2050415
-            cell_2 = row.cells[2]
-            cell_2.width = Cm(3.18)
-            write_to_docx(
-                cell_paragraph=cell_1,
-                edit_first_paragraph=True,
-                content=j,
-                font_bold=True,
-                font_size=10.5,
-                align='left',
-                left_indent=Cm(1),
-                style=f'bid_data_{j.lower()}'
-            )
-            write_to_docx(
-                cell_paragraph=cell_2,
-                edit_first_paragraph=True,
-                content=(f'$ {check_tbd(j)}' if check_tbd(j) != 'T.B.D' else 'T.B.D'),
-                font_bold=True,
-                align='right',
-                font_size=10.5,
-                style=f'bid_data_{db_subtotal_data[j]}_{i}'
-            )
+        log(log.DEBUG, "Percent of [%s]", str(db_subtotal_data[j]) + " " + str(db_subtotal_data[j][1]))
+        row = bid_subtotal_table.add_row()
+        set_row_height(row, 0.55, pt=False)
+        cell_1 = row.cells[1]
+        cell_1.width = Cm(5.695)  # 2050415
+        cell_2 = row.cells[2]
+        cell_2.width = Cm(3.18)
+        write_to_docx(
+            cell_paragraph=cell_1,
+            edit_first_paragraph=True,
+            content=j,
+            font_bold=True,
+            font_size=10.5,
+            align='left',
+            left_indent=Cm(1),
+            style=f'bid_data_{j.lower()}'
+        )
+        write_to_docx(
+            cell_paragraph=cell_2,
+            edit_first_paragraph=True,
+            content=(f'$ {check_tbd(j)}' if check_tbd(j) != 'T.B.D' else 'T.B.D'),
+            font_bold=True,
+            align='right',
+            font_size=10.5,
+            style=f'bid_data_{db_subtotal_data[j]}_{i}'
+        )
 
     # /// exclusions, clarifications, alternates blocks
     # begin Section B block
@@ -554,7 +552,6 @@ def create_docx(bid_id):
     alternate_table.columns[0].width = Cm(5)
     alternate_table.columns[1].width = Cm(11.195)
     alternate_table.columns[2].width = Cm(3.18)
-    alternate_paragraph = row.cells[0].paragraphs[0]
     if bid.alternates:
         for alternate in bid.alternates:
             row = alternate_table.add_row()
@@ -587,6 +584,8 @@ def create_docx(bid_id):
                 style=f'alternate_style_paragrapd_price_{alternate.id}'
             )
     else:
+        row = alternate_table.add_row()
+        alternate_paragraph = row.cells[0].paragraphs[0]
         write_to_docx(
                 insert=True,
                 cell_paragraph=alternate_paragraph,

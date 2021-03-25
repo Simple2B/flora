@@ -16,13 +16,14 @@ def update_bids():
     # assert bids_from_procore
     need_commit = False
     for bid in bids_from_procore:
-        if "bid_id" not in bid:
+        if "project_id" not in bid:
             log(log.ERROR, "Wrong bid entity format")
             continue
-        bid_id = bid["bid_id"]
-        db_bid = Bid.query.filter(Bid.procore_bid_id == bid_id).first()
+        project_id = bid["project_id"]
+        procore_id = bid["procore_id"]
+        db_bid = Bid.query.filter(Bid.procore_bid_id == procore_id).first()
         if not db_bid:
-            log(log.INFO, "Add new bid [%s]", bid_id)
+            log(log.INFO, "Add new bid [%s]", procore_id)
             # if "project" not in bid:
             #     log(log.ERROR, "Bad bid format [%s]. Not found [project]", bid_id)
             #     continue
@@ -58,21 +59,21 @@ def update_bids():
             # if not adress_city:
             #     "Information not in Procore"
             bidding = Bid(
-                procore_bid_id=bid_id,
+                procore_bid_id=procore_id,
                 # title=bid["bid_package_title"],
-                title=bid["vendor_name"],
+                title=bid["client"],
                 # client=(
                 #     bid["vendor"]["name"] if "name" in bid["vendor"] else "Unknown name"
                 # ),
-                client=bid["vendor_name"],
+                client=bid["client"],
                 # project_name=bid['project']['name'],
                 project_name=bid["name"],
                 # vendor_address_street=(v_addr_lines[0] if v_addr_lines else ""),
-                vendor_address_street=bid["vendor_address"],
+                vendor_address_street=bid["client_address"],
                 # vendor_address_city=(v_addr_lines[1] if len(v_addr_lines) > 1 else ""),
-                vendor_address_city=bid["vendor_adress_city"],
+                vendor_address_city=bid["client_city"],
                 # address_street=(p_addr_lines[0] if p_addr_lines else ""),
-                address_street=bid["vendor_address"],
+                address_street=bid["address_street"],
                 # address_city=(bid["address"] if len(p_addr_lines) > 1 else ""),
                 address_city=bid["adress_city"],
                 # phone=bid_requester["business_phone"],
@@ -83,21 +84,21 @@ def update_bids():
                 phone=bid["business_phone"],
                 email=bid["email"],
                 fax=bid["fax_number"],
-                contact=bid["contact"],
+                contact=bid["contact_name"],
                 due_date=bid["due_date"],
             )
             bidding.save(commit=False)
             if not projects:
                 projects = papi.projects
             # add_drawings_for_bid(bid, projects, papi, bidding)
-            add_drawings_for_bid(bid_id, projects, papi, bidding)
+            add_drawings_for_bid(project_id, projects, papi, bidding)
             need_commit = True
 
     if need_commit:
         db.session.commit()
 
 
-def add_drawings_for_bid(bid_id, projects, papi, bidding):
+def add_drawings_for_bid(project_id, projects, papi, bidding):
     # project = bid["project"] if "project" in bid else None
     # if not project:
     #     log(log.ERROR, "bid has not attribute project")
@@ -117,7 +118,7 @@ def add_drawings_for_bid(bid_id, projects, papi, bidding):
     # if not project_id:
     #     return
 
-    drawing_uploads = papi.drawing_uploads(bid_id)
+    drawing_uploads = papi.drawing_uploads(project_id)
     if not drawing_uploads:
         return
 
