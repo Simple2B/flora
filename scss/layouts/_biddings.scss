@@ -110,3 +110,9 @@
         color: $black;
     }
 }
+
+// redirect to bid
+.bid_link {
+    cursor: pointer;
+    background-color: $gray !important;
+}

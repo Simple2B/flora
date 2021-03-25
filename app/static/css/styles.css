@@ -2146,6 +2146,10 @@ button {
   .biddings-table a {
     color: #000; }
 
+.bid_link {
+  cursor: pointer;
+  background-color: #979797 !important; }
+
 .sidebar__nav-links-bidding {
   list-style-type: disc; }
   .sidebar__nav-links-bidding .__disc-blue {
