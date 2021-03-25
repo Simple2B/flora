@@ -2,7 +2,7 @@ import os
 import pytest
 
 from app import db, create_app
-from app.controllers import create_docx, populate_db_by_test_data, bid_generation
+from app.controllers import create_docx, populate_db_by_test_data
 
 
 @pytest.fixture
