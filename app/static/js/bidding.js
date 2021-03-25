@@ -4,7 +4,7 @@ const drawingLogCloseWrapper = document.getElementById(
 const drawingLogClosePanel = document.getElementById("drawing_log_hidden_id");
 drawingLogCloseWrapper.addEventListener("click", (e) => {
   e.preventDefault();
-  let changeDrawingLogImg = document
+  const changeDrawingLogImg = document
     .querySelector("#drawing_log_close_panel_id img")
     .getAttribute("src");
   drawingLogClosePanel.classList.toggle("hidden");
@@ -20,11 +20,10 @@ drawingLogCloseWrapper.addEventListener("click", (e) => {
 });
 
 const pageYoffset = window.pageYOffset;
-console.log(window.pageYOffset);
 const bidID = document.querySelector(".bidIdJs").getAttribute("value");
-if (window.location.search) {
-  let test = window.location.search.split("=").pop();
-  document.documentElement.scrollTop = Number(test);
+const linkQuery = window.location.search
+if (linkQuery) {
+  document.documentElement.scrollTop = Number(linkQuery.split("=").pop());
   window.history.replaceState(
     {},
     document.title,
@@ -117,7 +116,7 @@ const clientCloseWrapper = document.getElementById(
 const clientClosePanel = document.getElementById("client_job_hidden_id");
 clientCloseWrapper.addEventListener("click", (e) => {
   e.preventDefault();
-  let changeClientImg = document
+  const changeClientImg = document
     .querySelector("#client_and_job_close_panel_id img")
     .getAttribute("src");
   clientClosePanel.classList.toggle("hidden");
@@ -140,7 +139,7 @@ groupCloseWrapper.forEach((element) => {
       `#group_panel_id-${groupId}`
     );
     e.preventDefault();
-    let changeGroupImg = element.getAttribute("src");
+    const changeGroupImg = element.getAttribute("src");
     groupClosePanel.classList.toggle("hidden");
     if (changeGroupImg == "/static/images/up_direction_element.svg") {
       element.setAttribute(
@@ -168,7 +167,7 @@ lineList.forEach((element) => {
     e.preventDefault();
     const lineId = e.currentTarget.dataset["line_id"];
     const areaToShow = document.querySelector(`#${lineId}`);
-    let changeLineImg = document
+    const changeLineImg = document
       .querySelector(`#${lineId}_img_id`)
       .getAttribute("src");
     areaToShow.classList.toggle("hidden");
@@ -189,7 +188,7 @@ lineList.forEach((element) => {
 const closeWrapper = document.getElementById("subtotal_close_panel_id");
 const subtotalClosePanel = document.getElementById("subtotal_inputs_fields_id");
 closeWrapper.addEventListener("click", (e) => {
-  let changeImg = $("#subtotal_img_id").attr("src");
+  const changeImg = $("#subtotal_img_id").attr("src");
   e.preventDefault();
   subtotalClosePanel.classList.toggle("hidden");
   if (changeImg == "/static/images/up_direction_element.svg") {
