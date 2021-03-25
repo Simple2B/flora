@@ -122,9 +122,9 @@
         .project_quote {
             background-color: yellow;
         }
-        .project_quote_revised{
+        /* .project_quote_revised{
 
-        }
+        } */
         .client-padding {
             padding-left: 1rem;
         }
@@ -344,16 +344,27 @@
             border-bottom: 2px solid #333333;
         }
 
+        .exclusions, .clarifications {
+            padding-left: 0.5rem;
+        }
+
         .alternate {
             margin-top: 1rem;
         }
         .alternate_table {
             width: 100%;
         }
-        .alternates_name {
-            width: 80%;
+
+        .alternate_name {
+            max-width: 65%;
+            width: 10%;
+            padding-left: 0.5rem;
         }
-        .alternates_total {
+        .alternate_qty {
+            font-style: italic;
+        }
+
+        .alternate_price {
             text-align: right;
             font-weight: bold;
         }
@@ -709,7 +720,7 @@
 
                     <div class="section_letter">Section B: Exclusions</div>
                     <h5>Unless expressly stated, the following exclusions apply: </h5>
-                    <div>
+                    <div class="exclusions">
                         {% for exclusion_link in bid.exclusion_links %}
                             {% if exclusion_link == bid.exclusion_links[-1] %}
                                 {{ exclusion_link.exclusion.title }}.
@@ -721,7 +732,7 @@
 
                     <div class="section_letter">Section C: Clarifications</div>
                     <h5>Please note the following clarifications: </h5>
-                    <div>
+                    <div class="clarifications">
                         {% for clarification_link in bid.clarification_links %}
                             {% if clarification_link == bid.clarification_links[-1] %}
                                 {{ clarification_link.clarification.description }}.
@@ -739,10 +750,13 @@
                                 {% if bid.alternates %}
                                 {% for alternate in bid.alternates %}
                                     <tr>
-                                        <td class="alternates_name">
-                                            &nbsp; {{ alternate.name }}
+                                        <td class="alternate_name">
+                                            {{ alternate.name }}
                                         </td>
-                                        <td class="alternates_total">
+                                        <td class="alternate_qty">
+                                            &nbsp; (qty: {{ alternate.quantity }})
+                                        </td>
+                                        <td class="alternate_price">
                                             {% if alternate.tbd %}
                                             TBD
                                             {% else %}
@@ -751,13 +765,13 @@
                                         </td>
                                     </tr>
                                 {% endfor %}
-                                    <tr>
                                 {% else %}
-                                        <td class="alternates_name">
+                                    <tr>
+                                        <td class="alternate_name">
                                             &nbsp; No alternates speciefied.
                                         </td>
-                                {% endif %}
                                     </tr>
+                                {% endif %}
                             </tbody>
                         </table>
                     </div>

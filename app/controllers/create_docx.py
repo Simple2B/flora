@@ -1,3 +1,4 @@
+# flake8:  # noqa 501
 import os.path
 import datetime
 import uuid
@@ -129,8 +130,8 @@ def create_docx(bid_id):
 
     # /// endblock
 
-# ////// Begin to create document
-# /// add bid information block
+    # ////// Begin to create document
+    # /// add bid information block
     document.add_picture(f'{PATH_TO_IMG}/logo_pdf.png', width=Cm(6.91), height=Cm(2.64))
 
     bid_table_info = document.add_table(rows=0, cols=4)
@@ -487,7 +488,7 @@ def create_docx(bid_id):
                 style=f'bid_data_{db_subtotal_data[j]}_{i}'
             )
 
-# /// exclusions, clarifications, alternates blocks
+    # /// exclusions, clarifications, alternates blocks
     # begin Section B block
     document.add_picture(f'{PATH_TO_IMG}/Section_B.png', width=Cm(18.99), height=Cm(0.65))
     write_to_docx(
@@ -550,21 +551,31 @@ def create_docx(bid_id):
 
     alternate_table = document.add_table(rows=0, cols=3)
     alternate_table.autofit = False
-    alternate_table.columns[0].width = Cm(16.195)
-    alternate_table.columns[1].width = Cm(3.18)
-    row = alternate_table.add_row()
-    set_row_height(row, 15)
+    alternate_table.columns[0].width = Cm(5)
+    alternate_table.columns[1].width = Cm(11.195)
+    alternate_table.columns[2].width = Cm(3.18)
     alternate_paragraph = row.cells[0].paragraphs[0]
-    paragraph_alternates_name = row.cells[0].paragraphs[0]
-    paragraph_price = row.cells[1].paragraphs[0]
     if bid.alternates:
         for alternate in bid.alternates:
+            row = alternate_table.add_row()
+            set_row_height(row, 15)
+            paragraph_alternate_name = row.cells[0].paragraphs[0]
+            paragraph_alternate_qty = row.cells[1].paragraphs[0]
+            paragraph_price = row.cells[2].paragraphs[0]
             write_to_docx(
                 insert=True,
-                cell_paragraph=paragraph_alternates_name,
-                content=f'{alternate.name}',  # noqa 501
+                cell_paragraph=paragraph_alternate_name,
+                content=f'{alternate.name}',
                 font_size=9.5,
-                style=f'alternate_style_title_{i}'
+                style=f'alternate_style_title_{alternate.id}'
+            )
+            write_to_docx(
+                insert=True,
+                cell_paragraph=paragraph_alternate_qty,
+                content=f'(qty: {alternate.quantity})',
+                font_italic=True,
+                font_size=9.5,
+                style=f'alternate_style_title_{alternate.id}'
             )
             write_to_docx(
                 insert=True,
@@ -573,7 +584,7 @@ def create_docx(bid_id):
                 font_bold=True,
                 font_size=9.5,
                 align='right',
-                style=f'alternate_style_default_title_{i}'
+                style=f'alternate_style_paragrapd_price_{alternate.id}'
             )
     else:
         write_to_docx(
@@ -581,7 +592,7 @@ def create_docx(bid_id):
                 cell_paragraph=alternate_paragraph,
                 content='No alternates speciefied.',
                 font_size=9.5,
-                style=f'alternate_style_default_title_{i}'
+                style='alternate_style_default_title'
             )
     # endblock
 
