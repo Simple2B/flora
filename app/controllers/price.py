@@ -15,11 +15,15 @@ def calculate_link_subtotal(bid_id, line_id=None):
         if work_item_line.tbd:
             bid.subtotal = round(bid.subtotal - line_subtotal, 2)
             bid_subtotal = bid.subtotal
-            link_work_item.link_subtotal = round(link_work_item.link_subtotal - line_subtotal, 2)
+            link_work_item.link_subtotal = round(
+                link_work_item.link_subtotal - line_subtotal, 2
+            )
         else:
             bid.subtotal = round(bid.subtotal + line_subtotal, 2)
             bid_subtotal = bid.subtotal
-            link_work_item.link_subtotal = round(link_work_item.link_subtotal + line_subtotal, 2)
+            link_work_item.link_subtotal = round(
+                link_work_item.link_subtotal + line_subtotal, 2
+            )
         permit_value = round((bid.percent_permit_fee * bid_subtotal) / 100, 2)
         general_value = round((bid.percent_general_condition * bid_subtotal) / 100, 2)
         overhead_value = round((bid.percent_overhead * bid_subtotal) / 100, 2)
@@ -49,19 +53,18 @@ def calculate_link_subtotal(bid_id, line_id=None):
                 overhead=overhead_value,
                 insurance=insurance_value,
                 profit=profit_value,
-                bond=bond_value
-            )
+                bond=bond_value,
+            ),
         )
 
     bid_subtotal = 0.0
     for link in bid.link_work_items:
         link.link_subtotal = 0.0
         for line in link.work_item_lines:
-            if line.tbd:
+            if not line.tbd:
                 continue
-            else:
-                bid_subtotal += line.price * line.quantity
-                link.link_subtotal += line.price * line.quantity
+            bid_subtotal += line.price * line.quantity
+            link.link_subtotal += line.price * line.quantity
         link.link_subtotal = round(link.link_subtotal, 2)
     bid_subtotal = round(bid_subtotal, 2)
     return bid_subtotal
@@ -226,10 +229,9 @@ def calculate_alternate_total(bid_id):
     bid = Bid.query.get(bid_id)
     alternate_total = 0
     for alternate in bid.alternates:
-        if alternate.tbd is True:
+        if not alternate.tbd:
             continue
-        else:
-            alternate_total += alternate.price * alternate.quantity
+        alternate_total += alternate.price * alternate.quantity
     return round(alternate_total, 2)
 
 
