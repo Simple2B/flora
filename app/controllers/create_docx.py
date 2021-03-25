@@ -459,34 +459,32 @@ def create_docx(bid_id):
     bid_subtotal_table.columns[2].width = Cm(3.18)
 
     for i, j in enumerate(db_subtotal_data):
-        if db_subtotal_data[j][1] < 0.001:
-            log(log.DEBUG, "Percent of [%s]", str(db_subtotal_data[j]) + " " + str(db_subtotal_data[j][1]))
-        else:
-            row = bid_subtotal_table.add_row()
-            set_row_height(row, 0.55, pt=False)
-            cell_1 = row.cells[1]
-            cell_1.width = Cm(5.695)  # 2050415
-            cell_2 = row.cells[2]
-            cell_2.width = Cm(3.18)
-            write_to_docx(
-                cell_paragraph=cell_1,
-                edit_first_paragraph=True,
-                content=j,
-                font_bold=True,
-                font_size=10.5,
-                align='left',
-                left_indent=Cm(1),
-                style=f'bid_data_{j.lower()}'
-            )
-            write_to_docx(
-                cell_paragraph=cell_2,
-                edit_first_paragraph=True,
-                content=(f'$ {check_tbd(j)}' if check_tbd(j) != 'T.B.D' else 'T.B.D'),
-                font_bold=True,
-                align='right',
-                font_size=10.5,
-                style=f'bid_data_{db_subtotal_data[j]}_{i}'
-            )
+        log(log.DEBUG, "Percent of [%s]", str(db_subtotal_data[j]) + " " + str(db_subtotal_data[j][1]))
+        row = bid_subtotal_table.add_row()
+        set_row_height(row, 0.55, pt=False)
+        cell_1 = row.cells[1]
+        cell_1.width = Cm(5.695)  # 2050415
+        cell_2 = row.cells[2]
+        cell_2.width = Cm(3.18)
+        write_to_docx(
+            cell_paragraph=cell_1,
+            edit_first_paragraph=True,
+            content=j,
+            font_bold=True,
+            font_size=10.5,
+            align='left',
+            left_indent=Cm(1),
+            style=f'bid_data_{j.lower()}'
+        )
+        write_to_docx(
+            cell_paragraph=cell_2,
+            edit_first_paragraph=True,
+            content=(f'$ {check_tbd(j)}' if check_tbd(j) != 'T.B.D' else 'T.B.D'),
+            font_bold=True,
+            align='right',
+            font_size=10.5,
+            style=f'bid_data_{db_subtotal_data[j]}_{i}'
+        )
 
     # /// exclusions, clarifications, alternates blocks
     # begin Section B block
