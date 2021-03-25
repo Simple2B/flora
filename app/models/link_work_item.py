@@ -9,7 +9,6 @@ class LinkWorkItem(db.Model, ModelMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     bid_id = db.Column(db.Integer, db.ForeignKey("bids.id"), nullable=True)
-
     bid = relationship("Bid")
     work_item_id = db.Column(db.Integer, db.ForeignKey("work_items.id"), nullable=False)
     link_subtotal = db.Column(db.Float, default=0.0, nullable=True)

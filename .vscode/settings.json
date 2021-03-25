@@ -16,5 +16,9 @@
         "**/.git/subtree-cache/**": true,
         "**/node_modules/*/**": true,
         "**/.venv/*/**": true
+    },
+    "editor.defaultFormatter": null,
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
 }

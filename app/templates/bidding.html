@@ -303,7 +303,7 @@
             <div class="_flex-end">
               <div class="_flex-end_padding">
                 <input class="_form-input _form-input--m" readonly type="text" placeholder="$"
-                  value="$ {{link_work_item.link_subtotal}}">
+                  value="$ {{link_work_item.link_subtotal}}" id="link_subtotal-{{link_work_item.id}}">
               </div>
               <div class="_flex-end_padding">
                 <a href="{{url_for('bid.add_work_item_line', bid_id=bid.id, link_work_item_id=link_work_item.id)}}">
@@ -453,7 +453,7 @@
               <div class="_flex-end">
                 <div class="_flex-end_padding">
                   <input class="_form-input _form-input--m" readonly type="text" placeholder="$"
-                    value="$ {{group_link.link_subtotal}}">
+                    value="$ {{group_link.link_subtotal}}" id="link_subtotal-{{group_link.id}}">
                 </div>
                 <div class="_flex-end_padding">
                   <a href="{{url_for('bid.add_group_work_item_line', bid_id=bid.id, group_link_id=group_link.id)}}">
@@ -600,7 +600,7 @@
                           value="{{bid.percent_permit_fee}}%">
                       </div>
                       <div>
-                        <input class="_form-input _form-input--m" type="text" readonly
+                        <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly
                           value="$ {{bid.permit_filling_fee}}" id="permit_value">
                       </div>
                     </div>
@@ -619,7 +619,7 @@
                           value="{{bid.percent_general_condition}}%">
                       </div>
                       <div>
-                        <input class="_form-input _form-input--m" type="text" readonly
+                        <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly
                           value="$ {{bid.general_conditions}}" id="general_value">
                       </div>
                     </div>
@@ -638,7 +638,7 @@
                           value="{{bid.percent_overhead}}%">
                       </div>
                       <div>
-                        <input class="_form-input _form-input--m" type="text" readonly value="$ {{bid.overhead}}" id="overhead_value">
+                        <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly value="$ {{bid.overhead}}" id="overhead_value">
                       </div>
                     </div>
                     <div class="check_box-TBD">
@@ -656,7 +656,7 @@
                           value="{{bid.percent_insurance_tax}}%">
                       </div>
                       <div>
-                        <input class="_form-input _form-input--m" type="text" readonly value="$ {{bid.insurance_tax}}" id="insurance_value">
+                        <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly value="$ {{bid.insurance_tax}}" id="insurance_value">
                       </div>
                     </div>
                     <div class="check_box-TBD">
@@ -674,7 +674,7 @@
                           value="{{bid.percent_profit}}%">
                       </div>
                       <div>
-                        <input class="_form-input _form-input--m" type="text" readonly value="$ {{bid.profit}}" id="profit_value">
+                        <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly value="$ {{bid.profit}}" id="profit_value">
                       </div>
                     </div>
                     <div class="check_box-TBD">
@@ -692,7 +692,7 @@
                           value="{{bid.percent_bond}}%">
                       </div>
                       <div>
-                        <input class="_form-input _form-input--m" type="text" readonly value="$ {{bid.bond}}" id="bond_value">
+                        <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly value="$ {{bid.bond}}" id="bond_value">
                       </div>
                     </div>
                     <div class="check_box-TBD">

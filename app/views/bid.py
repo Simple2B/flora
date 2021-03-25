@@ -19,6 +19,7 @@ from app.models import Bid, WorkItemLine, LinkWorkItem, WorkItem, WorkItemGroup
 from app.forms import WorkItemLineForm, BidForm
 
 from app.controllers import (
+    calculate_link_subtotal,
     calculate_subtotal,
     calculate_alternate_total,
     time_update,
@@ -69,10 +70,13 @@ def save_tbd(bid_id):
             if tbd_name.startswith("work_item_line_tbd_"):
                 line_id = int(tbd_name.strip("work_item_line_tbd_"))
                 work_item_line = WorkItemLine.query.get(line_id)
+                if not work_item_line:
+                    log(log.WARNING, "No work item line with [id:%d] found!", line_id)
+                    return f"No work item line with [id:{line_id}] found!"
                 work_item_line.tbd = True
                 work_item_line.save()
                 log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is True'")
-                return f"Work item line: {tbd_name}"
+                return json.dumps(calculate_link_subtotal(bid_id, line_id))
             elif tbd_name.startswith("alternate_"):
                 return f"Alternate: {tbd_name}"
             else:
@@ -86,7 +90,7 @@ def save_tbd(bid_id):
                 work_item_line.tbd = False
                 work_item_line.save()
                 log(log.INFO, f"Response: 'work_item_line_tbd_id:{line_id} is False'")
-                return f"Work item line: {tbd_name}"
+                return json.dumps(calculate_link_subtotal(bid_id, line_id))
             elif tbd_name.startswith("alternate_"):
                 return f"Alternate: {tbd_name}"
             else:
@@ -112,6 +116,8 @@ def save_tbd(bid_id):
         log(log.ERROR, "No requesr.args")
         return "Error"
 
+# Begin sync requests
+
 
 @bid_blueprint.route(
     "/add_work_item_line/<bid_id>/<int:link_work_item_id>", methods=["GET"]
@@ -121,8 +127,7 @@ def add_work_item_line(bid_id, link_work_item_id):
     WorkItemLine(link_work_items_id=link_work_item_id).save()
     time_update(bid_id)
     session["saveInCloud"] = True
-    session["pageyoffset"] = request.args.get("pageYOffset", "")
-    return redirect(url_for("bid.bidding", bid_id=bid_id))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, pageYOffset=request.args.get("pageYOffset", "")))
 
 
 @bid_blueprint.route("/delete_group/<bid_id>/<group_name>", methods=["GET"])
@@ -139,7 +144,7 @@ def delete_group(bid_id, group_name):
         link.delete()
     group.delete()
     time_update(bid_id)
-    return redirect(url_for("bid.bidding", bid_id=bid_id, pageyoffset=request.args.get("pageYOffset", "")))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, pageYOffset=request.args.get("pageYOffset", "")))
 
 
 @bid_blueprint.route(
@@ -149,7 +154,7 @@ def delete_group(bid_id, group_name):
 def add_group_work_item_line(bid_id, group_link_id):
     WorkItemLine(link_work_items_id=group_link_id).save()
     time_update(bid_id)
-    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_scope_of_work"))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, pageYOffset=request.args.get("pageYOffset", "")))
 
 
 @bid_blueprint.route(
@@ -190,7 +195,7 @@ def delete_link_work_item(bid_id, link_work_item_id):
         session["saveInCloud"] = True
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", link_work_item_id)
-    return redirect(url_for("bid.bidding", bid_id=bid_id, pageyoffset=request.args.get("pageYOffset", "")))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, pageYOffset=request.args.get("pageYOffset", "")))
 
 
 @bid_blueprint.route(
@@ -206,7 +211,7 @@ def delete_group_link_work_item(bid_id, group_link_id):
         time_update(bid_id)
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", group_link_id)
-    return redirect(url_for("bid.bidding", bid_id=bid_id, pageyoffset=request.args.get("pageYOffset", "")))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, pageYOffset=request.args.get("pageYOffset", "")))
 
 
 @bid_blueprint.route(
@@ -220,7 +225,7 @@ def delete_work_item_line(bid_id, work_item_line_id):
         time_update(bid_id)
     else:
         log(log.ERROR, "Unknown work_item_line_id: %d", work_item_line_id)
-    return redirect(url_for("bid.bidding", bid_id=bid_id, pageyoffset=request.args.get("pageYOffset", "")))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, pageYOffset=request.args.get("pageYOffset", "")))
 
 
 @bid_blueprint.route(
