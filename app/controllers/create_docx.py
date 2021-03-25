@@ -176,7 +176,7 @@ def create_docx(bid_id):
         font_bold=True,
         font_size=10.5,
         align='left',
-        style=f'bid_client_{bid.client}'
+        style=f'bid_client_title_{bid.client}'
     )
     write_to_docx(
         cell_paragraph=cell_project,
@@ -552,7 +552,6 @@ def create_docx(bid_id):
     alternate_table.columns[0].width = Cm(5)
     alternate_table.columns[1].width = Cm(11.195)
     alternate_table.columns[2].width = Cm(3.18)
-    alternate_paragraph = row.cells[0].paragraphs[0]
     if bid.alternates:
         for alternate in bid.alternates:
             row = alternate_table.add_row()
@@ -585,6 +584,8 @@ def create_docx(bid_id):
                 style=f'alternate_style_paragrapd_price_{alternate.id}'
             )
     else:
+        row = alternate_table.add_row()
+        alternate_paragraph = row.cells[0].paragraphs[0]
         write_to_docx(
                 insert=True,
                 cell_paragraph=alternate_paragraph,
