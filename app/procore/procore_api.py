@@ -178,6 +178,46 @@ class ProcoreApi:
             return []
         return response.json()
 
+    def get_client(self, project_id) -> dict:
+        """
+        DESCRIPTION:
+            Dict of Client Name and User Id Within A Project.
+        """
+        access_token = self.access_token
+        if not access_token:
+            log(log.ERROR, "ProcoreApi.bids: need access_token!")
+            return []
+        headers = {"Authorization": "Bearer " + access_token}
+        PROCORE_API_BASE_URL = current_app.config["PROCORE_API_BASE_URL"]
+
+        # url = f"{PROCORE_API_BASE_URL}vapid/projects?company_id={PROCORE_API_COMPANY_ID}"
+        url = f"{PROCORE_API_BASE_URL}/rest/v1.0/project_roles?project_id={project_id}"
+
+        log(log.DEBUG, 'Make request to get client')
+        response = requests.get(url, headers=headers)
+        log(log.DEBUG, 'Get response with client')
+        if response.status_code >= 400:
+            res = response.json()
+            log(log.ERROR, res['errors'])
+            return None
+        persons = response.json()
+        if not persons:
+            log(log.DEBUG, "No client for project[%d]", project_id)
+            return dict(
+                client='Information not in Procore',
+                user_id=None
+            )
+        for i, person in enumerate(persons):
+            if person['role'] == 'Client':
+                client = person['name']
+                user_id = person['user_id']
+                break
+            elif i == len(persons) - 1:
+                client = 'Information not in Procore'
+                user_id = None
+        log(log.DEBUG, "Got client: [%s]", client)
+        return dict(client=client, user_id=user_id)
+
     def get_bids(self):
         projects = self.projects
         if projects:
@@ -190,34 +230,55 @@ class ProcoreApi:
             for project in projects:
                 bid = {}
                 project_id = project['id']
+                procore_id = project['project_number'] if project['project_number'] else 'Information not in Procore'
                 name = project['name'] if project['name'] else "Information not in Procore"
-                bid["name"] = name
                 adress_city = ",".join([project[el] for el in project if el in ("city", "state_code", "zip") and project[el] != None])  # noqa E711
                 address_street = project["address"] if project["address"] else "Information not in Procore"
                 if not adress_city:
                     adress_city = "Information not in Procore"
+                bid['project_id'] = project_id
+                bid["name"] = name
                 bid["adress_city"] = adress_city
                 bid["address_street"] = address_street
-                bid["bid_id"] = project_id
+                bid["procore_id"] = procore_id
                 due_date = project["updated_at"]
                 due_date = datetime.strptime(due_date, "%Y-%m-%dT%H:%M:%SZ")
                 bid["due_date"] = due_date
-                url = f"{current_app.config['PROCORE_API_BASE_URL']}/rest/v1.0/projects/{project_id}/vendors"
-                log(log.DEBUG, 'Make request to get project(%d) vendor', project_id)
+
+                # get client information
+                client_info = self.get_client(project_id)
+                if client_info['client'] == 'Information not in Procore' or not client_info:
+                    bid['client'] = 'Information not in Procore'
+                    bid["client_address"] = 'Information not in Procore'
+                    bid["client_city"] = 'Information not in Procore'
+                    bid["business_phone"] = 'Information not in Procore'
+                    bid["email"] = 'Information not in Procore'
+                    bid["fax_number"] = 'Information not in Procore'
+                    bid["contact_name"] = 'Information not in Procore'
+                    bids += [bid]
+                    continue
+
+                url = f"{current_app.config['PROCORE_API_BASE_URL']}/rest/v1.0/projects/{project_id}/users"
+                log(log.DEBUG, 'Make request to get project(%d) client information', project_id)
                 response = requests.get(url, headers=headers)
                 if response.status_code >= 400:
                     res = response.json()
                     log(log.ERROR, res['errors'])
                     return []
-                vendor = response.json()[0]
-                if vendor:
-                    bid["vendor_name"] = vendor["name"]
-                    bid["vendor_address"] = vendor["address"]
-                    bid["vendor_adress_city"] = ",".join([vendor[el] for el in vendor if el in ("city", "state_code", "zip") and vendor[el] != None])  # noqa E711
-                    bid["business_phone"] = vendor["business_phone"]
-                    bid["email"] = vendor["primary_contact"]["email"]
-                    bid["fax_number"] = vendor["fax_number"]
-                    bid["contact"] = vendor["primary_contact"]["name"]
+                users = response.json()
+                if users:
+                    for client in users:
+                        if client['id'] == client_info['user_id']:
+                            client_name = client['name']
+                            log(log.DEBUG, "Get for client [%s] information from Procore", client_name)
+                            bid['client'] = client_name
+                            bid["client_address"] = client['address']
+                            bid["client_city"] = client['city']
+                            bid["business_phone"] = client['business_phone']
+                            bid["email"] = client['email_address']
+                            bid["fax_number"] = client['fax_number']
+                            bid["contact_name"] = client_name
+                            break
                 bids += [bid]
             return bids
 
