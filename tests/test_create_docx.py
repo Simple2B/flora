@@ -2,6 +2,7 @@ import os
 import pytest
 
 from app import db, create_app
+from app.models import Bid
 from app.controllers import create_docx, populate_db_by_test_data
 
 
@@ -16,12 +17,19 @@ def client():
         db.drop_all()
         db.create_all()
         populate_db_by_test_data()
+        client.files_to_remove = []
         yield client
+        for file in client.files_to_remove:
+            os.remove(file)
         db.session.remove()
         db.drop_all()
         app_ctx.pop()
 
 
 def test_create_docx(client):
-    filepath = create_docx(1)
-    os.remove(filepath)
+    BID_ID = Bid.query.first().id
+    assert BID_ID
+    file_path = create_docx(BID_ID)
+    assert file_path
+    assert os.path.isfile(file_path)
+    client.files_to_remove += [file_path]
