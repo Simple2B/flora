@@ -22,7 +22,6 @@ $(document).ready(function () {
   rows.forEach((e) => {
     e.addEventListener('mouseover', (event) => {
       e.classList.add('bid_link');
-      if (event.target) {e.classList.add('bid_link')}
     })
     e.addEventListener('mouseout', () => {
       e.classList.remove('bid_link')
