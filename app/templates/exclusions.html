@@ -57,22 +57,23 @@
 
           <div class="border-none">
             <div class="form-row __add-exclusion--box">
-              <h6 class="__h6-font-style">Add exclusion item</h6>
+              <h6 class="title">Add exclusion item</h6>
               <div>
-                {{form.title(class='_form-input')}}
-                <label class="_label">Title</label>
-              </div>
+                <div>
+                  {{form.title(class='_form-input')}}
+                  <label class="_label">Title</label>
+                </div>
 
-              <div class="__add_new_excl--margin">
-                {{form.submit(class='_btn--blue ddb-cursor-handle')}}
+                <div>
+                  {{form.submit(class='_btn--blue ddb-cursor-handle')}}
+                </div>
               </div>
-
             </div>
           </div>
         </form>
 
         <form class="form" id="exclusions" role="form" action="{{ url_for('exclusion.add_exclusion_to_cart', bid_id=bid.id) }}" method="post">
-          <div id="exclusionTable" class="box-shadow">
+          <div id="exclusionTable">
 
             <span class="t-gray">
               Showing {{ form.exclusions|length }} Exclusions
@@ -117,22 +118,22 @@
           </div>
       </div>
 
+      <div class="vertical-line"></div>
       <div class="__box-table--right">
-        <div class="modal-content border-none" role="document">
-          <h6>Exclusion items cart</h6>
+        <div class="border-none">
+          <h6 class="title">Exclusion items cart</h6>
         </div>
 
         <div class="__table-item--thead">
           <div class="_cart_item--style">Exclusion item cart</div>
         </div>
 
-        <div class="ddb-margin-top box-scroll">
+        <div class="ddb-margin-top box-scroll border-box">
           <table id="selectedExclusionTable" class="patientsTable table table-striped table-sm centralized-text table__work-item">
-            <!-- <thead><th></th><th></th></thead> -->
             <tbody>
               {% for item in exclusion_cart_form.selected_exclusions %}
               <tr>
-                <td><a href="" class="t-gray">{{item.title}}</a></td>
+                <td class="t-gray">{{item.title}}</td>
                 <td>
                   <a href="{{url_for('exclusion.delete_exclusion_item_from_cart', bid_id=bid.id, item_id=item.id)}}"><img
                       src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
@@ -144,7 +145,7 @@
         </div>
         </form>
 
-        <div class="box-shadow __exclusion-box--description">
+        <div class="border-box __exclusion-box--description">
         <form action="">
           <h6>Unless expressly stated, the following exclusions apply:</h6>
           <div class="_box-text--width"> {{exclusion_cart_form.result_text}} </div>

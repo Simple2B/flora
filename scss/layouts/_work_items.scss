@@ -60,7 +60,9 @@
         width: 100%;
         display: inline-flex;
         align-items: baseline;
-        justify-content: space-evenly;;
+        & div {
+            margin-right: $m1rem;
+        }
     }
 
     .__table-item--thead {
@@ -73,7 +75,7 @@
         color: #fff;
 
         ._cart_item--style-work-name {
-            padding-left: 5rem;
+            padding-left: 3rem;
         }
 
     }
@@ -144,9 +146,6 @@
             margin-left: 1rem;
         }
 
-        & ._label {
-            left: 1.5rem;
-        }
     }
 
     & .chart-right__group_name-box {

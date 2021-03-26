@@ -65,7 +65,7 @@
 
 
           <form id="clarifications" class="form" role="form" action="{{ url_for('clarification.add_clarification_item_to_cart', bid_id=bid.id) }}" method="post">
-            <div id="clarificationTable" class="box-shadow __box-table--mtop ddb-margin-top">
+            <div id="clarificationTable" class="__box-table--mtop ddb-margin-top">
               <span class="t-gray">
                 Showing {{ clarifications_list|length }} Clarifications
               </span>
@@ -111,25 +111,21 @@
               </div>
             </div>
         </div>
-
+        <div class="vertical-line"></div>
         <div class="__box-table--right">
-          <div class="modal-content border-none" role="document">
-            <h6>Clarification items cart</h6>
+          <div class="border-none">
+            <h6 class="title">Clarification items cart</h6>
           </div>
 
-          <div class="__box-table--mtop ddb-margin-top box-scroll">
+          <div class="__box-table--mtop ddb-margin-top border-box">
             <div class="__table-item--thead">
               <div class="_cart_item--style">Clarification item cart</div>
             </div>
-            <table id="selectedClarificationTable" class="patientsTable table table-striped table-sm table__work-item">
-              <!-- <thead class="__table--head">
-                <th>Clarification Item</th>
-                <th>Delete</th>
-              </thead> -->
+            <table id="selectedClarificationTable" class="patientsTable table table-striped table-sm table__work-item box-scroll">
               <tbody>
                 {% for item in clarification_cart_form.selected_clarifications %}
                 <tr>
-                  <td><a href="" class="t-gray">{{item.note}}</a></td>
+                  <td class="t-gray">{{item.note}}</td>
                   <td>
                     <a href="{{url_for('clarification.delete_clarification_item_from_cart', item_id=item.id, bid_id=bid.id)}}"><img
                         src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
@@ -141,7 +137,7 @@
           </div>
           </form>
 
-          <div class="box-shadow __clarification-box--description">
+          <div class="border-box __clarification-box--description">
             <form action="">
               <h6>Unless expressly stated, the following clarifications apply:</h6>
               <div> {{clarification_cart_form.result_text}} </div>

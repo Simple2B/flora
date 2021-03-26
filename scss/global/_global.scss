@@ -36,6 +36,18 @@ hr {
     border-top: 3px solid #BDBDBD;
 }
 
+table td {
+    vertical-align: middle !important;
+    text-align: left;
+}
+
+td.t-gray {
+    padding-left: 0.5rem;
+}
+
+h6.title {
+    margin-left: 0.5rem;
+}
 // side-bar style
 .sidebar-container {
     width: 15vw;
@@ -121,10 +133,28 @@ hr {
     margin-bottom: 1rem;
 }
 
+// box border
+.border-box {
+    border: 1px solid #E5E5E5;
+}
+
 .box-shadow {
     // box-shadow: 0 .2rem .2rem rgba(0, 0, 0, 0.25);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+// end
+
+// custom dataTableJS
+#clarificationTable, #exclusionTable {
+    & span.t-gray {
+        padding-left: $m0-5rem;
+    }
+
+    & > div:last-child {
+        padding: $m0-5rem;
+    }
+}
+// end
 
 // profile and alternate container
 .container_60vw {
@@ -153,19 +183,9 @@ hr {
 // end profile and alternate block
 
 .box-scroll {
+    margin-top: 0.2rem;
     max-height: 35vh;
     overflow: auto;
-}
-
-.title-tab {
-    padding: 1rem;
-}
-
-.title-tabs {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.5rem;
-    color: black;
 }
 
 .section-block {
@@ -267,7 +287,7 @@ hr {
     text-align: left;
     height: 2.5rem;
     ._cart_item--style {
-        padding: 0.55rem 0rem 0.55rem 2.35rem;
+        padding: 0.55rem 0rem 0.55rem 0.5rem;
         color: #ffffff;
         font-size: 0.90rem;
         background-color: #828282;
@@ -372,4 +392,9 @@ hr {
 
 ._vertical_centralized {
     vertical-align: middle !important;
+}
+
+.vertical-line {
+    padding-left: 1rem;
+    border-right: 1px solid #E5E5E5;
 }
