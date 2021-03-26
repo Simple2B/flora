@@ -204,7 +204,7 @@ class ProcoreApi:
         if not persons:
             log(log.DEBUG, "No client for project[%d]", project_id)
             return dict(
-                client='Information not in Procore',
+                client='Information is not in Procore',
                 user_id=None
             )
         for i, person in enumerate(persons):
@@ -213,7 +213,7 @@ class ProcoreApi:
                 user_id = person['user_id']
                 break
             elif i == len(persons) - 1:
-                client = 'Information not in Procore'
+                client = 'Information is not in Procore'
                 user_id = None
         log(log.DEBUG, "Got client: [%s]", client)
         return dict(client=client, user_id=user_id)
@@ -227,15 +227,16 @@ class ProcoreApi:
                 return []
             headers = {"Authorization": "Bearer " + access_token}
             bids = []
+            not_info = 'Information is not in Procore'
             for project in projects:
                 bid = {}
                 project_id = project['id']
-                procore_id = project['project_number'] if project['project_number'] else 'Information not in Procore'
-                name = project['name'] if project['name'] else "Information not in Procore"
+                procore_id = project['project_number'] if project['project_number'] else not_info
+                name = project['name'] if project['name'] else not_info
                 adress_city = ",".join([project[el] for el in project if el in ("city", "state_code", "zip") and project[el] != None])  # noqa E711
-                address_street = project["address"] if project["address"] else "Information not in Procore"
+                address_street = project["address"] if project["address"] else not_info
                 if not adress_city:
-                    adress_city = "Information not in Procore"
+                    adress_city = not_info
                 bid['project_id'] = project_id
                 bid["name"] = name
                 bid["adress_city"] = adress_city
@@ -247,14 +248,14 @@ class ProcoreApi:
 
                 # get client information
                 client_info = self.get_client(project_id)
-                if client_info['client'] == 'Information not in Procore' or not client_info:
-                    bid['client'] = 'Information not in Procore'
-                    bid["client_address"] = 'Information not in Procore'
-                    bid["client_city"] = 'Information not in Procore'
-                    bid["business_phone"] = 'Information not in Procore'
-                    bid["email"] = 'Information not in Procore'
-                    bid["fax_number"] = 'Information not in Procore'
-                    bid["contact_name"] = 'Information not in Procore'
+                if client_info['client'] == not_info or not client_info:
+                    bid['client'] = not_info
+                    bid["client_address"] = not_info
+                    bid["client_city"] = ''
+                    bid["business_phone"] = not_info
+                    bid["email"] = not_info
+                    bid["fax_number"] = not_info
+                    bid["contact_name"] = not_info
                     bids += [bid]
                     continue
 
