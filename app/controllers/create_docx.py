@@ -31,8 +31,8 @@ def create_docx(bid_id):
         'Subtotal:': (bid.subtotal, 1),
         'Permit/Filing Free:': (bid.permit_filling_fee, bid.percent_permit_fee),
         'General Conditions:': (bid.general_conditions, bid.percent_general_condition),
-        'Overhead:': (bid.insurance_tax, bid.percent_overhead),
-        'Insurance/Tax:': (bid.overhead, bid.percent_insurance_tax),
+        'Overhead:': (bid.overhead, bid.percent_overhead),
+        'Insurance/Tax:': (bid.insurance_tax, bid.percent_insurance_tax),
         'Profit:': (bid.profit, bid.percent_profit),
         'Bond:': (bid.bond, bid.percent_bond),
         'Grand Total:': (bid.grand_subtotal, 1)
@@ -259,12 +259,12 @@ def create_docx(bid_id):
     write_to_docx(
         cell_paragraph=cell_project_info,
         edit_first_paragraph=True,
-        content=f"{bid.project_type.value} # B-20-034 R{bid.revision}",
+        content=f"{bid.project_type.value} # {bid.procore_bid_id} R{bid.revision}",
         font_bold=True,
         font_size=10.5,
         font_highlight_color=WD_COLOR_INDEX.YELLOW,
         align='left',
-        style=f'bid_project_type_{bid.project_type.value} # B-20-034 R{bid.revision}'
+        style=f'bid_project_type_{bid.project_type.value} # {bid.procore_bid_id} R{bid.revision}'
     )
 
     # /// endblock
@@ -313,7 +313,7 @@ def create_docx(bid_id):
             write_to_docx(
                 insert=True,
                 cell_paragraph=paragraph_2,
-                content=(f'$ {link_work_item.link_subtotal}' if link_work_item.link_subtotal < 0.001 else 'TBD'),
+                content=('TBD' if link_work_item.link_subtotal < 0.001 else f'$ {link_work_item.link_subtotal}'),
                 font_size=10.5,
                 font_bold=True,
                 align='right',
@@ -340,7 +340,7 @@ def create_docx(bid_id):
                 )
                 write_to_docx(
                     cell_paragraph=row.cells[1],
-                    content=f'{work_item_line.description}' + '(TBD)' if {work_item_line.tbd} else '',
+                    content=f'{work_item_line.description}' + ' (TBD)' if work_item_line.tbd else '',
                     font_size=9.5,
                     left_indent=Cm(0.5),
                     style=f'work_item_line_description{work_item_line.id}'
@@ -401,7 +401,7 @@ def create_docx(bid_id):
                 write_to_docx(
                     insert=True,
                     cell_paragraph=paragraph_2,
-                    content=(f'$ {link_work_item.link_subtotal}' if link_work_item.link_subtotal < 0.001 else 'TBD'),
+                    content=('TBD' if link_work_item.link_subtotal < 0.001 else f'$ {link_work_item.link_subtotal}'),
                     font_size=10.5,
                     font_bold=True,
                     align='right',
@@ -428,7 +428,7 @@ def create_docx(bid_id):
                     )
                     write_to_docx(
                         cell_paragraph=row.cells[1],
-                        content=f'{work_item_line.description}' + '(TBD)' if {work_item_line.tbd} else '',
+                        content=f'{work_item_line.description}' + ' (TBD)' if work_item_line.tbd else '',
                         font_size=9.5,
                         left_indent=Cm(0.5),
                         keep_with_next=True,
@@ -458,8 +458,8 @@ def create_docx(bid_id):
     bid_subtotal_table.columns[1].width = Cm(5.695)
     bid_subtotal_table.columns[2].width = Cm(3.18)
 
-    for i, j in enumerate(db_subtotal_data):
-        log(log.DEBUG, "Percent of [%s]", str(db_subtotal_data[j]) + " " + str(db_subtotal_data[j][1]))
+    for i, parametr in enumerate(db_subtotal_data):
+        log(log.DEBUG, "Percent of [%s]", str(db_subtotal_data[parametr]) + " " + str(db_subtotal_data[parametr][1]))
         row = bid_subtotal_table.add_row()
         set_row_height(row, 0.55, pt=False)
         cell_1 = row.cells[1]
@@ -469,21 +469,21 @@ def create_docx(bid_id):
         write_to_docx(
             cell_paragraph=cell_1,
             edit_first_paragraph=True,
-            content=j,
+            content=parametr,
             font_bold=True,
             font_size=10.5,
             align='left',
             left_indent=Cm(1),
-            style=f'bid_data_{j.lower()}'
+            style=f'bid_data_{parametr.lower()}'
         )
         write_to_docx(
             cell_paragraph=cell_2,
             edit_first_paragraph=True,
-            content=(f'$ {check_tbd(j)}' if check_tbd(j) != 'T.B.D' else 'T.B.D'),
+            content=(f'$ {check_tbd(parametr)}' if check_tbd(parametr) != 'T.B.D' else 'T.B.D'),
             font_bold=True,
             align='right',
             font_size=10.5,
-            style=f'bid_data_{db_subtotal_data[j]}_{i}'
+            style=f'bid_data_{db_subtotal_data[parametr]}_{i}'
         )
 
     # /// exclusions, clarifications, alternates blocks
@@ -652,7 +652,7 @@ def create_docx(bid_id):
     # endblock
     document.add_paragraph()
     write_to_docx(
-        content=f'{bid.project_type.value} # B_20_034 REVISED-{bid.revision}',
+        content=f'{bid.project_type.value} # {bid.procore_bid_id} REVISED-{bid.revision}',
         font_size=10,
         after_spacing=10,
         style=f'quote {bid.project_type.value}'
