@@ -22,7 +22,7 @@ class Bid(db.Model, ModelMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     procore_bid_id = db.Column(db.String, nullable=False)
-    title = db.Column(db.String(256), nullable=False)
+    title = db.Column(db.String(128), nullable=False, default='!Unknown project!')
     client = db.Column(db.String(256), nullable=False)
     vendor_address_street = db.Column(db.String(128), nullable=False, default='163 Spring Street')
     vendor_address_city = db.Column(db.String(128), nullable=False, default='Newton, New Jersey 07860')
@@ -32,7 +32,6 @@ class Bid(db.Model, ModelMixin):
     email = db.Column(db.String(128), nullable=False, default='ealbanese@ddbcontracting.com')
     fax = db.Column(db.String(128), nullable=False, default='973 300-0805')
     contact = db.Column(db.String(128), nullable=False, default='Edward Albanese')
-    project_name = db.Column(db.String(128), nullable=False, default='!Unknown project!')
     status = db.Column(db.Enum(Status), default=Status.a_new, nullable=False)
 
     percent_permit_fee = db.Column(db.Float, default=config.PERCENT_PERMIT_FEE)

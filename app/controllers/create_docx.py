@@ -219,7 +219,7 @@ def create_docx(bid_id):
     write_to_docx(
         cell_paragraph=cell_project_name,
         edit_first_paragraph=True,
-        content=f"{bid.project_name}",
+        content=f"{bid.title}",
         font_bold=True,
         font_size=10.5,
         align="left",
