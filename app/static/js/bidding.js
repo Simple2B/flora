@@ -178,6 +178,7 @@ const scrollBlocks = function Scrolling() {
     projectScopeOfWorkBlock.offsetTop <= window.pageYOffset + 2 &&
     projectScopeOfWorkBlock.getBoundingClientRect().bottom >=
       window.innerHeight * 0.55
+    || projectGeneralBlock.getBoundingClientRect().bottom < window.pageYOffset
   ) {
     document
       .querySelector("#sidebar__nav-links-bidding li.active")
