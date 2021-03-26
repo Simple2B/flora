@@ -473,7 +473,7 @@
                                 <div>{{ bid.address_city }}</div>
                                 <div>
                                     <span class="project_quote">
-                                        {{ bid.project_type.value }} # B-20-034 R{{ bid.revision }}
+                                        {{ bid.project_type.value }} # {bid.procore_bid_id} R{{ bid.revision }}
                                     </span>
                                 </div>
                             </div>
@@ -859,7 +859,7 @@
                         <span><strong>No drawings have been received for this project</strong></span>
                         {% endif %}
                         <div class="project_quote_revised">
-                            {{ bid.project_type.value }} # B_20_034 REVISED-{{ bid.revision }}
+                            {{ bid.project_type.value }} # {{ bid.procore_bid_id }} REVISED-{{ bid.revision }}
                         </div>
                     </div>
                 </div>

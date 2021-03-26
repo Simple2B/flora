@@ -24,46 +24,47 @@ def calculate_link_subtotal(bid_id, line_id=None):
             link_work_item.link_subtotal = round(
                 link_work_item.link_subtotal + line_subtotal, 2
             )
-        permit_value = (
+        bid.permit_filling_fee = (
             round((bid.percent_permit_fee * bid_subtotal) / 100, 2)
             if not bid.permit_filling_fee_tbd
-            else "0.0"
+            else 0.0
         )
-        general_value = (
+        bid.general_conditions = (
             round((bid.percent_general_condition * bid_subtotal) / 100, 2)
             if not bid.general_conditions_tbd
-            else "0.0"
+            else 0.0
         )
-        overhead_value = (
+        bid.overhead = (
             round((bid.percent_overhead * bid_subtotal) / 100, 2)
             if not bid.overhead_tbd
-            else "0.0"
+            else 0.0
         )
-        insurance_value = (
+        bid.insurance_tax = (
             round((bid.percent_insurance_tax * bid_subtotal) / 100, 2)
             if not bid.insurance_tax_tbd
-            else "0.0"
+            else 0.0
         )
-        profit_value = (
+        bid.profit = (
             round((bid.percent_profit * bid_subtotal) / 100, 2)
             if not bid.profit_tbd
-            else "0.0"
+            else 0.0
         )
-        bond_value = (
+        bid.bond = (
             round((bid.percent_bond * bid_subtotal) / 100, 2)
             if not bid.bond_tbd
-            else "0.0"
+            else 0.0
         )
         bid.grand_subtotal = round(
             bid_subtotal
-            + float(permit_value)
-            + float(general_value)
-            + float(overhead_value)
-            + float(insurance_value)
-            + float(profit_value)
-            + float(bond_value),
-            2,
+            + bid.permit_filling_fee
+            + bid.general_conditions
+            + bid.overhead
+            + bid.insurance_tax
+            + bid.profit
+            + bid.bond,
+            2
         )
+
         link_work_item.save()
         bid.save()
         return dict(
@@ -72,12 +73,12 @@ def calculate_link_subtotal(bid_id, line_id=None):
             linkWorkItemID=f"{link_work_item.id}",
             linkWorkItemSubtotal=f"{link_work_item.link_subtotal}",
             bidParamValues=dict(
-                permit=permit_value,
-                general=general_value,
-                overhead=overhead_value,
-                insurance=insurance_value,
-                profit=profit_value,
-                bond=bond_value,
+                permit=str(bid.permit_filling_fee),
+                general=str(bid.general_conditions),
+                overhead=str(bid.overhead),
+                insurance=str(bid.insurance_tax),
+                profit=str(bid.profit),
+                bond=str(bid.bond),
             ),
         )
 
