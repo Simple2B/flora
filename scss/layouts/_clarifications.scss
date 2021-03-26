@@ -1,4 +1,5 @@
 @import '../global/variables';
+@import '../global/mixins';
 
 .label--clarification {
     left: 1rem;
@@ -33,7 +34,8 @@
         }
 
         .__add-clarification--box {
-            margin-bottom: $m1rem;
+            margin-bottom: $m0-5rem;
+            margin-left: 0.5rem;
         }
 
         .__add_to_cart--place {
@@ -44,8 +46,7 @@
 
         ._add_to_cart--float-r {
             float: right;
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
+            margin: $m0-5rem $m0-5rem $m0-5rem 0rem;
         }
 
         #clarificationTable {
@@ -58,31 +59,18 @@
     }
 
     .__box-table--right {
-        padding-left: 1rem;
-        width: 47%;
-        position: relative;
+        // @extend %tpl-box-table-right;
+        @include box-table;
 
         .__table-item--thead {
             height: 1.5rem;
             ._cart_item--style {
-                padding: 0.2rem 0rem 0.2rem 2.35rem;
+                padding: 0.2rem 0rem 0.2rem 0.5rem;
             }
         }
 
         .__clarification-box--description {
-            position: absolute;
-            margin-top: 0.5rem;
-            height: 40%;
-            width: 29vw;
-
-            & h6 {
-                font-weight: $fw-700;
-                padding: 1rem;
-                width: 100%;
-            }
-            & div {
-                padding: 0rem 1.2rem 0.1rem 1.2rem;
-            }
+            @extend %tpl-box--description;
         }
 
     }

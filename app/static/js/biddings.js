@@ -1,7 +1,5 @@
-if (document.getElementById("bidding_id").href == window.location.href) {
-  bid_href_id.classList.remove("menu__item");
-  bid_href_id.classList.toggle("active-tab");
-}
+bid_href_id.classList.remove("menu__item");
+bid_href_id.classList.toggle("active-tab");
 
 $(document).ready(function () {
   let table = $("#biddingsTableId").DataTable({
@@ -38,5 +36,6 @@ $(document).ready(function () {
     if (tablePages.includes(event.target.className))
     redirectToBid();
   })
+  document.getElementById("biddingsSearch").addEventListener('change', redirectToBid)
   // endredirect
 });

@@ -31,3 +31,13 @@
     margin: auto;
     text-align: center;
 }
+
+// exclusions and clarifications
+@mixin box-table {
+    padding-left: 1rem;
+    position: relative;
+    min-width: 45.4%;
+    & div.border-box {
+        width: 30vw;
+    }
+}
