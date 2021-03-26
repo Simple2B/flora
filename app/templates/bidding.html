@@ -471,8 +471,8 @@
                 </div>
               </div>
             </div>
+            {% for work_item_line in group_link.work_item_lines %}
             <div class="_work_item-line">
-              {% for work_item_line in group_link.work_item_lines %}
               <div>
                 <div class="_show-line_panel bck-color">
                   <div class="title-text-style">Line {{ loop.index }}
@@ -552,9 +552,8 @@
                   </a>
                 </div>
               </div>
-              {% endfor %} {# end of lines #}
-
             </div>
+            {% endfor %} {# end of lines #}
             {% endfor %} {# end of work item links #}
           </div>
 
@@ -843,7 +842,6 @@
         </div>
         {% endfor %}
         {% endif %}
-        <hr>
         <div class="bidding_margin">
           <div>
             <a href="{{ url_for('alternate.new_alternate', bid_id=bid.id) }}">
