@@ -473,7 +473,7 @@
                                 <div>{{ bid.address_city }}</div>
                                 <div>
                                     <span class="project_quote">
-                                        {{ bid.project_type.value }} # {bid.procore_bid_id} R{{ bid.revision }}
+                                        {{ bid.project_type.value }} # {{bid.procore_bid_id}} R{{ bid.revision }}
                                     </span>
                                 </div>
                             </div>
@@ -621,7 +621,7 @@
                                     {% endif %}
                                 </div>
                                 {% endif %}
-                                {% if percent_general_condition < 0.001 %}
+                                {% if bid.percent_general_condition < 0.001 %}
                                 {% else %}
                                 <div class="feature_price">
                                     <div class="general_padding-r">
@@ -638,7 +638,7 @@
                                     {% endif %}
                                 </div>
                                 {% endif %}
-                                {% if percent_overhead < 0.001 %}
+                                {% if bid.percent_overhead < 0.001 %}
                                 {% else %}
                                 <div class="feature_price">
                                     <div>
@@ -655,7 +655,7 @@
                                     {% endif %}
                                 </div>
                                 {% endif %}
-                                {% if percent_insurance_tax < 0.001 %}
+                                {% if bid.percent_insurance_tax < 0.001 %}
                                 {% else %}
                                 <div class="feature_price">
                                     <div>
