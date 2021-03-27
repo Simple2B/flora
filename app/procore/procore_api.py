@@ -3,6 +3,7 @@ import urllib
 from datetime import datetime, timedelta
 
 from flask import current_app
+from config import BaseConfig as conf
 
 from app.logger import log
 
@@ -10,6 +11,8 @@ from app.logger import log
 class ProcoreApi:
 
     TOKEN_EXPIRED_PERIOD = timedelta(hours=2)
+    __PROCORE_API_BASE_URL = conf.PROCORE_API_BASE_URL
+    __PROCORE_API_COMPANY_ID = conf.PROCORE_API_COMPANY_ID
 
     def __init__(self):
         self.token_updated = None
@@ -28,8 +31,11 @@ class ProcoreApi:
             me_json['id']    = user's login ID
         """
         headers = {"Authorization": "Bearer " + self.access_token}
+        # response = requests.get(
+        #     current_app.config["PROCORE_API_BASE_URL"] + "/vapid/me", headers=headers
+        # )
         response = requests.get(
-            current_app.config["PROCORE_API_BASE_URL"] + "/vapid/me", headers=headers
+            ProcoreApi.__PROCORE_API_BASE_URL + "/vapid/me", headers=headers
         )
         me_json = response.json()
 
@@ -163,11 +169,11 @@ class ProcoreApi:
             log(log.ERROR, "ProcoreApi.bids: need access_token!")
             return []
         headers = {"Authorization": "Bearer " + access_token}
-        PROCORE_API_BASE_URL = current_app.config["PROCORE_API_BASE_URL"]
-        PROCORE_API_COMPANY_ID = current_app.config["PROCORE_API_COMPANY_ID"]
+        # PROCORE_API_BASE_URL = current_app.config["PROCORE_API_BASE_URL"]
+        # PROCORE_API_COMPANY_ID = current_app.config["PROCORE_API_COMPANY_ID"]
 
         # url = f"{PROCORE_API_BASE_URL}vapid/projects?company_id={PROCORE_API_COMPANY_ID}"
-        url = f"{PROCORE_API_BASE_URL}/rest/v1.0/projects?company_id={PROCORE_API_COMPANY_ID}"
+        url = f"{ProcoreApi.__PROCORE_API_BASE_URL}/rest/v1.0/projects?company_id={ProcoreApi.__PROCORE_API_COMPANY_ID}"
 
         log(log.DEBUG, 'Make request to get projects')
         response = requests.get(url, headers=headers)
@@ -188,14 +194,13 @@ class ProcoreApi:
             log(log.ERROR, "ProcoreApi.bids: need access_token!")
             return []
         headers = {"Authorization": "Bearer " + access_token}
-        PROCORE_API_BASE_URL = current_app.config["PROCORE_API_BASE_URL"]
+        # PROCORE_API_BASE_URL = current_app.config["PROCORE_API_BASE_URL"]
 
         # url = f"{PROCORE_API_BASE_URL}vapid/projects?company_id={PROCORE_API_COMPANY_ID}"
-        url = f"{PROCORE_API_BASE_URL}/rest/v1.0/project_roles?project_id={project_id}"
+        url = f"{ProcoreApi.__PROCORE_API_BASE_URL}/rest/v1.0/project_roles?project_id={project_id}"
 
-        log(log.DEBUG, 'Make request to get client')
         response = requests.get(url, headers=headers)
-        log(log.DEBUG, 'Get response with client')
+        log(log.INFO, 'Get response with client')
         if response.status_code >= 400:
             res = response.json()
             log(log.ERROR, res['errors'])
