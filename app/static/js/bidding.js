@@ -21,7 +21,7 @@ drawingLogCloseWrapper.addEventListener("click", (e) => {
 
 const pageYoffset = window.pageYOffset;
 const bidID = document.querySelector(".bidIdJs").getAttribute("value");
-const linkQuery = window.location.search
+const linkQuery = window.location.search;
 if (linkQuery) {
   document.documentElement.scrollTop = Number(linkQuery.split("=").pop());
   window.history.replaceState(
@@ -175,10 +175,10 @@ const scrollBlocks = function Scrolling() {
     document.getElementById("projectGeneralLink_ID").classList.add("active");
   }
   if (
-    projectScopeOfWorkBlock.offsetTop <= window.pageYOffset + 2 &&
-    projectScopeOfWorkBlock.getBoundingClientRect().bottom >=
-      window.innerHeight * 0.55
-    || projectGeneralBlock.getBoundingClientRect().bottom < window.pageYOffset
+    (projectScopeOfWorkBlock.offsetTop <= window.pageYOffset + 2 &&
+      projectScopeOfWorkBlock.getBoundingClientRect().bottom >=
+        window.innerHeight * 0.55) ||
+    projectGeneralBlock.getBoundingClientRect().bottom < window.pageYOffset
   ) {
     document
       .querySelector("#sidebar__nav-links-bidding li.active")
