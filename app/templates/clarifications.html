@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<section class="page-section section-block bidding d-flex overflow-x-hidden" id="wrapper">
+<section class="page-section section-block bidding d-flex" id="wrapper">
   <!-- Sidebar -->
   <div class="sidebar-container" id="sidebar-wrapper">
     <div class="sidebar">
@@ -43,121 +43,118 @@
       </strong></div>
     </div>
 
-    <div class="">
-      <div class="container __box-table-clarification flex-flow-wrap">
-        <div class="__box-table--left">
+    <div class="container __box-table-clarification flex-flow-wrap">
+      <div class="__box-table--left">
 
-          <div class="_form-search">
-            <div>
-              <img src="/static/images/Search_icon.png">
-            </div>
-            <input class="input_search" placeholder="Search" aria-controls="clarificationTable" id="clarificationSearchId">
+        <div class="_form-search">
+          <div>
+            <img src="/static/images/Search_icon.png">
           </div>
-
-          <div class="form-row __add-clarification--box">
-            <h6>Add clarification item</h6>
-
-            <button type="button" data-target="#AddModalClarification" data-toggle="modal" class="_btn--blue ddb-cursor-handle">
-              Add clarification
-            </button>
-
-          </div>
-
-
-          <form id="clarifications" class="form" role="form" action="{{ url_for('clarification.add_clarification_item_to_cart', bid_id=bid.id) }}" method="post">
-            <div id="clarificationTable" class="__box-table--mtop ddb-margin-top">
-              <span class="t-gray">
-                Showing {{ clarifications_list|length }} Clarifications
-              </span>
-
-              <div class="__table-item--thead">
-                <div class="_cart_item--style">Clarification item</div>
-              </div>
-
-              <div>
-                {{ clarification_cart_form.submit(class='_btn--gray _add_to_cart--float-r ddb-cursor-handle', form='clarifications') }}
-              </div>
-
-              <div>
-                <table id="clarificationsTable" class="ddb_base_Table table table-striped table-sm table__work-item">
-                  <thead class="bck-color-table">
-                    <th></th>
-                    <th>Note</th>
-
-                    <th></th>
-                  </thead>
-                  <tbody>
-                    {% for clarification in clarifications_list %}
-                    <tr>
-                      <td><input class="form-control" type="checkbox" name="{{clarification.id}}"></td>
-                      <td>{{clarification.note}}</td>
-
-                      <td><button type="button" value="{{clarification.id}}" class="border-none"
-                        data-toggle="modal" data-target="#AddModalClarification" data-target_link="{{url_for('clarification.edit_clarification_item', item_id=clarification.id, bid_id=bid.id)}}"
-                        data-note="{{clarification.note}}" data-description="{{clarification.description}}">
-                        <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
-                      </button>
-
-                      <button type="button" value="{{clarification.id}}" class="border-none" data-toggle="modal" data-target="#modalDeleteClarification"
-                      data-delete="{{clarification.note}}" data-description="{{clarification.description}}"
-                      data-target_link_clarification_delete="{{url_for('clarification.delete_clarification_item_from_items', item_id=clarification.id, bid_id=bid.id)}}">
-                      <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-                      </button>
-                    </td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+          <input class="input_search" placeholder="Search" aria-controls="clarificationTable" id="clarificationSearchId">
         </div>
-        <div class="vertical-line"></div>
-        <div class="__box-table--right">
-          <div class="border-none">
-            <h6 class="title">Clarification items cart</h6>
-          </div>
 
-          <div class="__box-table--mtop ddb-margin-top border-box">
+        <div class="__add-clarification--box">
+          <h6>Add clarification item</h6>
+
+          <button type="button" data-target="#AddModalClarification" data-toggle="modal" class="_btn--blue ddb-cursor-handle">
+            Add clarification
+          </button>
+
+        </div>
+
+
+        <form id="clarifications" class="form" role="form" action="{{ url_for('clarification.add_clarification_item_to_cart', bid_id=bid.id) }}" method="post">
+          <div id="clarificationTable" class="__box-table--mtop ddb-margin-top">
+            <span class="t-gray">
+              Showing {{ clarifications_list|length }} Clarifications
+            </span>
+
             <div class="__table-item--thead">
-              <div class="_cart_item--style">Clarification item cart</div>
+              <div class="_cart_item--style">Clarification item</div>
             </div>
-            <table id="selectedClarificationTable" class="patientsTable table table-striped table-sm table__work-item box-scroll">
-              <tbody>
-                {% for item in clarification_cart_form.selected_clarifications %}
-                <tr>
-                  <td class="t-gray">{{item.note}}</td>
-                  <td>
-                    <a href="{{url_for('clarification.delete_clarification_item_from_cart', item_id=item.id, bid_id=bid.id)}}"><img
-                        src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
+
+            <div>
+              {{ clarification_cart_form.submit(class='_btn--gray _add_to_cart--float-r ddb-cursor-handle', form='clarifications') }}
+            </div>
+
+            <div>
+              <table id="clarificationsTable" class="ddb_base_Table table table-striped table-sm table__work-item">
+                <thead class="bck-color-table">
+                  <th></th>
+                  <th>Note</th>
+
+                  <th></th>
+                </thead>
+                <tbody>
+                  {% for clarification in clarifications_list %}
+                  <tr>
+                    <td><input class="form-control" type="checkbox" name="{{clarification.id}}"></td>
+                    <td>{{clarification.note}}</td>
+
+                    <td><button type="button" value="{{clarification.id}}" class="border-none"
+                      data-toggle="modal" data-target="#AddModalClarification" data-target_link="{{url_for('clarification.edit_clarification_item', item_id=clarification.id, bid_id=bid.id)}}"
+                      data-note="{{clarification.note}}" data-description="{{clarification.description}}">
+                      <img src="{{ url_for('static', filename='images/edit_element.svg') }}" id="test_t">
+                    </button>
+
+                    <button type="button" value="{{clarification.id}}" class="border-none" data-toggle="modal" data-target="#modalDeleteClarification"
+                    data-delete="{{clarification.note}}" data-description="{{clarification.description}}"
+                    data-target_link_clarification_delete="{{url_for('clarification.delete_clarification_item_from_items', item_id=clarification.id, bid_id=bid.id)}}">
+                    <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                    </button>
                   </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
           </div>
-          </form>
-
-          <div class="border-box __clarification-box--description">
-            <form action="">
-              <h6>Unless expressly stated, the following clarifications apply:</h6>
-              <div> {{clarification_cart_form.result_text}} </div>
-            </form>
-          </div>
-
+      </div>
+      <div class="vertical-line"></div>
+      <div class="__box-table--right">
+        <div class="border-none">
+          <h6 class="title">Clarification items cart</h6>
         </div>
 
-        <div class="__box-add-bid-cancel--margins">
+        <div class="__box-table--mtop ddb-margin-top border-box">
+          <div class="__table-item--thead">
+            <div class="_cart_item--style">Clarification item cart</div>
+          </div>
+          <table id="selectedClarificationTable" class="patientsTable table table-striped table-sm table__work-item box-scroll">
+            <tbody>
+              {% for item in clarification_cart_form.selected_clarifications %}
+              <tr>
+                <td class="t-gray">{{item.note}}</td>
+                <td>
+                  <a href="{{url_for('clarification.delete_clarification_item_from_cart', item_id=item.id, bid_id=bid.id)}}"><img
+                      src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        </form>
 
-            <a class="none-underline _btn--black" href="{{ url_for('clarification.add_clarifications_to_bid', bid_id=bid.id) }}">
-              Add to bidding
-            </a>
-            <a class="_btn--gray" href="{{ url_for('bid.bidding', bid_id=bid.id, _anchor='bid_clarification') }}">
-                Cancel
-            </a>
+        <div class="border-box box--description">
+          <form action="">
+            <h6>Unless expressly stated, the following clarifications apply:</h6>
+            <div> {{clarification_cart_form.result_text}} </div>
+          </form>
         </div>
 
       </div>
-    </div>
+
+      <div class="__box-add-bid-cancel--margins">
+
+          <a class="none-underline _btn--black" href="{{ url_for('clarification.add_clarifications_to_bid', bid_id=bid.id) }}">
+            Add to bidding
+          </a>
+          <a class="_btn--gray" href="{{ url_for('bid.bidding', bid_id=bid.id, _anchor='bid_clarification') }}">
+              Cancel
+          </a>
+      </div>
+
     </div>
   </div>
 </section>

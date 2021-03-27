@@ -396,5 +396,10 @@ h6.title {
 
 .vertical-line {
     padding-left: 1rem;
+    margin-right: 1rem;
     border-right: 1px solid #E5E5E5;
+}
+
+.box--description {
+    @extend %tpl-box--description;
 }

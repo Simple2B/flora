@@ -54,44 +54,16 @@
         }
     }
 
-    .__border-none {
-        border: none;
-    }
-
     .__box-table--right {
-        // @extend %tpl-box-table-right;
         @include box-table;
-
-        .__table-item--thead {
-            height: 1.5rem;
-            ._cart_item--style {
-                padding: 0.2rem 0rem 0.2rem 0.5rem;
-            }
-        }
-
-        .__clarification-box--description {
-            @extend %tpl-box--description;
-        }
-
-    }
-
-    & h6 {
-        margin-top: $m1rem;
-        font-weight: $fw-700;
-
-        &:first-child {
-            width: 150%;
-        }
     }
 }
-
 
 .text--center {
     text-align: center;
 }
 
 ._add_new_clarification--modal {
-
 
     ._input--label{
         left: 6rem;

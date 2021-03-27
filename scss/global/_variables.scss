@@ -49,7 +49,7 @@ $border-bottom: 5px solid #175593;
     flex-flow: column;
     margin-left: auto;
     margin-right: auto;
-    width: 75vw;
+    width: 85vw;
 
     .__bid-header {
         background-color: black;
@@ -73,14 +73,20 @@ $border-bottom: 5px solid #175593;
     // max-height: 90vh;
     box-shadow: $shadow;
     overflow: visible;
+    .__border-none {
+        border: none;
+    }
+    & h6 {
+        margin-top: $m1rem;
+        font-weight: $fw-700;
+    }
 }
 
 // box description for exclusions and clarifications
 %tpl-box--description {
-    position: absolute;
     margin-top: 0.5rem;
-    height: 40%;
-
+    min-height: 35%;
+    overflow: auto;
     & h6 {
         font-weight: $fw-700;
         padding-left: 0.5rem;
