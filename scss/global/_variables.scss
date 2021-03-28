@@ -85,7 +85,7 @@ $border-bottom: 5px solid #175593;
 // box description for exclusions and clarifications
 %tpl-box--description {
     margin-top: 0.5rem;
-    min-height: 35%;
+    min-height: 100%;
     overflow: auto;
     & h6 {
         font-weight: $fw-700;

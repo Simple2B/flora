@@ -112,40 +112,39 @@
       </div>
       <div class="vertical-line"></div>
       <div class="__box-table--right">
-        <div class="border-none">
-          <h6 class="title">Clarification items cart</h6>
-        </div>
-
-        <div class="__box-table--mtop ddb-margin-top border-box">
-          <div class="__table-item--thead">
-            <div class="_cart_item--style">Clarification item cart</div>
+        <div>
+          <div class="border-none">
+            <h6 class="title">Clarification items cart</h6>
           </div>
-          <table id="selectedClarificationTable" class="patientsTable table table-striped table-sm table__work-item box-scroll">
-            <tbody>
-              {% for item in clarification_cart_form.selected_clarifications %}
-              <tr>
-                <td class="t-gray">{{item.note}}</td>
-                <td>
-                  <a href="{{url_for('clarification.delete_clarification_item_from_cart', item_id=item.id, bid_id=bid.id)}}"><img
-                      src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        </form>
 
-        <div class="border-box box--description">
-          <form action="">
-            <h6>Unless expressly stated, the following clarifications apply:</h6>
-            <div> {{clarification_cart_form.result_text}} </div>
+          <div class="__box-table--mtop ddb-margin-top border-box">
+            <div class="__table-item--thead">
+              <div class="_cart_item--style">Clarification item cart</div>
+            </div>
+            <table id="selectedClarificationTable" class="patientsTable table table-striped table-sm table__work-item box-scroll">
+              <tbody>
+                {% for item in clarification_cart_form.selected_clarifications %}
+                <tr>
+                  <td class="t-gray">{{item.note}}</td>
+                  <td>
+                    <a href="{{url_for('clarification.delete_clarification_item_from_cart', item_id=item.id, bid_id=bid.id)}}"><img
+                        src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
           </form>
+
+          <div class="border-box box--description">
+            <form action="">
+              <h6>Unless expressly stated, the following clarifications apply:</h6>
+              <div> {{clarification_cart_form.result_text}} </div>
+            </form>
+          </div>
         </div>
-
-      </div>
-
-      <div class="__box-add-bid-cancel--margins">
+        <div class="__box-add-bid-cancel--margins">
 
           <a class="none-underline _btn--black" href="{{ url_for('clarification.add_clarifications_to_bid', bid_id=bid.id) }}">
             Add to bidding
@@ -154,7 +153,7 @@
               Cancel
           </a>
       </div>
-
+      </div>
     </div>
   </div>
 </section>

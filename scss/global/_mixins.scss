@@ -35,6 +35,9 @@
 // exclusions and clarifications
 @mixin box-table {
     width: 30vw;
+    display: flex;
+    flex-direction: column;
+
     .__table-item--thead {
         height: 1.5rem;
         ._cart_item--style {

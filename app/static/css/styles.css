@@ -41,7 +41,7 @@
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -382,7 +382,7 @@ h6.title {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -445,7 +445,7 @@ h6.title {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -637,7 +637,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -689,7 +689,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -852,7 +852,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -924,7 +924,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -976,7 +976,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -1063,7 +1063,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -1161,7 +1161,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -1324,7 +1324,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -1376,7 +1376,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -2098,7 +2098,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -2290,7 +2290,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -2433,7 +2433,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -2631,7 +2631,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -2683,7 +2683,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -2738,7 +2738,9 @@ button {
     margin-top: 1rem; }
 
 .__box-table-exclusion .__box-table--right {
-  width: 30vw; }
+  width: 30vw;
+  display: flex;
+  flex-direction: column; }
   .__box-table-exclusion .__box-table--right .__table-item--thead {
     height: 1.5rem; }
     .__box-table-exclusion .__box-table--right .__table-item--thead ._cart_item--style {
@@ -2793,7 +2795,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -2845,7 +2847,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -2887,7 +2889,9 @@ button {
     margin-top: 1rem; }
 
 .__box-table-clarification .__box-table--right {
-  width: 30vw; }
+  width: 30vw;
+  display: flex;
+  flex-direction: column; }
   .__box-table-clarification .__box-table--right .__table-item--thead {
     height: 1.5rem; }
     .__box-table-clarification .__box-table--right .__table-item--thead ._cart_item--style {
@@ -2961,7 +2965,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -3013,7 +3017,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
@@ -3102,7 +3106,7 @@ button {
 
 .box--description {
   margin-top: 0.5rem;
-  min-height: 35%;
+  min-height: 100%;
   overflow: auto; }
   .box--description h6 {
     font-weight: 700;
