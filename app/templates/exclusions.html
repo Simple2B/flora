@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<section class="page-section section-block bidding d-flex overflow-x-hidden" id="wrapper">
+<section class="page-section section-block bidding d-flex" id="wrapper">
 
   <!-- Sidebar -->
   <div class="sidebar-container" id="sidebar-wrapper">
@@ -56,7 +56,7 @@
         <form role="form" action="{{ url_for('exclusion.add_new_exclusion', bid_id=bid.id) }}" method="post">
 
           <div class="border-none">
-            <div class="form-row __add-exclusion--box">
+            <div class="__add-exclusion--box">
               <h6 class="title">Add exclusion item</h6>
               <div>
                 <div>
@@ -120,48 +120,48 @@
 
       <div class="vertical-line"></div>
       <div class="__box-table--right">
-        <div class="border-none">
-          <h6 class="title">Exclusion items cart</h6>
+        <div>
+          <div class="border-none">
+            <h6 class="title">Exclusion items cart</h6>
+          </div>
+
+          <div class="__table-item--thead">
+            <div class="_cart_item--style">Exclusion item cart</div>
+          </div>
+
+          <div class="ddb-margin-top box-scroll border-box">
+            <table id="selectedExclusionTable" class="patientsTable table table-striped table-sm centralized-text table__work-item">
+              <tbody>
+                {% for item in exclusion_cart_form.selected_exclusions %}
+                <tr>
+                  <td class="t-gray">{{item.title}}</td>
+                  <td>
+                    <a href="{{url_for('exclusion.delete_exclusion_item_from_cart', bid_id=bid.id, item_id=item.id)}}"><img
+                        src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          </form>
+
+          <div class="border-box box--description">
+          <form action="">
+            <h6>Unless expressly stated, the following exclusions apply:</h6>
+            <div class="_box-text--width"> {{exclusion_cart_form.result_text}} </div>
+          </form>
+          </div>
         </div>
 
-        <div class="__table-item--thead">
-          <div class="_cart_item--style">Exclusion item cart</div>
+        <div class="__box-add-bid-cancel--margins">
+          <a class="none-underline _btn--black" href="{{ url_for('exclusion.add_exclusions_to_bid', bid_id=bid.id) }}">
+            Add to bidding
+          </a>
+          <a class="_btn--gray" href="{{ url_for('bid.bidding', bid_id=bid.id, _anchor='bid_exclusion') }}">
+              Cancel
+          </a>
         </div>
-
-        <div class="ddb-margin-top box-scroll border-box">
-          <table id="selectedExclusionTable" class="patientsTable table table-striped table-sm centralized-text table__work-item">
-            <tbody>
-              {% for item in exclusion_cart_form.selected_exclusions %}
-              <tr>
-                <td class="t-gray">{{item.title}}</td>
-                <td>
-                  <a href="{{url_for('exclusion.delete_exclusion_item_from_cart', bid_id=bid.id, item_id=item.id)}}"><img
-                      src="{{ url_for('static', filename='images/delete_element.svg') }}"></a>
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        </form>
-
-        <div class="border-box __exclusion-box--description">
-        <form action="">
-          <h6>Unless expressly stated, the following exclusions apply:</h6>
-          <div class="_box-text--width"> {{exclusion_cart_form.result_text}} </div>
-        </form>
-        </div>
-
-
-      </div>
-
-      <div class="__box-add-bid-cancel--margins">
-        <a class="none-underline _btn--black" href="{{ url_for('exclusion.add_exclusions_to_bid', bid_id=bid.id) }}">
-          Add to bidding
-        </a>
-        <a class="_btn--gray" href="{{ url_for('bid.bidding', bid_id=bid.id, _anchor='bid_exclusion') }}">
-            Cancel
-        </a>
       </div>
 
     </div>
