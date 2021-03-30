@@ -2,7 +2,6 @@
 
 .work-items-section {
     display: flex;
-    flex-flow: row wrap;
 
     & .ddb__side_bar {
         max-height: 50vh;
@@ -13,6 +12,7 @@
 
 .main-container {
     @extend %tpl_main-container;
+    width: 80vw !important;
 
     .__body {
         display: flex;
