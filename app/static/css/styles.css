@@ -2443,25 +2443,24 @@ button {
     padding: 0rem 1.2rem 0.1rem 0.5rem; }
 
 .work-items-section {
-  display: flex;
-  flex-flow: row wrap; }
+  display: flex; }
   .work-items-section .ddb__side_bar {
     max-height: 50vh;
     cursor: pointer; }
 
-.main-container .__body {
-  display: flex;
-  flex-flow: column wrap;
-  width: 100%;
-  min-height: 75vh;
-  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25); }
-
-.main-container .tables-block {
-  display: flex;
-  flex-flow: row wrap; }
-
-.main-container .btns-block {
-  margin-right: 1rem; }
+.main-container {
+  width: 80vw !important; }
+  .main-container .__body {
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+    min-height: 75vh;
+    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25); }
+  .main-container .tables-block {
+    display: flex;
+    flex-flow: row wrap; }
+  .main-container .btns-block {
+    margin-right: 1rem; }
 
 .chart-left {
   padding: 0.7rem;
