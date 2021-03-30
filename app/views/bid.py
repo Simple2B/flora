@@ -486,15 +486,16 @@ def project_type(bid_id, project_type_name):
 
 
 @bid_blueprint.route(
-    "/set_percent_value/<int:bid_id>/<parameter_name>/<value>", methods=["GET"]
+    "/set_percent_value/<int:bid_id>", methods=["GET"]
 )
 @login_required
-def set_percent_value(bid_id, parameter_name, value):
+def set_percent_value(bid_id):
     bid = Bid.query.get(bid_id)
+    parameter_name = request.args.get('name', '')
     if parameter_name not in dir(bid):
         log(log.ERROR, "set_percent_value: wrong parameter_name:[%s]", parameter_name)
         return "ERROR"
-    bid.__setattr__(parameter_name, value.strip("% "))
+    bid.__setattr__(parameter_name, request.args['value'].strip("% "))
     bid.save()
     calculate_subtotal(bid_id=bid_id)
     return "OK"
