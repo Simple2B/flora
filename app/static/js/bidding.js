@@ -506,7 +506,7 @@ document.querySelectorAll(".percent_parameter").forEach((e) => {
     // Update percent parameter value in the DB
     const storeInDB = async () => {
       const response = await fetch(
-        `/set_percent_value/${bidID}/${e.id}/${e.value}`,
+        `/set_percent_value/${bidID}?name=${e.id}&value=${e.value}`,
         { method: "GET" }
       );
       if (!response.ok) {
