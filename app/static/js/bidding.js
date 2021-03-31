@@ -21,7 +21,7 @@ drawingLogCloseWrapper.addEventListener("click", (e) => {
 
 const pageYoffset = window.pageYOffset;
 const bidID = document.querySelector(".bidIdJs").getAttribute("value");
-const linkQuery = window.location.search
+const linkQuery = window.location.search;
 if (linkQuery) {
   document.documentElement.scrollTop = Number(linkQuery.split("=").pop());
   window.history.replaceState(
@@ -30,55 +30,6 @@ if (linkQuery) {
     "/" + "bidding/" + `${bidID}`
   );
 }
-
-// edit work item line
-const updateWorkItemLine = async (el) => {
-  const lineID = document
-    .getElementById("btn_line_id")
-    .dataset.line_id.slice(5);
-  const linePrice = document.getElementById("wIl-price");
-  const lineQuantity = document.getElementById("wIl-quantity");
-  const lineGroupPrice = document.getElementById("wIgL-price");
-  const lineGroupQuantity = document.getElementById("wIgL-quantity");
-
-  let formData = new FormData();
-  formData.append(`submit`, true);
-  if (el.name.startsWith("g-")) {
-    el.name = el.name.slice([2]);
-    if (el.name === "quantity") {
-      formData.append("price", `${lineGroupPrice.value}`);
-    }
-    if (el.name === "price") {
-      formData.append("quantity", `${lineGroupQuantity.value}`);
-    } else {
-      formData.append("price", `${lineGroupPrice.value}`);
-      formData.append("quantity", `${lineGroupQuantity.value}`);
-    }
-  } else {
-    if (el.name === "quantity") {
-      formData.append("price", `${linePrice.value}`);
-    }
-    if (el.name === "price") {
-      formData.append("quantity", `${lineQuantity.value}`);
-    } else {
-      formData.append("price", `${linePrice.value}`);
-      formData.append("quantity", `${lineQuantity.value}`);
-    }
-  }
-  formData.append(`${el.name}`, `${el.value}`);
-  fetch(
-    `/edit_work_item_line/${bidID}/${el.dataset.wil_id}?pageYOffset=${pageYoffset}`,
-    {
-      body: formData,
-      method: "POST",
-    }
-  ).then((response) => {
-    if (!response.ok) {
-      console.error("Error update due date!");
-    }
-  });
-};
-// endedit block
 
 // Sidebar
 if (window.location.hash) {
@@ -175,10 +126,10 @@ const scrollBlocks = function Scrolling() {
     document.getElementById("projectGeneralLink_ID").classList.add("active");
   }
   if (
-    projectScopeOfWorkBlock.offsetTop <= window.pageYOffset + 2 &&
-    projectScopeOfWorkBlock.getBoundingClientRect().bottom >=
-      window.innerHeight * 0.55
-    || projectGeneralBlock.getBoundingClientRect().bottom < window.pageYOffset
+    (projectScopeOfWorkBlock.offsetTop <= window.pageYOffset + 2 &&
+      projectScopeOfWorkBlock.getBoundingClientRect().bottom >=
+        window.innerHeight * 0.55) ||
+    projectGeneralBlock.getBoundingClientRect().bottom < window.pageYOffset
   ) {
     document
       .querySelector("#sidebar__nav-links-bidding li.active")
@@ -294,6 +245,91 @@ closeWrapper.addEventListener("click", (e) => {
   }
 });
 
+// begin async functions
+
+const bidGrandSubtotal = document.getElementById("grand_subtotal_id");
+const bidSubtotal = document.getElementById("subtotal_id");
+const subtotalProjectGeneral = document.getElementById(
+  "subtotal_project_general_id"
+);
+const addsOn = document.getElementById("addson_project_general_id");
+const grandSubtotalProjectGeneral = document.getElementById(
+  "grand_subtotal_project_general_id"
+);
+
+function updateSubtotalValues(subtotalValue, grandSubtotalValue, addsOnValue) {
+  bidGrandSubtotal.innerText = "$ " + grandSubtotalValue;
+  bidSubtotal.innerText = "$ " + subtotalValue;
+  subtotalProjectGeneral.innerHTML = `Subtotal: &nbsp; &nbsp; ${subtotalValue}`;
+  addsOn.innerHTML = `Adds-on: &nbsp; &nbsp; ${addsOnValue}`;
+  grandSubtotalProjectGeneral.innerHTML = `<strong> Grand Total &nbsp; &nbsp; ${grandSubtotalValue}</strong>`;
+}
+
+// edit work item line
+const updateWorkItemLine = async (el) => {
+  const lineID = el.dataset.wil_id;
+  const linePrice = document.querySelector(`#line-${lineID} #wIl-price`);
+  const lineQuantity = document.querySelector(`#line-${lineID} #wIl-quantity`);
+  const lineGroupPrice = document.querySelector(`#line-${lineID} #wIgL-price`);
+  const lineGroupQuantity = document.querySelector(
+    `#line-${lineID} #wIgL-quantity`
+  );
+
+  let formData = new FormData();
+  formData.append(`submit`, true);
+  if (el.name.startsWith("g-")) {
+    el.name = el.name.slice([2]);
+    if (el.name === "quantity") {
+      formData.append("price", `${lineGroupPrice.value}`);
+    }
+    if (el.name === "price") {
+      formData.append("quantity", `${lineGroupQuantity.value}`);
+    } else {
+      formData.append("price", `${lineGroupPrice.value}`);
+      formData.append("quantity", `${lineGroupQuantity.value}`);
+    }
+  } else {
+    if (el.name === "quantity") {
+      formData.append("price", `${linePrice.value}`);
+    }
+    if (el.name === "price") {
+      formData.append("quantity", `${lineQuantity.value}`);
+    } else {
+      formData.append("price", `${linePrice.value}`);
+      formData.append("quantity", `${lineQuantity.value}`);
+    }
+  }
+  formData.append(`${el.name}`, `${el.value}`);
+  const test = fetch(
+    `/edit_work_item_line/${bidID}/${lineID}?pageYOffset=${pageYoffset}`,
+    {
+      body: formData,
+      method: "POST",
+    }
+  )
+    .then((response) => response.json())
+    .then((resData) => {
+      const grandSubtotalValue =
+        Math.round((resData.grandSubtotal + Number.EPSILON) * 100) / 100;
+      const subtotalValue =
+        Math.round((resData.subtotal + Number.EPSILON) * 100) / 100;
+      const addsOnValue =
+        Math.round((grandSubtotalValue - subtotalValue) * 100) / 100;
+
+      // work item line subtotal
+      const linkSubtotal = document.getElementById(
+        `link_subtotal-${resData.linkWorkItemID}`
+      );
+      if (linkSubtotal) {
+        linkSubtotal.value = "$ " + `${resData.linkWorkItemSubtotal}`;
+        setParamValues(resData.bidParamValues);
+      }
+      // end
+      updateSubtotalValues(subtotalValue, grandSubtotalValue, addsOnValue);
+    });
+};
+// endedit block
+
 // Due Date
 const dueDate = document.getElementById("due_date_id");
 dueDate.addEventListener("change", () => {
@@ -392,16 +428,6 @@ function setParamValues(bidParamValues) {
   });
 }
 
-const bidGrandSubtotal = document.getElementById("grand_subtotal_id");
-const bidSubtotal = document.getElementById("subtotal_id");
-const subtotalProjectGeneral = document.getElementById(
-  "subtotal_project_general_id"
-);
-const addsOn = document.getElementById("addson_project_general_id");
-const grandSubtotalProjectGeneral = document.getElementById(
-  "grand_subtotal_project_general_id"
-);
-
 inputs.forEach((el) => {
   el.addEventListener("click", () => {
     if (el.checked) {
@@ -412,9 +438,7 @@ inputs.forEach((el) => {
             { method: "GET" }
           );
           if (response.ok) {
-            console.log(response);
             const resData = await response.json();
-            console.log(resData);
 
             const grandSubtotalValue =
               Math.round((resData.grandSubtotal + Number.EPSILON) * 100) / 100;
@@ -435,12 +459,11 @@ inputs.forEach((el) => {
                 "$ " + "0.0";
             }
             // end
-
-            bidGrandSubtotal.innerText = "$ " + grandSubtotalValue;
-            bidSubtotal.innerText = "$ " + subtotalValue;
-            subtotalProjectGeneral.innerHTML = `Subtotal: &nbsp; &nbsp; ${subtotalValue}`;
-            addsOn.innerHTML = `Adds-on: &nbsp; &nbsp; ${addsOnValue}`;
-            grandSubtotalProjectGeneral.innerHTML = `<strong> Grand Total &nbsp; &nbsp; ${grandSubtotalValue}</strong>`;
+            updateSubtotalValues(
+              subtotalValue,
+              grandSubtotalValue,
+              addsOnValue
+            );
           }
         } catch (err) {
           console.warn(err);
@@ -456,7 +479,6 @@ inputs.forEach((el) => {
           );
           if (response.ok) {
             const resData = await response.json();
-            console.log(resData);
 
             const grandSubtotalValue =
               Math.round((resData.grandSubtotal + Number.EPSILON) * 100) / 100;
@@ -477,12 +499,11 @@ inputs.forEach((el) => {
                 "$ " + resData.bid_param_value;
             }
             // end
-
-            bidGrandSubtotal.innerText = "$ " + grandSubtotalValue;
-            bidSubtotal.innerText = "$ " + subtotalValue;
-            subtotalProjectGeneral.innerHTML = `Subtotal: &nbsp; &nbsp; ${subtotalValue}`;
-            addsOn.innerHTML = `Adds-on: &nbsp; &nbsp; ${addsOnValue}`;
-            grandSubtotalProjectGeneral.innerHTML = `<strong> Grand Total &nbsp; &nbsp; ${grandSubtotalValue}</strong>`;
+            updateSubtotalValues(
+              subtotalValue,
+              grandSubtotalValue,
+              addsOnValue
+            );
           }
         } catch (err) {
           console.warn(err);
