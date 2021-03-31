@@ -116,12 +116,6 @@ def save_tbd(bid_id):
         log(log.ERROR, "No requesr.args")
         return "Error"
 
-
-# @bid_blueprint.route("/calculate_work_item_line/<int:bid_id>", methods=["GET"])
-# @login_required
-# def calculate_work_item_line(bid_id):
-
-
 # Begin sync requests
 
 
@@ -189,7 +183,6 @@ def edit_work_item_line(bid_id, work_item_line_id):
         else:
             log(log.ERROR, "Unknown work_item_line_id: %d", work_item_line_id)
             return f"Unknown work_item_line_id: {work_item_line_id}"
-    # return redirect(url_for("bid.bidding", bid_id=bid_id, pageyoffset=request.args.get("pageYOffset", "")))
     return json.dumps(calculate_link_subtotal(bid_id, work_item_line_id))
 
 
