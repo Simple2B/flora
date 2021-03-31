@@ -347,15 +347,11 @@
                   <div class="text-areas">
                     <div>
                       <textarea class="_form-text_area" name="note" cols="30" rows="10" placeholder="Enter Note here..."
-                      onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">
-                          {{work_item_line.note}}
-                      </textarea>
+                      onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">{{work_item_line.note}}</textarea>
                     </div>
                     <div>
                       <textarea class="_form-text_area" name="description" cols="30" rows="10"
-                        placeholder="Enter Description here..." data-wil_id="{{work_item_line.id}}" onblur="updateWorkItemLine(this)">
-                          {{work_item_line.description}}
-                      </textarea>
+                        placeholder="Enter Description here..." data-wil_id="{{work_item_line.id}}" onblur="updateWorkItemLine(this)">{{work_item_line.description}}</textarea>
                     </div>
                   </div>
                   <div class="inputs-features">
@@ -385,16 +381,6 @@
               </div>
             </div>
             <div class="_edit_delete-btns">
-              <!-- <div class="edit-height">
-                <button class="border-none ddb-cursor-handle bck-white" type="button"
-                  data-target="#modalWorkItemLineEdit" data-toggle="modal" data-note="work_item_line.description"
-                  data-description="work_item_line.note" data-quantity="work_item_line.quantity"
-                  data-unit="work_item_line.unit" data-price="work_item_line.price"
-                  data-tbd="work_item_line.tbd"
-                  data-target_link="url_for('bid.edit_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)">
-                  <img src=" url_for('static', filename='images/edit_element.svg') ">
-                </button>
-              </div> -->
               <div class="delete-height">
                 <a class="border-none ddb-cursor-handle bck-white"
                   href="{{url_for('bid.delete_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)}}">
@@ -497,15 +483,11 @@
                     <div class="text-areas">
                       <div>
                         <textarea class="_form-text_area" name="g-note" cols="30" rows="10" placeholder="Enter Note here..."
-                        onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">
-                            {{work_item_line.note}}
-                        </textarea>
+                        onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">{{work_item_line.note}}</textarea>
                       </div>
                       <div>
                         <textarea class="_form-text_area" name="g-description" cols="30" rows="10" placeholder="Enter Note here..."
-                        onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">
-                            {{work_item_line.description}}
-                        </textarea>
+                        onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">{{work_item_line.description}}</textarea>
                       </div>
                     </div>
                     <div class="inputs-features">
@@ -535,16 +517,6 @@
                 </div>
               </div>
               <div class="_edit_delete-btns">
-                <!-- <div class="edit-height">
-                  <button class="border-none ddb-cursor-handle bck-white" type="button"
-                    data-target="#modalWorkItemLineEdit" data-toggle="modal" data-note="work_item_line.description"
-                    data-description="work_item_line.note" data-quantity="work_item_line.quantity"
-                    data-unit="work_item_line.unit" data-price="work_item_line.price"
-                    data-tbd="work_item_line.tbd"
-                    data-target_link="url_for('bid.edit_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)">
-                    <img src=" url_for('static', filename='images/edit_element.svg') ">
-                  </button>
-                </div> -->
                 <div class="delete-height">
                   <a class="border-none ddb-cursor-handle bck-white"
                     href="{{url_for('bid.delete_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)}}">
@@ -907,7 +879,6 @@
     </div>
   </div>
 </div>
-<!-- end of Edit Modal -->
 <!-- Modal Export -->
 <div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="ModalExport" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
