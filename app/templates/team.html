@@ -11,29 +11,6 @@
         Add new
       </button>
     </div>
-    <!-- Flash Massage -->
-    <!-- {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category, message in messages %}
-    {% if category == 'warning' %}
-    <div class="alert alert- category  alert-dismisible _profile_flash">
-      <button class="_flash-btn" type="button" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true"><img src=" url_for('static', filename='images/close_button_ddb.svg') "></span>
-      </button>
-      {{ message }}
-    </div>
-    {% else %}
-    <div class="alert alert- category  alert-dismisible _profile_flash">
-      <button class="_flash-btn" type="button" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true"><img src=" url_for('static', filename='images/close_button_ddb.svg') "></span>
-      </button>
-      {{ message }}
-    </div>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-    {% endwith %} -->
-    <!-- End Flash Massage -->
     <div class="team-cards">
       {% for user in users %}
         <div class="user-card">
@@ -51,11 +28,13 @@
             </div>
           </div>
           <div class="user-card__edit_and_delete">
+            {% if user.user_type.value != 'admin' %}
             <button class="border-none ddb-cursor-handle" type="button" data-toggle="modal" data-target="#deleteTeamModal"
               data-username="{{ user.username }}" data-position="{{ user.position }}" data-email="{{ user.email }}"
               data-phone="{{ user.phone }}" data-delete_card-link="{{ url_for('team.delete_card', user_id=user.id) }}">
               <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
             </button>
+            {% endif %}
             <button type="button" class="border-none ddb-cursor-handle"
               data-toggle="modal" data-target="#editTeamModal"
               data-username="{{ user.username }}" data-position="{{ user.position }}" data-email="{{ user.email }}"
