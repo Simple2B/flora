@@ -97,4 +97,3 @@ def test_edit_user(client):
         password_confirmation="Another value"
     ), follow_redirects=True)
     assert res.status_code == 200
-    assert b"Password do not match" in res.data
