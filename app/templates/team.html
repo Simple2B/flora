@@ -167,8 +167,13 @@
           </div>
         </form>
       </div>
-      <div class="bt_add-new-user">
-        {{form.submit(class='_btn--black', form='edit_user-form', value='Save')}}
+      <div class="form-row">
+        <div class="bt_add-new-user">
+          {{form.submit(class='_btn--black', form='edit_user-form', value='Save')}}
+        </div>
+        <div class="">
+          <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
+        </div>
       </div>
     </div>
   </div>
