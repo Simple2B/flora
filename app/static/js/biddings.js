@@ -20,15 +20,21 @@ $(document).ready(function () {
   function redirectToBid() {
     const rows = Array.from(document.querySelectorAll("#biddingsTableId tr")).slice(1)
     rows.forEach((e) => {
-      e.addEventListener('mouseover', () => {
+      const redirect = () => {
+        window.location.href = e.querySelector('a').href;
+      };
+      e.addEventListener('mouseover', (event) => {
         e.classList.add('bid_link');
+        if (event.target.className == "form-control") {
+          e.removeEventListener('click', redirect)
+        } else {
+          e.addEventListener('click', redirect)
+        }
       })
       e.addEventListener('mouseout', () => {
         e.classList.remove('bid_link')
       })
-      e.addEventListener('click', () => {
-        window.location.href = e.querySelector('a').href;
-      })
+      e.addEventListener('click', redirect)
     })
   };
   redirectToBid();
