@@ -255,7 +255,7 @@ def delete_exclusions(bid_id):
         exclusion_link.delete()
     session["saveInCloud"] = True
     time_update(bid_id)
-    return redirect(url_for("bidding.bidding", bid_id=bid_id, _anchor="bid_exclusion"))
+    return redirect(url_for("bid.bidding", bid_id=bid_id, _anchor="bid_exclusion"))
 
 
 @bid_blueprint.route("/edit_exclusions/<int:bid_id>")
