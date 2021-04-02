@@ -70,6 +70,11 @@ myProfileSubmitBtn.setAttribute("value", window.location.href);
 const sideBarNavLinks = document.querySelectorAll(
   "#sidebar__nav-links-bidding li"
 );
+
+/// part of bidding scroll
+window.anchorClick = false;
+/// end
+
 sideBarNavLinks.forEach((elem) => {
   elem.addEventListener("click", function (e) {
     document
@@ -80,9 +85,7 @@ sideBarNavLinks.forEach((elem) => {
     if (previewUrl) {
       previewUrl.setAttribute("value", window.location.href);
     }
-    if (e.target.hash == "#bid_alternates") {
-      alternateLiClick = true;
-    }
+    window.anchorClick = true;
   });
 });
 // endSidebar
