@@ -96,10 +96,9 @@ const projectAlternateBlock = document.getElementById("bid_alternates");
 const scrollBlocks = function Scrolling() {
   function removeActiveLink() {
     document
-    .querySelector("#sidebar__nav-links-bidding li.active")
-    .classList.remove("active");
-  };
-  // refactoring TODO: Switch
+      .querySelector("#sidebar__nav-links-bidding li.active")
+      .classList.remove("active");
+  }
   if (!window.anchorClick) {
     if (
       projectGeneralBlock.offsetTop <= window.pageYOffset &&
@@ -117,7 +116,6 @@ const scrollBlocks = function Scrolling() {
       removeActiveLink();
       document.getElementById("#bid_scope_of_work_id").classList.add("active");
     }
-
     if (
       (projectExclusionBlock.offsetTop <= window.pageYOffset + 2 &&
         projectExclusionBlock.getBoundingClientRect().bottom >=
@@ -130,7 +128,6 @@ const scrollBlocks = function Scrolling() {
       removeActiveLink();
       document.getElementById("#bid_exclusion_id").classList.add("active");
     }
-
     if (
       (projectClarificationBlock.offsetTop <= window.pageYOffset + 2 &&
         projectClarificationBlock.getBoundingClientRect().bottom >=
@@ -144,7 +141,6 @@ const scrollBlocks = function Scrolling() {
       removeActiveLink();
       document.getElementById("#bid_clarification_id").classList.add("active");
     }
-
     if (
       (projectAlternateBlock.offsetTop <= window.pageYOffset + 2 &&
         projectAlternateBlock.getBoundingClientRect().bottom >=
