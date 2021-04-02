@@ -93,83 +93,74 @@ const projectExclusionBlock = document.getElementById("bid_exclusion");
 const projectClarificationBlock = document.getElementById("bid_clarification");
 const projectAlternateBlock = document.getElementById("bid_alternates");
 
-let alternateLiClick = false;
-
 const scrollBlocks = function Scrolling() {
+  function removeActiveLink() {
+    document
+    .querySelector("#sidebar__nav-links-bidding li.active")
+    .classList.remove("active");
+  };
   // refactoring TODO: Switch
-  if (
-    projectGeneralBlock.offsetTop <= window.pageYOffset &&
-    window.pageYOffset <= projectGeneralBlock.offsetHeight
-  ) {
-    document
-      .querySelector("#sidebar__nav-links-bidding li.active")
-      .classList.remove("active");
-    document.getElementById("projectGeneralLink_ID").classList.add("active");
-  }
-  if (
-    (projectScopeOfWorkBlock.offsetTop <= window.pageYOffset + 2 &&
-      projectScopeOfWorkBlock.getBoundingClientRect().bottom >=
-        window.innerHeight * 0.55) ||
-    projectGeneralBlock.getBoundingClientRect().bottom < window.pageYOffset
-  ) {
-    document
-      .querySelector("#sidebar__nav-links-bidding li.active")
-      .classList.remove("active");
-    document.getElementById("#bid_scope_of_work_id").classList.add("active");
-  }
+  if (!window.anchorClick) {
+    if (
+      projectGeneralBlock.offsetTop <= window.pageYOffset &&
+      window.pageYOffset <= projectGeneralBlock.offsetHeight
+    ) {
+      removeActiveLink();
+      document.getElementById("projectGeneralLink_ID").classList.add("active");
+    }
+    if (
+      (projectScopeOfWorkBlock.offsetTop <= window.pageYOffset + 2 &&
+        projectScopeOfWorkBlock.getBoundingClientRect().bottom >=
+          window.innerHeight * 0.55) ||
+      projectGeneralBlock.getBoundingClientRect().bottom < window.pageYOffset
+    ) {
+      removeActiveLink();
+      document.getElementById("#bid_scope_of_work_id").classList.add("active");
+    }
 
-  if (
-    (!alternateLiClick &&
-      projectExclusionBlock.offsetTop <= window.pageYOffset + 2 &&
-      projectExclusionBlock.getBoundingClientRect().bottom >=
-        window.innerHeight * 0.55) ||
-    (!alternateLiClick &&
+    if (
+      (projectExclusionBlock.offsetTop <= window.pageYOffset + 2 &&
+        projectExclusionBlock.getBoundingClientRect().bottom >=
+          window.innerHeight * 0.55) ||
       window.pageYOffset >
         projectGeneralBlock.getBoundingClientRect().height +
           projectScopeOfWorkBlock.getBoundingClientRect().height -
-          window.innerHeight * 0.25)
-  ) {
-    document
-      .querySelector("#sidebar__nav-links-bidding li.active")
-      .classList.remove("active");
-    document.getElementById("#bid_exclusion_id").classList.add("active");
-  }
+          window.innerHeight * 0.25
+    ) {
+      removeActiveLink();
+      document.getElementById("#bid_exclusion_id").classList.add("active");
+    }
 
-  if (
-    (!alternateLiClick &&
-      projectClarificationBlock.offsetTop <= window.pageYOffset + 2 &&
-      projectClarificationBlock.getBoundingClientRect().bottom >=
-        window.innerHeight * 0.55) ||
-    (!alternateLiClick &&
+    if (
+      (projectClarificationBlock.offsetTop <= window.pageYOffset + 2 &&
+        projectClarificationBlock.getBoundingClientRect().bottom >=
+          window.innerHeight * 0.55) ||
       window.pageYOffset >
         projectGeneralBlock.getBoundingClientRect().height +
           projectScopeOfWorkBlock.getBoundingClientRect().height +
           projectExclusionBlock.getBoundingClientRect().height -
-          window.innerHeight * 0.25)
-  ) {
-    document
-      .querySelector("#sidebar__nav-links-bidding li.active")
-      .classList.remove("active");
-    document.getElementById("#bid_clarification_id").classList.add("active");
-  }
+          window.innerHeight * 0.25
+    ) {
+      removeActiveLink();
+      document.getElementById("#bid_clarification_id").classList.add("active");
+    }
 
-  if (
-    (projectAlternateBlock.offsetTop <= window.pageYOffset + 2 &&
-      projectAlternateBlock.getBoundingClientRect().bottom >=
-        window.innerHeight * 0.55) ||
-    window.pageYOffset >
-      projectGeneralBlock.getBoundingClientRect().height +
-        projectScopeOfWorkBlock.getBoundingClientRect().height +
-        projectExclusionBlock.getBoundingClientRect().height +
-        projectClarificationBlock.getBoundingClientRect().height -
-        window.innerHeight * 0.25
-  ) {
-    document
-      .querySelector("#sidebar__nav-links-bidding li.active")
-      .classList.remove("active");
-    document.getElementById("#bid_alternates_id").classList.add("active");
+    if (
+      (projectAlternateBlock.offsetTop <= window.pageYOffset + 2 &&
+        projectAlternateBlock.getBoundingClientRect().bottom >=
+          window.innerHeight * 0.55) ||
+      window.pageYOffset >
+        projectGeneralBlock.getBoundingClientRect().height +
+          projectScopeOfWorkBlock.getBoundingClientRect().height +
+          projectExclusionBlock.getBoundingClientRect().height +
+          projectClarificationBlock.getBoundingClientRect().height -
+          window.innerHeight * 0.25
+    ) {
+      removeActiveLink();
+      document.getElementById("#bid_alternates_id").classList.add("active");
+    }
   }
-  alternateLiClick = false;
+  window.anchorClick = false;
 };
 window.addEventListener("scroll", scrollBlocks);
 // endscroll
