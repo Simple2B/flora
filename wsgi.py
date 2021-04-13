@@ -53,6 +53,7 @@ def fill_db():
     user.save(commit=False)
 
     if app.config['GENERATE_TEST_DATA']:
+        log(log.INFO, "Generete test data [%s]", app.config['GENERATE_TEST_DATA'])
         populate_db_by_test_data()
         bid_generation()
     db.session.commit()

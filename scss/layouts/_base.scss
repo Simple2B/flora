@@ -1,5 +1,4 @@
 @import '../global/variables';
-
 .header {
     background-color: #fff;
     box-shadow: $shadow;
@@ -7,20 +6,16 @@
     min-height: 5rem;
     display: flex;
     align-items: flex-end;
-
     a {
         color: #000;
         text-decoration: none;
     }
-
     .header_container {
         display: flex;
         justify-content: space-between;
         width: 100%;
         flex-flow: wrap;
     }
-
-
     .active-tab {
         padding: 0 2rem;
         font-weight: 500;
@@ -32,8 +27,6 @@
         z-index: 1;
         font-weight: 500;
         position: relative;
-
-
         &:before {
             content: "";
             position: absolute;
@@ -46,13 +39,11 @@
             opacity: 0;
             transition: 0.3s;
         }
-
         &:not(.is-active):before {
             opacity: 1;
             bottom: 0;
         }
     }
-
     .menu__items {
         display: inline-flex;
         position: relative;
@@ -61,7 +52,6 @@
         background-color: #fff;
         padding: 0 20px;
     }
-
     .menu__item {
         padding: 0 2rem;
         font-weight: 500;
@@ -73,7 +63,6 @@
         z-index: 1;
         font-weight: 500;
         position: relative;
-
         &:before {
             content: "";
             position: absolute;
@@ -86,16 +75,13 @@
             opacity: 0;
             transition: 0.3s;
         }
-
         &:not(.is-active):hover:before {
             opacity: 1;
             bottom: 0;
         }
-
         &:not(.is-active):hover {
             color: #333;
         }
-
         .nav-indicator {
             position: absolute;
             left: 0;
@@ -107,52 +93,41 @@
             border-radius: 8px 8px 0 0;
         }
     }
-
     &__inner {
         display: flex;
         justify-content: space-between;
         flex-flow: wrap;
-
         .logo__img {
             width: 13rem;
         }
-
         &--left {
             display: inline-flex;
             align-items: flex-end;
-
             .logo {
                 padding-left: 3rem;
             }
         }
-
     }
-
     &--right {
         display: flex;
         justify-content: space-between;
         padding-right: 8rem;
-
         .user-info {
             display: flex;
             align-items: center;
             margin-top: .5rem;
-
             &__btn {
                 border: none;
                 background: none;
             }
-
             &__details {
                 display: flex;
                 flex-flow: column nowrap;
                 padding-left: 1rem;
-
                 p {
                     margin: 0;
                     padding: 0;
                 }
-
             }
         }
     }
