@@ -1,918 +1,854 @@
-{% extends 'base.html' %}
-
-{% block links %}
-<link rel="stylesheet" href="/static/css/jquery.dataTables.min.css">
-{% endblock %}
-
-
-{% block content %}
+{% extends 'base.html' %} {% block links %}
+<link rel="stylesheet" href="/static/css/jquery.dataTables.min.css"> {% endblock %} {% block content %}
 
 <div id="toggle_sidebar"></div>
 <section class="page-section bidding d-flex" id="wrapper">
-  <!-- begin Sidebar -->
+    <!-- begin Sidebar -->
 
-  <div id="sidebar-wrapper" class="sticky">
-    <div class="sidebar-container __sidebar-css">
-      <div class="side_dar_bidding">
-        <div class="side_dar_bidding__return-link t-gray">
-          <a href="{{ url_for('bidding.biddings') }}">
-            <img src="{{ url_for('static', filename='images/right-hand.svg') }}">
-            My Biddings
-          </a>
-        </div>
-        <div class="side_dar_bidding-bid"># {{ bid.procore_bid_id }} </div>
-        <span class="hidden bidIdJs" value="{{ bid.id }}"></span>
-        <ul class="sidebar__nav-links-bidding" id="sidebar__nav-links-bidding">
-          <li class="active" id="projectGeneralLink_ID">
-            <span><a href="#">Project general</a> </span>
-          </li>
-          <li class="" id="#bid_scope_of_work_id">
-            <span><a href="#bid_scope_of_work"> Scope of Work</a> </span>
-          </li>
-          <li class="" id="#bid_exclusion_id">
-            <span><a href="#bid_exclusion"> Exclusions</a> </span>
-          </li>
-          <li class="" id="#bid_clarification_id">
-            <span><a href="#bid_clarification"> Clarifications</a> </span>
-          </li>
-          <li class="" id="#bid_alternates_id">
-            <span><a href="#bid_alternates"> Alternates</a> </span>
-          </li>
-        </ul>
-      </div>
-      <div class="_preview_export_btns">
-        <div class="_btn">
-          <button class="ddb-cursor-handle" type="submit" name="preview" value="True" form="bid_subtotal_data">
+    <div id="sidebar-wrapper" class="sticky">
+        <div class="sidebar-container __sidebar-css">
+            <div class="side_dar_bidding">
+                <div class="side_dar_bidding__return-link t-gray">
+                    <a href="{{ url_for('bidding.biddings') }}">
+                        <img src="{{ url_for('static', filename='images/right-hand.svg') }}"> My Biddings
+                    </a>
+                </div>
+                <div class="side_dar_bidding-bid"># {{ bid.procore_bid_id }} </div>
+                <span class="hidden bidIdJs" value="{{ bid.id }}"></span>
+                <ul class="sidebar__nav-links-bidding" id="sidebar__nav-links-bidding">
+                    <li class="active" id="projectGeneralLink_ID">
+                        <span><a href="#">Project general</a> </span>
+                    </li>
+                    <li class="" id="#bid_scope_of_work_id">
+                        <span><a href="#bid_scope_of_work"> Scope of Work</a> </span>
+                    </li>
+                    <li class="" id="#bid_exclusion_id">
+                        <span><a href="#bid_exclusion"> Exclusions</a> </span>
+                    </li>
+                    <li class="" id="#bid_clarification_id">
+                        <span><a href="#bid_clarification"> Clarifications</a> </span>
+                    </li>
+                    <li class="" id="#bid_alternates_id">
+                        <span><a href="#bid_alternates"> Alternates</a> </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="_preview_export_btns">
+                <div class="_btn">
+                    <button class="ddb-cursor-handle" type="submit" name="preview" value="True" form="bid_subtotal_data">
             <img src="{{ url_for('static', filename='images/eye_preview.svg') }}">
             &nbsp;
             Preview
           </button>
-        </div>
-        <div class="_btn">
-          <button type="button" class="ddb-cursor-handle" data-target="#modalExport" data-toggle="modal">
+                </div>
+                <div class="_btn">
+                    <button type="button" class="ddb-cursor-handle" data-target="#modalExport" data-toggle="modal">
             <img src="{{ url_for('static', filename='images/export.svg') }}">
             &nbsp;
             Export
           </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- end Sidebar -->
-  <div class="main-container_bidding" id="work-item-container">
-    <div class="main-container_bidding-header">
-      <div class="__bid-header_start_block">
-        <div class="dropdown_status">
-          <form action="{{ url_for('bid.bidding_change_status', bid_id=bid.id) }}" method="post">
-            <div>
-              {% if bid.status.value == "Draft" %}
-              <button type="button" class="__bid_status-draft ddb-cursor-handle" id="bidStatusID">
-                {{ bid.status.value }}
-              </button>
-              {% elif bid.status.value == "Submitted" %}
-              <button type="button" class="__bid_status-submitted ddb-cursor-handle" id="bidStatusID">
-                {{ bid.status.value }}
-              </button>
-              {% else %}
-              <button type="button" class="__bid_status-archived ddb-cursor-handle" id="bidStatusID">
-                {{ bid.status.value }}
-              </button>
-              {% endif %}
+                </div>
             </div>
-            <div class="select_status" id="selectStatusID">
-              <button type="submit" class="__bid_status-default" value="Draft" name="bid_status">
+        </div>
+    </div>
+
+    <!-- end Sidebar -->
+    <div class="main-container_bidding" id="work-item-container">
+        <div class="main-container_bidding-header">
+            <div class="__bid-header_start_block">
+                <div class="dropdown_status">
+                    <form action="{{ url_for('bid.bidding_change_status', bid_id=bid.id) }}" method="post">
+                        <div>
+                            {% if bid.status.value == "Draft" %}
+                            <button type="button" class="__bid_status-draft ddb-cursor-handle" id="bidStatusID">
+                {{ bid.status.value }}
+              </button> {% elif bid.status.value == "Submitted" %}
+                            <button type="button" class="__bid_status-submitted ddb-cursor-handle" id="bidStatusID">
+                {{ bid.status.value }}
+              </button> {% else %}
+                            <button type="button" class="__bid_status-archived ddb-cursor-handle" id="bidStatusID">
+                {{ bid.status.value }}
+              </button> {% endif %}
+                        </div>
+                        <div class="select_status" id="selectStatusID">
+                            <button type="submit" class="__bid_status-default" value="Draft" name="bid_status">
                 {{ bid.Status.b_draft.value }}
               </button>
-              <button type="submit" class="__bid_status-default" value="Submitted" name="bid_status">
+                            <button type="submit" class="__bid_status-default" value="Submitted" name="bid_status">
                 {{ bid.Status.c_submitted.value }}
               </button>
-              <button type="submit" class="__bid_status-default" value="Archived" name="bid_status">
+                            <button type="submit" class="__bid_status-default" value="Archived" name="bid_status">
                 {{ bid.Status.d_archived.value }}
               </button>
-            </div>
-          </form>
-        </div>
-        <div class="bid-header__title"><strong>
+                        </div>
+                    </form>
+                </div>
+                <div class="bid-header__title"><strong>
             # {{ bid.procore_bid_id }} - {{ bid.client }}
           </strong></div>
-      </div>
-      {% if form_bid.save_in_cloud %}
-      <div class="__bid-header_end_block">
-        <span class="cloud_title">All changes saved in the cloud</span>
-        <a href="{{ url_for('bid.bidding_save_in_cloud', bid_id=bid.id) }}">
-          <button class="bck-black border-none ddb-cursor-handle">
+            </div>
+            {% if form_bid.save_in_cloud %}
+            <div class="__bid-header_end_block">
+                <span class="cloud_title">All changes saved in the cloud</span>
+                <a href="{{ url_for('bid.bidding_save_in_cloud', bid_id=bid.id) }}">
+                    <button class="bck-black border-none ddb-cursor-handle">
             <img src="{{ url_for('static', filename='images/close_x_element.svg') }}" alt="">
           </button>
-        </a>
-      </div>
-      {% endif %}
-    </div>
-    <div class="main-container__project_general box-shadow">
-      <span class="ddb-margin-top"><strong>Project General</strong></span>
-      <div class="_date_revision">
-        <div>
-          <div class="_input-date_time">
-            <div>
-              <input class="_form-input" type="date" value="{{ bid.due_date }}" id="due_date_id">
-              <label class="_label">Due Date</label>
-            </div>
-          </div>
-        </div>
-        <div>
-          <input class="_form-input _form-input--m" type="number" min="0" value="{{ bid.revision }}" id="revision_id">
-          <label class="_label">Revision</label>
-        </div>
-        <div class="project_type-radio-select m-1">
-          <div>
-            Chose a project type
-          </div>
-          <div>
-            <div>
-              {% if bid.project_type.value == "Budget" %}
-              <input type="radio" id="budget" name="project_type" value="Budget" checked>
-              {% else %}
-              <input type="radio" id="budget" name="project_type" value="Budget">
-              {% endif %}
-              <label for="budget">Budget</label>
-            </div>
-            <div>
-              {% if bid.project_type.value == "Quote" %}
-              <input type="radio" id="quote" name="project_type" value="Quote" checked>
-              {% else %}
-              <input type="radio" id="quote" name="project_type" value="Quote">
-              {% endif %}
-              <label for="quote">Quote</label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="_titles_prices">
-        <div id="subtotal_project_general_id">Subtotal: &nbsp; &nbsp; ${{bid.subtotal}}</div>
-        <div id="addson_project_general_id">Adds-on: &nbsp; &nbsp; ${{round(bid.grand_subtotal-bid.subtotal, 2)}}</div>
-        <div id="grand_subtotal_project_general_id">
-          <strong> Grand Total &nbsp; &nbsp; ${{bid.grand_subtotal}}</strong>
-        </div>
-      </div>
-      <div class="__client_job_info">
-        <div class="_show-client_panel">
-          <div class="title-text-style">Client and Job Info</div>
-          <div> *Information edited in Procore
-            <button class="border-none ddb-cursor-handle" id="client_and_job_close_panel_id">
-              <img src="{{ url_for('static', filename='images/up_direction_element.svg') }}">
-            </button>
-          </div>
-        </div>
-        <div id="client_job_hidden_id">
-          <div class="_client-block_info">
-            <div class="client-job--span">
-              <div>
-                <div>Client</div> &nbsp; &nbsp;
-                <div class="proj_gen-text-info">
-                  {{ bid.client }}
-                </div>
-              </div>
-              <div>
-
-                <div>Phone</div> &nbsp; &nbsp;
-                <div class="proj_gen-text-info">{{ bid.phone }}</div>
-
-              </div>
-              <div>
-                <div>Fax</div> &nbsp; &nbsp;
-                <div class="proj_gen-text-info">{{ bid.fax }}</div>
-              </div>
-            </div>
-            <div class="client-job--span">
-              <div>
-                <div>Address</div> &nbsp; &nbsp;
-                <div class="proj_gen-text-info block-text--width">
-                  {{bid.vendor_address_street}}
-                  {{bid.vendor_address_city}}
-                </div>
-              </div>
-              <div>
-
-                <div>Email</div> &nbsp; &nbsp;
-                <span class="proj_gen-text-info">{{ bid.email }}</span>
-
-              </div>
-              <div>
-                <div>Contact</div> &nbsp; &nbsp;
-                <div class="proj_gen-text-info">
-                  {{ bid.contact }}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="job-address">
-            <div class="client-job--span">
-              <div>
-                <div>Job</div> &nbsp; &nbsp;
-                <div class="proj_gen-text-info block-text--width">
-                  {{bid.title}}
-                </div>
-              </div>
-              <div>
-
-                <div>Note &nbsp; &nbsp;</div>
-                <div class="proj_gen-text-info"></div>
-
-              </div>
-              <div>
-
-              </div>
-            </div>
-            <div class="client-job--span">
-              <div>
-                <div>Address</div> &nbsp; &nbsp;
-                <div class="proj_gen-text-info">
-                  {{bid.address_street}}
-                  {{bid.address_city}}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="__drawing-log ddb-margin-top">
-        <div class="_show-drawing_log_panel">
-          <div class="title-text-style">Drawing Log</div>
-          <div> *Information edited in Procore
-            <button class="border-none ddb-cursor-handle" id="drawing_log_close_panel_id">
-              <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}">
-            </button>
-          </div>
-        </div>
-
-        <div class="counter t-gray">Showing {{ bid.drawings|length }} drawings</div>
-
-        <div class="_drawing_table hidden" id="drawing_log_hidden_id">
-          <table>
-            <thead class="_drawing-table">
-              <th>Drawing ID</th>
-              <th>Title</th>
-              <th>Date</th>
-              <th>Revison</th>
-            </thead>
-            <tbody>
-              {% for draw in bid.drawings %}
-              <tr>
-                <td><a href="{{ draw.png_url }}" target="_blank">{{ draw.number }}</a></td>
-                <td>{{ draw.title }}</td>
-                <td>{{ draw.updated_at }}</td>
-                <td>{{ draw.revision_number }}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div id="output"></div>
-
-    </div>
-    <div class="__bidding--scroll">
-      <div class="scope_of_work_container modal-content modal--padding box-shadow" id="bid_scope_of_work">
-        <div class="_work_items_block">
-          <span class="ddb-margin-top"><strong>Scope of Work</strong></span>
-          <br>
-          {% for link_work_item in form_bid.global_work_items %}
-          <div class="_work_item-link">
-            <div class="_flex-start">
-              <div>{{ loop.index }}</div>
-              <div>
-                <div class="title-gray">
-                  Work Code
-                </div>
-                <div class="item-style">
-                  {{ link_work_item.work_item.code }}
-                </div>
-              </div>
-              <div>
-                <div class="title-gray">
-                  Work Item
-                </div>
-                <div class="item-style">
-                  {{ link_work_item.work_item.name }}
-                </div>
-              </div>
-            </div>
-
-            <div class="_flex-end">
-              <div class="_flex-end_padding">
-                <input class="_form-input _form-input--m" readonly type="text" placeholder="$"
-                  value="$ {{link_work_item.link_subtotal}}" id="link_subtotal-{{link_work_item.id}}">
-              </div>
-              <div class="_flex-end_padding">
-                <a href="{{url_for('bid.add_work_item_line', bid_id=bid.id, link_work_item_id=link_work_item.id)}}">
-                  <button type="button" class="_btn--gray ddb-cursor-handle">
-                    Add line
-                  </button>
                 </a>
-              </div>
-              <div class="_delete_btn">
-                <a href="{{url_for('bid.delete_link_work_item', bid_id=bid.id, link_work_item_id=link_work_item.id)}}">
-                  <button class="border-none ddb-cursor-handle bck-white">
-                    <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-                  </button>
-                </a>
-              </div>
             </div>
-          </div>
-          {% for work_item_line in link_work_item.work_item_lines%}
-          <div class="_work_item-line">
-            <div>
-              <div class="_show-line_panel bck-color">
-                <div class="title-text-style">Line {{ loop.index }}
-                  {% if work_item_line.note|length < 31 %}
-                  <span> {{ work_item_line.note }}</span>
-                  {% else %}
-                    <span> {{ work_item_line.note[:30] }}...</span>
-                  {% endif %}
+            {% endif %}
+        </div>
+        <div class="main-container__project_general box-shadow">
+            <span class="ddb-margin-top"><strong>Project General</strong></span>
+            <div class="_date_revision">
+                <div>
+                    <div class="_input-date_time">
+                        <div>
+                            <input class="_form-input" type="date" value="{{ bid.due_date }}" id="due_date_id">
+                            <label class="_label">Due Date</label>
+                        </div>
+                    </div>
                 </div>
                 <div>
-                  <div>
-                    <button id="btn_line_id" data-line_id="line-{{work_item_line.id}}"
-                      class="border-none ddb-cursor-handle btnLine_element_direction_js">
+                    <input class="_form-input _form-input--m" type="number" min="0" value="{{ bid.revision }}" id="revision_id">
+                    <label class="_label">Revision</label>
+                </div>
+                <div class="project_type-radio-select m-1">
+                    <div>
+                        Chose a project type
+                    </div>
+                    <div>
+                        <div>
+                            {% if bid.project_type.value == "Budget" %}
+                            <input type="radio" id="budget" name="project_type" value="Budget" checked> {% else %}
+                            <input type="radio" id="budget" name="project_type" value="Budget"> {% endif %}
+                            <label for="budget">Budget</label>
+                        </div>
+                        <div>
+                            {% if bid.project_type.value == "Quote" %}
+                            <input type="radio" id="quote" name="project_type" value="Quote" checked> {% else %}
+                            <input type="radio" id="quote" name="project_type" value="Quote"> {% endif %}
+                            <label for="quote">Quote</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="_titles_prices">
+                <div id="subtotal_project_general_id">Subtotal: &nbsp; &nbsp; ${{bid.subtotal}}</div>
+                <div id="addson_project_general_id">Adds-on: &nbsp; &nbsp; ${{round(bid.grand_subtotal-bid.subtotal, 2)}}</div>
+                <div id="grand_subtotal_project_general_id">
+                    <strong> Grand Total &nbsp; &nbsp; ${{bid.grand_subtotal}}</strong>
+                </div>
+            </div>
+            <div class="__client_job_info">
+                <div class="_show-client_panel">
+                    <div class="title-text-style">Client and Job Info</div>
+                    <div> *Information edited in Procore
+                        <button class="border-none ddb-cursor-handle" id="client_and_job_close_panel_id">
+              <img src="{{ url_for('static', filename='images/up_direction_element.svg') }}">
+            </button>
+                    </div>
+                </div>
+                <div id="client_job_hidden_id">
+                    <div class="_client-block_info">
+                        <div class="client-job--span">
+                            <div>
+                                <div>Client</div> &nbsp; &nbsp;
+                                <div class="proj_gen-text-info">
+                                    {{ bid.client }}
+                                </div>
+                            </div>
+                            <div>
+
+                                <div>Phone</div> &nbsp; &nbsp;
+                                <div class="proj_gen-text-info">{{ bid.phone }}</div>
+
+                            </div>
+                            <div>
+                                <div>Fax</div> &nbsp; &nbsp;
+                                <div class="proj_gen-text-info">{{ bid.fax }}</div>
+                            </div>
+                        </div>
+                        <div class="client-job--span">
+                            <div>
+                                <div>Address</div> &nbsp; &nbsp;
+                                <div class="proj_gen-text-info block-text--width">
+                                    {{bid.vendor_address_street}} {{bid.vendor_address_city}}
+                                </div>
+                            </div>
+                            <div>
+
+                                <div>Email</div> &nbsp; &nbsp;
+                                <span class="proj_gen-text-info">{{ bid.email }}</span>
+
+                            </div>
+                            <div>
+                                <div>Contact</div> &nbsp; &nbsp;
+                                <div class="proj_gen-text-info">
+                                    {{ bid.contact }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="job-address">
+                        <div class="client-job--span">
+                            <div>
+                                <div>Job</div> &nbsp; &nbsp;
+                                <div class="proj_gen-text-info block-text--width">
+                                    {{bid.title}}
+                                </div>
+                            </div>
+                            <div>
+
+                                <div>Note &nbsp; &nbsp;</div>
+                                <div class="proj_gen-text-info"></div>
+
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
+                        <div class="client-job--span">
+                            <div>
+                                <div>Address</div> &nbsp; &nbsp;
+                                <div class="proj_gen-text-info">
+                                    {{bid.address_street}} {{bid.address_city}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="__drawing-log ddb-margin-top">
+                <div class="_show-drawing_log_panel">
+                    <div class="title-text-style">Drawing Log</div>
+                    <div> *Information edited in Procore
+                        <button class="border-none ddb-cursor-handle" id="drawing_log_close_panel_id">
+              <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}">
+            </button>
+                    </div>
+                </div>
+
+                <div class="counter t-gray">Showing {{ bid.drawings|length }} drawings</div>
+
+                <div class="_drawing_table hidden" id="drawing_log_hidden_id">
+                    <table>
+                        <thead class="_drawing-table">
+                            <th>Drawing ID</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Revison</th>
+                        </thead>
+                        <tbody>
+                            {% for draw in bid.drawings %}
+                            <tr>
+                                <td><a href="{{ draw.png_url }}" target="_blank">{{ draw.number }}</a></td>
+                                <td>{{ draw.title }}</td>
+                                <td>{{ draw.updated_at }}</td>
+                                <td>{{ draw.revision_number }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="output"></div>
+
+        </div>
+        <div class="__bidding--scroll">
+            <div class="scope_of_work_container modal-content modal--padding box-shadow" id="bid_scope_of_work">
+                <div class="_work_items_block">
+                    <span class="ddb-margin-top"><strong>Scope of Work</strong></span>
+                    <br> {% for link_work_item in form_bid.global_work_items %}
+                    <div class="_work_item-link">
+                        <div class="_flex-start">
+                            <div>{{ loop.index }}</div>
+                            <div>
+                                <div class="title-gray">
+                                    Work Code
+                                </div>
+                                <div class="item-style">
+                                    {{ link_work_item.work_item.code }}
+                                </div>
+                            </div>
+                            <div>
+                                <div class="title-gray">
+                                    Work Item
+                                </div>
+                                <div class="item-style">
+                                    {{ link_work_item.work_item.name }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="_flex-end">
+                            <div class="_flex-end_padding">
+                                <input class="_form-input _form-input--m" readonly type="text" placeholder="$" value="$ {{link_work_item.link_subtotal}}" id="link_subtotal-{{link_work_item.id}}">
+                            </div>
+                            <div class="_flex-end_padding">
+                                <a href="{{url_for('bid.add_work_item_line', bid_id=bid.id, link_work_item_id=link_work_item.id)}}">
+                                    <button type="button" class="_btn--gray ddb-cursor-handle">
+                    Add line
+                  </button>
+                                </a>
+                            </div>
+                            <div class="_delete_btn">
+                                <a href="{{url_for('bid.delete_link_work_item', bid_id=bid.id, link_work_item_id=link_work_item.id)}}">
+                                    <button class="border-none ddb-cursor-handle bck-white">
+                    <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                  </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% for work_item_line in link_work_item.work_item_lines%}
+                    <div class="_work_item-line">
+                        <div>
+                            <div class="_show-line_panel bck-color">
+                                <div class="title-text-style">Line {{ loop.index }} {% if work_item_line.note|length
+                                    < 31 %} <span> {{ work_item_line.note }}</span>
+                                        {% else %}
+                                        <span> {{ work_item_line.note[:30] }}...</span> {% endif %}
+                                </div>
+                                <div>
+                                    <div>
+                                        <button id="btn_line_id" data-line_id="line-{{work_item_line.id}}" class="border-none ddb-cursor-handle btnLine_element_direction_js">
                       <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt=""
                         id="line-{{work_item_line.id}}_img_id">
                     </button>
-                  </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="_work_item_line--inputs line_hidden_js hidden" id="line-{{work_item_line.id}}">
+                                <div class="bck-color">
+                                    <div class="text-areas">
+                                        <div>
+                                            <textarea class="_form-text_area" name="note" cols="30" rows="10" placeholder="Enter Note here..." onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">{{work_item_line.note}}</textarea>
+                                        </div>
+                                        <div>
+                                            <textarea class="_form-text_area" name="description" cols="30" rows="10" placeholder="Enter Description here..." data-wil_id="{{work_item_line.id}}" onblur="updateWorkItemLine(this)">{{work_item_line.description}}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="inputs-features">
+                                        <div>
+                                            <input class="_form-input" type="text" name="quantity" placeholder="1" value="{{work_item_line.quantity}}" onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}" id="wIl-quantity">
+                                            <label class="_label">Quantity</label>
+                                        </div>
+                                        <div>
+                                            <input class="_form-input" type="text" name="unit" placeholder="LS" value="{{work_item_line.unit}}" onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">
+                                            <label class="_label">Unit</label>
+                                        </div>
+                                        <div>
+                                            <input class="_form-input" type="text" name="price" placeholder="$0" value="{{work_item_line.price}}" onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}" id="wIl-price">
+                                        </div>
+                                        <div>
+                                            <div class="check_box-TBD">
+                                                <input class="form-control" type="checkbox" name="work_item_line_tbd_{{work_item_line.id}}">
+                                                <span class="">TBD</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="_edit_delete-btns">
+                            <div class="delete-height">
+                                <a class="border-none ddb-cursor-handle bck-white" href="{{url_for('bid.delete_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)}}">
+                                    <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    {% endfor %} {# end of lines #} {% endfor %} {# end of work item links #}
+
                 </div>
-              </div>
-              <div class="_work_item_line--inputs line_hidden_js hidden" id="line-{{work_item_line.id}}">
-                <div class="bck-color">
-                  <div class="text-areas">
-                    <div>
-                      <textarea class="_form-text_area" name="note" cols="30" rows="10" placeholder="Enter Note here..."
-                      onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">{{work_item_line.note}}</textarea>
+                <div class="add_work_item-group">
+
+
+                    {% for group in form_bid.groups %}
+                    <div class="_group-block">
+                        <div class="group-title">
+                            <img src="{{ url_for('static', filename='images/group_element.svg') }}">
+                            <span>Work Group: {{ group.name }}</span>
+                        </div>
+                        <div class="group-btns">
+                            <img class="ddb-cursor-handle" data-group_panel_id="{{group.id}}" src="{{ url_for('static', filename='images/up_direction_element.svg') }}" id="bid_group_id">
+                            <a href="{{ url_for('bid.delete_group', bid_id=bid.id, group_name=group.name)}}">
+                                <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                            </a>
+                        </div>
                     </div>
-                    <div>
-                      <textarea class="_form-text_area" name="description" cols="30" rows="10"
-                        placeholder="Enter Description here..." data-wil_id="{{work_item_line.id}}" onblur="updateWorkItemLine(this)">{{work_item_line.description}}</textarea>
-                    </div>
-                  </div>
-                  <div class="inputs-features">
-                    <div>
-                      <input class="_form-input" type="text" name="quantity" placeholder="1"
-                        value="{{work_item_line.quantity}}" onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}"
-                        id="wIl-quantity">
-                      <label class="_label">Quantity</label>
-                    </div>
-                    <div>
-                      <input class="_form-input" type="text" name="unit" placeholder="LS" value="{{work_item_line.unit}}"
-                      onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">
-                      <label class="_label">Unit</label>
-                    </div>
-                    <div>
-                      <input class="_form-input" type="text" name="price" placeholder="$0" value="{{work_item_line.price}}"
-                      onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}" id="wIl-price">
-                    </div>
-                    <div>
-                      <div class="check_box-TBD">
-                        <input class="form-control" type="checkbox" name="work_item_line_tbd_{{work_item_line.id}}">
-                        <span class="">TBD</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="_edit_delete-btns">
-              <div class="delete-height">
-                <a class="border-none ddb-cursor-handle bck-white"
-                  href="{{url_for('bid.delete_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)}}">
-                  <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-                </a>
-              </div>
-            </div>
 
-          </div>
-          {% endfor %} {# end of lines #}
-          {% endfor %} {# end of work item links #}
+                    <div id="group_panel_id-{{group.id}}">
+                        {% for group_link in group.link_work_items %}
 
-        </div>
-        <div class="add_work_item-group">
+                        <div class="_work_item-link">
+                            <div class="_flex-start">
+                                <div>{{ loop.index }}</div>
+                                <div>
+                                    <div class="title-gray">
+                                        Work Code
+                                    </div>
+                                    <div class="item-style">
+                                        {{ group_link.work_item.code }}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="title-gray">
+                                        Work Item
+                                    </div>
+                                    <div class="item-style">
+                                        {{ group_link.work_item.name }}
+                                    </div>
+                                </div>
+                            </div>
 
-
-          {% for group in form_bid.groups %}
-          <div class="_group-block">
-            <div class="group-title">
-              <img src="{{ url_for('static', filename='images/group_element.svg') }}">
-              <span>Work Group: {{ group.name }}</span>
-            </div>
-            <div class="group-btns">
-              <img class="ddb-cursor-handle" data-group_panel_id="{{group.id}}"
-                src="{{ url_for('static', filename='images/up_direction_element.svg') }}" id="bid_group_id">
-              <a href="{{ url_for('bid.delete_group', bid_id=bid.id, group_name=group.name)}}">
-                <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-              </a>
-            </div>
-          </div>
-
-          <div id="group_panel_id-{{group.id}}">
-            {% for group_link in group.link_work_items %}
-
-            <div class="_work_item-link">
-              <div class="_flex-start">
-                <div>{{ loop.index }}</div>
-                <div>
-                  <div class="title-gray">
-                    Work Code
-                  </div>
-                  <div class="item-style">
-                    {{ group_link.work_item.code }}
-                  </div>
-                </div>
-                <div>
-                  <div class="title-gray">
-                    Work Item
-                  </div>
-                  <div class="item-style">
-                    {{ group_link.work_item.name }}
-                  </div>
-                </div>
-              </div>
-
-              <div class="_flex-end">
-                <div class="_flex-end_padding">
-                  <input class="_form-input _form-input--m" readonly type="text" placeholder="$"
-                    value="$ {{group_link.link_subtotal}}" id="link_subtotal-{{group_link.id}}">
-                </div>
-                <div class="_flex-end_padding">
-                  <a href="{{url_for('bid.add_group_work_item_line', bid_id=bid.id, group_link_id=group_link.id)}}">
-                    <button type="button" class="_btn--gray ddb-cursor-handle">
+                            <div class="_flex-end">
+                                <div class="_flex-end_padding">
+                                    <input class="_form-input _form-input--m" readonly type="text" placeholder="$" value="$ {{group_link.link_subtotal}}" id="link_subtotal-{{group_link.id}}">
+                                </div>
+                                <div class="_flex-end_padding">
+                                    <a href="{{url_for('bid.add_group_work_item_line', bid_id=bid.id, group_link_id=group_link.id)}}">
+                                        <button type="button" class="_btn--gray ddb-cursor-handle">
                       Add line
                     </button>
-                  </a>
-                </div>
-                <div class="_delete_btn">
-                  <a href="{{url_for('bid.delete_group_link_work_item', bid_id=bid.id, group_link_id=group_link.id)}}">
-                    <button class="border-none ddb-cursor-handle bck-white">
+                                    </a>
+                                </div>
+                                <div class="_delete_btn">
+                                    <a href="{{url_for('bid.delete_group_link_work_item', bid_id=bid.id, group_link_id=group_link.id)}}">
+                                        <button class="border-none ddb-cursor-handle bck-white">
                       <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
                     </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-            {% for work_item_line in group_link.work_item_lines %}
-            <div class="_work_item-line">
-              <div>
-                <div class="_show-line_panel bck-color">
-                  <div class="title-text-style">Line {{ loop.index }}
-                    {% if work_item_line.note|length < 31 %}
-                    <span> {{ work_item_line.note }}</span>
-                    {% else %}
-                      <span> {{ work_item_line.note[:30] }}...</span>
-                    {% endif %}
-                  </div>
-                  <div>
-                    <div>
-                      <button id="btn_line_id" data-line_id="line-{{work_item_line.id}}"
-                        class="border-none ddb-cursor-handle btnLine_element_direction_js">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% for work_item_line in group_link.work_item_lines %}
+                        <div class="_work_item-line">
+                            <div>
+                                <div class="_show-line_panel bck-color">
+                                    <div class="title-text-style">Line {{ loop.index }} {% if work_item_line.note|length
+                                        < 31 %} <span> {{ work_item_line.note }}</span>
+                                            {% else %}
+                                            <span> {{ work_item_line.note[:30] }}...</span> {% endif %}
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <button id="btn_line_id" data-line_id="line-{{work_item_line.id}}" class="border-none ddb-cursor-handle btnLine_element_direction_js">
                         <img src="{{ url_for('static', filename='images/direction_element_bottom.svg') }}" alt=""
                           id="line-{{work_item_line.id}}_img_id">
                       </button>
-                    </div>
-                  </div>
-                </div>
-                <div class="_work_item_line--inputs line_hidden_js hidden" id="line-{{work_item_line.id}}">
-                  <div class="bck-color">
-                    <div class="text-areas">
-                      <div>
-                        <textarea class="_form-text_area" name="g-note" cols="30" rows="10" placeholder="Enter Note here..."
-                        onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">{{work_item_line.note}}</textarea>
-                      </div>
-                      <div>
-                        <textarea class="_form-text_area" name="g-description" cols="30" rows="10" placeholder="Enter Note here..."
-                        onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">{{work_item_line.description}}</textarea>
-                      </div>
-                    </div>
-                    <div class="inputs-features">
-                      <div>
-                        <input class="_form-input" type="text" name="g-quantity" placeholder="1"
-                        value="{{work_item_line.quantity}}" data-wil_id="{{work_item_line.id}}"
-                        onblur="updateWorkItemLine(this)" id="wIgL-quantity">
-                        <label class="_label">Quantity</label>
-                      </div>
-                      <div>
-                        <input class="_form-input" type="text" name="g-unit" placeholder="LS" value="{{work_item_line.unit}}"
-                        onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">
-                        <label class="_label">Unit</label>
-                      </div>
-                      <div>
-                        <input class="_form-input" type="text" name="g-price" placeholder="$0" value="{{work_item_line.price}}"
-                        onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}" id="wIgL-price">
-                      </div>
-                      <div>
-                        <div class="check_box-TBD">
-                          <input class="form-control" type="checkbox" name="work_item_line_tbd_{{work_item_line.id}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="_work_item_line--inputs line_hidden_js hidden" id="line-{{work_item_line.id}}">
+                                    <div class="bck-color">
+                                        <div class="text-areas">
+                                            <div>
+                                                <textarea class="_form-text_area" name="g-note" cols="30" rows="10" placeholder="Enter Note here..." onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">{{work_item_line.note}}</textarea>
+                                            </div>
+                                            <div>
+                                                <textarea class="_form-text_area" name="g-description" cols="30" rows="10" placeholder="Enter Note here..." onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">{{work_item_line.description}}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="inputs-features">
+                                            <div>
+                                                <input class="_form-input" type="text" name="g-quantity" placeholder="1" value="{{work_item_line.quantity}}" data-wil_id="{{work_item_line.id}}" onblur="updateWorkItemLine(this)" id="wIgL-quantity">
+                                                <label class="_label">Quantity</label>
+                                            </div>
+                                            <div>
+                                                <input class="_form-input" type="text" name="g-unit" placeholder="LS" value="{{work_item_line.unit}}" onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}">
+                                                <label class="_label">Unit</label>
+                                            </div>
+                                            <div>
+                                                <input class="_form-input" type="text" name="g-price" placeholder="$0" value="{{work_item_line.price}}" onblur="updateWorkItemLine(this)" data-wil_id="{{work_item_line.id}}" id="wIgL-price">
+                                            </div>
+                                            <div>
+                                                <div class="check_box-TBD">
+                                                    <input class="form-control" type="checkbox" name="work_item_line_tbd_{{work_item_line.id}}">
+                                                </div>
+                                                <span class="">TBD</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="_edit_delete-btns">
+                                <div class="delete-height">
+                                    <a class="border-none ddb-cursor-handle bck-white" href="{{url_for('bid.delete_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)}}">
+                                        <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <span class="">TBD</span>
-                      </div>
+                        {% endfor %} {# end of lines #} {% endfor %} {# end of work item links #}
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="_edit_delete-btns">
-                <div class="delete-height">
-                  <a class="border-none ddb-cursor-handle bck-white"
-                    href="{{url_for('bid.delete_work_item_line', bid_id=bid.id, work_item_line_id=work_item_line.id)}}">
-                    <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-                  </a>
-                </div>
-              </div>
-            </div>
-            {% endfor %} {# end of lines #}
-            {% endfor %} {# end of work item links #}
-          </div>
 
-          {% endfor %} {# end of groups #}
+                    {% endfor %} {# end of groups #}
 
-          <!-- begin of Add Group/Work Item button   -->
-          <div class="_top_block">
+                    <!-- begin of Add Group/Work Item button   -->
+                    <div class="_top_block">
 
-            <div class="add_item_btn">
-              <a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}"><button
+                        <div class="add_item_btn">
+                            <a href="{{ url_for('work_item.work_items', bid_id=bid.id) }}"><button
                   class="ddb-cursor-handle _btn--base-gray">Add work item/group</button></a>
+                        </div>
+
+                    </div>
+                    <!-- end of Add Group/Work Item button -->
+
+                    <div class="_subtotal-block">
+                        <div></div>
+                        <div class="__right-block">
+                            <div class="_grand_subtotal-block">
+                                <div class="subtotal">
+                                    Subtotal:
+                                </div>
+
+                                <div class="subtotal_price" id="subtotal_id">
+                                    $ {{bid.subtotal}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="form" id="bid_subtotal_data" role="form" action="{{ url_for('bid.export', bid_id=bid.id) }}" method="post">
+                        <input class="hidden" name="next_url" value="" id="current_url"></input>
+                        <div class="_center_block">
+                            <div class="inputs_fields" id="subtotal_inputs_fields_id">
+                                <div class="input-row">
+                                    <div class="_feature-title">Permit/Filling Fee: </div>
+                                    <div class="_feature-percents">
+                                        <div class="input_percents-block">
+                                            <div>
+                                                <input class="_form-input _form-input--sm percent_parameter" type="text" id="percent_permit_fee" value="{{bid.percent_permit_fee}}%">
+                                            </div>
+                                            <div>
+                                                <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly value="$ {{bid.permit_filling_fee}}" id="permit_value">
+                                            </div>
+                                        </div>
+                                        <div class="check_box-TBD">
+                                            <input class="form-control" type="checkbox" name="permit">
+                                            <span>TBD</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-row">
+                                    <div class="_feature-title">General Conditions: </div>
+                                    <div class="_feature-percents">
+                                        <div class="input_percents-block">
+                                            <div>
+                                                <input class="_form-input _form-input--sm percent_parameter" type="text" id="percent_general_condition" value="{{bid.percent_general_condition}}%">
+                                            </div>
+                                            <div>
+                                                <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly value="$ {{bid.general_conditions}}" id="general_value">
+                                            </div>
+                                        </div>
+                                        <div class="check_box-TBD">
+                                            <input class="form-control" type="checkbox" name="general">
+                                            <span>TBD</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-row">
+                                    <div class="_feature-title">Overhead: </div>
+                                    <div class="_feature-percents">
+                                        <div class="input_percents-block">
+                                            <div>
+                                                <input class="_form-input _form-input--sm percent_parameter" type="text" id="percent_overhead" value="{{bid.percent_overhead}}%">
+                                            </div>
+                                            <div>
+                                                <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly value="$ {{bid.overhead}}" id="overhead_value">
+                                            </div>
+                                        </div>
+                                        <div class="check_box-TBD">
+                                            <input class="form-control" type="checkbox" name="overhead">
+                                            <span>TBD</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-row">
+                                    <div class="_feature-title">Insurance/Tax: </div>
+                                    <div class="_feature-percents">
+                                        <div class="input_percents-block">
+                                            <div>
+                                                <input class="_form-input _form-input--sm percent_parameter" type="text" id="percent_insurance_tax" value="{{bid.percent_insurance_tax}}%">
+                                            </div>
+                                            <div>
+                                                <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly value="$ {{bid.insurance_tax}}" id="insurance_value">
+                                            </div>
+                                        </div>
+                                        <div class="check_box-TBD">
+                                            <input class="form-control" type="checkbox" name="insurance">
+                                            <span>TBD</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-row">
+                                    <div class="_feature-title">Profit: </div>
+                                    <div class="_feature-percents">
+                                        <div class="input_percents-block">
+                                            <div>
+                                                <input class="_form-input _form-input--sm percent_parameter" type="text" id="percent_profit" value="{{bid.percent_profit}}%">
+                                            </div>
+                                            <div>
+                                                <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly value="$ {{bid.profit}}" id="profit_value">
+                                            </div>
+                                        </div>
+                                        <div class="check_box-TBD">
+                                            <input class="form-control" type="checkbox" name="profit">
+                                            <span>TBD</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-row">
+                                    <div class="_feature-title">Bond: </div>
+                                    <div class="_feature-percents">
+                                        <div class="input_percents-block">
+                                            <div>
+                                                <input class="_form-input _form-input--sm percent_parameter" type="text" id="percent_bond" value="{{bid.percent_bond}}%">
+                                            </div>
+                                            <div>
+                                                <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly value="$ {{bid.bond}}" id="bond_value">
+                                            </div>
+                                        </div>
+                                        <div class="check_box-TBD">
+                                            <input class="form-control" type="checkbox" name="bond">
+                                            <span>TBD</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="_show_subtotal_close_panel">
+                                <div>
+                                    <div class="direction_element bck-white" id="subtotal_close_panel_id">
+                                        <img src="{{ url_for('static', filename='images/up_direction_element.svg') }}" alt="" id="subtotal_img_id">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="_bottom_block">
+                        <div class="__right-block">
+                            <div class="_grand_subtotal-block">
+                                <div class="subtotal">
+                                    Grand Subtotal:
+                                </div>
+
+                                <div class="subtotal_price" id="grand_subtotal_id">
+                                    $ {{ bid.grand_subtotal }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
-          </div>
-          <!-- end of Add Group/Work Item button -->
-
-          <div class="_subtotal-block">
-            <div></div>
-            <div class="__right-block">
-              <div class="_grand_subtotal-block">
-                <div class="subtotal">
-                  Subtotal:
-                </div>
-
-                <div class="subtotal_price" id="subtotal_id">
-                  $ {{bid.subtotal}}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <form class="form" id="bid_subtotal_data" role="form" action="{{ url_for('bid.export', bid_id=bid.id) }}"
-            method="post">
-            <input class="hidden" name="next_url" value="" id="current_url"></input>
-            <div class="_center_block">
-              <div class="inputs_fields" id="subtotal_inputs_fields_id">
-                <div class="input-row">
-                  <div class="_feature-title">Permit/Filling Fee: </div>
-                  <div class="_feature-percents">
-                    <div class="input_percents-block">
-                      <div>
-                        <input class="_form-input _form-input--sm percent_parameter" type="text" id="percent_permit_fee"
-                          value="{{bid.percent_permit_fee}}%">
-                      </div>
-                      <div>
-                        <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly
-                          value="$ {{bid.permit_filling_fee}}" id="permit_value">
-                      </div>
-                    </div>
-                    <div class="check_box-TBD">
-                      <input class="form-control" type="checkbox" name="permit">
-                      <span>TBD</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="input-row">
-                  <div class="_feature-title">General Conditions: </div>
-                  <div class="_feature-percents">
-                    <div class="input_percents-block">
-                      <div>
-                        <input class="_form-input _form-input--sm percent_parameter" type="text" id="percent_general_condition"
-                          value="{{bid.percent_general_condition}}%">
-                      </div>
-                      <div>
-                        <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly
-                          value="$ {{bid.general_conditions}}" id="general_value">
-                      </div>
-                    </div>
-                    <div class="check_box-TBD">
-                      <input class="form-control" type="checkbox" name="general">
-                      <span>TBD</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="input-row">
-                  <div class="_feature-title">Overhead: </div>
-                  <div class="_feature-percents">
-                    <div class="input_percents-block">
-                      <div>
-                        <input class="_form-input _form-input--sm percent_parameter" type="text" id="percent_overhead"
-                          value="{{bid.percent_overhead}}%">
-                      </div>
-                      <div>
-                        <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly value="$ {{bid.overhead}}" id="overhead_value">
-                      </div>
-                    </div>
-                    <div class="check_box-TBD">
-                      <input class="form-control" type="checkbox" name="overhead">
-                      <span>TBD</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="input-row">
-                  <div class="_feature-title">Insurance/Tax: </div>
-                  <div class="_feature-percents">
-                    <div class="input_percents-block">
-                      <div>
-                        <input class="_form-input _form-input--sm percent_parameter" type="text" id="percent_insurance_tax"
-                          value="{{bid.percent_insurance_tax}}%">
-                      </div>
-                      <div>
-                        <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly value="$ {{bid.insurance_tax}}" id="insurance_value">
-                      </div>
-                    </div>
-                    <div class="check_box-TBD">
-                      <input class="form-control" type="checkbox" name="insurance">
-                      <span>TBD</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="input-row">
-                  <div class="_feature-title">Profit: </div>
-                  <div class="_feature-percents">
-                    <div class="input_percents-block">
-                      <div>
-                        <input class="_form-input _form-input--sm percent_parameter" type="text" id="percent_profit"
-                          value="{{bid.percent_profit}}%">
-                      </div>
-                      <div>
-                        <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly value="$ {{bid.profit}}" id="profit_value">
-                      </div>
-                    </div>
-                    <div class="check_box-TBD">
-                      <input class="form-control" type="checkbox" name="profit">
-                      <span>TBD</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="input-row">
-                  <div class="_feature-title">Bond: </div>
-                  <div class="_feature-percents">
-                    <div class="input_percents-block">
-                      <div>
-                        <input class="_form-input _form-input--sm percent_parameter" type="text" id="percent_bond"
-                          value="{{bid.percent_bond}}%">
-                      </div>
-                      <div>
-                        <input class="_form-input _form-input--m bid_parameter_value" type="text" readonly value="$ {{bid.bond}}" id="bond_value">
-                      </div>
-                    </div>
-                    <div class="check_box-TBD">
-                      <input class="form-control" type="checkbox" name="bond">
-                      <span>TBD</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="_show_subtotal_close_panel">
-                <div>
-                  <div class="direction_element bck-white" id="subtotal_close_panel_id">
-                    <img src="{{ url_for('static', filename='images/up_direction_element.svg') }}" alt=""
-                      id="subtotal_img_id">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-
-          <div class="_bottom_block">
-            <div class="__right-block">
-              <div class="_grand_subtotal-block">
-                <div class="subtotal">
-                  Grand Subtotal:
-                </div>
-
-                <div class="subtotal_price" id="grand_subtotal_id">
-                  $ {{ bid.grand_subtotal }}
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="add_item_block box-shadow" id="bid_exclusion">
-        <span>
+            <div class="add_item_block box-shadow" id="bid_exclusion">
+                <span>
           <strong>
             Exclusions
           </strong>
         </span>
-        <div class="d-flex bd-highlight bidding_margin">
-          {% if bid.exclusion_links %}
+                <div class="d-flex bd-highlight bidding_margin">
+                    {% if bid.exclusion_links %}
 
-            <div class="delete_element">
-              <a href="{{url_for('bid.delete_exclusions', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
-                <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-              </a>
-            </div>
-            <div class="ddb-border p-2 bd-highlight">
-              <h6>Unless expressly stated, the following exclusions apply:</h6>
-              {{ show_exclusions }}
-            </div>
-            <div class="edit_element flex-shrink-1 bd-highlight">
-              <a href="{{url_for('bid.edit_exclusions', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
-                <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
-              </a>
-            </div>
-          {% else %}
-            <div class="">
-                <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--base-gray">Add exclusion</button></a>
+                    <div class="delete_element">
+                        <a href="{{url_for('bid.delete_exclusions', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
+                            <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                        </a>
+                    </div>
+                    <div class="ddb-border p-2 bd-highlight">
+                        <h6>Unless expressly stated, the following exclusions apply:</h6>
+                        {{ show_exclusions }}
+                    </div>
+                    <div class="edit_element flex-shrink-1 bd-highlight">
+                        <a href="{{url_for('bid.edit_exclusions', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
+                            <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="">
+                        <a href="{{ url_for('exclusion.exclusions', bid_id=bid.id) }}"><button class="ddb-cursor-handle _btn--base-gray">Add exclusion</button></a>
+                    </div>
+
+                    {% endif %}
+                </div>
             </div>
 
-          {% endif %}
-        </div>
-      </div>
-
-      <div class="add_item_block clarification_block" id="bid_clarification">
-        <span>
+            <div class="add_item_block clarification_block" id="bid_clarification">
+                <span>
           <strong>
             Clarifications
           </strong>
         </span>
-        <div class="d-flex bd-highlight bidding_margin">
-          {% if bid.clarification_links %}
+                <div class="d-flex bd-highlight bidding_margin">
+                    {% if bid.clarification_links %}
 
-            <div class="delete_element">
-            <a href="{{url_for('bid.delete_clarifications', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
-              <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-            </a>
-            </div>
-            <div class="ddb-border p-2 bd-highlight">
-              <h6>Please note the following clarifications:</h6>
-              {{ show_clarifications }}
-            </div>
-            <div class="edit_element">
-            <a href="{{url_for('bid.edit_clarifications', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
-              <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
-            </a>
-            </div>
+                    <div class="delete_element">
+                        <a href="{{url_for('bid.delete_clarifications', bid_id=bid.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
+                            <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                        </a>
+                    </div>
+                    <div class="ddb-border p-2 bd-highlight">
+                        <h6>Please note the following clarifications:</h6>
+                        {{ show_clarifications }}
+                    </div>
+                    <div class="edit_element">
+                        <a href="{{url_for('bid.edit_clarifications', bid_id=bid.id)}}" class="border-none ddb-cursor-handle">
+                            <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+                        </a>
+                    </div>
 
-            {% else %}
-              <div class="__modal-inputs--flex-row">
-                <a href="{{ url_for('clarification.clarifications', bid_id=bid.id) }}">
-                  <button class="ddb-cursor-handle _btn--base-gray">
+                    {% else %}
+                    <div class="__modal-inputs--flex-row">
+                        <a href="{{ url_for('clarification.clarifications', bid_id=bid.id) }}">
+                            <button class="ddb-cursor-handle _btn--base-gray">
                     Add clarification
                   </button>
-                </a>
-              </div>
+                        </a>
+                    </div>
 
-          {% endif %}
-        </div>
-      </div>
-      <!-- Alternates -->
-      <div class="add_item_block box-shadow" id="bid_alternates">
-        <span>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Alternates -->
+            <div class="add_item_block box-shadow" id="bid_alternates">
+                <span>
           <strong>
             Alternates
           </strong>
-        </span>
-        {% if bid.alternates %}
-        {% for alternate in bid.alternates%}
-        <div class="_alternate_block bidding_margin">
-          <div>
-            <input class="_form-input" value="{{alternate.name}}" readonly>
-            <label class="_label">Alternate item</label>
-          </div>
-          <div>
-            <input class="_form-input" value="{{alternate.quantity}}" readonly>
-            <label class="_label">Quantity</label>
-          </div>
-          <div>
-            <input class="_form-input" value="$ {{alternate.price}}" readonly>
-          </div>
-          <div class="__alternate_items">
-            <div>
-              <a href="{{url_for('alternate.delete_alternate', bid_id=bid.id, alternate_id=alternate.id)}}"
-                class="delete-button border-none ddb-cursor-handle bck-white">
-                <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
-              </a>
-            </div>
-            <div class="px-2">
-              <a href="{{url_for('alternate.edit_alternate', bid_id=bid.id, alternate_id=alternate.id)}}" class="border-none ddb-cursor-handle">
-                <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
-              </a>
-            </div>
-            <div class="check_box-TBD">
-              {% if alternate.tbd %}
-              <input class="form-control" type="checkbox" name="alternate_id:{{ alternate.id }}_on" checked onclick="return false;">
-              {% else %}
-              <input class="form-control" type="checkbox" name="alternate_id:{{ alternate.id }}_off" onclick="return false;">
-              {% endif %}
-              <span>TBD</span>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-        {% endif %}
-        <div class="bidding_margin">
-          <div>
-            <a href="{{ url_for('alternate.new_alternate', bid_id=bid.id) }}">
-              <button class="ddb-cursor-handle _btn--base-gray">
+        </span> {% if bid.alternates %} {% for alternate in bid.alternates%}
+                <div class="_alternate_block bidding_margin">
+                    <div>
+                        <input class="_form-input" value="{{alternate.name}}" readonly>
+                        <label class="_label">Alternate item</label>
+                    </div>
+                    <div>
+                        <input class="_form-input" value="{{alternate.quantity}}" readonly>
+                        <label class="_label">Quantity</label>
+                    </div>
+                    <div>
+                        <input class="_form-input" value="$ {{alternate.price}}" readonly>
+                    </div>
+                    <div class="__alternate_items">
+                        <div>
+                            <a href="{{url_for('alternate.delete_alternate', bid_id=bid.id, alternate_id=alternate.id)}}" class="delete-button border-none ddb-cursor-handle bck-white">
+                                <img src="{{ url_for('static', filename='images/delete_element.svg') }}">
+                            </a>
+                        </div>
+                        <div class="px-2">
+                            <a href="{{url_for('alternate.edit_alternate', bid_id=bid.id, alternate_id=alternate.id)}}" class="border-none ddb-cursor-handle">
+                                <img src="{{ url_for('static', filename='images/edit_element.svg') }}">
+                            </a>
+                        </div>
+                        <div class="check_box-TBD">
+                            {% if alternate.tbd %}
+                            <input class="form-control" type="checkbox" name="alternate_id:{{ alternate.id }}_on" checked onclick="return false;"> {% else %}
+                            <input class="form-control" type="checkbox" name="alternate_id:{{ alternate.id }}_off" onclick="return false;"> {% endif %}
+                            <span>TBD</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %} {% endif %}
+                <div class="bidding_margin">
+                    <div>
+                        <a href="{{ url_for('alternate.new_alternate', bid_id=bid.id) }}">
+                            <button class="ddb-cursor-handle _btn--base-gray">
                 Add alternate
               </button>
-            </a>
-          </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
 <!-- Edit Modal -->
-<div class="modal fade" id="modalWorkItemLineEdit" tabindex="-1" role="dialog" aria-labelledby="ModalWorkItemLineEdit"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <h5 class="--padding">Edit work item line</h5>
-      <div class="">
-        <form role="form" action="" method="post" id="modal_work_item_line_edit">
-          <div class="__modal-inputs--flex-row">
-            <div class="modal_work_item_line--inputs">
-              <div class="modal_text-areas">
-                <div id="form-text_area">
-                  {{form.note(class='_form-text_area', placeholder="Enter Note here...", id="modal_note")}}
-                </div>
-                <div id="form-text_area">
-                  {{form.description(class='_form-text_area', placeholder="Enter Description here...",
-                  id="modal_description")}}
-                </div>
-              </div>
-              <div class="modal_inputs-features">
-                <div>
-                  {{form.quantity(class='_form-input', id="modal_quantity")}}
-                  <label class="_label">Quantity</label>
-                </div>
-                <div>
-                  {{form.unit(class='_form-input', id="modal_unit")}}
-                  <label class="_label">Unit</label>
-                </div>
-                <div>
-                  {{form.price(class='_form-input', id="modal_price")}}
-                </div>
-              </div>
+<div class="modal fade" id="modalWorkItemLineEdit" tabindex="-1" role="dialog" aria-labelledby="ModalWorkItemLineEdit" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <h5 class="--padding">Edit work item line</h5>
+            <div class="">
+                <form role="form" action="" method="post" id="modal_work_item_line_edit">
+                    <div class="__modal-inputs--flex-row">
+                        <div class="modal_work_item_line--inputs">
+                            <div class="modal_text-areas">
+                                <div id="form-text_area">
+                                    {{form.note(class='_form-text_area', placeholder="Enter Note here...", id="modal_note")}}
+                                </div>
+                                <div id="form-text_area">
+                                    {{form.description(class='_form-text_area', placeholder="Enter Description here...", id="modal_description")}}
+                                </div>
+                            </div>
+                            <div class="modal_inputs-features">
+                                <div>
+                                    {{form.quantity(class='_form-input', id="modal_quantity")}}
+                                    <label class="_label">Quantity</label>
+                                </div>
+                                <div>
+                                    {{form.unit(class='_form-input', id="modal_unit")}}
+                                    <label class="_label">Unit</label>
+                                </div>
+                                <div>
+                                    {{form.price(class='_form-input', id="modal_price")}}
+                                </div>
+                            </div>
 
-              <div class="_modal_btns">
-                <div>
-                  {{form.submit(class='_btn--black ddb-cursor-handle _form-input--m')}}
-                </div>
+                            <div class="_modal_btns">
+                                <div>
+                                    {{form.submit(class='_btn--black ddb-cursor-handle _form-input--m')}}
+                                </div>
 
-                <div>
-                  <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle"
-                    data-dismiss="modal">Cancel</button>
-                </div>
-              </div>
+                                <div>
+                                    <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
 
+                        </div>
+                    </div>
+                </form>
             </div>
-          </div>
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
 </div>
 <!-- Modal Export -->
 <div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="ModalExport" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <h5 class="--padding">Export</h5>
-      <div>
-        <form role="form" action="" method="post" id="modal_work_item_line_edit">
-          <div class="__modal-inputs--flex-row">
-            <div class="modal_work_item_line--inputs">
-              <div class="_modal_btns">
-                <div>
-                  {{ form_bid.export_pdf(class="_btn--black ddb-cursor-handle", form="bid_subtotal_data") }}
-                </div>
-                <div>
-                  {{ form_bid.export_docx(class="_btn--black ddb-cursor-handle", form="bid_subtotal_data") }}
-                </div>
-                <div>
-                  <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle"
-                    data-dismiss="modal">Cancel</button>
-                </div>
-              </div>
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <h5 class="--padding">Export</h5>
+            <div>
+                <form role="form" action="" method="post" id="modal_work_item_line_edit">
+                    <div class="__modal-inputs--flex-row">
+                        <div class="modal_work_item_line--inputs">
+                            <div class="_modal_btns">
+                                <div>
+                                    {{ form_bid.export_pdf(class="_btn--black ddb-cursor-handle", form="bid_subtotal_data") }}
+                                </div>
+                                <div>
+                                    {{ form_bid.export_docx(class="_btn--black ddb-cursor-handle", form="bid_subtotal_data") }}
+                                </div>
+                                <div>
+                                    <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
 
+                        </div>
+                    </div>
+                </form>
             </div>
-          </div>
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
 </div>
 <!-- end of Modal Export -->
 
 {% block scripts %}
 <script src="/static/js/jquery.dataTables.min.js"></script>
 <script src="/static/js/bidding.js" defer></script>
-{% endblock %}
-
-{% endblock %}
+{% endblock %} {% endblock %}
