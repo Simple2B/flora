@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>{{ config.APP_NAME }}</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         body {
             font-family: "Poppins";
         }
-
+        
         a {
             color: #212529;
             text-decoration: none;
             outline: none;
         }
+        
         a:hover {
             color: #212529;
             text-decoration: none;
             outline: none;
         }
-
+        
         .export_container {
             display: flex;
             justify-content: center;
@@ -32,31 +33,36 @@
             margin-right: auto;
             margin-top: 1rem;
         }
-
+        
         .box_shadow {
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
-
+        
         .__top-content {
-            display: -webkit-box; /* wkhtmltopdf uses this one */
+            display: -webkit-box;
+            /* wkhtmltopdf uses this one */
             /* display: -webkit-flex; */
             /* display: flex; */
-            -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
+            -webkit-box-pack: justify;
+            /* wkhtmltopdf uses this one */
             -webkit-box-align: center;
             padding: 0.5rem;
         }
-
+        
         .preview_document {
             padding-top: 1rem;
             font-weight: 700;
         }
+        
         .back img {
             margin-right: 0.5rem;
         }
+        
         .back span:hover {
             color: #000000;
             font-weight: 600;
         }
+        
         .preview_export_btn {
             padding: .5rem 1.5rem;
             color: #fff;
@@ -68,79 +74,87 @@
             font-size: 14px;
             transition: .3s;
         }
+        
         .preview_export_btn:focus {
             outline: none;
         }
+        
         .preview_export_btn:active {
             outline: none;
         }
+        
         .preview_export_btn:hover {
             background-color: rgba(0, 0, 0, 0.65);
         }
-
+        
         .__main-content {
             margin-top: 1rem;
             padding: 1rem;
         }
-        .__main-content  .__ddb_logo {
+        
+        .__main-content .__ddb_logo {
             display: flex;
             justify-content: flex-start;
         }
-
+        
         .__due_time {
             width: 100%
         }
-
+        
         .__due_time td:nth-child(2) {
             width: 33.2%;
             text-align: right;
             font-weight: bold;
         }
-
+        
         .__client_project_block {
             display: -webkit-box;
             -webkit-box-pack: justify;
             font-size: 16px;
         }
+        
         .__client_project_block ._client_project {
             display: -webkit-box;
             -webkit-box-pack: justify;
         }
+        
         .__client_project_block ._client_project .client_project-info {
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: vertical;
         }
+        
         .__client_project_block ._client_project .client_project-info div:nth-child(1) {
             font-weight: bold;
         }
-
+        
         .__client_project_block ._client_project .client_project-info div:last-child {
             font-weight: bold;
         }
-
+        
         .project_quote {
             background-color: yellow;
         }
         /* .project_quote_revised{
 
         } */
+        
         .client-padding {
             padding-left: 1rem;
         }
-
+        
         .client_title {
             padding-right: 2rem;
         }
-
+        
         .project-padding {
             padding-right: 1rem;
         }
-
+        
         .project_title {
             padding-right: 2rem;
         }
-
+        
         .section_letter {
             text-align: center;
             font-weight: 600;
@@ -153,8 +167,7 @@
             border-top-width: 3px;
             margin-top: 1rem;
         }
-
-
+        
         .section_E_and_F--table {
             margin-top: 1rem;
             width: 100%;
@@ -168,74 +181,74 @@
             border-top-width: 3px;
         }
         /********** begin bid work items container */
-
+        
         .bid_work_items_container {
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: vertical;
         }
-
+        
         .link_work_item_line_padding {
             padding: 0rem 0.5rem 0.5rem 0.5rem;
         }
-
         /* Pagination */
+        
         .keep-together {
             page-break-inside: avoid;
         }
-
+        
         .break-before {
             page-break-before: always;
         }
-
+        
         .break-after {
             page-break-after: always;
         }
         /* end Pagination */
-
+        
         .bid_subtotal_value {
             display: -webkit-box;
             -webkit-box-pack: end;
             font-weight: bold;
             font-size: 18px;
         }
-
+        
         .bid_work_item {
             display: -webkit-box;
             -webkit-box-pack: justify;
             font-weight: bold;
             font-size: 18px;
         }
-
+        
         .work_item_note {
             /* display: -webkit-box;
             -webkit-box-pack: justify; */
-
             margin-bottom: 1rem;
         }
-
+        
         .work_item_note .__note-box {
             display: -webkit-box;
             -webkit-box-pack: end;
             width: 65%;
         }
-
+        
         .work_item_note ._note {
             overflow-wrap: break-word;
             margin-right: 0.5rem;
         }
+        
         ._note div {
             margin-left: 1rem;
         }
-
+        
         .work_item_note ._unit {
             display: -webkit-box;
         }
-
+        
         ._unit :first-child {
             margin-right: 1rem;
         }
-
+        
         .section_group_letter {
             display: -webkit-box;
             -webkit-box-pack: justify;
@@ -245,56 +258,62 @@
             color: #333333;
             background-color: #4682B4;
         }
-
+        
         .section_group_letter ._inner_block {
             display: -webkit-box;
         }
-
+        
         .section_group_letter ._inner_block div {
             padding: 0rem 0.75rem;
         }
         /* group block */
+        
         .group_title {
             margin-bottom: 0.3rem;
         }
-        .group_title span
-        {border-bottom: 3px solid #333333;}
+        
+        .group_title span {
+            border-bottom: 3px solid #333333;
+        }
+        
         ._group-block {
             padding: 0.5rem;
         }
+        
         ._group_note {
             overflow-wrap: break-word;
             margin-right: 0.5rem;
         }
+        
         .bid_subtotal_container .bid_subtotal {
             display: -webkit-box;
             -webkit-box-pack: end;
         }
         /* endblock */
-
         /********** end bid work items container */
-
+        
         .bid_subtotal .bid_subtotal_bid_features {
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: vertical;
         }
+        
         .bid_subtotal .bid_subtotal_bid_features .feature_price {
             display: -webkit-box;
             -webkit-box-pack: justify;
             font-weight: bold;
             font-size: 18px;
         }
-
+        
         .feature_price_subtotal_price {
             font-weight: bold;
             font-size: 18px;
         }
-
+        
         .bid_subtotal .bid_subtotal_bid_features .feature_price .general_padding-r {
             padding-right: 2rem;
         }
-
+        
         ._btn--gray {
             padding: .5rem 1.5rem;
             color: #fff;
@@ -305,81 +324,85 @@
             transition: .3s;
             background-color: #979797;
         }
-
+        
         .work_item_pdf {
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: horizontal;
         }
-
+        
         .work_item_pdf :last-child {
             padding-left: 2rem;
         }
-
+        
         .line_qty {
             width: 15%;
         }
-
+        
         .inputs_forms {
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: horizontal;
             padding: 0.5rem 0rem 0rem 1.5rem;
         }
-
+        
         .inputs_forms .by_name_date {
             display: -webkit-box;
             -webkit-box-pack: justify;
             -webkit-box-orient: vertical;
             width: 45%
         }
-
+        
         .by_name_date .input_field {
             display: -webkit-box;
             /* -webkit-box-align: end; */
         }
-
+        
         .input-underline {
             border: none;
             border-bottom: 2px solid #333333;
         }
-
-        .exclusions, .clarifications {
+        
+        .exclusions,
+        .clarifications {
             padding-left: 0.5rem;
         }
-
+        
         .alternate {
             margin-top: 1rem;
         }
+        
         .alternate_table {
             width: 100%;
         }
-
+        
         .alternate_name {
             max-width: 65%;
             width: 10%;
             padding-left: 0.5rem;
         }
+        
         .alternate_qty {
             font-style: italic;
         }
-
+        
         .alternate_price {
             text-align: right;
             font-weight: bold;
         }
-
+        
         .table_of_sections_E_F {
             width: 100%;
         }
-
+        
         .td_width {
             width: 5%;
         }
+        
         .td_vertical_bottom {
             vertical-align: bottom;
         }
-
+        
         .ddb_titles {
             margin-top: 1rem;
             width: 100%;
@@ -387,15 +410,15 @@
             font-weight: bold;
             text-align: center;
         }
-
+        
         .ddb_titles td {
             width: 50%;
         }
-
+        
         .send_copies {
             margin-left: 1rem;
         }
-
+        
         h5 {
             margin-top: 0.5rem;
             font-weight: 600;
@@ -454,7 +477,7 @@
                     <div class="__client_project_block">
                         <div class="_client_project client-padding">
                             <div class="client_title">Client</div>
-                            <div  class="client_project-info">
+                            <div class="client_project-info">
                                 <div>
                                     {{ bid.client }}
                                 </div>
@@ -465,7 +488,7 @@
                         </div>
                         <div class="_client_project project-padding">
                             <div class="project_title">Project</div>
-                            <div  class="client_project-info">
+                            <div class="client_project-info">
                                 <div>
                                     {{ bid.title }}
                                 </div>
@@ -491,56 +514,28 @@
                                     <div> {{ link_work_item.work_item.code }} &nbsp; &nbsp;</div>
                                     <div> {{ link_work_item.work_item.name }} &nbsp; &nbsp;</div>
                                 </div>
-                                {% if link_work_item.link_subtotal <= 0.001 %}
-                                <div class="bid_subtotal_value">TBD</div>
-                                {% else %}
-                                <div class="bid_subtotal_value">${{ link_work_item.link_subtotal }}</div>
-                                {% endif %}
-                            </div>
-                            {% for work_item_line in link_work_item.work_item_lines %}
-                            <div class="work_item_note">
-                                <table style="width: 100%;">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width: 11.5%;"></td>
-                                            <td style="width: 43.5%;">
-                                                <div class="_note">
-                                                    {% if work_item_line.tbd %}
-                                                    {{ work_item_line.note }} (T.B.D)
-                                                    {% else %}
-                                                    {{ work_item_line.note }}
-                                                    {% endif %}
-                                                    <div>
-                                                        NOTE: {{ work_item_line.description }}
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td style="width: 5%; vertical-align: top;">{{ work_item_line.quantity }}</td>
-                                            <td style="width: 8.5%; vertical-align: top;">{{ work_item_line.unit }}</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            {% endfor %}
+                                {% if link_work_item.link_subtotal
+                                <=0 .001 %} <div class="bid_subtotal_value">TBD</div>
+                            {% else %}
+                            <div class="bid_subtotal_value">${{ link_work_item.link_subtotal }}</div>
+                            {% endif %}
                         </div>
-                        {% endfor %}
-                    </div>
-                    <!-- # Pagination -->
-                    <div class="bid_work_items_container keep-together">
-
-                        {% for group in groups %}
-                        <div> <h4 class="group_title"> <span> Work Group: {{ group.name }} </span> </h4> </div>
-                        <div class="section_group_letter">
+                        {% for work_item_line in link_work_item.work_item_lines %}
+                        <div class="work_item_note">
                             <table style="width: 100%;">
                                 <tbody>
-                                    <tr style="text-align: left;">
-                                        <td style="width: 11%;">&nbsp; &nbsp;Phase</td>
-                                        <td style="width: 43.5%;"> Description</td>
-                                        <td style="width: 5%;">Qty</td>
-                                        <td style="width: 8.5%;">Unit</td>
+                                    <tr>
+                                        <td style="width: 11.5%;"></td>
+                                        <td style="width: 43.5%;">
+                                            <div class="_note">
+                                                {% if work_item_line.tbd %} {{ work_item_line.note }} (T.B.D) {% else %} {{ work_item_line.note }} {% endif %}
+                                                <div>
+                                                    NOTE: {{ work_item_line.description }}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td style="width: 5%; vertical-align: top;">{{ work_item_line.quantity }}</td>
+                                        <td style="width: 8.5%; vertical-align: top;">{{ work_item_line.unit }}</td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -548,341 +543,333 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="_group-block">
-                            {% for link in group.link_work_items %}
-                            <div class="bid_work_item">
-                                <div class="work_item_pdf">
-                                    <div> {{ link.work_item.code }} &nbsp; &nbsp;</div>
-                                    <div> {{ link.work_item.name }} &nbsp; &nbsp;</div>
-                                </div>
-                                {% if link.link_subtotal < 0.001 %}
-                                <div class="bid_subtotal_value">TBD</div>
-                                {% else %}
-                                <div class="bid_subtotal_value">${{ link.link_subtotal }}</div>
-                                {% endif %}
-                            </div>
-                                {% for work_item_line in link.work_item_lines %}
-                                <table style="width: 100%;">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width: 11.5%;"></td>
-                                            <td style="width: 43.5%;">
-                                                <div class="_group_note _note">
-                                                    {% if work_item_line.tbd %}
-                                                    {{ work_item_line.note }} (T.B.D)
-                                                    {% else %}
-                                                    {{ work_item_line.note }}
-                                                    {% endif %}
-                                                    <div>
-                                                        NOTE: {{ work_item_line.description }}
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td style="width: 5%; vertical-align: top;">{{ work_item_line.quantity }}</td>
-                                            <td style="width: 8.5%; vertical-align: top;">{{ work_item_line.unit }}</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                {% endfor %}
-
-                            {% endfor %}
-                        </div>
                         {% endfor %}
                     </div>
+                    {% endfor %}
+                </div>
+                <!-- # Pagination -->
+                <div class="bid_work_items_container keep-together">
 
-                    <div class="bid_subtotal_container keep-together">
-                        <div class="bid_subtotal">
-                            <div class="bid_subtotal_bid_features">
-                                <div class="feature_price">
-                                    <div>
-                                        Subtotal:
+                    {% for group in groups %}
+                    <div>
+                        <h4 class="group_title"> <span> Work Group: {{ group.name }} </span> </h4>
+                    </div>
+                    <div class="section_group_letter">
+                        <table style="width: 100%;">
+                            <tbody>
+                                <tr style="text-align: left;">
+                                    <td style="width: 11%;">&nbsp; &nbsp;Phase</td>
+                                    <td style="width: 43.5%;"> Description</td>
+                                    <td style="width: 5%;">Qty</td>
+                                    <td style="width: 8.5%;">Unit</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="_group-block">
+                        {% for link in group.link_work_items %}
+                        <div class="bid_work_item">
+                            <div class="work_item_pdf">
+                                <div> {{ link.work_item.code }} &nbsp; &nbsp;</div>
+                                <div> {{ link.work_item.name }} &nbsp; &nbsp;</div>
+                            </div>
+                            {% if link.link_subtotal
+                            < 0.001 %} <div class="bid_subtotal_value">TBD</div>
+                        {% else %}
+                        <div class="bid_subtotal_value">${{ link.link_subtotal }}</div>
+                        {% endif %}
+                    </div>
+                    {% for work_item_line in link.work_item_lines %}
+                    <table style="width: 100%;">
+                        <tbody>
+                            <tr>
+                                <td style="width: 11.5%;"></td>
+                                <td style="width: 43.5%;">
+                                    <div class="_group_note _note">
+                                        {% if work_item_line.tbd %} {{ work_item_line.note }} (T.B.D) {% else %} {{ work_item_line.note }} {% endif %}
+                                        <div>
+                                            NOTE: {{ work_item_line.description }}
+                                        </div>
                                     </div>
-                                    <div class="feature_price">
-                                        $ {{ bid.subtotal }}
-                                    </div>
+                                </td>
+                                <td style="width: 5%; vertical-align: top;">{{ work_item_line.quantity }}</td>
+                                <td style="width: 8.5%; vertical-align: top;">{{ work_item_line.unit }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {% endfor %} {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="bid_subtotal_container keep-together">
+                <div class="bid_subtotal">
+                    <div class="bid_subtotal_bid_features">
+                        <div class="feature_price">
+                            <div>
+                                Subtotal:
+                            </div>
+                            <div class="feature_price">
+                                $ {{ bid.subtotal }}
+                            </div>
+                        </div>
+                        {% if bid.percent_permit_fee
+                        < 0.001 %} {% else %} <div class="feature_price">
+                            <div>
+                                Permit/Filing Free:
+                            </div>
+                            {% if bid.permit_filling_fee
+                            < 0.001 %} <div>
+                                T.B.D
+                    </div>
+                    {% else %}
+                    <div>
+                        $ {{ bid.permit_filling_fee }}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %} {% if bid.percent_general_condition
+                < 0.001 %} {% else %} <div class="feature_price">
+                    <div class="general_padding-r">
+                        General Conditions:
+                    </div>
+                    {% if bid.general_conditions
+                    < 0.001 %} <div>
+                        T.B.D
+            </div>
+            {% else %}
+            <div>
+                $ {{ bid.general_conditions }}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %} {% if bid.percent_overhead
+        < 0.001 %} {% else %} <div class="feature_price">
+            <div>
+                Overhead:
+            </div>
+            {% if bid.overhead
+            < 0.001 %} <div>
+                T.B.D
+                </div>
+                {% else %}
+                <div>
+                    $ {{ bid.overhead }}
+                </div>
+                {% endif %}
+                </div>
+                {% endif %} {% if bid.percent_insurance_tax
+                < 0.001 %} {% else %} <div class="feature_price">
+                    <div>
+                        Insurance/Tax:
+                    </div>
+                    {% if bid.insurance_tax
+                    < 0.001 %} <div>
+                        T.B.D
+                        </div>
+                        {% else %}
+                        <div>
+                            $ {{ bid.insurance_tax }}
+                        </div>
+                        {% endif %}
+                        </div>
+                        {% endif %} {% if bid.percent_profit
+                        < 0.001 %} {% else %} <div class="feature_price">
+                            <div>
+                                Profit:
+                            </div>
+                            {% if bid.profit
+                            < 0.001 %} <div>
+                                T.B.D
                                 </div>
-                                {% if bid.percent_permit_fee < 0.001 %}
                                 {% else %}
-                                <div class="feature_price">
-                                    <div>
-                                        Permit/Filing Free:
-                                    </div>
-                                    {% if bid.permit_filling_fee < 0.001 %}
-                                    <div>
-                                        T.B.D
-                                    </div>
-                                    {% else %}
-                                    <div>
-                                        $ {{ bid.permit_filling_fee }}
-                                    </div>
-                                    {% endif %}
+                                <div>
+                                    $ {{ bid.profit }}
                                 </div>
                                 {% endif %}
-                                {% if bid.percent_general_condition < 0.001 %}
-                                {% else %}
-                                <div class="feature_price">
-                                    <div class="general_padding-r">
-                                        General Conditions:
-                                    </div>
-                                    {% if bid.general_conditions < 0.001 %}
-                                    <div>
-                                        T.B.D
-                                    </div>
-                                    {% else %}
-                                    <div>
-                                        $ {{ bid.general_conditions }}
-                                    </div>
-                                    {% endif %}
                                 </div>
-                                {% endif %}
-                                {% if bid.percent_overhead < 0.001 %}
-                                {% else %}
-                                <div class="feature_price">
-                                    <div>
-                                        Overhead:
-                                    </div>
-                                    {% if bid.overhead < 0.001 %}
-                                    <div>
-                                        T.B.D
-                                    </div>
-                                    {% else %}
-                                    <div>
-                                        $ {{ bid.overhead }}
-                                    </div>
-                                    {% endif %}
-                                </div>
-                                {% endif %}
-                                {% if bid.percent_insurance_tax < 0.001 %}
-                                {% else %}
-                                <div class="feature_price">
-                                    <div>
-                                        Insurance/Tax:
-                                    </div>
-                                    {% if bid.insurance_tax < 0.001 %}
-                                    <div>
-                                        T.B.D
-                                    </div>
-                                    {% else %}
-                                    <div>
-                                        $ {{ bid.insurance_tax }}
-                                    </div>
-                                    {% endif %}
-                                </div>
-                                {% endif %}
-                                {% if bid.percent_profit < 0.001 %}
-                                {% else %}
-                                <div class="feature_price">
-                                    <div>
-                                        Profit:
-                                    </div>
-                                    {% if bid.profit < 0.001  %}
-                                    <div>
-                                        T.B.D
-                                    </div>
-                                    {% else %}
-                                    <div>
-                                        $ {{ bid.profit }}
-                                    </div>
-                                    {% endif %}
-                                </div>
-                                {% endif %}
-                                {% if bid.percent_bond < 0.001 %}
-                                {% else %}
-                                <div class="feature_price">
+                                {% endif %} {% if bid.percent_bond
+                                < 0.001 %} {% else %} <div class="feature_price">
                                     <div>
                                         Bond:
                                     </div>
-                                    {% if bid.bond < 0.001 %}
-                                    <div>
+                                    {% if bid.bond
+                                    < 0.001 %} <div>
                                         T.B.D
-                                    </div>
-                                    {% else %}
-                                    <div>
-                                        $ {{ bid.bond }}
-                                    </div>
-                                    {% endif %}
-                                </div>
-                                {% endif %}
-                                <div class="feature_price">
-                                    <div>
-                                        Grand Total:
-                                    </div>
-                                    <div>
-                                        ${{ bid.grand_subtotal }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                        </div>
+                                        {% else %}
+                                        <div>
+                                            $ {{ bid.bond }}
+                                        </div>
+                                        {% endif %}
+                                        </div>
+                                        {% endif %}
+                                        <div class="feature_price">
+                                            <div>
+                                                Grand Total:
+                                            </div>
+                                            <div>
+                                                ${{ bid.grand_subtotal }}
+                                            </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
 
-                    <div class="section_letter">Section B: Exclusions</div>
-                    <h5>Unless expressly stated, the following exclusions apply: </h5>
-                    <div class="exclusions">
-                        {% for exclusion_link in bid.exclusion_links %}
-                            {% if exclusion_link == bid.exclusion_links[-1] %}
-                                {{ exclusion_link.exclusion.title }}.
-                            {% else %}
-                                {{ exclusion_link.exclusion.title }},
-                            {% endif %}
-                        {% endfor %}
-                    </div>
+                                        <div class="section_letter">Section B: Exclusions</div>
+                                        <h5>Unless expressly stated, the following exclusions apply: </h5>
+                                        <div class="exclusions">
+                                            {% for exclusion_link in bid.exclusion_links %} {% if exclusion_link == bid.exclusion_links[-1] %} {{ exclusion_link.exclusion.title }}. {% else %} {{ exclusion_link.exclusion.title }}, {% endif %} {% endfor %}
+                                        </div>
 
-                    <div class="section_letter">Section C: Clarifications</div>
-                    <h5>Please note the following clarifications: </h5>
-                    <div class="clarifications">
-                        {% for clarification_link in bid.clarification_links %}
-                            {% if clarification_link == bid.clarification_links[-1] %}
-                                {{ clarification_link.clarification.description }}.
-                            {% else %}
-                                {{ clarification_link.clarification.description }};
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    <div class="qoute_clarification"></div>
+                                        <div class="section_letter">Section C: Clarifications</div>
+                                        <h5>Please note the following clarifications: </h5>
+                                        <div class="clarifications">
+                                            {% for clarification_link in bid.clarification_links %} {% if clarification_link == bid.clarification_links[-1] %} {{ clarification_link.clarification.description }}. {% else %} {{ clarification_link.clarification.description }}; {% endif %} {% endfor
+                                            %}
+                                        </div>
+                                        <div class="qoute_clarification"></div>
 
-                    <div class="section_letter">Section D: Alternates</div>
-                    <div class="alternate">
-                        <table class="alternate_table">
-                            <tbody>
-                                {% if bid.alternates %}
-                                {% for alternate in bid.alternates %}
-                                    <tr>
-                                        <td class="alternate_name">
-                                            {{ alternate.name }}
-                                        </td>
-                                        <td class="alternate_qty">
-                                            &nbsp; (qty: {{ alternate.quantity }})
-                                        </td>
-                                        <td class="alternate_price">
-                                            {% if alternate.tbd %}
-                                            TBD
-                                            {% else %}
-                                            $ {{ alternate.price }}
+                                        <div class="section_letter">Section D: Alternates</div>
+                                        <div class="alternate">
+                                            <table class="alternate_table">
+                                                <tbody>
+                                                    {% if bid.alternates %} {% for alternate in bid.alternates %}
+                                                    <tr>
+                                                        <td class="alternate_name">
+                                                            {{ alternate.name }}
+                                                        </td>
+                                                        <td class="alternate_qty">
+                                                            &nbsp; (qty: {{ alternate.quantity }})
+                                                        </td>
+                                                        <td class="alternate_price">
+                                                            {% if alternate.tbd %} TBD {% else %} $ {{ alternate.price }} {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %} {% else %}
+                                                    <tr>
+                                                        <td class="alternate_name">
+                                                            &nbsp; No alternates speciefied.
+                                                        </td>
+                                                    </tr>
+                                                    {% endif %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="keep-together">
+
+                                            <table class="section_E_and_F--table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><span class="section_E">Section E: Submitted by: </span></td>
+                                                        <td><span class="section_F">Section F: Approved by: </span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <table class="ddb_titles">
+                                                <tr>
+                                                    <td> DDB Contracting, LLC. </td>
+                                                    <td> Premier Project Management </td>
+                                                </tr>
+                                            </table>
+
+                                            <div class="inputs_forms">
+                                                <table class="table_of_sections_E_F">
+                                                    <tr>
+                                                        <td>
+                                                            <table class="inner_table" style="padding: 0px;">
+                                                                <tr>
+                                                                    <td>
+                                                                        <td class="td_vertical_bottom">By &nbsp;</td>
+                                                                    </td>
+                                                                    <td>
+                                                                        <td class="td_width"></td>
+                                                                        <td><input type="text" class="input-underline"></td>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <td>Name &nbsp;</td>
+                                                                    </td>
+                                                                    <td>
+                                                                        <td class="td_width"></td>
+                                                                        <td>{{ bid.contact }}</td>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <td>Date &nbsp;</td>
+                                                                    </td>
+                                                                    <td>
+                                                                        <td class="td_width"></td>
+                                                                        <td>{{ date_today }}</td>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td>
+                                                            <table class="inner_table">
+                                                                <tr>
+                                                                    <td>
+                                                                        <td class="td_vertical_bottom">By &nbsp;</td>
+                                                                    </td>
+                                                                    <td>
+                                                                        <td class="td_width"></td>
+                                                                        <td><input type="text" class="input-underline"></td>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <td class="td_vertical_bottom">Name &nbsp;</td>
+                                                                    </td>
+                                                                    <td>
+                                                                        <td class="td_width"></td>
+                                                                        <td><input type="text" class="input-underline"></td>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <td class="td_vertical_bottom">Date &nbsp;</td>
+                                                                    </td>
+                                                                    <td>
+                                                                        <td class="td_width"></td>
+                                                                        <td><input type="text" class="input-underline"></td>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <!-- <div class="send_copies">
+                                                Send copies to the following:
+                                                <ul>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                </ul>
+                                            </div> -->
+                                            {% if bid.drawings %}
+                                            <div><strong>{{ bid.drawings|length }} drawings have been received</strong></div> {% else %}
+                                            <div><strong>No drawings have been received for this project</strong></div>
                                             {% endif %}
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                {% else %}
-                                    <tr>
-                                        <td class="alternate_name">
-                                            &nbsp; No alternates speciefied.
-                                        </td>
-                                    </tr>
-                                {% endif %}
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="keep-together">
-
-                        <table class="section_E_and_F--table">
-                            <tbody>
-                                <tr>
-                                    <td><span class="section_E">Section E: Submitted by: </span></td>
-                                    <td><span class="section_F">Section F: Approved by: </span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <table class="ddb_titles">
-                            <tr>
-                                <td> DDB Contracting, LLC. </td>
-                                <td> Premier Project Management </td>
-                            </tr>
-                        </table>
-
-                        <div class="inputs_forms">
-                            <table class="table_of_sections_E_F">
-                                <tr>
-                                    <td>
-                                        <table class="inner_table" style="padding: 0px;">
-                                            <tr>
-                                                <td>
-                                                    <td class="td_vertical_bottom">By &nbsp;</td>
-                                                </td>
-                                                <td>
-                                                    <td class="td_width"></td>
-                                                    <td><input type="text" class="input-underline"></td>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <td>Name &nbsp;</td>
-                                                </td>
-                                                <td>
-                                                    <td  class="td_width"></td>
-                                                    <td>{{ bid.contact }}</td>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <td>Date &nbsp;</td>
-                                                </td>
-                                                <td>
-                                                    <td  class="td_width"></td>
-                                                    <td>{{ date_today }}</td>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table class="inner_table">
-                                            <tr>
-                                                <td>
-                                                    <td class="td_vertical_bottom">By &nbsp;</td>
-                                                </td>
-                                                <td>
-                                                    <td class="td_width"></td>
-                                                    <td><input type="text" class="input-underline"></td>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <td class="td_vertical_bottom">Name &nbsp;</td>
-                                                </td>
-                                                <td>
-                                                    <td class="td_width"></td>
-                                                    <td><input type="text" class="input-underline"></td>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <td class="td_vertical_bottom">Date &nbsp;</td>
-                                                </td>
-                                                <td>
-                                                    <td class="td_width"></td>
-                                                    <td><input type="text" class="input-underline"></td>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="send_copies">
-                            Send copies to the following:
-                            <ul>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                            </ul>
-                        </div>
-                        {% if bid.drawings %}
-                        <span><strong>{{ bid.drawings|length }} drawings have been received</strong></span>
-                        {% else %}
-                        <span><strong>No drawings have been received for this project</strong></span>
-                        {% endif %}
-                        <div class="project_quote_revised">
-                            {{ bid.project_type.value }} # {{ bid.procore_bid_id }} REVISED-{{ bid.revision }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                            <div class="project_quote_revised">
+                                                {{ bid.project_type.value }} # {{ bid.procore_bid_id }} REVISED-{{ bid.revision }}
+                                            </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
     </section>
 
 </body>
+
 </html>

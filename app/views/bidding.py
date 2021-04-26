@@ -48,7 +48,7 @@ def archive_or_export():
             stream_of_bids += [(f'pdf_bid_{bid.procore_bid_id}', stream)]
             log(log.DEBUG, "Sending pdf file([%s])", stream)
 
-        zipped_file = BytesIO()
+        zipped_file = BytesIO()    
         with zipfile.ZipFile(zipped_file, 'w') as zip:
             for i in stream_of_bids:
                 stream.seek(0)
@@ -119,6 +119,8 @@ def biddings():
     status_active_submitted = request.args.get("Submitted", "")
     status_active_archived = request.args.get("Archived", "")
     status_active_draft = request.args.get("Draft", "")
+    status_active_new = request.args.get("New", "")
+
     if status_active_submitted or status_active_archived or status_active_draft:
         status_active_all = ""
     else:
@@ -131,9 +133,13 @@ def biddings():
         bids_query = bids_query.filter(Bid.status == Bid.Status.d_archived)
     elif status_active_draft:
         bids_query = bids_query.filter(Bid.status == Bid.Status.b_draft)
+    elif status_active_new:
+        bids_query = bids_query.filter(Bid.status == Bid.Status.a_new)
+
     bids_query = bids_query.order_by(desc(sort_by) if sort_by else Bid.procore_bid_id)
 
     bids = bids_query.all()
+    # bids.status.value
 
     time_now = round(time.time())
     for bid in bids:
@@ -164,4 +170,5 @@ def biddings():
         status_active_submitted=status_active_submitted,
         status_active_archived=status_active_archived,
         status_active_draft=status_active_draft,
+        status_active_new=status_active_new,
     )

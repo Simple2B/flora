@@ -1,187 +1,176 @@
-{% extends "base.html" %}
-
-{% block links %}
-<link rel="stylesheet" href="/static/css/jquery.dataTables.min.css">
-{% endblock %}
-
-
-{% block content %}
+{% extends "base.html" %} {% block links %}
+<link rel="stylesheet" href="/static/css/jquery.dataTables.min.css"> {% endblock %} {% block content %}
 <!-- Sidebar -->
 
 <section class="page-section bidding d-flex" id="wrapper">
-  <!-- begin Sidebar -->
-  <div>
-    <div class="sidebar-container" id="sidebar-wrapper">
-      <div class="sidebar-heading"></div>
-      <div class="text--center list-group-flush none-underline">
-        <div class="__side_bar-title">
-          <img src="{{ url_for('static', filename='images/biddings_element.svg') }}">
-          <span> My Bidding </span>
+    <!-- begin Sidebar -->
+    <div>
+        <div class="sidebar-container" id="sidebar-wrapper">
+            <div class="sidebar-heading"></div>
+            <div class="text--center list-group-flush none-underline">
+                <div class="__side_bar-title">
+                    <img src="{{ url_for('static', filename='images/biddings_element.svg') }}">
+                    <span> My Bidding </span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <!-- end Sidebar -->
-  <div class="container" id="work-item-container">
+    <!-- end Sidebar -->
+    <div class="container" id="work-item-container">
 
-    <div class="container__header-block">
-      <div>
-          {% if bidding_id %}
-          <form action="?sort_by=bidding_id" method="get">
-            <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
+        <div class="container__header-block">
+            <div>
+                {% if bidding_id %}
+                <form action="?sort_by=bidding_id" method="get">
+                    <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
               <option selected value="bidding_id">By Bidding ID</option>
               <option value="recent_edited">Recent Edited</option>
               <option value="due_date">By Due Date</option>
-            </select>
-          {% elif due_date %}
-          <form action="?sort_by=due_date" method="get">
-            <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
+            </select> {% elif due_date %}
+                    <form action="?sort_by=due_date" method="get">
+                        <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
               <option value="bidding_id">By Bidding ID</option>
               <option value="recent_edited">Recent Edited</option>
               <option selected value="due_date">By Due Date</option>
-            </select>
-          {% else %}
-          <form action="?sort_by=recent_edited" method="get">
-            <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
+            </select> {% else %}
+                        <form action="?sort_by=recent_edited" method="get">
+                            <select class="form-control form-control-resize" onchange="this.form.submit()" name="select_sort">
               <option value="bidding_id">By Bidding ID</option>
               <option selected value="recent_edited" name="recent_edited">Recent Edited</option>
               <option value="due_date">By Due Date</option>
-            </select>
-          {% endif %}
-          </form>
-        <div>
-        {% if edit_bid %}
-        <a href="{{ url_for('bidding.finish_edit_bid') }}">
-          <button class="edit_btn ddb-cursor-handle">
+            </select> {% endif %}
+                        </form>
+                        <div>
+                            {% if edit_bid %}
+                            <a href="{{ url_for('bidding.finish_edit_bid') }}">
+                                <button class="edit_btn ddb-cursor-handle">
             Finish Editing
           </button>
-        </a>
-        {% else %}
-        <a href="{{ url_for('bidding.edit_bid') }}">
-          <button class="edit_btn ddb-cursor-handle">
+                            </a>
+                            {% else %}
+                            <a href="{{ url_for('bidding.edit_bid') }}">
+                                <button class="edit_btn ddb-cursor-handle">
           Edit
           </button>
-        </a>
-        {% endif %}
+                            </a>
+                            {% endif %}
+                        </div>
+            </div>
+            <div class="_form-search">
+                <img src="{{ url_for('static', filename='images/Search_icon.png') }}">
+                <input class="input_search" type="text" placeholder="Search Bidding" id="biddingsSearch">
+                </input>
+            </div>
         </div>
-      </div>
-      <div class="_form-search">
-        <img src="{{ url_for('static', filename='images/Search_icon.png') }}">
-        <input class="input_search" type="text" placeholder="Search Bidding" id="biddingsSearch">
-        </input>
-      </div>
-    </div>
 
-    {% if edit_bid %}
-    <div class="bids_status_btns">
-      <button type="submit" form="edit_bids_form" class="_btn--white ddb-cursor-handle" name="arcive" value="true">
+        {% if edit_bid %}
+        <div class="bids_status_btns">
+            <button type="submit" form="edit_bids_form" class="_btn--white ddb-cursor-handle" name="arcive" value="true">
       <div>
         <img src="{{ url_for('static', filename='images/bids_status_box.svg') }}">
       </div>
       <span>Archive</span>
       </button>
-      <button type="button" class="_btn--white ddb-cursor-handle" data-target="#modalMultiplyExport" data-toggle="modal">
+            <button type="button" class="_btn--white ddb-cursor-handle" data-target="#modalMultiplyExport" data-toggle="modal">
         <div>
           <img src="{{ url_for('static', filename='images/export_biddings.svg') }}">
         </div>
         <span>Export</span>
       </button>
-    </div>
-    {% endif %}
-    <form method="get">
-      <div class="status_block">
-        <span class="t-gray">Showing {{ bids|length }} Documents</span>
-        <div class="status_block__bids_status">
-            <div> <button name="Draft" value="status-active" class="{{ status_active_draft }}"> Draft </button></div>
-            <div> <button name="Submitted" value="status-active" class="{{ status_active_submitted }}">Submitted </button></div>
-            <div> <button name="Archived" value="status-active" class="{{ status_active_archived }}">Archived </button></div>
-            <div> <button class="{{ status_active_all }}">All </button></div>
         </div>
-      </div>
-    </form>
+        {% endif %}
+        <form method="get">
+            <div class="status_block">
+                <span class="t-gray">Showing {{ bids|length }} Documents</span>
+                <div class="status_block__bids_status">
+                    <div> <button name="Draft" value="status-active" class="{{ status_active_draft }}"> Draft </button></div>
+                    <div> <button name="Submitted" value="status-active" class="{{ status_active_submitted }}">Submitted </button></div>
+                    <div> <button name="Archived" value="status-active" class="{{ status_active_archived }}">Archived </button></div>
+                    <div> <button class="{{ status_active_all }}">All </button></div>
+                </div>
+            </div>
+        </form>
 
-    <form action="{{ url_for('bidding.archive_or_export') }}" method="post" id="edit_bids_form">
-      <div class="biddings-table margin--top">
-        <table id="biddingsTableId" class="patientsTable table table-striped table-sm">
-          <thead class="bck-ground">
-            {% if edit_bid %}
-            <th></th>
-            <th>Bidding ID</th>
-            <th>Title</th>
-            <th>Client</th>
-            <th>Status</th>
-            <th>Last updated</th>
-            {% else %}
-            <th>Bidding ID</th>
-            <th>Title</th>
-            <th>Client</th>
-            <th>Status</th>
-            <th>Last updated</th>
-            {% endif %}
-          </thead>
-          <tbody>
-            {% if edit_bid %}
-              {% for bid in bids %}
-                <tr>
-                  <td class="biddings-table_check-box">
-                    <input class="form-control" type="checkbox" name="{{bid.id}}">
-                  </td>
-                  <td>#<a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
-                  <td>{{ bid.title }}</td>
-                  <td>{{ bid.client }}</td>
-                  <td>{{ bid.status.value }}</td>
-                  <td>{{ bid.last_updated }}</td>
-                </tr>
-              {% endfor %}
-            {% else %}
-              {% for bid in bids %}
-                <tr>
-                  <td>#<a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
-                  <td>{{ bid.title }}</td>
-                  <td>{{ bid.client }}</td>
-                  <td>{{ bid.status.value }}</td>
-                  <td>{{ bid.last_updated }}</td>
-                </tr>
-              {% endfor %}
-            {% endif %}
-          </tbody>
-        </table>
-      </div>
-    </form>
+        <form action="{{ url_for('bidding.archive_or_export') }}" method="post" id="edit_bids_form">
+            <div class="biddings-table margin--top">
+                <table id="biddingsTableId" class="patientsTable table table-striped table-sm">
+                    <thead class="bck-ground">
+                        {% if edit_bid %}
+                        <th></th>
+                        <th>Bidding ID</th>
+                        <th>Title</th>
+                        <th>Client</th>
+                        <th>Status</th>
+                        <th>Last updated</th>
+                        {% else %}
+                        <th>Bidding ID</th>
+                        <th>Title</th>
+                        <th>Client</th>
+                        <th>Status</th>
+                        <th>Last updated</th>
+                        {% endif %}
+                    </thead>
+                    <tbody>
+                        {% if edit_bid %} {% for bid in bids %}
+                        <tr>
+                            <td class="biddings-table_check-box">
+                                <input class="form-control" type="checkbox" name="{{bid.id}}">
+                            </td>
+                            <td>#<a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
+                            <td>{{ bid.title }}</td>
+                            <td>{{ bid.client }}</td>
+                            <td>{{ bid.status.value }}</td>
+                            <td>{{ bid.last_updated }}</td>
+                        </tr>
+                        {% endfor %} {% else %} {% for bid in bids %}
+                        <tr>
+                            <td>#<a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
+                            <td>{{ bid.title }}</td>
+                            <td>{{ bid.client }}</td>
+                            <!-- <td>{{ bid.status.value }}</td> -->
+                            {% if bid.status.value != 'New' %}
+                            <td>{{ bid.status.value }}</td>
+                            {% else %}
+                            <td class='statusValueColorNew'>{{ bid.status.value }}</td>
+                            {% endif %}
+                            <td>{{ bid.last_updated }}</td>
+                        </tr>
+                        {% endfor %} {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </form>
 
-  </div>
+    </div>
 </section>
 <!-- Begin Multiply Export Modal -->
-<div class="modal fade" id="modalMultiplyExport" tabindex="-2" role="dialog" aria-labelledby="ModalMultiplyExport"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <h5 class="--padding">Export</h5>
-      <div>
-        <div class="__modal-inputs--flex-row">
-          <div class="">
-            <div class="_modal_btns">
-              <div>
-                {{ form.export_pdf(class="_btn--black ddb-cursor-handle", form="edit_bids_form") }}
-              </div>
-              <div>
-                {{ form.export_docx(class="_btn--black ddb-cursor-handle", form="edit_bids_form") }}
-              </div>
-              <div>
-                <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
-              </div>
+<div class="modal fade" id="modalMultiplyExport" tabindex="-2" role="dialog" aria-labelledby="ModalMultiplyExport" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <h5 class="--padding">Export</h5>
+            <div>
+                <div class="__modal-inputs--flex-row">
+                    <div class="">
+                        <div class="_modal_btns">
+                            <div>
+                                {{ form.export_pdf(class="_btn--black ddb-cursor-handle", form="edit_bids_form") }}
+                            </div>
+                            <div>
+                                {{ form.export_docx(class="_btn--black ddb-cursor-handle", form="edit_bids_form") }}
+                            </div>
+                            <div>
+                                <button type="button" class="_btn--gray btn btn-secondary ddb-cursor-handle" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 <!-- End Multiply Export Modal -->
 
-{% endblock %}
-
-{% block scripts %}
+{% endblock %} {% block scripts %}
 <script src="/static/js/jquery.dataTables.min.js"></script>
 <script src="/static/js/biddings.js"></script>
 
