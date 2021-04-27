@@ -20,5 +20,6 @@
     "editor.defaultFormatter": null,
     "[javascript]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "python.pythonPath": ".venv/bin/python"
 }

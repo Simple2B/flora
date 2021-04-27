@@ -135,10 +135,16 @@ h6.title {
 }
 
 .sidebar-container {
-    width: 15vw;
+    width: 20vw;
     box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
     border-top: 1px solid #f1f1f1;
     height: 60vh;
+}
+
+@media (max-width: 1024) {
+    .sidebar-container.__sidebar-css {
+        height: 40vh;
+    }
 }
 
 .sidebar {
@@ -2314,6 +2320,9 @@ button {
     justify-content: center;
     width: 100%;
     min-height: 5vh;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: justify;
     background-color: #F2F2F2;
     border-right: 5px solid #175593;
 }
@@ -2335,8 +2344,15 @@ button {
     font-size: 14px;
     transition: .3s;
     background-color: #828282;
-    width: 10rem;
-    text-align: justify;
+    width: 100%;
+    /* width: 10rem; */
+    text-align: center;
+}
+
+@media (max-width: 1024) {
+    ._btn button {
+        width: 90%;
+    }
 }
 
 ._preview_export_btns ._btn button:focus {

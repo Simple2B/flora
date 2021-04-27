@@ -1,4 +1,4 @@
-# ignore directories
+ ignore directories
 __pycache__/
 env/
 .venv/
