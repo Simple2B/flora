@@ -6,7 +6,7 @@
     <!-- begin Sidebar -->
 
     <div id="sidebar-wrapper" class="sticky">
-        <div class="sidebar-container __sidebar-css">
+        <div class="sidebar-container __sidebar-css" id='sidebarContainer'>
             <div class="side_dar_bidding">
                 <div class="side_dar_bidding__return-link t-gray">
                     <a href="{{ url_for('bidding.biddings') }}">
@@ -34,14 +34,14 @@
                 </ul>
             </div>
             <div class="_preview_export_btns">
-                <div class="_btn">
+                <div class="_btn" style="width:60%">
                     <button class="ddb-cursor-handle" type="submit" name="preview" value="True" form="bid_subtotal_data">
             <img src="{{ url_for('static', filename='images/eye_preview.svg') }}">
             &nbsp;
             Preview
           </button>
                 </div>
-                <div class="_btn">
+                <div class="_btn" style="width:60%">
                     <button type="button" class="ddb-cursor-handle" data-target="#modalExport" data-toggle="modal">
             <img src="{{ url_for('static', filename='images/export.svg') }}">
             &nbsp;

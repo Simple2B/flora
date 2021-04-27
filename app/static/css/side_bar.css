@@ -2,7 +2,7 @@
     /* overflow-x: hidden; */
 }
 
-  #sidebar-wrapper {
+#sidebar-wrapper {
     /* min-height: 60vh; */
     margin-left: -15rem;
     -webkit-transition: margin .25s ease-out;
@@ -11,16 +11,16 @@
     transition: margin .25s ease-out;
 }
 
-  #sidebar-wrapper .sidebar-heading {
+#sidebar-wrapper .sidebar-heading {
     padding: 0.875rem 1.25rem;
     font-size: 1.2rem;
 }
 
-  #sidebar-wrapper .list-group {
+#sidebar-wrapper .list-group {
     width: 15rem;
 }
 
-  #wrapper.toggled #sidebar-wrapper {
+#wrapper.toggled #sidebar-wrapper {
     margin-left: 0;
 }
 
@@ -28,21 +28,20 @@
     #sidebar-wrapper {
         margin-left: 0;
     }
-
     #wrapper.toggled #sidebar-wrapper {
         margin-left: -12vw;
     }
 }
 
 @media (min-width: 500px) and (max-width: 767px) {
-  #sidebar-wrapper {
-      margin-left: 0;
-  }
-  #wrapper.toggled #sidebar-wrapper {
-    margin-left: -26%;
-  }
-  .work-items-section .ddb__side_bar {
-    max-height: 27vh;
-    cursor: pointer;
-  }
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -26%;
+    }
+    .work-items-section .ddb__side_bar {
+        max-height: 27vh;
+        cursor: pointer;
+    }
 }
