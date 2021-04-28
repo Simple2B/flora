@@ -2351,7 +2351,7 @@ button {
 
 @media (max-width: 1024) {
     ._btn button {
-        width: 90%;
+        width: 90% !important;
     }
 }
 
