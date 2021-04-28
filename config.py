@@ -15,7 +15,7 @@ class BaseConfig(object):
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     WTF_CSRF_ENABLED = False
-    GENERATE_TEST_DATA = int(os.environ.get('GENERATE_TEST_DATA', 'env0'))
+    GENERATE_TEST_DATA = int(os.environ.get('GENERATE_TEST_DATA', '0'))
 
     # Permit/Filling Fee: 8%
     PERCENT_PERMIT_FEE = float(os.environ.get("PERCENT_PERMIT_FEE", '8'))
