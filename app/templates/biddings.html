@@ -119,7 +119,6 @@
                             <td>#<a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
                             <td>{{ bid.title }}</td>
                             <td>{{ bid.client }}</td>
-                            <!-- <td>{{ bid.status.value }}</td> -->
                             {% if bid.status.value != 'New' %}
                             <td>{{ bid.status.value }}</td>
                             {% else %}
@@ -132,7 +131,6 @@
                             <td>#<a href="{{ url_for('bid.bidding', bid_id=bid.id) }} ">{{ bid.procore_bid_id }}</a></td>
                             <td>{{ bid.title }}</td>
                             <td>{{ bid.client }}</td>
-                            <!-- <td>{{ bid.status.value }}</td> -->
                             {% if bid.status.value != 'New' %}
                             <td>{{ bid.status.value }}</td>
                             {% else %}
