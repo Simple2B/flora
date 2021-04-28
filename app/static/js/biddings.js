@@ -19,12 +19,12 @@ $(document).ready(function() {
     // redirect to bid
     const tablePages = ["paginate_button ", "paginate_button previous", "paginate_button next"];
 
-    const statusValuesColorNew = document.getElementsByClassName('statusValueColorNew');
-    const values = Array.from(statusValuesColorNew);
-    values.map(value => value.style.color = 'red');
-    values.map(value => value.style.fontWeight = '600');
+    // const statusValuesColorNew = document.getElementsByClassName('statusValueColorNew');
+    // const values = Array.from(statusValuesColorNew);
+    // values.map(value => value.style.color = 'red');
+    // values.map(value => value.style.fontWeight = '600');
 
-    console.log(values);
+    // console.log(values);
 
     //statusValueColorNew.style.color = 'red'
 

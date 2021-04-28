@@ -122,7 +122,7 @@
                             {% if bid.status.value != 'New' %}
                             <td>{{ bid.status.value }}</td>
                             {% else %}
-                            <td class='statusValueColorNew'>{{ bid.status.value }}</td>
+                            <td style="color: red; font-weight: 600;">{{ bid.status.value }}</td>
                             {% endif %}
                             <td>{{ bid.last_updated }}</td>
                         </tr>
@@ -134,7 +134,7 @@
                             {% if bid.status.value != 'New' %}
                             <td>{{ bid.status.value }}</td>
                             {% else %}
-                            <td class='statusValueColorNew'>{{ bid.status.value }}</td>
+                            <td style="color: red; font-weight: 600;">{{ bid.status.value }}</td>
                             {% endif %}
                             <td>{{ bid.last_updated }}</td>
                         </tr>
