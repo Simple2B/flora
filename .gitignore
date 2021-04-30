@@ -3,7 +3,7 @@ __pycache__/
 env/
 .venv/
 .pytest_cache/
-# .DS_Store
+.DS_Store
 node_modules/
 
 # ignore files
